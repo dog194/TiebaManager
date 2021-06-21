@@ -55,6 +55,8 @@ public:
 	// 带Cookie
 	CString HTTPPost(const CString& URL, const CString& data);
 
+	// 封ID，返回错误代码 针对无用户名ID
+	CString BanID(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name);
 	// 封ID，返回错误代码
 	CString BanID(const CString& userName, const CString& pid);
 	// 封ID，返回错误代码，不用PID（用户必须为本吧会员）

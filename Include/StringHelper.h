@@ -55,6 +55,8 @@ HELPER_API CString GetStringBetween(const CString& src, const CString& left, con
 HELPER_API CString GetStringBetween2(const CString& src, const CString& left, const CString& right, int startPos = 0);
 // 取字符串之前的字符串
 HELPER_API CString GetStringBefore(const CString& src, const CString& right, int startPos = 0);
+// 取字符串之后的字符串
+HELPER_API CString GetStringAfter(const CString& src, const CString& left, int startPos = 0);
 
 // 写字符串到文件
 HELPER_API BOOL WriteString(const CString& src, const CString& path);

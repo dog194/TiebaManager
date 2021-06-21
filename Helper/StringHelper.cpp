@@ -250,6 +250,16 @@ HELPER_API CString GetStringBefore(const CString& src, const CString& right, int
 	return src.Left(rightPos);
 }
 
+// 取字符串之后的字符串
+HELPER_API CString GetStringAfter(const CString& src, const CString& left, int startPos)
+{
+	int leftPos = src.Find(left, startPos);
+	if (leftPos == -1)
+		return _T("");
+	leftPos += left.GetLength();
+	return src.Right(leftPos);
+}
+
 
 // 写字符串到文件
 HELPER_API BOOL WriteString(const CString& src, const CString& path)

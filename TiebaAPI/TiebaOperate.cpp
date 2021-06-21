@@ -24,6 +24,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <NetworkHelper.h>
 #include <TiebaClientHelper.h>
 
+const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
+const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
+
 
 CTiebaOperate::CTiebaOperate(CString& cookie, const int& banDuration, const CString& banReason) :
 	m_cookie(cookie), 
@@ -133,6 +136,33 @@ static inline CString GetOperationErrorCode(const CString& src)
 	if (code != _T("0"))
 		WriteString(src, _T("operation.txt"));
 	return code;
+}
+
+// 封ID，返回错误代码 针对无用户名ID
+CString CTiebaOperate::BanID(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name)
+{
+	//兼容原版 有用户名直接封
+	if (userName != _T("")) {
+		return BanID(userName, pid);
+	}
+	//不存在userName
+	//portrait[]=xxxxxxxxxxxxxxxxxxxxxxx
+	//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx?t=zzzzzzzzzz
+	//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx
+	CString data, tmp;
+	tmp = GetStringBetween(portrait, AUTHOR_PORTRAIT_LEFT, AUTHOR_PORTRAIT_RIGHT);
+	if (tmp == _T("")) {
+		tmp = GetStringAfter(portrait, AUTHOR_PORTRAIT_LEFT);
+		if (tmp == _T("")) {
+			//还TM空，不是代码写的有问题就是百度有问题。
+			return BanID(userName, pid);
+		}
+	}
+	data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&pid%%5B%%5D=%s&reason=%s&portrait%%5B%%5D=%s&nick_name%%5B%%5D=%s"),
+		m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName), (LPCTSTR)pid,
+		m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("%20"), (LPCTSTR)tmp, (LPCTSTR)nick_name);
+	CString src = this->HTTPPost(_T("https://tieba.baidu.com/pmc/blockid"), data);
+	return GetOperationErrorCode(src);
 }
 
 // 封ID，返回错误代码
