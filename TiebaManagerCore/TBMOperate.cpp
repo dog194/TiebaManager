@@ -174,7 +174,7 @@ void CTBMOperate::OperateThread()
 			if (pass)
 			{
 				BOOL result = FALSE;
-				CString pid;
+				CString pid, portrait, nick_name;
 				// 不使用客户端接口必须获取PID
 				if (!g_pTbmCoreConfig->m_banClientInterface)
 				{
@@ -185,15 +185,22 @@ void CTBMOperate::OperateThread()
 						std::vector<PostInfo> posts;
 						std::vector<LzlInfo> lzls;
 						TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), op.object->tid, _T("1"), posts, lzls);
-						if (posts.size() > 0)
+						if (posts.size() > 0){
 							pid = posts[0].pid;
+							portrait = posts[0].authorPortraitUrl;
+							nick_name = posts[0].authorShowName;
+						}		
 						break;
 					}
 					case TBObject::POST:
 						pid = ((PostInfo*)op.object.get())->pid;
+						portrait = ((PostInfo*)op.object.get())->authorPortraitUrl;
+						nick_name = ((PostInfo*)op.object.get())->authorShowName;
 						break;
 					case TBObject::LZL:
 						pid = ((LzlInfo*)op.object.get())->cid;
+						portrait = ((LzlInfo*)op.object.get())->authorPortraitUrl;
+						nick_name = ((LzlInfo*)op.object.get())->authorShowName;
 						break;
 					}
 
@@ -202,13 +209,13 @@ void CTBMOperate::OperateThread()
 				}
 
 				CString code = (g_pTbmCoreConfig->m_banClientInterface || pid == _T("")) ?
-					g_pTiebaOperate->BanIDClient(op.object->author) : g_pTiebaOperate->BanID(op.object->author, pid);
+					g_pTiebaOperate->BanIDClient(op.object->author) : g_pTiebaOperate->BanID(op.object->author, pid, portrait, nick_name);
 				if (code != _T("0"))
 				{
-					CString content;
+					CString content; //需同步更新 url 传递
 					content.Format(_T("<font color=red>封禁 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
-						_T("\"bd:%s,%s\">重试</a>"), (LPCTSTR)op.object->authorShowName, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
-						(LPCTSTR)op.object->author, (LPCTSTR)pid);
+						_T("\"bd:%s,%s,%s,%s,Dog194\">重试</a>"), (LPCTSTR)op.object->authorShowName, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
+						(LPCTSTR)op.object->author, (LPCTSTR)pid, (LPCTSTR)portrait, (LPCTSTR)nick_name);
 					g_pLog->Log(content);
 				}
 				else

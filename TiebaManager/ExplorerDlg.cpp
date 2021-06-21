@@ -179,10 +179,12 @@ void CExplorerDlg::OnBnClickedButton2()
 	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
 
 
-	CString author, pid;
+	CString author, pid, portrait, nick_name;
 	if (tabIndex == 0) // 主题
 	{
 		author = m_exploreThreadPage->m_threads[index].author;
+		portrait = m_exploreThreadPage->m_threads[index].authorPortraitUrl;
+		nick_name = m_exploreThreadPage->m_threads[index].authorShowName;
 		if (!g_plan.m_banClientInterface/* || g_plan.m_banDuration != 1*/)
 		{
 			std::vector<PostInfo> posts;
@@ -195,12 +197,16 @@ void CExplorerDlg::OnBnClickedButton2()
 	else if (tabIndex == 1) // 帖子
 	{
 		author = m_explorePostPage->m_posts[index].author;
+		portrait = m_explorePostPage->m_posts[index].authorPortraitUrl;
+		nick_name = m_explorePostPage->m_posts[index].authorShowName;
 		if (!g_plan.m_banClientInterface/* || g_plan.m_banDuration != 1*/)
 			pid = m_explorePostPage->m_posts[index].pid;
 	}
 	else // 楼中楼
 	{
 		author = m_exploreLzlPage->m_lzls[index].author;
+		portrait = m_exploreLzlPage->m_lzls[index].authorPortraitUrl;
+		nick_name = m_exploreLzlPage->m_lzls[index].authorShowName;
 		if (!g_plan.m_banClientInterface/* || g_plan.m_banDuration != 1*/)
 			pid = m_exploreLzlPage->m_lzls[index].cid;
 	}
@@ -211,7 +217,7 @@ void CExplorerDlg::OnBnClickedButton2()
 		AfxMessageBox(_T("封禁失败(获取帖子ID失败)"), MB_ICONERROR);
 		return;
 	}*/
-	CString code = pid == _T("") ? GetTiebaOperate().BanIDClient(author) : GetTiebaOperate().BanID(author, pid);
+	CString code = pid == _T("") ? GetTiebaOperate().BanIDClient(author) : GetTiebaOperate().BanID(author, pid, portrait, nick_name);
 	if (code != _T("0"))
 		AfxMessageBox(_T("封禁失败，错误代码" + code + _T("(") + GetTiebaErrorText(code) + _T(")")), MB_ICONERROR);
 	else
