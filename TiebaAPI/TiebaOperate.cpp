@@ -261,8 +261,12 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 	if (errorCode == _T("872"))
 		return _T("精品贴不能删");
 	if (errorCode == _T("890"))
-		return _T("贴子已删");
+		return _T("贴子已删"); 
+	if (errorCode == _T("1039"))
+		return _T("这个帖子已经被删除了哦");
 	if (errorCode == _T("4011"))
 		return _T("需要验证码(操作太快？)");
+	if (errorCode == _T("300000"))
+		return _T("由于系统升级，烦请您更新至最新版客户端处理违规用户，感谢您的理解与支持！(暂时无法用旧版客户端api封禁用户名为空用户)");
 	return _T("未知错误");
 }
