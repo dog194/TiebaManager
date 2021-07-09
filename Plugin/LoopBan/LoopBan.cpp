@@ -123,7 +123,7 @@ void CLoopBan::OnPostSetTieba(const CString& forumName)
 void CLoopBan::OnPostBan(const Operation& op, BOOL succeeded)
 {
 	// 自动循环封
-	if (m_config.m_autoLoopBan)
+	if (m_config.m_autoLoopBan)//TODO 等待改动，应该是封禁自动加列表的部分
 	{
 		auto it = std::find(m_config.m_userList->cbegin(), m_config.m_userList->cend(), op.object->author);
 		if (it == m_config.m_userList->cend())
@@ -138,7 +138,7 @@ void CLoopBan::OnPostBan(const Operation& op, BOOL succeeded)
 
 
 // 取用户发的帖子ID
-static CString GetPIDFromUser(const CString& userName)
+static CString GetPIDFromUser(const CString& userName)//TODO D:能不能用存疑。需不需要用也存疑。
 {
 	CString src = HTTPGet(_T("https://tieba.baidu.com/f/search/ures?ie=utf-8&kw=") + GetTiebaOperate().GetEncodedForumName() 
 		+ _T("&qw=&rn=10&un=") + userName + _T("&only_thread=&sm=1&sd=&ed=&pn=1"));
@@ -191,24 +191,27 @@ void CLoopBan::LoopBanThread()
 	// 循环封
 	if (!CoInitializeHelper())
 		return;
-	for (UINT i = 0; i < config.m_userList->size(); i++)
+	for (UINT i = 0; i < config.m_banlist->size(); i++)
 	{
 		CString code;
 		if (g_pTbmCoreConfig->m_banClientInterface)
-			code = tiebaOperate.BanIDClient((*config.m_userList)[i]); // 用客户端接口封禁
+			code = tiebaOperate.BanIDClient((*config.m_banlist)[i].m_uid); // 用客户端接口封禁
 		else
 		{
-			if ((*config.m_pidList)[i] != _T("")) // 尝试用PID封禁
-				code = tiebaOperate.BanID((*config.m_userList)[i], (*config.m_pidList)[i]);
-			if ((*config.m_pidList)[i] == _T("") || code != _T("0")) // 尝试不用PID封禁（用户必须为本吧会员）
+			//if ((*config.m_pidList)[i] != _T("")) // 尝试用PID封禁
+			//	code = tiebaOperate.BanID((*config.m_userList)[i], (*config.m_pidList)[i]);
+			//if ((*config.m_pidList)[i] == _T("") || code != _T("0")) // 尝试不用PID封禁（用户必须为本吧会员）D:存疑，现在好像没有这个限定。
+			if ((*config.m_banlist)[i].m_portrait == _T("")) //portrait 为空。默认 uid为用户id。portrait 不为空，默认uid为 nick_name
 			{
-				code = tiebaOperate.BanID((*config.m_userList)[i]);
-				if (code != _T("0")) // 尝试获取新的PID并用PID封禁
-				{
-					(*config.m_pidList)[i] = GetPIDFromUser((*config.m_userList)[i]);
-					updatePID = TRUE;
-					code = tiebaOperate.BanID((*config.m_userList)[i], (*config.m_pidList)[i]);
-				}
+				code = tiebaOperate.BanID((*config.m_banlist)[i].m_uid);
+			}else {
+				code = tiebaOperate.BanID(_T(""), _T(""), (*config.m_banlist)[i].m_portrait, (*config.m_banlist)[i].m_uid);
+				//if (code != _T("0")) // 尝试获取新的PID并用PID封禁
+				//{
+				//	(*config.m_pidList)[i] = GetPIDFromUser((*config.m_userList)[i]);
+				//	updatePID = TRUE;
+				//	code = tiebaOperate.BanID((*config.m_userList)[i], (*config.m_pidList)[i]);
+				//}
 			}
 		}
 
@@ -217,27 +220,95 @@ void CLoopBan::LoopBanThread()
 			if (code != _T("0"))
 			{
 				CString content;
-				content.Format(_T("<font color=red>封禁 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
-					_T("\"bd:%s,\">重试</a>"), (LPCTSTR)(*config.m_userList)[i], (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code), 
-					(LPCTSTR)(*config.m_userList)[i]);
+				if ((*config.m_banlist)[i].m_portrait == _T("")) //portrait 为空。默认 uid为用户id。portrait 不为空，默认uid为 nick_name
+				{
+					content.Format(_T("<font color=red>封禁 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
+						_T("\"bd:%s,\">重试</a>"), (LPCTSTR)(*config.m_banlist)[i].m_uid, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
+						(LPCTSTR)(*config.m_banlist)[i].m_uid);
+				}
+				else 
+				{
+					content.Format(_T("<font color=red>封禁 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
+						_T("\"bd:%s,%s,%s,%s,Dog194\">重试</a>"), (LPCTSTR)(*config.m_banlist)[i].m_uid, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
+						(LPCTSTR)_T(""), (LPCTSTR)_T(""), (LPCTSTR)(*config.m_banlist)[i].m_portrait, (LPCTSTR)(*config.m_banlist)[i].m_uid);
+				}
 				log.Log(content);
 			}
 			else
-				log.Log(_T("<font color=red>封禁 </font>") + (*config.m_userList)[i]);
+				log.Log(_T("<font color=red>封禁 </font>") + (*config.m_banlist)[i].m_uid);
 		}
 
-		if (code == _T("0") && i < config.m_userList->size() - 1)
+		if (code == _T("0") && i < config.m_banlist->size() - 1)
 			Sleep((DWORD)(config.m_banInterval * 1000));
 	}
 	CoUninitialize();
 
 	// 更新PID
-	if (updatePID)
-		config.Save(currentUserDir + _T("options2.xml")); // 可能会覆盖刚刚在LoopBanDlg修改的设置
+	//if (updatePID)
+	//	config.Save(currentUserDir + _T("options2.xml")); // 可能会覆盖刚刚在LoopBanDlg修改的设置
 
 	// 更新时间
 	*lastTime.m_year = time.wYear;
 	*lastTime.m_month = time.wMonth;
 	*lastTime.m_day = time.wDay;
 	lastTime.Save(currentUserDir + _T("LoopBanDate.xml"));
+}
+
+// 用户信息
+CUserInfo::CUserInfo()
+{
+	m_uid = _T("");
+	m_pid = _T("");
+	m_portrait = _T("");
+}
+
+CUserInfo::CUserInfo(const CString& uid)
+{
+	m_uid = uid;
+	m_pid = _T("");
+	m_portrait = _T("");
+}
+
+DECLEAR_READ(CUserInfo)
+{
+	const tinyxml2::XMLElement* optionNode = root.FirstChildElement(m_name);
+	if (optionNode == NULL)
+	{
+		UseDefault();	//虽然不知道做了什么，但是还是写了 = =
+		return;
+	}
+	COption<CString> uid("uid");
+	COption<CString> pid("pid");
+	COption<CString> portrait("portrait");
+	uid.Read(*optionNode);
+	pid.Read(*optionNode);
+	portrait.Read(*optionNode);
+
+	m_value.m_uid = uid;
+	m_value.m_pid = pid;
+	m_value.m_portrait = portrait;
+
+	if (!IsValid(m_value))	//虽然不知道做了什么，但是还是写了 = =
+		UseDefault();
+}
+
+DECLEAR_WRITE(CUserInfo)
+{
+	tinyxml2::XMLDocument* doc = root.GetDocument();
+	tinyxml2::XMLElement* optionNode = doc->NewElement(m_name);
+	root.LinkEndChild(optionNode);
+
+	COption<CString> uid("uid");
+	COption<CString> pid("pid");
+	COption<CString> portrait("portrait");
+	uid.Read(*optionNode);
+	pid.Read(*optionNode);
+	portrait.Read(*optionNode);
+
+	*uid = m_value.m_uid;
+	*pid = m_value.m_pid;
+	*portrait = m_value.m_portrait;
+	uid.Write(*optionNode);
+	pid.Write(*optionNode);
+	portrait.Write(*optionNode);
 }

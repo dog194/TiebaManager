@@ -149,13 +149,18 @@ CString CTiebaOperate::BanID(const CString& userName, const CString& pid, const 
 	//portrait[]=xxxxxxxxxxxxxxxxxxxxxxx
 	//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx?t=zzzzzzzzzz
 	//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx
+	//xxxxxxxxxxxxxxx
+	if (portrait == _T("")) {
+		//本身就空。
+		return BanID(userName, pid);
+	}
 	CString data, tmp;
 	tmp = GetStringBetween(portrait, AUTHOR_PORTRAIT_LEFT, AUTHOR_PORTRAIT_RIGHT);
 	if (tmp == _T("")) {
 		tmp = GetStringAfter(portrait, AUTHOR_PORTRAIT_LEFT);
 		if (tmp == _T("")) {
-			//还TM空，不是代码写的有问题就是百度有问题。
-			return BanID(userName, pid);
+			//更新兼容LoopBan格式。
+			tmp = portrait;
 		}
 	}
 	data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&pid%%5B%%5D=%s&reason=%s&portrait%%5B%%5D=%s&nick_name%%5B%%5D=%s"),
@@ -176,7 +181,7 @@ CString CTiebaOperate::BanID(const CString& userName, const CString& pid)
 	return GetOperationErrorCode(src);
 }
 
-// 封ID，返回错误代码，不用PID（用户必须为本吧会员）
+// 封ID，返回错误代码，不用PID（用户必须为本吧会员）//好像现在已经没有这个限制了？
 CString CTiebaOperate::BanID(const CString& userName)
 {
 	CString data;
