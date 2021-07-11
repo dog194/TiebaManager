@@ -23,6 +23,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 class CLoopBanConfig;
 #include "resource.h"
 
+//D: 新的数据结构
+class CUserInfo
+{
+public:
+	CString m_uid;			// userName
+	CString m_pid;			// pid	//似乎用不到
+	CString m_portrait;		// portrait
+	CUserInfo();
+	CUserInfo(const CString& uid);
+};
 
 // CLoopBanDlg 对话框
 
@@ -41,14 +51,17 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	virtual BOOL OnInitDialog();
+	virtual BOOL OnInitDialog() override;
 	virtual void OnCancel();
 	afx_msg void OnClose();
 	virtual void PostNcDestroy();
 	virtual void OnOK();
 
+	virtual BOOL SetItem(int index) override;
 	virtual void OnAdd(int index) override;
 	virtual void OnDelete(int index) override;
+	void ShowList(const std::vector<CUserInfo>& list);
+	void ApplyList(std::vector<CUserInfo>& list);
 
 
 public:

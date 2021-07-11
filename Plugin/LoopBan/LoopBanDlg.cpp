@@ -24,9 +24,67 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "resource.h"
 #include "LoopBanDlg.h"
 #include "LoopBan.h"
-
+#include "LoopBanInputDlg.h"
 #include <TBMAPI.h>
 
+// 用户信息
+CUserInfo::CUserInfo()
+{
+	m_uid = _T("");
+	m_pid = _T("");
+	m_portrait = _T("");
+}
+
+CUserInfo::CUserInfo(const CString& uid)
+{
+	m_uid = uid;
+	m_pid = _T("");
+	m_portrait = _T("");
+}
+
+DECLEAR_READ(CUserInfo)
+{
+	const tinyxml2::XMLElement* optionNode = root.FirstChildElement(m_name);
+	if (optionNode == NULL)
+	{
+		UseDefault();	//虽然不知道做了什么，但是还是写了 = =
+		return;
+	}
+	COption<CString> uid("uid");
+	COption<CString> pid("pid");
+	COption<CString> portrait("portrait");
+	uid.Read(*optionNode);
+	pid.Read(*optionNode);
+	portrait.Read(*optionNode);
+
+	m_value.m_uid = uid;
+	m_value.m_pid = pid;
+	m_value.m_portrait = portrait;
+
+	if (!IsValid(m_value))	//虽然不知道做了什么，但是还是写了 = =
+		UseDefault();
+}
+
+DECLEAR_WRITE(CUserInfo)
+{
+	tinyxml2::XMLDocument* doc = root.GetDocument();
+	tinyxml2::XMLElement* optionNode = doc->NewElement(m_name);
+	root.LinkEndChild(optionNode);
+
+	COption<CString> uid("uid");
+	COption<CString> pid("pid");
+	COption<CString> portrait("portrait");
+	uid.Read(*optionNode);
+	pid.Read(*optionNode);
+	portrait.Read(*optionNode);
+
+	*uid = m_value.m_uid;
+	*pid = m_value.m_pid;
+	*portrait = m_value.m_portrait;
+	uid.Write(*optionNode);
+	pid.Write(*optionNode);
+	portrait.Write(*optionNode);
+}
 
 // CLoopBanDlg 对话框
 
@@ -68,7 +126,14 @@ END_MESSAGE_MAP()
 // 初始化
 BOOL CLoopBanDlg::OnInitDialog()
 {
-	CNormalListPage::OnInitDialog();
+	CListPage::OnInitDialog();
+
+	//D: override OnInitDialog, 因为要多加Colunm。且不知道父类有没有其他东西调用 = =||
+	m_list.ModifyStyle(0, LVS_NOCOLUMNHEADER);
+	m_list.InsertColumn(0, _T("uid"), LVCFMT_LEFT, 500);
+	m_list.InsertColumn(1, _T("portrait"), LVCFMT_LEFT, 500);
+	m_list.SetColumnWidth(0, 220);
+	m_list.SetColumnWidth(1, 320);
 
 	m_resize.AddControl(&m_enableCheck, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_list);
 	m_resize.AddControl(&m_logCheck, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_list);
@@ -81,8 +146,8 @@ BOOL CLoopBanDlg::OnInitDialog()
 
 	// 显示配置
 	CString tmp;
-	ShowList(m_config.m_userList);							// 用户名
-	m_pid = std::move(*m_config.m_pidList);					// PID
+	ShowList(m_config.m_banlist);							// 用户名
+	m_pid = std::move(*m_config.m_pidList);					// PID //TODO D: 待移除
 	m_logCheck.SetCheck(m_config.m_log);					// 输出日志
 	m_enableCheck.SetCheck(m_config.m_enable);				// 开启
 	tmp.Format(_T("%g"), *m_config.m_banInterval);
@@ -125,20 +190,37 @@ void CLoopBanDlg::PostNcDestroy()
 }
 #pragma endregion
 
+// overwrite，使用新的子输入窗口
+BOOL CLoopBanDlg::SetItem(int index)
+{
+	CString uid = m_list.GetItemText(index, 0);
+	CString portrait = m_list.GetItemText(index, 1);
+
+	CLoopBanInputDlg dlg(uid, portrait, CLoopBanInputDlg::IDD, this);
+	if (dlg.DoModal() == IDOK && uid != _T(""))
+	{
+		m_list.SetItemText(index, 0, uid);
+		m_list.SetItemText(index, 1, portrait);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
 // 添加
 void CLoopBanDlg::OnAdd(int index)
 {
 	if (index >= 0)
 	{
-		if (m_pid.size() != m_list.GetItemCount())
-			m_pid.insert(m_pid.begin() + index, _T("")); // 优先不使用PID封禁
-		else
-			m_pid[index] = _T("");
+		//if (m_pid.size() != m_list.GetItemCount())
+		//	m_pid.insert(m_pid.begin() + index, _T("")); // 优先不使用PID封禁
+		//else
+		//	m_pid[index] = _T("");
 	}
 	else
 	{
-		m_pid.clear();
-		m_pid.resize(m_list.GetItemCount());
+		//m_pid.clear();
+		//m_pid.resize(m_list.GetItemCount());
 	}
 	m_clearCache = TRUE;
 }
@@ -146,10 +228,10 @@ void CLoopBanDlg::OnAdd(int index)
 // 删除
 void CLoopBanDlg::OnDelete(int index)
 {
-	if (index >= 0)
-		m_pid.erase(m_pid.begin() + index);
-	else
-		m_pid.clear();
+	//if (index >= 0)
+	//	m_pid.erase(m_pid.begin() + index);
+	//else
+	//	m_pid.clear();
 }
 
 // 确认
@@ -159,8 +241,8 @@ void CLoopBanDlg::OnOK()
 
 	CString strBuf;
 	// 循环封
-	ApplyList(m_config.m_userList);								// 用户名
-	*m_config.m_pidList = std::move(m_pid);						// PID
+	ApplyList(m_config.m_banlist);								// 将List应用回配置
+	*m_config.m_pidList = std::move(m_pid);						// PID //TODO D:移除
 	*m_config.m_log = m_logCheck.GetCheck();					// 输出日志
 	*m_config.m_enable = m_enableCheck.GetCheck();				// 开启
 	m_banIntervalEdit.GetWindowText(strBuf);
@@ -173,4 +255,23 @@ void CLoopBanDlg::OnOK()
 		DeleteFile(currentUserDir + _T("LoopBanDate.xml"));
 
 	DestroyWindow();
+}
+
+void CLoopBanDlg::ShowList(const std::vector<CUserInfo>& list)
+{
+	m_list.DeleteAllItems();
+	for (UINT i = 0; i < list.size(); i++) {
+		m_list.InsertItem(i, list[i].m_uid);
+		m_list.SetItemText(i, 1, list[i].m_portrait);
+	}
+}
+
+void CLoopBanDlg::ApplyList(std::vector<CUserInfo>& list)
+{
+	int size = m_list.GetItemCount();
+	list.resize(size);
+	for (int i = 0; i < size; i++) {
+		list[i].m_uid = m_list.GetItemText(i, 0);
+		list[i].m_portrait = m_list.GetItemText(i, 1);
+	}
 }

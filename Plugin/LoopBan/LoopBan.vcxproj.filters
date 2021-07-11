@@ -27,6 +27,9 @@
     <ClCompile Include="LoopBanDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="LoopBanInputDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\LoopBan.rc2">
@@ -47,6 +50,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="LoopBanDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LoopBanInputDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
