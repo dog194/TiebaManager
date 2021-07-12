@@ -32,6 +32,7 @@ public:
 	CString m_portrait;		// portrait
 	CUserInfo();
 	CUserInfo(const CString& uid);
+	CUserInfo(const CString& uid, const CString& pid, const CString& portrait);
 };
 
 // CLoopBanDlg 对话框

@@ -42,6 +42,13 @@ CUserInfo::CUserInfo(const CString& uid)
 	m_portrait = _T("");
 }
 
+CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& portrait)
+{
+	m_uid = uid;
+	m_pid = pid;
+	m_portrait = portrait;
+}
+
 DECLEAR_READ(CUserInfo)
 {
 	const tinyxml2::XMLElement* optionNode = root.FirstChildElement(m_name);

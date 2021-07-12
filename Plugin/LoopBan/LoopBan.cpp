@@ -36,6 +36,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 using namespace std::placeholders;
 
+const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
+const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -123,15 +126,56 @@ void CLoopBan::OnPostSetTieba(const CString& forumName)
 void CLoopBan::OnPostBan(const Operation& op, BOOL succeeded)
 {
 	// 自动循环封
-	if (m_config.m_autoLoopBan)//TODO 等待改动，应该是封禁自动加列表的部分
+	if (m_config.m_autoLoopBan)
 	{
-		auto it = std::find(m_config.m_userList->cbegin(), m_config.m_userList->cend(), op.object->author);
-		if (it == m_config.m_userList->cend())
-		{
-			m_config.m_userList->push_back(op.object->author);
-			m_config.m_pidList->push_back(_T(""));
-			CString currentUserDir = GetCurrentUserDir();
-			DeleteFile(currentUserDir + _T("LoopBanDate.xml"));
+		if (op.object->author != _T("")) {
+			//有用户名，以用户名为主
+			BOOL isAdd = TRUE;
+			for (UINT i = 0; i < m_config.m_banlist->size(); i++)
+			{
+				if (op.object->author == m_config.m_banlist->at(i).m_uid) {
+					isAdd = FALSE;
+					break;
+				}
+			}
+			if (isAdd) {
+				m_config.m_banlist->push_back(CUserInfo(op.object->author));
+				CString currentUserDir = GetCurrentUserDir();
+				DeleteFile(currentUserDir + _T("LoopBanDate.xml"));
+			}
+		}
+		else if (op.object->authorPortraitUrl != _T("")){
+			//空用户名，以Portrait为准。
+			//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx?t=zzzzzzzzzz
+			//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx
+			//。。当初为啥会加这堆前面的url。。
+			CString tmp;
+			tmp = GetStringBetween(op.object->authorPortraitUrl, AUTHOR_PORTRAIT_LEFT, AUTHOR_PORTRAIT_RIGHT);
+			if (tmp == _T("")) {
+				tmp = GetStringAfter(op.object->authorPortraitUrl, AUTHOR_PORTRAIT_LEFT);
+				if (tmp == _T("")) {
+					if (tmp.Find(AUTHOR_PORTRAIT_LEFT) == -1) {
+						tmp = op.object->authorPortraitUrl;
+					}
+					else {
+						return;
+					}
+					
+				}
+			}
+			BOOL isAdd = TRUE;
+			for (UINT i = 0; i < m_config.m_banlist->size(); i++)
+			{
+				if (tmp == m_config.m_banlist->at(i).m_portrait) {
+					isAdd = FALSE;
+					break;
+				}
+			}
+			if (isAdd) {
+				m_config.m_banlist->push_back(CUserInfo(op.object->authorShowName, _T(""), tmp));
+				CString currentUserDir = GetCurrentUserDir();
+				DeleteFile(currentUserDir + _T("LoopBanDate.xml"));
+			}
 		}
 	}
 }
