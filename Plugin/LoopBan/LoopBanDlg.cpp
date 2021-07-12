@@ -206,6 +206,41 @@ BOOL CLoopBanDlg::SetItem(int index)
 	return FALSE;
 }
 
+class CBanListFile : public CConfigBase
+{
+public:
+	COption<std::vector<CUserInfo> > m_list;
+
+	CBanListFile() : CConfigBase("Banlist"),
+		m_list("Banlist")
+	{
+		m_options.push_back(&m_list);
+	}
+};
+
+// 导出xml
+BOOL CLoopBanDlg::Export(const CString& path)
+{
+	if (path.Right(4).CompareNoCase(_T(".xml")) != 0)
+		return CListPage::Export(path);
+
+	CBanListFile tmp;
+	ApplyList(tmp.m_list);
+	return tmp.Save(path);
+}
+
+// 导入xml
+BOOL CLoopBanDlg::Import(const CString& path)
+{
+	if (path.Right(4).CompareNoCase(_T(".xml")) != 0)
+		return CListPage::Import(path);
+
+	CBanListFile tmp;
+	if (!tmp.Load(path)) //D: 需要同时考虑旧版和新版。
+		return CNormalListPage::Import(path);
+	ShowList(tmp.m_list);
+	return TRUE;
+}
 
 // 添加
 void CLoopBanDlg::OnAdd(int index)
