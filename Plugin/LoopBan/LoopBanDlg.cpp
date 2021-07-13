@@ -154,7 +154,6 @@ BOOL CLoopBanDlg::OnInitDialog()
 	// 显示配置
 	CString tmp;
 	ShowList(m_config.m_banlist);							// 用户名
-	m_pid = std::move(*m_config.m_pidList);					// PID //TODO D: 待移除
 	m_logCheck.SetCheck(m_config.m_log);					// 输出日志
 	m_enableCheck.SetCheck(m_config.m_enable);				// 开启
 	tmp.Format(_T("%g"), *m_config.m_banInterval);
@@ -252,28 +251,12 @@ BOOL CLoopBanDlg::Import(const CString& path)
 // 添加
 void CLoopBanDlg::OnAdd(int index)
 {
-	if (index >= 0)
-	{
-		//if (m_pid.size() != m_list.GetItemCount())
-		//	m_pid.insert(m_pid.begin() + index, _T("")); // 优先不使用PID封禁
-		//else
-		//	m_pid[index] = _T("");
-	}
-	else
-	{
-		//m_pid.clear();
-		//m_pid.resize(m_list.GetItemCount());
-	}
 	m_clearCache = TRUE;
 }
 
 // 删除
 void CLoopBanDlg::OnDelete(int index)
 {
-	//if (index >= 0)
-	//	m_pid.erase(m_pid.begin() + index);
-	//else
-	//	m_pid.clear();
 }
 
 // 确认
@@ -284,7 +267,6 @@ void CLoopBanDlg::OnOK()
 	CString strBuf;
 	// 循环封
 	ApplyList(m_config.m_banlist);								// 将List应用回配置
-	*m_config.m_pidList = std::move(m_pid);						// PID //TODO D:移除
 	*m_config.m_log = m_logCheck.GetCheck();					// 输出日志
 	*m_config.m_enable = m_enableCheck.GetCheck();				// 开启
 	m_banIntervalEdit.GetWindowText(strBuf);

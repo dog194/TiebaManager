@@ -32,7 +32,6 @@ public:
 	COption<float> m_banInterval;			    // 封禁间隔
 	COption<std::vector<CUserInfo> > m_banlist;	// D新版BanList结构
 	COption<std::vector<CString> > m_userList;	// 用户列表 //D保留，用于兼容，读取旧版结构然后转换。
-	COption<std::vector<CString> > m_pidList;	// PID列表	//D丢弃，移除
 	COption<BOOL> m_autoLoopBan;			    // 自动循环封
 
 	CLoopBanConfig() : CConfigBase("LoopBan"),
@@ -41,7 +40,6 @@ public:
 		m_banInterval("BanInterval", 2.0f, [](const float& value) { return 0.0f <= value && value <= 60.0f; }/*InRange<float, 0.0f, 60.0f>*/),
 		m_banlist("BanList"),
 		m_userList("Name"),
-		m_pidList("PID"),
 		m_autoLoopBan("AutoLoopBan", FALSE)
 	{
 		m_options.push_back(&m_enable);
@@ -49,7 +47,6 @@ public:
 		m_options.push_back(&m_banInterval);
 		m_options.push_back(&m_banlist);
 		m_options.push_back(&m_userList);
-		m_options.push_back(&m_pidList);
 		m_options.push_back(&m_autoLoopBan);
 	}
 
@@ -59,7 +56,6 @@ public:
 		if (m_userList->size() != 0 && m_userList->size() > m_banlist->size()) {
 			//原版结构与新版结构转换
 			m_banlist->clear();
-			m_pidList->clear();
 			for (UINT i = 0; i < m_userList->size(); i++)
 			{
 				m_banlist->push_back(CUserInfo(m_userList->at(i)));

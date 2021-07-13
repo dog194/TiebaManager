@@ -287,10 +287,6 @@ void CLoopBan::LoopBanThread()
 	}
 	CoUninitialize();
 
-	// 更新PID
-	//if (updatePID)
-	//	config.Save(currentUserDir + _T("options2.xml")); // 可能会覆盖刚刚在LoopBanDlg修改的设置
-
 	// 更新时间
 	*lastTime.m_year = time.wYear;
 	*lastTime.m_month = time.wMonth;
