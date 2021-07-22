@@ -29,7 +29,7 @@ class CLoopBanInputDlg : public CDialog
 	DECLARE_DYNAMIC(CLoopBanInputDlg)
 
 public:
-	CLoopBanInputDlg(CString& uid, CString& portrait, UINT nIDTemplate = IDD, CWnd* pParent = NULL);   // 标准构造函数
+	CLoopBanInputDlg(CString& uid, CString& portrait, CString& note, UINT nIDTemplate = IDD, CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~CLoopBanInputDlg();
 
 // 对话框数据
@@ -46,7 +46,9 @@ public:
 public:
 	CEdit m_edit_uid;
 	CEdit m_edit_portrait;
+	CEdit m_edit_note;
 
 	CString& m_uid;
 	CString& m_portrait;
+	CString& m_note;
 };

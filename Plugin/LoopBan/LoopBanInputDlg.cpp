@@ -30,10 +30,11 @@ const UINT CLoopBanInputDlg::IDD = IDD_LOOP_BAN_USER_INFO;
 
 IMPLEMENT_DYNAMIC(CLoopBanInputDlg, CDialog)
 
-CLoopBanInputDlg::CLoopBanInputDlg(CString& uid, CString& portrait, UINT nIDTemplate, CWnd* pParent)
+CLoopBanInputDlg::CLoopBanInputDlg(CString& uid, CString& portrait, CString& note, UINT nIDTemplate, CWnd* pParent)
 	: CDialog(nIDTemplate, pParent), 
 	m_uid(uid),
-	m_portrait(portrait)
+	m_portrait(portrait),
+	m_note(note)
 {
 }
 
@@ -46,6 +47,7 @@ void CLoopBanInputDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT_UID, m_edit_uid);
 	DDX_Control(pDX, IDC_EDIT_PORTRAIT, m_edit_portrait);
+	DDX_Control(pDX, IDC_EDIT_NOTE, m_edit_note);
 }
 
 BEGIN_MESSAGE_MAP(CLoopBanInputDlg, CDialog)
@@ -61,6 +63,7 @@ BOOL CLoopBanInputDlg::OnInitDialog()
 
 	m_edit_uid.SetWindowText(m_uid);
 	m_edit_portrait.SetWindowText(m_portrait);
+	m_edit_note.SetWindowText(m_note);
 	m_edit_uid.SetSel(0, -1);
 	m_edit_uid.SetFocus();
 
@@ -73,6 +76,7 @@ void CLoopBanInputDlg::OnOK()
 {
 	m_edit_uid.GetWindowText(m_uid);
 	m_edit_portrait.GetWindowText(m_portrait);
+	m_edit_note.GetWindowText(m_note);
 
 	CDialog::OnOK();
 }

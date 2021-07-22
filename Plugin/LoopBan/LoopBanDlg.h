@@ -23,6 +23,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 class CLoopBanConfig;
 #include "resource.h"
 
+const UINT COLUMN_INDEX_UID = 0;
+const UINT COLUMN_INDEX_PORTRAIT = 1;
+const UINT COLUMN_INDEX_NOTE = 2;
+
 //D: 新的数据结构
 class CUserInfo
 {
@@ -30,9 +34,11 @@ public:
 	CString m_uid;			// userName
 	CString m_pid;			// pid	//似乎用不到
 	CString m_portrait;		// portrait
+	CString m_note;		// 备注，没实际用途，单纯用来个人记录
 	CUserInfo();
 	CUserInfo(const CString& uid);
 	CUserInfo(const CString& uid, const CString& pid, const CString& portrait);
+	CUserInfo(const CString& uid, const CString& pid, const CString& portrait, const CString& note);
 };
 
 // CLoopBanDlg 对话框

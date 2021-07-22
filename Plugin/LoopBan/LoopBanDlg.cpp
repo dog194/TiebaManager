@@ -33,6 +33,7 @@ CUserInfo::CUserInfo()
 	m_uid = _T("");
 	m_pid = _T("");
 	m_portrait = _T("");
+	m_note = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid)
@@ -40,6 +41,7 @@ CUserInfo::CUserInfo(const CString& uid)
 	m_uid = uid;
 	m_pid = _T("");
 	m_portrait = _T("");
+	m_note = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& portrait)
@@ -47,6 +49,15 @@ CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& port
 	m_uid = uid;
 	m_pid = pid;
 	m_portrait = portrait;
+	m_note = _T("");
+}
+
+CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& portrait, const CString& note)
+{
+	m_uid = uid;
+	m_pid = pid;
+	m_portrait = portrait;
+	m_note = note;
 }
 
 DECLEAR_READ(CUserInfo)
@@ -60,13 +71,16 @@ DECLEAR_READ(CUserInfo)
 	COption<CString> uid("uid");
 	COption<CString> pid("pid");
 	COption<CString> portrait("portrait");
+	COption<CString> note("note");
 	uid.Read(*optionNode);
 	pid.Read(*optionNode);
 	portrait.Read(*optionNode);
+	note.Read(*optionNode);
 
 	m_value.m_uid = uid;
 	m_value.m_pid = pid;
 	m_value.m_portrait = portrait;
+	m_value.m_note = note;
 
 	if (!IsValid(m_value))	//虽然不知道做了什么，但是还是写了 = =
 		UseDefault();
@@ -81,16 +95,20 @@ DECLEAR_WRITE(CUserInfo)
 	COption<CString> uid("uid");
 	COption<CString> pid("pid");
 	COption<CString> portrait("portrait");
+	COption<CString> note("note");
 	uid.Read(*optionNode);
 	pid.Read(*optionNode);
 	portrait.Read(*optionNode);
+	note.Read(*optionNode);
 
 	*uid = m_value.m_uid;
 	*pid = m_value.m_pid;
 	*portrait = m_value.m_portrait;
+	*note = m_value.m_note;
 	uid.Write(*optionNode);
 	pid.Write(*optionNode);
 	portrait.Write(*optionNode);
+	note.Write(*optionNode);
 }
 
 // CLoopBanDlg 对话框
@@ -136,11 +154,13 @@ BOOL CLoopBanDlg::OnInitDialog()
 	CListPage::OnInitDialog();
 
 	//D: override OnInitDialog, 因为要多加Colunm。且不知道父类有没有其他东西调用 = =||
-	m_list.ModifyStyle(0, LVS_NOCOLUMNHEADER);
-	m_list.InsertColumn(0, _T("uid"), LVCFMT_LEFT, 500);
-	m_list.InsertColumn(1, _T("portrait"), LVCFMT_LEFT, 500);
-	m_list.SetColumnWidth(0, 220);
-	m_list.SetColumnWidth(1, 320);
+	//m_list.ModifyStyle(0, LVS_NOCOLUMNHEADER);
+	m_list.ModifyStyle(LVS_NOCOLUMNHEADER, 0);
+	m_list.InsertColumn(COLUMN_INDEX_UID, _T("用户名/昵称"), LVCFMT_LEFT, 500);
+	m_list.InsertColumn(COLUMN_INDEX_PORTRAIT, _T("portrait"), LVCFMT_LEFT, 500);
+	m_list.InsertColumn(COLUMN_INDEX_NOTE, _T("备注"), LVCFMT_LEFT, 500);
+	m_list.SetColumnWidth(COLUMN_INDEX_UID, 180);
+	m_list.SetColumnWidth(COLUMN_INDEX_PORTRAIT, 320);
 
 	m_resize.AddControl(&m_enableCheck, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_list);
 	m_resize.AddControl(&m_logCheck, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_list);
@@ -199,14 +219,16 @@ void CLoopBanDlg::PostNcDestroy()
 // overwrite，使用新的子输入窗口
 BOOL CLoopBanDlg::SetItem(int index)
 {
-	CString uid = m_list.GetItemText(index, 0);
-	CString portrait = m_list.GetItemText(index, 1);
+	CString uid = m_list.GetItemText(index, COLUMN_INDEX_UID);
+	CString portrait = m_list.GetItemText(index, COLUMN_INDEX_PORTRAIT);
+	CString note = m_list.GetItemText(index, COLUMN_INDEX_NOTE);
 
-	CLoopBanInputDlg dlg(uid, portrait, CLoopBanInputDlg::IDD, this);
+	CLoopBanInputDlg dlg(uid, portrait, note, CLoopBanInputDlg::IDD, this);
 	if (dlg.DoModal() == IDOK && uid != _T(""))
 	{
-		m_list.SetItemText(index, 0, uid);
-		m_list.SetItemText(index, 1, portrait);
+		m_list.SetItemText(index, COLUMN_INDEX_UID, uid);
+		m_list.SetItemText(index, COLUMN_INDEX_PORTRAIT, portrait);
+		m_list.SetItemText(index, COLUMN_INDEX_NOTE, note);
 		return TRUE;
 	}
 	return FALSE;
@@ -286,7 +308,8 @@ void CLoopBanDlg::ShowList(const std::vector<CUserInfo>& list)
 	m_list.DeleteAllItems();
 	for (UINT i = 0; i < list.size(); i++) {
 		m_list.InsertItem(i, list[i].m_uid);
-		m_list.SetItemText(i, 1, list[i].m_portrait);
+		m_list.SetItemText(i, COLUMN_INDEX_PORTRAIT, list[i].m_portrait);
+		m_list.SetItemText(i, COLUMN_INDEX_NOTE, list[i].m_note);
 	}
 }
 
@@ -295,7 +318,8 @@ void CLoopBanDlg::ApplyList(std::vector<CUserInfo>& list)
 	int size = m_list.GetItemCount();
 	list.resize(size);
 	for (int i = 0; i < size; i++) {
-		list[i].m_uid = m_list.GetItemText(i, 0);
-		list[i].m_portrait = m_list.GetItemText(i, 1);
+		list[i].m_uid = m_list.GetItemText(i, COLUMN_INDEX_UID);
+		list[i].m_portrait = m_list.GetItemText(i, COLUMN_INDEX_PORTRAIT);
+		list[i].m_note = m_list.GetItemText(i, COLUMN_INDEX_NOTE);
 	}
 }
