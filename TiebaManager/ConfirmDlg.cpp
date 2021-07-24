@@ -24,6 +24,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "ConfirmDlg.h"
 #include "ImageViewDlg.h"
 #include <TBMCoreImageHelper.h>
+#include <StringHelper.h>
 
 
 // CConfirmDlg 对话框
@@ -95,7 +96,7 @@ BOOL CConfirmDlg::OnInitDialog()
 	if (m_operation != NULL)
 	{
 		SetWindowText(m_operation->title);
-		CString content = m_operation->object->GetContent() + _T("\r\n\r\n作者：") + m_operation->object->authorShowName;
+		CString content = m_operation->object->GetContent() + _T("\r\n\r\n作者显示名：") + m_operation->object->authorShowName;
 		switch (m_operation->object->m_type)
 		{
 		case TBObject::POST:
@@ -112,6 +113,9 @@ BOOL CConfirmDlg::OnInitDialog()
 			break;
 		}
 		}
+		content += _T("\r\n\r\n作者名：") + m_operation->object->author		//多加个换行，有昵称的时候，显示名是昵称，没昵称的时候，显示名等于用户名
+			+ _T("\r\nPortrait：") + GetPortraitFromString(m_operation->object->authorPortraitUrl);
+
 		m_contentEdit.SetWindowText(content);
 		m_contentEdit.SetSel(m_operation->pos, m_operation->pos + m_operation->length);
 
