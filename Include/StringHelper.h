@@ -85,3 +85,6 @@ HELPER_API CString HTMLEscape(const CString& src);
 HELPER_API CString HTMLUnescape(const CString& src);
 // JS反转义，调用者应自行转义src里的双引号
 HELPER_API CString JSUnescape(const CString& src);
+
+// 取Portrait，解决Portrait url历史遗留问题
+HELPER_API CString GetPortraitFromString(const CString& src);

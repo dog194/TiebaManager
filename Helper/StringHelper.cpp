@@ -23,6 +23,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #import <msscript.ocx> no_namespace
 using namespace tinyxml2;
 
+const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
+const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
 
 void RegexText::Set(const CString& _text, BOOL _isRegex, BOOL _ignoreCase)
 {
@@ -257,7 +259,7 @@ HELPER_API CString GetStringAfter(const CString& src, const CString& left, int s
 	if (leftPos == -1)
 		return _T("");
 	leftPos += left.GetLength();
-	return src.Right(leftPos);
+	return src.Right(src.GetLength() - leftPos);
 }
 
 
@@ -377,4 +379,25 @@ HELPER_API CString JSUnescape(const CString& src)
 	if (FAILED(script->raw_Eval(_bstr_t((LPCTSTR)(_T("\"") + src + _T("\""))), result.GetAddress())))
 		return _T("");
 	return (LPCTSTR)(_bstr_t)result;
+}
+
+// 取Portrait，解决Portrait url历史遗留问题
+HELPER_API CString GetPortraitFromString(const CString& src)
+{
+	//由于历史代码问题，获取的Portrait有以下两种形式。也不知道当初为啥会加这堆前面的url。。
+	//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx?t=zzzzzzzzzz
+	//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx
+	//稳妥，还是TM的稳妥，多写点判断而不是直接改加url的代码。。。应对所有3种情况
+	//xxxxxxxxxxxxxxx
+	CString tmp;
+	tmp = GetStringBetween(src, AUTHOR_PORTRAIT_LEFT, AUTHOR_PORTRAIT_RIGHT);
+	if (tmp == _T("")) {
+		tmp = GetStringAfter(src, AUTHOR_PORTRAIT_LEFT);
+		if (tmp == _T("")) {
+			if (tmp.Find(AUTHOR_PORTRAIT_LEFT) == -1) {
+				tmp = src;
+			}
+		}
+	}
+	return tmp;
 }
