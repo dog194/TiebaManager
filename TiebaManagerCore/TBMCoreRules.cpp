@@ -192,7 +192,7 @@ BOOL CKeywordCondition::MatchThread(const CConditionParam& _param, const ThreadI
 	default: return FALSE;
 	case CKeywordParam::TITLE:           startPos = 0;                                    content = thread.title;           break;
 	case CKeywordParam::PREVIEW:         startPos = thread.title.GetLength() + 2;         content = thread.preview;         break;
-	case CKeywordParam::AUTHOR:          startPos = thread.GetContent().GetLength() + 7;  content = thread.authorShowName;  break;
+	case CKeywordParam::AUTHOR:          startPos = thread.GetContent().GetLength() + 10;  content = thread.authorShowName;  break;
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = thread.GetContent();    break;
 	}
 
@@ -210,7 +210,7 @@ BOOL CKeywordCondition::MatchPost(const CConditionParam& _param, const PostInfo&
 	{
 	default: return FALSE;
 	case CKeywordParam::POST_CONTENT:    startPos = 0;                                    content = post.content;         break;
-	case CKeywordParam::AUTHOR:          startPos = post.GetContent().GetLength() + 7;    content = post.authorShowName;  break;
+	case CKeywordParam::AUTHOR:          startPos = post.GetContent().GetLength() + 10;    content = post.authorShowName;  break;
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = post.GetContent();    break;
 	}
 
@@ -228,7 +228,7 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 	{
 	default: return FALSE;
 	case CKeywordParam::LZL_CONTENT:     startPos = 0;                                    content = lzl.content;          break;
-	case CKeywordParam::AUTHOR:          startPos = lzl.GetContent().GetLength() + 7;     content = lzl.authorShowName;   break;
+	case CKeywordParam::AUTHOR:          startPos = lzl.GetContent().GetLength() + 10;     content = lzl.authorShowName;   break;
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = lzl.GetContent();     break;
 	}
 
