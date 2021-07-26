@@ -15,9 +15,8 @@ TiebaManager
 ---------
 
 * [OpenCV](http://opencv.org/) 3.2.0
-* [OpenSSL](https://www.openssl.org/source/old/1.0.2/) 1.0.2u
 * [TinyXML2](http://www.grinninglizard.com/tinyxml2/index.html)
-* [libcurl](https://curl.haxx.se/libcurl/) 7.40.0
+* [libcurl](https://curl.haxx.se/libcurl/) 7.78.0
 * [rapidjson](http://rapidjson.org/)
 
 链接
