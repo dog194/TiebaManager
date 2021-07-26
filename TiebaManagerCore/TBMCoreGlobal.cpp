@@ -29,12 +29,12 @@ TBM_CORE_API CTiebaOperate* g_pTiebaOperate = NULL;
 
 
 CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
-	m_scanInterval		("ScanInterval",		5,		InRange<int, 0, 600>),
+	m_scanInterval		("ScanInterval",		30,		InRange<int, 0, 600>),
 	m_onlyScanTitle		("OnlyScanTitle",		FALSE),
 	m_scanPageCount		("ScanPageCount",		1,		GreaterThan<int, 1>),
 	m_briefLog			("BriefLog",			FALSE),
-	m_threadCount		("ThreadCount",			2,		InRange<int, 1, 16>),
-	m_clawerInterface	("ClawerInterface",		0,		InRange<int, 0, 1>),
+	m_threadCount		("ThreadCount",			1,		InRange<int, 1, 16>),
+	m_clawerInterface	("ClawerInterface",		1,		InRange<int, 0, 1>),
 
 	m_delete			("Delete",				TRUE),
 	m_banID				("BanID",				FALSE),
