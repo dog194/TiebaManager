@@ -49,8 +49,10 @@ public:
 		PREVIEW,          // 主题预览
 		POST_CONTENT,     // 帖子内容
 		LZL_CONTENT,      // 楼中楼内容
-		AUTHOR,           // 作者名
-		ALL_CONTENT       // 所有内容（包括主题标题、主题预览、帖子内容、楼中楼内容）
+		AUTHOR,           // 作者名显示名，有昵称的时候为昵称，没昵称显示用户名
+		ALL_CONTENT,      // 所有内容（包括主题标题、主题预览、帖子内容、楼中楼内容）
+		UID,			  // 作者名，可能为空
+		PORTRAIT          // Portrait，目前版本的用户唯一标识符
 	};
 
 

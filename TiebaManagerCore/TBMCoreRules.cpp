@@ -88,8 +88,10 @@ CString CKeywordCondition::GetDescription(const CConditionParam& _param)
 		_T("主题预览"),
 		_T("帖子内容"),
 		_T("楼中楼内容"),
+		_T("作者显示名"),
+		_T("所有内容"),
 		_T("作者名"),
-		_T("所有内容")
+		_T("Portirt")
 	};
 	
 	CString res = rangeDesc[param.m_range];
@@ -109,7 +111,7 @@ CConditionParam* CKeywordCondition::ReadParam(const tinyxml2::XMLElement* option
 {
 	auto* param = new CKeywordParam();
 
-	COption<int> range("Range", CKeywordParam::ALL_CONTENT, InRange<int, CKeywordParam::TITLE, CKeywordParam::ALL_CONTENT>);
+	COption<int> range("Range", CKeywordParam::ALL_CONTENT, InRange<int, CKeywordParam::TITLE, CKeywordParam::PORTRAIT>);
 	COption<BOOL> not("Not", FALSE);
 	COption<BOOL> include("Include", TRUE);
 	COption<RegexText> keyword("Keyword");
@@ -192,8 +194,16 @@ BOOL CKeywordCondition::MatchThread(const CConditionParam& _param, const ThreadI
 	default: return FALSE;
 	case CKeywordParam::TITLE:           startPos = 0;                                    content = thread.title;           break;
 	case CKeywordParam::PREVIEW:         startPos = thread.title.GetLength() + 2;         content = thread.preview;         break;
-	case CKeywordParam::AUTHOR:          startPos = thread.GetContent().GetLength() + 10;  content = thread.authorShowName;  break;
+	case CKeywordParam::AUTHOR:          startPos = thread.GetContent().GetLength() + 10; content = thread.authorShowName;  break;
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = thread.GetContent();    break;
+	case CKeywordParam::UID:             
+		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 8;
+		content = thread.author;          
+		break;
+	case CKeywordParam::PORTRAIT:        
+		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 8 + thread.author.GetLength() + 11;
+		content = GetPortraitFromString(thread.authorPortraitUrl);    
+		break;
 	}
 
 	return Match(param, content, startPos, pos, length);
@@ -210,8 +220,23 @@ BOOL CKeywordCondition::MatchPost(const CConditionParam& _param, const PostInfo&
 	{
 	default: return FALSE;
 	case CKeywordParam::POST_CONTENT:    startPos = 0;                                    content = post.content;         break;
-	case CKeywordParam::AUTHOR:          startPos = post.GetContent().GetLength() + 10;    content = post.authorShowName;  break;
+	case CKeywordParam::AUTHOR:          startPos = post.GetContent().GetLength() + 10;   content = post.authorShowName;  break;
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = post.GetContent();    break;
+	case CKeywordParam::UID:
+		startPos = post.GetContent().GetLength() + 10 + 
+			post.authorShowName.GetLength() + 5 + 
+			post.authorLevel.GetLength() + 5 + 
+			post.floor.GetLength() +  8;
+		content = post.author;
+		break;
+	case CKeywordParam::PORTRAIT:
+		startPos = post.GetContent().GetLength() + 10 + 
+			post.authorShowName.GetLength() + 5 +
+			post.authorLevel.GetLength() + 5 +
+			post.floor.GetLength() + 8 + 
+			post.author.GetLength() + 11;
+		content = GetPortraitFromString(post.authorPortraitUrl);
+		break;
 	}
 
 	return Match(param, content, startPos, pos, length);
@@ -228,8 +253,21 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 	{
 	default: return FALSE;
 	case CKeywordParam::LZL_CONTENT:     startPos = 0;                                    content = lzl.content;          break;
-	case CKeywordParam::AUTHOR:          startPos = lzl.GetContent().GetLength() + 10;     content = lzl.authorShowName;   break;
+	case CKeywordParam::AUTHOR:          startPos = lzl.GetContent().GetLength() + 10;    content = lzl.authorShowName;   break;
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = lzl.GetContent();     break;
+	case CKeywordParam::UID:
+		startPos = lzl.GetContent().GetLength() + 7 + 
+			lzl.floor.GetLength() + 10 + 
+			lzl.authorShowName.GetLength() + 8;
+		content = lzl.author;
+		break;
+	case CKeywordParam::PORTRAIT:
+		startPos = lzl.GetContent().GetLength() + 7 + 
+			lzl.floor.GetLength() + 10 + 
+			lzl.authorShowName.GetLength() + 8 + 
+			lzl.author.GetLength() + 11;
+		content = GetPortraitFromString(lzl.authorPortraitUrl);
+		break;
 	}
 
 	return Match(param, content, startPos, pos, length);
