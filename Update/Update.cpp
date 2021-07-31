@@ -27,10 +27,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // 当前版本，每次更新后修改，也可以不是日期
-UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("17-11-13");
+UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("21-08-01");
 
 static const CString MANUALLY_UPDATE_URL = _T("https://sinacloud.net/xfgryujk/TiebaManager/贴吧管理器.zip");
-UPDATE_API const CString UPDATE_INFO_URL = _T("https://sinacloud.net/xfgryujk/TiebaManager/UpdateInfo.xml");
+static const CString QQ_QUN_UPDATE_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=IbZJQTp42ZNuEQJRKbyyn0LTD1iCgEtT");
+UPDATE_API const CString UPDATE_INFO_URL = _T("https://github.com/dog194/TiebaManager/raw/master/UpdateInfo.xml");
 
 static const CString UPDATE_DIR_PATH = _T("Update\\"); // 只能是一级目录，因为批处理里用了相对路径
 static const CString UPDATE_BAT_NAME = _T("Update.bat");
@@ -300,13 +301,14 @@ UPDATE_API CheckUpdateResult CheckUpdate()
 		+ _T("\r\n\r\n是否更新？"), MB_ICONQUESTION | MB_YESNO) == IDNO)
 		return UPDATE_HAS_UPDATE;
 
-	// 在线程中更新
-	std::thread(UpdateThread, updateInfo.release()).detach();
+	// 在线程中更新 //关闭自动更新功能，以后有缘再修。
+	//std::thread(UpdateThread, updateInfo.release()).detach();
+	ManuallyUpdate();
 	return UPDATE_HAS_UPDATE;
 }
 
 // 手动更新，打开一个URL
 UPDATE_API void ManuallyUpdate()
 {
-	ShellExecute(NULL, _T("open"), MANUALLY_UPDATE_URL, NULL, NULL, SW_SHOWNORMAL);
+	ShellExecute(NULL, _T("open"), QQ_QUN_UPDATE_URL, NULL, NULL, SW_SHOWNORMAL);
 }

@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version></Version>
-    <UpdateLog>1. 兼容百度瞎J8改客户端API</UpdateLog>
+    <Version>21-08-01</Version>
+    <UpdateLog>更新日志简版：
+    1. 修复LoopBan，现在支持封禁无id用户。支持添加备注（单纯辅助记忆理由，无实际影响）
+    2. 更新基础库，修复多线程卡死，崩溃问题（测试了一周没问题）
+    3. 优化默认设置，（默认用客户端扫描，单线程）
+    4. 修正显示“作者名”为“作者显示名”，描述更加准确，因为原本这个是，有昵称显示昵称，无昵称显示作者名（不影响以前规则）
+    5. 确认窗口添加显示作者名，作者Portrait
+    6. 新加两个内置错误代码
+    更新日志详细版：
+    1. LoopBan改动：
+    用户信息结构重做，重构xml结构，导出，导入
+    修正封禁自动添加功能，无id用户会自动添加Portrait
+    重做LoopBan作者信息界面窗口，修改，增加列表显示
+    添加Portrait字段，存在Portrait字段默认uid为作者显示名，不存在则默认为作者名
+    自动兼容原版列表，转换成新版列表
+    删除pid部分，dll版本号 1.0.0.1 -> 2.1.0.2
+    2. 确认窗口改动:
+    添加显示作者名，作者Portrait，已经对应的高亮位置代码。
+    原作者名修正显示为，作者显示名。
+    3. 默认设置改动
+    扫描间隔 5->30秒，线程 2->1，使用客户端接口扫描 否->是 （网页端接口以后有缘再修）
+    4. 添加2个错误代码
+    1039 这个帖子已经被删除了哦
+    300000 由于系统升级，烦请您更新至最新版客户端处理违规用户，感谢您的理解与支持！(暂时无法用旧版客户端api封禁用户名为空用户)
+    5. curl库升级
+    从远古的版本7.40升级到7.78
+    文件大小从625KB->3.87MB
+    需要的基础库都集成了，因此不再需要libeay32.dll,libidn-11.dll,ssleay32.dll,zlib1.dll这4个文件
+    经过一周测试，暂时没有遇到线程卡死，崩溃问题。线程4.
+    6. 新关键字范围
+    增加作者名，Portrait两个关键字范围，旧版规则可以无障碍在新版本直接用。但是新版本规则拿到旧版本，可能崩溃（也不会有人这么做吧）
+    7. 小修更新功能。
+    取消下载更新功能，代替的是，打开群。
+    更新日志默认从我的github拉取</UpdateLog>
     <Files>
         <item><value><Dir/><Name>mfc120u.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>msvcp120.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>msvcr120.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>libcurl.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir/><Name>libeay32.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir/><Name>libidn-11.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir/><Name>ssleay32.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir/><Name>zlib1.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>tinyxml2.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>opencv_core320.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>opencv_imgcodecs320.dll</Name><URL/><MD5/></value></item>
@@ -20,8 +48,6 @@
         <item><value><Dir/><Name>TiebaManagerCore.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>TiebaManager.exe</Name><URL/><MD5/></value></item>
         <item><value><Dir>Plugin\</Dir><Name>LoopBan.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir>Plugin\</Dir><Name>Defriend.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir>Plugin\</Dir><Name>LockThread.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>Update.dll</Name><URL/><MD5/></value></item>
     </Files>
 </UpdateInfo>

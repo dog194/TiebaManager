@@ -69,16 +69,17 @@ BOOL CAboutPage::OnInitDialog()
 	m_resize.AddControl(&m_autoCheckUpdateCheck, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_edit);
 	m_resize.AddControl(&m_authorStatic, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_edit);
 
-	m_edit.SetWindowText(_T("软件介绍帖：https://tieba.baidu.com/p/5010576625\r\n")
+	m_edit.SetWindowText(_T("原作者宣布停更帖：https://tieba.baidu.com/p/6930244267 软件介绍贴被度娘删了\r\n")
 		                 _T("详细教程：https://github.com/xfgryujk/TiebaManager/wiki\r\n")
-						 _T("对更新日志感兴趣的话看这里：https://github.com/xfgryujk/TiebaManager/commits/master\r\n")
-						 _T("此程序通过GPLv2协议开源，你可以在https://github.com/xfgryujk/TiebaManager得到源码，求star，欢迎发pull request\r\n")
+						 _T("对更新日志感兴趣的话看这里：https://github.com/dog194/TiebaManager/commits/master\r\n")
+						 _T("此程序通过GPLv2协议开源：\r\n你可以在https://github.com/xfgryujk/TiebaManager得到原版源码，求star。\r\n")
+						 _T("你可以在https://github.com/dog194/TiebaManager得到此版本源码，求star，欢迎发pull request\r\n")
 						 _T("\r\n")
 						 _T("html代码只转换了\"'&<>还有空格，其他以网页源码为准，如换行符为<br> (不注意的话会不匹配或匹配太多)\r\n")
 						 _T("\r\n")
-						 _T("我的邮箱和支付宝是xfgryujk@126.com，喜欢此软件可以捐助哦\r\n")
+						 _T("原作者xfgryujk的邮箱和支付宝是xfgryujk@126.com，喜欢此软件可以捐助哦，\r\n（软件问题请不要发邮件，作者已经宣布停更，就不要打扰人家了，By:Dog194)\r\n")
 						 _T("\r\n")
-						 _T("我只是提供方便吧务管理贴吧的工具，被用来做拆吧等恶意行为造成的损失本人不负责"));
+						 _T("本工具只是提供方便吧务管理，被用来做拆吧等恶意行为造成的损失本工具不负责"));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
