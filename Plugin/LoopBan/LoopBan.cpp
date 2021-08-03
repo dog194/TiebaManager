@@ -36,9 +36,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 using namespace std::placeholders;
 
-const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
-const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -146,22 +143,10 @@ void CLoopBan::OnPostBan(const Operation& op, BOOL succeeded)
 		}
 		else if (op.object->authorPortraitUrl != _T("")){
 			//空用户名，以Portrait为准。
-			//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx?t=zzzzzzzzzz
-			//http://tb.himg.baidu.com/sys/portrait/item/xxxxxxxxxxxxxxx
-			//。。当初为啥会加这堆前面的url。。
 			CString tmp;
-			tmp = GetStringBetween(op.object->authorPortraitUrl, AUTHOR_PORTRAIT_LEFT, AUTHOR_PORTRAIT_RIGHT);
+			tmp = GetPortraitFromString(op.object->authorPortraitUrl);
 			if (tmp == _T("")) {
-				tmp = GetStringAfter(op.object->authorPortraitUrl, AUTHOR_PORTRAIT_LEFT);
-				if (tmp == _T("")) {
-					if (tmp.Find(AUTHOR_PORTRAIT_LEFT) == -1) {
-						tmp = op.object->authorPortraitUrl;
-					}
-					else {
-						return;
-					}
-					
-				}
+				return;
 			}
 			BOOL isAdd = TRUE;
 			for (UINT i = 0; i < m_config.m_banlist->size(); i++)
@@ -235,6 +220,13 @@ void CLoopBan::LoopBanThread()
 	// 循环封
 	if (!CoInitializeHelper())
 		return;
+
+	//循环封开始Log
+	CString startDate;
+	startDate.Format(_T("<font color=blue>开始循环封:</font><font color=green>=====%d年%d月%d日=====</font>"), 
+		(LPCTSTR)time.wYear, (LPCTSTR)time.wMonth, (LPCTSTR)time.wDay);
+	log.Log(startDate);
+
 	for (UINT i = 0; i < config.m_banlist->size(); i++)
 	{
 		CString code;
@@ -285,6 +277,8 @@ void CLoopBan::LoopBanThread()
 		if (code == _T("0") && i < config.m_banlist->size() - 1)
 			Sleep((DWORD)(config.m_banInterval * 1000));
 	}
+	//结束日志
+	log.Log(_T("<font color=blue>循环封结束</font>"));
 	CoUninitialize();
 
 	// 更新时间
