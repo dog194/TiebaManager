@@ -88,3 +88,5 @@ HELPER_API CString JSUnescape(const CString& src);
 
 // 取Portrait，解决Portrait url历史遗留问题
 HELPER_API CString GetPortraitFromString(const CString& src);
+// time_t to string x年x月x日-xx:xx:xx
+HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src);

@@ -401,3 +401,13 @@ HELPER_API CString GetPortraitFromString(const CString& src)
 	}
 	return tmp;
 }
+
+// time_t to string x年x月x日-xx:xx:xx
+HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src)
+{
+	struct tm time_;
+	CString tmp;
+	localtime_s(&time_, &src);
+	tmp.Format(_T("%02d-%02d-%02d %02d:%02d:%02d"), time_.tm_year + 1900, time_.tm_mon + 1, time_.tm_mday, time_.tm_hour, time_.tm_min, time_.tm_sec);
+	return tmp;
+}

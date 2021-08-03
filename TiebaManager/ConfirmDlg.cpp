@@ -115,6 +115,10 @@ BOOL CConfirmDlg::OnInitDialog()
 		}
 		content += _T("\r\n\r\n作者名：") + m_operation->object->author		//多加个换行，有昵称的时候，显示名是昵称，没昵称的时候，显示名等于用户名
 			+ _T("\r\nPortrait：") + GetPortraitFromString(m_operation->object->authorPortraitUrl);
+		if (m_operation->object->timestamp != 0) {
+			//不是所有数据都带时间
+			content += _T("\r\n\r\n时     间：") + GetYYMMDD_HHMMSS_FromTimeT(m_operation->object->timestamp);
+		}
 
 		m_contentEdit.SetWindowText(content);
 		m_contentEdit.SetSel(m_operation->pos, m_operation->pos + m_operation->length);
