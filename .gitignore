@@ -22,6 +22,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Tt]iebaManager/User/
+[Tt]iebaManager/ImageCache/
 
 # Visual Studio 2015 cache/options directory
 .vs/
