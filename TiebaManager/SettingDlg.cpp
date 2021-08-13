@@ -39,6 +39,7 @@ CSettingDlg::CSettingDlg(CSettingDlg*& pThis, CWnd* pParent /*=NULL*/) : CModele
 	m_illegalRulesPage(new CIllegalRulesPage()),
 	m_trustedRulesPage(new CRulesPage<CRule>()),
 	m_trustedThreadPage(new CNormalListPage(_T("主题ID："))),
+	m_blackListRulesPage(new CBlackListRulesPage()),
 	m_optionsPage(new COptionsPage()),
 	m_usersPage(new CUsersPage()),
 	m_aboutPage(new CAboutPage())
@@ -49,6 +50,7 @@ CSettingDlg::CSettingDlg(CSettingDlg*& pThis, CWnd* pParent /*=NULL*/) : CModele
 	m_pages.push_back(m_illegalRulesPage.get());
 	m_pages.push_back(m_trustedRulesPage.get());
 	m_pages.push_back(m_trustedThreadPage.get());
+	m_pages.push_back(m_blackListRulesPage.get());
 	m_pages.push_back(m_optionsPage.get());
 	m_pages.push_back(m_usersPage.get());
 	m_pages.push_back(m_aboutPage.get());
@@ -94,6 +96,7 @@ BOOL CSettingDlg::OnInitDialog()
 	m_tree.SetItemData(m_tree.InsertItem(_T("违规规则"), item), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("信任规则"), item), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("忽略主题"), item), i++);
+	m_tree.SetItemData(m_tree.InsertItem(_T("用户黑名单"), item), i++);
 	m_tree.Expand(item, TVE_EXPAND);
 	m_tree.SetItemData(m_tree.InsertItem(_T("方案")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("账号管理")), i++);
@@ -109,6 +112,7 @@ BOOL CSettingDlg::OnInitDialog()
 	m_trustedRulesPage->m_static.SetWindowText(_T("匹配的帖子不会违规"));
 	CREATE_PAGE(m_trustedThreadPage);
 	m_trustedThreadPage->m_static.SetWindowText(_T("添加的主题不会扫描，主题ID是网址中\"p/\"后面跟的数字"));
+	CREATE_PAGE(m_blackListRulesPage);
 	AfxSetResourceHandle(theApp.m_hInstance);
 	CREATE_PAGE(m_optionsPage);
 	CREATE_PAGE(m_usersPage);
@@ -248,6 +252,9 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 
 	// 信任主题
 	m_trustedThreadPage->ShowList(plan.m_trustedThreads);
+
+	// 黑名单
+	m_blackListRulesPage->ShowList(plan.m_blackListRules);
 }
 
 // 应用对话框中的设置
@@ -292,6 +299,9 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 
 	// 信任主题
 	m_trustedThreadPage->ApplyList(plan.m_trustedThreads);
+
+	// 黑名单
+	m_blackListRulesPage->ApplyList(plan.m_blackListRules);
 
 	plan.PostChange();
 

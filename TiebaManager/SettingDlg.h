@@ -31,6 +31,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "OperatePage.h"
 #include "IllegalRulesPage.h"
 #include "NormalListPage.h"
+#include "BlackListRulesPage.h"
 #include "OptionsPage.h"
 #include "UsersPage.h"
 #include "AboutPage.h"
@@ -75,6 +76,7 @@ public:
 	std::unique_ptr<CIllegalRulesPage> m_illegalRulesPage;
 	std::unique_ptr<CRulesPage<CRule> > m_trustedRulesPage;
 	std::unique_ptr<CNormalListPage> m_trustedThreadPage;
+	std::unique_ptr<CBlackListRulesPage> m_blackListRulesPage;
 	std::unique_ptr<COptionsPage> m_optionsPage;
 	std::unique_ptr<CUsersPage> m_usersPage;
 	std::unique_ptr<CAboutPage> m_aboutPage;

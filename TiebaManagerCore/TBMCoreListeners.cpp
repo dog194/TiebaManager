@@ -49,6 +49,15 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 		}
 	}
 
+	// 黑名单规则
+	if (g_pTbmCoreConfig->m_blackListEnable) {
+		if (g_pTbmCoreConfig->m_blackListBan || g_pTbmCoreConfig->m_blackListDelete) {
+			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+
+			}
+		}
+	}
+
 	// 违规规则
 	for (auto& i : *g_pTbmCoreConfig->m_illegalRules)
 	{

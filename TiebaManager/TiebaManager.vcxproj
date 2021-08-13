@@ -126,6 +126,7 @@
     <ClInclude Include="..\Include\TBMEvents.h" />
     <ClInclude Include="..\Include\TiebaManagerCommon.h" />
     <ClInclude Include="AboutPage.h" />
+    <ClInclude Include="BlackListRulesPage.h" />
     <ClInclude Include="ConditionGUI.h" />
     <ClInclude Include="ConfigHelper.h" />
     <ClInclude Include="IllegalRulesPage.h" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutPage.cpp" />
+    <ClCompile Include="BlackListRulesPage.cpp" />
     <ClCompile Include="ConditionGUI.cpp" />
     <ClCompile Include="ConfigHelper.cpp" />
     <ClCompile Include="IllegalRulesPage.cpp" />

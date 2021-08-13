@@ -216,6 +216,9 @@
     <ClInclude Include="InputFloorDlg.h">
       <Filter>头文件\GUI\Setting\Condition</Filter>
     </ClInclude>
+    <ClInclude Include="BlackListRulesPage.h">
+      <Filter>头文件\GUI\Setting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TiebaManager.cpp">
@@ -334,6 +337,9 @@
     </ClCompile>
     <ClCompile Include="InputFloorDlg.cpp">
       <Filter>源文件\GUI\Setting\Condition</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackListRulesPage.cpp">
+      <Filter>源文件\GUI\Setting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

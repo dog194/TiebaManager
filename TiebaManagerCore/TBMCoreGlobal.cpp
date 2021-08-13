@@ -47,9 +47,14 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_confirm			("Confirm",				TRUE),
 	m_banClientInterface("ClientBanInterface",  FALSE),
 
+	m_blackListEnable	("BlackListEnable",		FALSE),
+	m_blackListDelete	("BlackListDelete",		FALSE),
+	m_blackListBan		("BlackListBan",		FALSE),
+
 	m_illegalRules      ("IllegalRules"),
 	m_trustedRules      ("TrustedRules"),
-	m_trustedThreads    ("TrustedThreads")
+	m_trustedThreads    ("TrustedThreads"),
+	m_blackListRules	("BlackListRules")
 {
 	m_options.push_back(&m_scanInterval);
 	m_options.push_back(&m_onlyScanTitle);
@@ -69,9 +74,14 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_confirm);
 	m_options.push_back(&m_banClientInterface);
 
+	m_options.push_back(&m_blackListEnable);
+	m_options.push_back(&m_blackListDelete);
+	m_options.push_back(&m_blackListBan);
+
 	m_options.push_back(&m_illegalRules);
 	m_options.push_back(&m_trustedRules);
 	m_options.push_back(&m_trustedThreads);
+	m_options.push_back(&m_blackListRules);
 }
 
 void CTBMCoreConfig::OnChange()

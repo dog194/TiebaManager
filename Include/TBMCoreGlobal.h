@@ -47,9 +47,14 @@ public:
 	COption<BOOL>		m_confirm;				// 操作前提示
 	COption<BOOL>		m_banClientInterface;	// 封禁用客户端接口
 
+	COption<BOOL>		m_blackListEnable;		// 黑名单功能总开关
+	COption<BOOL>		m_blackListDelete;		// 黑名单删帖
+	COption<BOOL>		m_blackListBan;			// 黑名单封禁
+
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则
 	COption<std::set<CString> >              m_trustedThreads;    // 信任主题
+	COption<std::vector<CBlackListInfo> >    m_blackListRules;    // 黑名单规则
 
 	CTBMCoreConfig(CStringA name);
 	virtual void OnChange();

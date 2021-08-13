@@ -167,6 +167,7 @@ int CTiebaManagerApp::ExitInstance()
 	TRACE(_T("释放g_plan\n"));
 	g_plan.m_illegalRules->clear();
 	g_plan.m_trustedRules->clear();
+	g_plan.m_blackListRules->clear();
 	TRACE(_T("释放CConditionGUIManager\n"));
 	CConditionGUIManager::GetInstance().Uninit();
 	TRACE(_T("释放PluginManager\n"));

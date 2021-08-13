@@ -515,3 +515,85 @@ BOOL CFloorCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& lzl
 {
 	return Match(_param, lzl.floor);
 }
+
+
+// 黑名单条件
+CBlackListInfo::CBlackListInfo()
+{
+	m_uid = _T("");
+	m_portrait = _T("");
+	m_note = _T("");
+}
+
+CBlackListInfo::CBlackListInfo(const CString& uid)
+{
+	m_uid = uid;
+	m_portrait = _T("");
+	m_note = _T("");
+}
+
+CBlackListInfo::CBlackListInfo(const CString& uid, const CString& portrait)
+{
+	m_uid = uid;
+	m_portrait = portrait;
+	m_note = _T("");
+}
+
+CBlackListInfo::CBlackListInfo(const CString& uid, const CString& portrait, const CString& note)
+{
+	m_uid = uid;
+	m_portrait = portrait;
+	m_note = note;
+}
+
+// XML 读写
+DECLEAR_READ(CBlackListInfo)
+{
+	const tinyxml2::XMLElement* optionNode = root.FirstChildElement(m_name);
+	if (optionNode == NULL)
+	{
+		UseDefault();	//虽然不知道做了什么，但是还是写了 = =
+		return;
+	}
+	COption<CString> uid("uid");
+	COption<CString> portrait("portrait");
+	COption<int> trigCount("trigCount");
+	COption<CString> note("note");
+	uid.Read(*optionNode);
+	trigCount.Read(*optionNode);
+	portrait.Read(*optionNode);
+	note.Read(*optionNode);
+
+	m_value.m_uid = uid;
+	m_value.m_portrait = portrait;
+	m_value.m_trigCount = trigCount;
+	m_value.m_note = note;
+
+	if (!IsValid(m_value))	//虽然不知道做了什么，但是还是写了 = =
+		UseDefault();
+}
+
+DECLEAR_WRITE(CBlackListInfo)
+{
+	tinyxml2::XMLDocument* doc = root.GetDocument();
+	tinyxml2::XMLElement* optionNode = doc->NewElement(m_name);
+	root.LinkEndChild(optionNode);
+
+	COption<CString> uid("uid");
+	COption<CString> portrait("portrait");
+	COption<int> trigCount("trigCount");
+	COption<CString> note("note");
+	uid.Read(*optionNode);
+	trigCount.Read(*optionNode);
+	portrait.Read(*optionNode);
+	note.Read(*optionNode);
+
+	*uid = m_value.m_uid;
+	*portrait = m_value.m_portrait;
+	*trigCount = m_value.m_trigCount;
+	*note = m_value.m_note;
+	uid.Write(*optionNode);
+	portrait.Write(*optionNode);
+	trigCount.Write(*optionNode);
+	note.Write(*optionNode);
+}
