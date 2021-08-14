@@ -42,6 +42,8 @@ public:
 	virtual BOOL OnInitDialog() override;
 
 	virtual BOOL SetItem(int index) override;
+	virtual void OnAdd(int index) override;
+	virtual void OnDelete(int index) override;
 	virtual BOOL Export(const CString& path) override;
 	virtual BOOL Import(const CString& path) override;
 	void ShowList(const std::vector<CUserInfo>& list);

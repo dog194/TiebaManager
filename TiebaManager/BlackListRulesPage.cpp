@@ -23,13 +23,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "stdafx.h"
 #include "BlackListRulesPage.h"
 #include "SettingDlg.h"
-#include "InputIllegalRuleDlg.h"
+#include "UserInfoInputDlg.h"
+#include "StringHelper.h"
 
 IMPLEMENT_DYNAMIC(CBlackListRulesPage, CNormalListPage)
 
 CBlackListRulesPage::CBlackListRulesPage(CWnd* pParent /*=NULL*/) :
 	CNormalListPage(_T("黑名单："))
 {
+	m_file_type = _T("XML文件 (*.xml)|*.xml|所有文件 (*.*)|*.*||");
 }
 
 // 初始化
@@ -50,24 +52,55 @@ BOOL CBlackListRulesPage::OnInitDialog()
 	// 异常:  OCX 属性页应返回 FALSE
 }
 
-// overwrite，使用新的子输入窗口
+// 使用 UserInfoInput 输入窗口
 BOOL CBlackListRulesPage::SetItem(int index)
 {
-	CString uid = m_list.GetItemText(index, COLUMN_INDEX_UID);
-	CString portrait = m_list.GetItemText(index, COLUMN_INDEX_PORTRAIT);
-	CString note = m_list.GetItemText(index, COLUMN_INDEX_NOTE);
+	CUserInfoInputDlg dlg(m_rules[index], CUserInfoInputDlg::IDD, this);
+	if (dlg.DoModal() == IDOK && m_rules[index].m_uid != _T(""))
+	{
+		m_list.SetItemText(index, COLUMN_INDEX_UID, m_rules[index].m_uid);
+		m_list.SetItemText(index, COLUMN_INDEX_PORTRAIT, m_rules[index].m_portrait);
+		m_list.SetItemText(index, COLUMN_INDEX_TRIG_COUNT, Int2CString(m_rules[index].m_trigCount));
+		m_list.SetItemText(index, COLUMN_INDEX_NOTE, m_rules[index].m_note);
 
+		((CSettingDlg*)GetParent())->m_clearScanCache = TRUE;
+		return TRUE;
+	}
 	return FALSE;
+}
+
+void CBlackListRulesPage::OnAdd(int index)
+{
+	if (index >= 0)
+	{
+		if (m_rules.size() != m_list.GetItemCount()) // 添加
+			m_rules.insert(m_rules.begin() + index, CUserInfo());
+	}
+}
+
+void CBlackListRulesPage::OnDelete(int index)
+{
+	if (index >= 0)
+		m_rules.erase(m_rules.begin() + index);
+	else
+		m_rules.clear();
 }
 
 // 导出xml
 BOOL CBlackListRulesPage::Export(const CString& path)
 {
-	return TRUE;
+	CRuleListFile tmp;
+	ApplyList(tmp.m_list);
+	return tmp.Save(path);
 }
 
+// 导入xml
 BOOL CBlackListRulesPage::Import(const CString& path)
 {
+	CRuleListFile tmp;
+	if (!tmp.Load(path))
+		return FALSE;
+	ShowList(std::move(tmp.m_list));
 	return TRUE;
 }
 
@@ -79,9 +112,7 @@ void CBlackListRulesPage::ShowList(const std::vector<CUserInfo>& list)
 	for (UINT i = 0; i < list.size(); i++) {
 		m_list.InsertItem(i, list[i].m_uid);
 		m_list.SetItemText(i, COLUMN_INDEX_PORTRAIT, list[i].m_portrait);
-		CString tmp;
-		tmp.Format(_T("%d"), list[i].m_trigCount);
-		m_list.SetItemText(i, COLUMN_INDEX_TRIG_COUNT, tmp);
+		m_list.SetItemText(i, COLUMN_INDEX_TRIG_COUNT, Int2CString(list[i].m_trigCount));
 		m_list.SetItemText(i, COLUMN_INDEX_NOTE, list[i].m_note);
 	}
 }
