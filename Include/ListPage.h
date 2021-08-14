@@ -21,7 +21,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "HelperCommon.h"
 #include <NormalDlg.h>
 
-
 // CListPage 对话框
 
 class HELPER_API CListPage : public CNormalDlg
@@ -69,6 +68,7 @@ public:
 	CButton m_importButton;
 	CButton m_clearButton;
 	CStatic m_static;
+	CString m_file_type = _T("XML文件 (*.xml)|*.xml|TXT文件 (*.txt)|*.txt|所有文件 (*.*)|*.*||");
 protected:
 	COLORREF m_staticColor;
 };

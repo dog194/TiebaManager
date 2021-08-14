@@ -153,7 +153,7 @@ void CListPage::OnClickedButton3()
 void CListPage::OnClickedButton4()
 {
 	CFileDialog dlg(FALSE, _T("xml"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT,
-		_T("XML文件 (*.xml)|*.xml|TXT文件 (*.txt)|*.txt|所有文件 (*.*)|*.*||"), this);
+		m_file_type, this);
 	if (dlg.DoModal() == IDOK)
 	{
 		if (!Export(dlg.GetPathName()))
@@ -180,7 +180,7 @@ BOOL CListPage::Export(const CString& path)
 void CListPage::OnClickedButton5()
 {
 	CFileDialog dlg(TRUE, _T("xml"), NULL, 0,
-		_T("XML文件 (*.xml)|*.xml|TXT文件 (*.txt)|*.txt|所有文件 (*.*)|*.*||"), this);
+		m_file_type, this);
 	if (dlg.DoModal() == IDOK)
 	{
 		if (!Import(dlg.GetPathName()))
