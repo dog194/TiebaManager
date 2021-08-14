@@ -411,3 +411,11 @@ HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src)
 	tmp.Format(_T("%02d-%02d-%02d %02d:%02d:%02d"), time_.tm_year + 1900, time_.tm_mon + 1, time_.tm_mday, time_.tm_hour, time_.tm_min, time_.tm_sec);
 	return tmp;
 }
+
+// Int to CString
+HELPER_API CString Int2CString(const int num)
+{
+	CString tmp;
+	tmp.Format(_T("%d"), num);
+	return tmp;
+}

@@ -90,3 +90,5 @@ HELPER_API CString JSUnescape(const CString& src);
 HELPER_API CString GetPortraitFromString(const CString& src);
 // time_t to string x年x月x日-xx:xx:xx
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src);
+// Int to CString
+HELPER_API CString Int2CString(const int num);
