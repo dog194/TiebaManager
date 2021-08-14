@@ -192,6 +192,13 @@ CString CTiebaOperate::BanID(const CString& userName)
 	return GetOperationErrorCode(src);
 }
 
+// 封ID，返回错误代码，客户端接口
+CString CTiebaOperate::BanIDClient(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name)
+{
+	//接口预留，为以后可能的更新做准备
+	return BanIDClient(userName);
+}
+
 // 封ID，返回错误代码，客户端接口，不用PID，小吧可封10天
 CString CTiebaOperate::BanIDClient(const CString& userName)
 {

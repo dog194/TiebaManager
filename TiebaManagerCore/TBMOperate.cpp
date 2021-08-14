@@ -175,41 +175,39 @@ void CTBMOperate::OperateThread()
 			{
 				BOOL result = FALSE;
 				CString pid, portrait, nick_name;
-				// 不使用客户端接口必须获取PID
-				if (!g_pTbmCoreConfig->m_banClientInterface)
-				{
-					switch (op.object->m_type)
-					{
-					case TBObject::THREAD:
-					{
-						std::vector<PostInfo> posts;
-						std::vector<LzlInfo> lzls;
-						TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), op.object->tid, _T("1"), posts, lzls);
-						if (posts.size() > 0){
-							pid = posts[0].pid;
-							portrait = posts[0].authorPortraitUrl;
-							nick_name = posts[0].authorShowName;
-						}		
-						break;
-					}
-					case TBObject::POST:
-						pid = ((PostInfo*)op.object.get())->pid;
-						portrait = ((PostInfo*)op.object.get())->authorPortraitUrl;
-						nick_name = ((PostInfo*)op.object.get())->authorShowName;
-						break;
-					case TBObject::LZL:
-						pid = ((LzlInfo*)op.object.get())->cid;
-						portrait = ((LzlInfo*)op.object.get())->authorPortraitUrl;
-						nick_name = ((LzlInfo*)op.object.get())->authorShowName;
-						break;
-					}
+				// 不管是不是客户端接口封，都获取 PID
 
-					if (pid == _T(""))
-						g_pLog->Log(_T("<font color=red>封禁 </font>") + op.object->authorShowName + _T("<font color=red> 失败！(获取帖子ID失败)</font>"));
+				switch (op.object->m_type)
+				{
+				case TBObject::THREAD:
+				{
+					std::vector<PostInfo> posts;
+					std::vector<LzlInfo> lzls;
+					TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), op.object->tid, _T("1"), posts, lzls);
+					if (posts.size() > 0){
+						pid = posts[0].pid;
+						portrait = posts[0].authorPortraitUrl;
+						nick_name = posts[0].authorShowName;
+					}		
+					break;
+				}
+				case TBObject::POST:
+					pid = ((PostInfo*)op.object.get())->pid;
+					portrait = ((PostInfo*)op.object.get())->authorPortraitUrl;
+					nick_name = ((PostInfo*)op.object.get())->authorShowName;
+					break;
+				case TBObject::LZL:
+					pid = ((LzlInfo*)op.object.get())->cid;
+					portrait = ((LzlInfo*)op.object.get())->authorPortraitUrl;
+					nick_name = ((LzlInfo*)op.object.get())->authorShowName;
+					break;
 				}
 
+				if (pid == _T(""))
+					g_pLog->Log(_T("<font color=red>封禁 </font>") + op.object->authorShowName + _T("<font color=red> 失败！(获取帖子ID失败)</font>"));
+
 				CString code = (g_pTbmCoreConfig->m_banClientInterface || pid == _T("")) ?
-					g_pTiebaOperate->BanIDClient(op.object->author) : g_pTiebaOperate->BanID(op.object->author, pid, portrait, nick_name);
+					g_pTiebaOperate->BanIDClient(op.object->author, pid, portrait, nick_name) : g_pTiebaOperate->BanID(op.object->author, pid, portrait, nick_name);
 				if (code != _T("0"))
 				{
 					CString content; //需同步更新 url 传递

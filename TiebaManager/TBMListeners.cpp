@@ -192,7 +192,7 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 		if (args.GetSize() == 5 && args[4] == "Dog194") {
 			//单独框列，我也不知道有没有其他地方也用了 bd:
 			code = (g_plan.m_banClientInterface /*|| g_plan.m_banDuration == 1*/ || args[1] == _T("")) ?
-				g_tiebaOperate.BanIDClient(args[0]) : g_tiebaOperate.BanID(args[0], args[1], args[2], args[3]);
+				g_tiebaOperate.BanIDClient(args[0], args[1], args[2], args[3]) : g_tiebaOperate.BanID(args[0], args[1], args[2], args[3]);
 		}
 		else {
 			code = (g_plan.m_banClientInterface /*|| g_plan.m_banDuration == 1*/ || args[1] == _T("")) ?
