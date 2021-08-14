@@ -259,17 +259,17 @@ private:
 	BOOL Match(const CConditionParam& param, const CString& floor);
 };
 
-// 黑名单条件
+// 用户信息
 
-class TBM_CORE_API CBlackListInfo
+class TBM_CORE_API CUserInfo
 {
 public:
 	CString m_uid;			// userName/userNickName = userShowName
 	CString m_portrait;		// portrait
 	int m_trigCount = 0;    // 触发次数
 	CString m_note;			// 备注，没实际用途，单纯用来个人记录
-	CBlackListInfo();
-	CBlackListInfo(const CString& uid);
-	CBlackListInfo(const CString& uid, const CString& m_portrait);
-	CBlackListInfo(const CString& uid, const CString& m_portrait, const CString& m_note);
+	CUserInfo();
+	CUserInfo(const CString& uid);
+	CUserInfo(const CString& uid, const CString& m_portrait);
+	CUserInfo(const CString& uid, const CString& m_portrait, const CString& m_note);
 };

@@ -56,7 +56,7 @@ BOOL CBlackListRulesPage::SetItem(int index)
 	CString uid = m_list.GetItemText(index, COLUMN_INDEX_UID);
 	CString portrait = m_list.GetItemText(index, COLUMN_INDEX_PORTRAIT);
 	CString note = m_list.GetItemText(index, COLUMN_INDEX_NOTE);
-	
+
 	return FALSE;
 }
 
@@ -71,7 +71,7 @@ BOOL CBlackListRulesPage::Import(const CString& path)
 	return TRUE;
 }
 
-void CBlackListRulesPage::ShowList(const std::vector<CBlackListInfo>& list)
+void CBlackListRulesPage::ShowList(const std::vector<CUserInfo>& list)
 {
 	m_rules = list;
 
@@ -86,7 +86,7 @@ void CBlackListRulesPage::ShowList(const std::vector<CBlackListInfo>& list)
 	}
 }
 
-void CBlackListRulesPage::ApplyList(std::vector<CBlackListInfo>& list)
+void CBlackListRulesPage::ApplyList(std::vector<CUserInfo>& list)
 {
 	list = m_rules;
 }

@@ -54,7 +54,7 @@ public:
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则
 	COption<std::set<CString> >              m_trustedThreads;    // 信任主题
-	COption<std::vector<CBlackListInfo> >    m_blackListRules;    // 黑名单规则
+	COption<std::vector<CUserInfo> >		 m_blackListRules;    // 黑名单规则
 
 	CTBMCoreConfig(CStringA name);
 	virtual void OnChange();

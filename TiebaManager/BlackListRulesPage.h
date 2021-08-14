@@ -44,14 +44,14 @@ public:
 	virtual BOOL SetItem(int index) override;
 	virtual BOOL Export(const CString& path) override;
 	virtual BOOL Import(const CString& path) override;
-	void ShowList(const std::vector<CBlackListInfo>& list);
-	void ApplyList(std::vector<CBlackListInfo>& list);
+	void ShowList(const std::vector<CUserInfo>& list);
+	void ApplyList(std::vector<CUserInfo>& list);
 	
 protected:
 	class CRuleListFile : public CConfigBase
 	{
 	public:
-		COption<std::vector<CBlackListInfo> > m_list;
+		COption<std::vector<CUserInfo> > m_list;
 
 		CRuleListFile() : CConfigBase("BlackList"),
 			m_list("BlackList")
@@ -60,5 +60,5 @@ protected:
 		}
 	};
 
-	std::vector<CBlackListInfo> m_rules;
+	std::vector<CUserInfo> m_rules;
 };

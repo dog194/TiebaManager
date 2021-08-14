@@ -517,29 +517,29 @@ BOOL CFloorCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& lzl
 }
 
 
-// 黑名单条件
-CBlackListInfo::CBlackListInfo()
+// 用户信息
+CUserInfo::CUserInfo()
 {
 	m_uid = _T("");
 	m_portrait = _T("");
 	m_note = _T("");
 }
 
-CBlackListInfo::CBlackListInfo(const CString& uid)
+CUserInfo::CUserInfo(const CString& uid)
 {
 	m_uid = uid;
 	m_portrait = _T("");
 	m_note = _T("");
 }
 
-CBlackListInfo::CBlackListInfo(const CString& uid, const CString& portrait)
+CUserInfo::CUserInfo(const CString& uid, const CString& portrait)
 {
 	m_uid = uid;
 	m_portrait = portrait;
 	m_note = _T("");
 }
 
-CBlackListInfo::CBlackListInfo(const CString& uid, const CString& portrait, const CString& note)
+CUserInfo::CUserInfo(const CString& uid, const CString& portrait, const CString& note)
 {
 	m_uid = uid;
 	m_portrait = portrait;
@@ -547,7 +547,7 @@ CBlackListInfo::CBlackListInfo(const CString& uid, const CString& portrait, cons
 }
 
 // XML 读写
-DECLEAR_READ(CBlackListInfo)
+DECLEAR_READ(CUserInfo)
 {
 	const tinyxml2::XMLElement* optionNode = root.FirstChildElement(m_name);
 	if (optionNode == NULL)
@@ -573,7 +573,7 @@ DECLEAR_READ(CBlackListInfo)
 		UseDefault();
 }
 
-DECLEAR_WRITE(CBlackListInfo)
+DECLEAR_WRITE(CUserInfo)
 {
 	tinyxml2::XMLDocument* doc = root.GetDocument();
 	tinyxml2::XMLElement* optionNode = doc->NewElement(m_name);
