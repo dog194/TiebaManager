@@ -546,6 +546,38 @@ CUserInfo::CUserInfo(const CString& uid, const CString& portrait, const CString&
 	m_note = note;
 }
 
+BOOL CUserInfo::Match(const CString& uid, const CString& portrait)
+{
+	if (m_portrait != _T("")) {
+		// 优先以portrait为准，不为空就用portrait
+		if (m_portrait == portrait) {
+			return TRUE;
+		}
+	}
+	else if (m_uid != _T("")){
+		// portrait为空，用uid
+		if (m_uid == uid) {
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+BOOL CUserInfo::Match(const ThreadInfo& thread)
+{
+	return CUserInfo::Match(thread.author, GetPortraitFromString(thread.authorPortraitUrl));
+}
+
+BOOL CUserInfo::Match(const PostInfo& post)
+{
+	return CUserInfo::Match(post.author, GetPortraitFromString(post.authorPortraitUrl));
+}
+
+BOOL CUserInfo::Match(const LzlInfo& lzl)
+{
+	return CUserInfo::Match(lzl.author, GetPortraitFromString(lzl.authorPortraitUrl));
+}
+
 // XML 读写
 DECLEAR_READ(CUserInfo)
 {

@@ -272,4 +272,9 @@ public:
 	CUserInfo(const CString& uid);
 	CUserInfo(const CString& uid, const CString& m_portrait);
 	CUserInfo(const CString& uid, const CString& m_portrait, const CString& m_note);
+
+	BOOL Match(const CString& uid, const CString& portrait);
+	BOOL Match(const ThreadInfo& thread);
+	BOOL Match(const PostInfo& post);
+	BOOL Match(const LzlInfo& lzl);
 };
