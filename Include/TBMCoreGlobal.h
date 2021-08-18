@@ -48,6 +48,7 @@ public:
 	COption<BOOL>		m_banClientInterface;	// 封禁用客户端接口
 
 	COption<BOOL>		m_blackListEnable;		// 黑名单功能总开关
+	COption<BOOL>		m_blackListConfirm;		// 黑名单强制确认
 	COption<BOOL>		m_blackListDelete;		// 黑名单删帖
 	COption<BOOL>		m_blackListBan;			// 黑名单封禁
 

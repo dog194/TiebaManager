@@ -48,6 +48,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_banClientInterface("ClientBanInterface",  FALSE),
 
 	m_blackListEnable	("BlackListEnable",		FALSE),
+	m_blackListConfirm	("BlackListConfirm",	FALSE),
 	m_blackListDelete	("BlackListDelete",		FALSE),
 	m_blackListBan		("BlackListBan",		FALSE),
 
@@ -75,6 +76,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_banClientInterface);
 
 	m_options.push_back(&m_blackListEnable);
+	m_options.push_back(&m_blackListConfirm);
 	m_options.push_back(&m_blackListDelete);
 	m_options.push_back(&m_blackListBan);
 
