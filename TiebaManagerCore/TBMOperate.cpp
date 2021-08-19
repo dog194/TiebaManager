@@ -216,7 +216,8 @@ void CTBMOperate::OperateThread()
 			}
 		}
 		// 黑名单只有一个总开关控制
-		if (op.ruleType == RULE_TYPE_BLACK_LIST && g_pTbmCoreConfig->m_blackListBan) { 
+		if (op.ruleType == RULE_TYPE_BLACK_LIST && g_pTbmCoreConfig->m_blackListBan
+			&& g_pUserCache->m_bannedUser->find(op.object->author) == g_pUserCache->m_bannedUser->end()) {
 			isBan = TRUE;
 		}
 
