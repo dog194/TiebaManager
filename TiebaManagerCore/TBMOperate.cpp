@@ -54,7 +54,7 @@ void CTBMOperate::AddConfirm(Operation&& op)
 {
 	if (op.ruleType == RULE_TYPE_ILLEGA_RULE && (g_pTbmCoreConfig->m_confirm || op.forceToConfirm))
 		m_confirmQueue.push(std::move(op));
-	if (op.ruleType == RULE_TYPE_BLACK_LIST  && op.forceToConfirm)
+	else if (op.ruleType == RULE_TYPE_BLACK_LIST  && op.forceToConfirm)
 		m_confirmQueue.push(std::move(op));
 	else
 		AddOperation(std::move(op));
