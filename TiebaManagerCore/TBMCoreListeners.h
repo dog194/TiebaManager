@@ -32,7 +32,7 @@ private:
 	// 扫描事件
 
 	template<class TbObj>
-	static void OnCheckIllegal(const TbObj& obj, BOOL& res, CString& msg, BOOL& forceToConfirm, int& pos, int& length);
+	static void OnCheckIllegal(const TbObj& obj, BOOL& res, CString& msg, BOOL& forceToConfirm, int& pos, int& length, CString& ruleName, int& ruleType);
 
 	static void OnPreScanThread(int threadID, const ThreadInfo& thread, BOOL& pass);
 };

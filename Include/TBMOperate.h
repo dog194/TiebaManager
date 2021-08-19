@@ -34,6 +34,8 @@ public:
 	int length;				// 高亮长度
 
 	CString title;			// 主题标题
+	CString ruleName;		// 触发的规则标题
+	int ruleType;			// 触发的规则类型
 	std::unique_ptr<TBObject> object; // 操作对象
 
 
@@ -46,6 +48,8 @@ public:
 		length = other.length;
 		title = std::move(other.title);
 		object = std::move(other.object);
+		ruleName = std::move(other.ruleName);
+		ruleType = other.ruleType;
 		return *this;
 	}
 
@@ -54,12 +58,14 @@ public:
 		*this = std::move(other);
 	}
 
-	Operation(BOOL forceToConfirm_, int pos_, int length_, const CString& title_, std::unique_ptr<TBObject>&& object_) :
+	Operation(BOOL forceToConfirm_, int pos_, int length_, const CString& title_, std::unique_ptr<TBObject>&& object_, const CString& ruleName_, const int& ruleType_) :
 		forceToConfirm(forceToConfirm_),
 		pos(pos_),
 		length(length_),
 		title(title_),
-		object(std::move(object_))
+		object(std::move(object_)),
+		ruleName(ruleName_),
+		ruleType(ruleType_)
 	{ }
 };
 

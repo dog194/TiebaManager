@@ -35,7 +35,7 @@ CTBMCoreListeners::CTBMCoreListeners()
 }
 
 template<class TbObj>
-static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CString& msg, BOOL& forceToConfirm, int& pos, int& length)
+static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CString& msg, BOOL& forceToConfirm, int& pos, int& length, CString& ruleName, int&ruleType)
 {
 	std::unique_lock<decltype(g_pTbmCoreConfig->m_optionsLock)> lock(g_pTbmCoreConfig->m_optionsLock);
 
@@ -53,7 +53,15 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 	if (g_pTbmCoreConfig->m_blackListEnable) {
 		if (g_pTbmCoreConfig->m_blackListBan || g_pTbmCoreConfig->m_blackListDelete) {
 			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
-
+				if (i.Match(obj)) {
+					++i.m_trigCount;
+					forceToConfirm = g_pTbmCoreConfig->m_blackListConfirm;
+					msg = _T("<font color=red> 触发<b>黑名单用户</b>规则 </font>") + HTMLEscape(i.m_uid);
+					ruleName = i.m_uid;
+					ruleType = RULE_TYPE_BLACK_LIST;
+					res = TRUE;
+					return;
+				}
 			}
 		}
 	}
@@ -65,7 +73,9 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 		{
 			++i.m_trigCount;
 			forceToConfirm = i.m_forceToConfirm;
-			msg = _T("<font color=red> 触发违规规则 </font>") + HTMLEscape(i.m_name);
+			msg = _T("<font color=red> 触发<b>违规</b>规则 </font>") + HTMLEscape(i.m_name);
+			ruleName = i.m_name;
+			ruleType = RULE_TYPE_ILLEGA_RULE;
 			res = TRUE;
 			return;
 		}

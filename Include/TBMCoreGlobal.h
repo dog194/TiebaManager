@@ -91,6 +91,9 @@ public:
 	virtual void Log(const CString& content) = 0;
 };
 
+const int RULE_TYPE_ILLEGA_RULE = 0;
+const int RULE_TYPE_BLACK_LIST = 1;
+
 
 // 使用本模块前应先设置的全局变量
 

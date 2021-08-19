@@ -109,14 +109,14 @@ void CTBMScan::ScanThread(CString sPage)
 				if (g_pUserCache->m_ignoredTID.find(tid) == g_pUserCache->m_ignoredTID.end())
 				{
 					BOOL res = FALSE;
-					CString msg;
+					CString msg, ruleName;
 					BOOL forceToConfirm = FALSE;
-					int pos = 0, length = 0;
-					g_checkThreadIllegalEvent(thread, res, msg, forceToConfirm, pos, length);
+					int pos = 0, length = 0, ruleType = RULE_TYPE_ILLEGA_RULE;
+					g_checkThreadIllegalEvent(thread, res, msg, forceToConfirm, pos, length, ruleName, ruleType);
 					if (res)
 					{
 						CTBMOperate::GetInstance().AddConfirm(Operation(forceToConfirm, pos, length, thread.title,
-							std::make_unique<ThreadInfo>(thread)));
+							std::make_unique<ThreadInfo>(thread), ruleName, ruleType));
 						g_pLog->Log(_T("<a href=\"https://tieba.baidu.com/p/") + thread.tid + _T("\">")
 							+ HTMLEscape(thread.title) + _T("</a>") + msg);
 						g_pUserCache->m_ignoredTID.insert(tid);
@@ -315,14 +315,14 @@ BOOL CTBMScan::ScanPostPage(const ThreadInfo& thread, int page, BOOL hasHistoryR
 		if (g_pUserCache->m_ignoredPID.find(pid) == g_pUserCache->m_ignoredPID.end())
 		{
 			BOOL res = FALSE;
-			CString msg;
+			CString msg, ruleName;
 			BOOL forceToConfirm = FALSE;
-			int pos = 0, length = 0;
-			g_checkPostIllegalEvent(post, res, msg, forceToConfirm, pos, length);
+			int pos = 0, length = 0, ruleType = RULE_TYPE_ILLEGA_RULE;
+			g_checkPostIllegalEvent(post, res, msg, forceToConfirm, pos, length, ruleName, ruleType);
 			if (res)
 			{
 				operate.AddConfirm(Operation(forceToConfirm, pos, length, thread.title,
-					std::make_unique<PostInfo>(post)));
+					std::make_unique<PostInfo>(post), ruleName, ruleType));
 				g_pLog->Log(_T("<a href=\"https://tieba.baidu.com/p/") + thread.tid + _T("\">") + HTMLEscape(thread.title) +
 					_T("</a> ") + post.floor + _T("楼") + msg);
 				g_pUserCache->m_ignoredPID.insert(pid);
@@ -336,17 +336,17 @@ BOOL CTBMScan::ScanPostPage(const ThreadInfo& thread, int page, BOOL hasHistoryR
 		if (m_stopScanFlag)
 			return FALSE;
 		BOOL res = FALSE;
-		CString msg;
+		CString msg, ruleName;
 		BOOL forceToConfirm = FALSE;
-		int pos = 0, length = 0;
-		g_checkLzlIllegalEvent(lzl, res, msg, forceToConfirm, pos, length);
+		int pos = 0, length = 0, ruleType = RULE_TYPE_ILLEGA_RULE;
+		g_checkLzlIllegalEvent(lzl, res, msg, forceToConfirm, pos, length, ruleName, ruleType);
 		if (res)
 		{
 			__int64 cid = _ttoi64(lzl.cid);
 			if (g_pUserCache->m_ignoredLZLID.find(cid) == g_pUserCache->m_ignoredLZLID.end())
 			{
 				operate.AddConfirm(Operation(forceToConfirm, pos, length, thread.title,
-					std::make_unique<LzlInfo>(lzl)));
+					std::make_unique<LzlInfo>(lzl), ruleName, ruleType));
 				g_pLog->Log(_T("<a href=\"https://tieba.baidu.com/p/") + thread.tid + _T("\">") + HTMLEscape(thread.title) +
 					_T("</a> ") + lzl.floor + _T("楼回复") + msg);
 				g_pUserCache->m_ignoredLZLID.insert(cid);
