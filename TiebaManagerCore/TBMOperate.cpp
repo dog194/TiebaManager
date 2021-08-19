@@ -52,7 +52,9 @@ CTBMOperate::~CTBMOperate()
 // 添加确认
 void CTBMOperate::AddConfirm(Operation&& op)
 {
-	if (g_pTbmCoreConfig->m_confirm || op.forceToConfirm)
+	if (op.ruleType == RULE_TYPE_ILLEGA_RULE && (g_pTbmCoreConfig->m_confirm || op.forceToConfirm))
+		m_confirmQueue.push(std::move(op));
+	if (op.ruleType == RULE_TYPE_BLACK_LIST  && op.forceToConfirm)
 		m_confirmQueue.push(std::move(op));
 	else
 		AddOperation(std::move(op));
@@ -75,11 +77,16 @@ void CTBMOperate::ConfirmThread()
 			continue;
 
 		// 没有操作
-		if (!g_pTbmCoreConfig->m_delete && !g_pTbmCoreConfig->m_banID && !g_pTbmCoreConfig->m_defriend)
-			continue;
+		if (op.ruleType == RULE_TYPE_ILLEGA_RULE)
+			if (!g_pTbmCoreConfig->m_delete && !g_pTbmCoreConfig->m_banID && !g_pTbmCoreConfig->m_defriend)
+				continue;
+		if (op.ruleType == RULE_TYPE_BLACK_LIST)
+			if (!g_pTbmCoreConfig->m_blackListBan && !g_pTbmCoreConfig->m_blackListDelete)
+				continue;
 
 		// 确认是否操作
-		if (g_pTbmCoreConfig->m_confirm || op.forceToConfirm)
+		if ( (op.ruleType == RULE_TYPE_ILLEGA_RULE && (g_pTbmCoreConfig->m_confirm || op.forceToConfirm)) || 
+			 (op.ruleType == RULE_TYPE_BLACK_LIST  && (g_pTbmCoreConfig->m_blackListConfirm || op.forceToConfirm)) )
 		{
 			BOOL res = TRUE;
 			g_comfirmEvent(op, res);
@@ -148,26 +155,73 @@ void CTBMOperate::OperateThread()
 			continue;
 
 		// 没有操作
-		if (!g_pTbmCoreConfig->m_delete && !g_pTbmCoreConfig->m_banID && !g_pTbmCoreConfig->m_defriend)
-			continue;
+		if (op.ruleType == RULE_TYPE_ILLEGA_RULE)
+			if (!g_pTbmCoreConfig->m_delete && !g_pTbmCoreConfig->m_banID && !g_pTbmCoreConfig->m_defriend)
+				continue;
+		if (op.ruleType == RULE_TYPE_BLACK_LIST)
+			if (!g_pTbmCoreConfig->m_blackListBan && !g_pTbmCoreConfig->m_blackListDelete)
+				continue;
 
 		BOOL pass = TRUE;
 		g_preOperateEvent(op, pass);
 		if (!pass)
 			continue;
 
-		// 增加违规次数
-		auto countIt = g_pUserCache->m_userTrigCount->find(op.object->author);
-		BOOL hasHistory = countIt != g_pUserCache->m_userTrigCount->end();
-		int count = hasHistory ? (countIt->second + 1) : 1;
-		if (hasHistory)
-			countIt->second = count;
-		else
-			(*g_pUserCache->m_userTrigCount)[op.object->author] = 1;
+		BOOL isBan = FALSE;
+
+		if (op.ruleType == RULE_TYPE_ILLEGA_RULE) { //只有常规违规规则有违规次数设定
+			// 增加违规次数
+			auto countIt = g_pUserCache->m_userTrigCount->find(op.object->author);
+			BOOL hasHistory = countIt != g_pUserCache->m_userTrigCount->end();
+			int count = hasHistory ? (countIt->second + 1) : 1;
+			if (hasHistory)
+				countIt->second = count;
+			else
+				(*g_pUserCache->m_userTrigCount)[op.object->author] = 1;
+
+			if (g_pTbmCoreConfig->m_banID && count >= g_pTbmCoreConfig->m_banTrigCount
+				&& g_pUserCache->m_bannedUser->find(op.object->author) == g_pUserCache->m_bannedUser->end()) { // 达到封禁违规次数且未封
+				isBan = TRUE;
+			}
+
+
+			// 拉黑 只有常规违规有拉黑，移动到上面来，但是拉黑功能，应该到时候会被删除。
+			if (g_pTbmCoreConfig->m_defriend && count >= g_pTbmCoreConfig->m_defriendTrigCount
+				&& g_pUserCache->m_defriendedUser->find(op.object->author) == g_pUserCache->m_defriendedUser->end()) // 达到拉黑违规次数且未拉黑
+			{
+				pass = TRUE;
+				g_preDefriendEvent(op, pass);
+				if (pass)
+				{
+					BOOL result = FALSE;
+					CString code = g_pTiebaOperate->Defriend(op.object->authorID);
+					if (code != _T("0"))
+					{
+						CString content;
+						content.Format(_T("<font color=red>拉黑 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
+							_T("\"df:%s\">重试</a>"), (LPCTSTR)op.object->authorShowName, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
+							(LPCTSTR)op.object->authorID);
+						g_pLog->Log(content);
+					}
+					else
+					{
+						result = TRUE;
+						sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
+						g_pUserCache->m_defriendedUser->insert(op.object->author);
+						g_pLog->Log(_T("<font color=red>拉黑 </font>") + op.object->authorShowName);
+					}
+
+					g_postDefriendEvent(op, result);
+				}
+			}
+		}
+		// 黑名单只有一个总开关控制
+		if (op.ruleType == RULE_TYPE_BLACK_LIST && g_pTbmCoreConfig->m_blackListBan) { 
+			isBan = TRUE;
+		}
 
 		// 封禁
-		if (g_pTbmCoreConfig->m_banID && count >= g_pTbmCoreConfig->m_banTrigCount
-			&& g_pUserCache->m_bannedUser->find(op.object->author) == g_pUserCache->m_bannedUser->end()) // 达到封禁违规次数且未封
+		if (isBan)
 		{
 			pass = TRUE;
 			g_preBanEvent(op, pass);
@@ -228,35 +282,6 @@ void CTBMOperate::OperateThread()
 			}
 		}
 
-		// 拉黑
-		if (g_pTbmCoreConfig->m_defriend && count >= g_pTbmCoreConfig->m_defriendTrigCount
-			&& g_pUserCache->m_defriendedUser->find(op.object->author) == g_pUserCache->m_defriendedUser->end()) // 达到拉黑违规次数且未拉黑
-		{
-			pass = TRUE;
-			g_preDefriendEvent(op, pass);
-			if (pass)
-			{
-				BOOL result = FALSE;
-				CString code = g_pTiebaOperate->Defriend(op.object->authorID);
-				if (code != _T("0"))
-				{
-					CString content;
-					content.Format(_T("<font color=red>拉黑 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
-						_T("\"df:%s\">重试</a>"), (LPCTSTR)op.object->authorShowName, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
-						(LPCTSTR)op.object->authorID);
-					g_pLog->Log(content);
-				}
-				else
-				{
-					result = TRUE;
-					sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
-					g_pUserCache->m_defriendedUser->insert(op.object->author);
-					g_pLog->Log(_T("<font color=red>拉黑 </font>") + op.object->authorShowName);
-				}
-
-				g_postDefriendEvent(op, result);
-			}
-		}
 
 		// 主题已被删则不再删帖
 		__int64 tid = _ttoi64(op.object->tid);
@@ -264,7 +289,13 @@ void CTBMOperate::OperateThread()
 			continue;
 
 		// 删帖
-		if (g_pTbmCoreConfig->m_delete)
+		BOOL isDelete = FALSE;
+		if (op.ruleType == RULE_TYPE_ILLEGA_RULE && g_pTbmCoreConfig->m_delete)
+			isDelete = TRUE;
+		if (op.ruleType == RULE_TYPE_BLACK_LIST  && g_pTbmCoreConfig->m_blackListDelete)
+			isDelete = TRUE;
+
+		if (isDelete)
 		{
 			pass = TRUE;
 			g_preDeleteEvent(op, pass);
