@@ -46,6 +46,7 @@ public:
 	afx_msg void OnEnKillfocusEdit4();
 	afx_msg void OnEnKillfocusEdit8();
 	afx_msg void OnBnClickedCheck3();
+	afx_msg void OnBnClickedCheckBlEnable();
 
 
 public:
@@ -59,4 +60,8 @@ public:
 	CEdit m_deleteIntervalEdit;
 	CButton m_confirmCheck;
 	CButton m_banClientInterfaceCheck;
+	CButton m_blackListEnableCheck;
+	CButton m_blackListConfirmCheck;
+	CButton m_blackListDeleteCheck;
+	CButton m_blackListBanCheck;
 };

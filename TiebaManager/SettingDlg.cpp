@@ -243,6 +243,11 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 	m_operatePage->m_defriendTrigCountEdit.SetWindowText(tmp);		    // 拉黑违规次数
 	m_operatePage->m_confirmCheck.SetCheck(plan.m_confirm);			    // 操作前提示
 	m_operatePage->m_banClientInterfaceCheck.SetCheck(plan.m_banClientInterface);	// 封禁使用客户端接口
+	m_operatePage->m_blackListEnableCheck.SetCheck(plan.m_blackListEnable);			// 黑名单功能启用
+	m_operatePage->OnBnClickedCheckBlEnable();
+	m_operatePage->m_blackListConfirmCheck.SetCheck(plan.m_blackListConfirm);		// 黑名单强制确认
+	m_operatePage->m_blackListDeleteCheck.SetCheck(plan.m_blackListDelete);			// 黑名单删除贴
+	m_operatePage->m_blackListBanCheck.SetCheck(plan.m_blackListBan);				// 黑名单封禁作者
 
 	// 违规规则
 	m_illegalRulesPage->ShowList(plan.m_illegalRules);
@@ -290,6 +295,10 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	*plan.m_defriendTrigCount = _ttoi(strBuf);							// 拉黑违规次数
 	*plan.m_confirm = m_operatePage->m_confirmCheck.GetCheck();			// 操作前提示
 	*plan.m_banClientInterface = m_operatePage->m_banClientInterfaceCheck.GetCheck();	// 封禁使用客户端接口
+	*plan.m_blackListEnable = m_operatePage->m_blackListEnableCheck.GetCheck();			// 黑名单功能启用
+	*plan.m_blackListConfirm = m_operatePage->m_blackListConfirmCheck.GetCheck();		// 黑名单强制确认
+	*plan.m_blackListDelete = m_operatePage->m_blackListDeleteCheck.GetCheck();			// 黑名单删除贴
+	*plan.m_blackListBan = m_operatePage->m_blackListBanCheck.GetCheck();				// 黑名单封禁作者
 
 	// 违规规则
 	m_illegalRulesPage->ApplyList(plan.m_illegalRules);

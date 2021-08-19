@@ -52,6 +52,10 @@ void COperatePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK3, m_defriendCheck);
 	DDX_Control(pDX, IDC_EDIT8, m_defriendTrigCountEdit);
 	DDX_Control(pDX, IDC_CHECK5, m_banClientInterfaceCheck);
+	DDX_Control(pDX, IDC_CHECK_BL_ENABLE,	m_blackListEnableCheck);
+	DDX_Control(pDX, IDC_CHECK_BL_CONFIRM,	m_blackListConfirmCheck);
+	DDX_Control(pDX, IDC_CHECK_BL_DELETE,	m_blackListDeleteCheck);
+	DDX_Control(pDX, IDC_CHECK_BL_BAN,		m_blackListBanCheck);
 }
 
 
@@ -61,6 +65,7 @@ BEGIN_MESSAGE_MAP(COperatePage, CNormalDlg)
 	ON_EN_KILLFOCUS(IDC_EDIT4, &COperatePage::OnEnKillfocusEdit4)
 	ON_EN_KILLFOCUS(IDC_EDIT8, &COperatePage::OnEnKillfocusEdit8)
 	ON_BN_CLICKED(IDC_CHECK3, &COperatePage::OnBnClickedCheck3)
+	ON_BN_CLICKED(IDC_CHECK_BL_ENABLE, &COperatePage::OnBnClickedCheckBlEnable)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -110,4 +115,13 @@ void COperatePage::OnEnKillfocusEdit4()
 	float deleteInterval = (float)_ttof(tmp);
 	if (deleteInterval < 0 || deleteInterval > 60)
 		m_deleteIntervalEdit.SetWindowText(_T("1.5"));
+}
+
+// 黑名单
+void COperatePage::OnBnClickedCheckBlEnable()
+{
+	BOOL enable = m_blackListEnableCheck.GetCheck();
+	m_blackListConfirmCheck.EnableWindow(enable);
+	m_blackListDeleteCheck.EnableWindow(enable);
+	m_blackListBanCheck.EnableWindow(enable);
 }
