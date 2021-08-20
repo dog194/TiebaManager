@@ -343,6 +343,12 @@ HELPER_API CString EncodeURI_GBK(const CString& _src)
 	return result;
 }
 
+// URL解码
+HELPER_API CString DncodeURI(const CString& src)
+{
+	return EncodeURIBase(_T("decodeURIComponent"), src);
+}
+
 // HTML转义
 HELPER_API CString HTMLEscape(const CString& src)
 {

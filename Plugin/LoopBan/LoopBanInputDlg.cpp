@@ -51,6 +51,7 @@ void CLoopBanInputDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CLoopBanInputDlg, CDialog)
+	ON_EN_KILLFOCUS(IDC_EDIT_PORTRAIT, &CLoopBanInputDlg::OnEnKillfocusEditPortrait)
 END_MESSAGE_MAP()
 
 
@@ -79,4 +80,25 @@ void CLoopBanInputDlg::OnOK()
 	m_edit_note.GetWindowText(m_note);
 
 	CDialog::OnOK();
+}
+
+// 输入Url -> portrait
+void CLoopBanInputDlg::OnEnKillfocusEditPortrait()
+{
+	CString tmp, tmpP, tmpU;
+	m_edit_portrait.GetWindowText(tmp);
+	if (tmp.GetLength() > 36) {
+		tmpP = GetStringBetween(tmp, _T("id="), _T("&"));
+		if (tmpP.GetLength() > 36) {
+			tmpP = GetStringBefore(tmpP, _T("?"));
+		}
+		if (tmpP.GetLength() == 36) {
+			m_edit_portrait.SetWindowTextW(tmpP);
+		}
+		m_edit_uid.GetWindowText(tmpU);
+		if (tmpU == _T("")) {
+			tmpU = GetStringBetween(tmp, _T("un="), _T("&"));
+			m_edit_uid.SetWindowTextW(DncodeURI(tmpU));
+		}
+	}
 }

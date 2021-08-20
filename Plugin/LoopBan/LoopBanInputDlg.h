@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #pragma once
 #include "resource.h"
+#include <StringHelper.h>
 #include "afxwin.h"
 
 
@@ -42,6 +43,7 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
+	afx_msg void OnEnKillfocusEditPortrait();
 
 public:
 	CEdit m_edit_uid;

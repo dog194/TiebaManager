@@ -28,7 +28,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TBMAPI.h>
 
 // 用户信息
-CUserInfo::CUserInfo()
+CLBUserInfo::CLBUserInfo()
 {
 	m_uid = _T("");
 	m_pid = _T("");
@@ -36,7 +36,7 @@ CUserInfo::CUserInfo()
 	m_note = _T("");
 }
 
-CUserInfo::CUserInfo(const CString& uid)
+CLBUserInfo::CLBUserInfo(const CString& uid)
 {
 	m_uid = uid;
 	m_pid = _T("");
@@ -44,7 +44,7 @@ CUserInfo::CUserInfo(const CString& uid)
 	m_note = _T("");
 }
 
-CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& portrait)
+CLBUserInfo::CLBUserInfo(const CString& uid, const CString& pid, const CString& portrait)
 {
 	m_uid = uid;
 	m_pid = pid;
@@ -52,7 +52,7 @@ CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& port
 	m_note = _T("");
 }
 
-CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& portrait, const CString& note)
+CLBUserInfo::CLBUserInfo(const CString& uid, const CString& pid, const CString& portrait, const CString& note)
 {
 	m_uid = uid;
 	m_pid = pid;
@@ -60,7 +60,7 @@ CUserInfo::CUserInfo(const CString& uid, const CString& pid, const CString& port
 	m_note = note;
 }
 
-DECLEAR_READ(CUserInfo)
+DECLEAR_READ(CLBUserInfo)
 {
 	const tinyxml2::XMLElement* optionNode = root.FirstChildElement(m_name);
 	if (optionNode == NULL)
@@ -86,7 +86,7 @@ DECLEAR_READ(CUserInfo)
 		UseDefault();
 }
 
-DECLEAR_WRITE(CUserInfo)
+DECLEAR_WRITE(CLBUserInfo)
 {
 	tinyxml2::XMLDocument* doc = root.GetDocument();
 	tinyxml2::XMLElement* optionNode = doc->NewElement(m_name);
@@ -237,7 +237,7 @@ BOOL CLoopBanDlg::SetItem(int index)
 class CBanListFile : public CConfigBase
 {
 public:
-	COption<std::vector<CUserInfo> > m_list;
+	COption<std::vector<CLBUserInfo> > m_list;
 
 	CBanListFile() : CConfigBase("Banlist"),
 		m_list("Banlist")
@@ -303,7 +303,7 @@ void CLoopBanDlg::OnOK()
 	DestroyWindow();
 }
 
-void CLoopBanDlg::ShowList(const std::vector<CUserInfo>& list)
+void CLoopBanDlg::ShowList(const std::vector<CLBUserInfo>& list)
 {
 	m_list.DeleteAllItems();
 	for (UINT i = 0; i < list.size(); i++) {
@@ -313,7 +313,7 @@ void CLoopBanDlg::ShowList(const std::vector<CUserInfo>& list)
 	}
 }
 
-void CLoopBanDlg::ApplyList(std::vector<CUserInfo>& list)
+void CLoopBanDlg::ApplyList(std::vector<CLBUserInfo>& list)
 {
 	int size = m_list.GetItemCount();
 	list.resize(size);

@@ -30,7 +30,7 @@ public:
 	COption<BOOL> m_enable;					    // 开启
 	COption<BOOL> m_log;					    // 输出日志
 	COption<float> m_banInterval;			    // 封禁间隔
-	COption<std::vector<CUserInfo> > m_banlist;	// D新版BanList结构
+	COption<std::vector<CLBUserInfo> > m_banlist;	// D新版BanList结构
 	COption<std::vector<CString> > m_userList;	// 用户列表 //D保留，用于兼容，读取旧版结构然后转换。
 	COption<BOOL> m_autoLoopBan;			    // 自动循环封
 
@@ -58,7 +58,7 @@ public:
 			m_banlist->clear();
 			for (UINT i = 0; i < m_userList->size(); i++)
 			{
-				m_banlist->push_back(CUserInfo(m_userList->at(i)));
+				m_banlist->push_back(CLBUserInfo(m_userList->at(i)));
 			}
 			m_userList->clear(); //清空旧数据
 		}

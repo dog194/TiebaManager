@@ -28,17 +28,17 @@ const UINT COLUMN_INDEX_PORTRAIT = 1;
 const UINT COLUMN_INDEX_NOTE = 2;
 
 //D: 新的数据结构
-class CUserInfo
+class CLBUserInfo
 {
 public:
 	CString m_uid;			// userName
 	CString m_pid;			// pid	//似乎用不到
 	CString m_portrait;		// portrait
 	CString m_note;		// 备注，没实际用途，单纯用来个人记录
-	CUserInfo();
-	CUserInfo(const CString& uid);
-	CUserInfo(const CString& uid, const CString& pid, const CString& portrait);
-	CUserInfo(const CString& uid, const CString& pid, const CString& portrait, const CString& note);
+	CLBUserInfo();
+	CLBUserInfo(const CString& uid);
+	CLBUserInfo(const CString& uid, const CString& pid, const CString& portrait);
+	CLBUserInfo(const CString& uid, const CString& pid, const CString& portrait, const CString& note);
 };
 
 // CLoopBanDlg 对话框
@@ -69,8 +69,8 @@ public:
 	virtual BOOL Import(const CString& path) override;
 	virtual void OnAdd(int index) override;
 	virtual void OnDelete(int index) override;
-	void ShowList(const std::vector<CUserInfo>& list);
-	void ApplyList(std::vector<CUserInfo>& list);
+	void ShowList(const std::vector<CLBUserInfo>& list);
+	void ApplyList(std::vector<CLBUserInfo>& list);
 
 
 public:

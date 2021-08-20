@@ -79,6 +79,8 @@ HELPER_API CString EncodeURI(const CString& src);
 HELPER_API CString EncodeFullURI(const CString& src);
 // URL编码 GBK版
 HELPER_API CString EncodeURI_GBK(const CString& src);
+// URL解码
+HELPER_API CString DncodeURI(const CString& src);
 // HTML转义
 HELPER_API CString HTMLEscape(const CString& src);
 // HTML反转义

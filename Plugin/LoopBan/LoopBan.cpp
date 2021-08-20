@@ -136,7 +136,7 @@ void CLoopBan::OnPostBan(const Operation& op, BOOL succeeded)
 				}
 			}
 			if (isAdd) {
-				m_config.m_banlist->push_back(CUserInfo(op.object->author));
+				m_config.m_banlist->push_back(CLBUserInfo(op.object->author));
 				CString currentUserDir = GetCurrentUserDir();
 				DeleteFile(currentUserDir + _T("LoopBanDate.xml"));
 			}
@@ -157,7 +157,7 @@ void CLoopBan::OnPostBan(const Operation& op, BOOL succeeded)
 				}
 			}
 			if (isAdd) {
-				m_config.m_banlist->push_back(CUserInfo(op.object->authorShowName, _T(""), tmp));
+				m_config.m_banlist->push_back(CLBUserInfo(op.object->authorShowName, _T(""), tmp));
 				CString currentUserDir = GetCurrentUserDir();
 				DeleteFile(currentUserDir + _T("LoopBanDate.xml"));
 			}

@@ -44,6 +44,7 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
+	afx_msg void OnEnKillfocusEditPortrait();
 
 public:
 	CEdit m_edit_uid;
