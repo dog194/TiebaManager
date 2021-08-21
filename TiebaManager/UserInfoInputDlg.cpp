@@ -90,7 +90,7 @@ void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 		if (tmpP.GetLength() > 36) {
 			tmpP = GetStringBefore(tmpP, _T("?"));
 		}
-		if (tmpP.GetLength() == 36) {
+		if (tmpP.GetLength() <= 36 && tmpP.GetLength() > 30) {
 			m_edit_portrait.SetWindowTextW(tmpP);
 		}
 		m_edit_uid.GetWindowText(tmpU);
