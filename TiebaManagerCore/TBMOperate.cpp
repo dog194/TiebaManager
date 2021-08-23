@@ -171,16 +171,16 @@ void CTBMOperate::OperateThread()
 
 		if (op.ruleType == RULE_TYPE_ILLEGA_RULE) { //只有常规违规规则有违规次数设定
 			// 增加违规次数
-			auto countIt = g_pUserCache->m_userTrigCount->find(op.object->author);
+			auto countIt = g_pUserCache->m_userTrigCount->find(GetPortraitFromString(op.object->authorPortraitUrl));
 			BOOL hasHistory = countIt != g_pUserCache->m_userTrigCount->end();
 			int count = hasHistory ? (countIt->second + 1) : 1;
 			if (hasHistory)
 				countIt->second = count;
 			else
-				(*g_pUserCache->m_userTrigCount)[op.object->author] = 1;
+				(*g_pUserCache->m_userTrigCount)[GetPortraitFromString(op.object->authorPortraitUrl)] = 1;
 
 			if (g_pTbmCoreConfig->m_banID && count >= g_pTbmCoreConfig->m_banTrigCount
-				&& g_pUserCache->m_bannedUser->find(op.object->author) == g_pUserCache->m_bannedUser->end()) { // 达到封禁违规次数且未封
+				&& g_pUserCache->m_bannedUser->find(GetPortraitFromString(op.object->authorPortraitUrl)) == g_pUserCache->m_bannedUser->end()) { // 达到封禁违规次数且未封
 				isBan = TRUE;
 			}
 
@@ -217,7 +217,7 @@ void CTBMOperate::OperateThread()
 		}
 		// 黑名单只有一个总开关控制
 		if (op.ruleType == RULE_TYPE_BLACK_LIST && g_pTbmCoreConfig->m_blackListBan
-			&& g_pUserCache->m_bannedUser->find(op.object->author) == g_pUserCache->m_bannedUser->end()) {
+			&& g_pUserCache->m_bannedUser->find(GetPortraitFromString(op.object->authorPortraitUrl)) == g_pUserCache->m_bannedUser->end()) {
 			isBan = TRUE;
 		}
 
@@ -275,7 +275,7 @@ void CTBMOperate::OperateThread()
 				{
 					result = TRUE;
 					sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
-					g_pUserCache->m_bannedUser->insert(op.object->author);
+					g_pUserCache->m_bannedUser->insert(GetPortraitFromString(op.object->authorPortraitUrl));
 					g_pLog->Log(_T("<font color=red>封禁 </font>") + op.object->authorShowName);
 				}
 
