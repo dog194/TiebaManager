@@ -199,6 +199,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		g_userCache.m_bannedUser->clear();
 	});
 
+	SetWindowText(_T("贴吧管理器 - ") + UPDATE_CURRENT_VERSION);
 
 	g_mainDialogPostInitEvent();
 
@@ -422,7 +423,7 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		goto Error;
 	}
 
-	SetWindowText(_T("贴吧管理器 - ") + g_tiebaOperate.GetUserName_());
+	SetWindowText(_T("贴吧管理器 - ") + UPDATE_CURRENT_VERSION + _T(" - ") + g_tiebaOperate.GetUserName_());
 
 
 	m_stateStatic.SetWindowText(_T("待机中"));

@@ -55,6 +55,10 @@ public:
 	virtual void OnAdd(int index) { }
 	// 清除时index = -1，取消添加时也会调用
 	virtual void OnDelete(int index) { }
+	// 设置选中
+	virtual void SetSelectedRow(const int index);
+	// 滑动到指定行
+	virtual void ScrollToIndex(const int index);
 	virtual BOOL Export(const CString& path);
 	virtual BOOL Import(const CString& path);
 

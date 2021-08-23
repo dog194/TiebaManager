@@ -58,6 +58,27 @@ BOOL CBlackListRulesPage::SetItem(int index)
 	CUserInfoInputDlg dlg(m_rules[index], CUserInfoInputDlg::IDD, this);
 	if (dlg.DoModal() == IDOK && m_rules[index].m_uid != _T(""))
 	{
+		// 判断是否已经在列表中，避免重复添加
+		for (int i = 0; i < m_list.GetItemCount(); i++) {
+			if (m_rules[index].m_portrait != _T("")) {
+				// portrait 不为空 ，默认用portrait
+				if (m_rules[index].m_portrait == m_list.GetItemText(i, COLUMN_INDEX_PORTRAIT)) {
+					AfxMessageBox(m_rules[index].m_portrait + _T(" 已经在列表中！"), MB_ICONINFORMATION);
+					SetSelectedRow(i);
+					ScrollToIndex(i);
+					return FALSE;
+				}
+			}
+			else {
+				if (m_rules[index].m_uid == m_list.GetItemText(i, COLUMN_INDEX_UID)) {
+					AfxMessageBox(m_rules[index].m_uid + _T(" 已经在列表中！"), MB_ICONINFORMATION);
+					SetSelectedRow(i);
+					ScrollToIndex(i);
+					return FALSE;
+				}
+			}
+		}
+		// 更新列表
 		m_list.SetItemText(index, COLUMN_INDEX_UID, m_rules[index].m_uid);
 		m_list.SetItemText(index, COLUMN_INDEX_PORTRAIT, m_rules[index].m_portrait);
 		m_list.SetItemText(index, COLUMN_INDEX_TRIG_COUNT, Int2CString(m_rules[index].m_trigCount));

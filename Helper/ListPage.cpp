@@ -220,3 +220,23 @@ void CListPage::OnClickedButton6()
 	m_list.DeleteAllItems();
 	OnDelete(-1);
 }
+
+// 设置选中
+void CListPage::SetSelectedRow(const int index) {
+	m_list.SetSelectionMark(index);
+	m_list.SetItemState(index, LVNI_FOCUSED | LVNI_SELECTED, LVNI_FOCUSED | LVNI_SELECTED);
+}
+
+// 滑动到指定行
+void CListPage::ScrollToIndex(const int index) {
+	int nCurIndex;
+	CSize size;
+	CRect rc;
+
+	nCurIndex = m_list.GetTopIndex();
+	m_list.GetItemRect(0, rc, LVIR_BOUNDS);
+
+	size.cx = 0;
+	size.cy = (index - nCurIndex)*rc.Height();
+	m_list.Scroll(size);
+}
