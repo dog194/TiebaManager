@@ -335,6 +335,9 @@ void CTiebaManagerDlg::OnBnClickedButton7()
 		m_explorerDlg = new CExplorerDlg(m_explorerDlg);
 		m_explorerDlg->Create(m_explorerDlg->IDD, GetDesktopWindow());
 	}
+	else {
+		m_explorerDlg->SetActiveWindow();
+	}
 }
 
 // 插件
@@ -344,6 +347,9 @@ void CTiebaManagerDlg::OnBnClickedButton4()
 	{
 		m_pluginDlg = new CPluginDlg(m_pluginDlg);
 		m_pluginDlg->Create(m_pluginDlg->IDD, GetDesktopWindow());
+	}
+	else {
+		m_pluginDlg->SetActiveWindow();
 	}
 }
 
