@@ -226,6 +226,31 @@ BOOL CLoopBanDlg::SetItem(int index)
 	CLoopBanInputDlg dlg(uid, portrait, note, CLoopBanInputDlg::IDD, this);
 	if (dlg.DoModal() == IDOK && uid != _T(""))
 	{
+		// 判断是否已经在列表中，避免重复添加
+		for (int i = 0; i < m_list.GetItemCount(); i++) {
+			if (portrait != _T("")) {
+				// portrait 不为空 ，默认用portrait
+				if (portrait == m_list.GetItemText(i, COLUMN_INDEX_PORTRAIT)) {
+					if (AfxMessageBox(portrait + _T(" 已经在列表中！"), MB_ICONINFORMATION) == IDOK) {
+						SetSelectedRow(i);
+						ScrollToIndex(i);
+						this->SetActiveWindow();
+					}
+					return FALSE;
+				}
+			}
+			else {
+				if (uid == m_list.GetItemText(i, COLUMN_INDEX_UID)) {
+					if (AfxMessageBox(uid + _T(" 已经在列表中！"), MB_ICONINFORMATION) == IDOK) {
+						SetSelectedRow(i);
+						ScrollToIndex(i);
+						this->SetActiveWindow();
+					}
+					return FALSE;
+				}
+			}
+		}
+		// 更新列表
 		m_list.SetItemText(index, COLUMN_INDEX_UID, uid);
 		m_list.SetItemText(index, COLUMN_INDEX_PORTRAIT, portrait);
 		m_list.SetItemText(index, COLUMN_INDEX_NOTE, note);
