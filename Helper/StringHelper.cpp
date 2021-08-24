@@ -273,6 +273,19 @@ HELPER_API BOOL WriteString(const CString& src, const CString& path)
 	return TRUE;
 }
 
+// 单字符16进制转10进制
+HELPER_API int HexChar2Dec(const CCHAR c) {
+	if ('0' <= c && c <= '9') {
+		return (c - '0');
+	}
+	else if ('a' <= c && c <= 'f') {
+		return (c - 'a' + 10);
+	}
+	else if ('A' <= c && c <= 'F') {
+		return (c - 'A' + 10);
+	}
+	return -1;
+}
 
 // Unicode(UCS-2)转ANSI
 HELPER_API CStringA W2ANSI(const CStringW& src, UINT codePage)
@@ -347,6 +360,27 @@ HELPER_API CString EncodeURI_GBK(const CString& _src)
 HELPER_API CString DncodeURI(const CString& src)
 {
 	return EncodeURIBase(_T("decodeURIComponent"), src);
+}
+
+// URL解码 GBK版
+HELPER_API CString DncodeURI_GBK(const CString& src)
+{
+	CStringA result;
+	const int len = src.GetLength();
+	for (int i = 0; i < len; i++) {
+		char c = src[i];
+		if (c != '%') {
+			result += c;
+		}
+		else {
+			char c1 = src[++i];
+			char c0 = src[++i];
+			int num = 0;
+			num += HexChar2Dec(c1) * 16 + HexChar2Dec(c0);
+			result += char(num);
+		}
+	}
+	return GBK2W(result);
 }
 
 // HTML转义

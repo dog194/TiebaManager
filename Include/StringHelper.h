@@ -61,6 +61,8 @@ HELPER_API CString GetStringAfter(const CString& src, const CString& left, int s
 // 写字符串到文件
 HELPER_API BOOL WriteString(const CString& src, const CString& path);
 
+// 单字符16进制转10进制
+HELPER_API int HexChar2Dec(const CCHAR c);
 // Unicode(UCS-2)转ANSI
 HELPER_API CStringA W2ANSI(const CStringW& src, UINT codePage);
 // ANSI转Unicode(UCS-2)
@@ -81,6 +83,8 @@ HELPER_API CString EncodeFullURI(const CString& src);
 HELPER_API CString EncodeURI_GBK(const CString& src);
 // URL解码
 HELPER_API CString DncodeURI(const CString& src);
+// URL解码 GBK版
+HELPER_API CString DncodeURI_GBK(const CString& src);
 // HTML转义
 HELPER_API CString HTMLEscape(const CString& src);
 // HTML反转义

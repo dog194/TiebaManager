@@ -83,7 +83,7 @@ void CUserInfoInputDlg::OnOK()
 // 输入Url -> portrait
 void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 {
-	CString tmp, tmpP, tmpU;
+	CString tmp, tmpP, tmpU_ori, tmpU;
 	m_edit_portrait.GetWindowText(tmp);
 	if (tmp.GetLength() > 36) {
 		tmpP = GetStringBetween(tmp, _T("id="), _T("&"));
@@ -93,9 +93,13 @@ void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 		if (tmpP.GetLength() <= 36 && tmpP.GetLength() > 30) {
 			m_edit_portrait.SetWindowTextW(tmpP);
 		}
-		m_edit_uid.GetWindowText(tmpU);
-		if (tmpU == _T("")) {
-			tmpU = GetStringBetween(tmp, _T("un="), _T("&"));
+		m_edit_uid.GetWindowText(tmpU_ori);
+		if (tmpU_ori == _T("")) {
+			tmpU_ori = GetStringBetween(tmp, _T("un="), _T("&"));
+			tmpU = DncodeURI(tmpU_ori);
+			if (tmpU == _T("")) {
+				tmpU = DncodeURI_GBK(tmpU_ori);
+			}
 			m_edit_uid.SetWindowTextW(DncodeURI(tmpU));
 		}
 	}
