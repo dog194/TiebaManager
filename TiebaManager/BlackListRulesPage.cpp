@@ -60,6 +60,8 @@ BOOL CBlackListRulesPage::SetItem(int index)
 	{
 		// 判断是否已经在列表中，避免重复添加
 		for (int i = 0; i < m_list.GetItemCount(); i++) {
+			if (i == index)
+				continue;
 			if (m_rules[index].m_portrait != _T("")) {
 				// portrait 不为空 ，默认用portrait
 				if (m_rules[index].m_portrait == m_list.GetItemText(i, COLUMN_INDEX_PORTRAIT)) {
