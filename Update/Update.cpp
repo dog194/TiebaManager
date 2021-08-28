@@ -27,11 +27,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // 当前版本，每次更新后修改，也可以不是日期
-UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("21-08-01");
+UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("210901(2.2)");
+UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 210901; //使用整数形式，更方便版本判断
 
 static const CString MANUALLY_UPDATE_URL = _T("https://sinacloud.net/xfgryujk/TiebaManager/贴吧管理器.zip");
 static const CString QQ_QUN_UPDATE_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=IbZJQTp42ZNuEQJRKbyyn0LTD1iCgEtT");
-UPDATE_API const CString UPDATE_INFO_URL = _T("https://github.com/dog194/TiebaManager/raw/master/UpdateInfo.xml");
+UPDATE_API const CString UPDATE_INFO_URL = _T("https://raw.githubusercontent.com/dog194/TiebaManager/master/UpdateInfo.xml");
+UPDATE_API const CString UPDATE_INFO_URL_GITHUB = _T("https://github.com/dog194/TiebaManager/blob/master/UpdateInfo.xml");
 
 static const CString UPDATE_DIR_PATH = _T("Update\\"); // 只能是一级目录，因为批处理里用了相对路径
 static const CString UPDATE_BAT_NAME = _T("Update.bat");
@@ -89,10 +91,12 @@ UPDATE_API DECLEAR_WRITE(CUpdateInfo::FileInfo)
 
 CUpdateInfo::CUpdateInfo() : CConfigBase("UpdateInfo"),
 	m_version("Version", _T("")),
+	m_version_num("VersionNum", 0),
 	m_updateLog("UpdateLog", _T("")),
 	m_files("Files")
 {
 	m_options.push_back(&m_version);
+	m_options.push_back(&m_version_num);
 	m_options.push_back(&m_updateLog);
 	m_options.push_back(&m_files);
 }
@@ -284,8 +288,9 @@ End:
 UPDATE_API CheckUpdateResult CheckUpdate()
 {
 	// 取更新信息
-	std::unique_ptr<BYTE[]> buffer;
-	ULONG size;
+	std::unique_ptr<BYTE[]> buffer, buffer_G;
+	ULONG size, size_G;
+	HTTPGetRaw(UPDATE_INFO_URL_GITHUB, &buffer_G, &size_G);
 	if (HTTPGetRaw(UPDATE_INFO_URL, &buffer, &size) != NET_SUCCESS) // 用HTTPGetRaw防止转码
 		return UPDATE_FAILED_TO_GET_INFO;
 	auto updateInfo = std::make_unique<CUpdateInfo>();
@@ -293,7 +298,7 @@ UPDATE_API CheckUpdateResult CheckUpdate()
 		return UPDATE_FAILED_TO_GET_INFO;
 
 	// 无更新
-	if (updateInfo->m_version == UPDATE_CURRENT_VERSION)
+	if (updateInfo->m_version_num <= UPDATE_CURRENT_VERSION_NUM)
 		return UPDATE_NO_UPDATE;
 
 	// 用户取消更新

@@ -39,6 +39,7 @@ public:
 	};
 
 	COption<CString> m_version;				// 最新版本
+	COption<int> m_version_num;				// 最新版本号
 	COption<CString> m_updateLog;			// 更新日志
 	COption<std::vector<FileInfo> > m_files;		// 只储存必须的文件，如正则表达式手册不储存
 

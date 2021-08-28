@@ -379,8 +379,10 @@ void CTiebaManagerDlg::AutoUpdateThread()
 		m_stateStatic.SetWindowText(_T("检查更新失败：获取文件信息失败，在设置里手动检查更新"));
 		break;
 	case UPDATE_NO_UPDATE:
-	case UPDATE_HAS_UPDATE:
 		m_stateStatic.SetWindowText(_T("待机中"));
+		break;
+	case UPDATE_HAS_UPDATE:
+		m_stateStatic.SetWindowText(_T("待机中 有新版本"));
 		break;
 	}
 
