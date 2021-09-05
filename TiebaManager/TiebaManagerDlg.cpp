@@ -418,7 +418,7 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		AfxMessageBox(_T("连接超时..."), MB_ICONERROR);
 		goto Error;
 	case CTiebaOperate::SET_TIEBA_NOT_FOUND:
-		AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...)"), MB_ICONERROR);
+		AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR);
 		goto Error;
 	case CTiebaOperate::SET_TIEBA_NOT_LOGIN:
 		AfxMessageBox(_T("请在设置-账号管理登录百度账号"), MB_ICONERROR);
