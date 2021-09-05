@@ -36,6 +36,9 @@ public:
 	COption<int>		m_threadCount;			// 线程数
 	COption<int>        m_clawerInterface;      // 贴吧采集API用的接口
 
+	COption<BOOL>		m_autoVerify;			// 启动后自动验证
+	COption<BOOL>		m_autoScan;				// 验证后自动扫描
+
 	COption<BOOL>		m_delete;				// 删帖
 	COption<BOOL>		m_banID;				// 封ID
 	COption<BOOL>		m_defriend;				// 拉黑
@@ -45,12 +48,14 @@ public:
 	COption<int>		m_banTrigCount;			// 封禁违规次数
 	COption<int>		m_defriendTrigCount;	// 拉黑违规次数
 	COption<BOOL>		m_confirm;				// 操作前提示
+	COption<BOOL>		m_windowPro;			// 详细版操作界面
 	COption<BOOL>		m_banClientInterface;	// 封禁用客户端接口
 
 	COption<BOOL>		m_blackListEnable;		// 黑名单功能总开关
 	COption<BOOL>		m_blackListConfirm;		// 黑名单强制确认
 	COption<BOOL>		m_blackListDelete;		// 黑名单删帖
 	COption<BOOL>		m_blackListBan;			// 黑名单封禁
+	COption<BOOL>		m_blackListRecheck;		// 确认窗口重新检测是否在黑名单
 
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则

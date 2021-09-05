@@ -42,6 +42,8 @@ CScanPage::~CScanPage()
 void CScanPage::DoDataExchange(CDataExchange* pDX)
 {
 	CNormalDlg::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_AUTO_VERIFY, m_autoVerifyCheck);
+	DDX_Control(pDX, IDC_AUTO_SCAN, m_autoScanCheck);
 	DDX_Control(pDX, IDC_EDIT1, m_scanIntervalEdit);
 	DDX_Control(pDX, IDC_CHECK3, m_onlyScanTitleCheck);
 	DDX_Control(pDX, IDC_EDIT5, m_scanPageCountEdit);

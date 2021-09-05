@@ -48,6 +48,7 @@ void COperatePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT3, m_banTrigCountEdit);
 	DDX_Control(pDX, IDC_EDIT4, m_deleteIntervalEdit);
 	DDX_Control(pDX, IDC_CHECK4, m_confirmCheck);
+	DDX_Control(pDX, IDC_PRO_WINDOW, m_ProWinCheck);
 	DDX_Control(pDX, IDC_EDIT7, m_banReasonEdit);
 	DDX_Control(pDX, IDC_CHECK3, m_defriendCheck);
 	DDX_Control(pDX, IDC_EDIT8, m_defriendTrigCountEdit);
@@ -56,6 +57,7 @@ void COperatePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK_BL_CONFIRM,	m_blackListConfirmCheck);
 	DDX_Control(pDX, IDC_CHECK_BL_DELETE,	m_blackListDeleteCheck);
 	DDX_Control(pDX, IDC_CHECK_BL_BAN,		m_blackListBanCheck);
+	DDX_Control(pDX, IDC_CHECK_BL_RECHECK,	m_blackListRecheckCheck);
 }
 
 
@@ -65,7 +67,8 @@ BEGIN_MESSAGE_MAP(COperatePage, CNormalDlg)
 	ON_EN_KILLFOCUS(IDC_EDIT4, &COperatePage::OnEnKillfocusEdit4)
 	ON_EN_KILLFOCUS(IDC_EDIT8, &COperatePage::OnEnKillfocusEdit8)
 	ON_BN_CLICKED(IDC_CHECK3, &COperatePage::OnBnClickedCheck3)
-	ON_BN_CLICKED(IDC_CHECK_BL_ENABLE, &COperatePage::OnBnClickedCheckBlEnable)
+	ON_BN_CLICKED(IDC_CHECK_BL_ENABLE,	&COperatePage::OnBnClickedCheckBlEnable)
+	ON_BN_CLICKED(IDC_CHECK_BL_CONFIRM, &COperatePage::OnBnClickedCheckBlForceEnable)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -124,4 +127,16 @@ void COperatePage::OnBnClickedCheckBlEnable()
 	m_blackListConfirmCheck.EnableWindow(enable);
 	m_blackListDeleteCheck.EnableWindow(enable);
 	m_blackListBanCheck.EnableWindow(enable);
+	OnBnClickedCheckBlForceEnable();
+}
+
+// 黑名单强制确认，与对确认窗口生效互斥
+void COperatePage::OnBnClickedCheckBlForceEnable()
+{
+	BOOL enableALL = m_blackListEnableCheck.GetCheck();
+	BOOL enableCon = m_blackListConfirmCheck.GetCheck();
+	m_blackListRecheckCheck.EnableWindow(!(!enableALL || enableCon));
+	if (enableCon) {
+		m_blackListRecheckCheck.SetCheck(!enableCon);
+	}
 }

@@ -48,6 +48,8 @@ public:
 
 
 public:
+	CButton m_autoVerifyCheck;
+	CButton m_autoScanCheck;
 	CEdit m_scanIntervalEdit;
 	CButton m_onlyScanTitleCheck;
 	CEdit m_scanPageCountEdit;

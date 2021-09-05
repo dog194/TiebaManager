@@ -29,6 +29,9 @@ TBM_CORE_API CTiebaOperate* g_pTiebaOperate = NULL;
 
 
 CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
+	m_autoVerify		("AutoVerify",			FALSE),
+	m_autoScan			("AutoScan",			FALSE),
+
 	m_scanInterval		("ScanInterval",		30,		InRange<int, 0, 600>),
 	m_onlyScanTitle		("OnlyScanTitle",		FALSE),
 	m_scanPageCount		("ScanPageCount",		1,		GreaterThan<int, 1>),
@@ -45,18 +48,23 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_banTrigCount		("BanTrigCount",		1,		GreaterThan<int, 1>),
 	m_defriendTrigCount	("DefriendTrigCount",	5,		GreaterThan<int, 1>),
 	m_confirm			("Confirm",				TRUE),
+	m_windowPro			("WindowPro",			FALSE),
 	m_banClientInterface("ClientBanInterface",  FALSE),
 
 	m_blackListEnable	("BlackListEnable",		FALSE),
 	m_blackListConfirm	("BlackListConfirm",	FALSE),
 	m_blackListDelete	("BlackListDelete",		FALSE),
 	m_blackListBan		("BlackListBan",		FALSE),
+	m_blackListRecheck	("BlackListRecheck",	FALSE),
 
 	m_illegalRules      ("IllegalRules"),
 	m_trustedRules      ("TrustedRules"),
 	m_trustedThreads    ("TrustedThreads"),
 	m_blackListRules	("BlackListRules")
 {
+	m_options.push_back(&m_autoVerify);
+	m_options.push_back(&m_autoScan);
+
 	m_options.push_back(&m_scanInterval);
 	m_options.push_back(&m_onlyScanTitle);
 	m_options.push_back(&m_scanPageCount);
@@ -73,12 +81,14 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_banTrigCount);
 	m_options.push_back(&m_defriendTrigCount);
 	m_options.push_back(&m_confirm);
+	m_options.push_back(&m_windowPro);
 	m_options.push_back(&m_banClientInterface);
 
 	m_options.push_back(&m_blackListEnable);
 	m_options.push_back(&m_blackListConfirm);
 	m_options.push_back(&m_blackListDelete);
 	m_options.push_back(&m_blackListBan);
+	m_options.push_back(&m_blackListRecheck);
 
 	m_options.push_back(&m_illegalRules);
 	m_options.push_back(&m_trustedRules);
