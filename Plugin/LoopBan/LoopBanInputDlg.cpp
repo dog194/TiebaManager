@@ -76,6 +76,10 @@ BOOL CLoopBanInputDlg::OnInitDialog()
 void CLoopBanInputDlg::OnOK()
 {
 	m_edit_uid.GetWindowText(m_uid);
+	if (m_uid == _T("")) {
+		m_edit_uid.ShowBalloonTip(_T(""), _T("用户名/昵称 不能为空，用于封禁或日志显示"), TTI_NONE);
+		return;
+	}
 	m_edit_portrait.GetWindowText(m_portrait);
 	m_edit_note.GetWindowText(m_note);
 
