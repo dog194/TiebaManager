@@ -75,6 +75,8 @@ void CTiebaManagerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON5, m_settingButton);
 	DDX_Control(pDX, IDC_STATIC4, m_logStatic);
 	DDX_Control(pDX, IDC_STATIC5, m_stateStatic);
+	DDX_Control(pDX, IDC_STATIC_CON_QUENE, m_StaticConQueneCount);
+	DDX_Control(pDX, IDC_STATIC_OPE_QUENE, m_StaticOpeQueneCount);
 	DDX_Control(pDX, IDC_STATIC6, m_clearLogStatic);
 	DDX_Control(pDX, IDC_STATIC7, m_saveLogStatic);
 	DDX_Control(pDX, IDC_BUTTON7, m_explorerButton);
@@ -200,6 +202,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	});
 
 	SetWindowText(_T("贴吧管理器 - ") + UPDATE_CURRENT_VERSION);
+	OnProWinCheckChange();
 
 	g_mainDialogPostInitEvent();
 
@@ -237,6 +240,18 @@ void CTiebaManagerDlg::OnClose()
 	m_log.Release();
 
 	CNormalDlg::OnClose();
+}
+
+// 根据设置，更新界面
+void CTiebaManagerDlg::OnProWinCheckChange() {
+	if (g_plan.m_windowPro) {
+		m_StaticConQueneCount.ShowWindow(SW_SHOW);
+		m_StaticOpeQueneCount.ShowWindow(SW_SHOW);
+	}
+	else {
+		m_StaticConQueneCount.ShowWindow(SW_HIDE);
+		m_StaticOpeQueneCount.ShowWindow(SW_HIDE);
+	}
 }
 
 // 保存其他数据、释放

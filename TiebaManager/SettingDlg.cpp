@@ -26,6 +26,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "TiebaManager.h"
 #include <TBMScan.h>
+#include "TiebaManagerDlg.h"
 
 
 // CSettingDlg 对话框
@@ -360,6 +361,9 @@ void CSettingDlg::OnOK()
 	CreateDir(OPTIONS_DIR_PATH);
 	SavePlanInDlg(OPTIONS_DIR_PATH + g_userConfig.m_plan + _T(".xml"));
 	ApplyPlanInDlg(g_plan);
+
+	CTiebaManagerDlg* parent = (CTiebaManagerDlg *) GetParent();
+	parent->OnProWinCheckChange();
 
 	DestroyWindow();
 }
