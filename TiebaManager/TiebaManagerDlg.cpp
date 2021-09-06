@@ -203,6 +203,14 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	g_mainDialogPostInitEvent();
 
+	// 启动后自动确认贴吧
+	if (g_pTbmCoreConfig->m_autoVerify) {
+		CString forumName;
+		m_forumNameEdit.GetWindowText(forumName);
+		if (forumName != _T("")) {
+			OnBnClickedButton1();
+		}
+	}
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -446,6 +454,11 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		+ _T("<font color=green> 吧，使用账号：</font>" + g_tiebaOperate.GetUserName_()));
 
 	g_postSetTiebaEvent(forumName);
+
+	// 确认贴吧后自动扫描
+	if (g_pTbmCoreConfig->m_autoScan) {
+		OnBnClickedButton2();
+	}
 	return;
 
 Error:
