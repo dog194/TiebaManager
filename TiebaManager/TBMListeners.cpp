@@ -52,6 +52,8 @@ CTBMListeners::CTBMListeners()
 
 	g_comfirmEvent.AddListener(OnConfirm);
 
+	g_comfirmQueneChangeEvent.AddListener(OnUpdateComCount);
+	g_operateQueneChangeEvent.AddListener(OnUpdateOpeCount);
 
 	// UI事件
 
@@ -213,4 +215,18 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 			dlg->m_log.Log(_T("<font color=red>拉黑失败！</font>"));
 		pass = FALSE;
 	}
+}
+
+void CTBMListeners::OnUpdateComCount(const int& qSize) {
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	CString tmp;
+	tmp.Format(_T("确认队列: %d"), qSize);
+	dlg->m_StaticConQueneCount.SetWindowTextW(tmp);
+}
+
+void CTBMListeners::OnUpdateOpeCount(const int& qSize) {
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	CString tmp;
+	tmp.Format(_T("操作队列: %d"), qSize);
+	dlg->m_StaticOpeQueneCount.SetWindowTextW(tmp);
 }

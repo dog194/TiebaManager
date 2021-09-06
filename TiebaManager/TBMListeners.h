@@ -55,4 +55,6 @@ private:
 	// UI事件
 
 	static void OnOpenLinkInLog(const CString& url, BOOL& pass);
+	static void OnUpdateComCount(const int& qSize);
+	static void OnUpdateOpeCount(const int& qSize);
 };

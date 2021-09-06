@@ -28,6 +28,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 extern TBM_CORE_API PreEvent<const Operation&, BOOL&>   g_comfirmEvent;        // 确认是否操作，参数：操作, 结果
 
+extern TBM_CORE_API PostEvent<const int&>	g_comfirmQueneChangeEvent;			// 队列数量变化事件
+extern TBM_CORE_API PostEvent<const int&>	g_operateQueneChangeEvent;			// 队列数量变化事件
 extern TBM_CORE_API PreEvent<const Operation&, BOOL&>   g_preOperateEvent;     // 准备操作时触发，参数：操作, 不取消
 extern TBM_CORE_API PreEvent<const Operation&, BOOL&>   g_preBanEvent;         // 准备封禁时触发，参数：操作, 不取消
 extern TBM_CORE_API PostEvent<const Operation&, BOOL>   g_postBanEvent;        // 已封禁时触发，参数：操作, 封禁成功
