@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TBMEvents.h>
 #include <TBMAPI.h>
 #include "TBMGlobal.h"
+#include "ConfirmDlg.h"
 
 #include "SettingDlg.h"
 #include "ExplorerDlg.h"

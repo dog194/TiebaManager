@@ -31,7 +31,8 @@ class CUserInfoInputDlg : public CDialog
 	DECLARE_DYNAMIC(CUserInfoInputDlg)
 
 public:
-	CUserInfoInputDlg(CUserInfo& userinfo, UINT nIDTemplate = IDD, CWnd* pParent = NULL, const CString& pPreNote = _T(""), const CString& pNextNote = _T(""));   // 标准构造函数
+	CUserInfoInputDlg(CUserInfo& userinfo, UINT nIDTemplate = IDD, CWnd* pParent = NULL, const CString& pPreNote = _T(""), 
+		const CString& pNextNote = _T(""), std::shared_ptr<CUserInfo> preFillInfo = NULL);			// 构造函数
 	CUserInfoInputDlg(CUserInfo& userinfo, UINT nIDTemplate = IDD, CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~CUserInfoInputDlg();
 	
@@ -59,4 +60,5 @@ public:
 	CString m_next_note = _T("");
 
 	CUserInfo& m_userinfo;
+	std::shared_ptr<CUserInfo>m_preFillUserInfo;
 };

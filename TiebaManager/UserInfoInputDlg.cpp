@@ -30,11 +30,12 @@ const UINT CUserInfoInputDlg::IDD = IDD_USER_INFO;
 
 IMPLEMENT_DYNAMIC(CUserInfoInputDlg, CDialog)
 
-CUserInfoInputDlg::CUserInfoInputDlg(CUserInfo& userinfo, UINT nIDTemplate, CWnd* pParent, const CString& pPreNote, const CString& pNextNote)
+CUserInfoInputDlg::CUserInfoInputDlg(CUserInfo& userinfo, UINT nIDTemplate, CWnd* pParent, const CString& pPreNote, const CString& pNextNote, std::shared_ptr<CUserInfo> preFillInfo )
 	: CDialog(nIDTemplate, pParent),
 	m_userinfo(userinfo),
 	m_pre_note(pPreNote),
-	m_next_note(pNextNote)
+	m_next_note(pNextNote),
+	m_preFillUserInfo(std::move(preFillInfo))
 {
 }
 
@@ -72,9 +73,18 @@ BOOL CUserInfoInputDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	m_edit_uid.SetWindowText(m_userinfo.m_uid);
-	m_edit_portrait.SetWindowText(m_userinfo.m_portrait);
-	m_edit_note.SetWindowText(m_userinfo.m_note);
+	if (m_userinfo.m_uid == _T("") && m_userinfo.m_portrait == _T("") && m_userinfo.m_note == _T("")) {
+		if (m_preFillUserInfo != NULL) {
+			m_edit_uid.SetWindowText(m_preFillUserInfo->m_uid);
+			m_edit_portrait.SetWindowText(m_preFillUserInfo->m_portrait);
+			m_edit_note.SetWindowText(m_preFillUserInfo->m_note);
+		}
+	}
+	else {
+		m_edit_uid.SetWindowText(m_userinfo.m_uid);
+		m_edit_portrait.SetWindowText(m_userinfo.m_portrait);
+		m_edit_note.SetWindowText(m_userinfo.m_note);
+	}
 	m_edit_uid.SetSel(0, -1);
 	m_edit_uid.SetFocus();
 

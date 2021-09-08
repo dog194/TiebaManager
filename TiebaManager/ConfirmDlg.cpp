@@ -25,6 +25,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "ImageViewDlg.h"
 #include <TBMCoreImageHelper.h>
 #include <StringHelper.h>
+#include "TBMGlobal.h"
+#include "TiebaManagerDlg.h"
+#include "TiebaManager.h"
 
 
 // CConfirmDlg 对话框
@@ -58,15 +61,18 @@ void CConfirmDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT1, m_contentEdit);
 	DDX_Control(pDX, IDC_STATIC1, m_static);
+	DDX_Control(pDX, IDC_STATIC_RULE, m_static_rule);
 	DDX_Control(pDX, IDOK, m_yesButton);
 	DDX_Control(pDX, IDCANCEL, m_noButton);
 	DDX_Control(pDX, IDC_BUTTON1, m_explorerButton);
+	DDX_Control(pDX, IDC_BUTTON_ADD_BL, m_addBlButton);
 }
 
 
 BEGIN_MESSAGE_MAP(CConfirmDlg, CDialog)
 	ON_WM_SIZE()
 	ON_BN_CLICKED(IDC_BUTTON1, &CConfirmDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON_ADD_BL, &CConfirmDlg::OnBnClickedButtonAddBl)
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
 #pragma endregion
@@ -89,9 +95,14 @@ BOOL CConfirmDlg::OnInitDialog()
 
 	m_resize.AddControl(&m_contentEdit, RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, this);
 	m_resize.AddControl(&m_static, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
+	m_resize.AddControl(&m_addBlButton, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
 	m_resize.AddControl(&m_explorerButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_yesButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_noButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
+
+	if (g_plan.m_windowPro) {
+		m_addBlButton.ShowWindow(SW_SHOW);
+	}
 
 	if (m_operation != NULL)
 	{
@@ -132,6 +143,10 @@ BOOL CConfirmDlg::OnInitDialog()
 			m_imageViewDlg->SetImages(std::move(img));
 		}
 
+		if (g_plan.m_windowPro) {
+			m_static_rule.SetWindowTextW(m_operation->ruleName);
+		}
+
 		DWORD curTime = GetTickCount();
 		if (curTime - lastTime > 10 * 1000) // 10秒未确认则禁止确认一段时间防止误操作
 		{
@@ -155,7 +170,7 @@ void CConfirmDlg::OnTimer(UINT_PTR nIDEvent)
 		m_yesButton.EnableWindow(TRUE);
 		m_noButton.EnableWindow(TRUE);
 		m_yesButton.SetFocus();
-	}
+	} 
 
 	CDialog::OnTimer(nIDEvent);
 }
@@ -183,4 +198,18 @@ void CConfirmDlg::OnBnClickedButton1()
 	}
 
 	ShellExecute(NULL, _T("open"), url, NULL, NULL, SW_SHOWNORMAL);
+}
+
+// 加到黑名单
+void CConfirmDlg::OnBnClickedButtonAddBl()
+{
+	if (m_operation == NULL)
+		return;
+
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	dlg->OnBnClickedButton5();
+	dlg->m_settingDlg->ShowBlackListRulePage();
+	dlg->m_settingDlg->m_blackListRulesPage->
+		SetPreFillInfo(m_operation->object->authorShowName, GetPortraitFromString(m_operation->object->authorPortraitUrl));
+	dlg->m_settingDlg->SetActiveWindow();
 }
