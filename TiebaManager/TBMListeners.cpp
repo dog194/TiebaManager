@@ -58,6 +58,7 @@ CTBMListeners::CTBMListeners()
 	// UI事件
 
 	g_openLinkInLogEvent.AddListener(OnOpenLinkInLog);
+	g_settingWinCloseEvent.AddListener(OnCloseSettingWin);
 }
 
 
@@ -229,4 +230,9 @@ void CTBMListeners::OnUpdateOpeCount(const int& qSize) {
 	CString tmp;
 	tmp.Format(_T("操作队列: %d"), qSize);
 	dlg->m_StaticOpeQueneCount.SetWindowTextW(tmp);
+}
+
+void CTBMListeners::OnCloseSettingWin() {
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	dlg->OnProWinCheckChange();
 }

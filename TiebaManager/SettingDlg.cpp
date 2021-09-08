@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include "SettingDlg.h"
+#include <TBMCoreEvents.h>
 
 #include "TBMGlobal.h"
 #include "TBMConfigPath.h"
@@ -26,7 +27,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "TiebaManager.h"
 #include <TBMScan.h>
-#include "TiebaManagerDlg.h"
 
 
 // CSettingDlg 对话框
@@ -211,6 +211,20 @@ void CSettingDlg::ShowAbout()
 	for (const auto& page : m_pages)
 		page->ShowWindow(page == m_aboutPage.get() ? SW_SHOW : SW_HIDE);
 }
+
+// 显示违规规则
+void CSettingDlg::ShowIllegalRulesPage()
+{
+	for (const auto& page : m_pages)
+		page->ShowWindow(page == m_illegalRulesPage.get() ? SW_SHOW : SW_HIDE);
+}
+
+// 显示黑名单规则
+void CSettingDlg::ShowBlackListRulePage()
+{
+	for (const auto& page : m_pages)
+		page->ShowWindow(page == m_blackListRulesPage.get() ? SW_SHOW : SW_HIDE);
+}
 #pragma endregion
 
 // 显示当前设置
@@ -362,8 +376,6 @@ void CSettingDlg::OnOK()
 	SavePlanInDlg(OPTIONS_DIR_PATH + g_userConfig.m_plan + _T(".xml"));
 	ApplyPlanInDlg(g_plan);
 
-	CTiebaManagerDlg* parent = (CTiebaManagerDlg *) GetParent();
-	parent->OnProWinCheckChange();
-
+	g_settingWinCloseEvent();
 	DestroyWindow();
 }

@@ -62,6 +62,8 @@ public:
 	afx_msg void OnTvnSelchangedTree1(NMHDR *pNMHDR, LRESULT *pResult);
 
 	void ShowAbout();
+	void ShowIllegalRulesPage();
+	void ShowBlackListRulePage();
 
 	void ShowPlan(const CPlan& plan);
 	void ApplyPlanInDlg(CPlan& plan);
