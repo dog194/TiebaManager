@@ -27,8 +27,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // 当前版本，每次更新后修改，也可以不是日期
-UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("210901(2.2)");
-UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 210901; //使用整数形式，更方便版本判断
+UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("210915(2.21)");
+UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 210915; //使用整数形式，更方便版本判断
 
 static const CString MANUALLY_UPDATE_URL = _T("https://sinacloud.net/xfgryujk/TiebaManager/贴吧管理器.zip");
 static const CString QQ_QUN_UPDATE_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=IbZJQTp42ZNuEQJRKbyyn0LTD1iCgEtT");
@@ -290,7 +290,7 @@ UPDATE_API CheckUpdateResult CheckUpdate()
 	// 取更新信息
 	std::unique_ptr<BYTE[]> buffer, buffer_G;
 	ULONG size, size_G;
-	HTTPGetRaw(UPDATE_INFO_URL_GITHUB, &buffer_G, &size_G);
+	//HTTPGetRaw(UPDATE_INFO_URL_GITHUB, &buffer_G, &size_G);
 	if (HTTPGetRaw(UPDATE_INFO_URL, &buffer, &size) != NET_SUCCESS) // 用HTTPGetRaw防止转码
 		return UPDATE_FAILED_TO_GET_INFO;
 	auto updateInfo = std::make_unique<CUpdateInfo>();

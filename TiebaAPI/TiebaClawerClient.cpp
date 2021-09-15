@@ -244,6 +244,27 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 		for (const auto& content : rawPost[L"content"].GetArray())
 		{
 			CString tmp;
+			if (content.IsNull()) {
+				WriteString(src, _T("thread.txt"));
+				tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content=ISNULL)"), post.author, fid, tid, page, i+1);
+				WriteString(tmp, _T("百度傻逼.txt"));
+				tmp = _T("");
+				continue;
+			}
+			else if (content.IsString()) {
+				WriteString(src, _T("thread.txt"));
+				tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="%s")"), post.author, fid, tid, page, i + 1, content.GetString());
+				WriteString(tmp, _T("百度傻逼.txt"));
+				tmp = _T("");
+				continue;
+			}
+			else if (!content.IsObject()) {
+				WriteString(src, _T("thread.txt"));
+				tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="IsNoObject")"),post.author, fid, tid, page, i + 1);
+				WriteString(tmp, _T("百度傻逼.txt"));
+				tmp = _T("");
+				continue;
+			}
 			switch (_ttoi(content[L"type"].GetString()))
 			{
 			case 0: // 文字
@@ -253,14 +274,14 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 				tmp.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), content[L"link"].GetString(), content[L"text"].GetString());
 				break;
 			case 2: // 表情
-				tmp.Format(_T(R"(<img class="BDE_Smiley" width="30" height="30" changedsize="false" src="http://static.tieba.baidu.com/tb/editor/images/client/%s.png" >)"), 
+				tmp.Format(_T(R"(<img class="BDE_Smiley" width="30" height="30" changedsize="false" src="http://static.tieba.baidu.com/tb/editor/images/client/%s.png" >)"),
 					content[L"text"].GetString());
 				break;
 			case 3: // 图片
 			{
 				CStringArray size;
 				SplitString(size, content[L"bsize"].GetString(), _T(","));
-				tmp.Format(_T(R"(<img class="BDE_Image" pic_type="0" width="%s" height="%s" src="%s" >)"), (LPCTSTR)size[0], 
+				tmp.Format(_T(R"(<img class="BDE_Image" pic_type="0" width="%s" height="%s" src="%s" >)"), (LPCTSTR)size[0],
 					(LPCTSTR)size[1], content[L"origin_src"].GetString());
 				break;
 			}
@@ -271,6 +292,9 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 			case 5: // 视频
 				tmp.Format(_T(R"(<embed class="BDE_Flash" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" play="true" loop="false" menu="false" src="%s" width="500" height="450" allowscriptaccess="never" allowfullscreen="true" scale="noborder">)"),
 					content[L"text"].GetString());
+				break;
+			case 9: // 电话号码
+				tmp = content[L"text"].GetString();
 				break;
 			case 10: // 语音
 				tmp.Format(_T(R"(<div class="voice_player voice_player_pb"><a href="#" class="voice_player_inner"><span class="before">&nbsp;</span><span class="middle"><span class="speaker speaker_animate">&nbsp;</span><span class="time"><span class="second">%d</span>&quot;</span></span><span class="after">&nbsp;</span></a></div><img class="j_voice_ad_gif" src="http://tb2.bdstatic.com/tb/static-pb/img/voice_ad.gif" alt="下载贴吧客户端发语音！" /><br/>)"),
