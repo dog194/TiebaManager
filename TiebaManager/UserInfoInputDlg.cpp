@@ -30,6 +30,15 @@ const UINT CUserInfoInputDlg::IDD = IDD_USER_INFO;
 
 IMPLEMENT_DYNAMIC(CUserInfoInputDlg, CDialog)
 
+CUserInfoInputDlg::CUserInfoInputDlg(CUserInfo& userinfo, UINT nIDTemplate, CWnd* pParent, const CString& pPreNote, const CString& pNextNote, std::shared_ptr<CUserInfo> preFillInfo )
+	: CDialog(nIDTemplate, pParent),
+	m_userinfo(userinfo),
+	m_pre_note(pPreNote),
+	m_next_note(pNextNote),
+	m_preFillUserInfo(std::move(preFillInfo))
+{
+}
+
 CUserInfoInputDlg::CUserInfoInputDlg(CUserInfo& userinfo, UINT nIDTemplate, CWnd* pParent)
 	: CDialog(nIDTemplate, pParent),
 	m_userinfo(userinfo)
@@ -46,10 +55,14 @@ void CUserInfoInputDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_UID, m_edit_uid);
 	DDX_Control(pDX, IDC_EDIT_PORTRAIT, m_edit_portrait);
 	DDX_Control(pDX, IDC_EDIT_NOTE, m_edit_note);
+	DDX_Control(pDX, IDC_BUTTON_PRE, m_button_note_pre);
+	DDX_Control(pDX, IDC_BUTTON_NEXT, m_button_note_next);
 }
 
 BEGIN_MESSAGE_MAP(CUserInfoInputDlg, CDialog)
-	ON_EN_KILLFOCUS(IDC_EDIT_PORTRAIT, &CUserInfoInputDlg::OnEnKillfocusEditPortrait)
+	ON_EN_KILLFOCUS(IDC_EDIT_PORTRAIT,	&CUserInfoInputDlg::OnEnKillfocusEditPortrait)
+	ON_BN_CLICKED(	IDC_BUTTON_PRE,		&CUserInfoInputDlg::OnClickNotePre)
+	ON_BN_CLICKED(	IDC_BUTTON_NEXT,	&CUserInfoInputDlg::OnClickNoteNext)
 END_MESSAGE_MAP()
 
 
@@ -60,11 +73,27 @@ BOOL CUserInfoInputDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	m_edit_uid.SetWindowText(m_userinfo.m_uid);
-	m_edit_portrait.SetWindowText(m_userinfo.m_portrait);
-	m_edit_note.SetWindowText(m_userinfo.m_note);
+	if (m_userinfo.m_uid == _T("") && m_userinfo.m_portrait == _T("") && m_userinfo.m_note == _T("")) {
+		if (m_preFillUserInfo != NULL) {
+			m_edit_uid.SetWindowText(m_preFillUserInfo->m_uid);
+			m_edit_portrait.SetWindowText(m_preFillUserInfo->m_portrait);
+			m_edit_note.SetWindowText(m_preFillUserInfo->m_note);
+		}
+	}
+	else {
+		m_edit_uid.SetWindowText(m_userinfo.m_uid);
+		m_edit_portrait.SetWindowText(m_userinfo.m_portrait);
+		m_edit_note.SetWindowText(m_userinfo.m_note);
+	}
 	m_edit_uid.SetSel(0, -1);
 	m_edit_uid.SetFocus();
+
+	if (m_pre_note == _T("")) {
+		m_button_note_pre.ShowWindow(SW_HIDE);
+	}
+	if (m_next_note == _T("")) {
+		m_button_note_next.ShowWindow(SW_HIDE);
+	}
 
 	return FALSE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
@@ -74,6 +103,10 @@ BOOL CUserInfoInputDlg::OnInitDialog()
 void CUserInfoInputDlg::OnOK()
 {
 	m_edit_uid.GetWindowText(m_userinfo.m_uid);
+	if (m_userinfo.m_uid == _T("")) {
+		m_edit_uid.ShowBalloonTip(_T(""), _T("用户名/昵称 不能为空，用于封禁或日志显示"), TTI_NONE);
+		return;
+	}
 	m_edit_portrait.GetWindowText(m_userinfo.m_portrait);
 	m_edit_note.GetWindowText(m_userinfo.m_note);
 
@@ -103,4 +136,16 @@ void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 			m_edit_uid.SetWindowTextW(DncodeURI(tmpU));
 		}
 	}
+}
+
+// 快捷填写 同上
+void CUserInfoInputDlg::OnClickNotePre()
+{
+	m_edit_note.SetWindowText(m_pre_note);
+}
+
+// 快捷填写 同下
+void CUserInfoInputDlg::OnClickNoteNext()
+{
+	m_edit_note.SetWindowText(m_next_note);
 }

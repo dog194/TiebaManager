@@ -47,14 +47,16 @@ public:
 	virtual BOOL OnInitDialog();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton1();
-
+	afx_msg void OnBnClickedButtonAddBl();
 
 public:
 	CEdit m_contentEdit;
 	CStatic m_static;
+	CStatic m_static_rule;
 	CButton m_explorerButton;
 	CButton m_yesButton;
 	CButton m_noButton;
+	CButton m_addBlButton;
 
 	CImageViewDlg* m_imageViewDlg;
 

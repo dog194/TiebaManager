@@ -25,6 +25,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 TBM_CORE_API DEF_VARIABLE(g_comfirmEvent);
 
+TBM_CORE_API DEF_VARIABLE(g_settingWinCloseEvent);
+TBM_CORE_API DEF_VARIABLE(g_comfirmQueneChangeEvent);
+TBM_CORE_API DEF_VARIABLE(g_operateQueneChangeEvent);
+
 TBM_CORE_API DEF_VARIABLE(g_preOperateEvent);
 TBM_CORE_API DEF_VARIABLE(g_preBanEvent);
 TBM_CORE_API DEF_VARIABLE(g_postBanEvent);
@@ -53,6 +57,9 @@ TBM_CORE_API DEF_VARIABLE(g_scanPostPageEvent);
 // 外部模块可注册的事件集合，用来自动卸载外部listener
 TBM_CORE_API std::vector<EventBase*> g_tbmCoreEvents{
 	&g_comfirmEvent,
+
+	&g_comfirmQueneChangeEvent,
+	&g_operateQueneChangeEvent,
 
 	&g_preOperateEvent,
 	&g_preBanEvent,

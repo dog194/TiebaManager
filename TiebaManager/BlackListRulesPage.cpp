@@ -55,7 +55,9 @@ BOOL CBlackListRulesPage::OnInitDialog()
 // 使用 UserInfoInput 输入窗口
 BOOL CBlackListRulesPage::SetItem(int index)
 {
-	CUserInfoInputDlg dlg(m_rules[index], CUserInfoInputDlg::IDD, this);
+	CString pre_note = index > 0 ? m_rules[index - 1].m_note : _T("");
+	CString next_note = index < m_list.GetItemCount() - 1 ? m_rules[index + 1].m_note : _T("");
+	CUserInfoInputDlg dlg(m_rules[index], CUserInfoInputDlg::IDD, this, pre_note, next_note, preFillInfo);
 	if (dlg.DoModal() == IDOK && m_rules[index].m_uid != _T(""))
 	{
 		// 判断是否已经在列表中，避免重复添加
@@ -143,4 +145,8 @@ void CBlackListRulesPage::ShowList(const std::vector<CUserInfo>& list)
 void CBlackListRulesPage::ApplyList(std::vector<CUserInfo>& list)
 {
 	list = m_rules;
+}
+
+void CBlackListRulesPage::SetPreFillInfo(const CString& authorShowName, const CString& portrait) {
+	preFillInfo = std::make_shared<CUserInfo>(CUserInfo(authorShowName, portrait));
 }

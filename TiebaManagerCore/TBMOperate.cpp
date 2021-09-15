@@ -52,10 +52,14 @@ CTBMOperate::~CTBMOperate()
 // 添加确认
 void CTBMOperate::AddConfirm(Operation&& op)
 {
-	if (op.ruleType == RULE_TYPE_ILLEGA_RULE && (g_pTbmCoreConfig->m_confirm || op.forceToConfirm))
+	if (op.ruleType == RULE_TYPE_ILLEGA_RULE && (g_pTbmCoreConfig->m_confirm || op.forceToConfirm)) {
 		m_confirmQueue.push(std::move(op));
-	else if (op.ruleType == RULE_TYPE_BLACK_LIST  && op.forceToConfirm)
+		g_comfirmQueneChangeEvent(m_confirmQueue.size());
+	}
+	else if (op.ruleType == RULE_TYPE_BLACK_LIST && op.forceToConfirm) {
 		m_confirmQueue.push(std::move(op));
+		g_comfirmQueneChangeEvent(m_confirmQueue.size());
+	}
 	else
 		AddOperation(std::move(op));
 }
@@ -71,6 +75,7 @@ void CTBMOperate::ConfirmThread()
 	while (true)
 	{
 		PopResult res = m_confirmQueue.pop(op);
+		g_comfirmQueneChangeEvent(m_confirmQueue.size());
 		if (res == POP_STOP)
 			break;
 		if (res == POP_UNEXPECTED)
@@ -136,6 +141,7 @@ void CTBMOperate::ConfirmThread()
 void CTBMOperate::AddOperation(Operation&& operation)
 {
 	m_operationQueue.push(std::move(operation));
+	g_operateQueneChangeEvent(m_operationQueue.size());
 }
 
 // 操作线程
@@ -149,6 +155,7 @@ void CTBMOperate::OperateThread()
 	while (true)
 	{
 		PopResult res = m_operationQueue.pop(op);
+		g_operateQueneChangeEvent(m_operationQueue.size());
 		if (res == POP_STOP)
 			break;
 		if (res == POP_UNEXPECTED)

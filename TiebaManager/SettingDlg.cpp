@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include "SettingDlg.h"
+#include <TBMCoreEvents.h>
 
 #include "TBMGlobal.h"
 #include "TBMConfigPath.h"
@@ -210,6 +211,20 @@ void CSettingDlg::ShowAbout()
 	for (const auto& page : m_pages)
 		page->ShowWindow(page == m_aboutPage.get() ? SW_SHOW : SW_HIDE);
 }
+
+// 显示违规规则
+void CSettingDlg::ShowIllegalRulesPage()
+{
+	for (const auto& page : m_pages)
+		page->ShowWindow(page == m_illegalRulesPage.get() ? SW_SHOW : SW_HIDE);
+}
+
+// 显示黑名单规则
+void CSettingDlg::ShowBlackListRulePage()
+{
+	for (const auto& page : m_pages)
+		page->ShowWindow(page == m_blackListRulesPage.get() ? SW_SHOW : SW_HIDE);
+}
 #pragma endregion
 
 // 显示当前设置
@@ -227,6 +242,8 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 	m_scanPage->m_threadCountEdit.SetWindowText(tmp);				    // 线程数
 	m_scanPage->m_autoSaveLogCheck.SetCheck(plan.m_autoSaveLog);		// 自动保存日志
 	m_scanPage->m_clawerClientInterfaceCheck.SetCheck(plan.m_clawerInterface == 0 ? FALSE : TRUE); // 扫描接口
+	m_scanPage->m_autoVerifyCheck.SetCheck(plan.m_autoVerify);			// 启动后自动确认贴吧
+	m_scanPage->m_autoScanCheck.SetCheck(plan.m_autoScan);				// 确认后贴吧自动扫描
 
 	m_operatePage->m_deleteCheck.SetCheck(plan.m_delete);			    // 删帖
 	m_operatePage->m_banIDCheck.SetCheck(plan.m_banID);				    // 封ID
@@ -240,14 +257,16 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 	tmp.Format(_T("%d"), *plan.m_banTrigCount);
 	m_operatePage->m_banTrigCountEdit.SetWindowText(tmp);			    // 封禁违规次数
 	tmp.Format(_T("%d"), *plan.m_defriendTrigCount);
-	m_operatePage->m_defriendTrigCountEdit.SetWindowText(tmp);		    // 拉黑违规次数
+	m_operatePage->m_defriendTrigCountEdit.SetWindowText(tmp);		    // 拉黑违规次数   
 	m_operatePage->m_confirmCheck.SetCheck(plan.m_confirm);			    // 操作前提示
+	m_operatePage->m_ProWinCheck.SetCheck(plan.m_windowPro);			// Pro窗口
 	m_operatePage->m_banClientInterfaceCheck.SetCheck(plan.m_banClientInterface);	// 封禁使用客户端接口
 	m_operatePage->m_blackListEnableCheck.SetCheck(plan.m_blackListEnable);			// 黑名单功能启用
-	m_operatePage->OnBnClickedCheckBlEnable();
 	m_operatePage->m_blackListConfirmCheck.SetCheck(plan.m_blackListConfirm);		// 黑名单强制确认
 	m_operatePage->m_blackListDeleteCheck.SetCheck(plan.m_blackListDelete);			// 黑名单删除贴
 	m_operatePage->m_blackListBanCheck.SetCheck(plan.m_blackListBan);				// 黑名单封禁作者
+	m_operatePage->m_blackListRecheckCheck.SetCheck(plan.m_blackListRecheck);		// 黑名单对确认窗口生效
+	m_operatePage->OnBnClickedCheckBlEnable();
 
 	// 违规规则
 	m_illegalRulesPage->ShowList(plan.m_illegalRules);
@@ -279,6 +298,8 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	*plan.m_threadCount = _ttoi(strBuf);								// 线程数
 	*plan.m_autoSaveLog = m_scanPage->m_autoSaveLogCheck.GetCheck();	// 自动保存日志
 	*plan.m_clawerInterface = m_scanPage->m_clawerClientInterfaceCheck.GetCheck() == FALSE ? 0 : 1; // 扫描接口
+	*plan.m_autoVerify = m_scanPage->m_autoVerifyCheck.GetCheck();		// 启动后自动确认贴吧
+	*plan.m_autoScan = m_scanPage->m_autoScanCheck.GetCheck();			// 确认后贴吧自动扫描
 
 	*plan.m_delete = m_operatePage->m_deleteCheck.GetCheck();			// 删帖
 	*plan.m_banID = m_operatePage->m_banIDCheck.GetCheck();				// 封ID
@@ -294,11 +315,13 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	m_operatePage->m_defriendTrigCountEdit.GetWindowText(strBuf);
 	*plan.m_defriendTrigCount = _ttoi(strBuf);							// 拉黑违规次数
 	*plan.m_confirm = m_operatePage->m_confirmCheck.GetCheck();			// 操作前提示
+	*plan.m_windowPro = m_operatePage->m_ProWinCheck.GetCheck();		// Pro窗口
 	*plan.m_banClientInterface = m_operatePage->m_banClientInterfaceCheck.GetCheck();	// 封禁使用客户端接口
 	*plan.m_blackListEnable = m_operatePage->m_blackListEnableCheck.GetCheck();			// 黑名单功能启用
 	*plan.m_blackListConfirm = m_operatePage->m_blackListConfirmCheck.GetCheck();		// 黑名单强制确认
 	*plan.m_blackListDelete = m_operatePage->m_blackListDeleteCheck.GetCheck();			// 黑名单删除贴
 	*plan.m_blackListBan = m_operatePage->m_blackListBanCheck.GetCheck();				// 黑名单封禁作者
+	*plan.m_blackListRecheck = m_operatePage->m_blackListRecheckCheck.GetCheck();		// 黑名单对确认窗口生效
 
 	// 违规规则
 	m_illegalRulesPage->ApplyList(plan.m_illegalRules);
@@ -353,5 +376,6 @@ void CSettingDlg::OnOK()
 	SavePlanInDlg(OPTIONS_DIR_PATH + g_userConfig.m_plan + _T(".xml"));
 	ApplyPlanInDlg(g_plan);
 
+	g_settingWinCloseEvent();
 	DestroyWindow();
 }

@@ -48,6 +48,8 @@ public:
 	virtual BOOL Import(const CString& path) override;
 	void ShowList(const std::vector<CUserInfo>& list);
 	void ApplyList(std::vector<CUserInfo>& list);
+
+	void SetPreFillInfo(const CString& authorShowName, const CString& portrait);
 	
 protected:
 	class CRuleListFile : public CConfigBase
@@ -63,4 +65,5 @@ protected:
 	};
 
 	std::vector<CUserInfo> m_rules;
+	std::shared_ptr<CUserInfo> preFillInfo;
 };

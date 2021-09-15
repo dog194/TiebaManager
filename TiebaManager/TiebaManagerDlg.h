@@ -72,6 +72,7 @@ public:
 	afx_msg void OnStnClickedStatic7();
 	afx_msg void OnBnClickedButton7();
 	afx_msg void OnClose();
+	afx_msg void OnProWinCheckChange();
 	DECLARE_EVENTSINK_MAP()
 	void BeforeNavigate2Explorer1(LPDISPATCH pDisp, VARIANT* URL, VARIANT* Flags, VARIANT* TargetFrameName, VARIANT* PostData, VARIANT* Headers, BOOL* Cancel);
 
@@ -91,6 +92,8 @@ public:
 	CStatic m_logStatic;
 	CExplorer1 m_logExplorer;
 	CStatic m_stateStatic;
+	CStatic m_StaticConQueneCount;
+	CStatic m_StaticOpeQueneCount;
 	CTextButton m_clearLogStatic;
 	CTextButton m_saveLogStatic;
 	CListBox m_stateList;

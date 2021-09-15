@@ -47,6 +47,7 @@ public:
 	afx_msg void OnEnKillfocusEdit8();
 	afx_msg void OnBnClickedCheck3();
 	afx_msg void OnBnClickedCheckBlEnable();
+	afx_msg void OnBnClickedCheckBlForceEnable();
 
 
 public:
@@ -59,9 +60,11 @@ public:
 	CEdit m_defriendTrigCountEdit;
 	CEdit m_deleteIntervalEdit;
 	CButton m_confirmCheck;
+	CButton m_ProWinCheck;
 	CButton m_banClientInterfaceCheck;
 	CButton m_blackListEnableCheck;
 	CButton m_blackListConfirmCheck;
 	CButton m_blackListDeleteCheck;
 	CButton m_blackListBanCheck;
+	CButton m_blackListRecheckCheck;
 };

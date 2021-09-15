@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TBMEvents.h>
 #include <TBMAPI.h>
 #include "TBMGlobal.h"
+#include "ConfirmDlg.h"
 
 #include "SettingDlg.h"
 #include "ExplorerDlg.h"
@@ -75,6 +76,8 @@ void CTiebaManagerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON5, m_settingButton);
 	DDX_Control(pDX, IDC_STATIC4, m_logStatic);
 	DDX_Control(pDX, IDC_STATIC5, m_stateStatic);
+	DDX_Control(pDX, IDC_STATIC_CON_QUENE, m_StaticConQueneCount);
+	DDX_Control(pDX, IDC_STATIC_OPE_QUENE, m_StaticOpeQueneCount);
 	DDX_Control(pDX, IDC_STATIC6, m_clearLogStatic);
 	DDX_Control(pDX, IDC_STATIC7, m_saveLogStatic);
 	DDX_Control(pDX, IDC_BUTTON7, m_explorerButton);
@@ -200,9 +203,18 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	});
 
 	SetWindowText(_T("贴吧管理器 - ") + UPDATE_CURRENT_VERSION);
+	OnProWinCheckChange();
 
 	g_mainDialogPostInitEvent();
 
+	// 启动后自动确认贴吧
+	if (g_pTbmCoreConfig->m_autoVerify) {
+		CString forumName;
+		m_forumNameEdit.GetWindowText(forumName);
+		if (forumName != _T("")) {
+			OnBnClickedButton1();
+		}
+	}
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -229,6 +241,18 @@ void CTiebaManagerDlg::OnClose()
 	m_log.Release();
 
 	CNormalDlg::OnClose();
+}
+
+// 根据设置，更新界面
+void CTiebaManagerDlg::OnProWinCheckChange() {
+	if (g_plan.m_windowPro) {
+		m_StaticConQueneCount.ShowWindow(SW_SHOW);
+		m_StaticOpeQueneCount.ShowWindow(SW_SHOW);
+	}
+	else {
+		m_StaticConQueneCount.ShowWindow(SW_HIDE);
+		m_StaticOpeQueneCount.ShowWindow(SW_HIDE);
+	}
 }
 
 // 保存其他数据、释放
@@ -418,7 +442,7 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		AfxMessageBox(_T("连接超时..."), MB_ICONERROR);
 		goto Error;
 	case CTiebaOperate::SET_TIEBA_NOT_FOUND:
-		AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...)"), MB_ICONERROR);
+		AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR);
 		goto Error;
 	case CTiebaOperate::SET_TIEBA_NOT_LOGIN:
 		AfxMessageBox(_T("请在设置-账号管理登录百度账号"), MB_ICONERROR);
@@ -446,6 +470,11 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		+ _T("<font color=green> 吧，使用账号：</font>" + g_tiebaOperate.GetUserName_()));
 
 	g_postSetTiebaEvent(forumName);
+
+	// 确认贴吧后自动扫描
+	if (g_pTbmCoreConfig->m_autoScan) {
+		OnBnClickedButton2();
+	}
 	return;
 
 Error:
