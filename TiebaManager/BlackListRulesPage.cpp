@@ -88,6 +88,9 @@ BOOL CBlackListRulesPage::SetItem(int index)
 		m_list.SetItemText(index, COLUMN_INDEX_TRIG_COUNT, Int2CString(m_rules[index].m_trigCount));
 		m_list.SetItemText(index, COLUMN_INDEX_NOTE, m_rules[index].m_note);
 
+		// 点击确认按钮后，删除 Prefill 数据。
+		preFillInfo = NULL;
+
 		((CSettingDlg*)GetParent())->m_clearScanCache = TRUE;
 		return TRUE;
 	}
@@ -148,5 +151,6 @@ void CBlackListRulesPage::ApplyList(std::vector<CUserInfo>& list)
 }
 
 void CBlackListRulesPage::SetPreFillInfo(const CString& authorShowName, const CString& portrait) {
+	preFillInfo = NULL;
 	preFillInfo = std::make_shared<CUserInfo>(CUserInfo(authorShowName, portrait));
 }

@@ -109,6 +109,7 @@ void CUserInfoInputDlg::OnOK()
 	}
 	m_edit_portrait.GetWindowText(m_userinfo.m_portrait);
 	m_edit_note.GetWindowText(m_userinfo.m_note);
+	m_preFillUserInfo = NULL;
 
 	CDialog::OnOK();
 }

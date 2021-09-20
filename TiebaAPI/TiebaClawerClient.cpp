@@ -245,24 +245,24 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 		{
 			CString tmp;
 			if (content.IsNull()) {
-				WriteString(src, _T("thread.txt"));
-				tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content=ISNULL)"), post.author, fid, tid, page, i+1);
-				WriteString(tmp, _T("百度傻逼.txt"));
-				tmp = _T("");
+				//WriteString(src, _T("thread.txt"));
+				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content=ISNULL)"), post.author, fid, tid, page, i+1);
+				//WriteString(tmp, _T("百度傻逼.txt"));
+				//tmp = _T("");
 				continue;
 			}
 			else if (content.IsString()) {
-				WriteString(src, _T("thread.txt"));
-				tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="%s")"), post.author, fid, tid, page, i + 1, content.GetString());
-				WriteString(tmp, _T("百度傻逼.txt"));
-				tmp = _T("");
+				//WriteString(src, _T("thread.txt"));
+				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="%s")"), post.author, fid, tid, page, i + 1, content.GetString());
+				//WriteString(tmp, _T("百度傻逼.txt"));
+				//tmp = _T("");
 				continue;
 			}
 			else if (!content.IsObject()) {
-				WriteString(src, _T("thread.txt"));
-				tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="IsNoObject")"),post.author, fid, tid, page, i + 1);
-				WriteString(tmp, _T("百度傻逼.txt"));
-				tmp = _T("");
+				//WriteString(src, _T("thread.txt"));
+				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="IsNoObject")"),post.author, fid, tid, page, i + 1);
+				//WriteString(tmp, _T("百度傻逼.txt"));
+				//tmp = _T("");
 				continue;
 			}
 			switch (_ttoi(content[L"type"].GetString()))

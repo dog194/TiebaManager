@@ -290,9 +290,11 @@ UPDATE_API CheckUpdateResult CheckUpdate()
 	// 取更新信息
 	std::unique_ptr<BYTE[]> buffer, buffer_G;
 	ULONG size, size_G;
-	//HTTPGetRaw(UPDATE_INFO_URL_GITHUB, &buffer_G, &size_G);
-	if (HTTPGetRaw(UPDATE_INFO_URL, &buffer, &size) != NET_SUCCESS) // 用HTTPGetRaw防止转码
+	if (HTTPGetRaw(UPDATE_INFO_URL, &buffer, &size) != NET_SUCCESS) { // 用HTTPGetRaw防止转码
+		// TODO: 添加备用更新信息获取服务器
+		//if (HTTPGetRaw(UPDATE_INFO_URL_GITHUB, &buffer_G, &size_G) != NET_SUCCESS)
 		return UPDATE_FAILED_TO_GET_INFO;
+	} 
 	auto updateInfo = std::make_unique<CUpdateInfo>();
 	if (!updateInfo->LoadFromString((LPCSTR)buffer.get(), size))
 		return UPDATE_FAILED_TO_GET_INFO;
