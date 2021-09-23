@@ -43,6 +43,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	virtual BOOL OnInitDialog();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
@@ -53,6 +54,9 @@ public:
 	CEdit m_contentEdit;
 	CStatic m_static;
 	CStatic m_static_rule;
+	CStatic m_static_is_bl;
+	CStatic m_static_break_rule_count;
+	CStatic m_static_con_quene_count;
 	CButton m_explorerButton;
 	CButton m_yesButton;
 	CButton m_noButton;

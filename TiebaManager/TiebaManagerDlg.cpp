@@ -183,7 +183,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	});
 	g_globalConfig.Load(GLOBAL_CONFIG_PATH);
 	SetCurrentUser(g_globalConfig.m_currentUser, FALSE);
-	
+
 	// 自动更新
 	if (g_globalConfig.m_autoUpdate)
 		std::thread(&CTiebaManagerDlg::AutoUpdateThread, this).detach();
@@ -204,7 +204,8 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		g_userCache.m_bannedUser->clear();
 	});
 
-	SetWindowText(_T("贴吧管理器 - ") + UPDATE_CURRENT_VERSION);
+	SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION);
+
 	OnProWinCheckChange();
 
 	g_mainDialogPostInitEvent();
@@ -255,7 +256,17 @@ void CTiebaManagerDlg::OnProWinCheckChange() {
 		m_StaticConQueneCount.ShowWindow(SW_HIDE);
 		m_StaticOpeQueneCount.ShowWindow(SW_HIDE);
 	}
-}
+	if (m_explorerButton.IsWindowEnabled()) {//根据浏览按钮判断是否已经确认贴吧。
+		if (g_userConfig.m_plan != _T("默认")) {
+			SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION);
+			_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_());
+		}
+		else {
+			SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION);
+			_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_());
+		}
+	}
+}	
 
 // 保存其他数据、释放
 void CTiebaManagerDlg::OnDestroy()
@@ -457,19 +468,17 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		goto Error;
 	}
 
-	SetWindowText(_T("贴吧管理器 - ") + UPDATE_CURRENT_VERSION + _T(" - ") + g_tiebaOperate.GetUserName_());
-
-
 	m_stateStatic.SetWindowText(_T("待机中"));
 	m_startButton.EnableWindow(TRUE);
 	m_pageEdit.EnableWindow(TRUE);
 	m_explorerButton.EnableWindow(TRUE);
-
+	
 	*g_userConfig.m_forumName = g_tiebaOperate.GetForumName();
 	g_userConfig.Save(USER_CONFIG_PATH);
 	
 	m_log.Log(_T("<font color=green>确认监控贴吧：</font>") + g_tiebaOperate.GetForumName()
 		+ _T("<font color=green> 吧，使用账号：</font>" + g_tiebaOperate.GetUserName_()));
+	OnProWinCheckChange();
 
 	g_postSetTiebaEvent(forumName);
 

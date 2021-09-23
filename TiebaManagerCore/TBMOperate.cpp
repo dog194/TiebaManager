@@ -94,7 +94,34 @@ void CTBMOperate::ConfirmThread()
 			 (op.ruleType == RULE_TYPE_BLACK_LIST  && (g_pTbmCoreConfig->m_blackListConfirm || op.forceToConfirm)) )
 		{
 			BOOL res = TRUE;
-			g_comfirmEvent(op, res);
+			// 重新查验是否属于黑名单用户 
+			if (g_pTbmCoreConfig->m_blackListEnable) { // 功能开启
+				if (g_pTbmCoreConfig->m_blackListBan || g_pTbmCoreConfig->m_blackListDelete) {
+					for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+						if (i.Match(op.object->author, GetPortraitFromString(op.object->authorPortraitUrl))) {
+							op.isBlUser = true;
+							break;
+						}
+					}
+				}
+			}
+			op.confirmQueneLeft = m_confirmQueue.size(); // 传递确认队列剩余数量
+			// 查询当前作者缓存违规计次
+			auto countIt = g_pUserCache->m_userTrigCount->find(GetPortraitFromString(op.object->authorPortraitUrl));
+			BOOL hasHistory = countIt != g_pUserCache->m_userTrigCount->end();
+			int count = hasHistory ? (countIt->second) : 0;
+			op.ruleBreakCount = count; // 传递当前用户缓存已违规次数
+
+			// 黑名单对确认窗口生效
+			if (g_pTbmCoreConfig->m_blackListEnable && (!g_pTbmCoreConfig->m_blackListConfirm) && 
+				g_pTbmCoreConfig->m_blackListRecheck && op.isBlUser) { // 黑名单启用 && 没有强制确认 && 对确认窗前生效启用 && 属于黑名单
+				g_pLog->Log(_T("<font color=pink>用户: ") + op.object->authorShowName
+					+  _T(" 已在黑名单列表，自动确认处理</font>"));
+				res = TRUE;
+			}
+			else {
+				g_comfirmEvent(op, res);
+			}
 			if (!res)
 			{
 				switch (op.object->m_type)

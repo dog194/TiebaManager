@@ -36,6 +36,9 @@ public:
 	CString title;			// 主题标题
 	CString ruleName;		// 触发的规则标题
 	int ruleType;			// 触发的规则类型
+	int confirmQueneLeft;	// 用于传递剩余确认队列事件数量
+	int ruleBreakCount;		// 传递当前作者缓存违规次数
+	BOOL isBlUser;			// 传递是否属于黑名单用户
 	std::unique_ptr<TBObject> object; // 操作对象
 
 
@@ -50,6 +53,9 @@ public:
 		object = std::move(other.object);
 		ruleName = std::move(other.ruleName);
 		ruleType = other.ruleType;
+		confirmQueneLeft = 0;
+		ruleBreakCount = 0;
+		isBlUser = false;
 		return *this;
 	}
 

@@ -62,6 +62,9 @@ void CConfirmDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT1, m_contentEdit);
 	DDX_Control(pDX, IDC_STATIC1, m_static);
 	DDX_Control(pDX, IDC_STATIC_RULE, m_static_rule);
+	DDX_Control(pDX, IDC_STATIC_CON_IS_BL, m_static_is_bl);
+	DDX_Control(pDX, IDC_STATIC_CON_RULE_COUNT, m_static_break_rule_count);
+	DDX_Control(pDX, IDC_STATIC_CON_OPE_COUNT, m_static_con_quene_count);
 	DDX_Control(pDX, IDOK, m_yesButton);
 	DDX_Control(pDX, IDCANCEL, m_noButton);
 	DDX_Control(pDX, IDC_BUTTON1, m_explorerButton);
@@ -71,6 +74,7 @@ void CConfirmDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CConfirmDlg, CDialog)
 	ON_WM_SIZE()
+	ON_WM_CTLCOLOR()
 	ON_BN_CLICKED(IDC_BUTTON1, &CConfirmDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON_ADD_BL, &CConfirmDlg::OnBnClickedButtonAddBl)
 	ON_WM_TIMER()
@@ -86,6 +90,17 @@ void CConfirmDlg::OnSize(UINT nType, int cx, int cy)
 	CDialog::OnSize(nType, cx, cy);
 	m_resize.Resize();
 }
+// 控件颜色
+HBRUSH CConfirmDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	if (pWnd->m_hWnd == m_static_is_bl.m_hWnd)
+		pDC->SetTextColor(RGB(255, 0, 0));
+
+	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
+	return hbr;
+}
 #pragma endregion
 
 // 初始化
@@ -99,10 +114,10 @@ BOOL CConfirmDlg::OnInitDialog()
 	m_resize.AddControl(&m_explorerButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_yesButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_noButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
-
-	if (g_plan.m_windowPro) {
-		m_addBlButton.ShowWindow(SW_SHOW);
-	}
+	//m_resize.AddControl(&m_static_rule, RT_NULL, NULL, RT_NULL, NULL);
+	m_resize.AddControl(&m_static_is_bl, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_static_break_rule_count, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_static_con_quene_count, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
 
 	if (m_operation != NULL)
 	{
@@ -145,6 +160,17 @@ BOOL CConfirmDlg::OnInitDialog()
 
 		if (g_plan.m_windowPro) {
 			m_static_rule.SetWindowTextW(m_operation->ruleName);
+			m_addBlButton.ShowWindow(SW_SHOW);
+			if (m_operation->isBlUser) {
+				m_static_is_bl.ShowWindow(SW_SHOW);
+			}
+			CString tmp;
+			tmp.Format(_T(" 缓存违规计次：%d"), m_operation->ruleBreakCount);
+			m_static_break_rule_count.SetWindowTextW(tmp);
+			m_static_break_rule_count.ShowWindow(SW_SHOW);
+			tmp.Format(_T(" 确认线程：%d"), m_operation->confirmQueneLeft);
+			m_static_con_quene_count.SetWindowTextW(tmp);
+			m_static_con_quene_count.ShowWindow(SW_SHOW);
 		}
 
 		DWORD curTime = GetTickCount();
