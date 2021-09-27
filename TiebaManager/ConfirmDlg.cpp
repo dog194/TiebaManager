@@ -253,7 +253,28 @@ void CConfirmDlg::OnBnClickedButtonAddBl()
 
 void CConfirmDlg::OnStnDblclickStaticRule()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	if (m_operation == NULL)
+		return;
+	if (m_operation->ruleType == RULE_TYPE_ILLEGA_RULE) {
+		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+		dlg->OnBnClickedButton5();
+		dlg->m_settingDlg->ShowIllegalRulesPage();
+		int index = dlg->m_settingDlg->m_illegalRulesPage->
+			FindIndexFromStr(m_operation->ruleName);
+		dlg->m_settingDlg->m_illegalRulesPage->ScrollToIndex(index);
+		dlg->m_settingDlg->m_illegalRulesPage->SetSelectedRow(index);
+		dlg->m_settingDlg->m_illegalRulesPage->OnClickedButton3();
+	}
+	else if (m_operation->ruleType == RULE_TYPE_BLACK_LIST) {
+		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+		dlg->OnBnClickedButton5();
+		dlg->m_settingDlg->ShowBlackListRulePage();
+		int index = dlg->m_settingDlg->m_blackListRulesPage->
+			FindIndexFromStr(GetStringBefore(m_operation->ruleName, _T(" : ")));
+		dlg->m_settingDlg->m_blackListRulesPage->ScrollToIndex(index);
+		dlg->m_settingDlg->m_blackListRulesPage->SetSelectedRow(index);
+		dlg->m_settingDlg->m_blackListRulesPage->OnClickedButton3();
+	}
 }
 
 // 只删不封不计次

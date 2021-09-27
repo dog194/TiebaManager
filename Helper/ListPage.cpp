@@ -223,12 +223,18 @@ void CListPage::OnClickedButton6()
 
 // 设置选中
 void CListPage::SetSelectedRow(const int index) {
+	if (index == -1) {
+		return;
+	}
 	m_list.SetSelectionMark(index);
 	m_list.SetItemState(index, LVNI_FOCUSED | LVNI_SELECTED, LVNI_FOCUSED | LVNI_SELECTED);
 }
 
 // 滑动到指定行
 void CListPage::ScrollToIndex(const int index) {
+	if (index == -1) {
+		return;
+	}
 	int nCurIndex;
 	CSize size;
 	CRect rc;
@@ -239,4 +245,16 @@ void CListPage::ScrollToIndex(const int index) {
 	size.cx = 0;
 	size.cy = (index - nCurIndex)*rc.Height();
 	m_list.Scroll(size);
+}
+
+// 根据字符串第一列搜索，返回index
+int CListPage::FindIndexFromStr(const CString key) {
+	int index = -1;
+	for (int i = 0; i < m_list.GetItemCount(); i++) {
+		if (key == m_list.GetItemText(i, 0)) {
+			index = i;
+			return index;
+		}
+	}
+	return index;
 }
