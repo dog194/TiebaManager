@@ -56,8 +56,8 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 				if (i.Match(obj)) {
 					++i.m_trigCount;
 					forceToConfirm = g_pTbmCoreConfig->m_blackListConfirm;
-					msg = _T("<font color=pink> 触发用户黑名单规则 </font>") + HTMLEscape(i.m_uid);
-					ruleName = i.m_uid;
+					msg = _T("<font color=pink> 触发用户黑名单规则 </font>") + HTMLEscape(i.m_uid) + _T("<font color=pink> 备注:</font>") + HTMLEscape(i.m_note);
+					ruleName = i.m_uid + _T(" : ") + i.m_note;
 					ruleType = RULE_TYPE_BLACK_LIST;
 					res = TRUE;
 					return;

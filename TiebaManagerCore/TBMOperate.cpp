@@ -94,12 +94,14 @@ void CTBMOperate::ConfirmThread()
 			 (op.ruleType == RULE_TYPE_BLACK_LIST  && (g_pTbmCoreConfig->m_blackListConfirm || op.forceToConfirm)) )
 		{
 			BOOL res = TRUE;
+			CString tmp_note; // 黑名单备注记录
 			// 重新查验是否属于黑名单用户 
 			if (g_pTbmCoreConfig->m_blackListEnable) { // 功能开启
 				if (g_pTbmCoreConfig->m_blackListBan || g_pTbmCoreConfig->m_blackListDelete) {
 					for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
 						if (i.Match(op.object->author, GetPortraitFromString(op.object->authorPortraitUrl))) {
 							op.isBlUser = true;
+							tmp_note = i.m_note;
 							break;
 						}
 					}
@@ -115,8 +117,8 @@ void CTBMOperate::ConfirmThread()
 			// 黑名单对确认窗口生效
 			if (g_pTbmCoreConfig->m_blackListEnable && (!g_pTbmCoreConfig->m_blackListConfirm) && 
 				g_pTbmCoreConfig->m_blackListRecheck && op.isBlUser) { // 黑名单启用 && 没有强制确认 && 对确认窗前生效启用 && 属于黑名单
-				g_pLog->Log(_T("<font color=pink>用户: ") + op.object->authorShowName
-					+  _T(" 已在黑名单列表，自动确认处理</font>"));
+				g_pLog->Log(_T("<font color=pink>用户:") + op.object->authorShowName
+					+ _T(" 备注:") + tmp_note + _T(" 已在黑名单列表，自动确认处理</font>"));
 				res = TRUE;
 			}
 			else {
