@@ -459,3 +459,12 @@ HELPER_API CString Int2CString(const int num)
 	tmp.Format(_T("%d"), num);
 	return tmp;
 }
+
+// 获取随机Tip
+HELPER_API CString GetRandomTip() {
+	CString tmp;
+	std::srand(time(NULL));
+	int index = std::rand() % m_tips_num;
+	tmp.Format(_T("[%d/%d]%s"), index + 1, m_tips_num, m_tips[index]);
+	return tmp;
+}

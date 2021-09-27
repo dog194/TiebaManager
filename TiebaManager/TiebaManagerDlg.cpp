@@ -165,8 +165,8 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	m_resize.AddControl(&m_stateStatic, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_logStatic, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
 	m_resize.AddControl(&m_saveLogStatic, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_logStatic, RT_NULL, this, RT_NULL, NULL);
 	m_resize.AddControl(&m_clearLogStatic, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_logStatic, RT_NULL, this, RT_NULL, NULL);
-	m_resize.AddControl(&m_StaticOpeQueneCount, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_logStatic, RT_NULL, this, RT_NULL, NULL);
-	m_resize.AddControl(&m_StaticConQueneCount, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_logStatic, RT_NULL, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_StaticOpeQueneCount, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_pluginButton, RT_NULL, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_StaticConQueneCount, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_pluginButton, RT_NULL, this, RT_NULL, NULL);
 	m_resize.AddControl(&m_stateList, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, this, RT_KEEP_DIST_TO_RIGHT, this);
 
 	m_pageEdit.SetWindowText(_T("1"));
@@ -416,7 +416,7 @@ void CTiebaManagerDlg::AutoUpdateThread()
 		m_stateStatic.SetWindowText(_T("检查更新失败：获取文件信息失败，在设置里手动检查更新"));
 		break;
 	case UPDATE_NO_UPDATE:
-		m_stateStatic.SetWindowText(_T("待机中"));
+		m_stateStatic.SetWindowText(_T("待机中 ") + GetRandomTip());
 		break;
 	case UPDATE_HAS_UPDATE:
 		m_stateStatic.SetWindowText(_T("待机中 有新版本"));
@@ -468,7 +468,7 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		goto Error;
 	}
 
-	m_stateStatic.SetWindowText(_T("待机中"));
+	m_stateStatic.SetWindowText(_T("待机中 ") + GetRandomTip());
 	m_startButton.EnableWindow(TRUE);
 	m_pageEdit.EnableWindow(TRUE);
 	m_explorerButton.EnableWindow(TRUE);
@@ -489,7 +489,7 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 	return;
 
 Error:
-	m_stateStatic.SetWindowText(_T("待机中"));
+	m_stateStatic.SetWindowText(_T("待机中 ") + GetRandomTip());
 	m_forumNameEdit.EnableWindow(TRUE);
 	m_confirmButton.EnableWindow(TRUE);
 }

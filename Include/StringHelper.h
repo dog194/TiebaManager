@@ -34,6 +34,12 @@ public:
 	void Set(const CString& _text, BOOL _isRegex = FALSE, BOOL _ignoreCase = FALSE);
 };
 
+const int m_tips_num = 3;
+const CString m_tips[m_tips_num] = {
+	_T("不喜欢复杂的确认界面，可以在设置里面关闭启用Pro窗口"),
+	_T("扫描间隔，删帖封禁间隔都不能设置太短，会出验证码"),
+	_T("确认窗口双击规则名，可以快捷打开对应规则修改")
+};
 
 // 分割字符串
 HELPER_API void SplitString(CStringArray& dst, const CString& src, const CString& slipt);
@@ -98,3 +104,5 @@ HELPER_API CString GetPortraitFromString(const CString& src);
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src);
 // Int to CString
 HELPER_API CString Int2CString(const int num);
+// 获取随机Tip
+HELPER_API CString GetRandomTip();

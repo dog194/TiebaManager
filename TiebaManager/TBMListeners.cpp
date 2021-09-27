@@ -76,7 +76,7 @@ void CTBMListeners::OnScanThreadEnd()
 	dlg->m_stopButton.EnableWindow(FALSE);
 	dlg->m_startButton.EnableWindow(TRUE);
 	dlg->m_pageEdit.EnableWindow(TRUE);
-	dlg->m_stateStatic.SetWindowText(_T("待机中"));
+	dlg->m_stateStatic.SetWindowText(_T("待机中 ") + GetRandomTip());
 }
 
 void CTBMListeners::OnScanOnceStart(BOOL& pass)
@@ -93,7 +93,7 @@ void CTBMListeners::OnScanOnceEnd()
 	m_stateListLock.Lock();
 	dlg->m_stateList.ResetContent();
 	m_stateListLock.Unlock();
-	dlg->m_stateStatic.SetWindowText(_T("延时中"));
+	dlg->m_stateStatic.SetWindowText(_T("延时中 ") + GetRandomTip());
 }
 
 void CTBMListeners::OnPreScanAllThreads(BOOL& pass)
