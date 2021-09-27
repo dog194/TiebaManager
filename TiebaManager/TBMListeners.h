@@ -49,8 +49,7 @@ private:
 
 	// 操作事件
 
-	static void OnConfirm(const Operation& op, BOOL& res);
-
+	static void OnConfirm(const Operation& op, BOOL& res, int& reluType);
 
 	// UI事件
 

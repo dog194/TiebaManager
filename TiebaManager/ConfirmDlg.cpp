@@ -39,14 +39,16 @@ IMPLEMENT_DYNAMIC(CConfirmDlg, CDialog)
 
 CConfirmDlg::CConfirmDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CConfirmDlg::IDD, pParent),
-	m_resize(this)
+	m_resize(this),
+	m_ruleType(t)
 {
 	m_operation = NULL;
 }
 
-CConfirmDlg::CConfirmDlg(const Operation* operation, CWnd* pParent)
+CConfirmDlg::CConfirmDlg(const Operation* operation, int& ruleType, CWnd* pParent)
 	: CDialog(CConfirmDlg::IDD, pParent),
-	m_resize(this)
+	m_resize(this),
+	m_ruleType(ruleType)
 {
 	m_operation = operation;
 }
@@ -69,6 +71,8 @@ void CConfirmDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDCANCEL, m_noButton);
 	DDX_Control(pDX, IDC_BUTTON1, m_explorerButton);
 	DDX_Control(pDX, IDC_BUTTON_ADD_BL, m_addBlButton);
+	DDX_Control(pDX, IDC_BUTTON_BAN_NOW, m_banDirectButton);
+	DDX_Control(pDX, IDC_BUTTON_DELETE_ONLY, m_deleteOnlyButton);
 }
 
 
@@ -78,6 +82,9 @@ BEGIN_MESSAGE_MAP(CConfirmDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CConfirmDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON_ADD_BL, &CConfirmDlg::OnBnClickedButtonAddBl)
 	ON_WM_TIMER()
+	ON_STN_DBLCLK(IDC_STATIC_RULE, &CConfirmDlg::OnStnDblclickStaticRule)
+	ON_BN_CLICKED(IDC_BUTTON_DELETE_ONLY, &CConfirmDlg::OnBnClickedButtonDeleteOnly)
+	ON_BN_CLICKED(IDC_BUTTON_BAN_NOW, &CConfirmDlg::OnBnClickedButtonBanNow)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -111,6 +118,8 @@ BOOL CConfirmDlg::OnInitDialog()
 	m_resize.AddControl(&m_contentEdit, RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, this);
 	m_resize.AddControl(&m_static, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_addBlButton, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
+	m_resize.AddControl(&m_banDirectButton, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
+	m_resize.AddControl(&m_deleteOnlyButton, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
 	m_resize.AddControl(&m_explorerButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_yesButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_noButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
@@ -171,6 +180,8 @@ BOOL CConfirmDlg::OnInitDialog()
 			tmp.Format(_T(" 确认线程：%d"), m_operation->confirmQueneLeft);
 			m_static_con_quene_count.SetWindowTextW(tmp);
 			m_static_con_quene_count.ShowWindow(SW_SHOW);
+			m_banDirectButton.ShowWindow(SW_SHOW);
+			m_deleteOnlyButton.ShowWindow(SW_SHOW);
 		}
 
 		DWORD curTime = GetTickCount();
@@ -238,4 +249,27 @@ void CConfirmDlg::OnBnClickedButtonAddBl()
 	dlg->m_settingDlg->m_blackListRulesPage->
 		SetPreFillInfo(m_operation->object->authorShowName, GetPortraitFromString(m_operation->object->authorPortraitUrl));
 	dlg->m_settingDlg->SetActiveWindow();
+}
+
+void CConfirmDlg::OnStnDblclickStaticRule()
+{
+	// TODO: 在此添加控件通知处理程序代码
+}
+
+// 只删不封不计次
+void CConfirmDlg::OnBnClickedButtonDeleteOnly()
+{
+	if (m_operation == NULL)
+		return;
+	m_ruleType = RULE_TYPE_DELETE_ONLY;
+	CDialog::OnOK();
+}
+
+// 立即删封
+void CConfirmDlg::OnBnClickedButtonBanNow()
+{
+	if (m_operation == NULL)
+		return;
+	m_ruleType = RULE_TYPE_BAN_DIRECTLY;
+	CDialog::OnOK();
 }

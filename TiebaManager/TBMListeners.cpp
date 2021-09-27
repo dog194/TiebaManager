@@ -143,9 +143,9 @@ void CTBMListeners::OnScanPostPage(int threadID, const ThreadInfo& thread, int p
 
 // 操作事件
 
-void CTBMListeners::OnConfirm(const Operation& op, BOOL& res)
+void CTBMListeners::OnConfirm(const Operation& op, BOOL& res, int& reluType)
 {
-	res = CConfirmDlg(&op).DoModal() != IDCANCEL;
+	res = CConfirmDlg(&op, reluType).DoModal() != IDCANCEL;
 }
 
 

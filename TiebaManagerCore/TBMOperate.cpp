@@ -120,7 +120,9 @@ void CTBMOperate::ConfirmThread()
 				res = TRUE;
 			}
 			else {
-				g_comfirmEvent(op, res);
+				int tmpRUleType = op.ruleType;
+				g_comfirmEvent(op, res, tmpRUleType);
+				op.ruleType = tmpRUleType;
 			}
 			if (!res)
 			{
@@ -202,6 +204,17 @@ void CTBMOperate::OperateThread()
 			continue;
 
 		BOOL isBan = FALSE;
+		BOOL isDelete = FALSE;
+
+		if (op.ruleType == RULE_TYPE_DELETE_ONLY) {
+			isDelete = TRUE;
+			g_pLog->Log(_T("<font color=Orange>使用 只删不封 模式</font>"));
+		}
+		else if (op.ruleType == RULE_TYPE_BAN_DIRECTLY) {
+			isBan = TRUE;
+			isDelete = TRUE;
+			g_pLog->Log(_T("<font color=Orange>使用 立即删封 模式</font>"));
+		}
 
 		if (op.ruleType == RULE_TYPE_ILLEGA_RULE) { //只有常规违规规则有违规次数设定
 			// 增加违规次数
@@ -260,6 +273,10 @@ void CTBMOperate::OperateThread()
 		{
 			pass = TRUE;
 			g_preBanEvent(op, pass);
+			if (g_pUserCache->m_bannedUser->find(GetPortraitFromString(op.object->authorPortraitUrl)) != g_pUserCache->m_bannedUser->end()) {
+				// 封禁前集中判断一次是否已经封禁，减少代码冗余。不等于，说明已经被封过了。
+				pass = FALSE;
+			}
 			if (pass)
 			{
 				BOOL result = FALSE;
@@ -317,17 +334,16 @@ void CTBMOperate::OperateThread()
 			}
 		}
 
-
 		// 主题已被删则不再删帖
 		__int64 tid = _ttoi64(op.object->tid);
-		if (g_pUserCache->m_deletedTID.find(tid) != g_pUserCache->m_deletedTID.end())
+		if (g_pUserCache->m_deletedTID.find(tid) != g_pUserCache->m_deletedTID.end()) {
 			continue;
+		}
 
 		// 删帖
-		BOOL isDelete = FALSE;
 		if (op.ruleType == RULE_TYPE_ILLEGA_RULE && g_pTbmCoreConfig->m_delete)
 			isDelete = TRUE;
-		if (op.ruleType == RULE_TYPE_BLACK_LIST  && g_pTbmCoreConfig->m_blackListDelete)
+		else if (op.ruleType == RULE_TYPE_BLACK_LIST  && g_pTbmCoreConfig->m_blackListDelete)
 			isDelete = TRUE;
 
 		if (isDelete)

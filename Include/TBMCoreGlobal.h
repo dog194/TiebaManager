@@ -98,6 +98,8 @@ public:
 
 const int RULE_TYPE_ILLEGA_RULE = 0;
 const int RULE_TYPE_BLACK_LIST = 1;
+const int RULE_TYPE_DELETE_ONLY = 2;
+const int RULE_TYPE_BAN_DIRECTLY = 3;
 
 
 // 使用本模块前应先设置的全局变量

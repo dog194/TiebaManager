@@ -26,7 +26,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // 操作事件
 
-extern TBM_CORE_API PreEvent<const Operation&, BOOL&>   g_comfirmEvent;        // 确认是否操作，参数：操作, 结果
+extern TBM_CORE_API PreEvent<const Operation&, BOOL&, int&>   g_comfirmEvent;        // 确认是否操作，参数：操作, 结果
 
 extern TBM_CORE_API PostEvent<>				g_settingWinCloseEvent;				// 设置窗口关闭事件
 extern TBM_CORE_API PostEvent<const int&>	g_comfirmQueneChangeEvent;			// 队列数量变化事件

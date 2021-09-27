@@ -32,7 +32,7 @@ class CConfirmDlg : public CDialog
 
 public:
 	CConfirmDlg(CWnd* pParent = NULL);   // 标准构造函数
-	CConfirmDlg(const Operation* operation, CWnd* pParent = NULL);   // 指定内容的构造函数
+	CConfirmDlg(const Operation* operation, int &ruleType, CWnd* pParent = NULL);   // 指定内容的构造函数
 	virtual ~CConfirmDlg();
 
 // 对话框数据
@@ -49,6 +49,9 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButtonAddBl();
+	afx_msg void OnStnDblclickStaticRule();
+	afx_msg void OnBnClickedButtonDeleteOnly();
+	afx_msg void OnBnClickedButtonBanNow();
 
 public:
 	CEdit m_contentEdit;
@@ -61,6 +64,8 @@ public:
 	CButton m_yesButton;
 	CButton m_noButton;
 	CButton m_addBlButton;
+	CButton m_banDirectButton;
+	CButton m_deleteOnlyButton;
 
 	CImageViewDlg* m_imageViewDlg;
 
@@ -68,6 +73,8 @@ protected:
 	CResizeControl m_resize;
 
 	const Operation* m_operation;
+	int& m_ruleType;
+	int t = 1; // 没啥用，用于兼容原有接口。
 
 	// 上次确认的时间
 	static DWORD lastTime;
