@@ -30,11 +30,14 @@ const UINT CLoopBanInputDlg::IDD = IDD_LOOP_BAN_USER_INFO;
 
 IMPLEMENT_DYNAMIC(CLoopBanInputDlg, CDialog)
 
-CLoopBanInputDlg::CLoopBanInputDlg(CString& uid, CString& portrait, CString& note, UINT nIDTemplate, CWnd* pParent)
+CLoopBanInputDlg::CLoopBanInputDlg(CString& uid, CString& portrait, CString& note, UINT nIDTemplate, CWnd* pParent
+	, const CString& pPreNote, const CString& pNextNote)
 	: CDialog(nIDTemplate, pParent), 
 	m_uid(uid),
 	m_portrait(portrait),
-	m_note(note)
+	m_note(note),
+	m_pre_note(pPreNote),
+	m_next_note(pNextNote)
 {
 }
 
@@ -48,10 +51,14 @@ void CLoopBanInputDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_UID, m_edit_uid);
 	DDX_Control(pDX, IDC_EDIT_PORTRAIT, m_edit_portrait);
 	DDX_Control(pDX, IDC_EDIT_NOTE, m_edit_note);
+	DDX_Control(pDX, IDC_BUTTON_PRE, m_button_note_pre);
+	DDX_Control(pDX, IDC_BUTTON_NEXT, m_button_note_next);
 }
 
 BEGIN_MESSAGE_MAP(CLoopBanInputDlg, CDialog)
 	ON_EN_KILLFOCUS(IDC_EDIT_PORTRAIT, &CLoopBanInputDlg::OnEnKillfocusEditPortrait)
+	ON_BN_CLICKED(IDC_BUTTON_PRE, &CLoopBanInputDlg::OnClickNotePre)
+	ON_BN_CLICKED(IDC_BUTTON_NEXT, &CLoopBanInputDlg::OnClickNoteNext)
 END_MESSAGE_MAP()
 
 
@@ -67,6 +74,13 @@ BOOL CLoopBanInputDlg::OnInitDialog()
 	m_edit_note.SetWindowText(m_note);
 	m_edit_uid.SetSel(0, -1);
 	m_edit_uid.SetFocus();
+
+	if (m_pre_note == _T("")) {
+		m_button_note_pre.ShowWindow(SW_HIDE);
+	}
+	if (m_next_note == _T("")) {
+		m_button_note_next.ShowWindow(SW_HIDE);
+	}
 
 	return FALSE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
@@ -109,4 +123,16 @@ void CLoopBanInputDlg::OnEnKillfocusEditPortrait()
 			m_edit_uid.SetWindowTextW(DncodeURI(tmpU));
 		}
 	}
+}
+
+// 快捷填写 同上
+void CLoopBanInputDlg::OnClickNotePre()
+{
+	m_edit_note.SetWindowText(m_pre_note);
+}
+
+// 快捷填写 同下
+void CLoopBanInputDlg::OnClickNoteNext()
+{
+	m_edit_note.SetWindowText(m_next_note);
 }

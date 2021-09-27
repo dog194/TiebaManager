@@ -223,7 +223,9 @@ BOOL CLoopBanDlg::SetItem(int index)
 	CString portrait = m_list.GetItemText(index, COLUMN_INDEX_PORTRAIT);
 	CString note = m_list.GetItemText(index, COLUMN_INDEX_NOTE);
 
-	CLoopBanInputDlg dlg(uid, portrait, note, CLoopBanInputDlg::IDD, this);
+	CString pre_note = index > 0 ? m_list.GetItemText(index - 1, COLUMN_INDEX_NOTE) : _T("");
+	CString next_note = index < m_list.GetItemCount() - 1 ? m_list.GetItemText(index + 1, COLUMN_INDEX_NOTE) : _T("");
+	CLoopBanInputDlg dlg(uid, portrait, note, CLoopBanInputDlg::IDD, this, pre_note, next_note);
 	if (dlg.DoModal() == IDOK && uid != _T(""))
 	{
 		// 判断是否已经在列表中，避免重复添加

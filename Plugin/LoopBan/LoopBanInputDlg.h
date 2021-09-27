@@ -30,7 +30,8 @@ class CLoopBanInputDlg : public CDialog
 	DECLARE_DYNAMIC(CLoopBanInputDlg)
 
 public:
-	CLoopBanInputDlg(CString& uid, CString& portrait, CString& note, UINT nIDTemplate = IDD, CWnd* pParent = NULL);   // 标准构造函数
+	CLoopBanInputDlg(CString& uid, CString& portrait, CString& note, UINT nIDTemplate = IDD, CWnd* pParent = NULL, 
+		const CString& pPreNote = _T(""), const CString& pNextNote = _T(""));   // 标准构造函数
 	virtual ~CLoopBanInputDlg();
 
 // 对话框数据
@@ -44,11 +45,17 @@ public:
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 	afx_msg void OnEnKillfocusEditPortrait();
+	afx_msg void OnClickNotePre();
+	afx_msg void OnClickNoteNext();
 
 public:
 	CEdit m_edit_uid;
 	CEdit m_edit_portrait;
 	CEdit m_edit_note;
+	CButton m_button_note_pre;
+	CButton m_button_note_next;
+	CString m_pre_note = _T("");
+	CString m_next_note = _T("");
 
 	CString& m_uid;
 	CString& m_portrait;
