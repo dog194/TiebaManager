@@ -374,7 +374,6 @@ void CTBMOperate::OperateThread()
 						g_pUserCache->m_deletedTID.insert(_ttoi64(op.object->tid));
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + op.object->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a>"));
-						Sleep((DWORD)(g_pTbmCoreConfig->m_deleteInterval * 1000));
 					}
 				}
 				else if (op.object->m_type == TBObject::POST) // 帖子
@@ -398,7 +397,6 @@ void CTBMOperate::OperateThread()
 						sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + op.object->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + post->floor + _T("楼"));
-						Sleep((DWORD)(g_pTbmCoreConfig->m_deleteInterval * 1000));
 					}
 				}
 				else if (op.object->m_type == TBObject::LZL) // 楼中楼
@@ -419,12 +417,13 @@ void CTBMOperate::OperateThread()
 						sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + lzl->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + lzl->floor + _T("楼回复"));
-						Sleep((DWORD)(g_pTbmCoreConfig->m_deleteInterval * 1000));
 					}
 				}
-
 				g_postDeleteEvent(op, result);
 			}
+		}
+		if (isDelete || isBan) {
+			Sleep((DWORD)(g_pTbmCoreConfig->m_deleteInterval * 1000));
 		}
 	}
 
