@@ -55,4 +55,5 @@ public:
 
 protected:
 	const CString m_inputTitle;
+	BOOL m_subWinLock = false;
 };

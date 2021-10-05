@@ -58,6 +58,9 @@ BOOL CBlackListRulesPage::SetItem(int index)
 	CString pre_note = index > 0 ? m_rules[index - 1].m_note : _T("");
 	CString next_note = index < m_list.GetItemCount() - 1 ? m_rules[index + 1].m_note : _T("");
 	CUserInfoInputDlg dlg(m_rules[index], CUserInfoInputDlg::IDD, this, pre_note, next_note, preFillInfo);
+	if (m_subWinLock == true) // 增加个变量锁，防止重复开启
+		return FALSE;
+	m_subWinLock = true;
 	if (dlg.DoModal() == IDOK && m_rules[index].m_uid != _T(""))
 	{
 		// 判断是否已经在列表中，避免重复添加
@@ -70,6 +73,7 @@ BOOL CBlackListRulesPage::SetItem(int index)
 					AfxMessageBox(m_rules[index].m_portrait + _T(" 已经在列表中！"), MB_ICONINFORMATION);
 					SetSelectedRow(i);
 					ScrollToIndex(i);
+					m_subWinLock = false;
 					return FALSE;
 				}
 			}
@@ -78,6 +82,7 @@ BOOL CBlackListRulesPage::SetItem(int index)
 					AfxMessageBox(m_rules[index].m_uid + _T(" 已经在列表中！"), MB_ICONINFORMATION);
 					SetSelectedRow(i);
 					ScrollToIndex(i);
+					m_subWinLock = false;
 					return FALSE;
 				}
 			}
@@ -92,8 +97,10 @@ BOOL CBlackListRulesPage::SetItem(int index)
 		preFillInfo = NULL;
 
 		((CSettingDlg*)GetParent())->m_clearScanCache = TRUE;
+		m_subWinLock = false;
 		return TRUE;
 	}
+	m_subWinLock = false;
 	return FALSE;
 }
 
