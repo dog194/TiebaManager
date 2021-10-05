@@ -161,8 +161,11 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 		CString code = g_tiebaOperate.DeleteThread(url.Right(url.GetLength() - 3));
 		if (code == _T("0"))
 			dlg->m_log.Log(_T("<font color=green>删除成功！</font>"));
-		else
-			dlg->m_log.Log(_T("<font color=red>删除失败！</font>"));
+		else {
+			CString content;
+			content.Format(_T("<font color=red>删除失败！错误代码：%s(%s)</font>"),(LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code));
+			dlg->m_log.Log(content);
+		}
 		pass = FALSE;
 	}
 	else if (prefix == _T("dp:")) // 删帖子
@@ -172,8 +175,11 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 		CString code = g_tiebaOperate.DeletePost(args[0], args[1]);
 		if (code == _T("0"))
 			dlg->m_log.Log(_T("<font color=green>删除成功！</font>"));
-		else
-			dlg->m_log.Log(_T("<font color=red>删除失败！</font>"));
+		else {
+			CString content;
+			content.Format(_T("<font color=red>删除失败！错误代码：%s(%s)</font>"), (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code));
+			dlg->m_log.Log(content);
+		}
 		pass = FALSE;
 	}
 	else if (prefix == _T("dl:")) // 删楼中楼
@@ -183,8 +189,11 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 		CString code = g_tiebaOperate.DeleteLZL(args[0], args[1]);
 		if (code == _T("0"))
 			dlg->m_log.Log(_T("<font color=green>删除成功！</font>"));
-		else
-			dlg->m_log.Log(_T("<font color=red>删除失败！</font>"));
+		else {
+			CString content;
+			content.Format(_T("<font color=red>删除失败！错误代码：%s(%s)</font>"), (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code));
+			dlg->m_log.Log(content);
+		}
 		pass = FALSE;
 	}
 	else if (prefix == _T("bd:")) // 封ID
@@ -203,8 +212,11 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 		}
 		if (code == _T("0"))
 			dlg->m_log.Log(_T("<font color=green>封禁成功！</font>"));
-		else
-			dlg->m_log.Log(_T("<font color=red>封禁失败！</font>"));
+		else {
+			CString content;
+			content.Format(_T("<font color=red>封禁失败！错误代码：%s(%s)</font>"), (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code));
+			dlg->m_log.Log(content);
+		}
 		pass = FALSE;
 	}
 	else if (prefix == _T("df:")) // 拉黑
