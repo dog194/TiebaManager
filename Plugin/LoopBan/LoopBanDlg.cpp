@@ -157,7 +157,7 @@ BOOL CLoopBanDlg::OnInitDialog()
 	//m_list.ModifyStyle(0, LVS_NOCOLUMNHEADER);
 	m_list.ModifyStyle(LVS_NOCOLUMNHEADER, 0);
 	m_list.InsertColumn(COLUMN_INDEX_UID, _T("用户名/昵称"), LVCFMT_LEFT, 500);
-	m_list.InsertColumn(COLUMN_INDEX_PORTRAIT, _T("portrait"), LVCFMT_LEFT, 500);
+	m_list.InsertColumn(COLUMN_INDEX_PORTRAIT, _T("头像ID(Portrait)"), LVCFMT_LEFT, 500);
 	m_list.InsertColumn(COLUMN_INDEX_NOTE, _T("备注"), LVCFMT_LEFT, 500);
 	m_list.SetColumnWidth(COLUMN_INDEX_UID, 180);
 	m_list.SetColumnWidth(COLUMN_INDEX_PORTRAIT, 320);

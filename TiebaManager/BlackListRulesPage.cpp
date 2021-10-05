@@ -43,7 +43,7 @@ BOOL CBlackListRulesPage::OnInitDialog()
 	m_list.DeleteColumn(0);
 	m_list.ModifyStyle(LVS_NOCOLUMNHEADER, 0);
 	m_list.InsertColumn(COLUMN_INDEX_UID, _T("用户名/昵称"), LVCFMT_LEFT, 150);
-	m_list.InsertColumn(COLUMN_INDEX_PORTRAIT, _T("portrait"), LVCFMT_LEFT, 260);
+	m_list.InsertColumn(COLUMN_INDEX_PORTRAIT, _T("头像ID(Portrait)"), LVCFMT_LEFT, 260);
 	m_list.InsertColumn(COLUMN_INDEX_TRIG_COUNT, _T("触发次数"), LVCFMT_LEFT, 80);
 	m_list.InsertColumn(COLUMN_INDEX_NOTE, _T("备注"), LVCFMT_LEFT, 500);
 	m_static.SetWindowText(_T("黑名单用户，根据设置直接删帖或封禁。优先级低于信任规则，高于违规规则。"));

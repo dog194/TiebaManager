@@ -121,7 +121,7 @@ LONG WINAPI CTiebaManagerApp::ExceptionHandler(_EXCEPTION_POINTERS* ExceptionInf
 		MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), file, MiniDumpWithIndirectlyReferencedMemory,
 			&einfo, NULL, NULL);
 	}
-	AfxMessageBox(_T("程序崩溃了，请把exception.dmp文件发到群里帮助调试"), MB_ICONERROR);
+	AfxMessageBox(_T("程序崩溃了，先别点确定，如果其他窗口运行正常，请无视崩溃信息，或正常关闭窗口保存缓存记录，重开，如果其他窗口卡死请把exception.dmp文件发到群里帮助调试"), MB_ICONERROR);
 	return EXCEPTION_EXECUTE_HANDLER;
 }
 

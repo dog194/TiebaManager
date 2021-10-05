@@ -82,7 +82,8 @@ BEGIN_MESSAGE_MAP(CConfirmDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CConfirmDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON_ADD_BL, &CConfirmDlg::OnBnClickedButtonAddBl)
 	ON_WM_TIMER()
-	ON_STN_DBLCLK(IDC_STATIC_RULE, &CConfirmDlg::OnStnDblclickStaticRule)
+	//ON_STN_DBLCLK(IDC_STATIC_RULE, &CConfirmDlg::OnStnDblclickStaticRule)
+	ON_STN_CLICKED(IDC_STATIC_RULE, &CConfirmDlg::OnStnDblclickStaticRule)
 	ON_BN_CLICKED(IDC_BUTTON_DELETE_ONLY, &CConfirmDlg::OnBnClickedButtonDeleteOnly)
 	ON_BN_CLICKED(IDC_BUTTON_BAN_NOW, &CConfirmDlg::OnBnClickedButtonBanNow)
 END_MESSAGE_MAP()
@@ -104,6 +105,11 @@ HBRUSH CConfirmDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	if (pWnd->m_hWnd == m_static_is_bl.m_hWnd)
 		pDC->SetTextColor(RGB(255, 0, 0));
+	if (pWnd->m_hWnd == m_static_rule.m_hWnd) {
+		pDC->SetTextColor(RGB(0, 0, 255));
+		HFONT m_font = CreateFont(0, 0, 0, 0, 0, 0, TRUE, 0, 0, 0, 0, 0, 0, 0);
+		pDC->SelectObject(m_font);
+	}
 
 	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
@@ -149,7 +155,7 @@ BOOL CConfirmDlg::OnInitDialog()
 		}
 		}
 		content += _T("\r\n\r\n作者名：") + m_operation->object->author		//多加个换行，有昵称的时候，显示名是昵称，没昵称的时候，显示名等于用户名
-			+ _T("\r\nPortrait：") + GetPortraitFromString(m_operation->object->authorPortraitUrl);
+			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_operation->object->authorPortraitUrl);
 		if (m_operation->object->timestamp != 0) {
 			//不是所有数据都带时间
 			content += _T("\r\n\r\n时     间：") + GetYYMMDD_HHMMSS_FromTimeT(m_operation->object->timestamp);
@@ -167,8 +173,8 @@ BOOL CConfirmDlg::OnInitDialog()
 			m_imageViewDlg->SetImages(std::move(img));
 		}
 
+		m_static_rule.SetWindowTextW(m_operation->ruleName);
 		if (g_plan.m_windowPro) {
-			m_static_rule.SetWindowTextW(m_operation->ruleName);
 			m_addBlButton.ShowWindow(SW_SHOW);
 			if (m_operation->isBlUser) {
 				m_static_is_bl.ShowWindow(SW_SHOW);
@@ -242,12 +248,13 @@ void CConfirmDlg::OnBnClickedButtonAddBl()
 {
 	if (m_operation == NULL)
 		return;
-
+	this->ShowWindow(SW_MINIMIZE);
 	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
 	dlg->OnBnClickedButton5();
 	dlg->m_settingDlg->ShowBlackListRulePage();
 	dlg->m_settingDlg->m_blackListRulesPage->
 		SetPreFillInfo(m_operation->object->authorShowName, GetPortraitFromString(m_operation->object->authorPortraitUrl));
+	dlg->SetActiveWindow();
 	dlg->m_settingDlg->SetActiveWindow();
 }
 
@@ -264,6 +271,7 @@ void CConfirmDlg::OnStnDblclickStaticRule()
 		dlg->m_settingDlg->m_illegalRulesPage->ScrollToIndex(index);
 		dlg->m_settingDlg->m_illegalRulesPage->SetSelectedRow(index);
 		dlg->m_settingDlg->m_illegalRulesPage->OnClickedButton3();
+		dlg->SetActiveWindow();
 	}
 	else if (m_operation->ruleType == RULE_TYPE_BLACK_LIST) {
 		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
@@ -274,6 +282,7 @@ void CConfirmDlg::OnStnDblclickStaticRule()
 		dlg->m_settingDlg->m_blackListRulesPage->ScrollToIndex(index);
 		dlg->m_settingDlg->m_blackListRulesPage->SetSelectedRow(index);
 		dlg->m_settingDlg->m_blackListRulesPage->OnClickedButton3();
+		dlg->SetActiveWindow();
 	}
 }
 

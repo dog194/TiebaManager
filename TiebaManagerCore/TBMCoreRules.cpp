@@ -91,7 +91,7 @@ CString CKeywordCondition::GetDescription(const CConditionParam& _param)
 		_T("作者显示名"),
 		_T("所有内容"),
 		_T("作者名"),
-		_T("Portirt")
+		_T("头像ID(Portirt)")
 	};
 	
 	CString res = rangeDesc[param.m_range];
@@ -201,7 +201,7 @@ BOOL CKeywordCondition::MatchThread(const CConditionParam& _param, const ThreadI
 		content = thread.author;          
 		break;
 	case CKeywordParam::PORTRAIT:        
-		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 8 + thread.author.GetLength() + 11;
+		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 8 + thread.author.GetLength() + 17;
 		content = GetPortraitFromString(thread.authorPortraitUrl);    
 		break;
 	}
@@ -234,7 +234,7 @@ BOOL CKeywordCondition::MatchPost(const CConditionParam& _param, const PostInfo&
 			post.authorShowName.GetLength() + 5 +
 			post.authorLevel.GetLength() + 5 +
 			post.floor.GetLength() + 8 + 
-			post.author.GetLength() + 11;
+			post.author.GetLength() + 17;
 		content = GetPortraitFromString(post.authorPortraitUrl);
 		break;
 	}
@@ -265,7 +265,7 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 		startPos = lzl.GetContent().GetLength() + 7 + 
 			lzl.floor.GetLength() + 10 + 
 			lzl.authorShowName.GetLength() + 8 + 
-			lzl.author.GetLength() + 11;
+			lzl.author.GetLength() + 17;
 		content = GetPortraitFromString(lzl.authorPortraitUrl);
 		break;
 	}
