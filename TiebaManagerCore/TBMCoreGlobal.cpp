@@ -48,7 +48,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_banTrigCount		("BanTrigCount",		1,		GreaterThan<int, 1>),
 	m_defriendTrigCount	("DefriendTrigCount",	5,		GreaterThan<int, 1>),
 	m_confirm			("Confirm",				TRUE),
-	m_windowPro			("WindowPro",			TRUE),
+	m_windowPro			("WindowPro",			FALSE),
 	m_banClientInterface("ClientBanInterface",  FALSE),
 
 	m_blackListEnable	("BlackListEnable",		FALSE),
