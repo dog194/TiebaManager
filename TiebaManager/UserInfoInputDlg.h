@@ -54,6 +54,7 @@ public:
 	CEdit m_edit_uid;
 	CEdit m_edit_portrait;
 	CEdit m_edit_note;
+	CStatic m_static_portrait;
 	CButton m_button_note_pre;
 	CButton m_button_note_next;
 	CString m_pre_note = _T("");

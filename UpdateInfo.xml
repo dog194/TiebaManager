@@ -3,6 +3,13 @@
     <Version>211010(2.3)</Version>
     <VersionNum>210915</VersionNum>
     <UpdateLog>
+    更新日志211015(2.31)：
+    1. 各类优化/改动：
+    黑名单/LoopBan现在会对头像ID进行验证
+    强烈建议所有规则往头像ID过度
+    LoopBan不再使用客户端接口封禁
+    移除确认贴吧过程权限验证
+    点击规则后，确认窗口最小化
     更新日志211010(2.3)：
     1. 各类优化：
     Portrait更名为头像ID
@@ -33,6 +40,8 @@
     5. Bug修复
     现在删帖失败也会进入删帖间隔冷却
     现在日志重试按钮点击，操作失败会显示错误代码
+    </UpdateLog>
+    <HistoryLog>
     ========历史更新日志========
     更新日志210915(2.21)：
     1. 崩溃修复，修复客户端接口，傻逼崩溃事件
@@ -49,7 +58,7 @@
     4. 修正显示“作者名”为“作者显示名”（不影响以前规则）
     5. 确认窗口添加显示作者名，作者Portrait
     6. 新加两个内置错误代码
-    </UpdateLog>
+    </HistoryLog>
     <Files>
         <item><value><Dir/><Name>mfc120u.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>msvcp120.dll</Name><URL/><MD5/></value></item>

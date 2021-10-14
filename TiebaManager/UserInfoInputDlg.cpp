@@ -57,6 +57,7 @@ void CUserInfoInputDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_NOTE, m_edit_note);
 	DDX_Control(pDX, IDC_BUTTON_PRE, m_button_note_pre);
 	DDX_Control(pDX, IDC_BUTTON_NEXT, m_button_note_next);
+	DDX_Control(pDX, IDC_STATIC3, m_static_portrait);
 }
 
 BEGIN_MESSAGE_MAP(CUserInfoInputDlg, CDialog)
@@ -118,23 +119,57 @@ void CUserInfoInputDlg::OnOK()
 void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 {
 	CString tmp, tmpP, tmpU_ori, tmpU;
+	// url自动截取
 	m_edit_portrait.GetWindowText(tmp);
+	m_edit_uid.GetWindowText(tmpU_ori);
 	if (tmp.GetLength() > 36) {
 		tmpP = GetStringBetween(tmp, _T("id="), _T("&"));
 		if (tmpP.GetLength() > 36) {
 			tmpP = GetStringBefore(tmpP, _T("?"));
 		}
-		if (tmpP.GetLength() <= 36 && tmpP.GetLength() > 30) {
+		if (tmpP.GetLength() <= 36 && tmpP.GetLength() > 34) {
 			m_edit_portrait.SetWindowTextW(tmpP);
 		}
-		m_edit_uid.GetWindowText(tmpU_ori);
-		if (tmpU_ori == _T("")) {
-			tmpU_ori = GetStringBetween(tmp, _T("un="), _T("&"));
-			tmpU = DncodeURI(tmpU_ori);
-			if (tmpU == _T("")) {
-				tmpU = DncodeURI_GBK(tmpU_ori);
-			}
-			m_edit_uid.SetWindowTextW(DncodeURI(tmpU));
+	}
+	// 输入验证
+	m_edit_portrait.GetWindowText(tmp);
+	m_edit_uid.GetWindowText(tmpU_ori);
+	if (tmp.GetLength() > 36) {
+		m_static_portrait.SetWindowTextW(_T("		 头像ID长度超过，如果复制正确，请到群里反馈"));
+		m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度超过，如果复制正确，请到群里反馈"), TTI_NONE);
+		return;
+	}
+	if (tmp.GetLength() < 35) {
+		m_static_portrait.SetWindowTextW(_T("		 头像ID长度不足，如果复制正确，请到群里反馈"));
+		m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度不足，如果复制正确，请到群里反馈"), TTI_NONE);
+		return;
+	}
+	if (tmp.GetLength() >= 35 && tmp.GetLength() <= 36) {
+		tmpU = GetNameUsingPortrait(tmp);
+		if (tmpU == GET_NAME_ERROR_SHORT) {
+			m_static_portrait.SetWindowTextW(_T("		  头像ID长度不足，如果复制正确，请到群里反馈"));
+			m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度不足，如果复制正确，请到群里反馈"), TTI_NONE);
+			return;
+		}
+		else if (tmpU == GET_NAME_ERROR_TIME_OUT) {
+			m_static_portrait.SetWindowTextW(_T("		 头像ID验证超时，请检查网络，或重试"));
+			m_edit_note.ShowBalloonTip(_T(""), _T("头像ID验证超时，请检查网络，或重试"), TTI_NONE);
+			return;
+		}
+		else if (tmpU == GET_NAME_ERROR_INPUT_ERROR) {
+			m_static_portrait.SetWindowTextW(_T("		 头像ID输入错误，无法查到对应用户"));
+			m_edit_portrait.ShowBalloonTip(_T(""), _T("头像ID输入错误，无法查到对应用户"), TTI_ERROR);
+			return;
+		}
+		else if (tmpU == GET_NAME_ERROR_FORMAT_ERROR) {
+			m_static_portrait.SetWindowTextW(_T("		头像ID验证返回错误，请到群里反馈"));
+			m_edit_uid.ShowBalloonTip(_T(""), _T("头像ID验证返回错误，请到群里反馈"), TTI_ERROR);
+			return;
+		}
+		else {
+			m_static_portrait.SetWindowTextW(_T("		头像ID验证成功：") + tmpU);
+			if (tmpU_ori == _T("")) 
+				m_edit_uid.SetWindowTextW(DncodeURI(tmpU));
 		}
 	}
 }

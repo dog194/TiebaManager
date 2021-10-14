@@ -262,6 +262,7 @@ void CConfirmDlg::OnStnDblclickStaticRule()
 {
 	if (m_operation == NULL)
 		return;
+	this->ShowWindow(SW_MINIMIZE);
 	if (m_operation->ruleType == RULE_TYPE_ILLEGA_RULE) {
 		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
 		dlg->OnBnClickedButton5();
@@ -271,7 +272,7 @@ void CConfirmDlg::OnStnDblclickStaticRule()
 		dlg->m_settingDlg->m_illegalRulesPage->ScrollToIndex(index);
 		dlg->m_settingDlg->m_illegalRulesPage->SetSelectedRow(index);
 		dlg->m_settingDlg->m_illegalRulesPage->OnClickedButton3();
-		dlg->SetActiveWindow();
+		dlg->SetForegroundWindow();
 	}
 	else if (m_operation->ruleType == RULE_TYPE_BLACK_LIST) {
 		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
@@ -282,7 +283,7 @@ void CConfirmDlg::OnStnDblclickStaticRule()
 		dlg->m_settingDlg->m_blackListRulesPage->ScrollToIndex(index);
 		dlg->m_settingDlg->m_blackListRulesPage->SetSelectedRow(index);
 		dlg->m_settingDlg->m_blackListRulesPage->OnClickedButton3();
-		dlg->SetActiveWindow();
+		dlg->SetForegroundWindow();
 	}
 }
 

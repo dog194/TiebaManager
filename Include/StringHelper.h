@@ -45,6 +45,11 @@ const CString m_tips[m_tips_num] = {
 	_T("封禁需谨慎")
 };
 
+const CString GET_NAME_ERROR_SHORT = _T("[长度不足]");
+const CString GET_NAME_ERROR_TIME_OUT = _T("[访问超时]");
+const CString GET_NAME_ERROR_INPUT_ERROR = _T("[参数错误]");
+const CString GET_NAME_ERROR_FORMAT_ERROR = _T("[格式异常]");
+
 // 分割字符串
 HELPER_API void SplitString(CStringArray& dst, const CString& src, const CString& slipt);
 
@@ -104,6 +109,8 @@ HELPER_API CString JSUnescape(const CString& src);
 
 // 取Portrait，解决Portrait url历史遗留问题
 HELPER_API CString GetPortraitFromString(const CString& src);
+// 取UName，使用Portrait获取
+HELPER_API CString GetNameUsingPortrait(const CString& pPortrait);
 // time_t to string x年x月x日-xx:xx:xx
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src);
 // Int to CString

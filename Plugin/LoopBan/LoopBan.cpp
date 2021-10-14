@@ -230,10 +230,10 @@ void CLoopBan::LoopBanThread()
 	for (UINT i = 0; i < config.m_banlist->size(); i++)
 	{
 		CString code;
-		if (g_pTbmCoreConfig->m_banClientInterface)
-			code = tiebaOperate.BanIDClient((*config.m_banlist)[i].m_uid); // 用客户端接口封禁
-		else
-		{
+		//if (g_pTbmCoreConfig->m_banClientInterface)
+		//	code = tiebaOperate.BanIDClient((*config.m_banlist)[i].m_uid); // 用客户端接口封禁
+		//else
+		//{
 			//if ((*config.m_pidList)[i] != _T("")) // 尝试用PID封禁
 			//	code = tiebaOperate.BanID((*config.m_userList)[i], (*config.m_pidList)[i]);
 			//if ((*config.m_pidList)[i] == _T("") || code != _T("0")) // 尝试不用PID封禁（用户必须为本吧会员）D:存疑，现在好像没有这个限定。
@@ -249,7 +249,7 @@ void CLoopBan::LoopBanThread()
 				//	code = tiebaOperate.BanID((*config.m_userList)[i], (*config.m_pidList)[i]);
 				//}
 			}
-		}
+		//}
 
 		if (config.m_log)
 		{

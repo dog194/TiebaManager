@@ -74,7 +74,7 @@ CTiebaOperate::SetTiebaResult CTiebaOperate::SetTieba(const CString& forumName)
 	// 验证用户权限
 	// 旧接口
 	//CString src2 = ::HTTPGet(_T("http://tieba.baidu.com/f/bawu/admin_group?kw=") + EncodeURI_GBK(m_forumName));
-	CString src2 = ::HTTPGet(_T("http://tieba.baidu.com/bawu2/platform/listBawuTeamInfo?word=") + m_encodedForumName + _T("&ie=utf-8"));
+	/* CString src2 = ::HTTPGet(_T("http://tieba.baidu.com/bawu2/platform/listBawuTeamInfo?word=") + m_encodedForumName + _T("&ie=utf-8"));
 	if (src2 == NET_TIMEOUT_TEXT)
 		return SET_TIEBA_TIMEOUT;
 	CStringArray bawuList;
@@ -94,6 +94,8 @@ CTiebaOperate::SetTiebaResult CTiebaOperate::SetTieba(const CString& forumName)
 	}
 	if (!hasPower)
 		WriteString(src2, _T("admin.txt"));
+		*/
+	BOOL hasPower = TRUE;
 
 	// 取tbs(口令号)
 	m_tbs = GetStringBetween(src, _TBS_LEFT, _TBS_RIGHT);

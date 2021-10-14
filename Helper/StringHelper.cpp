@@ -19,9 +19,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include <StringHelper.h>
+#include <NetworkHelper.h>
 #include <ConfigFile.h>
+#include <document.h>
 #import <msscript.ocx> no_namespace
 using namespace tinyxml2;
+using namespace rapidjson;
 
 const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
 const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
@@ -440,6 +443,38 @@ HELPER_API CString GetPortraitFromString(const CString& src)
 		}
 	}
 	return tmp;
+}
+
+// 取UName，使用Portrait获取
+HELPER_API CString GetNameUsingPortrait(const CString& pPortrait) {
+	if (pPortrait.GetLength() < 35) {
+		return GET_NAME_ERROR_SHORT;
+	}
+	CString src = HTTPGet(_T("https://tieba.baidu.com/home/get/panel?ie=utf-8&id=") + pPortrait);
+	if (src == NET_TIMEOUT_TEXT)
+		return GET_NAME_ERROR_TIME_OUT;
+	CString code = GetStringBetween(src, _T("no\":"), _T(","));
+	if (code == _T(""))
+		code = GetStringBetween(src, _T("code\":\""), _T("\""));
+	if (code != _T("0")) {
+		return GET_NAME_ERROR_INPUT_ERROR;
+	}
+	GenericDocument<UTF16<> > document;
+	document.Parse(src);
+	if (document.HasParseError() || !document.IsObject())
+		return GET_NAME_ERROR_FORMAT_ERROR;
+
+	CString u_id = document[L"data"][L"name"].GetString();
+	CString u_showNickName = document[L"data"][L"show_nickname"].GetString();
+	if (u_id == _T("")) {
+		return u_showNickName;
+	}
+	else if (u_id == u_showNickName){
+		return u_showNickName;
+	}
+	else {
+		return u_showNickName + _T(" - ") + u_id;
+	}
 }
 
 // time_t to string x年x月x日-xx:xx:xx
