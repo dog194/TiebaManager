@@ -104,7 +104,7 @@ void CImageCondition::UpdateImage(CImageParam& param)
 
 	// 对其他算法只比较灰度图，提高速度
 	cv::Mat gray;
-	cv::cvtColor(param.m_image, gray, CV_BGR2GRAY);
+	cv::cvtColor(param.m_image, gray, cv::COLOR_BGR2GRAY);
 	param.m_image = gray;
 }
 
@@ -303,7 +303,7 @@ double CImageCondition::CompareImage(const CImageParam& param, const cv::Mat& im
 		return -2.0;
 
 	cv::Mat grayImg;
-	cv::cvtColor(img, grayImg, CV_BGR2GRAY);
+	cv::cvtColor(img, grayImg, cv::COLOR_BGR2GRAY);
 
 	cv::Mat resizedParamImg = param.m_image;
 	if (param.m_ignoreSize && (param.m_algorithm == CImageParam::PSNR || param.m_algorithm == CImageParam::SSIM))

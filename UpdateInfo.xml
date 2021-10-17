@@ -65,9 +65,9 @@
         <item><value><Dir/><Name>msvcr120.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>libcurl.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>tinyxml2.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir/><Name>opencv_core320.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir/><Name>opencv_imgcodecs320.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir/><Name>opencv_imgproc320.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>opencv_core453.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>opencv_imgcodecs453.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>opencv_imgproc453.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>Helper.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>TiebaAPI.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>TiebaManagerCore.dll</Name><URL/><MD5/></value></item>

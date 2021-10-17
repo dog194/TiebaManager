@@ -14,7 +14,7 @@ TiebaManager
 依赖
 ---------
 
-* [OpenCV](http://opencv.org/) 3.2.0
+* [OpenCV](http://opencv.org/) 4.5.3
 * [TinyXML2](http://www.grinninglizard.com/tinyxml2/index.html)
 * [libcurl](https://curl.haxx.se/libcurl/) 7.78.0
 * [rapidjson](http://rapidjson.org/)
