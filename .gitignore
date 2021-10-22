@@ -23,6 +23,10 @@ bld/
 [Ll]og/
 [Tt]iebaManager/User/
 [Tt]iebaManager/ImageCache/
+[Tt]iebaManager/Model/
+[Tt]iebaManager/Plugin/*.dll
+[Tt]iebaManager/*.txt
+[Tt]iebaManager/options.xml
 
 # Visual Studio 2015 cache/options directory
 .vs/
