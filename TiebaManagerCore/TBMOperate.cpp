@@ -255,7 +255,8 @@ void CTBMOperate::OperateThread()
 					else
 					{
 						result = TRUE;
-						sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
+						if (g_pTbmCoreConfig->m_playSound)
+							sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pUserCache->m_defriendedUser->insert(op.object->author);
 						g_pLog->Log(_T("<font color=red>拉黑 </font>") + op.object->authorShowName);
 					}
@@ -327,7 +328,8 @@ void CTBMOperate::OperateThread()
 				else
 				{
 					result = TRUE;
-					sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
+					if (g_pTbmCoreConfig->m_playSound)
+						sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
 					g_pUserCache->m_bannedUser->insert(GetPortraitFromString(op.object->authorPortraitUrl));
 					g_pLog->Log(_T("<font color=red>封禁 </font>") + op.object->authorShowName);
 				}
@@ -370,7 +372,8 @@ void CTBMOperate::OperateThread()
 					else
 					{
 						result = TRUE;
-						sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
+						if (g_pTbmCoreConfig->m_playSound)
+							sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pUserCache->m_deletedTID.insert(_ttoi64(op.object->tid));
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + op.object->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a>"));
@@ -394,7 +397,8 @@ void CTBMOperate::OperateThread()
 					else
 					{
 						result = TRUE;
-						sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
+						if (g_pTbmCoreConfig->m_playSound)
+							sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + op.object->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + post->floor + _T("楼"));
 					}
@@ -414,7 +418,8 @@ void CTBMOperate::OperateThread()
 					else
 					{
 						result = TRUE;
-						sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
+						if (g_pTbmCoreConfig->m_playSound)
+							sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + lzl->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + lzl->floor + _T("楼回复"));
 					}

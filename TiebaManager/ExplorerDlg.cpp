@@ -165,8 +165,10 @@ void CExplorerDlg::OnBnClickedButton1()
 
 	if (code != _T("0"))
 		AfxMessageBox(_T("删除失败，错误代码" + code + _T("(") + GetTiebaErrorText(code) + _T(")")), MB_ICONERROR);
-	else
-		sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
+	else {
+		if (g_pTbmCoreConfig->m_playSound)
+			sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
+	}
 }
 
 // 封禁
@@ -218,8 +220,10 @@ void CExplorerDlg::OnBnClickedButton2()
 	CString code = (g_plan.m_banClientInterface) ? GetTiebaOperate().BanIDClient(author, pid, portrait, nick_name) : GetTiebaOperate().BanID(author, pid, portrait, nick_name);
 	if (code != _T("0"))
 		AfxMessageBox(_T("封禁失败，错误代码" + code + _T("(") + GetTiebaErrorText(code) + _T(")")), MB_ICONERROR);
-	else
-		sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
+	else {
+		if (g_pTbmCoreConfig->m_playSound)
+			sndPlaySound(_T("封号.wav"), SND_ASYNC | SND_NODEFAULT);
+	}
 }
 
 // 浏览器

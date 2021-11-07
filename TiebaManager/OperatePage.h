@@ -61,6 +61,7 @@ public:
 	CEdit m_deleteIntervalEdit;
 	CButton m_confirmCheck;
 	CButton m_ProWinCheck;
+	CButton m_PlaySoundCheck;
 	CButton m_banClientInterfaceCheck;
 	CButton m_blackListEnableCheck;
 	CButton m_blackListConfirmCheck;
