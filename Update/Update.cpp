@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (C) 2011-2017  xfgryujk
+Copyright (C) 2011-2021  xfgryujk Dog194
 https://tieba.baidu.com/f?kw=%D2%BB%B8%F6%BC%AB%C6%E4%D2%FE%C3%D8%D6%BB%D3%D0xfgryujk%D6%AA%B5%C0%B5%C4%B5%D8%B7%BD
 
 This program is free software; you can redistribute it and/or modify
@@ -27,13 +27,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // 当前版本，每次更新后修改，也可以不是日期
-UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("211015(2.31)");
+UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("211015(2.32)");
 UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 211015; //使用整数形式，更方便版本判断
 
-static const CString MANUALLY_UPDATE_URL = _T("https://sinacloud.net/xfgryujk/TiebaManager/贴吧管理器.zip");
+static const CString MANUALLY_UPDATE_URL = _T("http://tieba.bakasnow.com/TiebaManager/?download&client=%d");
 static const CString QQ_QUN_UPDATE_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=IbZJQTp42ZNuEQJRKbyyn0LTD1iCgEtT");
-UPDATE_API const CString UPDATE_INFO_URL = _T("https://raw.githubusercontent.com/dog194/TiebaManager/master/UpdateInfo.xml");
-UPDATE_API const CString UPDATE_INFO_URL_GITHUB = _T("https://github.com/dog194/TiebaManager/blob/master/UpdateInfo.xml");
+UPDATE_API const CString UPDATE_INFO_URL = _T("http://tieba.bakasnow.com/TiebaManager/?update&client=%d");
+static const CString UPDATE_PACK_URL = _T("http://tieba.bakasnow.com/TiebaManager/?download&client=%d");
 
 static const CString UPDATE_DIR_PATH = _T("Update\\"); // 只能是一级目录，因为批处理里用了相对路径
 static const CString UPDATE_BAT_NAME = _T("Update.bat");
@@ -102,11 +102,18 @@ CUpdateInfo::CUpdateInfo() : CConfigBase("UpdateInfo"),
 }
 #pragma endregion
 
-
 // 用新版文件替换旧版的
 static BOOL ReplaceFiles(const std::vector<CUpdateInfo::FileInfo>& files, const CString& relativeDir, const CString& updateDir)
 {
-	// 原理：可移动正在运行的程序、DLL文件（但是不能删除），貌似可以用ReplaceFile这个API，但是没试过
+	// 验证文件是否完整
+	for (const auto& fileInfo : files)
+	{
+		if (!PathFileExists(updateDir + fileInfo.dir + fileInfo.name)) {
+			AfxMessageBox(_T("文件\"") + fileInfo.dir + fileInfo.name + _T("\"不存在！请到群里反馈或重试！"), MB_ICONERROR);
+			return FALSE;
+		}
+	}
+;	// 原理：可移动正在运行的程序、DLL文件（但是不能删除），貌似可以用ReplaceFile这个API，但是没试过
 	for (const auto& fileInfo : files)
 	{
 		if ((PathFileExists(updateDir + fileInfo.dir + fileInfo.name + _T(".bak"))
@@ -251,11 +258,62 @@ static void UpdateThread(CUpdateInfo* updateInfo_)
 	CString updateDir = relativeDir + UPDATE_DIR_PATH;
 	// 需要更新的文件
 	std::vector<CUpdateInfo::FileInfo> updateFiles;
-
-
+	
+	/*
 	// 下载需要更新的文件
 	if (!DownloadFiles(updateInfo->m_files, relativeDir, updateDir, updateFiles))
-		goto End;
+		goto End;*/
+	CreateDir(updateDir);
+	CString filesPackUrl, fileName, cmdStr, tmpStr;
+	cmdStr = _T("");
+	filesPackUrl.Format(UPDATE_PACK_URL, UPDATE_CURRENT_VERSION_NUM);
+	fileName = _T("TBGuanLiQi.zip");
+
+	// 关闭指令显示
+	cmdStr += _T("@echo off");
+	cmdStr += _T("\necho ============================================");
+	cmdStr += _T("\necho 贴吧管理器更新辅助程序，请不要手动关闭本程序");
+	cmdStr += _T("\necho ============================================");
+	cmdStr += _T("\necho 开始下载更新包......");
+	cmdStr += _T("\necho.");
+	// 下载指令
+	tmpStr.Format(_T("\"%scurl.exe\" -o \"%s%s\" \"%s\""), relativeDir, updateDir, fileName, filesPackUrl);
+	cmdStr += _T("\n");
+	cmdStr += tmpStr;
+	cmdStr += _T("\necho.");
+	cmdStr += _T("\necho 下载结束......");
+	cmdStr += _T("\necho 开始解压......");
+	// 写出解压bat 调用7za进行解压
+	tmpStr.Format(_T("\"%s7za.exe\" x \"%s%s\" -o\"%s\" -y"), relativeDir, updateDir, fileName, updateDir);
+	cmdStr += _T("\n");
+	cmdStr += tmpStr;
+	cmdStr += _T("\necho 解压结束......");
+	cmdStr += _T("\necho 延时5秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时4秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时3秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时2秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时1秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\ndel %0");
+	WriteString(cmdStr, updateDir + _T("unzip.bat"));
+	tmpStr.Format(_T("\"%sunzip.bat\""), updateDir);
+	// 阻塞调用CMD，等待下载完成
+	SHELLEXECUTEINFO ShExecInfo = { 0 };
+	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+	ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+	ShExecInfo.hwnd = NULL;
+	ShExecInfo.lpVerb = _T("open");
+	ShExecInfo.lpFile = tmpStr;
+	ShExecInfo.lpParameters = NULL;
+	ShExecInfo.lpDirectory = NULL;
+	ShExecInfo.nShow = SW_SHOWNORMAL;
+	ShExecInfo.hInstApp = NULL;
+	ShellExecuteEx(&ShExecInfo);
+	WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
 
 	// 写更新批处理
 	/*if (!WriteUpdateBat(updateFiles, updateDir))
@@ -265,7 +323,7 @@ static void UpdateThread(CUpdateInfo* updateInfo_)
 	}*/
 
 	// 备份
-	if (!Backup(updateFiles, relativeDir))
+	if (!Backup(updateInfo->m_files, relativeDir))
 		AfxMessageBox(_T("创建备份失败，请手动备份！"), MB_ICONERROR);
 
 	//AfxMessageBox(_T("更新文件下载完毕，关闭本程序以完成更新，不要关闭cmd窗口"));
@@ -273,8 +331,10 @@ static void UpdateThread(CUpdateInfo* updateInfo_)
 	//// 执行批处理
 	//ShellExecute(NULL, _T("open"), updateDir + UPDATE_BAT_NAME, NULL, updateDir, SW_SHOWNORMAL);
 
+	
 	// 替换旧文件
-	if (!ReplaceFiles(updateFiles, relativeDir, updateDir))
+	// if (!ReplaceFiles(updateFiles, relativeDir, updateDir))
+	if (!ReplaceFiles(updateInfo->m_files, relativeDir, updateDir))
 		goto End;
 
 	AfxMessageBox(_T("更新完毕，重启本程序后生效"));
@@ -285,14 +345,14 @@ End:
 }
 
 // 检查更新，如果需要更新则开一个线程自动更新
-UPDATE_API CheckUpdateResult CheckUpdate()
+UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent)
 {
 	// 取更新信息
-	std::unique_ptr<BYTE[]> buffer, buffer_G;
-	ULONG size, size_G;
-	if (HTTPGetRaw(UPDATE_INFO_URL, &buffer, &size) != NET_SUCCESS) { // 用HTTPGetRaw防止转码
-		// TODO: 添加备用更新信息获取服务器
-		//if (HTTPGetRaw(UPDATE_INFO_URL_GITHUB, &buffer_G, &size_G) != NET_SUCCESS)
+	std::unique_ptr<BYTE[]> buffer;
+	ULONG size;
+	CString update_url;
+	update_url.Format(UPDATE_INFO_URL, UPDATE_CURRENT_VERSION_NUM);
+	if (HTTPGetRaw(update_url, &buffer, &size) != NET_SUCCESS) { // 用HTTPGetRaw防止转码
 		return UPDATE_FAILED_TO_GET_INFO;
 	} 
 	auto updateInfo = std::make_unique<CUpdateInfo>();
@@ -303,15 +363,21 @@ UPDATE_API CheckUpdateResult CheckUpdate()
 	if (updateInfo->m_version_num <= UPDATE_CURRENT_VERSION_NUM)
 		return UPDATE_NO_UPDATE;
 
-	// 用户取消更新
-	if (AfxMessageBox(_T("最新版本") + updateInfo->m_version + _T("\r\n\r\n") + updateInfo->m_updateLog 
-		+ _T("\r\n\r\n是否更新？"), MB_ICONQUESTION | MB_YESNO) == IDNO)
+	if (silent) {
+		// 静默拉取信息，然后在主界面提示
 		return UPDATE_HAS_UPDATE;
+	}
+	else {
+		// 用户取消更新
+		if (AfxMessageBox(_T("最新版本") + updateInfo->m_version + _T("\r\n\r\n") + updateInfo->m_updateLog
+			+ _T("\r\n\r\n是否更新？"), MB_ICONQUESTION | MB_YESNO) == IDNO)
+			return UPDATE_HAS_UPDATE;
 
-	// 在线程中更新 //关闭自动更新功能，以后有缘再修。
-	//std::thread(UpdateThread, updateInfo.release()).detach();
-	ManuallyUpdate();
-	return UPDATE_HAS_UPDATE;
+		// 在线程中更新
+		std::thread(UpdateThread, updateInfo.release()).detach();
+		//ManuallyUpdate();
+		return UPDATE_NEED_RESTART;
+	}
 }
 
 // 手动更新，打开一个URL

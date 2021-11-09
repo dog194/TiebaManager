@@ -103,6 +103,7 @@ public:
 	CPluginDlg* m_pluginDlg = NULL;
 
 	CExplorerLog m_log;
+	CString m_hasUpdate;
 
 	BOOL m_isClosing = FALSE;
 

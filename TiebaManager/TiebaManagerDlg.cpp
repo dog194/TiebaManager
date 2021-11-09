@@ -42,6 +42,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // 常量
 static const UINT WM_TASKBARCREATED = RegisterWindowMessage(_T("TaskbarCreated"));
 static const UINT WM_TRAY = WM_APP + 1;
+static const CString STR_HAS_UPDATE = _T("-有新版本");
+static const CString STR_NEED_RESTART = _T("-更新完毕，请重启");
 
 
 // 构造函数
@@ -53,6 +55,7 @@ CTiebaManagerDlg::CTiebaManagerDlg(CWnd* pParent /*=NULL*/)
 
 	m_clearLogStatic.m_normalColor = m_saveLogStatic.m_normalColor = RGB(128, 128, 128);
 	m_clearLogStatic.m_hoverColor = m_saveLogStatic.m_hoverColor = RGB(192, 192, 192);
+	m_hasUpdate = _T("");
 
 	// 初始化托盘图标数据
 	m_nfData.cbSize = sizeof(NOTIFYICONDATA);
@@ -258,13 +261,16 @@ void CTiebaManagerDlg::OnProWinCheckChange() {
 	}
 	if (m_explorerButton.IsWindowEnabled()) {//根据浏览按钮判断是否已经确认贴吧。
 		if (g_userConfig.m_plan != _T("默认")) {
-			SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION);
+			SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
 			_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_());
 		}
 		else {
-			SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION);
+			SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
 			_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_());
 		}
+	}
+	else {
+		SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
 	}
 }	
 
@@ -414,15 +420,21 @@ void CTiebaManagerDlg::AutoUpdateThread()
 	{
 	case UPDATE_FAILED_TO_GET_INFO:
 		m_stateStatic.SetWindowText(_T("检查更新失败：获取文件信息失败，在设置里手动检查更新"));
+		m_hasUpdate = _T("");
 		break;
 	case UPDATE_NO_UPDATE:
 		m_stateStatic.SetWindowText(_T("待机中 ") + GetRandomTip());
+		m_hasUpdate = _T("");
 		break;
 	case UPDATE_HAS_UPDATE:
 		m_stateStatic.SetWindowText(_T("待机中 有新版本"));
+		m_hasUpdate = STR_HAS_UPDATE;
+		break;
+	case UPDATE_NEED_RESTART:
+		m_hasUpdate = STR_NEED_RESTART;
 		break;
 	}
-
+	OnProWinCheckChange();
 	CoUninitialize();
 }
 
