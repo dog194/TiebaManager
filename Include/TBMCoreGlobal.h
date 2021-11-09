@@ -49,6 +49,7 @@ public:
 	COption<int>		m_defriendTrigCount;	// 拉黑违规次数
 	COption<BOOL>		m_confirm;				// 操作前提示
 	COption<BOOL>		m_windowPro;			// 详细版操作界面
+	COption<BOOL>		m_playSound;			// 播放删帖音效
 	COption<BOOL>		m_banClientInterface;	// 封禁用客户端接口
 
 	COption<BOOL>		m_blackListEnable;		// 黑名单功能总开关

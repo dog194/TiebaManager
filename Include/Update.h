@@ -47,8 +47,8 @@ public:
 };
 
 
-enum CheckUpdateResult { UPDATE_NO_UPDATE, UPDATE_HAS_UPDATE, UPDATE_FAILED_TO_GET_INFO };
+enum CheckUpdateResult { UPDATE_NO_UPDATE, UPDATE_HAS_UPDATE, UPDATE_FAILED_TO_GET_INFO, UPDATE_NEED_RESTART};
 // 检查更新，如果需要更新则开一个线程自动更新
-UPDATE_API CheckUpdateResult CheckUpdate();
+UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent = false);
 // 手动更新，打开一个URL
 UPDATE_API void ManuallyUpdate();

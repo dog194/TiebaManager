@@ -23,6 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TBMAPI.h>
 #include "TBMGlobal.h"
 #include "ConfirmDlg.h"
+#include <TBMCoreEvents.h>
 
 #include "SettingDlg.h"
 #include "ExplorerDlg.h"
@@ -42,6 +43,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // 常量
 static const UINT WM_TASKBARCREATED = RegisterWindowMessage(_T("TaskbarCreated"));
 static const UINT WM_TRAY = WM_APP + 1;
+static const CString STR_HAS_UPDATE = _T("-有新版本");
+static const CString STR_NEED_RESTART = _T("-更新完毕，请重启");
 
 
 // 构造函数
@@ -53,6 +56,7 @@ CTiebaManagerDlg::CTiebaManagerDlg(CWnd* pParent /*=NULL*/)
 
 	m_clearLogStatic.m_normalColor = m_saveLogStatic.m_normalColor = RGB(128, 128, 128);
 	m_clearLogStatic.m_hoverColor = m_saveLogStatic.m_hoverColor = RGB(192, 192, 192);
+	m_hasUpdate = _T("");
 
 	// 初始化托盘图标数据
 	m_nfData.cbSize = sizeof(NOTIFYICONDATA);
@@ -202,6 +206,17 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
 	SetTimer(0, 24 * 60 * 60 * 1000, [](HWND, UINT, UINT_PTR, DWORD) {
 		g_userCache.m_bannedUser->clear();
+		// 如果设置了自动更新，每天检查一次
+		if (g_globalConfig.m_autoUpdate) {
+			switch (CheckUpdate(True)) {
+			case UPDATE_HAS_UPDATE:
+				g_postUpdateInfoEvent(STR_HAS_UPDATE);
+				break;
+			case UPDATE_NO_UPDATE:
+			case UPDATE_FAILED_TO_GET_INFO:
+				g_postUpdateInfoEvent(_T(""));
+			}
+		}
 	});
 
 	SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION);
@@ -258,13 +273,16 @@ void CTiebaManagerDlg::OnProWinCheckChange() {
 	}
 	if (m_explorerButton.IsWindowEnabled()) {//根据浏览按钮判断是否已经确认贴吧。
 		if (g_userConfig.m_plan != _T("默认")) {
-			SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION);
+			SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
 			_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_());
 		}
 		else {
-			SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION);
+			SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
 			_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_());
 		}
+	}
+	else {
+		SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
 	}
 }	
 
@@ -414,15 +432,21 @@ void CTiebaManagerDlg::AutoUpdateThread()
 	{
 	case UPDATE_FAILED_TO_GET_INFO:
 		m_stateStatic.SetWindowText(_T("检查更新失败：获取文件信息失败，在设置里手动检查更新"));
+		m_hasUpdate = _T("");
 		break;
 	case UPDATE_NO_UPDATE:
 		m_stateStatic.SetWindowText(_T("待机中 ") + GetRandomTip());
+		m_hasUpdate = _T("");
 		break;
 	case UPDATE_HAS_UPDATE:
 		m_stateStatic.SetWindowText(_T("待机中 有新版本"));
+		m_hasUpdate = STR_HAS_UPDATE;
+		break;
+	case UPDATE_NEED_RESTART:
+		m_hasUpdate = STR_NEED_RESTART;
 		break;
 	}
-
+	OnProWinCheckChange();
 	CoUninitialize();
 }
 
@@ -448,15 +472,45 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 	m_confirmButton.EnableWindow(FALSE);
 	m_stateStatic.SetWindowText(_T("验证贴吧中"));
 
-
+	BOOL hasCache = FALSE;
+	BOOL useCache = FALSE;
+	time_t curTime;
+	time(&curTime);
+	double timeDiff;
+	CString tbs, isLogin, src, tmp;
+	// 缓存查验机制
+	for (auto& i : *g_globalConfig.m_forumCache) {
+		if (i.m_forumName == forumName)
+		{
+			// 提示Cache
+			hasCache = TRUE;
+			m_log.Log(_T("<font color=green>存在贴吧信息缓存：</font>") + forumName
+				+ _T("<font color=green> 吧，缓存时间：</font>" + GetYYMMDD_HHMMSS_FromTimeT(i.m_cacheTime)));
+			timeDiff = difftime(curTime, i.m_cacheTime);
+			if (difftime(curTime, i.m_cacheTime) < 60 * 60) {
+				tmp.Format(_T("缓存时间距今小于1小时,将使用缓存数据 %.f"), timeDiff);
+				m_log.Log(tmp);
+				useCache = TRUE;
+				goto Cache;
+			}
+			break;
+		}
+	}
 	switch (g_tiebaOperate.SetTieba(forumName))
 	{
 	case CTiebaOperate::SET_TIEBA_TIMEOUT:
 		AfxMessageBox(_T("连接超时..."), MB_ICONERROR);
 		goto Error;
 	case CTiebaOperate::SET_TIEBA_NOT_FOUND:
-		AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR);
-		goto Error;
+		if (hasCache) {
+			AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
+			useCache = TRUE;
+			break;
+		}
+		else {
+			AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR);
+			goto Error;
+		}
 	case CTiebaOperate::SET_TIEBA_NOT_LOGIN:
 		AfxMessageBox(_T("请在设置-账号管理登录百度账号"), MB_ICONERROR);
 		goto Error;
@@ -466,6 +520,60 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 	case CTiebaOperate::SET_TIEBA_NO_TBS:
 		AfxMessageBox(_T("获取口令号失败！"), MB_ICONERROR);
 		goto Error;
+	}
+Cache:
+	// 缓存更新机制
+	if (!useCache) {
+		forumName = g_tiebaOperate.GetForumName();
+	}
+	for (auto& i : *g_globalConfig.m_forumCache) {
+		if (i.m_forumName == forumName)
+		{
+			if (useCache) {
+				// 使用Cache
+				g_tiebaOperate.SetForumName(i.m_forumName);
+				g_tiebaOperate.SetForumID(i.m_forumID);
+				g_tiebaOperate.SetUserName_(i.m_userName);
+				g_tiebaOperate.SetBDUSS();
+				// 采集tbs
+				src = g_tiebaOperate.HTTPGet(_T("https://tieba.baidu.com/dc/common/tbs"));
+				tbs = GetStringBetween(src, _T("tbs\":\""), _T("\""));
+				isLogin = GetStringBetween(src, _T("is_login\":"), _T("}"));
+				if (tbs == _T("")) {
+					AfxMessageBox(_T("使用缓存,获取口令号失败"), MB_ICONERROR);
+					goto Error;
+				}
+				if (isLogin != _T("1")) {
+					AfxMessageBox(_T("使用缓存,未登录状态"), MB_ICONERROR);
+					goto Error;
+				}
+				g_tiebaOperate.SetTBS(tbs);
+				m_log.Log(_T("<font color=green>使用贴吧信息缓存：</font>") + g_tiebaOperate.GetForumName()
+					+ _T("<font color=green> 吧，缓存时间：</font>" + GetYYMMDD_HHMMSS_FromTimeT(i.m_cacheTime)));
+			}
+			else {
+				// 更新Cache
+				i.m_forumName = g_tiebaOperate.GetForumName();
+				i.m_forumID = g_tiebaOperate.GetForumID();
+				i.m_userName = g_tiebaOperate.GetUserName_();
+				time(&i.m_cacheTime);
+				m_log.Log(_T("<font color=green>更新贴吧信息缓存：</font>") + g_tiebaOperate.GetForumName()
+					+ _T("<font color=green> 吧，更新时间：</font>" + GetYYMMDD_HHMMSS_FromTimeT(i.m_cacheTime)));
+			}
+			hasCache = TRUE;
+			break;
+		}
+	}
+	// 新建缓存
+	if (!hasCache && !useCache) {
+		// 没有缓存 且 不使用Cache
+		g_globalConfig.m_forumCache.m_value.push_back(CforumCache(
+			g_tiebaOperate.GetForumID(),
+			g_tiebaOperate.GetForumName(),
+			g_tiebaOperate.GetUserName_()
+		));
+		m_log.Log(_T("<font color=green>创建贴吧信息缓存：</font>") + g_tiebaOperate.GetForumName()
+			+ _T("<font color=green> 吧，创建时间：</font>" + GetYYMMDD_HHMMSS_FromTimeT()));
 	}
 
 	m_stateStatic.SetWindowText(_T("待机中 ") + GetRandomTip());
@@ -478,6 +586,7 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 	
 	m_log.Log(_T("<font color=green>确认监控贴吧：</font>") + g_tiebaOperate.GetForumName()
 		+ _T("<font color=green> 吧，使用账号：</font>" + g_tiebaOperate.GetUserName_()));
+	m_forumNameEdit.SetWindowText(g_tiebaOperate.GetForumName()); // 立即修正输入框
 	OnProWinCheckChange();
 
 	g_postSetTiebaEvent(forumName);

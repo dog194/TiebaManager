@@ -51,6 +51,7 @@ void CExplorePostPage::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CExplorePostPage, CExplorerPage)
 	ON_BN_CLICKED(IDC_BUTTON1, &CExplorePostPage::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON_T_ID, &CExplorePostPage::OnBnClickedButtonTID)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST1, &CExplorePostPage::OnItemchangedList1)
 END_MESSAGE_MAP()
 #pragma endregion
@@ -114,6 +115,18 @@ void CExplorePostPage::OnBnClickedButton1()
 	}
 
 	m_gotoButton.EnableWindow(TRUE);
+}
+
+// 通过贴ID跳转
+void CExplorePostPage::OnBnClickedButtonTID()
+{
+	m_gotoButtonTID.EnableWindow(FALSE);
+
+	CString sTid;
+	m_editTID.GetWindowText(sTid);
+	m_tid = sTid;
+	OnBnClickedButton1();
+	m_gotoButtonTID.EnableWindow(TRUE);
 }
 
 // 选中项改变

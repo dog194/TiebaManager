@@ -26,6 +26,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 TBM_CORE_API DEF_VARIABLE(g_comfirmEvent);
 
 TBM_CORE_API DEF_VARIABLE(g_settingWinCloseEvent);
+TBM_CORE_API DEF_VARIABLE(g_postUpdateInfoEvent);
 TBM_CORE_API DEF_VARIABLE(g_comfirmQueneChangeEvent);
 TBM_CORE_API DEF_VARIABLE(g_operateQueneChangeEvent);
 

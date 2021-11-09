@@ -42,6 +42,7 @@ protected:
 public:
 	virtual BOOL OnInitDialog();
 	void OnBnClickedButton1();
+	void OnBnClickedButtonTID();
 	afx_msg void OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDblclkList1(NMHDR *pNMHDR, LRESULT *pResult);
 

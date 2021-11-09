@@ -23,6 +23,19 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #pragma warning(disable:4819) // OpenCV头文件包含Unicode字符
 #include <opencv2\core\mat.hpp>
 
+// 贴吧信息缓存
+class CforumCache
+{
+public:
+	CString m_forumID;				// 贴吧ID
+	CString m_forumName;			// 贴吧名
+	CString m_userName;				// 用户名
+	time_t m_cacheTime = time(NULL);// 缓存时间
+
+	CforumCache();
+	CforumCache(const CString& forumID, const CString& forumName, const CString& userName);
+	CforumCache(const CString& forumID, const CString& forumName, const CString& userName, const time_t& cacheTime);
+};
 
 // 全局配置
 class CGlobalConfig : public CConfigBase
@@ -31,6 +44,7 @@ public:
 	COption<BOOL> m_firstRun;				// 第一次运行
 	COption<CString> m_currentUser;			// 当前账号
 	COption<BOOL> m_autoUpdate;				// 自动更新
+	COption<std::vector<CforumCache> > m_forumCache;// 贴吧信息缓存
 
 	CGlobalConfig();
 };

@@ -57,4 +57,5 @@ private:
 	static void OnUpdateComCount(const int& qSize);
 	static void OnUpdateOpeCount(const int& qSize);
 	static void OnCloseSettingWin();
+	static void OnPostUpdateInfo(const CString& hasUpdate);
 };
