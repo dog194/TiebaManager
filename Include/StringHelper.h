@@ -34,7 +34,7 @@ public:
 	void Set(const CString& _text, BOOL _isRegex = FALSE, BOOL _ignoreCase = FALSE);
 };
 
-const int m_tips_num = 7;
+const int m_tips_num = 8;
 const CString m_tips[m_tips_num] = {
 	_T("更新群，交流群，984150818(没被封的话)"),
 	_T("不喜欢复杂的确认界面，可以在设置里面关闭启用Pro窗口"),
@@ -42,7 +42,8 @@ const CString m_tips[m_tips_num] = {
 	_T("确认窗口点击规则名，可以快捷打开对应规则修改"),
 	_T("黑名单/循环封，头像ID输入用户主页网址可以自动转换哦"),
 	_T("修改方案名，主窗口标题会跟着变哦！"),
-	_T("封禁需谨慎")
+	_T("封禁需谨慎"),
+	_T("检查更新设置在 关于&更新 页面中")
 };
 
 const CString GET_NAME_ERROR_SHORT = _T("[长度不足]");
