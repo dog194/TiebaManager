@@ -44,6 +44,9 @@ void CExplorerPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC1, m_static);
 	DDX_Control(pDX, IDC_EDIT2, m_edit);
 	DDX_Control(pDX, IDC_BUTTON1, m_gotoButton);
+	DDX_Control(pDX, IDC_STATIC_T_ID, m_staticTID);
+	DDX_Control(pDX, IDC_EDIT_T_ID, m_editTID);
+	DDX_Control(pDX, IDC_BUTTON_T_ID, m_gotoButtonTID);
 	DDX_Control(pDX, IDC_LIST1, m_list);
 }
 

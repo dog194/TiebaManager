@@ -51,6 +51,7 @@ void CExploreThreadPage::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CExploreThreadPage, CExplorerPage)
 	ON_BN_CLICKED(IDC_BUTTON1, &CExploreThreadPage::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON_T_ID, &CExploreThreadPage::OnBnClickedButtonTID)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST1, &CExploreThreadPage::OnItemchangedList1)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, &CExploreThreadPage::OnDblclkList1)
 END_MESSAGE_MAP()
@@ -109,6 +110,26 @@ void CExploreThreadPage::OnBnClickedButton1()
 	m_gotoButton.EnableWindow(TRUE);
 }
 
+// 通过贴ID跳转
+void CExploreThreadPage::OnBnClickedButtonTID()
+{
+	m_gotoButtonTID.EnableWindow(FALSE);
+
+	CExplorerDlg* parentDlg = (CExplorerDlg*)GetParent()->GetParent();
+	CExplorePostPage& explorePostPage = *parentDlg->m_explorePostPage;
+	CString sTid;
+	m_editTID.GetWindowText(sTid);
+	explorePostPage.m_tid = sTid;
+	explorePostPage.m_edit.SetWindowText(_T("1"));
+	explorePostPage.m_editTID.SetWindowText(sTid);
+	explorePostPage.OnBnClickedButton1();
+	parentDlg->m_tab.SetCurSel(1);
+	LRESULT tmp;
+	parentDlg->OnTcnSelchangeTab1(NULL, &tmp);
+
+	m_gotoButtonTID.EnableWindow(TRUE);
+}
+
 // 选中项改变
 void CExploreThreadPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 {
@@ -116,6 +137,7 @@ void CExploreThreadPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 	
 	if (pNMLV->iItem != LB_ERR && (pNMLV->uNewState & LVIS_SELECTED) != 0)
 	{
+		m_editTID.SetWindowText(m_threads[pNMLV->iItem].tid);
 		CExplorerDlg* explorerDlg = (CExplorerDlg*)GetParent()->GetParent();
 		explorerDlg->m_edit.SetWindowText(m_threads[pNMLV->iItem].title + _T("\r\n") 
 			+ m_threads[pNMLV->iItem].preview + _T("\r\n\r\n") + m_threads[pNMLV->iItem].authorShowName);
@@ -136,7 +158,9 @@ void CExploreThreadPage::OnDblclkList1(NMHDR *pNMHDR, LRESULT *pResult)
 	{
 		CExplorerDlg* parentDlg = (CExplorerDlg*)GetParent()->GetParent();
 		CExplorePostPage& explorePostPage = *parentDlg->m_explorePostPage;
+		m_editTID.SetWindowText(m_threads[pNMItemActivate->iItem].tid);
 		explorePostPage.m_tid = m_threads[pNMItemActivate->iItem].tid;
+		explorePostPage.m_editTID.SetWindowText(m_threads[pNMItemActivate->iItem].tid);
 		explorePostPage.m_edit.SetWindowText(_T("1"));
 		explorePostPage.OnBnClickedButton1();
 		parentDlg->m_tab.SetCurSel(1);

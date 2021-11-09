@@ -48,5 +48,8 @@ public:
 	CStatic m_static;
 	CEdit m_edit;
 	CButton m_gotoButton;
+	CStatic m_staticTID;
+	CEdit m_editTID;
+	CButton m_gotoButtonTID;
 	CListCtrl m_list;
 };

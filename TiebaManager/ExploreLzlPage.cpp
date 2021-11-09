@@ -62,6 +62,9 @@ BOOL CExploreLzlPage::OnInitDialog()
 	m_static.ShowWindow(SW_HIDE);
 	m_edit.ShowWindow(SW_HIDE);
 	m_gotoButton.ShowWindow(SW_HIDE);
+	m_staticTID.ShowWindow(SW_HIDE);
+	m_editTID.ShowWindow(SW_HIDE);
+	m_gotoButtonTID.ShowWindow(SW_HIDE);
 
 	m_list.SetExtendedStyle(LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 	int i = 0;
