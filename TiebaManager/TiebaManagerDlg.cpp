@@ -523,6 +523,9 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 	}
 Cache:
 	// 缓存更新机制
+	if (!useCache) {
+		forumName = g_tiebaOperate.GetForumName();
+	}
 	for (auto& i : *g_globalConfig.m_forumCache) {
 		if (i.m_forumName == forumName)
 		{
