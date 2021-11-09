@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #pragma once
 #include "TiebaAPICommon.h"
+#include <StringHelper.h>
 
 
 class TIEBA_API_API CTiebaOperate
@@ -42,6 +43,11 @@ public:
 	CString GetEncodedForumName() { return m_encodedForumName; }
 	CString GetUserName_() { return m_userName; }
 	CString GetTBS() { return m_tbs; }
+	void SetForumID(const CString forumID) { m_forumID = forumID; }
+	void SetForumName(const CString forumName) { m_forumName = forumName; m_encodedForumName = EncodeURI(m_forumName); }
+	void SetUserName_(const CString userName) { m_userName = userName; }
+	void SetBDUSS() { m_bduss = GetStringBetween(m_cookie, _T("BDUSS="), _T(";"));}
+	void SetTBS(const CString tbs) { m_tbs = tbs; }
 	BOOL HasSetTieba() { return m_bduss != _T(""); }
 
 	CTiebaOperate(CString& cookie, const int& banDuration, const CString& banReason);

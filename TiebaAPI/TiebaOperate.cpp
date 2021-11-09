@@ -20,7 +20,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "stdafx.h"
 #include <TiebaOperate.h>
 #include <TiebaClawer.h>
-#include <StringHelper.h>
 #include <NetworkHelper.h>
 #include <TiebaClientHelper.h>
 

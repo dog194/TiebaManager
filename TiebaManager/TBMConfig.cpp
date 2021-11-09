@@ -22,16 +22,94 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "TBMConfigPath.h"
 #include "ConfigHelper.h"
 
+// 贴吧信息缓存
+CforumCache::CforumCache()
+{
+	m_forumID = _T("");
+	m_forumName = _T("");
+	m_userName = _T("");
+}
+
+CforumCache::CforumCache(const CString& forumID, const CString& forumName, const CString& userName)
+{
+	m_forumID = forumID;
+	m_forumName = forumName;
+	m_userName = userName;
+	time(&m_cacheTime);
+}
+
+CforumCache::CforumCache(const CString& forumID, const CString& forumName, const CString& userName, const time_t& cacheTime)
+{
+	m_forumID = forumID;
+	m_forumName = forumName;
+	m_userName = userName;
+	m_cacheTime = cacheTime;
+}
+
+// XML 读写
+DECLEAR_READ(CforumCache)
+{
+	const tinyxml2::XMLElement* optionNode = root.FirstChildElement(m_name);
+	if (optionNode == NULL)
+	{
+		UseDefault();	//虽然不知道做了什么，但是还是写了 = =
+		return;
+	}
+	COption<CString> forumID("ForumID");
+	COption<CString> forumName("ForumName");
+	COption<CString> userName("UserName");
+	COption<time_t> cacheTime("CacheTime", 0LL);
+	
+	forumID.Read(*optionNode);
+	forumName.Read(*optionNode);
+	userName.Read(*optionNode);
+	cacheTime.Read(*optionNode);
+
+	m_value.m_forumID = forumID;
+	m_value.m_forumName = forumName;
+	m_value.m_userName = userName;
+	m_value.m_cacheTime = cacheTime;
+
+	if (!IsValid(m_value))	//虽然不知道做了什么，但是还是写了 = =
+		UseDefault();
+}
+
+DECLEAR_WRITE(CforumCache)
+{
+	tinyxml2::XMLDocument* doc = root.GetDocument();
+	tinyxml2::XMLElement* optionNode = doc->NewElement(m_name);
+	root.LinkEndChild(optionNode);
+
+	COption<CString> forumID("ForumID");
+	COption<CString> forumName("ForumName");
+	COption<CString> userName("UserName");
+	COption<time_t> cacheTime("CacheTime", 0LL);
+	forumID.Read(*optionNode);
+	forumName.Read(*optionNode);
+	userName.Read(*optionNode);
+	cacheTime.Read(*optionNode);
+
+	*forumID = m_value.m_forumID;
+	*forumName = m_value.m_forumName;
+	*userName = m_value.m_userName;
+	*cacheTime = m_value.m_cacheTime;
+	forumID.Write(*optionNode);
+	forumName.Write(*optionNode);
+	userName.Write(*optionNode);
+	cacheTime.Write(*optionNode);
+}
 
 // 全局配置
 CGlobalConfig::CGlobalConfig() : CConfigBase("Global"),
 	m_firstRun("FirstRun", TRUE),
 	m_currentUser("UserName", _T("[NULL]"), [](const CString& value){ return value != _T("") && PathFileExists(USERS_DIR_PATH + value + _T("\\ck.xml")); }),
-	m_autoUpdate("AutoUpdate", TRUE)
+	m_autoUpdate("AutoUpdate", TRUE),
+	m_forumCache("ForumCache")
 {
 	m_options.push_back(&m_firstRun);
 	m_options.push_back(&m_currentUser);
 	m_options.push_back(&m_autoUpdate);
+	m_options.push_back(&m_forumCache);
 }
 
 // 用户配置
