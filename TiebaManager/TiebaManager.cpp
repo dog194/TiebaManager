@@ -112,6 +112,20 @@ BOOL CTiebaManagerApp::InitInstance()
 LONG WINAPI CTiebaManagerApp::ExceptionHandler(_EXCEPTION_POINTERS* ExceptionInfo)
 {
 	CFile file;
+	HMODULE hModule;
+	WCHAR eModuleName[MAX_PATH] = { 0 };
+	GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS, (LPCWSTR)ExceptionInfo->ExceptionRecord->ExceptionAddress, &hModule);
+	GetModuleFileName(hModule, eModuleName, ARRAYSIZE(eModuleName));
+	CString eModuleNameStr, eMessage;
+	eModuleNameStr.Format(_T("%s"), eModuleName);
+	if (StringIncludes(eModuleNameStr, _T("MMDevAPI.DLL"), false, true)) {
+		AfxMessageBox(_T("MMDevAPI.DLL 这是一个已知的崩溃,不会影响正常使用,可以正常关闭程序重开,或者就这样放着."), MB_ICONERROR);
+		return EXCEPTION_CONTINUE_EXECUTION;
+		//return EXCEPTION_CONTINUE_EXECUTION;
+		//EXCEPTION_EXECUTE_FAULT;
+		// EXCEPTION_CONTINUE_SEARCH
+	}
+	eMessage.Format(_T("程序崩溃了，先别点确定，如果其他窗口运行正常，请无视崩溃信息，或正常关闭窗口保存缓存记录，重开，如果其他窗口卡死请把exception.dmp文件发到群里帮助调试.(%s)"), eModuleNameStr);
 	if (file.Open(_T("exception.dmp"), CFile::modeCreate | CFile::modeWrite))
 	{
 		MINIDUMP_EXCEPTION_INFORMATION einfo;
@@ -121,7 +135,7 @@ LONG WINAPI CTiebaManagerApp::ExceptionHandler(_EXCEPTION_POINTERS* ExceptionInf
 		MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), file, MiniDumpWithIndirectlyReferencedMemory,
 			&einfo, NULL, NULL);
 	}
-	AfxMessageBox(_T("程序崩溃了，先别点确定，如果其他窗口运行正常，请无视崩溃信息，或正常关闭窗口保存缓存记录，重开，如果其他窗口卡死请把exception.dmp文件发到群里帮助调试"), MB_ICONERROR);
+	AfxMessageBox(eMessage, MB_ICONERROR);
 	return EXCEPTION_EXECUTE_HANDLER;
 }
 
