@@ -23,6 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TBMAPI.h>
 #include "TBMGlobal.h"
 #include "ConfirmDlg.h"
+#include <TBMCoreEvents.h>
 
 #include "SettingDlg.h"
 #include "ExplorerDlg.h"
@@ -205,6 +206,17 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
 	SetTimer(0, 24 * 60 * 60 * 1000, [](HWND, UINT, UINT_PTR, DWORD) {
 		g_userCache.m_bannedUser->clear();
+		// 如果设置了自动更新，每天检查一次
+		if (g_globalConfig.m_autoUpdate) {
+			switch (CheckUpdate(True)) {
+			case UPDATE_HAS_UPDATE:
+				g_postUpdateInfoEvent(STR_HAS_UPDATE);
+				break;
+			case UPDATE_NO_UPDATE:
+			case UPDATE_FAILED_TO_GET_INFO:
+				g_postUpdateInfoEvent(_T(""));
+			}
+		}
 	});
 
 	SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION);

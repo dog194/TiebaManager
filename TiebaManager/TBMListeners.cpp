@@ -59,6 +59,7 @@ CTBMListeners::CTBMListeners()
 
 	g_openLinkInLogEvent.AddListener(OnOpenLinkInLog);
 	g_settingWinCloseEvent.AddListener(OnCloseSettingWin);
+	g_postUpdateInfoEvent.AddListener(OnPostUpdateInfo);
 }
 
 
@@ -246,5 +247,11 @@ void CTBMListeners::OnUpdateOpeCount(const int& qSize) {
 
 void CTBMListeners::OnCloseSettingWin() {
 	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	dlg->OnProWinCheckChange();
+}
+
+void CTBMListeners::OnPostUpdateInfo(const CString& hasUpdate) {
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	dlg->m_hasUpdate = hasUpdate;
 	dlg->OnProWinCheckChange();
 }
