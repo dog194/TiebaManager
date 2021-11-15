@@ -52,7 +52,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_playSound			("PlaySound",			TRUE),
 	m_banClientInterface("ClientBanInterface",  FALSE),
 
-	m_blackListEnable	("BlackListEnable",		FALSE),
+	m_blackListEnable	("BlackListEnable",		TRUE),
 	m_blackListConfirm	("BlackListConfirm",	FALSE),
 	m_blackListDelete	("BlackListDelete",		FALSE),
 	m_blackListBan		("BlackListBan",		FALSE),

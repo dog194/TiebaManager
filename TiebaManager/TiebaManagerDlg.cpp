@@ -192,6 +192,9 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	if (g_globalConfig.m_autoUpdate)
 		std::thread(&CTiebaManagerDlg::AutoUpdateThread, this).detach();
 
+	// 默认启用黑名单
+	g_pTbmCoreConfig->m_blackListEnable.m_value = TRUE;
+
 	// 初次运行先看关于
 	if (g_globalConfig.m_firstRun)
 	{
