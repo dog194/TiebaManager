@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
     <Version>211115(2.32)</Version>
-    <VersionNum>211015</VersionNum>
+    <VersionNum>211115</VersionNum>
     <UpdateLog>
     更新日志211115(2.32)：
     1. 确认贴吧大修，缓存贴吧信息。避免确认失败
