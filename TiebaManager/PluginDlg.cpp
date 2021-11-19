@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include "PluginDlg.h"
+#include <update.h>
 
 #include "PluginManager.h"
 
@@ -74,6 +75,7 @@ BOOL CPluginDlg::OnInitDialog()
 	for (const auto& i : CPluginManager::GetInstance().GetPlugins())
 		m_list.AddString(i.m_name);
 
+	SetWindowText(_T("插件-") + UPDATE_CURRENT_VERSION);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }

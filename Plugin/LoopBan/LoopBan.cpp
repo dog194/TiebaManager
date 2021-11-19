@@ -59,9 +59,12 @@ void CLoopBan::Init()
 	if (plugin == NULL)
 		return;
 
+	m_version = GetFileVersionString(plugin->m_path, _T("ProductVersion"));
 	plugin->m_description = _T("循环封插件\r\n")
 		                    _T("\r\n")
-		                    _T("作者：盗我原号的没J8");
+		                    _T("作者：盗我原号的没J8")
+							_T("\r\n")
+							_T("版本：") + m_version;
 	plugin->m_onConfig = std::bind(&CLoopBan::OnConfig, this);
 
 
@@ -104,7 +107,7 @@ void CLoopBan::OnConfig()
 
 	if (m_loopBanDlg == NULL)
 	{
-		m_loopBanDlg = new CLoopBanDlg(m_loopBanDlg, m_config);
+		m_loopBanDlg = new CLoopBanDlg(m_loopBanDlg, m_config, m_version);
 		m_loopBanDlg->Create(m_loopBanDlg->IDD, CWnd::GetDesktopWindow());
 	}
 }

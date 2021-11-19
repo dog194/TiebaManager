@@ -84,6 +84,7 @@ public:
 
 	HMODULE m_module;
 
+	CString m_version = _T("");
 	CLoopBanConfig m_config;
 	CLoopBanDlg* m_loopBanDlg = NULL;
 };

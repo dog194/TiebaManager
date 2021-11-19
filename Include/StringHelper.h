@@ -118,3 +118,5 @@ HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
 HELPER_API CString Int2CString(const int num);
 // 获取随机Tip
 HELPER_API CString GetRandomTip();
+// 获取DLL文件信息
+HELPER_API CString GetFileVersionString(LPCTSTR pFileName, LPCTSTR pName /* = NULL */);
