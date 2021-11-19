@@ -261,6 +261,7 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 	m_operatePage->m_confirmCheck.SetCheck(plan.m_confirm);			    // 操作前提示
 	m_operatePage->m_ProWinCheck.SetCheck(plan.m_windowPro);			// Pro窗口
 	m_operatePage->m_PlaySoundCheck.SetCheck(plan.m_playSound);			// 播放删帖音效
+	m_operatePage->m_ShowNameCheck.SetCheck(plan.m_showName);			// 标题/托盘显示用户名
 	m_operatePage->m_banClientInterfaceCheck.SetCheck(plan.m_banClientInterface);	// 封禁使用客户端接口
 	m_operatePage->m_blackListEnableCheck.SetCheck(plan.m_blackListEnable);			// 黑名单功能启用
 	m_operatePage->m_blackListConfirmCheck.SetCheck(plan.m_blackListConfirm);		// 黑名单强制确认
@@ -318,6 +319,7 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	*plan.m_confirm = m_operatePage->m_confirmCheck.GetCheck();			// 操作前提示
 	*plan.m_windowPro = m_operatePage->m_ProWinCheck.GetCheck();		// Pro窗口
 	*plan.m_playSound = m_operatePage->m_PlaySoundCheck.GetCheck();		// 播放删帖音效
+	*plan.m_showName = m_operatePage->m_ShowNameCheck.GetCheck();		// 标题/托盘显示用户名
 	*plan.m_banClientInterface = m_operatePage->m_banClientInterfaceCheck.GetCheck();	// 封禁使用客户端接口
 	*plan.m_blackListEnable = m_operatePage->m_blackListEnableCheck.GetCheck();			// 黑名单功能启用
 	*plan.m_blackListConfirm = m_operatePage->m_blackListConfirmCheck.GetCheck();		// 黑名单强制确认

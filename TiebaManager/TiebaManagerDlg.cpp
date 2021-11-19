@@ -276,12 +276,24 @@ void CTiebaManagerDlg::OnProWinCheckChange() {
 	}
 	if (m_explorerButton.IsWindowEnabled()) {//根据浏览按钮判断是否已经确认贴吧。
 		if (g_userConfig.m_plan != _T("默认")) {
-			SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
-			_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_());
+			if (g_plan.m_showName) {
+				SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_());
+			}
+			else {
+				SetWindowText(g_userConfig.m_plan + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(""));
+			}
 		}
 		else {
-			SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
-			_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_());
+			if (g_plan.m_showName) {
+				SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_());
+			}
+			else {
+				SetWindowText(g_tiebaOperate.GetForumName() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(""));
+			}
 		}
 	}
 	else {
