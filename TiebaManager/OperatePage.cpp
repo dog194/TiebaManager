@@ -51,6 +51,7 @@ void COperatePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_PRO_WINDOW, m_ProWinCheck);
 	DDX_Control(pDX, IDC_PLAY_SOUND, m_PlaySoundCheck);
 	DDX_Control(pDX, IDC_SHOW_NAME, m_ShowNameCheck);
+	DDX_Control(pDX, IDC_RULE_DOUBLE_CLICK, m_RuleDoubleClickCheck);
 	DDX_Control(pDX, IDC_EDIT7, m_banReasonEdit);
 	DDX_Control(pDX, IDC_CHECK3, m_defriendCheck);
 	DDX_Control(pDX, IDC_EDIT8, m_defriendTrigCountEdit);

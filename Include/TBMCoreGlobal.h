@@ -51,6 +51,7 @@ public:
 	COption<BOOL>		m_windowPro;			// 详细版操作界面
 	COption<BOOL>		m_playSound;			// 播放删帖音效
 	COption<BOOL>		m_showName;				// 标题/托盘显示用户名
+	COption<BOOL>		m_ruleDoubleClick;		// 确认窗口规则跳转改用双击
 	COption<BOOL>		m_banClientInterface;	// 封禁用客户端接口
 
 	COption<BOOL>		m_blackListEnable;		// 黑名单功能总开关

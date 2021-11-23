@@ -82,8 +82,8 @@ BEGIN_MESSAGE_MAP(CConfirmDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &CConfirmDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON_ADD_BL, &CConfirmDlg::OnBnClickedButtonAddBl)
 	ON_WM_TIMER()
-	//ON_STN_DBLCLK(IDC_STATIC_RULE, &CConfirmDlg::OnStnDblclickStaticRule)
-	ON_STN_CLICKED(IDC_STATIC_RULE, &CConfirmDlg::OnStnDblclickStaticRule)
+	ON_STN_DBLCLK(IDC_STATIC_RULE, &CConfirmDlg::OnStnDblclickStaticRule)
+	ON_STN_CLICKED(IDC_STATIC_RULE, &CConfirmDlg::OnStnClickStaticRule)
 	ON_BN_CLICKED(IDC_BUTTON_DELETE_ONLY, &CConfirmDlg::OnBnClickedButtonDeleteOnly)
 	ON_BN_CLICKED(IDC_BUTTON_BAN_NOW, &CConfirmDlg::OnBnClickedButtonBanNow)
 END_MESSAGE_MAP()
@@ -158,8 +158,13 @@ BOOL CConfirmDlg::OnInitDialog()
 			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_operation->object->authorPortraitUrl);
 		if (m_operation->object->timestamp != 0) {
 			//不是所有数据都带时间
-			content += _T("\r\n\r\n时     间：") + GetYYMMDD_HHMMSS_FromTimeT(m_operation->object->timestamp);
+			content += _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_operation->object->timestamp);
+			content += _T("\r\n主题帖ID：") + m_operation->object->tid;
 		}
+		else {
+			content += _T("\r\n\r\n主题帖ID：") + m_operation->object->tid;
+		}
+		
 
 		m_contentEdit.SetWindowText(content);
 		m_contentEdit.SetSel(m_operation->pos, m_operation->pos + m_operation->length);
@@ -258,7 +263,8 @@ void CConfirmDlg::OnBnClickedButtonAddBl()
 	dlg->m_settingDlg->SetActiveWindow();
 }
 
-void CConfirmDlg::OnStnDblclickStaticRule()
+// 打开规则跳转
+void CConfirmDlg::OpenRulePage()
 {
 	if (m_operation == NULL)
 		return;
@@ -284,6 +290,22 @@ void CConfirmDlg::OnStnDblclickStaticRule()
 		dlg->m_settingDlg->m_blackListRulesPage->SetSelectedRow(index);
 		dlg->m_settingDlg->m_blackListRulesPage->OnClickedButton3();
 		dlg->SetForegroundWindow();
+	}
+}
+
+// 点击规则 单击
+void CConfirmDlg::OnStnClickStaticRule()
+{
+	if (!g_plan.m_ruleDoubleClick) {
+		OpenRulePage();
+	}
+}
+
+// 点击规则 双击
+void CConfirmDlg::OnStnDblclickStaticRule()
+{
+	if (g_plan.m_ruleDoubleClick) {
+		OpenRulePage();
 	}
 }
 

@@ -63,6 +63,7 @@ public:
 	CButton m_ProWinCheck;
 	CButton m_PlaySoundCheck;
 	CButton m_ShowNameCheck;
+	CButton m_RuleDoubleClickCheck;
 	CButton m_banClientInterfaceCheck;
 	CButton m_blackListEnableCheck;
 	CButton m_blackListConfirmCheck;

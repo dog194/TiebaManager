@@ -49,6 +49,8 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButtonAddBl();
+	afx_msg void OpenRulePage();
+	afx_msg void OnStnClickStaticRule();
 	afx_msg void OnStnDblclickStaticRule();
 	afx_msg void OnBnClickedButtonDeleteOnly();
 	afx_msg void OnBnClickedButtonBanNow();
