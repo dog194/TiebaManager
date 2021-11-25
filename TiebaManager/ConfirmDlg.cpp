@@ -138,9 +138,9 @@ BOOL CConfirmDlg::OnInitDialog()
 	m_resize.AddControl(&m_static_is_bl, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
 	m_resize.AddControl(&m_static_break_rule_count, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
 	m_resize.AddControl(&m_static_con_quene_count, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
-	m_resize.AddControl(&m_ignoreTidButton, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
-	m_resize.AddControl(&m_ignorePortraitButton, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
-	m_resize.AddControl(&m_static_tempRule, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_ignoreTidButton, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
+	m_resize.AddControl(&m_ignorePortraitButton, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
+	m_resize.AddControl(&m_static_tempRule, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
 	if (g_plan.m_hiddenFunction) {
 		m_ignoreTidButton.ShowWindow(SW_SHOW);
 		m_ignorePortraitButton.ShowWindow(SW_SHOW);

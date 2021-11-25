@@ -88,6 +88,8 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_windowPro);
 	m_options.push_back(&m_playSound);
 	m_options.push_back(&m_showName);
+	m_options.push_back(&m_ruleDoubleClick);
+	m_options.push_back(&m_hiddenFunction);
 	m_options.push_back(&m_banClientInterface);
 
 	m_options.push_back(&m_blackListEnable);

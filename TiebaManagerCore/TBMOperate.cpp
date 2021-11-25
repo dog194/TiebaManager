@@ -81,6 +81,11 @@ void CTBMOperate::ConfirmThread()
 		if (res == POP_UNEXPECTED)
 			continue;
 
+		if (m_confirmQueue.size() <= 0) {
+			// 确认队列为0 清空临时规则
+			g_pUserCache->m_tempIgnoreRule.clear();
+		}
+
 		// 没有操作
 		if (op.ruleType == RULE_TYPE_ILLEGA_RULE)
 			if (!g_pTbmCoreConfig->m_delete && !g_pTbmCoreConfig->m_banID && !g_pTbmCoreConfig->m_defriend)
@@ -147,17 +152,21 @@ void CTBMOperate::ConfirmThread()
 				int tmpRUleType = op.ruleType;
 				g_comfirmEvent(op, res, tmpRUleType);
 				op.ruleType = tmpRUleType;
+				if (m_confirmQueue.size() <= 0) {
+					// 确认队列为0 清空临时规则
+					g_pUserCache->m_tempIgnoreRule.clear();
+				}
 			}
 			if (!res)
 			{
 				// 本次确认队列忽略规则
 				if (op.ruleType == RULE_TYPE_IGNORE_TID) {
 					// 本次确认队列忽略 指定主题帖所有内容
-					g_pLog->Log(_T("<font color='Dragon Green'>本次确认队列：忽略 </font>") + op.object.get()->tid + _T("<font color='Dragon Green'> 主题帖所有内容</font>"));
+					g_pLog->Log(_T("<font color='#32CD32'>本次确认队列：忽略 </font>") + HTMLEscape(op.title) + _T("<font color='#32CD32'> 主题帖所有内容</font>"));
 				}
 				else if (op.ruleType == RULE_TYPE_IGNORE_POR) {
 					// 本次确认队列忽略 指定用户所有内容
-					g_pLog->Log(_T("<font color='Dragon Green'>本次确认队列：忽略 </font>") + HTMLEscape(op.object.get()->authorShowName) + _T("<font color='Dragon Green'> 作者所有内容</font>"));
+					g_pLog->Log(_T("<font color='#32CD32'>本次确认队列：忽略 </font>") + HTMLEscape(op.object.get()->authorShowName) + _T("<font color='#32CD32'> 作者所有内容</font>"));
 				}
 				switch (op.object->m_type)
 				{
