@@ -73,6 +73,9 @@ void CConfirmDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON_ADD_BL, m_addBlButton);
 	DDX_Control(pDX, IDC_BUTTON_BAN_NOW, m_banDirectButton);
 	DDX_Control(pDX, IDC_BUTTON_DELETE_ONLY, m_deleteOnlyButton);
+	DDX_Control(pDX, IDC_BUTTON_IGNORE_TID, m_ignoreTidButton);
+	DDX_Control(pDX, IDC_BUTTON_IGNORE_POR, m_ignorePortraitButton);
+	DDX_Control(pDX, IDC_STATIC_TEMP_RULE, m_static_tempRule);
 }
 
 
@@ -86,6 +89,8 @@ BEGIN_MESSAGE_MAP(CConfirmDlg, CDialog)
 	ON_STN_CLICKED(IDC_STATIC_RULE, &CConfirmDlg::OnStnClickStaticRule)
 	ON_BN_CLICKED(IDC_BUTTON_DELETE_ONLY, &CConfirmDlg::OnBnClickedButtonDeleteOnly)
 	ON_BN_CLICKED(IDC_BUTTON_BAN_NOW, &CConfirmDlg::OnBnClickedButtonBanNow)
+	ON_BN_CLICKED(IDC_BUTTON_IGNORE_TID, &CConfirmDlg::OnBnClickedButtonIgnoreTid)
+	ON_BN_CLICKED(IDC_BUTTON_IGNORE_POR, &CConfirmDlg::OnBnClickedButtonIgnorePor)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -133,6 +138,14 @@ BOOL CConfirmDlg::OnInitDialog()
 	m_resize.AddControl(&m_static_is_bl, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
 	m_resize.AddControl(&m_static_break_rule_count, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
 	m_resize.AddControl(&m_static_con_quene_count, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_ignoreTidButton, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_ignorePortraitButton, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
+	m_resize.AddControl(&m_static_tempRule, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
+	if (g_plan.m_hiddenFunction) {
+		m_ignoreTidButton.ShowWindow(SW_SHOW);
+		m_ignorePortraitButton.ShowWindow(SW_SHOW);
+		m_static_tempRule.ShowWindow(SW_SHOW);
+	}
 
 	if (m_operation != NULL)
 	{
@@ -325,4 +338,24 @@ void CConfirmDlg::OnBnClickedButtonBanNow()
 		return;
 	m_ruleType = RULE_TYPE_BAN_DIRECTLY;
 	CDialog::OnOK();
+}
+
+// 此次确认队列忽略该主题帖所有内容
+void CConfirmDlg::OnBnClickedButtonIgnoreTid()
+{
+	if (m_operation == NULL)
+		return;
+	m_ruleType = RULE_TYPE_IGNORE_TID;
+	g_pUserCache->m_tempIgnoreRule.push_back(CTempIgnoreRule(m_operation->object.get()->tid, _T("")));
+	CDialog::OnCancel();
+}
+
+// 此次确认队列忽略该作者所有内容
+void CConfirmDlg::OnBnClickedButtonIgnorePor()
+{
+	if (m_operation == NULL)
+		return;
+	m_ruleType = RULE_TYPE_IGNORE_POR;
+	g_pUserCache->m_tempIgnoreRule.push_back(CTempIgnoreRule(_T(""), GetPortraitFromString(m_operation->object.get()->authorPortraitUrl)));
+	CDialog::OnCancel();
 }

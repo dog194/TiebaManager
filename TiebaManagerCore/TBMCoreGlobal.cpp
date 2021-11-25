@@ -52,6 +52,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_playSound			("PlaySound",			TRUE),
 	m_showName			("ShowName",			TRUE),
 	m_ruleDoubleClick	("RuleDoubleClick",		FALSE),
+	m_hiddenFunction	("HiddenFunction",		FALSE),
 	m_banClientInterface("ClientBanInterface",  FALSE),
 
 	m_blackListEnable	("BlackListEnable",		TRUE),

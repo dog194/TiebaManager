@@ -93,10 +93,29 @@ void CTBMOperate::ConfirmThread()
 		if ( (op.ruleType == RULE_TYPE_ILLEGA_RULE && (g_pTbmCoreConfig->m_confirm || op.forceToConfirm)) || 
 			 (op.ruleType == RULE_TYPE_BLACK_LIST  && (g_pTbmCoreConfig->m_blackListConfirm || op.forceToConfirm)) )
 		{
-			BOOL res = TRUE;
+			BOOL res = TRUE; // 是否处理Flag
+
+			// 是否属于本次确认队列临时忽略规则
+			for (auto& i : g_pUserCache->m_tempIgnoreRule) {
+				if (i.m_tid != _T("")) {
+					// tid 不为空，表示按照tid忽略
+					if (i.m_tid == op.object.get()->tid) {
+						op.ruleType = RULE_TYPE_IGNORE_TID;
+						res = FALSE;
+					}
+				}
+				else if (i.m_portrait != _T("")) {
+					// portrait 不为空，表示按照portrait忽略
+					if (i.m_portrait == GetPortraitFromString(op.object.get()->authorPortraitUrl)) {
+						op.ruleType = RULE_TYPE_IGNORE_POR;
+						res = FALSE;
+					}
+				}
+			}
+			
+			// 重新查验是否属于黑名单用户
 			CString tmp_note; // 黑名单备注记录
-			// 重新查验是否属于黑名单用户 
-			if (g_pTbmCoreConfig->m_blackListEnable) { // 功能开启
+			if (g_pTbmCoreConfig->m_blackListEnable && res) { // 功能开启
 				if (g_pTbmCoreConfig->m_blackListBan || g_pTbmCoreConfig->m_blackListDelete) {
 					for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
 						if (i.Match(op.object->author, GetPortraitFromString(op.object->authorPortraitUrl))) {
@@ -114,9 +133,12 @@ void CTBMOperate::ConfirmThread()
 			int count = hasHistory ? (countIt->second) : 0;
 			op.ruleBreakCount = count; // 传递当前用户缓存已违规次数
 
-			// 黑名单对确认窗口生效
-			if (g_pTbmCoreConfig->m_blackListEnable && (!g_pTbmCoreConfig->m_blackListConfirm) && 
+			if (!res) {
+				// res = FALSE
+				// 临时的忽略规则
+			} else if (g_pTbmCoreConfig->m_blackListEnable && (!g_pTbmCoreConfig->m_blackListConfirm) && 
 				g_pTbmCoreConfig->m_blackListRecheck && op.isBlUser) { // 黑名单启用 && 没有强制确认 && 对确认窗前生效启用 && 属于黑名单
+				// 黑名单对确认窗口生效
 				g_pLog->Log(_T("<font color=pink>用户:") + op.object->authorShowName
 					+ _T(" 备注:") + tmp_note + _T(" 已在黑名单列表，自动确认处理</font>"));
 				res = TRUE;
@@ -128,6 +150,15 @@ void CTBMOperate::ConfirmThread()
 			}
 			if (!res)
 			{
+				// 本次确认队列忽略规则
+				if (op.ruleType == RULE_TYPE_IGNORE_TID) {
+					// 本次确认队列忽略 指定主题帖所有内容
+					g_pLog->Log(_T("<font color='Dragon Green'>本次确认队列：忽略 </font>") + op.object.get()->tid + _T("<font color='Dragon Green'> 主题帖所有内容</font>"));
+				}
+				else if (op.ruleType == RULE_TYPE_IGNORE_POR) {
+					// 本次确认队列忽略 指定用户所有内容
+					g_pLog->Log(_T("<font color='Dragon Green'>本次确认队列：忽略 </font>") + HTMLEscape(op.object.get()->authorShowName) + _T("<font color='Dragon Green'> 作者所有内容</font>"));
+				}
 				switch (op.object->m_type)
 				{
 				case TBObject::THREAD:
