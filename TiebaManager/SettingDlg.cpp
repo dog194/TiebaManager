@@ -247,6 +247,8 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 	m_scanPage->m_threadCountEdit.SetWindowText(tmp);				    // 线程数
 	m_scanPage->m_autoSaveLogCheck.SetCheck(plan.m_autoSaveLog);		// 自动保存日志
 	m_scanPage->m_clawerClientInterfaceCheck.SetCheck(plan.m_clawerInterface == 0 ? FALSE : TRUE); // 扫描接口
+	m_scanPage->m_nicknameClientInterfaceCheck.SetCheck(plan.m_nickNameInterface); // 启用昵称版本接口
+	m_scanPage->OnEnClientInterfaceChange();
 	m_scanPage->m_autoVerifyCheck.SetCheck(plan.m_autoVerify);			// 启动后自动确认贴吧
 	m_scanPage->m_autoScanCheck.SetCheck(plan.m_autoScan);				// 确认后贴吧自动扫描
 
@@ -306,6 +308,7 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	*plan.m_threadCount = _ttoi(strBuf);								// 线程数
 	*plan.m_autoSaveLog = m_scanPage->m_autoSaveLogCheck.GetCheck();	// 自动保存日志
 	*plan.m_clawerInterface = m_scanPage->m_clawerClientInterfaceCheck.GetCheck() == FALSE ? 0 : 1; // 扫描接口
+	*plan.m_nickNameInterface = m_scanPage->m_nicknameClientInterfaceCheck.GetCheck();				// 启用昵称版本接口
 	*plan.m_autoVerify = m_scanPage->m_autoVerifyCheck.GetCheck();		// 启动后自动确认贴吧
 	*plan.m_autoScan = m_scanPage->m_autoScanCheck.GetCheck();			// 确认后贴吧自动扫描
 

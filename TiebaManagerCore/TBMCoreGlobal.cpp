@@ -38,6 +38,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_briefLog			("BriefLog",			FALSE),
 	m_threadCount		("ThreadCount",			1,		InRange<int, 1, 16>),
 	m_clawerInterface	("ClawerInterface",		1,		InRange<int, 0, 1>),
+	m_nickNameInterface	("NickNameInterface",	FALSE),
 
 	m_delete			("Delete",				TRUE),
 	m_banID				("BanID",				FALSE),
@@ -75,6 +76,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_briefLog);
 	m_options.push_back(&m_threadCount);
 	m_options.push_back(&m_clawerInterface);
+	m_options.push_back(&m_nickNameInterface);
 
 	m_options.push_back(&m_delete);
 	m_options.push_back(&m_banID);

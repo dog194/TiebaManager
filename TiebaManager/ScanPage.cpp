@@ -51,6 +51,7 @@ void CScanPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT2, m_threadCountEdit);
 	DDX_Control(pDX, IDC_CHECK6, m_autoSaveLogCheck);
 	DDX_Control(pDX, IDC_CHECK7, m_clawerClientInterfaceCheck);
+	DDX_Control(pDX, IDC_CHECK_NICKNAME_INTERFACE, m_nicknameClientInterfaceCheck);
 }
 
 
@@ -59,6 +60,7 @@ BEGIN_MESSAGE_MAP(CScanPage, CNormalDlg)
 	ON_EN_KILLFOCUS(IDC_EDIT5, &CScanPage::OnEnKillfocusEdit5)
 	ON_EN_CHANGE(IDC_EDIT5, &CScanPage::OnEnChangeEdit5)
 	ON_EN_KILLFOCUS(IDC_EDIT2, &CScanPage::OnEnKillfocusEdit2)
+	ON_BN_CLICKED(IDC_CHECK7, &CScanPage::OnEnClientInterfaceChange)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -98,4 +100,10 @@ void CScanPage::OnEnKillfocusEdit2()
 	int threadCount = _ttoi(tmp);
 	if (threadCount < 1 || threadCount > 16)
 		m_threadCountEdit.SetWindowText(_T("2"));
+}
+
+// 客户端接口选中
+void CScanPage::OnEnClientInterfaceChange()
+{
+	m_nicknameClientInterfaceCheck.EnableWindow(m_clawerClientInterfaceCheck.GetCheck());
 }

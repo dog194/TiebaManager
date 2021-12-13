@@ -35,6 +35,7 @@ public:
 	COption<BOOL>		m_briefLog;				// 只输出删帖封号
 	COption<int>		m_threadCount;			// 线程数
 	COption<int>        m_clawerInterface;      // 贴吧采集API用的接口
+	COption<BOOL>       m_nickNameInterface;    // 启用昵称版本接口
 
 	COption<BOOL>		m_autoVerify;			// 启动后自动验证
 	COption<BOOL>		m_autoScan;				// 验证后自动扫描
