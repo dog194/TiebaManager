@@ -130,4 +130,4 @@ public:
 		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) = 0;
 };
 
-enum TiebaInterface { TIEBA_INTERFACE_WEB, TIEBA_INTERFACE_CLIENT };
+enum TiebaInterface { TIEBA_INTERFACE_WEB, TIEBA_INTERFACE_CLIENT, TIEBA_INTERFACE_CLIENT_NICKNAME};

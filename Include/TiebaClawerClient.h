@@ -34,3 +34,15 @@ public:
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
 		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) override;
 };
+
+// 使用昵称版客户端接口采集贴吧
+class TIEBA_API_API TiebaClawerClientNickName final : public TiebaClawer, public Singleton<TiebaClawerClientNickName>
+{
+	DECL_SINGLETON_DEFAULT(TiebaClawerClientNickName);
+public:
+	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads) override;
+	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, std::vector<PostInfo>& posts,
+		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) override;
+	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
+		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) override;
+};
