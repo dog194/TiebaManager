@@ -67,6 +67,7 @@ void CSettingDlg::DoDataExchange(CDataExchange* pDX)
 	CModelessDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDOK, m_okButton);
 	DDX_Control(pDX, IDCANCEL, m_cancelButton);
+	DDX_Control(pDX, IDC_BUTTON_APPLY, m_applyButton);
 	DDX_Control(pDX, IDC_TREE1, m_tree);
 }
 
@@ -74,6 +75,8 @@ void CSettingDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CSettingDlg, CModelessDlg)
 	ON_WM_CLOSE()
 	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CSettingDlg::OnTvnSelchangedTree1)
+	ON_BN_CLICKED(IDC_BUTTON_APPLY, &CSettingDlg::ApplyChange)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -130,6 +133,7 @@ BOOL CSettingDlg::OnInitDialog()
 	m_resize.AddControl(&m_tree, RT_NULL, NULL, RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, this);
 	m_resize.AddControl(&m_okButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_tree);
 	m_resize.AddControl(&m_cancelButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_tree);
+	m_resize.AddControl(&m_applyButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_tree);
 	for (const auto& page : m_pages)
 		m_resize.AddControl(page, RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, this);
 	m_tree.SelectItem(m_tree.GetFirstVisibleItem());
@@ -385,4 +389,37 @@ void CSettingDlg::OnOK()
 
 	g_settingWinCloseEvent();
 	DestroyWindow();
+}
+
+// 应用
+void CSettingDlg::ApplyChange()
+{
+	m_applyButton.EnableWindow(FALSE);
+
+	*g_globalConfig.m_autoUpdate = m_aboutPage->m_autoCheckUpdateCheck.GetCheck();
+	g_globalConfig.Save(GLOBAL_CONFIG_PATH);
+
+	CString tmp;
+	m_optionsPage->m_currentOptionStatic.GetWindowText(tmp);
+	*g_userConfig.m_plan = tmp.Right(tmp.GetLength() - 5); // "当前方案："
+	g_userConfig.Save(USER_CONFIG_PATH);
+
+	CreateDir(OPTIONS_DIR_PATH);
+	SavePlanInDlg(OPTIONS_DIR_PATH + g_userConfig.m_plan + _T(".xml"));
+	ApplyPlanInDlg(g_plan);
+
+	g_settingWinCloseEvent();
+	
+	SetTimer(0, 2000, NULL);
+}
+
+void CSettingDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	if (nIDEvent == 0)
+	{
+		KillTimer(0);
+		m_applyButton.EnableWindow(TRUE);
+		m_okButton.SetFocus();
+	}
+	CDialog::OnTimer(nIDEvent);
 }
