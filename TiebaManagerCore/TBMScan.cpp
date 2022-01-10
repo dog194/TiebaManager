@@ -96,7 +96,8 @@ void CTBMScan::ScanThread(CString sPage)
 				if (m_stopScanFlag)
 					break;
 				if (!g_pTbmCoreConfig->m_briefLog)
-					g_pLog->Log(_T("<font color=red>获取主题列表失败，重新开始本轮</font>"));
+					g_pLog->Log(_T("<font color=red>获取主题列表失败，稍后重新开始本轮</font>"));
+				goto ScanDelay;
 				continue;
 			}
 
@@ -157,6 +158,7 @@ void CTBMScan::ScanThread(CString sPage)
 
 		ScanOnceEnd:
 			g_scanOnceEndEvent();
+		ScanDelay:
 
 			// 延时
 			int count = g_pTbmCoreConfig->m_scanInterval * 10;
