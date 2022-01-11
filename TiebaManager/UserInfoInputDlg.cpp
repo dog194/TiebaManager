@@ -122,29 +122,29 @@ void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 	// url自动截取
 	m_edit_portrait.GetWindowText(tmp);
 	m_edit_uid.GetWindowText(tmpU_ori);
-	if (tmp.GetLength() > 36) {
+	if (tmp.GetLength() > PORT_LEN_MAX) {
 		tmpP = GetStringBetween(tmp, _T("id="), _T("&"));
-		if (tmpP.GetLength() > 36) {
+		if (tmpP.GetLength() > PORT_LEN_MAX) {
 			tmpP = GetStringBefore(tmpP, _T("?"));
 		}
-		if (tmpP.GetLength() <= 36 && tmpP.GetLength() > 34) {
+		if (tmpP.GetLength() <= PORT_LEN_MAX && tmpP.GetLength() >= PORT_LEN_MIN) {
 			m_edit_portrait.SetWindowTextW(tmpP);
 		}
 	}
 	// 输入验证
 	m_edit_portrait.GetWindowText(tmp);
 	m_edit_uid.GetWindowText(tmpU_ori);
-	if (tmp.GetLength() > 36) {
+	if (tmp.GetLength() > PORT_LEN_MAX) {
 		m_static_portrait.SetWindowTextW(_T("		 头像ID长度超过，如果复制正确，请到群里反馈"));
 		m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度超过，如果复制正确，请到群里反馈"), TTI_NONE);
 		return;
 	}
-	if (tmp.GetLength() < 35) {
+	if (tmp.GetLength() < PORT_LEN_MIN) {
 		m_static_portrait.SetWindowTextW(_T("		 头像ID长度不足，如果复制正确，请到群里反馈"));
 		m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度不足，如果复制正确，请到群里反馈"), TTI_NONE);
 		return;
 	}
-	if (tmp.GetLength() >= 35 && tmp.GetLength() <= 36) {
+	if (tmp.GetLength() >= PORT_LEN_MIN && tmp.GetLength() <= PORT_LEN_MAX) {
 		tmpU = GetNameUsingPortrait(tmp);
 		if (tmpU == GET_NAME_ERROR_SHORT) {
 			m_static_portrait.SetWindowTextW(_T("		  头像ID长度不足，如果复制正确，请到群里反馈"));

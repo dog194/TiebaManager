@@ -447,7 +447,7 @@ HELPER_API CString GetPortraitFromString(const CString& src)
 
 // 取UName，使用Portrait获取
 HELPER_API CString GetNameUsingPortrait(const CString& pPortrait) {
-	if (pPortrait.GetLength() < 35) {
+	if (pPortrait.GetLength() < PORT_LEN_MIN) {
 		return GET_NAME_ERROR_SHORT;
 	}
 	CString src = HTTPGet(_T("https://tieba.baidu.com/home/get/panel?ie=utf-8&id=") + pPortrait);
