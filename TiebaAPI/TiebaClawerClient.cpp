@@ -121,7 +121,7 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 	CString src = TiebaClientHTTPPost(_T("https://c.tieba.baidu.com/c/f/pb/page"), data);
 	if (src == NET_TIMEOUT_TEXT)
 		return GET_POSTS_TIMEOUT;
-	//WriteString(src, _T("thread.txt"));
+	WriteString(src, _T("thread.txt"));
 	return GetPosts(fid, tid, page, src, posts, lzls, addition);
 }
 
@@ -245,24 +245,12 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 		{
 			CString tmp;
 			if (content.IsNull()) {
-				//WriteString(src, _T("thread.txt"));
-				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content=ISNULL)"), post.author, fid, tid, page, i+1);
-				//WriteString(tmp, _T("百度傻逼.txt"));
-				//tmp = _T("");
 				continue;
 			}
 			else if (content.IsString()) {
-				//WriteString(src, _T("thread.txt"));
-				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="%s")"), post.author, fid, tid, page, i + 1, content.GetString());
-				//WriteString(tmp, _T("百度傻逼.txt"));
-				//tmp = _T("");
 				continue;
 			}
 			else if (!content.IsObject()) {
-				//WriteString(src, _T("thread.txt"));
-				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="IsNoObject")"),post.author, fid, tid, page, i + 1);
-				//WriteString(tmp, _T("百度傻逼.txt"));
-				//tmp = _T("");
 				continue;
 			}
 			switch (_ttoi(content[L"type"].GetString()))
@@ -328,13 +316,14 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 }
 
 // 使用昵称版客户端接口采集贴吧
+const CString STR_THREAD_VOTE = _T("\n[请更新到贴吧App最新版本查看投票模块]");
 BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads)
 {
 	CString data;
 	data.Format(_T("_client_type=2&_client_version=5.7.0&from=tieba&kw=%s&net_type=1&pn=%d&q_type=2&rn=50&st_type=tb_forumlist&with_group=0"),
 		(LPCTSTR)forumName, _ttoi(ignoreThread) / 50 + 1);
 	CString src = TiebaClientHTTPPost(_T("https://c.tieba.baidu.com/c/f/frs/page"), data);
-	//WriteString(src, _T("forum.txt"));
+	WriteString(src, _T("forum12.0.8.txt"));
 
 	threads.clear();
 	GenericDocument<UTF16<> > document;
@@ -412,12 +401,12 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
 {
 	CString data;
-	data.Format(_T("_client_type=2&_client_version=7.0.0&back=0&floor_rn=3&from=tieba&kz=%s&mark=0&net_type=1&pn=%s&rn=30&st_type=tb_bookmarklist&with_floor=1"),
+	data.Format(_T("_client_type=2&_client_version=12.12.1&back=0&floor_rn=5&from=tieba&kz=%s&mark=0&net_type=1&pn=%s&rn=30&st_type=tb_bookmarklist&with_floor=1"),
 		(LPCTSTR)tid, (LPCTSTR)page);
 	CString src = TiebaClientHTTPPost(_T("https://c.tieba.baidu.com/c/f/pb/page"), data);
 	if (src == NET_TIMEOUT_TEXT)
 		return GET_POSTS_TIMEOUT;
-	//WriteString(src, _T("thread.txt"));
+	WriteString(src, _T("thread12.12.1.txt"));
 	return GetPosts(fid, tid, page, src, posts, lzls, addition);
 }
 
@@ -480,6 +469,8 @@ static void GetLzls_nicknameVersion(const CString& tid, const GenericDocument<UT
 					tmp.Format(_T("\r\n") _T(R"(<div class="voice_player voice_player_mini voice_player_lzl"><a class="voice_player_inner" href="#"><span class="before">&nbsp;</span><span class="middle"><span class="speaker speaker_animate">&nbsp;</span><span class="time" style="width: 65px;"><span class="second">%d</span>"</span></span><span class="after">&nbsp;</span></a></div>)"),
 						_ttoi(content[L"during_time"].GetString()) / 1000);
 					break;
+				default:
+					WriteString(content[L"type"].GetString(), _T("TypeLzl.txt"));
 				}
 				lzl.content += tmp;
 			}
@@ -537,28 +528,16 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		post.timestamp = _ttoi64(rawPost[L"time"].GetString());
 
 		post.content = _T("");
+		CString tmp;
 		for (const auto& content : rawPost[L"content"].GetArray())
 		{
-			CString tmp;
 			if (content.IsNull()) {
-				//WriteString(src, _T("thread.txt"));
-				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content=ISNULL)"), post.author, fid, tid, page, i+1);
-				//WriteString(tmp, _T("百度傻逼.txt"));
-				//tmp = _T("");
 				continue;
 			}
 			else if (content.IsString()) {
-				//WriteString(src, _T("thread.txt"));
-				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="%s")"), post.author, fid, tid, page, i + 1, content.GetString());
-				//WriteString(tmp, _T("百度傻逼.txt"));
-				//tmp = _T("");
 				continue;
 			}
 			else if (!content.IsObject()) {
-				//WriteString(src, _T("thread.txt"));
-				//tmp.Format(_T(R"(百度傻逼，uid="%s",fid="%s",tid="%s",page="%s",l="%d", content="IsNoObject")"),post.author, fid, tid, page, i + 1);
-				//WriteString(tmp, _T("百度傻逼.txt"));
-				//tmp = _T("");
 				continue;
 			}
 			switch (_ttoi(content[L"type"].GetString()))
@@ -596,9 +575,57 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 				tmp.Format(_T(R"(<div class="voice_player voice_player_pb"><a href="#" class="voice_player_inner"><span class="before">&nbsp;</span><span class="middle"><span class="speaker speaker_animate">&nbsp;</span><span class="time"><span class="second">%d</span>&quot;</span></span><span class="after">&nbsp;</span></a></div><img class="j_voice_ad_gif" src="http://tb2.bdstatic.com/tb/static-pb/img/voice_ad.gif" alt="下载贴吧客户端发语音！" /><br/>)"),
 					_ttoi(content[L"during_time"].GetString()) / 1000);
 				break;
+			default:
+				WriteString(content[L"type"].GetString() + tid, _T("TypePost.txt"));
 			}
 			post.content += tmp;
 		}
+
+		// 投票贴解析，强特征兼容保留
+		if (post.floor == _T("1")) {
+			// 仅针对1楼进行判断
+			if (document.HasMember(L"thread")) {
+				const auto& threadInfo = document[L"thread"];
+				if (threadInfo.IsObject()) {
+					// 分享贴判断
+					if (threadInfo.HasMember(L"is_share_thread")) {
+						if (_ttoi(threadInfo[L"is_share_thread"].GetString()) == 1) {
+							// 属于分享贴
+							if (threadInfo.HasMember(L"origin_thread_info")) {
+								const auto& oriThreadInfo = threadInfo[L"origin_thread_info"];
+								// 分享贴强特征
+								tmp.Format(_T(R"(<a href="http://tieba.baidu.com/p/%s"  target="_blank"> 点击查看</a>)"), oriThreadInfo[L"tid"].GetString());
+								post.content += tmp;
+								// 分享贴预览信息 TODO
+
+							}
+						}
+					}
+					// 投票贴判断
+					if (threadInfo.HasMember(L"poll_info")) {
+						const auto& pollInfo = threadInfo[L"poll_info"];
+						if (pollInfo.IsObject() && pollInfo.HasMember(L"options") && pollInfo.HasMember(L"title")) {
+							const auto& optionsTitle = pollInfo[L"title"].GetString();
+							const auto& optionsInfo = pollInfo[L"options"];
+							// 投票贴强特征
+							post.content += STR_THREAD_VOTE;
+							// 投票内容标题
+							post.content += _T("\r\n");
+							post.content += optionsTitle;
+							// 投票内容
+							if (optionsInfo.IsArray()) {
+								for (const auto& optionContent : optionsInfo.GetArray())
+								{
+									post.content += optionContent[L"text"].GetString();
+								}
+							}
+						}
+					}
+					
+				}
+			}
+		}
+
 		// 小尾巴
 		if (rawPost[L"signature"].IsObject()
 			&& rawPost[L"signature"][L"content"].Size() > 0
@@ -610,7 +637,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	}
 
 	// 取楼中楼
-	GetLzls(tid, document, userIndex, lzls);
+	GetLzls_nicknameVersion(tid, document, userIndex, lzls);
 
 	// 附加信息
 	if (addition != NULL)
