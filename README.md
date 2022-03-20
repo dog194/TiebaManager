@@ -17,6 +17,7 @@ TiebaManager
 * [OpenCV](http://opencv.org/) 4.5.3
 * [TinyXML2](http://www.grinninglizard.com/tinyxml2/index.html)
 * [libcurl](https://curl.haxx.se/libcurl/) 7.78.0
+* [protobuf](https://github.com/protocolbuffers/protobuf/releases) 3.5.1
 * [7z](https://www.7-zip.org/) 19.00 (7za.exe)
 * [rapidjson](http://rapidjson.org/)
 
