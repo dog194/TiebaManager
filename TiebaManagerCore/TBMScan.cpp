@@ -102,7 +102,7 @@ void CTBMScan::ScanThread(CString sPage)
 			}
 
 			// 扫描主题
-			for (const ThreadInfo& thread : m_threads)
+			for (const TapiThreadInfo& thread : m_threads)
 			{
 				if (m_stopScanFlag)
 					break;
@@ -117,7 +117,7 @@ void CTBMScan::ScanThread(CString sPage)
 					if (res)
 					{
 						CTBMOperate::GetInstance().AddConfirm(Operation(forceToConfirm, pos, length, thread.title,
-							std::make_unique<ThreadInfo>(thread), ruleName, ruleType));
+							std::make_unique<TapiThreadInfo>(thread), ruleName, ruleType));
 						g_pLog->Log(_T("<a href=\"https://tieba.baidu.com/p/") + thread.tid + _T("\">")
 							+ HTMLEscape(thread.title) + _T("</a>") + msg);
 						g_pUserCache->m_ignoredTID.insert(tid);
@@ -201,7 +201,7 @@ void CTBMScan::ScanPostThread(int threadID)
 		m_threadIndexLock.lock();
 		while (!m_stopScanFlag && m_threadIndex < (int)m_threads.size())
 		{
-			ThreadInfo& thread = m_threads[m_threadIndex++];
+			TapiThreadInfo& thread = m_threads[m_threadIndex++];
 			m_threadIndexLock.unlock();
 			if (g_pUserCache->m_deletedTID.find(_ttoi64(thread.tid)) != g_pUserCache->m_deletedTID.end()) // 已删
 				goto Next;
@@ -277,7 +277,7 @@ ScanPostThreadEnd:
 }
 
 // 扫描帖子页
-BOOL CTBMScan::ScanPostPage(const ThreadInfo& thread, int page, BOOL hasHistoryReply,
+BOOL CTBMScan::ScanPostPage(const TapiThreadInfo& thread, int page, BOOL hasHistoryReply,
 	int ScanedCount, const CString& src, int threadID)
 {
 	BOOL pass = TRUE;

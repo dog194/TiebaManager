@@ -60,7 +60,7 @@ public:
 };
 
 // 主题信息
-class TIEBA_API_API ThreadInfo : public TBObject
+class TIEBA_API_API TapiThreadInfo : public TBObject
 {
 public:
 	CString reply;		    // 回复数
@@ -69,8 +69,8 @@ public:
 	CString lastAuthor;     // 最后回复
 
 
-	ThreadInfo() : TBObject(THREAD) { }
-	virtual ~ThreadInfo() = default;
+	TapiThreadInfo() : TBObject(THREAD) { }
+	virtual ~TapiThreadInfo() = default;
 
 	// 返回标题+预览
 	virtual CString GetContent() const { return title + _T("\r\n") + preview; }
@@ -122,7 +122,7 @@ public:
 class TIEBA_API_API TiebaClawer
 {
 public:
-	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads) = 0;
+	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads) = 0;
 	enum GetPostsResult { GET_POSTS_SUCCESS, GET_POSTS_TIMEOUT, GET_POSTS_DELETED };
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, std::vector<PostInfo>& posts, 
 		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) = 0;

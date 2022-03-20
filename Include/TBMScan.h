@@ -45,7 +45,7 @@ protected:
 	volatile BOOL m_stopScanFlag = FALSE;
 	std::unique_ptr<std::thread> m_scanThread;
 
-	std::vector<ThreadInfo> m_threads; // 当前扫描的主题列表
+	std::vector<TapiThreadInfo> m_threads; // 当前扫描的主题列表
 	int m_threadIndex; // 下个要扫描的主题索引
 	std::mutex m_threadIndexLock;
 	BOOL m_noNewReply; // 无新回复
@@ -53,6 +53,6 @@ protected:
 
 	void ScanThread(CString sPage);
 	void ScanPostThread(int threadID);
-	BOOL ScanPostPage(const ThreadInfo& thread, int page, BOOL hasHistoryReply,
+	BOOL ScanPostPage(const TapiThreadInfo& thread, int page, BOOL hasHistoryReply,
 		int ScanedCount, const CString& src, int threadID);
 };

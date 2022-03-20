@@ -99,7 +99,7 @@ void CExploreThreadPage::OnBnClickedButton1()
 	TiebaClawerProxy::GetInstance().GetThreads(m_forumName, ignoreThread, m_threads);
 	m_list.DeleteAllItems();
 	((CExplorerDlg*)GetParent()->GetParent())->m_edit.SetWindowText(_T(""));
-	for (const ThreadInfo& i : m_threads)
+	for (const TapiThreadInfo& i : m_threads)
 	{
 		int index = m_list.GetItemCount();
 		m_list.InsertItem(index, i.reply);

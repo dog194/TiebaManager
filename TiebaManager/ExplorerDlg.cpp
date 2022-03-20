@@ -154,7 +154,7 @@ void CExplorerDlg::OnBnClickedButton1()
 	CString code;
 	if (tabIndex == 0) // 主题
 	{
-		ThreadInfo& thread = m_exploreThreadPage->m_threads[index];
+		TapiThreadInfo& thread = m_exploreThreadPage->m_threads[index];
 		code = GetTiebaOperate().DeleteThread(thread.tid);
 		if (code == _T("0"))
 			g_userCache.m_deletedTID.insert(_ttoi64(thread.tid));

@@ -34,5 +34,5 @@ private:
 	template<class TbObj>
 	static void OnCheckIllegal(const TbObj& obj, BOOL& res, CString& msg, BOOL& forceToConfirm, int& pos, int& length, CString& ruleName, int& ruleType);
 
-	static void OnPreScanThread(int threadID, const ThreadInfo& thread, BOOL& pass);
+	static void OnPreScanThread(int threadID, const TapiThreadInfo& thread, BOOL& pass);
 };

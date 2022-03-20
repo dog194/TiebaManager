@@ -42,7 +42,7 @@ extern TBM_CORE_API PostEvent<const Operation&, BOOL>   g_postDeleteEvent;     /
 
 // 扫描事件
 
-extern TBM_CORE_API PreEvent<const ThreadInfo&, BOOL&, CString&, BOOL&, int&, int&, CString&, int&>   g_checkThreadIllegalEvent;        // 判断主题是否违规，参数：主题信息, 是否违规, 日志里输出的信息, 强制确认, 确认时高亮位置, 确认时高亮长度
+extern TBM_CORE_API PreEvent<const TapiThreadInfo&, BOOL&, CString&, BOOL&, int&, int&, CString&, int&>   g_checkThreadIllegalEvent;        // 判断主题是否违规，参数：主题信息, 是否违规, 日志里输出的信息, 强制确认, 确认时高亮位置, 确认时高亮长度
 extern TBM_CORE_API PreEvent<const PostInfo&, BOOL&, CString&, BOOL&, int&, int&, CString&, int&>     g_checkPostIllegalEvent;          // 判断帖子是否违规，参数：帖子信息, 是否违规, 日志里输出的信息, 强制确认, 确认时高亮位置, 确认时高亮长度
 extern TBM_CORE_API PreEvent<const LzlInfo&, BOOL&, CString&, BOOL&, int&, int&, CString&, int&>      g_checkLzlIllegalEvent;           // 判断楼中楼是否违规，参数：帖子信息, 是否违规, 日志里输出的信息, 强制确认, 确认时高亮位置, 确认时高亮长度
 
@@ -54,9 +54,9 @@ extern TBM_CORE_API PreEvent<BOOL&>                                g_preScanAllT
 														                     
 extern TBM_CORE_API PreEvent<int, BOOL&>                           g_scanPostThreadStartEvent;  // 扫描帖子线程开始，参数：线程ID, 不取消
 extern TBM_CORE_API PostEvent<int>                                 g_scanPostThreadEndEvent;    // 扫描帖子线程结束，参数：线程ID
-extern TBM_CORE_API PreEvent<int, const ThreadInfo&, BOOL&>        g_preScanThreadEvent;        // 准备扫描某个主题，参数：线程ID, 主题信息, 不取消
+extern TBM_CORE_API PreEvent<int, const TapiThreadInfo&, BOOL&>        g_preScanThreadEvent;        // 准备扫描某个主题，参数：线程ID, 主题信息, 不取消
 
-extern TBM_CORE_API PreEvent<int, const ThreadInfo&, int, BOOL&>   g_scanPostPageEvent;         // 扫描帖子页开始，参数：线程ID, 主题信息, 帖子页, 不取消
+extern TBM_CORE_API PreEvent<int, const TapiThreadInfo&, int, BOOL&>   g_scanPostPageEvent;         // 扫描帖子页开始，参数：线程ID, 主题信息, 帖子页, 不取消
 
 
 // 外部模块可注册的事件集合，用来自动卸载外部listener

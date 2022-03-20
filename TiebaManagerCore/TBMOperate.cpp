@@ -172,7 +172,7 @@ void CTBMOperate::ConfirmThread()
 				{
 				case TBObject::THREAD:
 				{
-					ThreadInfo* thread = (ThreadInfo*)op.object.get();
+					TapiThreadInfo* thread = (TapiThreadInfo*)op.object.get();
 					g_pUserCache->m_initIgnoredTID->insert(_ttoi64(thread->tid));
 					g_pLog->Log(_T("<font color=green>忽略 </font><a href=\"https://tieba.baidu.com/p/") + thread->tid
 						+ _T("\">") + HTMLEscape(op.title) + _T("</a>"));

@@ -109,7 +109,7 @@ void CImageCondition::UpdateImage(CImageParam& param)
 }
 
 
-BOOL CImageCondition::MatchThread(const CConditionParam& _param, const ThreadInfo& thread, int& pos, int& length)
+BOOL CImageCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
 {
 	return Match((CImageParam&)_param, thread);
 }

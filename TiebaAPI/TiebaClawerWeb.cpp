@@ -78,7 +78,7 @@ const TCHAR ADDITION_THREAD_PAGE_COUNT_RIGHT[]  = _T("}");
 #pragma endregion
 
 
-BOOL TiebaClawerWeb::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads)
+BOOL TiebaClawerWeb::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads)
 {
 	CString src = HTTPGet(_T("https://tieba.baidu.com/f?ie=UTF-8&kw=") + EncodeURI(forumName)
 		+ _T("&pn=") + ignoreThread);

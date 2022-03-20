@@ -23,7 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TiebaClawerClient.h>
 
 
-BOOL TiebaClawerProxy::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads)
+BOOL TiebaClawerProxy::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads)
 {
 	return GetImplement().GetThreads(forumName, ignoreThread, threads);
 }
