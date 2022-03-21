@@ -84,14 +84,16 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, common_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, kz_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, r_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, with_floor_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, floor_rn_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, rn_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, q_type_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, pn_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, is_comm_reverse_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, is_jumpfloor_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, jumpfloor_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, forum_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl_DataReq, floor_sort_type_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbPageReqIdl, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -101,7 +103,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::PbPageReqIdl_DataReq)},
-  { 15, -1, sizeof(::PbPageReqIdl)},
+  { 17, -1, sizeof(::PbPageReqIdl)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -131,17 +133,18 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\022PbPageReqIdl.proto\032\017CommonReq.proto\"\373\001"
+      "\n\022PbPageReqIdl.proto\032\017CommonReq.proto\"\237\002"
       "\n\014PbPageReqIdl\022#\n\004data\030\001 \001(\0132\025.PbPageReq"
-      "Idl.DataReq\032\305\001\n\007DataReq\022\032\n\006common\030\031 \001(\0132"
-      "\n.CommonReq\022\n\n\002kz\030\004 \001(\003\022\022\n\nwith_floor\030\010 "
-      "\001(\005\022\n\n\002rn\030\r \001(\005\022\016\n\006q_type\030\021 \001(\005\022\n\n\002pn\030\022 "
-      "\001(\005\022\027\n\017is_comm_reverse\030! \001(\005\022\024\n\014is_jumpf"
-      "loor\030\" \001(\005\022\025\n\rjumpfloor_num\030# \001(\005\022\020\n\010for"
-      "um_id\0308 \001(\003b\006proto3"
+      "Idl.DataReq\032\351\001\n\007DataReq\022\032\n\006common\030\031 \001(\0132"
+      "\n.CommonReq\022\n\n\002kz\030\004 \001(\003\022\t\n\001r\030\006 \001(\005\022\022\n\nwi"
+      "th_floor\030\010 \001(\005\022\020\n\010floor_rn\030\t \001(\005\022\n\n\002rn\030\r"
+      " \001(\005\022\016\n\006q_type\030\021 \001(\005\022\n\n\002pn\030\022 \001(\005\022\027\n\017is_c"
+      "omm_reverse\030! \001(\005\022\024\n\014is_jumpfloor\030\" \001(\005\022"
+      "\025\n\rjumpfloor_num\030# \001(\005\022\027\n\017floor_sort_typ"
+      "e\030J \001(\005b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 299);
+      descriptor, 335);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PbPageReqIdl.proto", &protobuf_RegisterTypes);
   ::protobuf_CommonReq_2eproto::AddDescriptors();
@@ -174,14 +177,16 @@ void PbPageReqIdl_DataReq::clear_common() {
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int PbPageReqIdl_DataReq::kCommonFieldNumber;
 const int PbPageReqIdl_DataReq::kKzFieldNumber;
+const int PbPageReqIdl_DataReq::kRFieldNumber;
 const int PbPageReqIdl_DataReq::kWithFloorFieldNumber;
+const int PbPageReqIdl_DataReq::kFloorRnFieldNumber;
 const int PbPageReqIdl_DataReq::kRnFieldNumber;
 const int PbPageReqIdl_DataReq::kQTypeFieldNumber;
 const int PbPageReqIdl_DataReq::kPnFieldNumber;
 const int PbPageReqIdl_DataReq::kIsCommReverseFieldNumber;
 const int PbPageReqIdl_DataReq::kIsJumpfloorFieldNumber;
 const int PbPageReqIdl_DataReq::kJumpfloorNumFieldNumber;
-const int PbPageReqIdl_DataReq::kForumIdFieldNumber;
+const int PbPageReqIdl_DataReq::kFloorSortTypeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 PbPageReqIdl_DataReq::PbPageReqIdl_DataReq()
@@ -203,15 +208,15 @@ PbPageReqIdl_DataReq::PbPageReqIdl_DataReq(const PbPageReqIdl_DataReq& from)
     common_ = NULL;
   }
   ::memcpy(&kz_, &from.kz_,
-    static_cast<size_t>(reinterpret_cast<char*>(&forum_id_) -
-    reinterpret_cast<char*>(&kz_)) + sizeof(forum_id_));
+    static_cast<size_t>(reinterpret_cast<char*>(&floor_sort_type_) -
+    reinterpret_cast<char*>(&kz_)) + sizeof(floor_sort_type_));
   // @@protoc_insertion_point(copy_constructor:PbPageReqIdl.DataReq)
 }
 
 void PbPageReqIdl_DataReq::SharedCtor() {
   ::memset(&common_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&forum_id_) -
-      reinterpret_cast<char*>(&common_)) + sizeof(forum_id_));
+      reinterpret_cast<char*>(&floor_sort_type_) -
+      reinterpret_cast<char*>(&common_)) + sizeof(floor_sort_type_));
   _cached_size_ = 0;
 }
 
@@ -258,8 +263,8 @@ void PbPageReqIdl_DataReq::Clear() {
   }
   common_ = NULL;
   ::memset(&kz_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&forum_id_) -
-      reinterpret_cast<char*>(&kz_)) + sizeof(forum_id_));
+      reinterpret_cast<char*>(&floor_sort_type_) -
+      reinterpret_cast<char*>(&kz_)) + sizeof(floor_sort_type_));
   _internal_metadata_.Clear();
 }
 
@@ -287,6 +292,20 @@ bool PbPageReqIdl_DataReq::MergePartialFromCodedStream(
         break;
       }
 
+      // int32 r = 6;
+      case 6: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &r_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // int32 with_floor = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
@@ -295,6 +314,20 @@ bool PbPageReqIdl_DataReq::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &with_floor_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // int32 floor_rn = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &floor_rn_)));
         } else {
           goto handle_unusual;
         }
@@ -397,14 +430,14 @@ bool PbPageReqIdl_DataReq::MergePartialFromCodedStream(
         break;
       }
 
-      // int64 forum_id = 56;
-      case 56: {
+      // int32 floor_sort_type = 74;
+      case 74: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(192u /* 448 & 0xFF */)) {
+            static_cast< ::google::protobuf::uint8>(80u /* 592 & 0xFF */)) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &forum_id_)));
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &floor_sort_type_)));
         } else {
           goto handle_unusual;
         }
@@ -442,9 +475,19 @@ void PbPageReqIdl_DataReq::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->kz(), output);
   }
 
+  // int32 r = 6;
+  if (this->r() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->r(), output);
+  }
+
   // int32 with_floor = 8;
   if (this->with_floor() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->with_floor(), output);
+  }
+
+  // int32 floor_rn = 9;
+  if (this->floor_rn() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->floor_rn(), output);
   }
 
   // int32 rn = 13;
@@ -483,9 +526,9 @@ void PbPageReqIdl_DataReq::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(35, this->jumpfloor_num(), output);
   }
 
-  // int64 forum_id = 56;
-  if (this->forum_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(56, this->forum_id(), output);
+  // int32 floor_sort_type = 74;
+  if (this->floor_sort_type() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(74, this->floor_sort_type(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -507,9 +550,19 @@ void PbPageReqIdl_DataReq::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->kz(), target);
   }
 
+  // int32 r = 6;
+  if (this->r() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->r(), target);
+  }
+
   // int32 with_floor = 8;
   if (this->with_floor() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->with_floor(), target);
+  }
+
+  // int32 floor_rn = 9;
+  if (this->floor_rn() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->floor_rn(), target);
   }
 
   // int32 rn = 13;
@@ -549,9 +602,9 @@ void PbPageReqIdl_DataReq::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(35, this->jumpfloor_num(), target);
   }
 
-  // int64 forum_id = 56;
-  if (this->forum_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(56, this->forum_id(), target);
+  // int32 floor_sort_type = 74;
+  if (this->floor_sort_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(74, this->floor_sort_type(), target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -585,6 +638,13 @@ size_t PbPageReqIdl_DataReq::ByteSizeLong() const {
         this->kz());
   }
 
+  // int32 r = 6;
+  if (this->r() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->r());
+  }
+
   // int32 with_floor = 8;
   if (this->with_floor() != 0) {
     total_size += 1 +
@@ -592,18 +652,18 @@ size_t PbPageReqIdl_DataReq::ByteSizeLong() const {
         this->with_floor());
   }
 
+  // int32 floor_rn = 9;
+  if (this->floor_rn() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->floor_rn());
+  }
+
   // int32 rn = 13;
   if (this->rn() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->rn());
-  }
-
-  // int32 jumpfloor_num = 35;
-  if (this->jumpfloor_num() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->jumpfloor_num());
   }
 
   // int32 q_type = 17;
@@ -634,11 +694,18 @@ size_t PbPageReqIdl_DataReq::ByteSizeLong() const {
         this->is_jumpfloor());
   }
 
-  // int64 forum_id = 56;
-  if (this->forum_id() != 0) {
+  // int32 jumpfloor_num = 35;
+  if (this->jumpfloor_num() != 0) {
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->forum_id());
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->jumpfloor_num());
+  }
+
+  // int32 floor_sort_type = 74;
+  if (this->floor_sort_type() != 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->floor_sort_type());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -676,14 +743,17 @@ void PbPageReqIdl_DataReq::MergeFrom(const PbPageReqIdl_DataReq& from) {
   if (from.kz() != 0) {
     set_kz(from.kz());
   }
+  if (from.r() != 0) {
+    set_r(from.r());
+  }
   if (from.with_floor() != 0) {
     set_with_floor(from.with_floor());
   }
+  if (from.floor_rn() != 0) {
+    set_floor_rn(from.floor_rn());
+  }
   if (from.rn() != 0) {
     set_rn(from.rn());
-  }
-  if (from.jumpfloor_num() != 0) {
-    set_jumpfloor_num(from.jumpfloor_num());
   }
   if (from.q_type() != 0) {
     set_q_type(from.q_type());
@@ -697,8 +767,11 @@ void PbPageReqIdl_DataReq::MergeFrom(const PbPageReqIdl_DataReq& from) {
   if (from.is_jumpfloor() != 0) {
     set_is_jumpfloor(from.is_jumpfloor());
   }
-  if (from.forum_id() != 0) {
-    set_forum_id(from.forum_id());
+  if (from.jumpfloor_num() != 0) {
+    set_jumpfloor_num(from.jumpfloor_num());
+  }
+  if (from.floor_sort_type() != 0) {
+    set_floor_sort_type(from.floor_sort_type());
   }
 }
 
@@ -728,14 +801,16 @@ void PbPageReqIdl_DataReq::InternalSwap(PbPageReqIdl_DataReq* other) {
   using std::swap;
   swap(common_, other->common_);
   swap(kz_, other->kz_);
+  swap(r_, other->r_);
   swap(with_floor_, other->with_floor_);
+  swap(floor_rn_, other->floor_rn_);
   swap(rn_, other->rn_);
-  swap(jumpfloor_num_, other->jumpfloor_num_);
   swap(q_type_, other->q_type_);
   swap(pn_, other->pn_);
   swap(is_comm_reverse_, other->is_comm_reverse_);
   swap(is_jumpfloor_, other->is_jumpfloor_);
-  swap(forum_id_, other->forum_id_);
+  swap(jumpfloor_num_, other->jumpfloor_num_);
+  swap(floor_sort_type_, other->floor_sort_type_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }

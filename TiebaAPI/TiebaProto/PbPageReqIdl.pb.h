@@ -158,23 +158,29 @@ class PbPageReqIdl_DataReq : public ::google::protobuf::Message /* @@protoc_inse
   ::google::protobuf::int64 kz() const;
   void set_kz(::google::protobuf::int64 value);
 
+  // int32 r = 6;
+  void clear_r();
+  static const int kRFieldNumber = 6;
+  ::google::protobuf::int32 r() const;
+  void set_r(::google::protobuf::int32 value);
+
   // int32 with_floor = 8;
   void clear_with_floor();
   static const int kWithFloorFieldNumber = 8;
   ::google::protobuf::int32 with_floor() const;
   void set_with_floor(::google::protobuf::int32 value);
 
+  // int32 floor_rn = 9;
+  void clear_floor_rn();
+  static const int kFloorRnFieldNumber = 9;
+  ::google::protobuf::int32 floor_rn() const;
+  void set_floor_rn(::google::protobuf::int32 value);
+
   // int32 rn = 13;
   void clear_rn();
   static const int kRnFieldNumber = 13;
   ::google::protobuf::int32 rn() const;
   void set_rn(::google::protobuf::int32 value);
-
-  // int32 jumpfloor_num = 35;
-  void clear_jumpfloor_num();
-  static const int kJumpfloorNumFieldNumber = 35;
-  ::google::protobuf::int32 jumpfloor_num() const;
-  void set_jumpfloor_num(::google::protobuf::int32 value);
 
   // int32 q_type = 17;
   void clear_q_type();
@@ -200,11 +206,17 @@ class PbPageReqIdl_DataReq : public ::google::protobuf::Message /* @@protoc_inse
   ::google::protobuf::int32 is_jumpfloor() const;
   void set_is_jumpfloor(::google::protobuf::int32 value);
 
-  // int64 forum_id = 56;
-  void clear_forum_id();
-  static const int kForumIdFieldNumber = 56;
-  ::google::protobuf::int64 forum_id() const;
-  void set_forum_id(::google::protobuf::int64 value);
+  // int32 jumpfloor_num = 35;
+  void clear_jumpfloor_num();
+  static const int kJumpfloorNumFieldNumber = 35;
+  ::google::protobuf::int32 jumpfloor_num() const;
+  void set_jumpfloor_num(::google::protobuf::int32 value);
+
+  // int32 floor_sort_type = 74;
+  void clear_floor_sort_type();
+  static const int kFloorSortTypeFieldNumber = 74;
+  ::google::protobuf::int32 floor_sort_type() const;
+  void set_floor_sort_type(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:PbPageReqIdl.DataReq)
  private:
@@ -212,14 +224,16 @@ class PbPageReqIdl_DataReq : public ::google::protobuf::Message /* @@protoc_inse
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::CommonReq* common_;
   ::google::protobuf::int64 kz_;
+  ::google::protobuf::int32 r_;
   ::google::protobuf::int32 with_floor_;
+  ::google::protobuf::int32 floor_rn_;
   ::google::protobuf::int32 rn_;
-  ::google::protobuf::int32 jumpfloor_num_;
   ::google::protobuf::int32 q_type_;
   ::google::protobuf::int32 pn_;
   ::google::protobuf::int32 is_comm_reverse_;
   ::google::protobuf::int32 is_jumpfloor_;
-  ::google::protobuf::int64 forum_id_;
+  ::google::protobuf::int32 jumpfloor_num_;
+  ::google::protobuf::int32 floor_sort_type_;
   mutable int _cached_size_;
   friend struct ::protobuf_PbPageReqIdl_2eproto::TableStruct;
   friend void ::protobuf_PbPageReqIdl_2eproto::InitDefaultsPbPageReqIdl_DataReqImpl();
@@ -397,6 +411,20 @@ inline void PbPageReqIdl_DataReq::set_kz(::google::protobuf::int64 value) {
   // @@protoc_insertion_point(field_set:PbPageReqIdl.DataReq.kz)
 }
 
+// int32 r = 6;
+inline void PbPageReqIdl_DataReq::clear_r() {
+  r_ = 0;
+}
+inline ::google::protobuf::int32 PbPageReqIdl_DataReq::r() const {
+  // @@protoc_insertion_point(field_get:PbPageReqIdl.DataReq.r)
+  return r_;
+}
+inline void PbPageReqIdl_DataReq::set_r(::google::protobuf::int32 value) {
+  
+  r_ = value;
+  // @@protoc_insertion_point(field_set:PbPageReqIdl.DataReq.r)
+}
+
 // int32 with_floor = 8;
 inline void PbPageReqIdl_DataReq::clear_with_floor() {
   with_floor_ = 0;
@@ -409,6 +437,20 @@ inline void PbPageReqIdl_DataReq::set_with_floor(::google::protobuf::int32 value
   
   with_floor_ = value;
   // @@protoc_insertion_point(field_set:PbPageReqIdl.DataReq.with_floor)
+}
+
+// int32 floor_rn = 9;
+inline void PbPageReqIdl_DataReq::clear_floor_rn() {
+  floor_rn_ = 0;
+}
+inline ::google::protobuf::int32 PbPageReqIdl_DataReq::floor_rn() const {
+  // @@protoc_insertion_point(field_get:PbPageReqIdl.DataReq.floor_rn)
+  return floor_rn_;
+}
+inline void PbPageReqIdl_DataReq::set_floor_rn(::google::protobuf::int32 value) {
+  
+  floor_rn_ = value;
+  // @@protoc_insertion_point(field_set:PbPageReqIdl.DataReq.floor_rn)
 }
 
 // int32 rn = 13;
@@ -495,18 +537,18 @@ inline void PbPageReqIdl_DataReq::set_jumpfloor_num(::google::protobuf::int32 va
   // @@protoc_insertion_point(field_set:PbPageReqIdl.DataReq.jumpfloor_num)
 }
 
-// int64 forum_id = 56;
-inline void PbPageReqIdl_DataReq::clear_forum_id() {
-  forum_id_ = GOOGLE_LONGLONG(0);
+// int32 floor_sort_type = 74;
+inline void PbPageReqIdl_DataReq::clear_floor_sort_type() {
+  floor_sort_type_ = 0;
 }
-inline ::google::protobuf::int64 PbPageReqIdl_DataReq::forum_id() const {
-  // @@protoc_insertion_point(field_get:PbPageReqIdl.DataReq.forum_id)
-  return forum_id_;
+inline ::google::protobuf::int32 PbPageReqIdl_DataReq::floor_sort_type() const {
+  // @@protoc_insertion_point(field_get:PbPageReqIdl.DataReq.floor_sort_type)
+  return floor_sort_type_;
 }
-inline void PbPageReqIdl_DataReq::set_forum_id(::google::protobuf::int64 value) {
+inline void PbPageReqIdl_DataReq::set_floor_sort_type(::google::protobuf::int32 value) {
   
-  forum_id_ = value;
-  // @@protoc_insertion_point(field_set:PbPageReqIdl.DataReq.forum_id)
+  floor_sort_type_ = value;
+  // @@protoc_insertion_point(field_set:PbPageReqIdl.DataReq.floor_sort_type)
 }
 
 // -------------------------------------------------------------------
