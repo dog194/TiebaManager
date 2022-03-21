@@ -79,7 +79,8 @@ HELPER_API CString GetStringAfter(const CString& src, const CString& left, int s
 
 // 写字符串到文件
 HELPER_API BOOL WriteString(const CString& src, const CString& path);
-
+// 写字符串到文件 续写
+HELPER_API BOOL WriteStringCon(const CString& src, const CString& path);
 // 单字符16进制转10进制
 HELPER_API int HexChar2Dec(const CCHAR c);
 // Unicode(UCS-2)转ANSI
@@ -90,6 +91,8 @@ HELPER_API CStringW ANSI2W(const CStringA& src, UINT codePage);
 inline CStringA W2UTF8(const CStringW& src) { return W2ANSI(src, CP_UTF8); }
 // UTF-8转Unicode(UCS-2)
 inline CStringW UTF82W(const CStringA& src) { return ANSI2W(src, CP_UTF8); }
+// UTF-8转Unicode(UCS-2)
+inline CStringW strUTF82W(const std::string& src) { CStringA srcA(src.c_str(), src.size()); return ANSI2W(srcA, CP_UTF8); }
 // Unicode(UCS-2)转GBK
 inline CStringA W2GBK(const CStringW& src) { return W2ANSI(src, 936); }
 // GBK转Unicode(UCS-2)

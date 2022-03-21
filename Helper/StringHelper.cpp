@@ -265,13 +265,26 @@ HELPER_API CString GetStringAfter(const CString& src, const CString& left, int s
 	return src.Right(src.GetLength() - leftPos);
 }
 
-
 // 写字符串到文件
 HELPER_API BOOL WriteString(const CString& src, const CString& path)
 {
 	CStdioFile file;
 	if (!file.Open(path, CFile::modeCreate | CFile::modeWrite))
 		return FALSE;
+	file.WriteString(src);
+	return TRUE;
+}
+
+// 写字符串到文件 续写
+HELPER_API BOOL WriteStringCon(const CString& src, const CString& path)
+{
+	CStdioFile file;
+	if (!file.Open(path, CFile::modeCreate | CFile::modeWrite | CFile::modeNoTruncate))
+		return FALSE;
+	if (file.GetLength() != 0) {
+		file.SeekToEnd();
+		file.WriteString(_T("\r\n"));
+	}
 	file.WriteString(src);
 	return TRUE;
 }
