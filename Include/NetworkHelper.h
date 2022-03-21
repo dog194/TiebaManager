@@ -30,3 +30,4 @@ const TCHAR NET_FAILED_TO_REDIRECT_TEXT[] = _T("failed to redirect");
 HELPER_API CString HTTPGet(const CString& URL, CString* cookie = NULL);
 HELPER_API CString HTTPPost(const CString& URL, const CString& data, CString* cookie = NULL);
 HELPER_API HTTPRequestResult HTTPGetRaw(const CString& URL, std::unique_ptr<BYTE[]>* buffer = NULL, ULONG* size = NULL, CString* cookie = NULL);
+HELPER_API CStringA HTTPProtoPost(const CString& URL, const CStringA& data, CString* cookie = NULL);

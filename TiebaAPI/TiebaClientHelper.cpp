@@ -14,3 +14,8 @@ TIEBA_API_API CString TiebaClientHTTPPost(const CString& URL, const CString& dat
 	CString newData = data + _T("&sign=") + GetMD5_UTF8(signData);
 	return HTTPPost(URL, newData, cookie);
 }
+
+TIEBA_API_API CStringA TiebaClientHTTPProtoPost(const CString& URL, const CStringA& data, CString* cookie)
+{
+	return HTTPProtoPost(URL, data, cookie);
+}

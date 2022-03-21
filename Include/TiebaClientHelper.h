@@ -23,3 +23,4 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 // 用于贴吧客户端的HTTP POST请求，自动加上签名，必须保证data按字典序排列
 TIEBA_API_API CString TiebaClientHTTPPost(const CString& URL, const CString& data, CString* cookie = NULL);
+TIEBA_API_API CStringA TiebaClientHTTPProtoPost(const CString& URL, const CStringA& data, CString* cookie = NULL);
