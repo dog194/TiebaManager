@@ -60,6 +60,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, content_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, time_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, author_id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, title_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, floor_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, author_),
@@ -96,14 +97,14 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\021SubPostList.proto\032\017PbContent.proto\032\nUs"
-      "er.proto\032\013Agree.proto\"\220\001\n\013SubPostList\022\n\n"
+      "er.proto\032\013Agree.proto\"\243\001\n\013SubPostList\022\n\n"
       "\002id\030\001 \001(\003\022\033\n\007content\030\002 \003(\0132\n.PbContent\022\014"
-      "\n\004time\030\003 \001(\r\022\r\n\005title\030\005 \001(\t\022\r\n\005floor\030\006 \001"
-      "(\r\022\025\n\006author\030\007 \001(\0132\005.User\022\025\n\005agree\030\t \001(\013"
-      "2\006.Agreeb\006proto3"
+      "\n\004time\030\003 \001(\r\022\021\n\tauthor_id\030\004 \001(\003\022\r\n\005title"
+      "\030\005 \001(\t\022\r\n\005floor\030\006 \001(\r\022\025\n\006author\030\007 \001(\0132\005."
+      "User\022\025\n\005agree\030\t \001(\0132\006.Agreeb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 216);
+      descriptor, 235);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "SubPostList.proto", &protobuf_RegisterTypes);
   ::protobuf_PbContent_2eproto::AddDescriptors();
@@ -150,6 +151,7 @@ void SubPostList::clear_agree() {
 const int SubPostList::kIdFieldNumber;
 const int SubPostList::kContentFieldNumber;
 const int SubPostList::kTimeFieldNumber;
+const int SubPostList::kAuthorIdFieldNumber;
 const int SubPostList::kTitleFieldNumber;
 const int SubPostList::kFloorFieldNumber;
 const int SubPostList::kAuthorFieldNumber;
@@ -303,6 +305,20 @@ bool SubPostList::MergePartialFromCodedStream(
         break;
       }
 
+      // int64 author_id = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &author_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // string title = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
@@ -400,6 +416,11 @@ void SubPostList::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->time(), output);
   }
 
+  // int64 author_id = 4;
+  if (this->author_id() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->author_id(), output);
+  }
+
   // string title = 5;
   if (this->title().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
@@ -457,6 +478,11 @@ void SubPostList::SerializeWithCachedSizes(
   // uint32 time = 3;
   if (this->time() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->time(), target);
+  }
+
+  // int64 author_id = 4;
+  if (this->author_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->author_id(), target);
   }
 
   // string title = 5;
@@ -545,6 +571,13 @@ size_t SubPostList::ByteSizeLong() const {
         this->id());
   }
 
+  // int64 author_id = 4;
+  if (this->author_id() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->author_id());
+  }
+
   // uint32 time = 3;
   if (this->time() != 0) {
     total_size += 1 +
@@ -602,6 +635,9 @@ void SubPostList::MergeFrom(const SubPostList& from) {
   if (from.id() != 0) {
     set_id(from.id());
   }
+  if (from.author_id() != 0) {
+    set_author_id(from.author_id());
+  }
   if (from.time() != 0) {
     set_time(from.time());
   }
@@ -639,6 +675,7 @@ void SubPostList::InternalSwap(SubPostList* other) {
   swap(author_, other->author_);
   swap(agree_, other->agree_);
   swap(id_, other->id_);
+  swap(author_id_, other->author_id_);
   swap(time_, other->time_);
   swap(floor_, other->floor_);
   _internal_metadata_.Swap(&other->_internal_metadata_);

@@ -189,6 +189,12 @@ class SubPostList : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::int64 id() const;
   void set_id(::google::protobuf::int64 value);
 
+  // int64 author_id = 4;
+  void clear_author_id();
+  static const int kAuthorIdFieldNumber = 4;
+  ::google::protobuf::int64 author_id() const;
+  void set_author_id(::google::protobuf::int64 value);
+
   // uint32 time = 3;
   void clear_time();
   static const int kTimeFieldNumber = 3;
@@ -210,6 +216,7 @@ class SubPostList : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::User* author_;
   ::Agree* agree_;
   ::google::protobuf::int64 id_;
+  ::google::protobuf::int64 author_id_;
   ::google::protobuf::uint32 time_;
   ::google::protobuf::uint32 floor_;
   mutable int _cached_size_;
@@ -280,6 +287,20 @@ inline void SubPostList::set_time(::google::protobuf::uint32 value) {
   
   time_ = value;
   // @@protoc_insertion_point(field_set:SubPostList.time)
+}
+
+// int64 author_id = 4;
+inline void SubPostList::clear_author_id() {
+  author_id_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 SubPostList::author_id() const {
+  // @@protoc_insertion_point(field_get:SubPostList.author_id)
+  return author_id_;
+}
+inline void SubPostList::set_author_id(::google::protobuf::int64 value) {
+  
+  author_id_ = value;
+  // @@protoc_insertion_point(field_set:SubPostList.author_id)
 }
 
 // string title = 5;

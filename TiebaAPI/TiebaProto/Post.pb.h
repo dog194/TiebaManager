@@ -158,14 +158,17 @@ class Post_SubPost : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // .SubPostList sub_post_list = 2;
-  bool has_sub_post_list() const;
+  // repeated .SubPostList sub_post_list = 2;
+  int sub_post_list_size() const;
   void clear_sub_post_list();
   static const int kSubPostListFieldNumber = 2;
-  const ::SubPostList& sub_post_list() const;
-  ::SubPostList* release_sub_post_list();
-  ::SubPostList* mutable_sub_post_list();
-  void set_allocated_sub_post_list(::SubPostList* sub_post_list);
+  const ::SubPostList& sub_post_list(int index) const;
+  ::SubPostList* mutable_sub_post_list(int index);
+  ::SubPostList* add_sub_post_list();
+  ::google::protobuf::RepeatedPtrField< ::SubPostList >*
+      mutable_sub_post_list();
+  const ::google::protobuf::RepeatedPtrField< ::SubPostList >&
+      sub_post_list() const;
 
   // uint64 pid = 1;
   void clear_pid();
@@ -177,7 +180,7 @@ class Post_SubPost : public ::google::protobuf::Message /* @@protoc_insertion_po
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::SubPostList* sub_post_list_;
+  ::google::protobuf::RepeatedPtrField< ::SubPostList > sub_post_list_;
   ::google::protobuf::uint64 pid_;
   mutable int _cached_size_;
   friend struct ::protobuf_Post_2eproto::TableStruct;
@@ -671,48 +674,31 @@ inline void Post_SubPost::set_pid(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:Post.SubPost.pid)
 }
 
-// .SubPostList sub_post_list = 2;
-inline bool Post_SubPost::has_sub_post_list() const {
-  return this != internal_default_instance() && sub_post_list_ != NULL;
+// repeated .SubPostList sub_post_list = 2;
+inline int Post_SubPost::sub_post_list_size() const {
+  return sub_post_list_.size();
 }
-inline const ::SubPostList& Post_SubPost::sub_post_list() const {
-  const ::SubPostList* p = sub_post_list_;
+inline const ::SubPostList& Post_SubPost::sub_post_list(int index) const {
   // @@protoc_insertion_point(field_get:Post.SubPost.sub_post_list)
-  return p != NULL ? *p : *reinterpret_cast<const ::SubPostList*>(
-      &::_SubPostList_default_instance_);
+  return sub_post_list_.Get(index);
 }
-inline ::SubPostList* Post_SubPost::release_sub_post_list() {
-  // @@protoc_insertion_point(field_release:Post.SubPost.sub_post_list)
-  
-  ::SubPostList* temp = sub_post_list_;
-  sub_post_list_ = NULL;
-  return temp;
-}
-inline ::SubPostList* Post_SubPost::mutable_sub_post_list() {
-  
-  if (sub_post_list_ == NULL) {
-    sub_post_list_ = new ::SubPostList;
-  }
+inline ::SubPostList* Post_SubPost::mutable_sub_post_list(int index) {
   // @@protoc_insertion_point(field_mutable:Post.SubPost.sub_post_list)
-  return sub_post_list_;
+  return sub_post_list_.Mutable(index);
 }
-inline void Post_SubPost::set_allocated_sub_post_list(::SubPostList* sub_post_list) {
-  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
-  if (message_arena == NULL) {
-    delete reinterpret_cast< ::google::protobuf::MessageLite*>(sub_post_list_);
-  }
-  if (sub_post_list) {
-    ::google::protobuf::Arena* submessage_arena = NULL;
-    if (message_arena != submessage_arena) {
-      sub_post_list = ::google::protobuf::internal::GetOwnedMessage(
-          message_arena, sub_post_list, submessage_arena);
-    }
-    
-  } else {
-    
-  }
-  sub_post_list_ = sub_post_list;
-  // @@protoc_insertion_point(field_set_allocated:Post.SubPost.sub_post_list)
+inline ::SubPostList* Post_SubPost::add_sub_post_list() {
+  // @@protoc_insertion_point(field_add:Post.SubPost.sub_post_list)
+  return sub_post_list_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::SubPostList >*
+Post_SubPost::mutable_sub_post_list() {
+  // @@protoc_insertion_point(field_mutable_list:Post.SubPost.sub_post_list)
+  return &sub_post_list_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::SubPostList >&
+Post_SubPost::sub_post_list() const {
+  // @@protoc_insertion_point(field_list:Post.SubPost.sub_post_list)
+  return sub_post_list_;
 }
 
 // -------------------------------------------------------------------

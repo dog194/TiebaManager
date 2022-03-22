@@ -221,7 +221,7 @@ void AddDescriptorsImpl() {
       "st.SignatureData\022\025\n\005agree\030% \001(\0132\006.Agree\022"
       " \n\nfrom_forum\030& \001(\0132\014.SimpleForum\022\013\n\003tid"
       "\030. \001(\003\032;\n\007SubPost\022\013\n\003pid\030\001 \001(\004\022#\n\rsub_po"
-      "st_list\030\002 \001(\0132\014.SubPostList\032\264\001\n\rSignatur"
+      "st_list\030\002 \003(\0132\014.SubPostList\032\264\001\n\rSignatur"
       "eData\022\024\n\014signature_id\030\001 \001(\005\022\023\n\013fontKeyNa"
       "me\030\002 \001(\t\022\021\n\tfontColor\030\003 \001(\t\0225\n\007content\030\004"
       " \003(\0132$.Post.SignatureData.SignatureConte"
@@ -253,14 +253,9 @@ struct StaticDescriptorInitializer {
 // ===================================================================
 
 void Post_SubPost::InitAsDefaultInstance() {
-  ::_Post_SubPost_default_instance_._instance.get_mutable()->sub_post_list_ = const_cast< ::SubPostList*>(
-      ::SubPostList::internal_default_instance());
 }
 void Post_SubPost::clear_sub_post_list() {
-  if (GetArenaNoVirtual() == NULL && sub_post_list_ != NULL) {
-    delete sub_post_list_;
-  }
-  sub_post_list_ = NULL;
+  sub_post_list_.Clear();
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int Post_SubPost::kPidFieldNumber;
@@ -278,21 +273,15 @@ Post_SubPost::Post_SubPost()
 Post_SubPost::Post_SubPost(const Post_SubPost& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
+      sub_post_list_(from.sub_post_list_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_sub_post_list()) {
-    sub_post_list_ = new ::SubPostList(*from.sub_post_list_);
-  } else {
-    sub_post_list_ = NULL;
-  }
   pid_ = from.pid_;
   // @@protoc_insertion_point(copy_constructor:Post.SubPost)
 }
 
 void Post_SubPost::SharedCtor() {
-  ::memset(&sub_post_list_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&pid_) -
-      reinterpret_cast<char*>(&sub_post_list_)) + sizeof(pid_));
+  pid_ = GOOGLE_ULONGLONG(0);
   _cached_size_ = 0;
 }
 
@@ -302,7 +291,6 @@ Post_SubPost::~Post_SubPost() {
 }
 
 void Post_SubPost::SharedDtor() {
-  if (this != internal_default_instance()) delete sub_post_list_;
 }
 
 void Post_SubPost::SetCachedSize(int size) const {
@@ -334,10 +322,7 @@ void Post_SubPost::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && sub_post_list_ != NULL) {
-    delete sub_post_list_;
-  }
-  sub_post_list_ = NULL;
+  sub_post_list_.Clear();
   pid_ = GOOGLE_ULONGLONG(0);
   _internal_metadata_.Clear();
 }
@@ -366,12 +351,11 @@ bool Post_SubPost::MergePartialFromCodedStream(
         break;
       }
 
-      // .SubPostList sub_post_list = 2;
+      // repeated .SubPostList sub_post_list = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_sub_post_list()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_sub_post_list()));
         } else {
           goto handle_unusual;
         }
@@ -409,10 +393,11 @@ void Post_SubPost::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->pid(), output);
   }
 
-  // .SubPostList sub_post_list = 2;
-  if (this->has_sub_post_list()) {
+  // repeated .SubPostList sub_post_list = 2;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->sub_post_list_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->sub_post_list_, output);
+      2, this->sub_post_list(static_cast<int>(i)), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -434,11 +419,12 @@ void Post_SubPost::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->pid(), target);
   }
 
-  // .SubPostList sub_post_list = 2;
-  if (this->has_sub_post_list()) {
+  // repeated .SubPostList sub_post_list = 2;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->sub_post_list_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, *this->sub_post_list_, deterministic, target);
+        2, this->sub_post_list(static_cast<int>(i)), deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -458,11 +444,15 @@ size_t Post_SubPost::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // .SubPostList sub_post_list = 2;
-  if (this->has_sub_post_list()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->sub_post_list_);
+  // repeated .SubPostList sub_post_list = 2;
+  {
+    unsigned int count = static_cast<unsigned int>(this->sub_post_list_size());
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          this->sub_post_list(static_cast<int>(i)));
+    }
   }
 
   // uint64 pid = 1;
@@ -501,9 +491,7 @@ void Post_SubPost::MergeFrom(const Post_SubPost& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.has_sub_post_list()) {
-    mutable_sub_post_list()->::SubPostList::MergeFrom(from.sub_post_list());
-  }
+  sub_post_list_.MergeFrom(from.sub_post_list_);
   if (from.pid() != 0) {
     set_pid(from.pid());
   }
@@ -533,7 +521,7 @@ void Post_SubPost::Swap(Post_SubPost* other) {
 }
 void Post_SubPost::InternalSwap(Post_SubPost* other) {
   using std::swap;
-  swap(sub_post_list_, other->sub_post_list_);
+  sub_post_list_.InternalSwap(&other->sub_post_list_);
   swap(pid_, other->pid_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
