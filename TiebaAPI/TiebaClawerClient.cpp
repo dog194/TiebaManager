@@ -130,7 +130,7 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 	CString src = TiebaClientHTTPPost(_T("https://c.tieba.baidu.com/c/f/pb/page"), data);
 	if (src == NET_TIMEOUT_TEXT)
 		return GET_POSTS_TIMEOUT;
-	WriteString(src, _T("thread.txt"));
+	//WriteString(src, _T("thread.txt"));
 	return GetPosts(fid, tid, page, src, posts, lzls, addition);
 }
 
@@ -415,7 +415,8 @@ const static void debugContent(PbContent pbContent, const CString& tid = _T(""),
 	std::string phonetypeStr = pbContent.phonetype();
 	CString phonetype = strUTF82W(phonetypeStr);
 	UINT32 e_type = pbContent.e_type();
-	tmp.Format(_T("packet_name: %s\tphonetype: %s\te_type: %d"), packet_name, phonetype, e_type);
+	UINT32 during_time = pbContent.during_time();
+	tmp.Format(_T("packet_name: %s\tphonetype: %s\te_type: %d\tduring_time: %d"), packet_name, phonetype, e_type, during_time);
 	output += tmp;
 	WriteStringCon(output, fname);
 }
@@ -435,6 +436,7 @@ const static CString decodeContent(const ::google::protobuf::RepeatedPtrField<Pb
 		switch (type)
 		{
 		case 0: // 文字
+		case 18: // 话题
 			tmpStr = rawContent->text();
 			content = strUTF82W(tmpStr);
 			break;
@@ -466,26 +468,22 @@ const static CString decodeContent(const ::google::protobuf::RepeatedPtrField<Pb
 			tmp = strUTF82W(tmpStr);
 			content.Format(_T(R"#(<a href=""  onclick="Stats.sendRequest('fr=tb0_forum&st_mod=pb&st_value=atlink');" onmouseover="showattip(this)" onmouseout="hideattip(this)" username="%s" target="_blank" class="at">%s</a>)#"),
 				tmp, tmp);
-			// tmp.Format(_T(R"#(<a href=""  onclick="Stats.sendRequest('fr=tb0_forum&st_mod=pb&st_value=atlink');" onmouseover="showattip(this)" onmouseout="hideattip(this)" username="%s" target="_blank" class="at">%s</a>)#"),
-			// content[L"text"].GetString() + 1, content[L"text"].GetString());
 			break;
 		case 5: // 视频
 			tmpStr = rawContent->text();
 			tmp = strUTF82W(tmpStr);
 			content.Format(_T(R"(<embed class="BDE_Flash" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" play="true" loop="false" menu="false" src="%s" width="500" height="450" allowscriptaccess="never" allowfullscreen="true" scale="noborder">)"),
 				tmp);
+			//debugContent(*rawContent, tid, pid);
 			break;
 		case 9: // 电话号码
 			tmpStr = rawContent->text();
 			content = strUTF82W(tmpStr);
-			debugContent(*rawContent, tid, pid);
 			break;
 		case 10: // 语音
 			content.Format(_T(R"(<div class="voice_player voice_player_pb"><a href="#" class="voice_player_inner"><span class="before">&nbsp;</span><span class="middle"><span class="speaker speaker_animate">&nbsp;</span><span class="time"><span class="second">%d</span>&quot;</span></span><span class="after">&nbsp;</span></a></div><img class="j_voice_ad_gif" src="http://tb2.bdstatic.com/tb/static-pb/img/voice_ad.gif" alt="下载贴吧客户端发语音！" /><br/>)"),
-				0);
-			debugContent(*rawContent, tid, pid);
+				rawContent->during_time() / 1000);
 			break;
-			// _ttoi(content[L"during_time"].GetString()) / 1000
 		default:
 			debugContent(*rawContent, tid, pid);
 			content = _T("");
@@ -622,7 +620,6 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		//int last_time_int = rawThread->last_time_int();
 		//int is_top = rawThread->is_top();
 		//int is_good = rawThread->is_good();
-		int is_vote = rawThread->is_vote();
 		UINT32 is_ad = rawThread->is_ad();
 		INT64 fid64 = rawThread->fid();
 		CString fid;
@@ -643,9 +640,9 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		//TMPP.Format(_T("标题：%s"), title);
 		//WriteStringCon(TMPP, _T("row.txt"));
 		/*
-		TMPP.Format(_T("size %d \nreply_n %d \nview_n %d \ntime %d \nis top %d is good %d is vote %d is_ad %s\nis_global_top %d \nctime %d \ntab_id %d"),
+		TMPP.Format(_T("size %d \nreply_n %d \nview_n %d \ntime %d \nis top %d is good %d  is_ad %s\nis_global_top %d \nctime %d \ntab_id %d"),
 			titleSize, reply_num, view_num, last_time_int,
-			is_top, is_good, is_vote, is_ad, is_global_top, create_time, tab_id);
+			is_top, is_good, is_ad, is_global_top, create_time, tab_id);
 		WriteStringCon(TMPP, _T("row.txt"));
 		TMPP.Format(_T("tid %I64d\nfid %I64d\nfirst_post_id %I64d\nauthor_id %I64d"), 
 			tid, fid, first_post_id, author_id);
@@ -781,9 +778,6 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	int uSize = PostuserList.size();
 	for (int i = 0; i < uSize; ++i)
 		userIndex[PostuserList[i].id] = i;
-	
-	// 帖子基本信息解析
-	int is_vote = threadInfo->is_vote();
 
 	int size = pbPostList->size();
 	posts.resize(size);
@@ -815,56 +809,58 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		post.timestamp = time;
 		post.rawData = _T("");
 		post.content = content;
-		/*
-		// 投票贴解析，强特征兼容保留
+		
+		// 特殊贴解析
 		if (post.floor == _T("1")) { // 仅需要处理1楼
-			// 分享贴判断
-			if (is_vote != 0) {
-				if (_ttoi(threadInfo[L"is_share_thread"].GetString()) == 1) {
-					// 属于分享贴
-					if (threadInfo.HasMember(L"origin_thread_info")) {
-						const auto& oriThreadInfo = threadInfo[L"origin_thread_info"];
-						// 分享贴强特征
-						tmp.Format(_T(R"(<a href="http://tieba.baidu.com/p/%s"  target="_blank"> 点击查看</a>)"), oriThreadInfo[L"tid"].GetString());
-						post.content += tmp;
-						// 分享贴预览信息 TODO
-
-					}
-				}
-			}
 			// 投票贴判断
-			if (threadInfo.HasMember(L"poll_info")) {
-				const auto& pollInfo = threadInfo[L"poll_info"];
-				if (pollInfo.IsObject() && pollInfo.HasMember(L"options") && pollInfo.HasMember(L"title")) {
-					const auto& optionsTitle = pollInfo[L"title"].GetString();
-					const auto& optionsInfo = pollInfo[L"options"];
-					// 投票贴强特征
-					post.content += STR_THREAD_VOTE;
-					// 投票内容标题
-					post.content += _T("\r\n");
-					post.content += optionsTitle;
-					// 投票内容
-					if (optionsInfo.IsArray()) {
-						for (const auto& optionContent : optionsInfo.GetArray())
-						{
-							post.content += optionContent[L"text"].GetString();
-						}
-					}
-				}
+			PollInfo* pbPollInfo = threadInfo->mutable_poll_info();
+			::google::protobuf::RepeatedPtrField<PollInfo_PollOption>* pbPollOptions;
+			pbPollOptions = pbPollInfo->mutable_options();
+			// 分享贴判断
+			const int is_share_thread = threadInfo->is_share_thread();
+			if (is_share_thread != 0) {
+				ThreadInfo_OriginThreadInfo* pbOriThreadInfo = threadInfo->mutable_origin_thread_info();
+				const CString oriTid = strUTF82W(pbOriThreadInfo->tid());
+				// 分享贴强特征
+				CString STR_SHARE_THREAD;
+				STR_SHARE_THREAD.Format(_T(R"(<a href="http://tieba.baidu.com/p/%s"  target="_blank"> 点击查看</a>)"), oriTid);
+				post.content += STR_SHARE_THREAD;
+				/*
+				// 分享贴预览信息 TODO
+				}*/
 			}
-					
-				
-			
-		}*/
-		/*
+			// 投票贴解析
+			if (pbPollOptions->size() > 0) {
+				const CString pollTitle = strUTF82W(pbPollInfo->title());
+				CString pollOption = _T("");
+				for (auto& rawOption = pbPollOptions->begin(); rawOption != pbPollOptions->end(); ++rawOption)
+				{
+					pollOption += strUTF82W(rawOption->text());
+				}
+				// 投票贴强特征
+				post.content += STR_THREAD_VOTE;
+				// 投票内容标题
+				post.content += _T("\r\n");
+				post.content += pollTitle;
+				// 投票内容
+				post.content += _T("\r\n");
+				post.content += pollOption;
+			}
+		}
+		
 		// 小尾巴
-		if (rawPost[L"signature"].IsObject()
-			&& rawPost[L"signature"][L"content"].Size() > 0
-			&& rawPost[L"signature"][L"content"][0].HasMember(L"text"))
-		{
-			post.content += _T("\r\n");
-			post.content += rawPost[L"signature"][L"content"][0][L"text"].GetString();
-		}*/
+		Post_SignatureData* pbSignatureData = rawPost->mutable_signature();
+		::google::protobuf::RepeatedPtrField<Post_SignatureData_SignatureContent>* pbSignatureContent;
+		pbSignatureContent = pbSignatureData->mutable_content();
+		if (pbSignatureContent->size() > 0) {
+			CString signStr = _T("");
+			for (auto& rawCotent = pbSignatureContent->begin(); rawCotent != pbSignatureContent->end(); ++rawCotent)
+			{
+				signStr += strUTF82W(rawCotent->text());
+			}
+			post.content += _T("\r\n\r\n");
+			post.content += signStr;
+		}
 
 		// 楼中楼信息处理
 		UINT32 sub_post_number = rawPost->sub_post_number(); // 显示总的楼中楼，暂时没用到

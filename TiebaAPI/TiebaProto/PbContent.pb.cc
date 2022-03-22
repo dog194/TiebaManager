@@ -65,6 +65,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, big_cdn_src_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, imgtype_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, voice_md5_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, during_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, width_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, height_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, packet_name_),
@@ -103,18 +104,19 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\017PbContent.proto\"\276\002\n\tPbContent\022\014\n\004type\030"
+      "\n\017PbContent.proto\"\323\002\n\tPbContent\022\014\n\004type\030"
       "\001 \001(\r\022\014\n\004text\030\002 \001(\t\022\014\n\004link\030\003 \001(\t\022\013\n\003src"
       "\030\004 \001(\t\022\r\n\005bsize\030\005 \001(\t\022\017\n\007big_src\030\006 \001(\t\022\020"
       "\n\010big_size\030\007 \001(\t\022\017\n\007cdn_src\030\010 \001(\t\022\023\n\013big"
       "_cdn_src\030\t \001(\t\022\017\n\007imgtype\030\n \001(\t\022\021\n\tvoice"
-      "_md5\030\014 \001(\t\022\r\n\005width\030\022 \001(\r\022\016\n\006height\030\023 \001("
-      "\r\022\023\n\013packet_name\030\024 \001(\t\022\021\n\tphonetype\030\025 \001("
-      "\t\022\016\n\006e_type\030\030 \001(\r\022\022\n\norigin_src\030\031 \001(\t\022\023\n"
-      "\013origin_size\030\033 \001(\rb\006proto3"
+      "_md5\030\014 \001(\t\022\023\n\013during_time\030\r \001(\r\022\r\n\005width"
+      "\030\022 \001(\r\022\016\n\006height\030\023 \001(\r\022\023\n\013packet_name\030\024 "
+      "\001(\t\022\021\n\tphonetype\030\025 \001(\t\022\016\n\006e_type\030\030 \001(\r\022\022"
+      "\n\norigin_src\030\031 \001(\t\022\023\n\013origin_size\030\033 \001(\rb"
+      "\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 346);
+      descriptor, 367);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PbContent.proto", &protobuf_RegisterTypes);
 }
@@ -147,6 +149,7 @@ const int PbContent::kCdnSrcFieldNumber;
 const int PbContent::kBigCdnSrcFieldNumber;
 const int PbContent::kImgtypeFieldNumber;
 const int PbContent::kVoiceMd5FieldNumber;
+const int PbContent::kDuringTimeFieldNumber;
 const int PbContent::kWidthFieldNumber;
 const int PbContent::kHeightFieldNumber;
 const int PbContent::kPacketNameFieldNumber;
@@ -222,8 +225,8 @@ PbContent::PbContent(const PbContent& from)
     origin_src_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.origin_src_);
   }
   ::memcpy(&type_, &from.type_,
-    static_cast<size_t>(reinterpret_cast<char*>(&e_type_) -
-    reinterpret_cast<char*>(&type_)) + sizeof(e_type_));
+    static_cast<size_t>(reinterpret_cast<char*>(&origin_size_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(origin_size_));
   // @@protoc_insertion_point(copy_constructor:PbContent)
 }
 
@@ -242,8 +245,8 @@ void PbContent::SharedCtor() {
   phonetype_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   origin_src_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&e_type_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(e_type_));
+      reinterpret_cast<char*>(&origin_size_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(origin_size_));
   _cached_size_ = 0;
 }
 
@@ -311,8 +314,8 @@ void PbContent::Clear() {
   phonetype_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   origin_src_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&e_type_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(e_type_));
+      reinterpret_cast<char*>(&origin_size_) -
+      reinterpret_cast<char*>(&type_)) + sizeof(origin_size_));
   _internal_metadata_.Clear();
 }
 
@@ -494,6 +497,20 @@ bool PbContent::MergePartialFromCodedStream(
             this->voice_md5().data(), static_cast<int>(this->voice_md5().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "PbContent.voice_md5"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // uint32 during_time = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &during_time_)));
         } else {
           goto handle_unusual;
         }
@@ -735,6 +752,11 @@ void PbContent::SerializeWithCachedSizes(
       12, this->voice_md5(), output);
   }
 
+  // uint32 during_time = 13;
+  if (this->during_time() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(13, this->during_time(), output);
+  }
+
   // uint32 width = 18;
   if (this->width() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(18, this->width(), output);
@@ -914,6 +936,11 @@ void PbContent::SerializeWithCachedSizes(
         12, this->voice_md5(), target);
   }
 
+  // uint32 during_time = 13;
+  if (this->during_time() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(13, this->during_time(), target);
+  }
+
   // uint32 width = 18;
   if (this->width() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(18, this->width(), target);
@@ -1082,18 +1109,18 @@ size_t PbContent::ByteSizeLong() const {
         this->type());
   }
 
+  // uint32 during_time = 13;
+  if (this->during_time() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->during_time());
+  }
+
   // uint32 width = 18;
   if (this->width() != 0) {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->width());
-  }
-
-  // uint32 origin_size = 27;
-  if (this->origin_size() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->origin_size());
   }
 
   // uint32 height = 19;
@@ -1108,6 +1135,13 @@ size_t PbContent::ByteSizeLong() const {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->e_type());
+  }
+
+  // uint32 origin_size = 27;
+  if (this->origin_size() != 0) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        this->origin_size());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -1194,17 +1228,20 @@ void PbContent::MergeFrom(const PbContent& from) {
   if (from.type() != 0) {
     set_type(from.type());
   }
+  if (from.during_time() != 0) {
+    set_during_time(from.during_time());
+  }
   if (from.width() != 0) {
     set_width(from.width());
-  }
-  if (from.origin_size() != 0) {
-    set_origin_size(from.origin_size());
   }
   if (from.height() != 0) {
     set_height(from.height());
   }
   if (from.e_type() != 0) {
     set_e_type(from.e_type());
+  }
+  if (from.origin_size() != 0) {
+    set_origin_size(from.origin_size());
   }
 }
 
@@ -1246,10 +1283,11 @@ void PbContent::InternalSwap(PbContent* other) {
   phonetype_.Swap(&other->phonetype_);
   origin_src_.Swap(&other->origin_src_);
   swap(type_, other->type_);
+  swap(during_time_, other->during_time_);
   swap(width_, other->width_);
-  swap(origin_size_, other->origin_size_);
   swap(height_, other->height_);
   swap(e_type_, other->e_type_);
+  swap(origin_size_, other->origin_size_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);
 }

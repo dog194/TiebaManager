@@ -38,23 +38,472 @@ namespace protobuf_ThreadInfo_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[1];
+  static const ::google::protobuf::internal::ParseTable schema[4];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
 };
 void AddDescriptors();
+void InitDefaultsPollInfo_PollOptionImpl();
+void InitDefaultsPollInfo_PollOption();
+void InitDefaultsPollInfoImpl();
+void InitDefaultsPollInfo();
+void InitDefaultsThreadInfo_OriginThreadInfoImpl();
+void InitDefaultsThreadInfo_OriginThreadInfo();
 void InitDefaultsThreadInfoImpl();
 void InitDefaultsThreadInfo();
 inline void InitDefaults() {
+  InitDefaultsPollInfo_PollOption();
+  InitDefaultsPollInfo();
+  InitDefaultsThreadInfo_OriginThreadInfo();
   InitDefaultsThreadInfo();
 }
 }  // namespace protobuf_ThreadInfo_2eproto
+class PollInfo;
+class PollInfoDefaultTypeInternal;
+extern PollInfoDefaultTypeInternal _PollInfo_default_instance_;
+class PollInfo_PollOption;
+class PollInfo_PollOptionDefaultTypeInternal;
+extern PollInfo_PollOptionDefaultTypeInternal _PollInfo_PollOption_default_instance_;
 class ThreadInfo;
 class ThreadInfoDefaultTypeInternal;
 extern ThreadInfoDefaultTypeInternal _ThreadInfo_default_instance_;
+class ThreadInfo_OriginThreadInfo;
+class ThreadInfo_OriginThreadInfoDefaultTypeInternal;
+extern ThreadInfo_OriginThreadInfoDefaultTypeInternal _ThreadInfo_OriginThreadInfo_default_instance_;
 
 // ===================================================================
+
+class PollInfo_PollOption : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:PollInfo.PollOption) */ {
+ public:
+  PollInfo_PollOption();
+  virtual ~PollInfo_PollOption();
+
+  PollInfo_PollOption(const PollInfo_PollOption& from);
+
+  inline PollInfo_PollOption& operator=(const PollInfo_PollOption& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  PollInfo_PollOption(PollInfo_PollOption&& from) noexcept
+    : PollInfo_PollOption() {
+    *this = ::std::move(from);
+  }
+
+  inline PollInfo_PollOption& operator=(PollInfo_PollOption&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PollInfo_PollOption& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PollInfo_PollOption* internal_default_instance() {
+    return reinterpret_cast<const PollInfo_PollOption*>(
+               &_PollInfo_PollOption_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    0;
+
+  void Swap(PollInfo_PollOption* other);
+  friend void swap(PollInfo_PollOption& a, PollInfo_PollOption& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PollInfo_PollOption* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  PollInfo_PollOption* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const PollInfo_PollOption& from);
+  void MergeFrom(const PollInfo_PollOption& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(PollInfo_PollOption* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string text = 3;
+  void clear_text();
+  static const int kTextFieldNumber = 3;
+  const ::std::string& text() const;
+  void set_text(const ::std::string& value);
+  #if LANG_CXX11
+  void set_text(::std::string&& value);
+  #endif
+  void set_text(const char* value);
+  void set_text(const char* value, size_t size);
+  ::std::string* mutable_text();
+  ::std::string* release_text();
+  void set_allocated_text(::std::string* text);
+
+  // string image = 4;
+  void clear_image();
+  static const int kImageFieldNumber = 4;
+  const ::std::string& image() const;
+  void set_image(const ::std::string& value);
+  #if LANG_CXX11
+  void set_image(::std::string&& value);
+  #endif
+  void set_image(const char* value);
+  void set_image(const char* value, size_t size);
+  ::std::string* mutable_image();
+  ::std::string* release_image();
+  void set_allocated_image(::std::string* image);
+
+  // int64 num = 2;
+  void clear_num();
+  static const int kNumFieldNumber = 2;
+  ::google::protobuf::int64 num() const;
+  void set_num(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:PollInfo.PollOption)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr text_;
+  ::google::protobuf::internal::ArenaStringPtr image_;
+  ::google::protobuf::int64 num_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_ThreadInfo_2eproto::TableStruct;
+  friend void ::protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo_PollOptionImpl();
+};
+// -------------------------------------------------------------------
+
+class PollInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:PollInfo) */ {
+ public:
+  PollInfo();
+  virtual ~PollInfo();
+
+  PollInfo(const PollInfo& from);
+
+  inline PollInfo& operator=(const PollInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  PollInfo(PollInfo&& from) noexcept
+    : PollInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline PollInfo& operator=(PollInfo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PollInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const PollInfo* internal_default_instance() {
+    return reinterpret_cast<const PollInfo*>(
+               &_PollInfo_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    1;
+
+  void Swap(PollInfo* other);
+  friend void swap(PollInfo& a, PollInfo& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline PollInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  PollInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const PollInfo& from);
+  void MergeFrom(const PollInfo& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(PollInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  typedef PollInfo_PollOption PollOption;
+
+  // accessors -------------------------------------------------------
+
+  // repeated .PollInfo.PollOption options = 9;
+  int options_size() const;
+  void clear_options();
+  static const int kOptionsFieldNumber = 9;
+  const ::PollInfo_PollOption& options(int index) const;
+  ::PollInfo_PollOption* mutable_options(int index);
+  ::PollInfo_PollOption* add_options();
+  ::google::protobuf::RepeatedPtrField< ::PollInfo_PollOption >*
+      mutable_options();
+  const ::google::protobuf::RepeatedPtrField< ::PollInfo_PollOption >&
+      options() const;
+
+  // string title = 12;
+  void clear_title();
+  static const int kTitleFieldNumber = 12;
+  const ::std::string& title() const;
+  void set_title(const ::std::string& value);
+  #if LANG_CXX11
+  void set_title(::std::string&& value);
+  #endif
+  void set_title(const char* value);
+  void set_title(const char* value, size_t size);
+  ::std::string* mutable_title();
+  ::std::string* release_title();
+  void set_allocated_title(::std::string* title);
+
+  // int64 total_num = 3;
+  void clear_total_num();
+  static const int kTotalNumFieldNumber = 3;
+  ::google::protobuf::int64 total_num() const;
+  void set_total_num(::google::protobuf::int64 value);
+
+  // int32 is_multi = 2;
+  void clear_is_multi();
+  static const int kIsMultiFieldNumber = 2;
+  ::google::protobuf::int32 is_multi() const;
+  void set_is_multi(::google::protobuf::int32 value);
+
+  // int64 total_poll = 11;
+  void clear_total_poll();
+  static const int kTotalPollFieldNumber = 11;
+  ::google::protobuf::int64 total_poll() const;
+  void set_total_poll(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:PollInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::PollInfo_PollOption > options_;
+  ::google::protobuf::internal::ArenaStringPtr title_;
+  ::google::protobuf::int64 total_num_;
+  ::google::protobuf::int32 is_multi_;
+  ::google::protobuf::int64 total_poll_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_ThreadInfo_2eproto::TableStruct;
+  friend void ::protobuf_ThreadInfo_2eproto::InitDefaultsPollInfoImpl();
+};
+// -------------------------------------------------------------------
+
+class ThreadInfo_OriginThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ThreadInfo.OriginThreadInfo) */ {
+ public:
+  ThreadInfo_OriginThreadInfo();
+  virtual ~ThreadInfo_OriginThreadInfo();
+
+  ThreadInfo_OriginThreadInfo(const ThreadInfo_OriginThreadInfo& from);
+
+  inline ThreadInfo_OriginThreadInfo& operator=(const ThreadInfo_OriginThreadInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  ThreadInfo_OriginThreadInfo(ThreadInfo_OriginThreadInfo&& from) noexcept
+    : ThreadInfo_OriginThreadInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline ThreadInfo_OriginThreadInfo& operator=(ThreadInfo_OriginThreadInfo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ThreadInfo_OriginThreadInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ThreadInfo_OriginThreadInfo* internal_default_instance() {
+    return reinterpret_cast<const ThreadInfo_OriginThreadInfo*>(
+               &_ThreadInfo_OriginThreadInfo_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    2;
+
+  void Swap(ThreadInfo_OriginThreadInfo* other);
+  friend void swap(ThreadInfo_OriginThreadInfo& a, ThreadInfo_OriginThreadInfo& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ThreadInfo_OriginThreadInfo* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  ThreadInfo_OriginThreadInfo* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const ThreadInfo_OriginThreadInfo& from);
+  void MergeFrom(const ThreadInfo_OriginThreadInfo& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(ThreadInfo_OriginThreadInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .PbContent content = 14;
+  int content_size() const;
+  void clear_content();
+  static const int kContentFieldNumber = 14;
+  const ::PbContent& content(int index) const;
+  ::PbContent* mutable_content(int index);
+  ::PbContent* add_content();
+  ::google::protobuf::RepeatedPtrField< ::PbContent >*
+      mutable_content();
+  const ::google::protobuf::RepeatedPtrField< ::PbContent >&
+      content() const;
+
+  // string title = 1;
+  void clear_title();
+  static const int kTitleFieldNumber = 1;
+  const ::std::string& title() const;
+  void set_title(const ::std::string& value);
+  #if LANG_CXX11
+  void set_title(::std::string&& value);
+  #endif
+  void set_title(const char* value);
+  void set_title(const char* value, size_t size);
+  ::std::string* mutable_title();
+  ::std::string* release_title();
+  void set_allocated_title(::std::string* title);
+
+  // string tid = 5;
+  void clear_tid();
+  static const int kTidFieldNumber = 5;
+  const ::std::string& tid() const;
+  void set_tid(const ::std::string& value);
+  #if LANG_CXX11
+  void set_tid(::std::string&& value);
+  #endif
+  void set_tid(const char* value);
+  void set_tid(const char* value, size_t size);
+  ::std::string* mutable_tid();
+  ::std::string* release_tid();
+  void set_allocated_tid(::std::string* tid);
+
+  // .PollInfo poll_info = 21;
+  bool has_poll_info() const;
+  void clear_poll_info();
+  static const int kPollInfoFieldNumber = 21;
+  const ::PollInfo& poll_info() const;
+  ::PollInfo* release_poll_info();
+  ::PollInfo* mutable_poll_info();
+  void set_allocated_poll_info(::PollInfo* poll_info);
+
+  // int64 fid = 7;
+  void clear_fid();
+  static const int kFidFieldNumber = 7;
+  ::google::protobuf::int64 fid() const;
+  void set_fid(::google::protobuf::int64 value);
+
+  // int64 pid = 25;
+  void clear_pid();
+  static const int kPidFieldNumber = 25;
+  ::google::protobuf::int64 pid() const;
+  void set_pid(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:ThreadInfo.OriginThreadInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::PbContent > content_;
+  ::google::protobuf::internal::ArenaStringPtr title_;
+  ::google::protobuf::internal::ArenaStringPtr tid_;
+  ::PollInfo* poll_info_;
+  ::google::protobuf::int64 fid_;
+  ::google::protobuf::int64 pid_;
+  mutable int _cached_size_;
+  friend struct ::protobuf_ThreadInfo_2eproto::TableStruct;
+  friend void ::protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfo_OriginThreadInfoImpl();
+};
+// -------------------------------------------------------------------
 
 class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:ThreadInfo) */ {
  public:
@@ -91,7 +540,7 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
                &_ThreadInfo_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
-    0;
+    3;
 
   void Swap(ThreadInfo* other);
   friend void swap(ThreadInfo& a, ThreadInfo& b) {
@@ -136,6 +585,8 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   // nested types ----------------------------------------------------
 
+  typedef ThreadInfo_OriginThreadInfo OriginThreadInfo;
+
   // accessors -------------------------------------------------------
 
   // repeated .PbContent first_post_content = 142;
@@ -164,6 +615,15 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::std::string* release_title();
   void set_allocated_title(::std::string* title);
 
+  // .PollInfo poll_info = 74;
+  bool has_poll_info() const;
+  void clear_poll_info();
+  static const int kPollInfoFieldNumber = 74;
+  const ::PollInfo& poll_info() const;
+  ::PollInfo* release_poll_info();
+  ::PollInfo* mutable_poll_info();
+  void set_allocated_poll_info(::PollInfo* poll_info);
+
   // .Agree agree = 126;
   bool has_agree() const;
   void clear_agree();
@@ -172,6 +632,15 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::Agree* release_agree();
   ::Agree* mutable_agree();
   void set_allocated_agree(::Agree* agree);
+
+  // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
+  bool has_origin_thread_info() const;
+  void clear_origin_thread_info();
+  static const int kOriginThreadInfoFieldNumber = 141;
+  const ::ThreadInfo_OriginThreadInfo& origin_thread_info() const;
+  ::ThreadInfo_OriginThreadInfo* release_origin_thread_info();
+  ::ThreadInfo_OriginThreadInfo* mutable_origin_thread_info();
+  void set_allocated_origin_thread_info(::ThreadInfo_OriginThreadInfo* origin_thread_info);
 
   // int64 id = 1;
   void clear_id();
@@ -209,11 +678,17 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 is_good() const;
   void set_is_good(::google::protobuf::int32 value);
 
-  // int32 is_vote = 11;
-  void clear_is_vote();
-  static const int kIsVoteFieldNumber = 11;
-  ::google::protobuf::int32 is_vote() const;
-  void set_is_vote(::google::protobuf::int32 value);
+  // int32 is_voice_thread = 15;
+  void clear_is_voice_thread();
+  static const int kIsVoiceThreadFieldNumber = 15;
+  ::google::protobuf::int32 is_voice_thread() const;
+  void set_is_voice_thread(::google::protobuf::int32 value);
+
+  // int32 is_frs_mask = 198;
+  void clear_is_frs_mask();
+  static const int kIsFrsMaskFieldNumber = 198;
+  ::google::protobuf::int32 is_frs_mask() const;
+  void set_is_frs_mask(::google::protobuf::int32 value);
 
   // int64 fid = 27;
   void clear_fid();
@@ -263,6 +738,12 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 is_god() const;
   void set_is_god(::google::protobuf::int32 value);
 
+  // int32 is_share_thread = 143;
+  void clear_is_share_thread();
+  static const int kIsShareThreadFieldNumber = 143;
+  ::google::protobuf::int32 is_share_thread() const;
+  void set_is_share_thread(::google::protobuf::int32 value);
+
   // int32 tab_id = 175;
   void clear_tab_id();
   static const int kTabIdFieldNumber = 175;
@@ -275,26 +756,23 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 is_deleted() const;
   void set_is_deleted(::google::protobuf::int32 value);
 
-  // int32 is_frs_mask = 198;
-  void clear_is_frs_mask();
-  static const int kIsFrsMaskFieldNumber = 198;
-  ::google::protobuf::int32 is_frs_mask() const;
-  void set_is_frs_mask(::google::protobuf::int32 value);
-
   // @@protoc_insertion_point(class_scope:ThreadInfo)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::PbContent > first_post_content_;
   ::google::protobuf::internal::ArenaStringPtr title_;
+  ::PollInfo* poll_info_;
   ::Agree* agree_;
+  ::ThreadInfo_OriginThreadInfo* origin_thread_info_;
   ::google::protobuf::int64 id_;
   ::google::protobuf::int32 reply_num_;
   ::google::protobuf::int32 view_num_;
   ::google::protobuf::int32 last_time_int_;
   ::google::protobuf::int32 is_top_;
   ::google::protobuf::int32 is_good_;
-  ::google::protobuf::int32 is_vote_;
+  ::google::protobuf::int32 is_voice_thread_;
+  ::google::protobuf::int32 is_frs_mask_;
   ::google::protobuf::int64 fid_;
   ::google::protobuf::int64 first_post_id_;
   ::google::protobuf::int32 is_global_top_;
@@ -303,9 +781,9 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::uint32 is_ad_;
   ::google::protobuf::int32 is_godthread_recommend_;
   ::google::protobuf::int32 is_god_;
+  ::google::protobuf::int32 is_share_thread_;
   ::google::protobuf::int32 tab_id_;
   ::google::protobuf::int32 is_deleted_;
-  ::google::protobuf::int32 is_frs_mask_;
   mutable int _cached_size_;
   friend struct ::protobuf_ThreadInfo_2eproto::TableStruct;
   friend void ::protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfoImpl();
@@ -319,6 +797,474 @@ class ThreadInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// PollInfo_PollOption
+
+// int64 num = 2;
+inline void PollInfo_PollOption::clear_num() {
+  num_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PollInfo_PollOption::num() const {
+  // @@protoc_insertion_point(field_get:PollInfo.PollOption.num)
+  return num_;
+}
+inline void PollInfo_PollOption::set_num(::google::protobuf::int64 value) {
+  
+  num_ = value;
+  // @@protoc_insertion_point(field_set:PollInfo.PollOption.num)
+}
+
+// string text = 3;
+inline void PollInfo_PollOption::clear_text() {
+  text_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& PollInfo_PollOption::text() const {
+  // @@protoc_insertion_point(field_get:PollInfo.PollOption.text)
+  return text_.GetNoArena();
+}
+inline void PollInfo_PollOption::set_text(const ::std::string& value) {
+  
+  text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:PollInfo.PollOption.text)
+}
+#if LANG_CXX11
+inline void PollInfo_PollOption::set_text(::std::string&& value) {
+  
+  text_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:PollInfo.PollOption.text)
+}
+#endif
+inline void PollInfo_PollOption::set_text(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:PollInfo.PollOption.text)
+}
+inline void PollInfo_PollOption::set_text(const char* value, size_t size) {
+  
+  text_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:PollInfo.PollOption.text)
+}
+inline ::std::string* PollInfo_PollOption::mutable_text() {
+  
+  // @@protoc_insertion_point(field_mutable:PollInfo.PollOption.text)
+  return text_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PollInfo_PollOption::release_text() {
+  // @@protoc_insertion_point(field_release:PollInfo.PollOption.text)
+  
+  return text_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PollInfo_PollOption::set_allocated_text(::std::string* text) {
+  if (text != NULL) {
+    
+  } else {
+    
+  }
+  text_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), text);
+  // @@protoc_insertion_point(field_set_allocated:PollInfo.PollOption.text)
+}
+
+// string image = 4;
+inline void PollInfo_PollOption::clear_image() {
+  image_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& PollInfo_PollOption::image() const {
+  // @@protoc_insertion_point(field_get:PollInfo.PollOption.image)
+  return image_.GetNoArena();
+}
+inline void PollInfo_PollOption::set_image(const ::std::string& value) {
+  
+  image_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:PollInfo.PollOption.image)
+}
+#if LANG_CXX11
+inline void PollInfo_PollOption::set_image(::std::string&& value) {
+  
+  image_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:PollInfo.PollOption.image)
+}
+#endif
+inline void PollInfo_PollOption::set_image(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  image_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:PollInfo.PollOption.image)
+}
+inline void PollInfo_PollOption::set_image(const char* value, size_t size) {
+  
+  image_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:PollInfo.PollOption.image)
+}
+inline ::std::string* PollInfo_PollOption::mutable_image() {
+  
+  // @@protoc_insertion_point(field_mutable:PollInfo.PollOption.image)
+  return image_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PollInfo_PollOption::release_image() {
+  // @@protoc_insertion_point(field_release:PollInfo.PollOption.image)
+  
+  return image_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PollInfo_PollOption::set_allocated_image(::std::string* image) {
+  if (image != NULL) {
+    
+  } else {
+    
+  }
+  image_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), image);
+  // @@protoc_insertion_point(field_set_allocated:PollInfo.PollOption.image)
+}
+
+// -------------------------------------------------------------------
+
+// PollInfo
+
+// int32 is_multi = 2;
+inline void PollInfo::clear_is_multi() {
+  is_multi_ = 0;
+}
+inline ::google::protobuf::int32 PollInfo::is_multi() const {
+  // @@protoc_insertion_point(field_get:PollInfo.is_multi)
+  return is_multi_;
+}
+inline void PollInfo::set_is_multi(::google::protobuf::int32 value) {
+  
+  is_multi_ = value;
+  // @@protoc_insertion_point(field_set:PollInfo.is_multi)
+}
+
+// int64 total_num = 3;
+inline void PollInfo::clear_total_num() {
+  total_num_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PollInfo::total_num() const {
+  // @@protoc_insertion_point(field_get:PollInfo.total_num)
+  return total_num_;
+}
+inline void PollInfo::set_total_num(::google::protobuf::int64 value) {
+  
+  total_num_ = value;
+  // @@protoc_insertion_point(field_set:PollInfo.total_num)
+}
+
+// repeated .PollInfo.PollOption options = 9;
+inline int PollInfo::options_size() const {
+  return options_.size();
+}
+inline void PollInfo::clear_options() {
+  options_.Clear();
+}
+inline const ::PollInfo_PollOption& PollInfo::options(int index) const {
+  // @@protoc_insertion_point(field_get:PollInfo.options)
+  return options_.Get(index);
+}
+inline ::PollInfo_PollOption* PollInfo::mutable_options(int index) {
+  // @@protoc_insertion_point(field_mutable:PollInfo.options)
+  return options_.Mutable(index);
+}
+inline ::PollInfo_PollOption* PollInfo::add_options() {
+  // @@protoc_insertion_point(field_add:PollInfo.options)
+  return options_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::PollInfo_PollOption >*
+PollInfo::mutable_options() {
+  // @@protoc_insertion_point(field_mutable_list:PollInfo.options)
+  return &options_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::PollInfo_PollOption >&
+PollInfo::options() const {
+  // @@protoc_insertion_point(field_list:PollInfo.options)
+  return options_;
+}
+
+// int64 total_poll = 11;
+inline void PollInfo::clear_total_poll() {
+  total_poll_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PollInfo::total_poll() const {
+  // @@protoc_insertion_point(field_get:PollInfo.total_poll)
+  return total_poll_;
+}
+inline void PollInfo::set_total_poll(::google::protobuf::int64 value) {
+  
+  total_poll_ = value;
+  // @@protoc_insertion_point(field_set:PollInfo.total_poll)
+}
+
+// string title = 12;
+inline void PollInfo::clear_title() {
+  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& PollInfo::title() const {
+  // @@protoc_insertion_point(field_get:PollInfo.title)
+  return title_.GetNoArena();
+}
+inline void PollInfo::set_title(const ::std::string& value) {
+  
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:PollInfo.title)
+}
+#if LANG_CXX11
+inline void PollInfo::set_title(::std::string&& value) {
+  
+  title_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:PollInfo.title)
+}
+#endif
+inline void PollInfo::set_title(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:PollInfo.title)
+}
+inline void PollInfo::set_title(const char* value, size_t size) {
+  
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:PollInfo.title)
+}
+inline ::std::string* PollInfo::mutable_title() {
+  
+  // @@protoc_insertion_point(field_mutable:PollInfo.title)
+  return title_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* PollInfo::release_title() {
+  // @@protoc_insertion_point(field_release:PollInfo.title)
+  
+  return title_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void PollInfo::set_allocated_title(::std::string* title) {
+  if (title != NULL) {
+    
+  } else {
+    
+  }
+  title_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), title);
+  // @@protoc_insertion_point(field_set_allocated:PollInfo.title)
+}
+
+// -------------------------------------------------------------------
+
+// ThreadInfo_OriginThreadInfo
+
+// string title = 1;
+inline void ThreadInfo_OriginThreadInfo::clear_title() {
+  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ThreadInfo_OriginThreadInfo::title() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.OriginThreadInfo.title)
+  return title_.GetNoArena();
+}
+inline void ThreadInfo_OriginThreadInfo::set_title(const ::std::string& value) {
+  
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ThreadInfo.OriginThreadInfo.title)
+}
+#if LANG_CXX11
+inline void ThreadInfo_OriginThreadInfo::set_title(::std::string&& value) {
+  
+  title_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ThreadInfo.OriginThreadInfo.title)
+}
+#endif
+inline void ThreadInfo_OriginThreadInfo::set_title(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ThreadInfo.OriginThreadInfo.title)
+}
+inline void ThreadInfo_OriginThreadInfo::set_title(const char* value, size_t size) {
+  
+  title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ThreadInfo.OriginThreadInfo.title)
+}
+inline ::std::string* ThreadInfo_OriginThreadInfo::mutable_title() {
+  
+  // @@protoc_insertion_point(field_mutable:ThreadInfo.OriginThreadInfo.title)
+  return title_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ThreadInfo_OriginThreadInfo::release_title() {
+  // @@protoc_insertion_point(field_release:ThreadInfo.OriginThreadInfo.title)
+  
+  return title_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ThreadInfo_OriginThreadInfo::set_allocated_title(::std::string* title) {
+  if (title != NULL) {
+    
+  } else {
+    
+  }
+  title_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), title);
+  // @@protoc_insertion_point(field_set_allocated:ThreadInfo.OriginThreadInfo.title)
+}
+
+// string tid = 5;
+inline void ThreadInfo_OriginThreadInfo::clear_tid() {
+  tid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ThreadInfo_OriginThreadInfo::tid() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.OriginThreadInfo.tid)
+  return tid_.GetNoArena();
+}
+inline void ThreadInfo_OriginThreadInfo::set_tid(const ::std::string& value) {
+  
+  tid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:ThreadInfo.OriginThreadInfo.tid)
+}
+#if LANG_CXX11
+inline void ThreadInfo_OriginThreadInfo::set_tid(::std::string&& value) {
+  
+  tid_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:ThreadInfo.OriginThreadInfo.tid)
+}
+#endif
+inline void ThreadInfo_OriginThreadInfo::set_tid(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  tid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:ThreadInfo.OriginThreadInfo.tid)
+}
+inline void ThreadInfo_OriginThreadInfo::set_tid(const char* value, size_t size) {
+  
+  tid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:ThreadInfo.OriginThreadInfo.tid)
+}
+inline ::std::string* ThreadInfo_OriginThreadInfo::mutable_tid() {
+  
+  // @@protoc_insertion_point(field_mutable:ThreadInfo.OriginThreadInfo.tid)
+  return tid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ThreadInfo_OriginThreadInfo::release_tid() {
+  // @@protoc_insertion_point(field_release:ThreadInfo.OriginThreadInfo.tid)
+  
+  return tid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ThreadInfo_OriginThreadInfo::set_allocated_tid(::std::string* tid) {
+  if (tid != NULL) {
+    
+  } else {
+    
+  }
+  tid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), tid);
+  // @@protoc_insertion_point(field_set_allocated:ThreadInfo.OriginThreadInfo.tid)
+}
+
+// int64 fid = 7;
+inline void ThreadInfo_OriginThreadInfo::clear_fid() {
+  fid_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 ThreadInfo_OriginThreadInfo::fid() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.OriginThreadInfo.fid)
+  return fid_;
+}
+inline void ThreadInfo_OriginThreadInfo::set_fid(::google::protobuf::int64 value) {
+  
+  fid_ = value;
+  // @@protoc_insertion_point(field_set:ThreadInfo.OriginThreadInfo.fid)
+}
+
+// repeated .PbContent content = 14;
+inline int ThreadInfo_OriginThreadInfo::content_size() const {
+  return content_.size();
+}
+inline const ::PbContent& ThreadInfo_OriginThreadInfo::content(int index) const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.OriginThreadInfo.content)
+  return content_.Get(index);
+}
+inline ::PbContent* ThreadInfo_OriginThreadInfo::mutable_content(int index) {
+  // @@protoc_insertion_point(field_mutable:ThreadInfo.OriginThreadInfo.content)
+  return content_.Mutable(index);
+}
+inline ::PbContent* ThreadInfo_OriginThreadInfo::add_content() {
+  // @@protoc_insertion_point(field_add:ThreadInfo.OriginThreadInfo.content)
+  return content_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::PbContent >*
+ThreadInfo_OriginThreadInfo::mutable_content() {
+  // @@protoc_insertion_point(field_mutable_list:ThreadInfo.OriginThreadInfo.content)
+  return &content_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::PbContent >&
+ThreadInfo_OriginThreadInfo::content() const {
+  // @@protoc_insertion_point(field_list:ThreadInfo.OriginThreadInfo.content)
+  return content_;
+}
+
+// .PollInfo poll_info = 21;
+inline bool ThreadInfo_OriginThreadInfo::has_poll_info() const {
+  return this != internal_default_instance() && poll_info_ != NULL;
+}
+inline void ThreadInfo_OriginThreadInfo::clear_poll_info() {
+  if (GetArenaNoVirtual() == NULL && poll_info_ != NULL) {
+    delete poll_info_;
+  }
+  poll_info_ = NULL;
+}
+inline const ::PollInfo& ThreadInfo_OriginThreadInfo::poll_info() const {
+  const ::PollInfo* p = poll_info_;
+  // @@protoc_insertion_point(field_get:ThreadInfo.OriginThreadInfo.poll_info)
+  return p != NULL ? *p : *reinterpret_cast<const ::PollInfo*>(
+      &::_PollInfo_default_instance_);
+}
+inline ::PollInfo* ThreadInfo_OriginThreadInfo::release_poll_info() {
+  // @@protoc_insertion_point(field_release:ThreadInfo.OriginThreadInfo.poll_info)
+  
+  ::PollInfo* temp = poll_info_;
+  poll_info_ = NULL;
+  return temp;
+}
+inline ::PollInfo* ThreadInfo_OriginThreadInfo::mutable_poll_info() {
+  
+  if (poll_info_ == NULL) {
+    poll_info_ = new ::PollInfo;
+  }
+  // @@protoc_insertion_point(field_mutable:ThreadInfo.OriginThreadInfo.poll_info)
+  return poll_info_;
+}
+inline void ThreadInfo_OriginThreadInfo::set_allocated_poll_info(::PollInfo* poll_info) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete poll_info_;
+  }
+  if (poll_info) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      poll_info = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, poll_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  poll_info_ = poll_info;
+  // @@protoc_insertion_point(field_set_allocated:ThreadInfo.OriginThreadInfo.poll_info)
+}
+
+// int64 pid = 25;
+inline void ThreadInfo_OriginThreadInfo::clear_pid() {
+  pid_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 ThreadInfo_OriginThreadInfo::pid() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.OriginThreadInfo.pid)
+  return pid_;
+}
+inline void ThreadInfo_OriginThreadInfo::set_pid(::google::protobuf::int64 value) {
+  
+  pid_ = value;
+  // @@protoc_insertion_point(field_set:ThreadInfo.OriginThreadInfo.pid)
+}
+
+// -------------------------------------------------------------------
+
 // ThreadInfo
 
 // int64 id = 1;
@@ -458,18 +1404,18 @@ inline void ThreadInfo::set_is_good(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:ThreadInfo.is_good)
 }
 
-// int32 is_vote = 11;
-inline void ThreadInfo::clear_is_vote() {
-  is_vote_ = 0;
+// int32 is_voice_thread = 15;
+inline void ThreadInfo::clear_is_voice_thread() {
+  is_voice_thread_ = 0;
 }
-inline ::google::protobuf::int32 ThreadInfo::is_vote() const {
-  // @@protoc_insertion_point(field_get:ThreadInfo.is_vote)
-  return is_vote_;
+inline ::google::protobuf::int32 ThreadInfo::is_voice_thread() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.is_voice_thread)
+  return is_voice_thread_;
 }
-inline void ThreadInfo::set_is_vote(::google::protobuf::int32 value) {
+inline void ThreadInfo::set_is_voice_thread(::google::protobuf::int32 value) {
   
-  is_vote_ = value;
-  // @@protoc_insertion_point(field_set:ThreadInfo.is_vote)
+  is_voice_thread_ = value;
+  // @@protoc_insertion_point(field_set:ThreadInfo.is_voice_thread)
 }
 
 // int64 fid = 27;
@@ -556,6 +1502,56 @@ inline void ThreadInfo::set_is_ad(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:ThreadInfo.is_ad)
 }
 
+// .PollInfo poll_info = 74;
+inline bool ThreadInfo::has_poll_info() const {
+  return this != internal_default_instance() && poll_info_ != NULL;
+}
+inline void ThreadInfo::clear_poll_info() {
+  if (GetArenaNoVirtual() == NULL && poll_info_ != NULL) {
+    delete poll_info_;
+  }
+  poll_info_ = NULL;
+}
+inline const ::PollInfo& ThreadInfo::poll_info() const {
+  const ::PollInfo* p = poll_info_;
+  // @@protoc_insertion_point(field_get:ThreadInfo.poll_info)
+  return p != NULL ? *p : *reinterpret_cast<const ::PollInfo*>(
+      &::_PollInfo_default_instance_);
+}
+inline ::PollInfo* ThreadInfo::release_poll_info() {
+  // @@protoc_insertion_point(field_release:ThreadInfo.poll_info)
+  
+  ::PollInfo* temp = poll_info_;
+  poll_info_ = NULL;
+  return temp;
+}
+inline ::PollInfo* ThreadInfo::mutable_poll_info() {
+  
+  if (poll_info_ == NULL) {
+    poll_info_ = new ::PollInfo;
+  }
+  // @@protoc_insertion_point(field_mutable:ThreadInfo.poll_info)
+  return poll_info_;
+}
+inline void ThreadInfo::set_allocated_poll_info(::PollInfo* poll_info) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete poll_info_;
+  }
+  if (poll_info) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      poll_info = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, poll_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  poll_info_ = poll_info;
+  // @@protoc_insertion_point(field_set_allocated:ThreadInfo.poll_info)
+}
+
 // int32 is_godthread_recommend = 85;
 inline void ThreadInfo::clear_is_godthread_recommend() {
   is_godthread_recommend_ = 0;
@@ -628,6 +1624,56 @@ inline void ThreadInfo::set_is_god(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:ThreadInfo.is_god)
 }
 
+// .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
+inline bool ThreadInfo::has_origin_thread_info() const {
+  return this != internal_default_instance() && origin_thread_info_ != NULL;
+}
+inline void ThreadInfo::clear_origin_thread_info() {
+  if (GetArenaNoVirtual() == NULL && origin_thread_info_ != NULL) {
+    delete origin_thread_info_;
+  }
+  origin_thread_info_ = NULL;
+}
+inline const ::ThreadInfo_OriginThreadInfo& ThreadInfo::origin_thread_info() const {
+  const ::ThreadInfo_OriginThreadInfo* p = origin_thread_info_;
+  // @@protoc_insertion_point(field_get:ThreadInfo.origin_thread_info)
+  return p != NULL ? *p : *reinterpret_cast<const ::ThreadInfo_OriginThreadInfo*>(
+      &::_ThreadInfo_OriginThreadInfo_default_instance_);
+}
+inline ::ThreadInfo_OriginThreadInfo* ThreadInfo::release_origin_thread_info() {
+  // @@protoc_insertion_point(field_release:ThreadInfo.origin_thread_info)
+  
+  ::ThreadInfo_OriginThreadInfo* temp = origin_thread_info_;
+  origin_thread_info_ = NULL;
+  return temp;
+}
+inline ::ThreadInfo_OriginThreadInfo* ThreadInfo::mutable_origin_thread_info() {
+  
+  if (origin_thread_info_ == NULL) {
+    origin_thread_info_ = new ::ThreadInfo_OriginThreadInfo;
+  }
+  // @@protoc_insertion_point(field_mutable:ThreadInfo.origin_thread_info)
+  return origin_thread_info_;
+}
+inline void ThreadInfo::set_allocated_origin_thread_info(::ThreadInfo_OriginThreadInfo* origin_thread_info) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete origin_thread_info_;
+  }
+  if (origin_thread_info) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      origin_thread_info = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, origin_thread_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  origin_thread_info_ = origin_thread_info;
+  // @@protoc_insertion_point(field_set_allocated:ThreadInfo.origin_thread_info)
+}
+
 // repeated .PbContent first_post_content = 142;
 inline int ThreadInfo::first_post_content_size() const {
   return first_post_content_.size();
@@ -653,6 +1699,20 @@ inline const ::google::protobuf::RepeatedPtrField< ::PbContent >&
 ThreadInfo::first_post_content() const {
   // @@protoc_insertion_point(field_list:ThreadInfo.first_post_content)
   return first_post_content_;
+}
+
+// int32 is_share_thread = 143;
+inline void ThreadInfo::clear_is_share_thread() {
+  is_share_thread_ = 0;
+}
+inline ::google::protobuf::int32 ThreadInfo::is_share_thread() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.is_share_thread)
+  return is_share_thread_;
+}
+inline void ThreadInfo::set_is_share_thread(::google::protobuf::int32 value) {
+  
+  is_share_thread_ = value;
+  // @@protoc_insertion_point(field_set:ThreadInfo.is_share_thread)
 }
 
 // int32 tab_id = 175;
@@ -700,6 +1760,12 @@ inline void ThreadInfo::set_is_frs_mask(::google::protobuf::int32 value) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 

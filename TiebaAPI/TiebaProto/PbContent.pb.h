@@ -324,17 +324,17 @@ class PbContent : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::uint32 type() const;
   void set_type(::google::protobuf::uint32 value);
 
+  // uint32 during_time = 13;
+  void clear_during_time();
+  static const int kDuringTimeFieldNumber = 13;
+  ::google::protobuf::uint32 during_time() const;
+  void set_during_time(::google::protobuf::uint32 value);
+
   // uint32 width = 18;
   void clear_width();
   static const int kWidthFieldNumber = 18;
   ::google::protobuf::uint32 width() const;
   void set_width(::google::protobuf::uint32 value);
-
-  // uint32 origin_size = 27;
-  void clear_origin_size();
-  static const int kOriginSizeFieldNumber = 27;
-  ::google::protobuf::uint32 origin_size() const;
-  void set_origin_size(::google::protobuf::uint32 value);
 
   // uint32 height = 19;
   void clear_height();
@@ -347,6 +347,12 @@ class PbContent : public ::google::protobuf::Message /* @@protoc_insertion_point
   static const int kETypeFieldNumber = 24;
   ::google::protobuf::uint32 e_type() const;
   void set_e_type(::google::protobuf::uint32 value);
+
+  // uint32 origin_size = 27;
+  void clear_origin_size();
+  static const int kOriginSizeFieldNumber = 27;
+  ::google::protobuf::uint32 origin_size() const;
+  void set_origin_size(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:PbContent)
  private:
@@ -366,10 +372,11 @@ class PbContent : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::internal::ArenaStringPtr phonetype_;
   ::google::protobuf::internal::ArenaStringPtr origin_src_;
   ::google::protobuf::uint32 type_;
+  ::google::protobuf::uint32 during_time_;
   ::google::protobuf::uint32 width_;
-  ::google::protobuf::uint32 origin_size_;
   ::google::protobuf::uint32 height_;
   ::google::protobuf::uint32 e_type_;
+  ::google::protobuf::uint32 origin_size_;
   mutable int _cached_size_;
   friend struct ::protobuf_PbContent_2eproto::TableStruct;
   friend void ::protobuf_PbContent_2eproto::InitDefaultsPbContentImpl();
@@ -927,6 +934,20 @@ inline void PbContent::set_allocated_voice_md5(::std::string* voice_md5) {
   }
   voice_md5_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), voice_md5);
   // @@protoc_insertion_point(field_set_allocated:PbContent.voice_md5)
+}
+
+// uint32 during_time = 13;
+inline void PbContent::clear_during_time() {
+  during_time_ = 0u;
+}
+inline ::google::protobuf::uint32 PbContent::during_time() const {
+  // @@protoc_insertion_point(field_get:PbContent.during_time)
+  return during_time_;
+}
+inline void PbContent::set_during_time(::google::protobuf::uint32 value) {
+  
+  during_time_ = value;
+  // @@protoc_insertion_point(field_set:PbContent.during_time)
 }
 
 // uint32 width = 18;
