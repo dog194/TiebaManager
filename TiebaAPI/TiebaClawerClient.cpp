@@ -466,8 +466,7 @@ const static CString decodeContent(const ::google::protobuf::RepeatedPtrField<Pb
 		case 4: // @
 			tmpStr = rawContent->text();
 			tmp = strUTF82W(tmpStr);
-			content.Format(_T(R"#(<a href=""  onclick="Stats.sendRequest('fr=tb0_forum&st_mod=pb&st_value=atlink');" onmouseover="showattip(this)" onmouseout="hideattip(this)" username="%s" target="_blank" class="at">%s</a>)#"),
-				tmp, tmp);
+			content.Format(_T(R"#(<a href="" username="%s" class="at">%s</a>)#"), tmp, tmp);
 			break;
 		case 5: // 视频
 			tmpStr = rawContent->text();
@@ -820,14 +819,24 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 			const int is_share_thread = threadInfo->is_share_thread();
 			if (is_share_thread != 0) {
 				ThreadInfo_OriginThreadInfo* pbOriThreadInfo = threadInfo->mutable_origin_thread_info();
-				const CString oriTid = strUTF82W(pbOriThreadInfo->tid());
 				// 分享贴强特征
+				const CString oriTid = strUTF82W(pbOriThreadInfo->tid());
 				CString STR_SHARE_THREAD;
 				STR_SHARE_THREAD.Format(_T(R"(<a href="http://tieba.baidu.com/p/%s"  target="_blank"> 点击查看</a>)"), oriTid);
 				post.content += STR_SHARE_THREAD;
-				/*
-				// 分享贴预览信息 TODO
-				}*/
+				// 原帖标题
+				const CString oriTitle = strUTF82W(pbOriThreadInfo->title());
+				post.content += _T("\r\n\r\n") + oriTitle;
+				// 是否被删帖
+				const int ori_is_deleted = pbOriThreadInfo->is_deleted();
+				if (ori_is_deleted == 0) {
+					::google::protobuf::RepeatedPtrField<PbContent>* oriPbContent;
+					oriPbContent = pbOriThreadInfo->mutable_content();
+					post.content += _T("\r\n") + decodeContent(oriPbContent);
+				}
+				// 更新投票贴情况
+				pbPollInfo = pbOriThreadInfo->mutable_poll_info();
+				pbPollOptions = pbPollInfo->mutable_options();
 			}
 			// 投票贴解析
 			if (pbPollOptions->size() > 0) {

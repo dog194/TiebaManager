@@ -160,6 +160,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, title_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, tid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, fid_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, is_deleted_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, content_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, poll_info_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, pid_),
@@ -197,7 +198,7 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 0, -1, sizeof(::PollInfo_PollOption)},
   { 8, -1, sizeof(::PollInfo)},
   { 18, -1, sizeof(::ThreadInfo_OriginThreadInfo)},
-  { 29, -1, sizeof(::ThreadInfo)},
+  { 30, -1, sizeof(::ThreadInfo)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -234,7 +235,7 @@ void AddDescriptorsImpl() {
       "\021\n\ttotal_num\030\003 \001(\003\022%\n\007options\030\t \003(\0132\024.Po"
       "llInfo.PollOption\022\022\n\ntotal_poll\030\013 \001(\003\022\r\n"
       "\005title\030\014 \001(\t\0326\n\nPollOption\022\013\n\003num\030\002 \001(\003\022"
-      "\014\n\004text\030\003 \001(\t\022\r\n\005image\030\004 \001(\t\"\265\005\n\nThreadI"
+      "\014\n\004text\030\003 \001(\t\022\r\n\005image\030\004 \001(\t\"\311\005\n\nThreadI"
       "nfo\022\n\n\002id\030\001 \001(\003\022\r\n\005title\030\003 \001(\t\022\021\n\treply_"
       "num\030\004 \001(\005\022\020\n\010view_num\030\005 \001(\005\022\025\n\rlast_time"
       "_int\030\007 \001(\005\022\016\n\006is_top\030\t \001(\005\022\017\n\007is_good\030\n "
@@ -248,14 +249,14 @@ void AddDescriptorsImpl() {
       "adInfo.OriginThreadInfo\022\'\n\022first_post_co"
       "ntent\030\216\001 \003(\0132\n.PbContent\022\030\n\017is_share_thr"
       "ead\030\217\001 \001(\005\022\017\n\006tab_id\030\257\001 \001(\005\022\023\n\nis_delete"
-      "d\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\032\203\001\n\020Origi"
+      "d\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\032\227\001\n\020Origi"
       "nThreadInfo\022\r\n\005title\030\001 \001(\t\022\013\n\003tid\030\005 \001(\t\022"
-      "\013\n\003fid\030\007 \001(\003\022\033\n\007content\030\016 \003(\0132\n.PbConten"
-      "t\022\034\n\tpoll_info\030\025 \001(\0132\t.PollInfo\022\013\n\003pid\030\031"
-      " \001(\003b\006proto3"
+      "\013\n\003fid\030\007 \001(\003\022\022\n\nis_deleted\030\t \001(\005\022\033\n\007cont"
+      "ent\030\016 \003(\0132\n.PbContent\022\034\n\tpoll_info\030\025 \001(\013"
+      "2\t.PollInfo\022\013\n\003pid\030\031 \001(\003b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 932);
+      descriptor, 952);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "ThreadInfo.proto", &protobuf_RegisterTypes);
   ::protobuf_PbContent_2eproto::AddDescriptors();
@@ -1054,6 +1055,7 @@ void ThreadInfo_OriginThreadInfo::clear_content() {
 const int ThreadInfo_OriginThreadInfo::kTitleFieldNumber;
 const int ThreadInfo_OriginThreadInfo::kTidFieldNumber;
 const int ThreadInfo_OriginThreadInfo::kFidFieldNumber;
+const int ThreadInfo_OriginThreadInfo::kIsDeletedFieldNumber;
 const int ThreadInfo_OriginThreadInfo::kContentFieldNumber;
 const int ThreadInfo_OriginThreadInfo::kPollInfoFieldNumber;
 const int ThreadInfo_OriginThreadInfo::kPidFieldNumber;
@@ -1210,6 +1212,20 @@ bool ThreadInfo_OriginThreadInfo::MergePartialFromCodedStream(
         break;
       }
 
+      // int32 is_deleted = 9;
+      case 9: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &is_deleted_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // repeated .PbContent content = 14;
       case 14: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
@@ -1298,6 +1314,11 @@ void ThreadInfo_OriginThreadInfo::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(7, this->fid(), output);
   }
 
+  // int32 is_deleted = 9;
+  if (this->is_deleted() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->is_deleted(), output);
+  }
+
   // repeated .PbContent content = 14;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
@@ -1355,6 +1376,11 @@ void ThreadInfo_OriginThreadInfo::SerializeWithCachedSizes(
   // int64 fid = 7;
   if (this->fid() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(7, this->fid(), target);
+  }
+
+  // int32 is_deleted = 9;
+  if (this->is_deleted() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->is_deleted(), target);
   }
 
   // repeated .PbContent content = 14;
@@ -1433,6 +1459,13 @@ size_t ThreadInfo_OriginThreadInfo::ByteSizeLong() const {
         this->fid());
   }
 
+  // int32 is_deleted = 9;
+  if (this->is_deleted() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->is_deleted());
+  }
+
   // int64 pid = 25;
   if (this->pid() != 0) {
     total_size += 2 +
@@ -1484,6 +1517,9 @@ void ThreadInfo_OriginThreadInfo::MergeFrom(const ThreadInfo_OriginThreadInfo& f
   if (from.fid() != 0) {
     set_fid(from.fid());
   }
+  if (from.is_deleted() != 0) {
+    set_is_deleted(from.is_deleted());
+  }
   if (from.pid() != 0) {
     set_pid(from.pid());
   }
@@ -1518,6 +1554,7 @@ void ThreadInfo_OriginThreadInfo::InternalSwap(ThreadInfo_OriginThreadInfo* othe
   tid_.Swap(&other->tid_);
   swap(poll_info_, other->poll_info_);
   swap(fid_, other->fid_);
+  swap(is_deleted_, other->is_deleted_);
   swap(pid_, other->pid_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_cached_size_, other->_cached_size_);

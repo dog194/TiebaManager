@@ -483,6 +483,12 @@ class ThreadInfo_OriginThreadInfo : public ::google::protobuf::Message /* @@prot
   ::google::protobuf::int64 fid() const;
   void set_fid(::google::protobuf::int64 value);
 
+  // int32 is_deleted = 9;
+  void clear_is_deleted();
+  static const int kIsDeletedFieldNumber = 9;
+  ::google::protobuf::int32 is_deleted() const;
+  void set_is_deleted(::google::protobuf::int32 value);
+
   // int64 pid = 25;
   void clear_pid();
   static const int kPidFieldNumber = 25;
@@ -498,6 +504,7 @@ class ThreadInfo_OriginThreadInfo : public ::google::protobuf::Message /* @@prot
   ::google::protobuf::internal::ArenaStringPtr tid_;
   ::PollInfo* poll_info_;
   ::google::protobuf::int64 fid_;
+  ::google::protobuf::int32 is_deleted_;
   ::google::protobuf::int64 pid_;
   mutable int _cached_size_;
   friend struct ::protobuf_ThreadInfo_2eproto::TableStruct;
@@ -1170,6 +1177,20 @@ inline void ThreadInfo_OriginThreadInfo::set_fid(::google::protobuf::int64 value
   
   fid_ = value;
   // @@protoc_insertion_point(field_set:ThreadInfo.OriginThreadInfo.fid)
+}
+
+// int32 is_deleted = 9;
+inline void ThreadInfo_OriginThreadInfo::clear_is_deleted() {
+  is_deleted_ = 0;
+}
+inline ::google::protobuf::int32 ThreadInfo_OriginThreadInfo::is_deleted() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.OriginThreadInfo.is_deleted)
+  return is_deleted_;
+}
+inline void ThreadInfo_OriginThreadInfo::set_is_deleted(::google::protobuf::int32 value) {
+  
+  is_deleted_ = value;
+  // @@protoc_insertion_point(field_set:ThreadInfo.OriginThreadInfo.is_deleted)
 }
 
 // repeated .PbContent content = 14;
