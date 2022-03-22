@@ -515,6 +515,14 @@ HELPER_API CString Int2CString(const int num)
 	return tmp;
 }
 
+// Int64 to CString
+HELPER_API CString Int64oCString(const INT64 num)
+{
+	CString tmp;
+	tmp.Format(_T("%I64d"), num);
+	return tmp;
+}
+
 // 获取随机Tip
 HELPER_API CString GetRandomTip() {
 	CString tmp;

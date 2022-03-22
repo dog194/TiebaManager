@@ -122,6 +122,8 @@ HELPER_API CString GetNameUsingPortrait(const CString& pPortrait);
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
 // Int to CString
 HELPER_API CString Int2CString(const int num);
+// Int64 to CString
+HELPER_API CString Int64oCString(const INT64 num);
 // 获取随机Tip
 HELPER_API CString GetRandomTip();
 // 获取DLL文件信息

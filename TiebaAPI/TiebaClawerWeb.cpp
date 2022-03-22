@@ -137,7 +137,7 @@ TiebaClawer::GetPostsResult TiebaClawerWeb::GetPosts(const CString& fid, const C
 }
 
 TiebaClawer::GetPostsResult TiebaClawerWeb::GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const CStringA& srcA)
 {
 	// 取帖子列表
 	GetPostsResult res = GetPosts(tid, page, src, posts, addition);
