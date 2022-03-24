@@ -22,6 +22,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <map>
 #include <crtdbg.h>
 
+static const CString STR_HAS_UPDATE = _T("-有新版本");
+static const CString STR_NEED_RESTART = _T("-更新完毕，请重启");
 
 class EventBase
 {

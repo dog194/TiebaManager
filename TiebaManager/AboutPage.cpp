@@ -24,6 +24,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "AboutPage.h"
 
 #include <Update.h>
+#include <TBMCoreEvents.h>
 
 
 // CAboutPage 对话框
@@ -90,10 +91,15 @@ void CAboutPage::OnStnClickedStatic1()
 {
 	switch (CheckUpdate())
 	{
+	case UPDATE_HAS_UPDATE:
+		g_postUpdateInfoEvent(STR_HAS_UPDATE);
+		break;
 	case UPDATE_NO_UPDATE:
 		AfxMessageBox(_T("已经是最新版本"));
+		g_postUpdateInfoEvent(_T(""));
 		break;
 	case UPDATE_FAILED_TO_GET_INFO:
+		g_postUpdateInfoEvent(_T(""));
 		if (AfxMessageBox(_T("获取文件信息失败，手动更新？"), MB_ICONQUESTION | MB_YESNO) == IDYES)
 			ManuallyUpdate();
 		break;

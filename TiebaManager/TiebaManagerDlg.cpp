@@ -43,8 +43,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // 常量
 static const UINT WM_TASKBARCREATED = RegisterWindowMessage(_T("TaskbarCreated"));
 static const UINT WM_TRAY = WM_APP + 1;
-static const CString STR_HAS_UPDATE = _T("-有新版本");
-static const CString STR_NEED_RESTART = _T("-更新完毕，请重启");
 
 
 // 构造函数
@@ -209,6 +207,17 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		m_settingDlg->ShowAbout();
 	}
 
+	// 如果设置了自动更新，启动检查一次
+	if (g_globalConfig.m_autoUpdate) {
+		switch (CheckUpdate(True)) {
+		case UPDATE_HAS_UPDATE:
+			g_postUpdateInfoEvent(STR_HAS_UPDATE);
+			break;
+		case UPDATE_NO_UPDATE:
+		case UPDATE_FAILED_TO_GET_INFO:
+			g_postUpdateInfoEvent(_T(""));
+		}
+	}
 
 	// 每24小时清除已封名单
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
