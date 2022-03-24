@@ -114,6 +114,9 @@
     <ClCompile Include="TiebaProto\ThreadInfo.pb.cc">
       <Filter>源文件\TiebaProto</Filter>
     </ClCompile>
+    <ClCompile Include="TiebaProto\TiebaPlusInfo.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\TiebaAPI.rc2">
@@ -212,6 +215,9 @@
       <Filter>头文件\TiebaProto</Filter>
     </ClInclude>
     <ClInclude Include="TiebaProto\Page.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\TiebaPlusInfo.pb.h">
       <Filter>头文件\TiebaProto</Filter>
     </ClInclude>
   </ItemGroup>

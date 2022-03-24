@@ -29,6 +29,7 @@
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
+#include "TiebaPlusInfo.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace protobuf_PbContent_2eproto {
@@ -318,6 +319,15 @@ class PbContent : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::std::string* release_origin_src();
   void set_allocated_origin_src(::std::string* origin_src);
 
+  // .TiebaPlusInfo tiebaplus_info = 40;
+  bool has_tiebaplus_info() const;
+  void clear_tiebaplus_info();
+  static const int kTiebaplusInfoFieldNumber = 40;
+  const ::TiebaPlusInfo& tiebaplus_info() const;
+  ::TiebaPlusInfo* release_tiebaplus_info();
+  ::TiebaPlusInfo* mutable_tiebaplus_info();
+  void set_allocated_tiebaplus_info(::TiebaPlusInfo* tiebaplus_info);
+
   // uint32 type = 1;
   void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -329,6 +339,12 @@ class PbContent : public ::google::protobuf::Message /* @@protoc_insertion_point
   static const int kDuringTimeFieldNumber = 13;
   ::google::protobuf::uint32 during_time() const;
   void set_during_time(::google::protobuf::uint32 value);
+
+  // int64 uid = 15;
+  void clear_uid();
+  static const int kUidFieldNumber = 15;
+  ::google::protobuf::int64 uid() const;
+  void set_uid(::google::protobuf::int64 value);
 
   // uint32 width = 18;
   void clear_width();
@@ -371,8 +387,10 @@ class PbContent : public ::google::protobuf::Message /* @@protoc_insertion_point
   ::google::protobuf::internal::ArenaStringPtr packet_name_;
   ::google::protobuf::internal::ArenaStringPtr phonetype_;
   ::google::protobuf::internal::ArenaStringPtr origin_src_;
+  ::TiebaPlusInfo* tiebaplus_info_;
   ::google::protobuf::uint32 type_;
   ::google::protobuf::uint32 during_time_;
+  ::google::protobuf::int64 uid_;
   ::google::protobuf::uint32 width_;
   ::google::protobuf::uint32 height_;
   ::google::protobuf::uint32 e_type_;
@@ -950,6 +968,20 @@ inline void PbContent::set_during_time(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:PbContent.during_time)
 }
 
+// int64 uid = 15;
+inline void PbContent::clear_uid() {
+  uid_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 PbContent::uid() const {
+  // @@protoc_insertion_point(field_get:PbContent.uid)
+  return uid_;
+}
+inline void PbContent::set_uid(::google::protobuf::int64 value) {
+  
+  uid_ = value;
+  // @@protoc_insertion_point(field_set:PbContent.uid)
+}
+
 // uint32 width = 18;
 inline void PbContent::clear_width() {
   width_ = 0u;
@@ -1163,6 +1195,50 @@ inline void PbContent::set_origin_size(::google::protobuf::uint32 value) {
   
   origin_size_ = value;
   // @@protoc_insertion_point(field_set:PbContent.origin_size)
+}
+
+// .TiebaPlusInfo tiebaplus_info = 40;
+inline bool PbContent::has_tiebaplus_info() const {
+  return this != internal_default_instance() && tiebaplus_info_ != NULL;
+}
+inline const ::TiebaPlusInfo& PbContent::tiebaplus_info() const {
+  const ::TiebaPlusInfo* p = tiebaplus_info_;
+  // @@protoc_insertion_point(field_get:PbContent.tiebaplus_info)
+  return p != NULL ? *p : *reinterpret_cast<const ::TiebaPlusInfo*>(
+      &::_TiebaPlusInfo_default_instance_);
+}
+inline ::TiebaPlusInfo* PbContent::release_tiebaplus_info() {
+  // @@protoc_insertion_point(field_release:PbContent.tiebaplus_info)
+  
+  ::TiebaPlusInfo* temp = tiebaplus_info_;
+  tiebaplus_info_ = NULL;
+  return temp;
+}
+inline ::TiebaPlusInfo* PbContent::mutable_tiebaplus_info() {
+  
+  if (tiebaplus_info_ == NULL) {
+    tiebaplus_info_ = new ::TiebaPlusInfo;
+  }
+  // @@protoc_insertion_point(field_mutable:PbContent.tiebaplus_info)
+  return tiebaplus_info_;
+}
+inline void PbContent::set_allocated_tiebaplus_info(::TiebaPlusInfo* tiebaplus_info) {
+  ::google::protobuf::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == NULL) {
+    delete reinterpret_cast< ::google::protobuf::MessageLite*>(tiebaplus_info_);
+  }
+  if (tiebaplus_info) {
+    ::google::protobuf::Arena* submessage_arena = NULL;
+    if (message_arena != submessage_arena) {
+      tiebaplus_info = ::google::protobuf::internal::GetOwnedMessage(
+          message_arena, tiebaplus_info, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  tiebaplus_info_ = tiebaplus_info;
+  // @@protoc_insertion_point(field_set_allocated:PbContent.tiebaplus_info)
 }
 
 #ifdef __GNUC__

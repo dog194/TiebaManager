@@ -33,6 +33,7 @@ void InitDefaultsPbContentImpl() {
 #else
   ::google::protobuf::internal::InitProtobufDefaults();
 #endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
+  protobuf_TiebaPlusInfo_2eproto::InitDefaultsTiebaPlusInfo();
   {
     void* ptr = &::_PbContent_default_instance_;
     new (ptr) ::PbContent();
@@ -66,6 +67,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, imgtype_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, voice_md5_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, during_time_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, uid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, width_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, height_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, packet_name_),
@@ -73,6 +75,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, e_type_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, origin_src_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, origin_size_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PbContent, tiebaplus_info_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::PbContent)},
@@ -104,21 +107,24 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\017PbContent.proto\"\323\002\n\tPbContent\022\014\n\004type\030"
-      "\001 \001(\r\022\014\n\004text\030\002 \001(\t\022\014\n\004link\030\003 \001(\t\022\013\n\003src"
-      "\030\004 \001(\t\022\r\n\005bsize\030\005 \001(\t\022\017\n\007big_src\030\006 \001(\t\022\020"
-      "\n\010big_size\030\007 \001(\t\022\017\n\007cdn_src\030\010 \001(\t\022\023\n\013big"
-      "_cdn_src\030\t \001(\t\022\017\n\007imgtype\030\n \001(\t\022\021\n\tvoice"
-      "_md5\030\014 \001(\t\022\023\n\013during_time\030\r \001(\r\022\r\n\005width"
-      "\030\022 \001(\r\022\016\n\006height\030\023 \001(\r\022\023\n\013packet_name\030\024 "
-      "\001(\t\022\021\n\tphonetype\030\025 \001(\t\022\016\n\006e_type\030\030 \001(\r\022\022"
-      "\n\norigin_src\030\031 \001(\t\022\023\n\013origin_size\030\033 \001(\rb"
-      "\006proto3"
+      "\n\017PbContent.proto\032\023TiebaPlusInfo.proto\"\210"
+      "\003\n\tPbContent\022\014\n\004type\030\001 \001(\r\022\014\n\004text\030\002 \001(\t"
+      "\022\014\n\004link\030\003 \001(\t\022\013\n\003src\030\004 \001(\t\022\r\n\005bsize\030\005 \001"
+      "(\t\022\017\n\007big_src\030\006 \001(\t\022\020\n\010big_size\030\007 \001(\t\022\017\n"
+      "\007cdn_src\030\010 \001(\t\022\023\n\013big_cdn_src\030\t \001(\t\022\017\n\007i"
+      "mgtype\030\n \001(\t\022\021\n\tvoice_md5\030\014 \001(\t\022\023\n\013durin"
+      "g_time\030\r \001(\r\022\013\n\003uid\030\017 \001(\003\022\r\n\005width\030\022 \001(\r"
+      "\022\016\n\006height\030\023 \001(\r\022\023\n\013packet_name\030\024 \001(\t\022\021\n"
+      "\tphonetype\030\025 \001(\t\022\016\n\006e_type\030\030 \001(\r\022\022\n\norig"
+      "in_src\030\031 \001(\t\022\023\n\013origin_size\030\033 \001(\r\022&\n\016tie"
+      "baplus_info\030( \001(\0132\016.TiebaPlusInfob\006proto"
+      "3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 367);
+      descriptor, 441);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PbContent.proto", &protobuf_RegisterTypes);
+  ::protobuf_TiebaPlusInfo_2eproto::AddDescriptors();
 }
 
 void AddDescriptors() {
@@ -136,6 +142,14 @@ struct StaticDescriptorInitializer {
 // ===================================================================
 
 void PbContent::InitAsDefaultInstance() {
+  ::_PbContent_default_instance_._instance.get_mutable()->tiebaplus_info_ = const_cast< ::TiebaPlusInfo*>(
+      ::TiebaPlusInfo::internal_default_instance());
+}
+void PbContent::clear_tiebaplus_info() {
+  if (GetArenaNoVirtual() == NULL && tiebaplus_info_ != NULL) {
+    delete tiebaplus_info_;
+  }
+  tiebaplus_info_ = NULL;
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int PbContent::kTypeFieldNumber;
@@ -150,6 +164,7 @@ const int PbContent::kBigCdnSrcFieldNumber;
 const int PbContent::kImgtypeFieldNumber;
 const int PbContent::kVoiceMd5FieldNumber;
 const int PbContent::kDuringTimeFieldNumber;
+const int PbContent::kUidFieldNumber;
 const int PbContent::kWidthFieldNumber;
 const int PbContent::kHeightFieldNumber;
 const int PbContent::kPacketNameFieldNumber;
@@ -157,6 +172,7 @@ const int PbContent::kPhonetypeFieldNumber;
 const int PbContent::kETypeFieldNumber;
 const int PbContent::kOriginSrcFieldNumber;
 const int PbContent::kOriginSizeFieldNumber;
+const int PbContent::kTiebaplusInfoFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 PbContent::PbContent()
@@ -224,6 +240,11 @@ PbContent::PbContent(const PbContent& from)
   if (from.origin_src().size() > 0) {
     origin_src_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.origin_src_);
   }
+  if (from.has_tiebaplus_info()) {
+    tiebaplus_info_ = new ::TiebaPlusInfo(*from.tiebaplus_info_);
+  } else {
+    tiebaplus_info_ = NULL;
+  }
   ::memcpy(&type_, &from.type_,
     static_cast<size_t>(reinterpret_cast<char*>(&origin_size_) -
     reinterpret_cast<char*>(&type_)) + sizeof(origin_size_));
@@ -244,9 +265,9 @@ void PbContent::SharedCtor() {
   packet_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phonetype_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   origin_src_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&type_, 0, static_cast<size_t>(
+  ::memset(&tiebaplus_info_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&origin_size_) -
-      reinterpret_cast<char*>(&type_)) + sizeof(origin_size_));
+      reinterpret_cast<char*>(&tiebaplus_info_)) + sizeof(origin_size_));
   _cached_size_ = 0;
 }
 
@@ -269,6 +290,7 @@ void PbContent::SharedDtor() {
   packet_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phonetype_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   origin_src_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (this != internal_default_instance()) delete tiebaplus_info_;
 }
 
 void PbContent::SetCachedSize(int size) const {
@@ -313,6 +335,10 @@ void PbContent::Clear() {
   packet_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   phonetype_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   origin_src_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && tiebaplus_info_ != NULL) {
+    delete tiebaplus_info_;
+  }
+  tiebaplus_info_ = NULL;
   ::memset(&type_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&origin_size_) -
       reinterpret_cast<char*>(&type_)) + sizeof(origin_size_));
@@ -517,6 +543,20 @@ bool PbContent::MergePartialFromCodedStream(
         break;
       }
 
+      // int64 uid = 15;
+      case 15: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(120u /* 120 & 0xFF */)) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &uid_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       // uint32 width = 18;
       case 18: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
@@ -615,6 +655,18 @@ bool PbContent::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &origin_size_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .TiebaPlusInfo tiebaplus_info = 40;
+      case 40: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u /* 322 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+               input, mutable_tiebaplus_info()));
         } else {
           goto handle_unusual;
         }
@@ -757,6 +809,11 @@ void PbContent::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(13, this->during_time(), output);
   }
 
+  // int64 uid = 15;
+  if (this->uid() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(15, this->uid(), output);
+  }
+
   // uint32 width = 18;
   if (this->width() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(18, this->width(), output);
@@ -805,6 +862,12 @@ void PbContent::SerializeWithCachedSizes(
   // uint32 origin_size = 27;
   if (this->origin_size() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(27, this->origin_size(), output);
+  }
+
+  // .TiebaPlusInfo tiebaplus_info = 40;
+  if (this->has_tiebaplus_info()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      40, *this->tiebaplus_info_, output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -941,6 +1004,11 @@ void PbContent::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(13, this->during_time(), target);
   }
 
+  // int64 uid = 15;
+  if (this->uid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(15, this->uid(), target);
+  }
+
   // uint32 width = 18;
   if (this->width() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(18, this->width(), target);
@@ -992,6 +1060,13 @@ void PbContent::SerializeWithCachedSizes(
   // uint32 origin_size = 27;
   if (this->origin_size() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(27, this->origin_size(), target);
+  }
+
+  // .TiebaPlusInfo tiebaplus_info = 40;
+  if (this->has_tiebaplus_info()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        40, *this->tiebaplus_info_, deterministic, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1102,6 +1177,13 @@ size_t PbContent::ByteSizeLong() const {
         this->origin_src());
   }
 
+  // .TiebaPlusInfo tiebaplus_info = 40;
+  if (this->has_tiebaplus_info()) {
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *this->tiebaplus_info_);
+  }
+
   // uint32 type = 1;
   if (this->type() != 0) {
     total_size += 1 +
@@ -1114,6 +1196,13 @@ size_t PbContent::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt32Size(
         this->during_time());
+  }
+
+  // int64 uid = 15;
+  if (this->uid() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->uid());
   }
 
   // uint32 width = 18;
@@ -1225,11 +1314,17 @@ void PbContent::MergeFrom(const PbContent& from) {
 
     origin_src_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.origin_src_);
   }
+  if (from.has_tiebaplus_info()) {
+    mutable_tiebaplus_info()->::TiebaPlusInfo::MergeFrom(from.tiebaplus_info());
+  }
   if (from.type() != 0) {
     set_type(from.type());
   }
   if (from.during_time() != 0) {
     set_during_time(from.during_time());
+  }
+  if (from.uid() != 0) {
+    set_uid(from.uid());
   }
   if (from.width() != 0) {
     set_width(from.width());
@@ -1282,8 +1377,10 @@ void PbContent::InternalSwap(PbContent* other) {
   packet_name_.Swap(&other->packet_name_);
   phonetype_.Swap(&other->phonetype_);
   origin_src_.Swap(&other->origin_src_);
+  swap(tiebaplus_info_, other->tiebaplus_info_);
   swap(type_, other->type_);
   swap(during_time_, other->during_time_);
+  swap(uid_, other->uid_);
   swap(width_, other->width_);
   swap(height_, other->height_);
   swap(e_type_, other->e_type_);

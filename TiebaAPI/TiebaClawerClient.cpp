@@ -35,6 +35,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "TiebaProto/PbPageReqIdl.pb.h"
 #include "TiebaProto/PbPageResIdl.pb.h"
 #include "TiebaProto/PbContent.pb.h"
+#include "TiebaProto/TiebaPlusInfo.pb.h"
 
 using namespace rapidjson;
 
@@ -422,7 +423,7 @@ const static void debugContent(PbContent pbContent, const CString& tid = _T(""),
 }
 
 // 解析Content
-const static CString decodeContent(const ::google::protobuf::RepeatedPtrField<PbContent>* pbContentList, 
+const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbContent>* pbContentList, 
 	const CString& tid = _T(""), const CString& pid = _T("")) {
 	CString ret = _T("");
 	if (pbContentList->size() == 0) {
@@ -433,30 +434,28 @@ const static CString decodeContent(const ::google::protobuf::RepeatedPtrField<Pb
 		UINT type = rawContent->type();
 		CString content, tmp, tmpSize;
 		std::string tmpStr, tmpSizeStr;
+		TiebaPlusInfo* pbTbPlusInfo;
 		switch (type)
 		{
 		case 0: // 文字
+		case 9: // 电话号码
 		case 18: // 话题
-			tmpStr = rawContent->text();
-			content = strUTF82W(tmpStr);
+		case 27: // 词条
+			content = strUTF82W(rawContent->text());
 			break;
 		case 1: // 超链接
-			tmpStr = rawContent->link();
-			tmp = strUTF82W(tmpStr);
+			tmp = strUTF82W(rawContent->link());
 			content.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), tmp, tmp);
 			break;
 		case 2: // 表情
-			tmpStr = rawContent->text();
-			tmp = strUTF82W(tmpStr);
+			tmp = strUTF82W(rawContent->text());
 			content.Format(_T(R"(<img class="BDE_Smiley" width="30" height="30" changedsize="false" src="http://static.tieba.baidu.com/tb/editor/images/client/%s.png" >)"),
 				tmp);
 			break;
 		case 3: // 图片
 		{
-			tmpSizeStr = rawContent->bsize();
-			tmpSize = strUTF82W(tmpSizeStr);
-			tmpStr = rawContent->origin_src();
-			tmp = strUTF82W(tmpStr);
+			tmpSize = strUTF82W(rawContent->bsize());
+			tmp = strUTF82W(rawContent->origin_src());
 			CStringArray size;
 			SplitString(size, tmpSize, _T(","));
 			content.Format(_T(R"(<img class="BDE_Image" pic_type="0" width="%s" height="%s" src="%s" >)"), (LPCTSTR)size[0],
@@ -464,24 +463,27 @@ const static CString decodeContent(const ::google::protobuf::RepeatedPtrField<Pb
 			break;
 		}
 		case 4: // @
-			tmpStr = rawContent->text();
-			tmp = strUTF82W(tmpStr);
-			content.Format(_T(R"#(<a href="" username="%s" class="at">%s</a>)#"), tmp, tmp);
+			tmp = strUTF82W(rawContent->text());
+			tmpSize = Int64oCString(rawContent->uid());
+			content.Format(_T(R"#(<a href="" username="%s" class="at">%s</a>)#"), tmpSize, tmp);
 			break;
 		case 5: // 视频
-			tmpStr = rawContent->text();
-			tmp = strUTF82W(tmpStr);
+			tmp = strUTF82W(rawContent->text());
 			content.Format(_T(R"(<embed class="BDE_Flash" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" play="true" loop="false" menu="false" src="%s" width="500" height="450" allowscriptaccess="never" allowfullscreen="true" scale="noborder">)"),
 				tmp);
 			//debugContent(*rawContent, tid, pid);
 			break;
-		case 9: // 电话号码
-			tmpStr = rawContent->text();
-			content = strUTF82W(tmpStr);
-			break;
 		case 10: // 语音
 			content.Format(_T(R"(<div class="voice_player voice_player_pb"><a href="#" class="voice_player_inner"><span class="before">&nbsp;</span><span class="middle"><span class="speaker speaker_animate">&nbsp;</span><span class="time"><span class="second">%d</span>&quot;</span></span><span class="after">&nbsp;</span></a></div><img class="j_voice_ad_gif" src="http://tb2.bdstatic.com/tb/static-pb/img/voice_ad.gif" alt="下载贴吧客户端发语音！" /><br/>)"),
 				rawContent->during_time() / 1000);
+			break;
+		case 35: // TiebaPlusInfo
+			pbTbPlusInfo = rawContent->mutable_tiebaplus_info();
+			content.Format(_T(R"(%s<tpcl>%s</tpcl>)"),
+				strUTF82W(rawContent->text()), strUTF82W(pbTbPlusInfo->h5_jump_number()));
+			break;
+		case 36: // TODO
+			content = _T("");
 			break;
 		default:
 			debugContent(*rawContent, tid, pid);

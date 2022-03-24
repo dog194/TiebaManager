@@ -163,10 +163,17 @@ CString CTiebaOperate::BanID(const CString& userName, const CString& pid, const 
 			//更新兼容LoopBan格式。
 			tmp = portrait;
 		}
-	}
-	data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&pid%%5B%%5D=%s&reason=%s&portrait%%5B%%5D=%s&nick_name%%5B%%5D=%s"),
-		m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName), (LPCTSTR)pid,
-		m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("%20"), (LPCTSTR)tmp, (LPCTSTR)nick_name);
+	} /*
+	if (nick_name == _T("") && userName == _T("")) {
+		data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&pid%%5B%%5D=%s&reason=%s&portrait%%5B%%5D=%s"),
+			m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)pid,
+			m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("%20"), (LPCTSTR)EncodeURI(tmp));
+	}*/
+	//else {
+		data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&pid%%5B%%5D=%s&reason=%s&portrait%%5B%%5D=%s&nick_name%%5B%%5D=%s"),
+			m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName), (LPCTSTR)pid,
+			m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("1"), (LPCTSTR)EncodeURI(tmp), (LPCTSTR)EncodeURI(nick_name));
+	//}
 	CString src = this->HTTPPost(_T("https://tieba.baidu.com/pmc/blockid"), data);
 	return GetOperationErrorCode(src);
 }
@@ -177,7 +184,7 @@ CString CTiebaOperate::BanID(const CString& userName, const CString& pid)
 	CString data;
 	data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&pid%%5B%%5D=%s&reason=%s"),
 		m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName), (LPCTSTR)pid,
-		m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("%20"));
+		m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("1"));
 	CString src = this->HTTPPost(_T("https://tieba.baidu.com/pmc/blockid"), data);
 	return GetOperationErrorCode(src);
 }
@@ -188,7 +195,7 @@ CString CTiebaOperate::BanID(const CString& userName)
 	CString data;
 	data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&reason=%s"),
 		m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName),
-		m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("%20"));
+		m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("1"));
 	CString src = this->HTTPPost(_T("https://tieba.baidu.com/pmc/blockid"), data);
 	return GetOperationErrorCode(src);
 }
@@ -196,8 +203,18 @@ CString CTiebaOperate::BanID(const CString& userName)
 // 封ID，返回错误代码，客户端接口
 CString CTiebaOperate::BanIDClient(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name)
 {
-	//接口预留，为以后可能的更新做准备
-	return BanIDClient(userName);
+	CString data, tmp;
+	tmp = GetPortraitFromString(portrait);
+	//兼容原版 有用户名直接封
+	if (userName != _T("") && tmp == _T("")) {
+		return BanIDClient(userName);
+	}
+	data.Format(_T("BDUSS=%s&day=%d&fid=%s&nick_name=%s&ntn=banid&portrait=%s&reason=%s&tbs=%s&un=%s&word=%s&z=9998732423"),
+		(LPCTSTR)m_bduss, m_banDuration, (LPCTSTR)m_forumID,
+		(LPCTSTR)nick_name, (LPCTSTR)tmp, m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("1"),
+		(LPCTSTR)m_tbs, (LPCTSTR)userName, (LPCTSTR)m_forumName);
+	CString src = TiebaClientHTTPPost(_T("http://c.tieba.baidu.com/c/c/bawu/commitprison"), data, NULL, TYPE_CLIENT_VERSION_12);
+	return GetOperationErrorCode(src);
 }
 
 // 封ID，返回错误代码，客户端接口，不用PID，小吧可封10天
@@ -261,6 +278,8 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 		return _T("度娘抽了");
 	if (errorCode == _T("14") || errorCode == _T("12"))
 		return _T("已被系统封禁");
+	if (errorCode == _T("72"))
+		return _T("权限不足");
 	if (errorCode == _T("74"))
 		return _T("用户不存在(可能帖子已被删且用户已退出本吧会员且用户已隐藏动态)");
 	if (errorCode == _T("77"))

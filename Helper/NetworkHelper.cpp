@@ -152,7 +152,7 @@ static size_t WriteData(void *buffer, size_t size, size_t nmemb, void *userp)
 
 // HTTP请求
 static HTTPRequestResult HTTPRequestBase(std::unique_ptr<BYTE[]>* buffer, ULONG* size, BOOL postMethod,
-	const CString& URL, const CString& data, CString* cookie, CString* charset = NULL)
+	const CString& URL, const CString& data, CString* cookie, CString* charset = NULL, const int& cliVer = TYPE_CLIENT_VERSION_7)
 {
 	std::unique_ptr<CURL, void(*)(CURL*)> easyHandle(curl_easy_init(), [](CURL* p){ curl_easy_cleanup(p); });
 	std::unique_ptr<CURLM, std::function<void(CURLM*)> > multiHandle(curl_multi_init(), [&easyHandle](CURLM* p){
@@ -161,6 +161,7 @@ static HTTPRequestResult HTTPRequestBase(std::unique_ptr<BYTE[]>* buffer, ULONG*
 		return NET_FAILED_TO_CREATE_INSTANCE;
 
 	// 设置
+	// curl_easy_setopt(easyHandle.get(), CURLOPT_PROXY, "127.0.0.1:8888");
 	curl_easy_setopt(easyHandle.get(), CURLOPT_URL, (LPCSTR)CStringA(EncodeFullURI(URL)));
 	curl_easy_setopt(easyHandle.get(), CURLOPT_SSL_VERIFYPEER, 0L);
 	curl_easy_setopt(easyHandle.get(), CURLOPT_SSL_VERIFYHOST, 0L);
@@ -170,11 +171,21 @@ static HTTPRequestResult HTTPRequestBase(std::unique_ptr<BYTE[]>* buffer, ULONG*
 	curl_easy_setopt(easyHandle.get(), CURLOPT_WRITEFUNCTION, WriteData);
 	curl_easy_setopt(easyHandle.get(), CURLOPT_WRITEDATA, &bodyBuf);
 	curl_slist* chunk = NULL;
-	chunk = curl_slist_append(chunk, "Connection: Keep-Alive");
-	chunk = curl_slist_append(chunk, "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-	chunk = curl_slist_append(chunk, "Accept: */*");
-	curl_easy_setopt(easyHandle.get(), CURLOPT_ACCEPT_ENCODING, "gzip, deflate");
-	chunk = curl_slist_append(chunk, "Accept-Language: zh-CN,zh;q=0.8");
+	if (cliVer == TYPE_CLIENT_VERSION_12) {
+		chunk = curl_slist_append(chunk, "User-Agent: bdtb for Android 12.21.1.0");
+		chunk = curl_slist_append(chunk, "Charset: UTF-8");
+		chunk = curl_slist_append(chunk, "Connection: keep-alive");
+		chunk = curl_slist_append(chunk, "Host: c.tieba.baidu.com");
+		chunk = curl_slist_append(chunk, "Accept:");
+		curl_easy_setopt(easyHandle.get(), CURLOPT_ACCEPT_ENCODING, "gzip");
+	}
+	else {
+		chunk = curl_slist_append(chunk, "Connection: Keep-Alive");
+		chunk = curl_slist_append(chunk, "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+		chunk = curl_slist_append(chunk, "Accept: */*");
+		curl_easy_setopt(easyHandle.get(), CURLOPT_ACCEPT_ENCODING, "gzip, deflate");
+		chunk = curl_slist_append(chunk, "Accept-Language: zh-CN,zh;q=0.8");
+	}
 	if (postMethod)
 	{
 		curl_easy_setopt(easyHandle.get(), CURLOPT_POST, 1L);
@@ -262,12 +273,12 @@ static HTTPRequestResult HTTPRequestBase(std::unique_ptr<BYTE[]>* buffer, ULONG*
 }
 
 // HTTP请求，把响应转码
-static CString HTTPRequestBase_Convert(BOOL postMethod, const CString& URL, const CString& data, CString* cookie)
+static CString HTTPRequestBase_Convert(BOOL postMethod, const CString& URL, const CString& data, CString* cookie, const int& cliVer = TYPE_CLIENT_VERSION_7)
 {
 	std::unique_ptr<BYTE[]> buffer;
 	ULONG size = 0;
 	CString charset;
-	HTTPRequestResult ret = HTTPRequestBase(&buffer, &size, postMethod, URL, data, cookie, &charset);
+	HTTPRequestResult ret = HTTPRequestBase(&buffer, &size, postMethod, URL, data, cookie, &charset, cliVer);
 	if (ret != NET_SUCCESS)
 	{
 		CString result;
@@ -303,9 +314,9 @@ HELPER_API CString HTTPGet(const CString& URL, CString* cookie)
 }
 
 // HTTP POST请求
-HELPER_API CString HTTPPost(const CString& URL, const CString& data, CString* cookie)
+HELPER_API CString HTTPPost(const CString& URL, const CString& data, CString* cookie, const int& cliVer)
 {
-	return HTTPRequestBase_Convert(TRUE, URL, data, cookie);
+	return HTTPRequestBase_Convert(TRUE, URL, data, cookie, cliVer);
 }
 
 // HTTP GET请求，取得原始数据

@@ -183,6 +183,9 @@
     <ClCompile Include="TiebaProto\ThreadInfo.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TiebaProto\TiebaPlusInfo.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="TiebaProto\User.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -221,6 +224,7 @@
     <ClInclude Include="TiebaProto\SimpleForum.pb.h" />
     <ClInclude Include="TiebaProto\SubPostList.pb.h" />
     <ClInclude Include="TiebaProto\ThreadInfo.pb.h" />
+    <ClInclude Include="TiebaProto\TiebaPlusInfo.pb.h" />
     <ClInclude Include="TiebaProto\User.pb.h" />
   </ItemGroup>
   <ItemGroup>
