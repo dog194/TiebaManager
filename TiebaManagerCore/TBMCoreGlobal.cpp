@@ -37,8 +37,8 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_scanPageCount		("ScanPageCount",		1,		GreaterThan<int, 1>),
 	m_briefLog			("BriefLog",			FALSE),
 	m_threadCount		("ThreadCount",			1,		InRange<int, 1, 16>),
-	m_clawerInterface	("ClawerInterface",		1,		InRange<int, 0, 1>),
-	m_nickNameInterface	("NickNameInterface",	FALSE),
+	m_clawerInterface	("ClawerInterface",		0,		InRange<int, 0, 1>),
+	m_nickNameInterface	("NickNameInterface",	TRUE),
 
 	m_delete			("Delete",				TRUE),
 	m_banID				("BanID",				FALSE),
@@ -114,13 +114,11 @@ void CTBMCoreConfig::OnChange()
 void CTBMCoreConfig::PostChange()
 {
 	if (this == g_pTbmCoreConfig) {
-		if (m_clawerInterface == 0) {
-			TiebaClawerProxy::GetInstance().m_interface = TIEBA_INTERFACE_WEB;
-		}
-		else if (m_nickNameInterface == TRUE) {
+		if (m_nickNameInterface == TRUE) {
 			TiebaClawerProxy::GetInstance().m_interface = TIEBA_INTERFACE_CLIENT_NICKNAME;
-		}
-		else {
+		} else if (m_clawerInterface == 0) {
+			TiebaClawerProxy::GetInstance().m_interface = TIEBA_INTERFACE_WEB;
+		} else {
 			TiebaClawerProxy::GetInstance().m_interface = TIEBA_INTERFACE_CLIENT;
 		}
 	}

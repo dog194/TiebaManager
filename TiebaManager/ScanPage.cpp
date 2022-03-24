@@ -61,6 +61,7 @@ BEGIN_MESSAGE_MAP(CScanPage, CNormalDlg)
 	ON_EN_CHANGE(IDC_EDIT5, &CScanPage::OnEnChangeEdit5)
 	ON_EN_KILLFOCUS(IDC_EDIT2, &CScanPage::OnEnKillfocusEdit2)
 	ON_BN_CLICKED(IDC_CHECK7, &CScanPage::OnEnClientInterfaceChange)
+	ON_BN_CLICKED(IDC_CHECK_NICKNAME_INTERFACE, &CScanPage::OnEnClientInterfaceChange)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -105,5 +106,9 @@ void CScanPage::OnEnKillfocusEdit2()
 // 客户端接口选中
 void CScanPage::OnEnClientInterfaceChange()
 {
-	m_nicknameClientInterfaceCheck.EnableWindow(m_clawerClientInterfaceCheck.GetCheck());
+	// 客户端接口互斥
+	if (m_nicknameClientInterfaceCheck.GetCheck()) {
+		m_clawerClientInterfaceCheck.SetCheck(FALSE);
+	}
+	m_clawerClientInterfaceCheck.EnableWindow(!m_nicknameClientInterfaceCheck.GetCheck());
 }
