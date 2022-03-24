@@ -3,15 +3,16 @@
     <Version>211115(2.32)</Version>
     <VersionNum>211115</VersionNum>
     <UpdateLog>
+    更新日志220325(3.0)：
+    </UpdateLog>
+    <HistoryLog>
+    ========历史更新日志========
     更新日志211115(2.32)：
     1. 确认贴吧大修，缓存贴吧信息。避免确认失败
     2. 更新大修，管理器支持自动更新
     3. 帖子浏览器（查看帖子）新增使用帖子ID跳转
     4. 新增关闭删封音效设置
     5. 其他优化与基础库更新（OpenCv,Curl,7za）
-    </UpdateLog>
-    <HistoryLog>
-    ========历史更新日志========
     更新日志211015(2.31)：
     1. 各类优化/改动：
     黑名单/LoopBan现在会对头像ID进行验证
@@ -48,5 +49,7 @@
         <item><value><Dir/><Name>TiebaManager.exe</Name><URL/><MD5/></value></item>
         <item><value><Dir>Plugin\</Dir><Name>LoopBan.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>Update.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>libprotobuf.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>libprotobuf-lite.dll</Name><URL/><MD5/></value></item>
     </Files>
 </UpdateInfo>
