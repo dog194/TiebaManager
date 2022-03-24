@@ -27,6 +27,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include <TiebaClawerProxy.h>
 #include <TBMCoreImageHelper.h>
+#include <StringHelper.h>
 
 
 // CExplorePostPage 对话框
@@ -137,8 +138,14 @@ void CExplorePostPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 	if (pNMLV->iItem != LB_ERR && (pNMLV->uNewState & LVIS_SELECTED) != 0)
 	{
 		CExplorerDlg* explorerDlg = (CExplorerDlg*)GetParent()->GetParent();
-		explorerDlg->m_edit.SetWindowText(m_posts[pNMLV->iItem].content + 
-			_T("\r\n\r\n") + m_posts[pNMLV->iItem].authorShowName);
+		explorerDlg->m_edit.SetWindowText(m_posts[pNMLV->iItem].content 
+			+ _T("\r\n\r\n作者显示名：") + m_posts[pNMLV->iItem].authorShowName
+			+ _T("\r\n等级：") + m_posts[pNMLV->iItem].authorLevel
+			+ _T("\r\n楼层：") + m_posts[pNMLV->iItem].floor
+			+ _T("\r\n\r\n作者名：") + m_posts[pNMLV->iItem].author
+			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_posts[pNMLV->iItem].authorPortraitUrl)
+			+ _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_posts[pNMLV->iItem].timestamp)
+			+ _T("\r\n主题帖ID：") + m_posts[pNMLV->iItem].tid);
 		auto img = std::make_unique<std::vector<CString> >();
 		GetImageUrls(m_posts[pNMLV->iItem], *img);
 		explorerDlg->ViewImages(std::move(img));
