@@ -19,6 +19,12 @@
     <Filter Include="源文件\API">
       <UniqueIdentifier>{edf7f6d0-1ec7-4a91-8a13-55dfe4450ec9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\TiebaProto">
+      <UniqueIdentifier>{582b1f6a-998c-4757-bf89-9f4e39e7f6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\TiebaProto">
+      <UniqueIdentifier>{d35eb4ea-bad4-4d3f-924f-d791352ab412}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TiebaAPI.cpp">
@@ -44,6 +50,72 @@
     </ClCompile>
     <ClCompile Include="TiebaClientHelper.cpp">
       <Filter>源文件\API</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SubPostList.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SimpleForum.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SearchPostForumResIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SearchPostForumReqIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\Post.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbPageResIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbPageReqIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbFloorResIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbFloorReqIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbContent.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\Page.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\GetUserInfoResIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\GetUserInfoReqIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\FrsTabInfo.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\FrsPageResIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\FrsPageReqIdl.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\CommonReq.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\Agree.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\Error.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\User.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\ThreadInfo.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\TiebaPlusInfo.pb.cc">
+      <Filter>源文件\TiebaProto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +153,72 @@
     </ClInclude>
     <ClInclude Include="..\Include\TiebaClientHelper.h">
       <Filter>头文件\API</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\GetUserInfoResIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\GetUserInfoReqIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\FrsTabInfo.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\FrsPageResIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\FrsPageReqIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\CommonReq.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\Agree.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\Error.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\User.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\ThreadInfo.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\SubPostList.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\SimpleForum.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\SearchPostForumResIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\SearchPostForumReqIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\Post.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\PbPageResIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\PbPageReqIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\PbFloorResIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\PbFloorReqIdl.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\PbContent.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\Page.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
+    </ClInclude>
+    <ClInclude Include="TiebaProto\TiebaPlusInfo.pb.h">
+      <Filter>头文件\TiebaProto</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

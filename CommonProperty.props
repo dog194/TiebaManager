@@ -2,12 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)Include;$(SolutionDir)3rdParty\opencv\include;$(SolutionDir)3rdParty\rapidjson;$(SolutionDir)3rdParty\libcurl\include;$(SolutionDir)3rdParty\tinyxml2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)$(Configuration);$(SolutionDir)3rdParty\opencv\lib;$(SolutionDir)3rdParty\libcurl\lib;$(SolutionDir)3rdParty\tinyxml2\lib\$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Include;$(SolutionDir)3rdParty\opencv\include;$(SolutionDir)3rdParty\rapidjson;$(SolutionDir)3rdParty\libcurl\include;$(SolutionDir)3rdParty\tinyxml2\include;$(SolutionDir)3rdParty\protobuf;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Configuration);$(SolutionDir)3rdParty\opencv\lib;$(SolutionDir)3rdParty\libcurl\lib;$(SolutionDir)3rdParty\protobuf\lib;$(SolutionDir)3rdParty\tinyxml2\lib\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalDependencies>libcurl.dll.a;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libcurl.dll.a;tinyxml2.lib;libprotobuf-lite.lib;libprotobuf.lib;libprotoc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

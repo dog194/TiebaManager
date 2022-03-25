@@ -45,6 +45,7 @@ public:
 	afx_msg void OnEnKillfocusEdit5();
 	afx_msg void OnEnChangeEdit5();
 	afx_msg void OnEnKillfocusEdit2();
+	afx_msg void OnEnClientInterfaceChange();
 
 
 public:
@@ -57,4 +58,5 @@ public:
 	CEdit m_threadCountEdit;
 	CButton m_autoSaveLogCheck;
 	CButton m_clawerClientInterfaceCheck;
+	CButton m_nicknameClientInterfaceCheck;
 };

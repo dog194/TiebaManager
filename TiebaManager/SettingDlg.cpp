@@ -27,7 +27,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "TiebaManager.h"
 #include <TBMScan.h>
-
+#include <Update.h>
 
 // CSettingDlg 对话框
 
@@ -67,6 +67,7 @@ void CSettingDlg::DoDataExchange(CDataExchange* pDX)
 	CModelessDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDOK, m_okButton);
 	DDX_Control(pDX, IDCANCEL, m_cancelButton);
+	DDX_Control(pDX, IDC_BUTTON_APPLY, m_applyButton);
 	DDX_Control(pDX, IDC_TREE1, m_tree);
 }
 
@@ -74,6 +75,8 @@ void CSettingDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CSettingDlg, CModelessDlg)
 	ON_WM_CLOSE()
 	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CSettingDlg::OnTvnSelchangedTree1)
+	ON_BN_CLICKED(IDC_BUTTON_APPLY, &CSettingDlg::ApplyChange)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -130,6 +133,7 @@ BOOL CSettingDlg::OnInitDialog()
 	m_resize.AddControl(&m_tree, RT_NULL, NULL, RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, this);
 	m_resize.AddControl(&m_okButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_tree);
 	m_resize.AddControl(&m_cancelButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_tree);
+	m_resize.AddControl(&m_applyButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_tree);
 	for (const auto& page : m_pages)
 		m_resize.AddControl(page, RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, this);
 	m_tree.SelectItem(m_tree.GetFirstVisibleItem());
@@ -165,6 +169,7 @@ BOOL CSettingDlg::OnInitDialog()
 	}
 
 	m_aboutPage->m_autoCheckUpdateCheck.SetCheck(g_globalConfig.m_autoUpdate); // 自动更新
+	SetWindowText(_T("设置-") + UPDATE_CURRENT_VERSION);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
@@ -242,6 +247,8 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 	m_scanPage->m_threadCountEdit.SetWindowText(tmp);				    // 线程数
 	m_scanPage->m_autoSaveLogCheck.SetCheck(plan.m_autoSaveLog);		// 自动保存日志
 	m_scanPage->m_clawerClientInterfaceCheck.SetCheck(plan.m_clawerInterface == 0 ? FALSE : TRUE); // 扫描接口
+	m_scanPage->m_nicknameClientInterfaceCheck.SetCheck(plan.m_nickNameInterface); // 启用昵称版本接口
+	m_scanPage->OnEnClientInterfaceChange();
 	m_scanPage->m_autoVerifyCheck.SetCheck(plan.m_autoVerify);			// 启动后自动确认贴吧
 	m_scanPage->m_autoScanCheck.SetCheck(plan.m_autoScan);				// 确认后贴吧自动扫描
 
@@ -261,6 +268,8 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 	m_operatePage->m_confirmCheck.SetCheck(plan.m_confirm);			    // 操作前提示
 	m_operatePage->m_ProWinCheck.SetCheck(plan.m_windowPro);			// Pro窗口
 	m_operatePage->m_PlaySoundCheck.SetCheck(plan.m_playSound);			// 播放删帖音效
+	m_operatePage->m_ShowNameCheck.SetCheck(plan.m_showName);			// 标题/托盘显示用户名
+	m_operatePage->m_RuleDoubleClickCheck.SetCheck(plan.m_ruleDoubleClick);			// 确认窗口规则跳转改用双击
 	m_operatePage->m_banClientInterfaceCheck.SetCheck(plan.m_banClientInterface);	// 封禁使用客户端接口
 	m_operatePage->m_blackListEnableCheck.SetCheck(plan.m_blackListEnable);			// 黑名单功能启用
 	m_operatePage->m_blackListConfirmCheck.SetCheck(plan.m_blackListConfirm);		// 黑名单强制确认
@@ -299,6 +308,7 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	*plan.m_threadCount = _ttoi(strBuf);								// 线程数
 	*plan.m_autoSaveLog = m_scanPage->m_autoSaveLogCheck.GetCheck();	// 自动保存日志
 	*plan.m_clawerInterface = m_scanPage->m_clawerClientInterfaceCheck.GetCheck() == FALSE ? 0 : 1; // 扫描接口
+	*plan.m_nickNameInterface = m_scanPage->m_nicknameClientInterfaceCheck.GetCheck();				// 启用昵称版本接口
 	*plan.m_autoVerify = m_scanPage->m_autoVerifyCheck.GetCheck();		// 启动后自动确认贴吧
 	*plan.m_autoScan = m_scanPage->m_autoScanCheck.GetCheck();			// 确认后贴吧自动扫描
 
@@ -318,6 +328,8 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	*plan.m_confirm = m_operatePage->m_confirmCheck.GetCheck();			// 操作前提示
 	*plan.m_windowPro = m_operatePage->m_ProWinCheck.GetCheck();		// Pro窗口
 	*plan.m_playSound = m_operatePage->m_PlaySoundCheck.GetCheck();		// 播放删帖音效
+	*plan.m_showName = m_operatePage->m_ShowNameCheck.GetCheck();		// 标题/托盘显示用户名
+	*plan.m_ruleDoubleClick = m_operatePage->m_RuleDoubleClickCheck.GetCheck();			// 确认窗口规则跳转改用双击
 	*plan.m_banClientInterface = m_operatePage->m_banClientInterfaceCheck.GetCheck();	// 封禁使用客户端接口
 	*plan.m_blackListEnable = m_operatePage->m_blackListEnableCheck.GetCheck();			// 黑名单功能启用
 	*plan.m_blackListConfirm = m_operatePage->m_blackListConfirmCheck.GetCheck();		// 黑名单强制确认
@@ -380,4 +392,37 @@ void CSettingDlg::OnOK()
 
 	g_settingWinCloseEvent();
 	DestroyWindow();
+}
+
+// 应用
+void CSettingDlg::ApplyChange()
+{
+	m_applyButton.EnableWindow(FALSE);
+
+	*g_globalConfig.m_autoUpdate = m_aboutPage->m_autoCheckUpdateCheck.GetCheck();
+	g_globalConfig.Save(GLOBAL_CONFIG_PATH);
+
+	CString tmp;
+	m_optionsPage->m_currentOptionStatic.GetWindowText(tmp);
+	*g_userConfig.m_plan = tmp.Right(tmp.GetLength() - 5); // "当前方案："
+	g_userConfig.Save(USER_CONFIG_PATH);
+
+	CreateDir(OPTIONS_DIR_PATH);
+	SavePlanInDlg(OPTIONS_DIR_PATH + g_userConfig.m_plan + _T(".xml"));
+	ApplyPlanInDlg(g_plan);
+
+	g_settingWinCloseEvent();
+	
+	SetTimer(0, 2000, NULL);
+}
+
+void CSettingDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	if (nIDEvent == 0)
+	{
+		KillTimer(0);
+		m_applyButton.EnableWindow(TRUE);
+		m_okButton.SetFocus();
+	}
+	CDialog::OnTimer(nIDEvent);
 }

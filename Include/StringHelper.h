@@ -46,6 +46,9 @@ const CString m_tips[m_tips_num] = {
 	_T("检查更新设置在 关于&更新 页面中")
 };
 
+const int PORT_LEN_MAX = 36;
+const int PORT_LEN_MIN = 34;
+
 const CString GET_NAME_ERROR_SHORT = _T("[长度不足]");
 const CString GET_NAME_ERROR_TIME_OUT = _T("[访问超时]");
 const CString GET_NAME_ERROR_INPUT_ERROR = _T("[参数错误]");
@@ -76,7 +79,8 @@ HELPER_API CString GetStringAfter(const CString& src, const CString& left, int s
 
 // 写字符串到文件
 HELPER_API BOOL WriteString(const CString& src, const CString& path);
-
+// 写字符串到文件 续写
+HELPER_API BOOL WriteStringCon(const CString& src, const CString& path);
 // 单字符16进制转10进制
 HELPER_API int HexChar2Dec(const CCHAR c);
 // Unicode(UCS-2)转ANSI
@@ -87,6 +91,8 @@ HELPER_API CStringW ANSI2W(const CStringA& src, UINT codePage);
 inline CStringA W2UTF8(const CStringW& src) { return W2ANSI(src, CP_UTF8); }
 // UTF-8转Unicode(UCS-2)
 inline CStringW UTF82W(const CStringA& src) { return ANSI2W(src, CP_UTF8); }
+// UTF-8转Unicode(UCS-2)
+inline CStringW strUTF82W(const std::string& src) { CStringA srcA(src.c_str(), src.size()); return ANSI2W(srcA, CP_UTF8); }
 // Unicode(UCS-2)转GBK
 inline CStringA W2GBK(const CStringW& src) { return W2ANSI(src, 936); }
 // GBK转Unicode(UCS-2)
@@ -116,5 +122,9 @@ HELPER_API CString GetNameUsingPortrait(const CString& pPortrait);
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
 // Int to CString
 HELPER_API CString Int2CString(const int num);
+// Int64 to CString
+HELPER_API CString Int64oCString(const INT64 num);
 // 获取随机Tip
 HELPER_API CString GetRandomTip();
+// 获取DLL文件信息
+HELPER_API CString GetFileVersionString(LPCTSTR pFileName, LPCTSTR pName /* = NULL */);

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+message User {
+    int64 id = 2;
+    string name = 3;
+    string name_show = 4;
+    string portrait = 5;
+    int32 is_coreuser = 20;
+    int32 level_id = 23;
+    int32 is_bawu = 25;
+    string bawu_type = 26;
+    string BDUSS = 29;
+    int32 post_num = 37;
+    string tb_age = 38;
+    int32 gender = 42;
+    message PrivSets {
+        int32 location = 1;
+        int32 like = 2;
+        int32 group = 3;
+        int32 post = 4;
+        int32 friend = 5;
+        int32 live = 6;
+        int32 reply = 7;
+        int32 bazhu_show_inside = 8;
+        int32 bazhu_show_outside = 9;
+    }
+    PrivSets priv_sets = 45;
+    int32 is_friend = 46;
+    message LikeForumInfo {
+        string forum_name = 1;
+        uint64 forum_id = 2;
+    }
+    repeated LikeForumInfo likeForum = 47;
+    int32 is_guanfang = 52;
+    message UserVipInfo {
+        uint32 v_status = 1;
+        uint32 s_time = 2;
+        uint32 e_time = 3;
+        uint32 ext_score = 4;
+        uint32 v_level = 5;
+        int32 a_score = 6;
+        uint32 n_score = 7;
+        string icon_url = 8;
+    }
+    UserVipInfo vipInfo = 61;
+    int32 is_fans = 91;
+    message NewGodInfo {
+        int32 status = 1;
+        uint32 field_id = 2;
+        string field_name = 3;
+        uint32 type = 4;
+        string type_name = 5;
+    }
+    NewGodInfo new_god_data = 101;
+    int32 is_default_avatar = 106;
+    string tieba_uid = 120;
+}

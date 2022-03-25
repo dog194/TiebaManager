@@ -35,6 +35,7 @@ public:
 	COption<BOOL>		m_briefLog;				// 只输出删帖封号
 	COption<int>		m_threadCount;			// 线程数
 	COption<int>        m_clawerInterface;      // 贴吧采集API用的接口
+	COption<BOOL>       m_nickNameInterface;    // 启用昵称版本接口
 
 	COption<BOOL>		m_autoVerify;			// 启动后自动验证
 	COption<BOOL>		m_autoScan;				// 验证后自动扫描
@@ -50,6 +51,9 @@ public:
 	COption<BOOL>		m_confirm;				// 操作前提示
 	COption<BOOL>		m_windowPro;			// 详细版操作界面
 	COption<BOOL>		m_playSound;			// 播放删帖音效
+	COption<BOOL>		m_showName;				// 标题/托盘显示用户名
+	COption<BOOL>		m_ruleDoubleClick;		// 确认窗口规则跳转改用双击
+	COption<BOOL>		m_hiddenFunction;		// 隐藏的，未经充分测试的功能
 	COption<BOOL>		m_banClientInterface;	// 封禁用客户端接口
 
 	COption<BOOL>		m_blackListEnable;		// 黑名单功能总开关
@@ -68,6 +72,17 @@ public:
 	virtual void PostChange();
 };
 
+class TBM_CORE_API CTempIgnoreRule {
+public:
+	CString m_tid;
+	CString m_portrait;
+
+	CTempIgnoreRule(CString pTid, CString pPortrait) {
+		m_tid = pTid;
+		m_portrait = pPortrait;
+	}
+};
+
 class TBM_CORE_API CUserCache : public CConfigBase
 {
 public:
@@ -83,6 +98,8 @@ public:
 	COption<std::map<CString, int> > m_userTrigCount;	// 某用户违规次数，要写入文件
 	COption<std::set<CString> > m_bannedUser;			// 已封的用户，要写入文件
 	COption<std::set<CString> > m_defriendedUser;		// 已拉黑的用户，要写入文件
+
+	std::vector<CTempIgnoreRule> m_tempIgnoreRule;		// 一次性临时确认列表忽略规则，不写入文件
 
 	CUserCache();
 
@@ -101,6 +118,8 @@ const int RULE_TYPE_ILLEGA_RULE = 0;
 const int RULE_TYPE_BLACK_LIST = 1;
 const int RULE_TYPE_DELETE_ONLY = 2;
 const int RULE_TYPE_BAN_DIRECTLY = 3;
+const int RULE_TYPE_IGNORE_TID = 4;
+const int RULE_TYPE_IGNORE_POR = 5;
 
 
 // 使用本模块前应先设置的全局变量

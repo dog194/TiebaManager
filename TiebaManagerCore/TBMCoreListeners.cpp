@@ -27,7 +27,7 @@ CTBMCoreListeners::CTBMCoreListeners()
 {
 	// 扫描事件
 
-	g_checkThreadIllegalEvent.AddListener(OnCheckIllegal<ThreadInfo>);
+	g_checkThreadIllegalEvent.AddListener(OnCheckIllegal<TapiThreadInfo>);
 	g_checkPostIllegalEvent.AddListener(OnCheckIllegal<PostInfo>);
 	g_checkLzlIllegalEvent.AddListener(OnCheckIllegal<LzlInfo>);
 
@@ -83,7 +83,7 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 	res = FALSE;
 }
 
-void CTBMCoreListeners::OnPreScanThread(int threadID, const ThreadInfo& thread, BOOL& pass)
+void CTBMCoreListeners::OnPreScanThread(int threadID, const TapiThreadInfo& thread, BOOL& pass)
 {
 	std::unique_lock<decltype(g_pTbmCoreConfig->m_optionsLock)> lock(g_pTbmCoreConfig->m_optionsLock);
 

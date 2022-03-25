@@ -37,7 +37,8 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_scanPageCount		("ScanPageCount",		1,		GreaterThan<int, 1>),
 	m_briefLog			("BriefLog",			FALSE),
 	m_threadCount		("ThreadCount",			1,		InRange<int, 1, 16>),
-	m_clawerInterface	("ClawerInterface",		1,		InRange<int, 0, 1>),
+	m_clawerInterface	("ClawerInterface",		0,		InRange<int, 0, 1>),
+	m_nickNameInterface	("NickNameInterface",	TRUE),
 
 	m_delete			("Delete",				TRUE),
 	m_banID				("BanID",				FALSE),
@@ -50,6 +51,9 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_confirm			("Confirm",				TRUE),
 	m_windowPro			("WindowPro",			FALSE),
 	m_playSound			("PlaySound",			TRUE),
+	m_showName			("ShowName",			TRUE),
+	m_ruleDoubleClick	("RuleDoubleClick",		FALSE),
+	m_hiddenFunction	("HiddenFunction",		FALSE),
 	m_banClientInterface("ClientBanInterface",  FALSE),
 
 	m_blackListEnable	("BlackListEnable",		TRUE),
@@ -72,6 +76,7 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_briefLog);
 	m_options.push_back(&m_threadCount);
 	m_options.push_back(&m_clawerInterface);
+	m_options.push_back(&m_nickNameInterface);
 
 	m_options.push_back(&m_delete);
 	m_options.push_back(&m_banID);
@@ -84,6 +89,9 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_confirm);
 	m_options.push_back(&m_windowPro);
 	m_options.push_back(&m_playSound);
+	m_options.push_back(&m_showName);
+	m_options.push_back(&m_ruleDoubleClick);
+	m_options.push_back(&m_hiddenFunction);
 	m_options.push_back(&m_banClientInterface);
 
 	m_options.push_back(&m_blackListEnable);
@@ -105,8 +113,15 @@ void CTBMCoreConfig::OnChange()
 
 void CTBMCoreConfig::PostChange()
 {
-	if (this == g_pTbmCoreConfig)
-		TiebaClawerProxy::GetInstance().m_interface = m_clawerInterface == 0 ? TIEBA_INTERFACE_WEB : TIEBA_INTERFACE_CLIENT;
+	if (this == g_pTbmCoreConfig) {
+		if (m_nickNameInterface == TRUE) {
+			TiebaClawerProxy::GetInstance().m_interface = TIEBA_INTERFACE_CLIENT_NICKNAME;
+		} else if (m_clawerInterface == 0) {
+			TiebaClawerProxy::GetInstance().m_interface = TIEBA_INTERFACE_WEB;
+		} else {
+			TiebaClawerProxy::GetInstance().m_interface = TIEBA_INTERFACE_CLIENT;
+		}
+	}
 	m_optionsLock.unlock();
 }
 

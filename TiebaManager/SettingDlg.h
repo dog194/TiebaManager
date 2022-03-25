@@ -56,8 +56,10 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	virtual BOOL OnInitDialog();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	virtual void OnCancel();
 	virtual void OnOK();
+	virtual void ApplyChange();
 	afx_msg void OnClose();
 	afx_msg void OnTvnSelchangedTree1(NMHDR *pNMHDR, LRESULT *pResult);
 
@@ -84,6 +86,7 @@ public:
 	std::unique_ptr<CAboutPage> m_aboutPage;
 	CButton m_okButton;
 	CButton m_cancelButton;
+	CButton m_applyButton;
 
 	BOOL m_clearScanCache;
 

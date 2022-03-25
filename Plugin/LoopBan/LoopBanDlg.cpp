@@ -115,10 +115,11 @@ DECLEAR_WRITE(CLBUserInfo)
 
 IMPLEMENT_DYNAMIC(CLoopBanDlg, CNormalListPage)
 
-CLoopBanDlg::CLoopBanDlg(CLoopBanDlg*& pThis, CLoopBanConfig& config, CWnd* pParent /*=NULL*/) :
+CLoopBanDlg::CLoopBanDlg(CLoopBanDlg*& pThis, CLoopBanConfig& config, const CString pVersion,CWnd* pParent /*=NULL*/) :
 	CNormalListPage(_T("用户名："), IDD_LOOP_BAN_DLG, pParent),
 	m_pThis(pThis),
-	m_config(config)
+	m_config(config),
+	m_version(pVersion)
 {
 }
 
@@ -180,6 +181,7 @@ BOOL CLoopBanDlg::OnInitDialog()
 	m_banIntervalEdit.SetWindowText(tmp);					// 封禁间隔
 	m_autoLoopBanCheck.SetCheck(m_config.m_autoLoopBan);	// 自动循环封
 
+	SetWindowText(_T("循环封-") + m_version);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }

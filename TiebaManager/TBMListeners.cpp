@@ -108,7 +108,7 @@ void CTBMListeners::OnPreScanAllThreads(BOOL& pass)
 }
 
 
-void CTBMListeners::OnPreScanThread(int threadID, const ThreadInfo& thread, BOOL& pass)
+void CTBMListeners::OnPreScanThread(int threadID, const TapiThreadInfo& thread, BOOL& pass)
 {
 	if (!pass)
 		return;
@@ -130,7 +130,7 @@ void CTBMListeners::OnScanPostThreadEnd(int threadID)
 }
 
 
-void CTBMListeners::OnScanPostPage(int threadID, const ThreadInfo& thread, int page, BOOL& pass)
+void CTBMListeners::OnScanPostPage(int threadID, const TapiThreadInfo& thread, int page, BOOL& pass)
 {
 	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
 	CString sPage;

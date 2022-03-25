@@ -182,7 +182,7 @@ BOOL CKeywordCondition::Match(const CKeywordParam& param, const CString& content
 	return res;
 }
 
-BOOL CKeywordCondition::MatchThread(const CConditionParam& _param, const ThreadInfo& thread, int& pos, int& length)
+BOOL CKeywordCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
 {
 	const auto& param = (CKeywordParam&)_param;
 
@@ -324,7 +324,7 @@ CConditionParam* CLevelCondition::CloneParam(const CConditionParam& _param)
 }
 
 
-BOOL CLevelCondition::MatchThread(const CConditionParam& _param, const ThreadInfo& thread, int& pos, int& length)
+BOOL CLevelCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
 {
 	return FALSE;
 }
@@ -417,7 +417,7 @@ BOOL CTimeCondition::Match(const CTimeParam& param, const TBObject& obj)
 	}
 }
 
-BOOL CTimeCondition::MatchThread(const CConditionParam& _param, const ThreadInfo& thread, int& pos, int& length)
+BOOL CTimeCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
 {
 	return Match((CTimeParam&)_param, thread);
 }
@@ -501,7 +501,7 @@ BOOL CFloorCondition::Match(const CConditionParam& _param, const CString& floor)
 	}
 }
 
-BOOL CFloorCondition::MatchThread(const CConditionParam& _param, const ThreadInfo& thread, int& pos, int& length)
+BOOL CFloorCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
 {
 	return FALSE;
 }
@@ -563,7 +563,7 @@ BOOL CUserInfo::Match(const CString& uid, const CString& portrait)
 	return FALSE;
 }
 
-BOOL CUserInfo::Match(const ThreadInfo& thread)
+BOOL CUserInfo::Match(const TapiThreadInfo& thread)
 {
 	return CUserInfo::Match(thread.author, GetPortraitFromString(thread.authorPortraitUrl));
 }

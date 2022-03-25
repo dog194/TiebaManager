@@ -78,7 +78,7 @@ DECLEAR_WRITE(std::shared_ptr<CConditionParam>)
 }
 
 
-BOOL CConditionParam::MatchThread(const ThreadInfo& thread, int& pos, int& length)
+BOOL CConditionParam::MatchThread(const TapiThreadInfo& thread, int& pos, int& length)
 {
 	return GetCondition().MatchThread(*this, thread, pos, length);
 }
@@ -186,7 +186,7 @@ CConditionParam* CCondition::CloneParam(const CConditionParam& _param)
 }
 
 
-BOOL CCondition::MatchThread(const CConditionParam& param, const ThreadInfo& thread, int& pos, int& length)
+BOOL CCondition::MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length)
 {
 	return FALSE;
 }
@@ -278,7 +278,7 @@ CRule& CRule::operator = (CRule&& other)
 }
 
 
-BOOL CRule::Match(const ThreadInfo& thread, int& pos, int& length)
+BOOL CRule::Match(const TapiThreadInfo& thread, int& pos, int& length)
 {
 	if (m_conditionParams.empty())
 		return FALSE;

@@ -49,9 +49,13 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButtonAddBl();
+	afx_msg void OpenRulePage();
+	afx_msg void OnStnClickStaticRule();
 	afx_msg void OnStnDblclickStaticRule();
 	afx_msg void OnBnClickedButtonDeleteOnly();
 	afx_msg void OnBnClickedButtonBanNow();
+	afx_msg void OnBnClickedButtonIgnoreTid();
+	afx_msg void OnBnClickedButtonIgnorePor();
 
 public:
 	CEdit m_contentEdit;
@@ -66,6 +70,9 @@ public:
 	CButton m_addBlButton;
 	CButton m_banDirectButton;
 	CButton m_deleteOnlyButton;
+	CStatic m_static_tempRule;
+	CButton m_ignoreTidButton;
+	CButton m_ignorePortraitButton;
 
 	CImageViewDlg* m_imageViewDlg;
 

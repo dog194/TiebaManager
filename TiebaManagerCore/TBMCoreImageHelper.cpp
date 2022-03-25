@@ -36,7 +36,7 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 	if (object.m_type == TBObject::THREAD)
 	{
 		// 从主题预览取图片地址
-		ThreadInfo& thread = (ThreadInfo&)object;
+		TapiThreadInfo& thread = (TapiThreadInfo&)object;
 
 		for (std::regex_iterator<LPCTSTR> it((LPCTSTR)thread.preview, (LPCTSTR)thread.preview + thread.preview.GetLength(), THREAD_IMG_REG),
 			end; it != end; ++it)

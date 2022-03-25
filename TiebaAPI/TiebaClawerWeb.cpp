@@ -78,7 +78,7 @@ const TCHAR ADDITION_THREAD_PAGE_COUNT_RIGHT[]  = _T("}");
 #pragma endregion
 
 
-BOOL TiebaClawerWeb::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads)
+BOOL TiebaClawerWeb::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads)
 {
 	CString src = HTTPGet(_T("https://tieba.baidu.com/f?ie=UTF-8&kw=") + EncodeURI(forumName)
 		+ _T("&pn=") + ignoreThread);
@@ -137,7 +137,7 @@ TiebaClawer::GetPostsResult TiebaClawerWeb::GetPosts(const CString& fid, const C
 }
 
 TiebaClawer::GetPostsResult TiebaClawerWeb::GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const CStringA& srcA)
 {
 	// 取帖子列表
 	GetPostsResult res = GetPosts(tid, page, src, posts, addition);

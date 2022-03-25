@@ -27,6 +27,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include <TiebaClawerProxy.h>
 #include <TBMCoreImageHelper.h>
+#include <StringHelper.h>
 
 
 // CExploreThreadPage 对话框
@@ -99,7 +100,7 @@ void CExploreThreadPage::OnBnClickedButton1()
 	TiebaClawerProxy::GetInstance().GetThreads(m_forumName, ignoreThread, m_threads);
 	m_list.DeleteAllItems();
 	((CExplorerDlg*)GetParent()->GetParent())->m_edit.SetWindowText(_T(""));
-	for (const ThreadInfo& i : m_threads)
+	for (const TapiThreadInfo& i : m_threads)
 	{
 		int index = m_list.GetItemCount();
 		m_list.InsertItem(index, i.reply);
@@ -139,8 +140,13 @@ void CExploreThreadPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 	{
 		m_editTID.SetWindowText(m_threads[pNMLV->iItem].tid);
 		CExplorerDlg* explorerDlg = (CExplorerDlg*)GetParent()->GetParent();
-		explorerDlg->m_edit.SetWindowText(m_threads[pNMLV->iItem].title + _T("\r\n") 
-			+ m_threads[pNMLV->iItem].preview + _T("\r\n\r\n") + m_threads[pNMLV->iItem].authorShowName);
+		explorerDlg->m_edit.SetWindowText(m_threads[pNMLV->iItem].title + _T("\r\n")
+			+ m_threads[pNMLV->iItem].preview +
+			+ _T("\r\n\r\n作者显示名：") + m_threads[pNMLV->iItem].authorShowName
+			+ _T("\r\n\r\n作者名：") + m_threads[pNMLV->iItem].author
+			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_threads[pNMLV->iItem].authorPortraitUrl)
+			+ _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_threads[pNMLV->iItem].timestamp)
+			+ _T("\r\n主题帖ID：") + m_threads[pNMLV->iItem].tid);
 		auto img = std::make_unique<std::vector<CString> >();
 		GetImageUrls(m_threads[pNMLV->iItem], *img);
 		explorerDlg->ViewImages(std::move(img));

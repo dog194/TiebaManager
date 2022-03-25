@@ -59,8 +59,46 @@ public:
 	virtual CString GetContent() const = 0;
 };
 
+class TIEBA_API_API TBUserObjBase
+{
+public:
+
+	CString id;				// id
+	CString name;			// 用户名
+	CString ShowName;		// 显示名
+	CString Portrait;		// 头像ID
+
+	TBUserObjBase() { }
+	virtual ~TBUserObjBase() = default;
+};
+
+class TIEBA_API_API TBUserObj : public TBUserObjBase
+{
+public:
+
+	CString PortraitUrl;	// 作者头像URL。头像ID
+	int level;				// 等级
+	int is_bawu;			// 是否吧务
+	CString bawu_type;		// 吧务类别
+	int post_num;			// 发帖量
+	CString tb_age;			// 吧龄
+	int is_default_avatar;	// 是否默认头像
+	CString tieba_uid;		// tieba uid
+
+	virtual CString GetContent() const { 
+		CString TMP,ret = _T("");
+		ret += _T("id: ") + id + _T("\t用户名: ") + name + _T("\t昵称: ") + ShowName;
+		TMP.Format(_T("\n头像ID: %s\n等级：%d\t是否吧务：%d-%s\n"), Portrait, level, is_bawu, bawu_type);
+		ret += TMP;
+		TMP.Format(_T("发帖数: %d\t吧龄：%s\t默认头像：%d\ttieba uid:%s\n"), post_num, tb_age, is_default_avatar, tieba_uid);
+		ret += TMP; return ret; }
+
+	TBUserObj(){ }
+	virtual ~TBUserObj() = default;
+};
+
 // 主题信息
-class TIEBA_API_API ThreadInfo : public TBObject
+class TIEBA_API_API TapiThreadInfo : public TBObject
 {
 public:
 	CString reply;		    // 回复数
@@ -69,8 +107,8 @@ public:
 	CString lastAuthor;     // 最后回复
 
 
-	ThreadInfo() : TBObject(THREAD) { }
-	virtual ~ThreadInfo() = default;
+	TapiThreadInfo() : TBObject(THREAD) { }
+	virtual ~TapiThreadInfo() = default;
 
 	// 返回标题+预览
 	virtual CString GetContent() const { return title + _T("\r\n") + preview; }
@@ -122,12 +160,12 @@ public:
 class TIEBA_API_API TiebaClawer
 {
 public:
-	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads) = 0;
+	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads) = 0;
 	enum GetPostsResult { GET_POSTS_SUCCESS, GET_POSTS_TIMEOUT, GET_POSTS_DELETED };
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, std::vector<PostInfo>& posts, 
 		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) = 0;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src, 
-		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) = 0;
+		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const CStringA& srcA = "") = 0;
 };
 
-enum TiebaInterface { TIEBA_INTERFACE_WEB, TIEBA_INTERFACE_CLIENT };
+enum TiebaInterface { TIEBA_INTERFACE_WEB, TIEBA_INTERFACE_CLIENT, TIEBA_INTERFACE_CLIENT_NICKNAME};

@@ -25,6 +25,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "ExplorerDlg.h"
 
 #include <TBMCoreImageHelper.h>
+#include <StringHelper.h>
 
 
 // CExploreLzlPage 对话框
@@ -86,8 +87,13 @@ void CExploreLzlPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 	if (pNMLV->iItem != LB_ERR && (pNMLV->uNewState & LVIS_SELECTED) != 0)
 	{
 		CExplorerDlg* explorerDlg = (CExplorerDlg*)GetParent()->GetParent();
-		explorerDlg->m_edit.SetWindowText(m_lzls[pNMLV->iItem].content +
-			_T("\r\n\r\n") + m_lzls[pNMLV->iItem].authorShowName);
+		explorerDlg->m_edit.SetWindowText(m_lzls[pNMLV->iItem].content 
+			+ _T("\r\n\r\n作者显示名：") + m_lzls[pNMLV->iItem].authorShowName
+			+ _T("\r\n楼层：") + m_lzls[pNMLV->iItem].floor
+			+ _T("\r\n\r\n作者名：") + m_lzls[pNMLV->iItem].author
+			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_lzls[pNMLV->iItem].authorPortraitUrl)
+			+ _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_lzls[pNMLV->iItem].timestamp)
+			+ _T("\r\n主题帖ID：") + m_lzls[pNMLV->iItem].tid);
 		auto img = std::make_unique<std::vector<CString> >();
 		GetImageUrls(m_lzls[pNMLV->iItem], *img);
 		explorerDlg->ViewImages(std::move(img));

@@ -48,7 +48,7 @@ public:
 
 
 public:
-	std::vector<ThreadInfo> m_threads;
+	std::vector<TapiThreadInfo> m_threads;
 
 protected:
 	CString m_forumName;

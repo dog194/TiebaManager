@@ -43,8 +43,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 // 常量
 static const UINT WM_TASKBARCREATED = RegisterWindowMessage(_T("TaskbarCreated"));
 static const UINT WM_TRAY = WM_APP + 1;
-static const CString STR_HAS_UPDATE = _T("-有新版本");
-static const CString STR_NEED_RESTART = _T("-更新完毕，请重启");
 
 
 // 构造函数
@@ -195,6 +193,11 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	// 默认启用黑名单
 	g_pTbmCoreConfig->m_blackListEnable.m_value = TRUE;
 
+	if (g_pTbmCoreConfig->m_nickNameInterface.m_value == TRUE) {
+		// 主动切换 m_nickNameInterface
+		g_pTbmCoreConfig->m_clawerInterface.m_value = FALSE;
+	}
+
 	// 初次运行先看关于
 	if (g_globalConfig.m_firstRun)
 	{
@@ -204,6 +207,17 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		m_settingDlg->ShowAbout();
 	}
 
+	// 如果设置了自动更新，启动检查一次
+	if (g_globalConfig.m_autoUpdate) {
+		switch (CheckUpdate(True)) {
+		case UPDATE_HAS_UPDATE:
+			g_postUpdateInfoEvent(STR_HAS_UPDATE);
+			break;
+		case UPDATE_NO_UPDATE:
+		case UPDATE_FAILED_TO_GET_INFO:
+			g_postUpdateInfoEvent(_T(""));
+		}
+	}
 
 	// 每24小时清除已封名单
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
@@ -276,12 +290,24 @@ void CTiebaManagerDlg::OnProWinCheckChange() {
 	}
 	if (m_explorerButton.IsWindowEnabled()) {//根据浏览按钮判断是否已经确认贴吧。
 		if (g_userConfig.m_plan != _T("默认")) {
-			SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
-			_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_());
+			if (g_plan.m_showName) {
+				SetWindowText(g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(" - ") + g_tiebaOperate.GetUserName_());
+			}
+			else {
+				SetWindowText(g_userConfig.m_plan + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_userConfig.m_plan + _T(""));
+			}
 		}
 		else {
-			SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
-			_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_());
+			if (g_plan.m_showName) {
+				SetWindowText(g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(" - ") + g_tiebaOperate.GetUserName_());
+			}
+			else {
+				SetWindowText(g_tiebaOperate.GetForumName() + _T(" - 贴吧管理器-") + UPDATE_CURRENT_VERSION + m_hasUpdate);
+				_tcscpy_s(m_nfData.szTip, g_tiebaOperate.GetForumName() + _T(""));
+			}
 		}
 	}
 	else {
@@ -506,7 +532,9 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		goto Error;
 	case CTiebaOperate::SET_TIEBA_NOT_FOUND:
 		if (hasCache) {
-			AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
+			if (!g_pTbmCoreConfig->m_autoScan) {
+				AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
+			}
 			useCache = TRUE;
 			break;
 		}

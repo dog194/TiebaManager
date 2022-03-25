@@ -23,7 +23,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TiebaClawerClient.h>
 
 
-BOOL TiebaClawerProxy::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads)
+BOOL TiebaClawerProxy::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads)
 {
 	return GetImplement().GetThreads(forumName, ignoreThread, threads);
 }
@@ -35,7 +35,7 @@ TiebaClawer::GetPostsResult TiebaClawerProxy::GetPosts(const CString& fid, const
 }
 
 TiebaClawer::GetPostsResult TiebaClawerProxy::GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const CStringA& srcA)
 {
 	return GetImplement().GetPosts(fid, tid, page, src, posts, lzls, addition);
 }
@@ -47,6 +47,7 @@ TiebaClawer& TiebaClawerProxy::GetImplement()
 	{
 	case TIEBA_INTERFACE_WEB:       return TiebaClawerWeb::GetInstance();
 	case TIEBA_INTERFACE_CLIENT:    return TiebaClawerClient::GetInstance();
+	case TIEBA_INTERFACE_CLIENT_NICKNAME:	return TiebaClawerClientNickName::GetInstance();
 	}
 	throw std::invalid_argument("No interface");
 }

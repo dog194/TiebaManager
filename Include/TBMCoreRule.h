@@ -46,7 +46,7 @@ public:
 
 	CConditionParam* Clone();
 
-	BOOL MatchThread(const ThreadInfo& thread, int& pos, int& length);
+	BOOL MatchThread(const TapiThreadInfo& thread, int& pos, int& length);
 	BOOL MatchPost(const PostInfo& post, int& pos, int& length);
 	BOOL MatchLzl(const LzlInfo& lzl, int& pos, int& length);
 };
@@ -74,7 +74,7 @@ public:
 	virtual void WriteParam(const CConditionParam& param, tinyxml2::XMLElement* optionNode);
 	virtual CConditionParam* CloneParam(const CConditionParam& param);
 
-	virtual BOOL MatchThread(const CConditionParam& param, const ThreadInfo& thread, int& pos, int& length);
+	virtual BOOL MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length);
 	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length);
 	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length);
 };
@@ -95,7 +95,7 @@ public:
 	CRule& operator = (CRule&& other);
 	virtual ~CRule() = default;
 
-	BOOL Match(const ThreadInfo& thread, int& pos, int& length);
+	BOOL Match(const TapiThreadInfo& thread, int& pos, int& length);
 	BOOL Match(const PostInfo& post, int& pos, int& length);
 	BOOL Match(const LzlInfo& lzl, int& pos, int& length);
 };

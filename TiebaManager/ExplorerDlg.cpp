@@ -27,6 +27,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TBMAPI.h>
 #include <TiebaClawerProxy.h>
 #include <TiebaOperate.h>
+#include <update.h>
 
 #include <Mmsystem.h>
 
@@ -135,6 +136,7 @@ BOOL CExplorerDlg::OnInitDialog()
 	for (i = 0; i < _countof(m_pages); i++)
 		m_pagesResize.AddControl(m_pages[i], RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_RIGHT, &m_tab, RT_KEEP_DIST_TO_BOTTOM, &m_tab);
 
+	SetWindowText(_T("贴吧浏览器-") + UPDATE_CURRENT_VERSION);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }
@@ -152,7 +154,7 @@ void CExplorerDlg::OnBnClickedButton1()
 	CString code;
 	if (tabIndex == 0) // 主题
 	{
-		ThreadInfo& thread = m_exploreThreadPage->m_threads[index];
+		TapiThreadInfo& thread = m_exploreThreadPage->m_threads[index];
 		code = GetTiebaOperate().DeleteThread(thread.tid);
 		if (code == _T("0"))
 			g_userCache.m_deletedTID.insert(_ttoi64(thread.tid));

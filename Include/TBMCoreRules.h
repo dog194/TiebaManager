@@ -78,7 +78,7 @@ public:
 	virtual void WriteParam(const CConditionParam& param, tinyxml2::XMLElement* optionNode) override;
 	virtual CConditionParam* CloneParam(const CConditionParam& param) override;
 
-	virtual BOOL MatchThread(const CConditionParam& param, const ThreadInfo& thread, int& pos, int& length) override;
+	virtual BOOL MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length) override;
 	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length) override;
 	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length) override;
 
@@ -119,7 +119,7 @@ public:
 	virtual void WriteParam(const CConditionParam& param, tinyxml2::XMLElement* optionNode) override;
 	virtual CConditionParam* CloneParam(const CConditionParam& param) override;
 
-	virtual BOOL MatchThread(const CConditionParam& param, const ThreadInfo& thread, int& pos, int& length) override;
+	virtual BOOL MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length) override;
 	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length) override;
 	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length) override;
 };
@@ -157,7 +157,7 @@ public:
 	virtual void WriteParam(const CConditionParam& param, tinyxml2::XMLElement* optionNode) override;
 	virtual CConditionParam* CloneParam(const CConditionParam& param) override;
 
-	virtual BOOL MatchThread(const CConditionParam& param, const ThreadInfo& thread, int& pos, int& length) override;
+	virtual BOOL MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length) override;
 	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length) override;
 	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length) override;
 
@@ -206,7 +206,7 @@ public:
 	// 读取图片数据、预处理
 	void UpdateImage(CImageParam& param);
 
-	virtual BOOL MatchThread(const CConditionParam& param, const ThreadInfo& thread, int& pos, int& length) override;
+	virtual BOOL MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length) override;
 	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length) override;
 	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length) override;
 
@@ -251,7 +251,7 @@ public:
 	virtual void WriteParam(const CConditionParam& param, tinyxml2::XMLElement* optionNode) override;
 	virtual CConditionParam* CloneParam(const CConditionParam& param) override;
 
-	virtual BOOL MatchThread(const CConditionParam& param, const ThreadInfo& thread, int& pos, int& length) override;
+	virtual BOOL MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length) override;
 	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length) override;
 	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length) override;
 
@@ -274,7 +274,7 @@ public:
 	CUserInfo(const CString& uid, const CString& m_portrait, const CString& m_note);
 
 	BOOL Match(const CString& uid, const CString& portrait);
-	BOOL Match(const ThreadInfo& thread);
+	BOOL Match(const TapiThreadInfo& thread);
 	BOOL Match(const PostInfo& post);
 	BOOL Match(const LzlInfo& lzl);
 };

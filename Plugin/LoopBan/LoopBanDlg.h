@@ -48,7 +48,7 @@ class CLoopBanDlg : public CNormalListPage
 	DECLARE_DYNAMIC(CLoopBanDlg)
 
 public:
-	CLoopBanDlg(CLoopBanDlg*& pThis, CLoopBanConfig& config, CWnd* pParent = NULL);   // 标准构造函数
+	CLoopBanDlg(CLoopBanDlg*& pThis, CLoopBanConfig& config, const CString pVersion, CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~CLoopBanDlg();
 
 // 对话框数据
@@ -90,4 +90,5 @@ public:
 
 protected:
 	CLoopBanDlg*& m_pThis;
+	CString m_version = _T("");
 };

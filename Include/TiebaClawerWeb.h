@@ -28,11 +28,11 @@ class TIEBA_API_API TiebaClawerWeb final : public TiebaClawer, public Singleton<
 {
 	DECL_SINGLETON_DEFAULT(TiebaClawerWeb);
 public:
-	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<ThreadInfo>& threads) override;
+	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads) override;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, std::vector<PostInfo>& posts, 
 		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) override;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src, 
-		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) override;
+		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const CStringA& srcA = "") override;
 
 	GetPostsResult GetPosts(const CString& tid, const CString& page, std::vector<PostInfo>& posts, AdditionalThreadInfo* addition = NULL);
 	GetPostsResult GetPosts(const CString& tid, const CString& page, const CString& src, std::vector<PostInfo>& posts, AdditionalThreadInfo* addition = NULL);

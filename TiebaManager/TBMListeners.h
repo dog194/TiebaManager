@@ -38,10 +38,10 @@ private:
 	void OnScanOnceEnd();
 	void OnPreScanAllThreads(BOOL& pass);
 	
-	void OnPreScanThread(int threadID, const ThreadInfo& thread, BOOL& pass);
+	void OnPreScanThread(int threadID, const TapiThreadInfo& thread, BOOL& pass);
 	void OnScanPostThreadEnd(int threadID);
 
-	void OnScanPostPage(int threadID, const ThreadInfo& thread, int page, BOOL& pass);
+	void OnScanPostPage(int threadID, const TapiThreadInfo& thread, int page, BOOL& pass);
 
 
 	CCriticalSection m_stateListLock;

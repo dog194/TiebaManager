@@ -14,7 +14,7 @@
     <ProjectGuid>{FBE318AB-E302-49E5-9027-9291B2F92743}</ProjectGuid>
     <RootNamespace>TiebaAPI</RootNamespace>
     <Keyword>MFCDLLProj</Keyword>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,13 +84,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>TIEBA_API_EXPORTS;WIN32;_WINDOWS;NDEBUG;_AFXEXT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -121,6 +123,72 @@
     <ClCompile Include="TiebaClawerWeb.cpp" />
     <ClCompile Include="TiebaClientHelper.cpp" />
     <ClCompile Include="TiebaOperate.cpp" />
+    <ClCompile Include="TiebaProto\Agree.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\CommonReq.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\Error.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\FrsPageReqIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\FrsPageResIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\FrsTabInfo.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\GetUserInfoReqIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\GetUserInfoResIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\Page.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbContent.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbFloorReqIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbFloorResIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbPageReqIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\PbPageResIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\Post.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SearchPostForumReqIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SearchPostForumResIdl.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SimpleForum.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\SubPostList.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\ThreadInfo.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\TiebaPlusInfo.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TiebaProto\User.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\TiebaAPI.rc2" />
@@ -136,6 +204,28 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TiebaProto\Agree.pb.h" />
+    <ClInclude Include="TiebaProto\CommonReq.pb.h" />
+    <ClInclude Include="TiebaProto\Error.pb.h" />
+    <ClInclude Include="TiebaProto\FrsPageReqIdl.pb.h" />
+    <ClInclude Include="TiebaProto\FrsPageResIdl.pb.h" />
+    <ClInclude Include="TiebaProto\FrsTabInfo.pb.h" />
+    <ClInclude Include="TiebaProto\GetUserInfoReqIdl.pb.h" />
+    <ClInclude Include="TiebaProto\GetUserInfoResIdl.pb.h" />
+    <ClInclude Include="TiebaProto\Page.pb.h" />
+    <ClInclude Include="TiebaProto\PbContent.pb.h" />
+    <ClInclude Include="TiebaProto\PbFloorReqIdl.pb.h" />
+    <ClInclude Include="TiebaProto\PbFloorResIdl.pb.h" />
+    <ClInclude Include="TiebaProto\PbPageReqIdl.pb.h" />
+    <ClInclude Include="TiebaProto\PbPageResIdl.pb.h" />
+    <ClInclude Include="TiebaProto\Post.pb.h" />
+    <ClInclude Include="TiebaProto\SearchPostForumReqIdl.pb.h" />
+    <ClInclude Include="TiebaProto\SearchPostForumResIdl.pb.h" />
+    <ClInclude Include="TiebaProto\SimpleForum.pb.h" />
+    <ClInclude Include="TiebaProto\SubPostList.pb.h" />
+    <ClInclude Include="TiebaProto\ThreadInfo.pb.h" />
+    <ClInclude Include="TiebaProto\TiebaPlusInfo.pb.h" />
+    <ClInclude Include="TiebaProto\User.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TiebaAPI.rc" />
