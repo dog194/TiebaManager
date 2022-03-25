@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>211115(2.32)</Version>
-    <VersionNum>211115</VersionNum>
+    <Version>220325(2.5)</Version>
+    <VersionNum>220325</VersionNum>
     <UpdateLog>
-    更新日志220325(3.0)：
+	更新日志220325(2.5)：
+	【重要更新】
+	1.软件接口已升级，请检查删帖规则
+	2.新增获取投票贴的选项内容
+	3.新增获取分享帖的内容
+	4.新增获取跳转标签的内容
+	5.适配长度为34字节的头像ID
+
+	【其他更新】
+	1.新增 标题/托盘 隐藏用户名模式
+	2.修复 获取主题列表失败后，不会进入扫描间隔的问题
+
+	感谢@荧光_Starry @n0099 对本次更新做出的贡献
     </UpdateLog>
     <HistoryLog>
     ========历史更新日志========

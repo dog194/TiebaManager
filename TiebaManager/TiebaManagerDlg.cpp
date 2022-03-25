@@ -193,9 +193,9 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	// 默认启用黑名单
 	g_pTbmCoreConfig->m_blackListEnable.m_value = TRUE;
 
-	if (g_pTbmCoreConfig->m_clawerInterface.m_value == TRUE) {
-		// 兼容旧版，用户手动切换至新版接口
-		g_pTbmCoreConfig->m_nickNameInterface.m_value = FALSE;
+	if (g_pTbmCoreConfig->m_nickNameInterface.m_value == TRUE) {
+		// 主动切换 m_nickNameInterface
+		g_pTbmCoreConfig->m_clawerInterface.m_value = FALSE;
 	}
 
 	// 初次运行先看关于
