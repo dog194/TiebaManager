@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>220325(2.5)</Version>
-    <VersionNum>220325</VersionNum>
+    <Version>220326(2.51)</Version>
+    <VersionNum>220326</VersionNum>
     <UpdateLog>
+	更新日志220326(2.51)：
+	【重要更新】
+	1.删帖替换为客户端接口
+
 	更新日志220325(2.5)：
 	【重要更新】
 	1.软件接口已升级，请检查删帖规则

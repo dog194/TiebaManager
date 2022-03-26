@@ -56,6 +56,7 @@ public:
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButtonAddBl();
 
 	void ViewImages(std::unique_ptr<std::vector<CString> > img);
 
@@ -69,6 +70,7 @@ public:
 	CButton m_deleteButton;
 	CButton m_banButton;
 	CButton m_explorerButton;
+	CButton m_addBlButton;
 
 	CImageViewDlg* m_imageViewDlg;
 
