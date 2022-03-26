@@ -243,7 +243,7 @@ CString CTiebaOperate::DeleteThread(const CString& tid)
 	CString data;
 	data.Format(_T("BDUSS=%s&fid=%s&is_frs_mask=%d&tbs=%s&z=%s"),
 		(LPCTSTR)m_bduss, (LPCTSTR)m_forumID, 0, (LPCTSTR)m_tbs, tid);
-	CString src = TiebaClientHTTPPost(_T("http://c.tieba.baidu.com/c/c/bawu/delpost"), data, NULL, TYPE_CLIENT_VERSION_12);
+	CString src = TiebaClientHTTPPost(_T("http://c.tieba.baidu.com/c/c/bawu/delthread"), data, NULL, TYPE_CLIENT_VERSION_12);
 	//CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/thread/delete"), _T("kw=") + m_encodedForumName
 	//	+ _T("&fid=") + m_forumID + _T("&tid=") + tid + _T("&ie=utf-8&tbs=") + m_tbs);
 	return GetOperationErrorCode(src);
