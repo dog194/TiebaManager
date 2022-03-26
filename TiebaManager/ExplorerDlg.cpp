@@ -24,6 +24,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "ExplorerDlg.h"
 
 #include "TBMGlobal.h"
+#include "TiebaManagerDlg.h"
+#include "TiebaManager.h"
 #include <TBMAPI.h>
 #include <TiebaClawerProxy.h>
 #include <TiebaOperate.h>
@@ -65,6 +67,7 @@ void CExplorerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_BUTTON1, m_deleteButton);
 	DDX_Control(pDX, IDC_BUTTON2, m_banButton);
 	DDX_Control(pDX, IDC_BUTTON3, m_explorerButton);
+	DDX_Control(pDX, IDC_BUTTON_BL, m_addBlButton);
 }
 
 
@@ -74,6 +77,7 @@ BEGIN_MESSAGE_MAP(CExplorerDlg, CModelessDlg)
 	ON_BN_CLICKED(IDC_BUTTON1, &CExplorerDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, &CExplorerDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, &CExplorerDlg::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON_BL, &CExplorerDlg::OnBnClickedButtonAddBl)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -251,6 +255,55 @@ void CExplorerDlg::OnBnClickedButton3()
 		url = _T("https://tieba.baidu.com/p/") + m_explorePostPage->m_tid + _T("?pn=") + page;
 	}
 	ShellExecute(NULL, _T("open"), url, NULL, NULL, SW_SHOWNORMAL);
+}
+
+// 快捷黑名单
+void CExplorerDlg::OnBnClickedButtonAddBl()
+{
+	int tabIndex = m_tab.GetCurSel();
+	POSITION pos = m_pages[tabIndex]->m_list.GetFirstSelectedItemPosition();
+	if (pos == NULL)
+		return;
+	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
+
+
+	CString author, pid, portrait, nick_name;
+	if (tabIndex == 0) // 主题
+	{
+		author = m_exploreThreadPage->m_threads[index].author;
+		portrait = m_exploreThreadPage->m_threads[index].authorPortraitUrl;
+		nick_name = m_exploreThreadPage->m_threads[index].authorShowName;
+
+		//数据获取
+		std::vector<PostInfo> posts;
+		std::vector<LzlInfo> lzls;
+		TiebaClawerProxy::GetInstance().GetPosts(g_tiebaOperate.GetForumID(), m_exploreThreadPage->m_threads[index].tid, _T("1"), posts, lzls);
+		if (posts.size() > 0)
+			pid = posts[0].pid;
+
+	}
+	else if (tabIndex == 1) // 帖子
+	{
+		author = m_explorePostPage->m_posts[index].author;
+		portrait = m_explorePostPage->m_posts[index].authorPortraitUrl;
+		nick_name = m_explorePostPage->m_posts[index].authorShowName;
+		pid = m_explorePostPage->m_posts[index].pid;
+	}
+	else // 楼中楼
+	{
+		author = m_exploreLzlPage->m_lzls[index].author;
+		portrait = m_exploreLzlPage->m_lzls[index].authorPortraitUrl;
+		nick_name = m_exploreLzlPage->m_lzls[index].authorShowName;
+		pid = m_exploreLzlPage->m_lzls[index].cid;
+	}
+
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	dlg->OnBnClickedButton5();
+	dlg->m_settingDlg->ShowBlackListRulePage();
+	dlg->m_settingDlg->m_blackListRulesPage->
+		SetPreFillInfo(nick_name, GetPortraitFromString(portrait));
+	dlg->SetActiveWindow();
+	dlg->m_settingDlg->SetActiveWindow();
 }
 
 // 打开浏览图片对话框

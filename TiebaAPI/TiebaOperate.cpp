@@ -240,8 +240,12 @@ CString CTiebaOperate::Defriend(const CString& userID)
 // 删主题，返回错误代码
 CString CTiebaOperate::DeleteThread(const CString& tid)
 {
-	CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/thread/delete"), _T("kw=") + m_encodedForumName
-		+ _T("&fid=") + m_forumID + _T("&tid=") + tid + _T("&ie=utf-8&tbs=") + m_tbs);
+	CString data;
+	data.Format(_T("BDUSS=%s&fid=%s&is_frs_mask=%d&tbs=%s&z=%s"),
+		(LPCTSTR)m_bduss, (LPCTSTR)m_forumID, 0, (LPCTSTR)m_tbs, tid);
+	CString src = TiebaClientHTTPPost(_T("http://c.tieba.baidu.com/c/c/bawu/delpost"), data, NULL, TYPE_CLIENT_VERSION_12);
+	//CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/thread/delete"), _T("kw=") + m_encodedForumName
+	//	+ _T("&fid=") + m_forumID + _T("&tid=") + tid + _T("&ie=utf-8&tbs=") + m_tbs);
 	return GetOperationErrorCode(src);
 }
 
@@ -249,9 +253,12 @@ CString CTiebaOperate::DeleteThread(const CString& tid)
 CString CTiebaOperate::DeletePost(const CString& tid, const CString& pid)
 {
 	CString data;
-	data.Format(_T("commit_fr=pb&ie=utf-8&tbs=%s&kw=%s&fid=%s&tid=%s&is_vipdel=0&pid=%s&is_finf=false"),
-		(LPCTSTR)m_tbs, (LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, tid, pid);
-	CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/post/delete"), data);
+	data.Format(_T("BDUSS=%s&fid=%s&pid=%s&tbs=%s&z=%s"),
+		(LPCTSTR)m_bduss, (LPCTSTR)m_forumID, pid, (LPCTSTR)m_tbs, tid);
+	CString src = TiebaClientHTTPPost(_T("http://c.tieba.baidu.com/c/c/bawu/delpost"), data, NULL, TYPE_CLIENT_VERSION_12);
+	//data.Format(_T("commit_fr=pb&ie=utf-8&tbs=%s&kw=%s&fid=%s&tid=%s&is_vipdel=0&pid=%s&is_finf=false"),
+	//	(LPCTSTR)m_tbs, (LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, tid, pid);
+	//CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/post/delete"), data);
 	return GetOperationErrorCode(src);
 }
 
@@ -259,9 +266,12 @@ CString CTiebaOperate::DeletePost(const CString& tid, const CString& pid)
 CString CTiebaOperate::DeleteLZL(const CString& tid, const CString& lzlid)
 {
 	CString data;
-	data.Format(_T("ie=utf-8&tbs=%s&kw=%s&fid=%s&tid=%s&pid=%s&is_finf=1"),
-		(LPCTSTR)m_tbs, (LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, tid, lzlid);
-	CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/post/delete"), data);
+	data.Format(_T("BDUSS=%s&fid=%s&pid=%s&tbs=%s&z=%s"),
+		(LPCTSTR)m_bduss, (LPCTSTR)m_forumID, lzlid, (LPCTSTR)m_tbs, tid);
+	CString src = TiebaClientHTTPPost(_T("http://c.tieba.baidu.com/c/c/bawu/delpost"), data, NULL, TYPE_CLIENT_VERSION_12);
+	//data.Format(_T("ie=utf-8&tbs=%s&kw=%s&fid=%s&tid=%s&pid=%s&is_finf=1"),
+	//	(LPCTSTR)m_tbs, (LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, tid, lzlid);
+	//CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/post/delete"), data);
 	return GetOperationErrorCode(src);
 }
 
