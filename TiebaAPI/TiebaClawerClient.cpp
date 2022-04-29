@@ -536,7 +536,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	FrsPageReqIdl pbReq;
 	FrsPageReqIdl_DataReq* pbReqData = new FrsPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
-	pbCom->set__client_version("12.21.1.0");
+	pbCom->set__client_version("12.12.1.0");
 	pbReqData->set_allocated_common(pbCom);
 	std::string kw = CT2A(forumName);
 	pbReqData->set_kw(kw);
@@ -711,7 +711,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	PbPageReqIdl_DataReq* pbReqData = new PbPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
 
-	pbCom->set__client_version("12.21.1.0");
+	pbCom->set__client_version("12.12.1.0");
 	pbReqData->set_allocated_common(pbCom);
 	INT64 kz = _ttoi64(tid); 
 	pbReqData->set_kz(kz);
@@ -721,6 +721,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	pbReqData->set_q_type(2);
 	pbReqData->set_with_floor(1);
 	pbReqData->set_floor_rn(5);
+	pbReqData->set_floor_sort_type(1);
 	pbReq.set_allocated_data(pbReqData);
 	std::string pbData;
 	pbReq.SerializeToString(&pbData);
