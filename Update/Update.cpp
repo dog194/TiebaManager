@@ -27,8 +27,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // 当前版本，每次更新后修改，也可以不是日期
-UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("220327(2.52)");
-UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 220327; //使用整数形式，更方便版本判断
+UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("220511(2.53)");
+UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 220511; //使用整数形式，更方便版本判断
 
 static const CString MANUALLY_UPDATE_URL = _T("http://tieba.bakasnow.com/TiebaManager/?download&client=%d");
 static const CString QQ_QUN_UPDATE_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=IbZJQTp42ZNuEQJRKbyyn0LTD1iCgEtT");

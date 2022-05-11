@@ -47,7 +47,7 @@ const CString m_tips[m_tips_num] = {
 };
 
 const int PORT_LEN_MAX = 36;
-const int PORT_LEN_MIN = 34;
+const int PORT_LEN_MIN = 33;
 
 const CString GET_NAME_ERROR_SHORT = _T("[长度不足]");
 const CString GET_NAME_ERROR_TIME_OUT = _T("[访问超时]");

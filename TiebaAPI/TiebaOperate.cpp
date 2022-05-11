@@ -282,6 +282,8 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 		return _T("超时");
 	if (errorCode == _T("-1"))
 		return _T("权限不足");
+	if (errorCode == _T("1"))
+		return _T("未登陆(重新登陆账号)");
 	if (errorCode == _T("4"))
 		return _T("参数校验失败");
 	if (errorCode == _T("11"))
