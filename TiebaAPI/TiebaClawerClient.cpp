@@ -48,7 +48,7 @@ BOOL TiebaClawerClient::GetThreads(const CString& forumName, const CString& igno
 	data.Format(_T("_client_type=2&_client_version=5.7.0&from=tieba&kw=%s&net_type=1&pn=%d&q_type=2&rn=50&st_type=tb_forumlist&with_group=0"), 
 		(LPCTSTR)forumName, _ttoi(ignoreThread) / 50 + 1);
 	CString src = TiebaClientHTTPPost(_T("https://c.tieba.baidu.com/c/f/frs/page"), data);
-	//WriteString(src, _T("forum.txt"));
+	WriteString(src, _T("forum.txt"));
 	
 	threads.clear();
 	GenericDocument<UTF16<> > document;
@@ -537,9 +537,11 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	FrsPageReqIdl_DataReq* pbReqData = new FrsPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
 	pbCom->set__client_version("12.12.1.0");
+	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
-	std::string kw = CT2A(forumName);
-	pbReqData->set_kw(kw);
+	CStringA t_fn = W2UTF8(forumName);;
+	//std::string kw = CT2A(forumName);
+	pbReqData->set_kw(t_fn);
 	pbReqData->set_pn(_ttoi(ignoreThread) / 50 + 1);
 	pbReqData->set_rn(90);
 	pbReqData->set_rn_need(50);
@@ -553,13 +555,12 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 
 	CStringA data;
 	data = pbData.c_str();
-
-	/* 
+	/*
 	std::ofstream file("outputPbData.txt", std::ios::binary);
 	file.write(pbData.c_str(), sizeof(char) * (pbData.size()));
-	file.close(); 
+	file.close();*/
 	// CStringA to std::string 
-	int iLen = data.GetLength() + 1;
+	/* int iLen = data.GetLength() + 1;
 	char * pSec = data.GetBuffer(iLen * sizeof(char));
 	std::string psecstr = std::string(pSec);
 	data.ReleaseBuffer();*/
@@ -712,6 +713,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	CommonReq* pbCom = new CommonReq();
 
 	pbCom->set__client_version("12.12.1.0");
+	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	INT64 kz = _ttoi64(tid); 
 	pbReqData->set_kz(kz);
