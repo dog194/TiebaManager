@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>220826(2.54)</Version>
-    <VersionNum>220826</VersionNum>
+    <Version>220911(2.55)</Version>
+    <VersionNum>220911</VersionNum>
     <UpdateLog>
+    更新日志220911(2.55)：
+    【重要更新】
+	1.修复不扫描帖子最后一页的bug
+    
     更新日志220826(2.54)：
 	【重要更新】
 	1.修正百度更新而造成扫描吧错误的问题

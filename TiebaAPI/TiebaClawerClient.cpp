@@ -893,5 +893,16 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		}
 		++iPost;
 	}
+
+	// 附加信息
+	if (addition != NULL)
+	{
+		CString tmp;
+		tmp.Format(_T("%d"), pbPage->total_page());
+		addition->src = src;
+		addition->fid = fid;
+		addition->pageCount = tmp;
+	}
+
 	return GET_POSTS_SUCCESS;
 }
