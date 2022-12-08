@@ -249,6 +249,14 @@ CString CTiebaOperate::DeleteThread(const CString& tid)
 	return GetOperationErrorCode(src);
 }
 
+// 删主题，返回错误代码
+CString CTiebaOperate::DeleteThread_web(const CString& tid)
+{
+	CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/thread/delete"), _T("kw=") + m_encodedForumName
+		+ _T("&fid=") + m_forumID + _T("&tid=") + tid + _T("&ie=utf-8&tbs=") + m_tbs);
+	return GetOperationErrorCode(src);
+}
+
 // 删帖子，返回错误代码
 CString CTiebaOperate::DeletePost(const CString& tid, const CString& pid)
 {
@@ -259,6 +267,16 @@ CString CTiebaOperate::DeletePost(const CString& tid, const CString& pid)
 	//data.Format(_T("commit_fr=pb&ie=utf-8&tbs=%s&kw=%s&fid=%s&tid=%s&is_vipdel=0&pid=%s&is_finf=false"),
 	//	(LPCTSTR)m_tbs, (LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, tid, pid);
 	//CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/post/delete"), data);
+	return GetOperationErrorCode(src);
+}
+
+// 删帖子，返回错误代码
+CString CTiebaOperate::DeletePost_web(const CString& tid, const CString& pid)
+{
+	CString data;
+	data.Format(_T("commit_fr=pb&ie=utf-8&tbs=%s&kw=%s&fid=%s&tid=%s&is_vipdel=0&pid=%s&is_finf=false"),
+		(LPCTSTR)m_tbs, (LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, tid, pid);
+	CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/post/delete"), data);
 	return GetOperationErrorCode(src);
 }
 
@@ -281,7 +299,7 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 	if (errorCode == _T("-65536"))
 		return _T("超时");
 	if (errorCode == _T("-1"))
-		return _T("权限不足");
+		return _T("权限不足，(如是吧务，尝试重新登录)");
 	if (errorCode == _T("1"))
 		return _T("未登陆(重新登陆账号)");
 	if (errorCode == _T("4"))
@@ -291,7 +309,7 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 	if (errorCode == _T("14") || errorCode == _T("12"))
 		return _T("已被系统封禁");
 	if (errorCode == _T("72"))
-		return _T("权限不足");
+		return _T("权限不足，(如是吧务，尝试重新登录)");
 	if (errorCode == _T("74"))
 		return _T("用户不存在(可能帖子已被删且用户已退出本吧会员且用户已隐藏动态)");
 	if (errorCode == _T("77"))

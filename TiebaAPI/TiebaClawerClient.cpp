@@ -36,6 +36,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "TiebaProto/PbPageResIdl.pb.h"
 #include "TiebaProto/PbContent.pb.h"
 #include "TiebaProto/TiebaPlusInfo.pb.h"
+#include "TiebaProto/User.pb.h"
 
 using namespace rapidjson;
 
@@ -340,7 +341,8 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	CString tb_age = strUTF82W(rawUser.tb_age());
 	int is_default_avatar = rawUser.is_default_avatar();
 	CString tb_uid = strUTF82W(rawUser.tieba_uid());
-
+	
+	int reply_type = rawUser.priv_sets().reply();
 	// 赋值
 	user.id = id;
 	user.name = name;
@@ -354,6 +356,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	user.tb_age = tb_age;
 	user.is_default_avatar = is_default_avatar;
 	user.tieba_uid = tb_uid;
+	user.reply_type = reply_type;
 }
 
 // 解析UserList
@@ -379,7 +382,6 @@ const static void decodeUserList(const ::google::protobuf::RepeatedPtrField<User
 		auto& user = userList[iUser];
 		decodeUser(*rawUser, user);
 		//WriteStringCon(user.GetContent(), _T("userlist.txt"));
-
 		++iUser;
 	}
 	userList.resize(iUser);
@@ -528,6 +530,7 @@ const static void decodeLzl(SubPostList& pbSubPost, LzlInfo& lzl, const CString 
 }
 
 const CString STR_THREAD_VOTE = _T("\n[请更新到贴吧App最新版本查看投票模块]");
+const CString STR_FAN_ONLY = _T("\r\n[由于楼主的设置，你需要关注TA才能发表评论]");
 // 使用新版客户端接口采集贴吧
 BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CString& ignoreThread, 
 	std::vector<TapiThreadInfo>& threads)
@@ -859,6 +862,12 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 				// 投票内容
 				post.content += _T("\r\n");
 				post.content += pollOption;
+			}
+			// 个人隐私设置解析
+			if (PostuserList[userIndex[author_id]].reply_type == 5) {
+				// == 1 仅粉丝可回复模式
+				// 添加强特征   
+				post.content += STR_FAN_ONLY;
 			}
 		}
 		
