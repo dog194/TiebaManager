@@ -217,8 +217,13 @@ void CListPage::OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult)
 // 清除
 void CListPage::OnClickedButton6()
 {
-	m_list.DeleteAllItems();
-	OnDelete(-1);
+	int result = AfxMessageBox(_T("清除列表？"), MB_ICONQUESTION | MB_YESNO);
+	if (result == IDYES)
+	{
+		m_list.DeleteAllItems();
+		OnDelete(-1);
+		return;
+	}
 }
 
 // 设置选中
