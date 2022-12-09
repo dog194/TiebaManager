@@ -50,6 +50,7 @@ const int PORT_LEN_MAX = 36;
 const int PORT_LEN_MIN = 33;
 
 const CString GET_NAME_ERROR_SHORT = _T("[长度不足]");
+const CString GET_NAME_ERROR_UID_BAN = _T("[用户封禁]");
 const CString GET_NAME_ERROR_TIME_OUT = _T("[访问超时]");
 const CString GET_NAME_ERROR_INPUT_ERROR = _T("[参数错误]");
 const CString GET_NAME_ERROR_FORMAT_ERROR = _T("[格式异常]");

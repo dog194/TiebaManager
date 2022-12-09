@@ -469,6 +469,8 @@ HELPER_API CString GetNameUsingPortrait(const CString& pPortrait) {
 	CString code = GetStringBetween(src, _T("no\":"), _T(","));
 	if (code == _T(""))
 		code = GetStringBetween(src, _T("code\":\""), _T("\""));
+	if (code == _T("1130032"))
+		return GET_NAME_ERROR_UID_BAN;
 	if (code != _T("0")) {
 		return GET_NAME_ERROR_INPUT_ERROR;
 	}

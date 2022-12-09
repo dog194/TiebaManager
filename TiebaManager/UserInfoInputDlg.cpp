@@ -86,8 +86,8 @@ BOOL CUserInfoInputDlg::OnInitDialog()
 		m_edit_portrait.SetWindowText(m_userinfo.m_portrait);
 		m_edit_note.SetWindowText(m_userinfo.m_note);
 	}
-	m_edit_uid.SetSel(0, -1);
-	m_edit_uid.SetFocus();
+	m_edit_portrait.SetSel(0, -1);
+	m_edit_portrait.SetFocus();
 
 	if (m_pre_note == _T("")) {
 		m_button_note_pre.ShowWindow(SW_HIDE);
@@ -149,6 +149,11 @@ void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 		if (tmpU == GET_NAME_ERROR_SHORT) {
 			m_static_portrait.SetWindowTextW(_T("		  头像ID长度不足，如果复制正确，请到群里反馈"));
 			m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度不足，如果复制正确，请到群里反馈"), TTI_NONE);
+			return;
+		}
+		else if (tmpU == GET_NAME_ERROR_UID_BAN) {
+			m_static_portrait.SetWindowTextW(_T("		 该用户已被百度屏蔽"));
+			m_edit_note.ShowBalloonTip(_T(""), _T("该用户已被百度屏蔽"), TTI_NONE);
 			return;
 		}
 		else if (tmpU == GET_NAME_ERROR_TIME_OUT) {
