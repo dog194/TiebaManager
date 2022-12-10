@@ -49,7 +49,7 @@ protected:
 	int m_threadIndex; // 下个要扫描的主题索引
 	std::mutex m_threadIndexLock;
 	BOOL m_noNewReply; // 无新回复
-
+	CString m_lastScanTime = _T("");
 
 	void ScanThread(CString sPage);
 	void ScanPostThread(int threadID);

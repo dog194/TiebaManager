@@ -509,6 +509,23 @@ HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src)
 	return tmp;
 }
 
+// time_t to string x年x月x日
+HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src)
+{
+	struct tm time_;
+	CString tmp;
+	if (src == NULL) {
+		time_t t;
+		time(&t);
+		localtime_s(&time_, &t);
+	}
+	else {
+		localtime_s(&time_, &src);
+	}
+	tmp.Format(_T("%02d-%02d-%02d"), time_.tm_year + 1900, time_.tm_mon + 1, time_.tm_mday);
+	return tmp;
+}
+
 // Int to CString
 HELPER_API CString Int2CString(const int num)
 {

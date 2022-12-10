@@ -93,6 +93,20 @@ void CTBMScan::ScanThread(CString sPage)
 		{
 			// 主扫描结构
 			for (int iPage = iPageS; iPage <= iPageE; iPage++) {
+				// 记录扫描时间
+				if (m_lastScanTime == _T("")) {
+					m_lastScanTime = GetYYMMDD_FromTimeT();
+				}
+				else {
+					if (m_lastScanTime != GetYYMMDD_FromTimeT()) {
+						m_lastScanTime = GetYYMMDD_FromTimeT();
+						//扫描日期 Log 
+						CString noticeDate;
+						noticeDate.Format(_T("<font color=#FE007F>========%s========</font>"), m_lastScanTime);
+						g_pLog->Log(noticeDate);
+					}
+				}
+
 				pass = TRUE;
 				g_scanOnceStartEvent(pass);
 				if (!pass)

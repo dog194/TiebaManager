@@ -121,6 +121,8 @@ HELPER_API CString GetPortraitFromString(const CString& src);
 HELPER_API CString GetNameUsingPortrait(const CString& pPortrait);
 // time_t to string x年x月x日-xx:xx:xx
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
+// time_t to string x年x月x日
+HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src = NULL);
 // Int to CString
 HELPER_API CString Int2CString(const int num);
 // Int64 to CString
