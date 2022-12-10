@@ -328,9 +328,15 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 		return _T("这个帖子已经被删除了哦");
 	if (errorCode == _T("4011"))
 		return _T("需要验证码(操作太快？)");
+	if (errorCode == _T("220034"))
+		return _T("您的操作太频繁了");
 	if (errorCode == _T("300000"))
 		return _T("由于系统升级，烦请您更新至最新版客户端处理违规用户，感谢您的理解与支持！(暂时无法用旧版客户端api封禁用户名为空用户)");
 	if (errorCode == _T("1211039"))
 		return _T("删除主题失败(不知道为啥，反正百度说删除失败)");
-	return _T("未知错误");
+	if (errorCode == _T("1989005"))
+		return _T("加载数据失败");
+	if (errorCode == _T("2210002"))
+		return _T("系统错误");
+	return _T("未收录错误");
 }
