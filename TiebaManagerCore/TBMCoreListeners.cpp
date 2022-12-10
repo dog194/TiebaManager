@@ -39,6 +39,16 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 {
 	std::unique_lock<decltype(g_pTbmCoreConfig->m_optionsLock)> lock(g_pTbmCoreConfig->m_optionsLock);
 
+	// 扫描帖子列表 检查信任主题
+	if (obj.m_type == TBObject::THREAD) 
+	{
+		if (g_pTbmCoreConfig->m_trustedThreads->find(obj.tid) != g_pTbmCoreConfig->m_trustedThreads->end())
+		{
+			res = FALSE;
+			return;
+		}
+	}
+
 	// 信任规则
 	for (auto& i : *g_pTbmCoreConfig->m_trustedRules)
 	{
