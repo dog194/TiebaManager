@@ -255,8 +255,24 @@ void CListPage::ScrollToIndex(const int index) {
 // 根据字符串第一列搜索，返回index
 int CListPage::FindIndexFromStr(const CString key) {
 	int index = -1;
+	CString key_ = key;
+	key_.Replace(_T(" "), _T(" ")); // 把HTML Non-breaking space 替换回普通 space
 	for (int i = 0; i < m_list.GetItemCount(); i++) {
-		if (key == m_list.GetItemText(i, 0)) {
+		if (key_ == m_list.GetItemText(i, 0)) {
+			index = i;
+			return index;
+		}
+	}
+	return index;
+}
+
+// 根据字符串第二列搜索，返回index
+int CListPage::FindIndexFromSecondStr(const CString key) {
+	int index = -1;
+	CString key_ = key;
+	key_.Replace(_T(" "), _T(" ")); // 把HTML Non-breaking space 替换回普通 space
+	for (int i = 0; i < m_list.GetItemCount(); i++) {
+		if (key_ == m_list.GetItemText(i, 1)) {
 			index = i;
 			return index;
 		}

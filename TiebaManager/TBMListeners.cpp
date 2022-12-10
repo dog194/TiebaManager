@@ -229,6 +229,32 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 			dlg->m_log.Log(_T("<font color=red>拉黑失败！</font>"));
 		pass = FALSE;
 	}
+	else if (prefix == _T("rb:")) //黑名单规则快捷跳转
+	{
+		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+		dlg->OnBnClickedButton5();
+		dlg->m_settingDlg->ShowBlackListRulePage();
+		int index = dlg->m_settingDlg->m_blackListRulesPage->
+			FindIndexFromSecondStr(url.Right(url.GetLength() - 3));
+		dlg->m_settingDlg->m_blackListRulesPage->ScrollToIndex(index);
+		dlg->m_settingDlg->m_blackListRulesPage->SetSelectedRow(index);
+		dlg->m_settingDlg->m_blackListRulesPage->OnClickedButton3();
+		dlg->SetForegroundWindow();
+		pass = FALSE;
+	}
+	else if (prefix == _T("rn:")) //违规规则快捷跳转
+	{
+		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+		dlg->OnBnClickedButton5();
+		dlg->m_settingDlg->ShowIllegalRulesPage();
+		int index = dlg->m_settingDlg->m_illegalRulesPage->
+			FindIndexFromStr(url.Right(url.GetLength() - 3));
+		dlg->m_settingDlg->m_illegalRulesPage->ScrollToIndex(index);
+		dlg->m_settingDlg->m_illegalRulesPage->SetSelectedRow(index);
+		dlg->m_settingDlg->m_illegalRulesPage->OnClickedButton3();
+		dlg->SetForegroundWindow();
+		pass = FALSE;
+	}
 }
 
 void CTBMListeners::OnUpdateComCount(const int& qSize) {

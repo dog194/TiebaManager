@@ -61,6 +61,7 @@ public:
 	virtual void ScrollToIndex(const int index);
 	// 根据字符串第一列搜索，返回index
 	virtual int FindIndexFromStr(const CString key);
+	virtual int FindIndexFromSecondStr(const CString key);
 	virtual BOOL Export(const CString& path);
 	virtual BOOL Import(const CString& path);
 
