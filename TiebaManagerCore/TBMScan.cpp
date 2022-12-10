@@ -75,85 +75,110 @@ void CTBMScan::ScanThread(CString sPage)
 
 	{
 		// 初始化页数
-		int iPage = _ttoi(sPage);
+		CStringArray args;
+		SplitString(args, sPage, _T("-"));
+		int iPageS, iPageE;
+		if (args.GetSize() == 2) {
+			// 长度为 2 
+			iPageS = _ttoi(args[0]);
+			iPageE = _ttoi(args[1]);
+		}
+		else {
+			iPageS = _ttoi(sPage);
+			iPageE = _ttoi(sPage);
+		}
 		CString ignoreThread; // 忽略前几个主题
-		ignoreThread.Format(_T("%d"), (iPage - 1) * 50);
-
 
 		while (!m_stopScanFlag)
 		{
-			pass = TRUE;
-			g_scanOnceStartEvent(pass);
-			if (!pass)
-				goto ScanOnceEnd;
+			// 主扫描结构
+			for (int iPage = iPageS; iPage <= iPageE; iPage++) {
+				pass = TRUE;
+				g_scanOnceStartEvent(pass);
+				if (!pass)
+					goto ScanOnceEnd;
 
 #pragma warning(suppress: 28159)
-			DWORD startTime = GetTickCount();
+				DWORD startTime = GetTickCount();
 
-			// 获取主题列表
-			if (!TiebaClawerProxy::GetInstance().GetThreads(g_pTiebaOperate->GetForumName(), ignoreThread, m_threads))
-			{
-				if (m_stopScanFlag)
-					break;
+				ignoreThread.Format(_T("%d"), (iPage - 1) * 50);
+				// 开始扫描
 				if (!g_pTbmCoreConfig->m_briefLog)
-					g_pLog->Log(_T("<font color=red>获取主题列表失败，稍后重新开始本轮</font>"));
-				goto ScanDelay;
-				continue;
-			}
-
-			// 扫描主题
-			for (const TapiThreadInfo& thread : m_threads)
-			{
-				if (m_stopScanFlag)
-					break;
-				__int64 tid = _ttoi64(thread.tid);
-				if (g_pUserCache->m_ignoredTID.find(tid) == g_pUserCache->m_ignoredTID.end())
 				{
-					BOOL res = FALSE;
-					CString msg, ruleName;
-					BOOL forceToConfirm = FALSE;
-					int pos = 0, length = 0, ruleType = RULE_TYPE_ILLEGA_RULE;
-					g_checkThreadIllegalEvent(thread, res, msg, forceToConfirm, pos, length, ruleName, ruleType);
-					if (res)
+					CString content;
+					content.Format(_T("<font color=green>开始扫描：第 %d 页</font>"), iPage);
+					g_pLog->Log(content);
+				}
+
+				// 获取主题列表
+				if (!TiebaClawerProxy::GetInstance().GetThreads(g_pTiebaOperate->GetForumName(), ignoreThread, m_threads))
+				{
+					if (m_stopScanFlag)
+						break;
+					if (!g_pTbmCoreConfig->m_briefLog)
+						g_pLog->Log(_T("<font color=red>获取主题列表失败，稍后重新开始本轮</font>"));
+					goto ScanDelay;
+					continue;
+				}
+
+				// 扫描主题
+				for (const TapiThreadInfo& thread : m_threads)
+				{
+					if (m_stopScanFlag)
+						break;
+					__int64 tid = _ttoi64(thread.tid);
+					if (g_pUserCache->m_ignoredTID.find(tid) == g_pUserCache->m_ignoredTID.end())
 					{
-						CTBMOperate::GetInstance().AddConfirm(Operation(forceToConfirm, pos, length, thread.title,
-							std::make_unique<TapiThreadInfo>(thread), ruleName, ruleType));
-						g_pLog->Log(_T("<a href=\"https://tieba.baidu.com/p/") + thread.tid + _T("\">")
-							+ HTMLEscape(thread.title) + _T("</a>") + msg);
-						g_pUserCache->m_ignoredTID.insert(tid);
+						BOOL res = FALSE;
+						CString msg, ruleName;
+						BOOL forceToConfirm = FALSE;
+						int pos = 0, length = 0, ruleType = RULE_TYPE_ILLEGA_RULE;
+						g_checkThreadIllegalEvent(thread, res, msg, forceToConfirm, pos, length, ruleName, ruleType);
+						if (res)
+						{
+							CTBMOperate::GetInstance().AddConfirm(Operation(forceToConfirm, pos, length, thread.title,
+								std::make_unique<TapiThreadInfo>(thread), ruleName, ruleType));
+							g_pLog->Log(_T("<a href=\"https://tieba.baidu.com/p/") + thread.tid + _T("\">")
+								+ HTMLEscape(thread.title) + _T("</a>") + msg);
+							g_pUserCache->m_ignoredTID.insert(tid);
+						}
 					}
 				}
-			}
 
-			// 扫描帖子
-			m_noNewReply = TRUE;
-			if (!g_pTbmCoreConfig->m_onlyScanTitle)
-			{
-				pass = TRUE;
-				g_preScanAllThreadsEvent(pass);
-				if (pass)
+				// 扫描帖子
+				m_noNewReply = TRUE;
+				if (!g_pTbmCoreConfig->m_onlyScanTitle)
 				{
-					m_threadIndex = 0;
+					pass = TRUE;
+					g_preScanAllThreadsEvent(pass);
+					if (pass)
+					{
+						m_threadIndex = 0;
 
-					// 创建线程扫描帖子
-					int threadCount = g_pTbmCoreConfig->m_threadCount; // g_pTbmCoreConfig->m_threadCount会变
-					std::vector<std::thread> threads;
-					for (int i = 0; i < threadCount; i++)
-						threads.push_back(std::thread(&CTBMScan::ScanPostThread, this, i));
+						// 创建线程扫描帖子
+						int threadCount = g_pTbmCoreConfig->m_threadCount; // g_pTbmCoreConfig->m_threadCount会变
+						std::vector<std::thread> threads;
+						for (int i = 0; i < threadCount; i++)
+							threads.push_back(std::thread(&CTBMScan::ScanPostThread, this, i));
 
-					// 等待扫描帖子线程结束
-					for (auto& i : threads)
-						i.join();
+						// 等待扫描帖子线程结束
+						for (auto& i : threads)
+							i.join();
+					}
 				}
-			}
 
-			if (!g_pTbmCoreConfig->m_briefLog)
-			{
-				CString content;
+				// 结束扫描
+				if (!g_pTbmCoreConfig->m_briefLog)
+				{
+					CString content;
 #pragma warning(suppress: 28159)
-				content.Format(_T("<font color=green>本轮扫描结束，用时%.3f秒%s</font>"), float(GetTickCount() - startTime) / 1000.0f, 
-					m_noNewReply ? _T("，没有发现新帖子") : _T(""));
-				g_pLog->Log(content);
+					content.Format(_T("<font color=green>本轮(页)扫描结束，用时%.3f秒%s</font>"), float(GetTickCount() - startTime) / 1000.0f,
+						m_noNewReply ? _T("，没有发现新帖子") : _T(""));
+					g_pLog->Log(content);
+				}
+				if (iPage != iPageE) {
+					g_scanOnceEndEvent();
+				}
 			}
 
 		ScanOnceEnd:

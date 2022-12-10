@@ -646,7 +646,24 @@ void CTiebaManagerDlg::OnBnClickedButton2()
 
 	CString tmp;
 	m_pageEdit.GetWindowText(tmp);
-	if (_ttoi(tmp) < 1)
+
+	// 判断是否是范围扫描  
+	CStringArray args;
+	SplitString(args, tmp, _T("-"));
+	if (args.GetSize() == 2) {
+		// 长度为 2 或许是 范围 1-2
+		int s = _ttoi(args[0]);
+		int e = _ttoi(args[1]);
+		if (s < 1 || e < 1 || s >= e) {
+			m_pageEdit.SetWindowText(_T("1"));
+			tmp = _T("1");
+		}
+		else {
+			tmp.Format(_T("%d-%d"), s, e);
+			m_pageEdit.SetWindowText(tmp);
+		}
+	} 
+	else if (_ttoi(tmp) < 1)
 	{
 		m_pageEdit.SetWindowText(_T("1"));
 		tmp = _T("1");
