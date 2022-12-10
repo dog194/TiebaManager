@@ -96,6 +96,10 @@ void CLoopBanInputDlg::OnOK()
 		return;
 	}
 	m_edit_portrait.GetWindowText(m_portrait);
+	if (m_portrait == _T("")) {
+		m_edit_portrait.ShowBalloonTip(_T(""), _T("头像ID 不能为空，保证正确封禁"), TTI_NONE);
+		return;
+	}
 	m_edit_note.GetWindowText(m_note);
 
 	CDialog::OnOK();
