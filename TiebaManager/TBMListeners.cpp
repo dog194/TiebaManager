@@ -276,8 +276,19 @@ void CTBMListeners::OnCloseSettingWin() {
 	dlg->OnProWinCheckChange();
 }
 
-void CTBMListeners::OnPostUpdateInfo(const CString& hasUpdate) {
+void CTBMListeners::OnPostUpdateInfo(const CString& hasUpdate, const std::vector<CUpdateInfo::FileInfo>& dependFiles) {
 	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
 	dlg->m_hasUpdate = hasUpdate;
 	dlg->OnProWinCheckChange();
+	for (size_t i = 0; i < dependFiles.size(); i++) {
+		if (dependFiles[i].name == _T("libcurl.dll")) {
+			dlg->m_libcurlV = dependFiles[i].version;
+		}
+		else if (dependFiles[i].name == _T("curl.exe")) {
+			dlg->m_curlV = dependFiles[i].version;
+		}
+		else if (dependFiles[i].name == _T("7za.exe")) {
+			dlg->m_7zaV = dependFiles[i].version;
+		}
+	}
 }

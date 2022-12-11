@@ -209,13 +209,14 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 如果设置了自动更新，启动检查一次
 	if (g_globalConfig.m_autoUpdate) {
-		switch (CheckUpdate(True)) {
+		std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
+		switch (CheckUpdate(True, dependFiles)) {
 		case UPDATE_HAS_UPDATE:
-			g_postUpdateInfoEvent(STR_HAS_UPDATE);
+			g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
 			break;
 		case UPDATE_NO_UPDATE:
 		case UPDATE_FAILED_TO_GET_INFO:
-			g_postUpdateInfoEvent(_T(""));
+			g_postUpdateInfoEvent(_T(""), dependFiles);
 		}
 	}
 
@@ -225,13 +226,14 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		g_userCache.m_bannedUser->clear();
 		// 如果设置了自动更新，每天检查一次
 		if (g_globalConfig.m_autoUpdate) {
-			switch (CheckUpdate(True)) {
+			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
+			switch (CheckUpdate(True, dependFiles)) {
 			case UPDATE_HAS_UPDATE:
-				g_postUpdateInfoEvent(STR_HAS_UPDATE);
+				g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
 				break;
 			case UPDATE_NO_UPDATE:
 			case UPDATE_FAILED_TO_GET_INFO:
-				g_postUpdateInfoEvent(_T(""));
+				g_postUpdateInfoEvent(_T(""), dependFiles);
 			}
 		}
 	});

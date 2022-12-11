@@ -21,6 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <Singleton.h>
 #include <TBMCoreEvents.h>
 #include <TBMEvents.h>
+#include <Update.h>
 
 
 class CTBMListeners final : public Singleton<CTBMListeners>
@@ -57,5 +58,5 @@ private:
 	static void OnUpdateComCount(const int& qSize);
 	static void OnUpdateOpeCount(const int& qSize);
 	static void OnCloseSettingWin();
-	static void OnPostUpdateInfo(const CString& hasUpdate);
+	static void OnPostUpdateInfo(const CString& hasUpdate, const std::vector<CUpdateInfo::FileInfo>& dependFiles);
 };

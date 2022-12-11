@@ -104,6 +104,9 @@ public:
 
 	CExplorerLog m_log;
 	CString m_hasUpdate;
+	CString m_libcurlV = _T("");
+	CString m_curlV = _T("");
+	CString m_7zaV = _T("");
 
 	BOOL m_isClosing = FALSE;
 

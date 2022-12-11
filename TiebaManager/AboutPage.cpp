@@ -89,17 +89,18 @@ BOOL CAboutPage::OnInitDialog()
 // 检查更新
 void CAboutPage::OnStnClickedStatic1()
 {
-	switch (CheckUpdate())
+	std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
+	switch (CheckUpdate(FALSE, dependFiles))
 	{
 	case UPDATE_HAS_UPDATE:
-		g_postUpdateInfoEvent(STR_HAS_UPDATE);
+		g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
 		break;
 	case UPDATE_NO_UPDATE:
 		AfxMessageBox(_T("已经是最新版本"));
-		g_postUpdateInfoEvent(_T(""));
+		g_postUpdateInfoEvent(_T(""), dependFiles);
 		break;
 	case UPDATE_FAILED_TO_GET_INFO:
-		g_postUpdateInfoEvent(_T(""));
+		g_postUpdateInfoEvent(_T(""), dependFiles);
 		if (AfxMessageBox(_T("获取文件信息失败，手动更新？"), MB_ICONQUESTION | MB_YESNO) == IDYES)
 			ManuallyUpdate();
 		break;

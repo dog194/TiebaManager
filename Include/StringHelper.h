@@ -56,6 +56,7 @@ const CString GET_NAME_ERROR_INPUT_ERROR = _T("[参数错误]");
 const CString GET_NAME_ERROR_FORMAT_ERROR = _T("[格式异常]");
 
 const CString NOT_FOUND = _T("[未找到]");
+const CString QQ_QUN_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=ccjdz1q_9-VDat0FeKU9ov9nWrZD3naD");
 
 // 分割字符串
 HELPER_API void SplitString(CStringArray& dst, const CString& src, const CString& slipt);

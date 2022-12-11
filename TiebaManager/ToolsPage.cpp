@@ -25,6 +25,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "SettingDlg.h"
 #include "TiebaManagerDlg.h"
 #include "TiebaManager.h"
+#include <Update.h>
+#include <MiscHelper.h>
 
 
 // CToolsPage 对话框
@@ -138,5 +140,86 @@ void CToolsPage::OnBnClickedButtonOepnQq()
 
 void CToolsPage::OnBnClickedButtonLibcurlUpdate()
 {
+	CString UPDATE_PACK_URL_CURL = _T("http://tieba.bakasnow.com/TiebaManager/?df&f=libcurl.dll");
+	// exe所在目录，不一定是当前目录
+	CString relativeDir;
+	GetModuleFileName(GetModuleHandle(NULL), relativeDir.GetBuffer(MAX_PATH), MAX_PATH);
+	relativeDir.ReleaseBuffer();
+	int pos = relativeDir.ReverseFind(_T('\\'));
+	relativeDir = pos == -1 ? _T(".\\") : relativeDir.Left(pos + 1);
+	
+	CString UPDATE_DIR_PATH = _T("Update\\");
+	CString updateDir = relativeDir + UPDATE_DIR_PATH;
+	// 需要更新的文件
+	std::vector<CUpdateInfo::FileInfo> updateFiles;
 
+	CreateDir(updateDir);
+	CString filesPackUrl, fileName, cmdStr, tmpStr;
+	cmdStr = _T("");
+	filesPackUrl = UPDATE_PACK_URL_CURL;
+	fileName = _T("libcurl.dll");
+
+	// 关闭指令显示
+	cmdStr += _T("@echo off");
+	cmdStr += _T("\necho ============================================");
+	cmdStr += _T("\necho 贴吧管理器更新辅助程序，请不要手动关闭本程序");
+	cmdStr += _T("\necho ============================================");
+	cmdStr += _T("\necho 开始下载libcurl.dll......");
+	cmdStr += _T("\necho.");
+	// 下载指令
+	tmpStr.Format(_T("\"%scurl.exe\" -o \"%s%s\" \"%s\""), relativeDir, updateDir, fileName, filesPackUrl);
+	cmdStr += _T("\n");
+	cmdStr += tmpStr;
+	cmdStr += _T("\necho.");
+	cmdStr += _T("\necho 下载结束......");
+	cmdStr += _T("\necho 延时5秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时4秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时3秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时2秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\necho 延时1秒关闭......");
+	cmdStr += _T("\nchoice /t 1 /d y /n >nul");
+	cmdStr += _T("\ndel %0");
+	WriteString(cmdStr, updateDir + _T("libcurl.bat"));
+	tmpStr.Format(_T("\"%slibcurl.bat\""), updateDir);
+	// 阻塞调用CMD，等待下载完成
+	SHELLEXECUTEINFO ShExecInfo = { 0 };
+	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+	ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+	ShExecInfo.hwnd = NULL;
+	ShExecInfo.lpVerb = _T("open");
+	ShExecInfo.lpFile = tmpStr;
+	ShExecInfo.lpParameters = NULL;
+	ShExecInfo.lpDirectory = NULL;
+	ShExecInfo.nShow = SW_SHOWNORMAL;
+	ShExecInfo.hInstApp = NULL;
+	ShellExecuteEx(&ShExecInfo);
+	WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
+
+	if (!PathFileExists(updateDir + fileName)) {
+		AfxMessageBox(_T("文件\"") + fileName + _T("\"不存在！请到群里反馈或重试！"), MB_ICONERROR);
+		return;
+	}
+	
+	if ((PathFileExists(updateDir + fileName + _T(".bak"))
+		&& !DeleteFile(updateDir + fileName + _T(".bak")))
+		|| (PathFileExists(relativeDir + fileName)
+			&& !MoveFile(relativeDir + fileName, updateDir + fileName + _T(".bak"))))
+	{
+		AfxMessageBox(_T("移动文件\"") + relativeDir + fileName + _T("\"失败！"), MB_ICONERROR);
+		return;
+	}
+	if (!MoveFile(updateDir + fileName, relativeDir + fileName))
+	{
+		AfxMessageBox(_T("移动文件\"") + updateDir + fileName + _T("\"失败！"), MB_ICONERROR);
+		return;
+	}
+	AfxMessageBox(_T("更新完毕，重启本程序后生效"));
+
+
+End:
+	CoUninitialize();
 }

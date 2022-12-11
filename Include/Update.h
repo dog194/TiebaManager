@@ -36,12 +36,14 @@ public:
 		CString name;		// 文件名
 		CString url;		// 下载地址
 		CString md5;		// 比较MD5确定是否下载这个文件
+		CString version;	// version
 	};
 
 	COption<CString> m_version;				// 最新版本
 	COption<int> m_version_num;				// 最新版本号
 	COption<CString> m_updateLog;			// 更新日志
 	COption<std::vector<FileInfo> > m_files;		// 只储存必须的文件，如正则表达式手册不储存
+	COption<std::vector<FileInfo> > m_dependFiles;		// 只储存必须的文件，如正则表达式手册不储存
 
 	CUpdateInfo();
 };
@@ -49,6 +51,6 @@ public:
 
 enum CheckUpdateResult { UPDATE_NO_UPDATE, UPDATE_HAS_UPDATE, UPDATE_FAILED_TO_GET_INFO, UPDATE_NEED_RESTART};
 // 检查更新，如果需要更新则开一个线程自动更新
-UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent = false);
+UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent = false, std::vector<CUpdateInfo::FileInfo>& dependFiles = std::vector<CUpdateInfo::FileInfo>());
 // 手动更新，打开一个URL
 UPDATE_API void ManuallyUpdate();
