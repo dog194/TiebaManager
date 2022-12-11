@@ -43,7 +43,8 @@ CSettingDlg::CSettingDlg(CSettingDlg*& pThis, CWnd* pParent /*=NULL*/) : CModele
 	m_blackListRulesPage(new CBlackListRulesPage()),
 	m_optionsPage(new COptionsPage()),
 	m_usersPage(new CUsersPage()),
-	m_aboutPage(new CAboutPage())
+	m_aboutPage(new CAboutPage()),
+	m_toolsPage(new CToolsPage())
 {
 	// 初始化m_pages
 	m_pages.push_back(m_scanPage.get());
@@ -55,6 +56,7 @@ CSettingDlg::CSettingDlg(CSettingDlg*& pThis, CWnd* pParent /*=NULL*/) : CModele
 	m_pages.push_back(m_optionsPage.get());
 	m_pages.push_back(m_usersPage.get());
 	m_pages.push_back(m_aboutPage.get());
+	m_pages.push_back(m_toolsPage.get());
 }
 
 #pragma region MFC
@@ -105,6 +107,7 @@ BOOL CSettingDlg::OnInitDialog()
 	m_tree.SetItemData(m_tree.InsertItem(_T("方案")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("账号管理")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("关于&更新")), i++);
+	m_tree.SetItemData(m_tree.InsertItem(_T("没想好叫啥")), i++);
 
 	// 初始化各页
 #define CREATE_PAGE(page) page->Create(page->IDD, this)
@@ -121,6 +124,7 @@ BOOL CSettingDlg::OnInitDialog()
 	CREATE_PAGE(m_optionsPage);
 	CREATE_PAGE(m_usersPage);
 	CREATE_PAGE(m_aboutPage);
+	CREATE_PAGE(m_toolsPage);
 
 	CRect treeRect, wndRect, pageRect;
 	m_tree.GetWindowRect(&treeRect);

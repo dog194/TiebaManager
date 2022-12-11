@@ -164,6 +164,7 @@
     <ClInclude Include="TextButton.h" />
     <ClInclude Include="TiebaManager.h" />
     <ClInclude Include="TiebaManagerDlg.h" />
+    <ClInclude Include="ToolsPage.h" />
     <ClInclude Include="UserInfoInputDlg.h" />
     <ClInclude Include="UsersPage.h" />
   </ItemGroup>
@@ -210,6 +211,7 @@
     <ClCompile Include="TextButton.cpp" />
     <ClCompile Include="TiebaManager.cpp" />
     <ClCompile Include="TiebaManagerDlg.cpp" />
+    <ClCompile Include="ToolsPage.cpp" />
     <ClCompile Include="UserInfoInputDlg.cpp" />
     <ClCompile Include="UsersPage.cpp" />
   </ItemGroup>

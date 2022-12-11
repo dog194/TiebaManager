@@ -222,6 +222,9 @@
     <ClInclude Include="UserInfoInputDlg.h">
       <Filter>头文件\GUI\Setting\Condition</Filter>
     </ClInclude>
+    <ClInclude Include="ToolsPage.h">
+      <Filter>头文件\GUI\Setting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TiebaManager.cpp">
@@ -346,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="UserInfoInputDlg.cpp">
       <Filter>源文件\GUI\Setting\Condition</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolsPage.cpp">
+      <Filter>源文件\GUI\Setting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
