@@ -175,6 +175,9 @@ BOOL CSettingDlg::OnInitDialog()
 	m_aboutPage->m_autoCheckUpdateCheck.SetCheck(g_globalConfig.m_autoUpdate); // 自动更新
 	SetWindowText(_T("设置-") + UPDATE_CURRENT_VERSION);
 
+	//
+	m_toolsPage->InitFilesList();
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }

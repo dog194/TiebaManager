@@ -685,3 +685,44 @@ End:
 	ptBuf = NULL;
 	return str;
 }
+
+// 比较版本值，返回更高的版本
+HELPER_API CString GetHigherVersionString(const CString pVersionA, const CString pVersionB) {
+	CStringArray argsA, argsB;
+	SplitString(argsA, pVersionA, _T("."));
+	SplitString(argsB, pVersionB, _T("."));
+	if (argsA.GetSize() != 4 || argsB.GetSize() != 4) {
+		// 参数有问题直接返回空。规范的版本号是  a.b.c.d
+		return _T("");
+	}
+	if (argsA[0] == argsB[0]) {
+		if (argsA[1] == argsB[1]) {
+			if (argsA[2] == argsB[2]) {
+				if (_ttoi(argsA[3]) > _ttoi(argsB[3])) {
+					return pVersionA;
+				}
+				else {
+					return pVersionB;
+				}
+			}
+			else if (_ttoi(argsA[2]) > _ttoi(argsB[2])) {
+				return pVersionA;
+			}
+			else {
+				return pVersionB;
+			}
+		}
+		else if (_ttoi(argsA[1]) > _ttoi(argsB[1])) {
+			return pVersionA;
+		}
+		else {
+			return pVersionB;
+		}
+	}
+	else if (_ttoi(argsA[0]) > _ttoi(argsB[0])) {
+		return pVersionA;
+	}
+	else {
+		return pVersionB;
+	}
+}

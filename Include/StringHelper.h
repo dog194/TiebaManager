@@ -55,6 +55,8 @@ const CString GET_NAME_ERROR_TIME_OUT = _T("[访问超时]");
 const CString GET_NAME_ERROR_INPUT_ERROR = _T("[参数错误]");
 const CString GET_NAME_ERROR_FORMAT_ERROR = _T("[格式异常]");
 
+const CString NOT_FOUND = _T("[未找到]");
+
 // 分割字符串
 HELPER_API void SplitString(CStringArray& dst, const CString& src, const CString& slipt);
 
@@ -131,3 +133,5 @@ HELPER_API CString Int64oCString(const INT64 num);
 HELPER_API CString GetRandomTip();
 // 获取DLL文件信息
 HELPER_API CString GetFileVersionString(LPCTSTR pFileName, LPCTSTR pName /* = NULL */);
+// 比较版本值，返回更高的版本
+HELPER_API CString GetHigherVersionString(const CString pVersionA, const CString pVersionB);
