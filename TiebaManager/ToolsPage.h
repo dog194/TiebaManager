@@ -49,12 +49,14 @@ public:
 	CStatic m_staticCurlV;
 	CStatic m_staticCurlExeV;
 	CStatic m_static7zV;
+	CStatic m_static7zVnew;
 	CStatic m_staticCurlVnew;
 	CStatic m_staticCurlExeVnew;
-	CStatic m_static7zVnew;
-
+	
 	CString m_latestLibcurlV = _T("");
 	
+	CButton m_btnUpdate;
+
 	afx_msg void OnBnClickedButtonLibcurlUpdate();
 	afx_msg void OnBnClickedButtonOepnQq();
 };

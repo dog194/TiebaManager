@@ -53,6 +53,7 @@ void CToolsPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_CURL_V_NEW, m_staticCurlVnew);
 	DDX_Control(pDX, IDC_STATIC_CURL_EXE_V_NEW, m_staticCurlExeVnew);
 	DDX_Control(pDX, IDC_STATIC_7Z_V_NEW, m_static7zVnew);
+	DDX_Control(pDX, IDC_BUTTON_LIBCURL_UPDATE, m_btnUpdate);
 }
 
 BEGIN_MESSAGE_MAP(CToolsPage, CNormalDlg)
@@ -140,6 +141,20 @@ void CToolsPage::OnBnClickedButtonOepnQq()
 
 void CToolsPage::OnBnClickedButtonLibcurlUpdate()
 {
+	CString tmpV, tmpVnew;
+	m_staticCurlV.GetWindowText(tmpV);
+	m_staticCurlVnew.GetWindowText(tmpVnew);
+
+	if (tmpVnew == _T("")) {
+		// 没有版本信息
+		AfxMessageBox(_T("未获取到服务器版本信息，请点击 设置-关于&更新 检查更新 重试"));
+		return;
+	}
+	if (tmpVnew == tmpV) {
+		AfxMessageBox(_T("已经是最新版"));
+		return;
+	}
+
 	CString UPDATE_PACK_URL_CURL = _T("http://tieba.bakasnow.com/TiebaManager/?df&f=libcurl.dll");
 	// exe所在目录，不一定是当前目录
 	CString relativeDir;

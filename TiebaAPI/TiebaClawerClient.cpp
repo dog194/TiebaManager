@@ -566,6 +566,8 @@ const static void decodeLzl(SubPostList& pbSubPost, LzlInfo& lzl, const CString 
 
 const CString STR_THREAD_VOTE = _T("\n[请更新到贴吧App最新版本查看投票模块]");
 const CString STR_FAN_ONLY = _T("\r\n[由于楼主的设置，你需要关注TA才能发表评论]");
+const CString STR_ONLY_F = _T("\r\n[由于楼主设置了评论权限，你无法评论此贴哦]");
+
 // 使用新版客户端接口采集贴吧
 BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CString& ignoreThread, 
 	std::vector<TapiThreadInfo>& threads)
@@ -908,6 +910,11 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 				// == 1 仅粉丝可回复模式
 				// 添加强特征   
 				post.content += STR_FAN_ONLY;
+			}
+			else if (PostuserList[userIndex[author_id]].reply_type == 6) {
+				// == 1 仅楼主关注可回复模式
+				// 添加强特征   
+				post.content += STR_ONLY_F;
 			}
 		}
 		

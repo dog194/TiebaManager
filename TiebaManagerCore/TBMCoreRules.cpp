@@ -92,7 +92,7 @@ CString CKeywordCondition::GetDescription(const CConditionParam& _param)
 		_T("所有内容"),
 		_T("作者名"),
 		_T("头像ID(Portirt)"),
-		_T("TID(主题帖ID)")
+		_T("主题帖号(Tid)")
 	};
 	
 	CString res = rangeDesc[param.m_range];
