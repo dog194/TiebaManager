@@ -469,6 +469,8 @@ HELPER_API CString GetNameUsingPortrait(const CString& pPortrait) {
 	CString code = GetStringBetween(src, _T("no\":"), _T(","));
 	if (code == _T(""))
 		code = GetStringBetween(src, _T("code\":\""), _T("\""));
+	if (code == _T("1130032"))
+		return GET_NAME_ERROR_UID_BAN;
 	if (code != _T("0")) {
 		return GET_NAME_ERROR_INPUT_ERROR;
 	}
@@ -504,6 +506,23 @@ HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src)
 		localtime_s(&time_, &src);
 	}
 	tmp.Format(_T("%02d-%02d-%02d %02d:%02d:%02d"), time_.tm_year + 1900, time_.tm_mon + 1, time_.tm_mday, time_.tm_hour, time_.tm_min, time_.tm_sec);
+	return tmp;
+}
+
+// time_t to string x年x月x日
+HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src)
+{
+	struct tm time_;
+	CString tmp;
+	if (src == NULL) {
+		time_t t;
+		time(&t);
+		localtime_s(&time_, &t);
+	}
+	else {
+		localtime_s(&time_, &src);
+	}
+	tmp.Format(_T("%02d-%02d-%02d"), time_.tm_year + 1900, time_.tm_mon + 1, time_.tm_mday);
 	return tmp;
 }
 
@@ -665,4 +684,45 @@ End:
 	delete ptBuf;
 	ptBuf = NULL;
 	return str;
+}
+
+// 比较版本值，返回更高的版本
+HELPER_API CString GetHigherVersionString(const CString pVersionA, const CString pVersionB) {
+	CStringArray argsA, argsB;
+	SplitString(argsA, pVersionA, _T("."));
+	SplitString(argsB, pVersionB, _T("."));
+	if (argsA.GetSize() != 4 || argsB.GetSize() != 4) {
+		// 参数有问题直接返回空。规范的版本号是  a.b.c.d
+		return _T("");
+	}
+	if (argsA[0] == argsB[0]) {
+		if (argsA[1] == argsB[1]) {
+			if (argsA[2] == argsB[2]) {
+				if (_ttoi(argsA[3]) > _ttoi(argsB[3])) {
+					return pVersionA;
+				}
+				else {
+					return pVersionB;
+				}
+			}
+			else if (_ttoi(argsA[2]) > _ttoi(argsB[2])) {
+				return pVersionA;
+			}
+			else {
+				return pVersionB;
+			}
+		}
+		else if (_ttoi(argsA[1]) > _ttoi(argsB[1])) {
+			return pVersionA;
+		}
+		else {
+			return pVersionB;
+		}
+	}
+	else if (_ttoi(argsA[0]) > _ttoi(argsB[0])) {
+		return pVersionA;
+	}
+	else {
+		return pVersionB;
+	}
 }

@@ -27,11 +27,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // 当前版本，每次更新后修改，也可以不是日期
-UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("220911(2.55)");
-UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 220911; //使用整数形式，更方便版本判断
+UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("221218(2.6)");
+UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 221218; //使用整数形式，更方便版本判断
 
 static const CString MANUALLY_UPDATE_URL = _T("http://tieba.bakasnow.com/TiebaManager/?download&client=%d");
-static const CString QQ_QUN_UPDATE_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=IbZJQTp42ZNuEQJRKbyyn0LTD1iCgEtT");
 UPDATE_API const CString UPDATE_INFO_URL = _T("http://tieba.bakasnow.com/TiebaManager/?update&client=%d");
 static const CString UPDATE_PACK_URL = _T("http://tieba.bakasnow.com/TiebaManager/?download&client=%d");
 
@@ -55,15 +54,18 @@ UPDATE_API DECLEAR_READ(CUpdateInfo::FileInfo)
 	COption<CString> name("Name");
 	COption<CString> url("URL");
 	COption<CString> md5("MD5");
+	COption<CString> version("VERSION");
 	dir.Read(*optionNode);
 	name.Read(*optionNode);
 	url.Read(*optionNode);
 	md5.Read(*optionNode);
+	version.Read(*optionNode);
 
 	m_value.dir = dir;
 	m_value.name = name;
 	m_value.url = url;
 	m_value.md5 = md5;
+	m_value.version = version;
 
 	if (!IsValid(m_value))
 		UseDefault();
@@ -87,18 +89,23 @@ UPDATE_API DECLEAR_WRITE(CUpdateInfo::FileInfo)
 	COption<CString> md5("MD5");
 	*md5 = m_value.md5;
 	md5.Write(*optionNode);
+	COption<CString> version("VERSION");
+	*version = m_value.version;
+	version.Write(*optionNode);
 }
 
 CUpdateInfo::CUpdateInfo() : CConfigBase("UpdateInfo"),
 	m_version("Version", _T("")),
 	m_version_num("VersionNum", 0),
 	m_updateLog("UpdateLog", _T("")),
-	m_files("Files")
+	m_files("Files"),
+	m_dependFiles("DependFiles")
 {
 	m_options.push_back(&m_version);
 	m_options.push_back(&m_version_num);
 	m_options.push_back(&m_updateLog);
 	m_options.push_back(&m_files);
+	m_options.push_back(&m_dependFiles);
 }
 #pragma endregion
 
@@ -345,7 +352,7 @@ End:
 }
 
 // 检查更新，如果需要更新则开一个线程自动更新
-UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent)
+UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent, std::vector<CUpdateInfo::FileInfo>& dependFiles)
 {
 	// 取更新信息
 	std::unique_ptr<BYTE[]> buffer;
@@ -359,8 +366,11 @@ UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent)
 	if (!updateInfo->LoadFromString((LPCSTR)buffer.get(), size))
 		return UPDATE_FAILED_TO_GET_INFO;
 
+	// 基础库相关
+	dependFiles = updateInfo->m_dependFiles;
+
 	// 无更新
-	if (updateInfo->m_version_num <= UPDATE_CURRENT_VERSION_NUM)
+ 	if (updateInfo->m_version_num <= UPDATE_CURRENT_VERSION_NUM)
 		return UPDATE_NO_UPDATE;
 
 	if (silent) {
@@ -383,5 +393,5 @@ UPDATE_API CheckUpdateResult CheckUpdate(BOOL silent)
 // 手动更新，打开一个URL
 UPDATE_API void ManuallyUpdate()
 {
-	ShellExecute(NULL, _T("open"), QQ_QUN_UPDATE_URL, NULL, NULL, SW_SHOWNORMAL);
+	ShellExecute(NULL, _T("open"), QQ_QUN_URL, NULL, NULL, SW_SHOWNORMAL);
 }

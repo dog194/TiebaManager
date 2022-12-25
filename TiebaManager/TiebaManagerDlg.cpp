@@ -209,13 +209,14 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 如果设置了自动更新，启动检查一次
 	if (g_globalConfig.m_autoUpdate) {
-		switch (CheckUpdate(True)) {
+		std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
+		switch (CheckUpdate(True, dependFiles)) {
 		case UPDATE_HAS_UPDATE:
-			g_postUpdateInfoEvent(STR_HAS_UPDATE);
+			g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
 			break;
 		case UPDATE_NO_UPDATE:
 		case UPDATE_FAILED_TO_GET_INFO:
-			g_postUpdateInfoEvent(_T(""));
+			g_postUpdateInfoEvent(_T(""), dependFiles);
 		}
 	}
 
@@ -225,13 +226,14 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		g_userCache.m_bannedUser->clear();
 		// 如果设置了自动更新，每天检查一次
 		if (g_globalConfig.m_autoUpdate) {
-			switch (CheckUpdate(True)) {
+			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
+			switch (CheckUpdate(True, dependFiles)) {
 			case UPDATE_HAS_UPDATE:
-				g_postUpdateInfoEvent(STR_HAS_UPDATE);
+				g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
 				break;
 			case UPDATE_NO_UPDATE:
 			case UPDATE_FAILED_TO_GET_INFO:
-				g_postUpdateInfoEvent(_T(""));
+				g_postUpdateInfoEvent(_T(""), dependFiles);
 			}
 		}
 	});
@@ -646,7 +648,24 @@ void CTiebaManagerDlg::OnBnClickedButton2()
 
 	CString tmp;
 	m_pageEdit.GetWindowText(tmp);
-	if (_ttoi(tmp) < 1)
+
+	// 判断是否是范围扫描  
+	CStringArray args;
+	SplitString(args, tmp, _T("-"));
+	if (args.GetSize() == 2) {
+		// 长度为 2 或许是 范围 1-2
+		int s = _ttoi(args[0]);
+		int e = _ttoi(args[1]);
+		if (s < 1 || e < 1 || s >= e) {
+			m_pageEdit.SetWindowText(_T("1"));
+			tmp = _T("1");
+		}
+		else {
+			tmp.Format(_T("%d-%d"), s, e);
+			m_pageEdit.SetWindowText(tmp);
+		}
+	} 
+	else if (_ttoi(tmp) < 1)
 	{
 		m_pageEdit.SetWindowText(_T("1"));
 		tmp = _T("1");

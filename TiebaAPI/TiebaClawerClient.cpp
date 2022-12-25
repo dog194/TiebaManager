@@ -36,6 +36,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "TiebaProto/PbPageResIdl.pb.h"
 #include "TiebaProto/PbContent.pb.h"
 #include "TiebaProto/TiebaPlusInfo.pb.h"
+#include "TiebaProto/User.pb.h"
 
 using namespace rapidjson;
 
@@ -340,7 +341,8 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	CString tb_age = strUTF82W(rawUser.tb_age());
 	int is_default_avatar = rawUser.is_default_avatar();
 	CString tb_uid = strUTF82W(rawUser.tieba_uid());
-
+	
+	int reply_type = rawUser.priv_sets().reply();
 	// 赋值
 	user.id = id;
 	user.name = name;
@@ -354,6 +356,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	user.tb_age = tb_age;
 	user.is_default_avatar = is_default_avatar;
 	user.tieba_uid = tb_uid;
+	user.reply_type = reply_type;
 }
 
 // 解析UserList
@@ -379,7 +382,6 @@ const static void decodeUserList(const ::google::protobuf::RepeatedPtrField<User
 		auto& user = userList[iUser];
 		decodeUser(*rawUser, user);
 		//WriteStringCon(user.GetContent(), _T("userlist.txt"));
-
 		++iUser;
 	}
 	userList.resize(iUser);
@@ -424,7 +426,7 @@ const static void debugContent(PbContent pbContent, const CString& tid = _T(""),
 
 // 解析Content
 const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbContent>* pbContentList, 
-	const CString& tid = _T(""), const CString& pid = _T("")) {
+	const CString& tid = _T(""), const CString& pid = _T(""), const BOOLEAN textOnly = FALSE) {
 	CString ret = _T("");
 	if (pbContentList->size() == 0) {
 		return ret;
@@ -444,45 +446,80 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 			content = strUTF82W(rawContent->text());
 			break;
 		case 1: // 超链接
-			tmp = strUTF82W(rawContent->link());
-			content.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), tmp, tmp);
+			if (textOnly) {
+				content = _T("");
+			}
+			else {
+				tmp = strUTF82W(rawContent->link());
+				content.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), tmp, tmp);
+			}
 			break;
 		case 2: // 表情
-			tmp = strUTF82W(rawContent->text());
-			content.Format(_T(R"(<img class="BDE_Smiley" width="30" height="30" changedsize="false" src="http://static.tieba.baidu.com/tb/editor/images/client/%s.png" >)"),
-				tmp);
+			if (textOnly) {
+				content = _T("");
+			}
+			else {
+				tmp = strUTF82W(rawContent->text());
+				content.Format(_T(R"(<img class="BDE_Smiley" width="30" height="30" changedsize="false" src="http://static.tieba.baidu.com/tb/editor/images/client/%s.png" >)"),
+					tmp);
+			}
 			break;
 		case 3: // 图片
 		{
-			tmpSize = strUTF82W(rawContent->bsize());
-			tmp = strUTF82W(rawContent->origin_src());
-			CStringArray size;
-			SplitString(size, tmpSize, _T(","));
-			content.Format(_T(R"(<img class="BDE_Image" pic_type="0" width="%s" height="%s" src="%s" >)"), (LPCTSTR)size[0],
-				(LPCTSTR)size[1], tmp);
+			if (textOnly) {
+				content = _T("");
+			}
+			else {
+				tmpSize = strUTF82W(rawContent->bsize());
+				tmp = strUTF82W(rawContent->origin_src());
+				CStringArray size;
+				SplitString(size, tmpSize, _T(","));
+				content.Format(_T(R"(<img class="BDE_Image" pic_type="0" width="%s" height="%s" src="%s" >)"), (LPCTSTR)size[0],
+					(LPCTSTR)size[1], tmp);
+			}
 			break;
 		}
 		case 4: // @
-			tmp = strUTF82W(rawContent->text());
-			tmpSize = Int64oCString(rawContent->uid());
-			content.Format(_T(R"#(<a href="" username="%s" class="at">%s</a>)#"), tmpSize, tmp);
+			if (textOnly) {
+				content = strUTF82W(rawContent->text());
+			}
+			else {
+				tmp = strUTF82W(rawContent->text());
+				tmpSize = Int64oCString(rawContent->uid());
+				content.Format(_T(R"#(<a href="" username="%s" class="at">%s</a>)#"), tmpSize, tmp);
+			}
 			break;
 		case 5: // 视频
-			tmp = strUTF82W(rawContent->text());
-			content.Format(_T(R"(<embed class="BDE_Flash" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" play="true" loop="false" menu="false" src="%s" width="500" height="450" allowscriptaccess="never" allowfullscreen="true" scale="noborder">)"),
-				tmp);
+			if (textOnly) {
+				content = _T("");
+			}
+			else {
+				tmp = strUTF82W(rawContent->text());
+				content.Format(_T(R"(<embed class="BDE_Flash" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="transparent" play="true" loop="false" menu="false" src="%s" width="500" height="450" allowscriptaccess="never" allowfullscreen="true" scale="noborder">)"),
+					tmp);
+			}
 			//debugContent(*rawContent, tid, pid);
 			break;
 		case 10: // 语音
-			content.Format(_T(R"(<div class="voice_player voice_player_pb"><a href="#" class="voice_player_inner"><span class="before">&nbsp;</span><span class="middle"><span class="speaker speaker_animate">&nbsp;</span><span class="time"><span class="second">%d</span>&quot;</span></span><span class="after">&nbsp;</span></a></div><img class="j_voice_ad_gif" src="http://tb2.bdstatic.com/tb/static-pb/img/voice_ad.gif" alt="下载贴吧客户端发语音！" /><br/>)"),
-				rawContent->during_time() / 1000);
+			if (textOnly) {
+				content = _T("");
+			}
+			else {
+				content.Format(_T(R"(<div class="voice_player voice_player_pb"><a href="#" class="voice_player_inner"><span class="before">&nbsp;</span><span class="middle"><span class="speaker speaker_animate">&nbsp;</span><span class="time"><span class="second">%d</span>&quot;</span></span><span class="after">&nbsp;</span></a></div><img class="j_voice_ad_gif" src="http://tb2.bdstatic.com/tb/static-pb/img/voice_ad.gif" alt="下载贴吧客户端发语音！" /><br/>)"),
+					rawContent->during_time() / 1000);
+			}
 			break;
+		case 34: // TiebaPlusInfo 应该也是
 		case 35: // TiebaPlusInfo
 			pbTbPlusInfo = rawContent->mutable_tiebaplus_info();
 			content.Format(_T(R"(%s<tpcl>%s</tpcl>)"),
 				strUTF82W(rawContent->text()), strUTF82W(pbTbPlusInfo->h5_jump_number()));
 			break;
 		case 36: // TODO
+			content = _T("");
+			break;
+		case 11: // 特殊表情，哈米猫，滑稽，鸡年滑稽等
+		case 20: // 大表情，图片表情
 			content = _T("");
 			break;
 		default:
@@ -528,6 +565,9 @@ const static void decodeLzl(SubPostList& pbSubPost, LzlInfo& lzl, const CString 
 }
 
 const CString STR_THREAD_VOTE = _T("\n[请更新到贴吧App最新版本查看投票模块]");
+const CString STR_FAN_ONLY = _T("\r\n[由于楼主的设置，你需要关注TA才能发表评论]");
+const CString STR_ONLY_F = _T("\r\n[由于楼主设置了评论权限，你无法评论此贴哦]");
+
 // 使用新版客户端接口采集贴吧
 BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CString& ignoreThread, 
 	std::vector<TapiThreadInfo>& threads)
@@ -657,7 +697,12 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		thread.tid = tid;
 		thread.timestamp = create_time;
 		thread.reply = reply_num;
-		thread.title = title;
+		if (title == _T("")) {
+			thread.title = decodeContent(pbContentList, tid, _T(""), TRUE).Left(20);
+		}
+		else {
+			thread.title = title;
+		}
 		if (userIndex.find(author_id) != userIndex.end()) {
 			thread.author = userList[userIndex[author_id]].name;
 			thread.authorShowName = userList[userIndex[author_id]].ShowName;
@@ -859,6 +904,17 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 				// 投票内容
 				post.content += _T("\r\n");
 				post.content += pollOption;
+			}
+			// 个人隐私设置解析
+			if (PostuserList[userIndex[author_id]].reply_type == 5) {
+				// == 1 仅粉丝可回复模式
+				// 添加强特征   
+				post.content += STR_FAN_ONLY;
+			}
+			else if (PostuserList[userIndex[author_id]].reply_type == 6) {
+				// == 1 仅楼主关注可回复模式
+				// 添加强特征   
+				post.content += STR_ONLY_F;
 			}
 		}
 		

@@ -39,6 +39,16 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 {
 	std::unique_lock<decltype(g_pTbmCoreConfig->m_optionsLock)> lock(g_pTbmCoreConfig->m_optionsLock);
 
+	// 扫描帖子列表 检查信任主题
+	if (obj.m_type == TBObject::THREAD) 
+	{
+		if (g_pTbmCoreConfig->m_trustedThreads->find(obj.tid) != g_pTbmCoreConfig->m_trustedThreads->end())
+		{
+			res = FALSE;
+			return;
+		}
+	}
+
 	// 信任规则
 	for (auto& i : *g_pTbmCoreConfig->m_trustedRules)
 	{
@@ -56,7 +66,8 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 				if (i.Match(obj)) {
 					++i.m_trigCount;
 					forceToConfirm = g_pTbmCoreConfig->m_blackListConfirm;
-					msg = _T("<font color=pink> 触发用户黑名单规则 </font>") + HTMLEscape(i.m_uid) + _T("<font color=pink> 备注:</font>") + HTMLEscape(i.m_note);
+					msg.Format(_T("<font color=pink> 触发用户黑名单规则 </font><a href=\"rb:%s\">%s</a><font color=pink> 备注:</font>%s"), 
+						(LPCTSTR)HTMLEscape(i.m_portrait), (LPCTSTR)HTMLEscape(i.m_uid), (LPCTSTR)HTMLEscape(i.m_note));
 					ruleName = i.m_uid + _T(" : ") + i.m_note;
 					ruleType = RULE_TYPE_BLACK_LIST;
 					res = TRUE;
@@ -73,7 +84,7 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 		{
 			++i.m_trigCount;
 			forceToConfirm = i.m_forceToConfirm;
-			msg = _T("<font color=red> 触发违规规则 </font>") + HTMLEscape(i.m_name);
+			msg.Format(_T("<font color=red> 触发违规规则 </font><a href=\"rn:%s\">%s</a>"), (LPCTSTR)HTMLEscape(i.m_name), (LPCTSTR)HTMLEscape(i.m_name));
 			ruleName = i.m_name;
 			ruleType = RULE_TYPE_ILLEGA_RULE;
 			res = TRUE;

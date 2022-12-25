@@ -91,7 +91,8 @@ CString CKeywordCondition::GetDescription(const CConditionParam& _param)
 		_T("作者显示名"),
 		_T("所有内容"),
 		_T("作者名"),
-		_T("头像ID(Portirt)")
+		_T("头像ID(Portirt)"),
+		_T("主题帖号(Tid)")
 	};
 	
 	CString res = rangeDesc[param.m_range];
@@ -111,7 +112,7 @@ CConditionParam* CKeywordCondition::ReadParam(const tinyxml2::XMLElement* option
 {
 	auto* param = new CKeywordParam();
 
-	COption<int> range("Range", CKeywordParam::ALL_CONTENT, InRange<int, CKeywordParam::TITLE, CKeywordParam::PORTRAIT>);
+	COption<int> range("Range", CKeywordParam::ALL_CONTENT, InRange<int, CKeywordParam::TITLE, CKeywordParam::TID>);
 	COption<BOOL> not("Not", FALSE);
 	COption<BOOL> include("Include", TRUE);
 	COption<RegexText> keyword("Keyword");
@@ -204,6 +205,14 @@ BOOL CKeywordCondition::MatchThread(const CConditionParam& _param, const TapiThr
 		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 8 + thread.author.GetLength() + 17;
 		content = GetPortraitFromString(thread.authorPortraitUrl);    
 		break;
+	case CKeywordParam::TID:
+		startPos = thread.GetContent().GetLength() + 10 + 
+			thread.authorShowName.GetLength() + 8 + 
+			thread.author.GetLength() + 17 + 
+			GetPortraitFromString(thread.authorPortraitUrl).GetLength() + 15 +
+			GetYYMMDD_HHMMSS_FromTimeT(thread.timestamp).GetLength() + 8;
+		content = GetPortraitFromString(thread.tid);
+		break;
 	}
 
 	return Match(param, content, startPos, pos, length);
@@ -237,6 +246,16 @@ BOOL CKeywordCondition::MatchPost(const CConditionParam& _param, const PostInfo&
 			post.author.GetLength() + 17;
 		content = GetPortraitFromString(post.authorPortraitUrl);
 		break;
+	case CKeywordParam::TID:
+		startPos = post.GetContent().GetLength() + 10 +
+			post.authorShowName.GetLength() + 5 +
+			post.authorLevel.GetLength() + 5 +
+			post.floor.GetLength() + 8 +
+			post.author.GetLength() + 17 + 
+			GetPortraitFromString(post.authorPortraitUrl).GetLength() + 15 +
+			GetYYMMDD_HHMMSS_FromTimeT(post.timestamp).GetLength() + 8;
+		content = GetPortraitFromString(post.tid);
+		break;
 	}
 
 	return Match(param, content, startPos, pos, length);
@@ -267,6 +286,15 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 			lzl.authorShowName.GetLength() + 8 + 
 			lzl.author.GetLength() + 17;
 		content = GetPortraitFromString(lzl.authorPortraitUrl);
+		break;
+	case CKeywordParam::TID:
+		startPos = lzl.GetContent().GetLength() + 7 +
+			lzl.floor.GetLength() + 10 +
+			lzl.authorShowName.GetLength() + 8 +
+			lzl.author.GetLength() + 17 +
+			GetPortraitFromString(lzl.authorPortraitUrl).GetLength() + 15 +
+			GetYYMMDD_HHMMSS_FromTimeT(lzl.timestamp).GetLength() + 8;
+		content = GetPortraitFromString(lzl.tid);
 		break;
 	}
 

@@ -50,9 +50,13 @@ const int PORT_LEN_MAX = 36;
 const int PORT_LEN_MIN = 33;
 
 const CString GET_NAME_ERROR_SHORT = _T("[长度不足]");
+const CString GET_NAME_ERROR_UID_BAN = _T("[用户封禁]");
 const CString GET_NAME_ERROR_TIME_OUT = _T("[访问超时]");
 const CString GET_NAME_ERROR_INPUT_ERROR = _T("[参数错误]");
 const CString GET_NAME_ERROR_FORMAT_ERROR = _T("[格式异常]");
+
+const CString NOT_FOUND = _T("[未找到]");
+const CString QQ_QUN_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=ccjdz1q_9-VDat0FeKU9ov9nWrZD3naD");
 
 // 分割字符串
 HELPER_API void SplitString(CStringArray& dst, const CString& src, const CString& slipt);
@@ -120,6 +124,8 @@ HELPER_API CString GetPortraitFromString(const CString& src);
 HELPER_API CString GetNameUsingPortrait(const CString& pPortrait);
 // time_t to string x年x月x日-xx:xx:xx
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
+// time_t to string x年x月x日
+HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src = NULL);
 // Int to CString
 HELPER_API CString Int2CString(const int num);
 // Int64 to CString
@@ -128,3 +134,5 @@ HELPER_API CString Int64oCString(const INT64 num);
 HELPER_API CString GetRandomTip();
 // 获取DLL文件信息
 HELPER_API CString GetFileVersionString(LPCTSTR pFileName, LPCTSTR pName /* = NULL */);
+// 比较版本值，返回更高的版本
+HELPER_API CString GetHigherVersionString(const CString pVersionA, const CString pVersionB);

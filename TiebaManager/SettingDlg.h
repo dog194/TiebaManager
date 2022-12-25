@@ -35,6 +35,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "OptionsPage.h"
 #include "UsersPage.h"
 #include "AboutPage.h"
+#include "ToolsPage.h"
 
 
 // CSettingDlg 对话框
@@ -84,6 +85,7 @@ public:
 	std::unique_ptr<COptionsPage> m_optionsPage;
 	std::unique_ptr<CUsersPage> m_usersPage;
 	std::unique_ptr<CAboutPage> m_aboutPage;
+	std::unique_ptr<CToolsPage> m_toolsPage;
 	CButton m_okButton;
 	CButton m_cancelButton;
 	CButton m_applyButton;

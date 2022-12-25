@@ -75,8 +75,12 @@ public:
 	CString Defriend(const CString& userID);
 	// 删主题，返回错误代码
 	CString DeleteThread(const CString& tid);
+	// 删主题，返回错误代码
+	CString DeleteThread_web(const CString& tid);
 	// 删帖子，返回错误代码
 	CString DeletePost(const CString& tid, const CString& pid);
+	// 删帖子，返回错误代码
+	CString DeletePost_web(const CString& tid, const CString& pid);
 	// 删楼中楼，返回错误代码
 	CString DeleteLZL(const CString& tid, const CString& lzlid);
 };

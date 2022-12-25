@@ -84,6 +84,7 @@ public:
 	CString tb_age;			// 吧龄
 	int is_default_avatar;	// 是否默认头像
 	CString tieba_uid;		// tieba uid
+	int reply_type;			// 回复模式
 
 	virtual CString GetContent() const { 
 		CString TMP,ret = _T("");
