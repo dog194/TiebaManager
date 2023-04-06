@@ -322,3 +322,147 @@ double CImageCondition::CompareImage(const CImageParam& param, const cv::Mat& im
 	default: return -3.0;
 	}
 }
+
+
+// 图片内容条件
+
+CString CImgContentCondition::GetDescription(const CConditionParam& _param)
+{
+	const auto& param = (CImgContentParam&)_param;
+
+	static LPCTSTR rangeDesc[] = {
+	_T("图片类型 "),
+	_T("二维码识别结果 "),
+	};
+
+	CString res = rangeDesc[param.m_contentType];
+	if (param.m_not)
+		res += _T("不");
+	res += param.m_include ? _T("含有") : _T("匹配");
+	res += param.m_keyword.isRegex ? _T("正则表达式\"") : _T("\"");
+	res += param.m_keyword.text;
+	res += _T("\"");
+	if (param.m_keyword.ignoreCase)
+		res += _T("，忽略大小写");
+	return res;
+}
+
+CConditionParam* CImgContentCondition::ReadParam(const tinyxml2::XMLElement* optionNode)
+{
+	auto* param = new CImgContentParam();
+
+	COption<int> type("Type", CImgContentParam::IMG_TYPE, InRange<int, CImgContentParam::IMG_TYPE, CImgContentParam::QR_CODE>);
+	COption<BOOL> not("Not", FALSE);
+	COption<BOOL> include("Include", TRUE);
+	COption<RegexText> keyword("Keyword");
+	type.Read(*optionNode);
+	not.Read(*optionNode);
+	include.Read(*optionNode);
+	keyword.Read(*optionNode);
+
+	param->m_contentType = CImgContentParam::ContentType(*type);
+	param->m_not = not;
+	param->m_include = include;
+	param->m_keyword = keyword;
+
+	return param;
+}
+
+void CImgContentCondition::WriteParam(const CConditionParam& _param, tinyxml2::XMLElement* optionNode)
+{
+	const auto& param = (CImgContentParam&)_param;
+
+	COption<int> range("Type");
+	*range = param.m_contentType;
+	range.Write(*optionNode);
+	COption<BOOL> not("Not");
+	*not = param.m_not;
+	not.Write(*optionNode);
+	COption<BOOL> include("Include");
+	*include = param.m_include;
+	include.Write(*optionNode);
+	COption<RegexText> keyword("Keyword");
+	*keyword = param.m_keyword;
+	keyword.Write(*optionNode);
+}
+
+CConditionParam* CImgContentCondition::CloneParam(const CConditionParam& _param)
+{
+	const auto& param = (CImgContentParam&)_param;
+	return new CImgContentParam(param);
+}
+
+BOOL CImgContentCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
+{
+	return CImgContentCondition::Match((CImgContentParam&)_param, thread);
+}
+
+BOOL CImgContentCondition::MatchPost(const CConditionParam& _param, const PostInfo& post, int& pos, int& length)
+{
+	return CImgContentCondition::Match((CImgContentParam&)_param, post);
+}
+
+BOOL CImgContentCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& lzl, int& pos, int& length)
+{
+	return CImgContentCondition::Match((CImgContentParam&)_param, lzl);
+}
+
+BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& obj)
+{
+	return FALSE;
+
+	auto& imageCache = CImageCache::GetInstance();
+	std::vector<CString> urls;
+	GetImageUrls(obj, urls);
+	for (const auto& i : urls)
+	{
+		BOOL res;
+		CString content;
+		cv::Mat img;
+		if (!imageCache.GetImage(i, img))
+			continue;
+		// 图片，或图片头获取
+		switch (param.m_contentType)
+		{
+		case CImgContentParam::IMG_TYPE:
+
+			break;
+		case CImgContentParam::QR_CODE:
+			content = GetImgContent(param, img);
+			break;
+		default:
+			res = FALSE;
+			break;
+		}
+
+		// 判断匹配
+		int _pos, _length;
+		if (param.m_include)
+		{
+			res = StringIncludes(content, param.m_keyword, &_pos, &_length);
+		}
+		else
+		{
+			res = StringMatchs(content, param.m_keyword);
+			_length = content.GetLength();
+		}
+		// 取FALSE
+		if (param.m_not)
+			res = !res;
+		if (res)
+			return TRUE;
+	}
+	return FALSE;
+}
+
+CString CImgContentCondition::GetImgContent(const CImgContentParam& param, const cv::Mat& img)
+{
+	switch (param.m_contentType)
+	{
+	case CImgContentParam::QR_CODE:
+		return _T("");
+	default: 
+		return _T("");
+	}
+}
+

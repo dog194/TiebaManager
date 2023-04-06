@@ -62,6 +62,8 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_blackListBan		("BlackListBan",		FALSE),
 	m_blackListRecheck	("BlackListRecheck",	FALSE),
 
+	m_acedEnhancedLzl	("AcedEnhancedLzl",		FALSE),
+
 	m_illegalRules      ("IllegalRules"),
 	m_trustedRules      ("TrustedRules"),
 	m_trustedThreads    ("TrustedThreads"),
@@ -99,6 +101,8 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_blackListDelete);
 	m_options.push_back(&m_blackListBan);
 	m_options.push_back(&m_blackListRecheck);
+
+	m_options.push_back(&m_acedEnhancedLzl);
 
 	m_options.push_back(&m_illegalRules);
 	m_options.push_back(&m_trustedRules);

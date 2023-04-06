@@ -62,6 +62,8 @@ public:
 	COption<BOOL>		m_blackListBan;			// 黑名单封禁
 	COption<BOOL>		m_blackListRecheck;		// 确认窗口重新检测是否在黑名单
 
+	COption<BOOL>		m_acedEnhancedLzl;		// 进阶-增强型楼中楼
+
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则
 	COption<std::set<CString> >              m_trustedThreads;    // 信任主题

@@ -37,6 +37,7 @@ IMPLEMENT_DYNAMIC(CSettingDlg, CModelessDlg)
 CSettingDlg::CSettingDlg(CSettingDlg*& pThis, CWnd* pParent /*=NULL*/) : CModelessDlg(CSettingDlg::IDD, (CModelessDlg**)&pThis, pParent),
 	m_scanPage(new CScanPage()),
 	m_operatePage(new COperatePage()),
+	m_acedPage(new CAcedPage()),
 	m_illegalRulesPage(new CIllegalRulesPage()),
 	m_trustedRulesPage(new CRulesPage<CRule>()),
 	m_trustedThreadPage(new CNormalListPage(_T("主题ID："))),
@@ -49,6 +50,7 @@ CSettingDlg::CSettingDlg(CSettingDlg*& pThis, CWnd* pParent /*=NULL*/) : CModele
 	// 初始化m_pages
 	m_pages.push_back(m_scanPage.get());
 	m_pages.push_back(m_operatePage.get());
+	m_pages.push_back(m_acedPage.get());
 	m_pages.push_back(m_illegalRulesPage.get());
 	m_pages.push_back(m_trustedRulesPage.get());
 	m_pages.push_back(m_trustedThreadPage.get());
@@ -98,6 +100,7 @@ BOOL CSettingDlg::OnInitDialog()
 	HTREEITEM item = NULL;
 	m_tree.SetItemData(m_tree.InsertItem(_T("扫描")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("操作")), i++);
+	m_tree.SetItemData(m_tree.InsertItem(_T("进阶")), i++);
 	m_tree.SetItemData(item = m_tree.InsertItem(_T("规则")), i);
 	m_tree.SetItemData(m_tree.InsertItem(_T("违规规则"), item), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("信任规则"), item), i++);
@@ -113,6 +116,7 @@ BOOL CSettingDlg::OnInitDialog()
 #define CREATE_PAGE(page) page->Create(page->IDD, this)
 	CREATE_PAGE(m_scanPage);
 	CREATE_PAGE(m_operatePage);
+	CREATE_PAGE(m_acedPage);
 	AfxSetResourceHandle(GetModuleHandle(_T("Helper.dll"))); // 资源ID冲突....
 	CREATE_PAGE(m_illegalRulesPage);
 	CREATE_PAGE(m_trustedRulesPage);

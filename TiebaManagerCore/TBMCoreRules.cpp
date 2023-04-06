@@ -74,6 +74,7 @@ void InitRules()
 	CCondition::AddCondition(CLevelCondition::GetInstance());
 	CCondition::AddCondition(CTimeCondition::GetInstance());
 	CCondition::AddCondition(CImageCondition::GetInstance());
+	CCondition::AddCondition(CImgContentCondition::GetInstance());
 	CCondition::AddCondition(CFloorCondition::GetInstance());
 }
 
