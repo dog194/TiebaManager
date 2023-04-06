@@ -181,10 +181,13 @@ static HTTPRequestResult HTTPRequestBase(std::unique_ptr<BYTE[]>* buffer, ULONG*
 	}
 	else {
 		chunk = curl_slist_append(chunk, "Connection: Keep-Alive");
-		chunk = curl_slist_append(chunk, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
+		chunk = curl_slist_append(chunk, "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
 		chunk = curl_slist_append(chunk, "Accept: */*");
 		curl_easy_setopt(easyHandle.get(), CURLOPT_ACCEPT_ENCODING, "gzip, deflate");
 		chunk = curl_slist_append(chunk, "Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+		if (cliVer == TYPE_GET_FILE_HEAD) {
+			chunk = curl_slist_append(chunk, "Range: bytes=0-2");
+		}
 	}
 	if (postMethod)
 	{
@@ -311,6 +314,11 @@ static CString HTTPRequestBase_Convert(BOOL postMethod, const CString& URL, cons
 HELPER_API CString HTTPGet(const CString& URL, CString* cookie)
 {
 	return HTTPRequestBase_Convert(FALSE, URL, NULL, cookie);
+}
+
+HELPER_API CString HTTPGetFileHead(const CString& URL, CString* cookie)
+{
+	return HTTPRequestBase_Convert(FALSE, URL, NULL, cookie, TYPE_GET_FILE_HEAD);
 }
 
 // HTTP POST请求
