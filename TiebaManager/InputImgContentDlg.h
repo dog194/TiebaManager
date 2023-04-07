@@ -53,6 +53,7 @@ public:
 	CComboBox m_includeCombo;
 	CButton m_regexCheck;
 	CButton m_ignoreCaseCheck;
+	CButton m_igPortiCheck;
 	CEdit m_contentEdit;
 	CEdit m_testEdit;
 

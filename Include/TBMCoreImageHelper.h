@@ -32,7 +32,7 @@ using std::max;
 #include <thread>
 
 
-TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls);
+TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti = false);
 TBM_CORE_API CString GetImgHead(CString imgUrl);
 
 

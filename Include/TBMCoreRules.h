@@ -234,6 +234,7 @@ public:
 	ContentType m_contentType = IMG_TYPE;    // 内容类型
 	BOOL m_not = FALSE;                      // 结果取FALSE
 	BOOL m_include = TRUE;                   // TRUE为包含，FALSE为匹配
+	BOOL m_ignorePortrait = TRUE;			 // 忽略头像，TRUE 为忽略，FALSE为包括
 	RegexText m_keyword;                     // 关键词
 };
 

@@ -23,9 +23,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <ImageHelper.h>
 #include <NetworkHelper.h>
 #include <MiscHelper.h>
+#include <TBMCoreGlobal.h>
 
 
-TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls)
+TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti)
 {
 	// 1是图片地址
 	static const std::wregex THREAD_IMG_REG(_T("<img .*?bpic=\"(.*?)\".*?/>"));
@@ -51,22 +52,35 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 			urls.push_back((*it)[2].str().c_str());
 	}
 	// 头像
-	if (object.authorPortraitUrl != _T(""))
+	if (object.authorPortraitUrl != _T("") && !igPorti)
 		urls.push_back(object.authorPortraitUrl);
 }
 
 TBM_CORE_API CString GetImgHead(CString imgUrl)
 {
 	CString imgName = GetImageName(imgUrl);
-	cv::Mat mat;
-	
+	CString headInfo;
+	// 从缓存中查找记录
+	for (auto& i : g_pUserCache->m_imgHeadCache) {
+		if (i.m_imgName == imgName) {
+			// 有记录，直接返回结果
+			return i.m_head;
+		}
+	}
 	if (PathFileExists(CImageCache::CACHE_PATH + imgName))
 	{
-		// 从图片缓存读取文件头
-		return GetLocalImgHead(CImageCache::CACHE_PATH + imgName);
+		// 从本地图片缓存文件读取文件头
+		headInfo = GetLocalImgHead(CImageCache::CACHE_PATH + imgName);
 	}
-	// 下载图片文件头
-	return HTTPGetFileHead(imgUrl);
+	else {
+		// 下载图片文件头
+		headInfo = HTTPGetFileHead(imgUrl);
+	}
+	// 校验一下结果，没问题添加到缓存
+	if (headInfo != _T("") && headInfo.GetLength() < 4) {
+		g_pUserCache->m_imgHeadCache.push_back(CImgHeadCache(imgName, headInfo));
+	}
+	return headInfo;
 }
 
 // CImageCache

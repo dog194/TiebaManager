@@ -50,6 +50,7 @@ void CInputImgContentDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT1, m_contentEdit);
 	DDX_Control(pDX, IDC_EDIT3, m_testEdit);
 	DDX_Control(pDX, IDC_CHECK4, m_ignoreCaseCheck);
+	DDX_Control(pDX, IDC_CHECK_IG_PORTI, m_igPortiCheck);
 }
 
 
@@ -69,6 +70,7 @@ BOOL CInputImgContentDlg::OnInitDialog()
 	m_includeCombo.SetCurSel(m_param->m_include ? 0 : 1);
 	m_regexCheck.SetCheck(m_param->m_keyword.isRegex);
 	m_ignoreCaseCheck.SetCheck(m_param->m_keyword.ignoreCase);
+	m_igPortiCheck.SetCheck(m_param->m_ignorePortrait);
 	m_contentEdit.SetWindowText(m_param->m_keyword.text);
 
 	m_testEdit.SetWindowText(_T("欲测试文本"));
@@ -82,6 +84,7 @@ void CInputImgContentDlg::OnOK()
 	m_param->m_contentType = CImgContentParam::ContentType(m_rangeCombo.GetCurSel());
 	m_param->m_not = m_notCheck.GetCheck();
 	m_param->m_include = m_includeCombo.GetCurSel() == 0;
+	m_param->m_ignorePortrait = m_igPortiCheck.GetCheck();
 	CString content;
 	m_contentEdit.GetWindowText(content);
 	m_param->m_keyword.Set(content, m_regexCheck.GetCheck(), m_ignoreCaseCheck.GetCheck());

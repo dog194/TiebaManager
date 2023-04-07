@@ -355,15 +355,18 @@ CConditionParam* CImgContentCondition::ReadParam(const tinyxml2::XMLElement* opt
 	COption<int> type("Type", CImgContentParam::IMG_TYPE, InRange<int, CImgContentParam::IMG_TYPE, CImgContentParam::QR_CODE>);
 	COption<BOOL> not("Not", FALSE);
 	COption<BOOL> include("Include", TRUE);
+	COption<BOOL> igPorti("IgPorti", TRUE);
 	COption<RegexText> keyword("Keyword");
 	type.Read(*optionNode);
 	not.Read(*optionNode);
 	include.Read(*optionNode);
+	igPorti.Read(*optionNode);
 	keyword.Read(*optionNode);
 
 	param->m_contentType = CImgContentParam::ContentType(*type);
 	param->m_not = not;
 	param->m_include = include;
+	param->m_ignorePortrait = igPorti;
 	param->m_keyword = keyword;
 
 	return param;
@@ -382,6 +385,9 @@ void CImgContentCondition::WriteParam(const CConditionParam& _param, tinyxml2::X
 	COption<BOOL> include("Include");
 	*include = param.m_include;
 	include.Write(*optionNode);
+	COption<BOOL> igPorti("IgPorti");
+	*igPorti = param.m_ignorePortrait;
+	igPorti.Write(*optionNode);
 	COption<RegexText> keyword("Keyword");
 	*keyword = param.m_keyword;
 	keyword.Write(*optionNode);
@@ -413,7 +419,7 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 	ILog& log = GetLog();
 	auto& imageCache = CImageCache::GetInstance();
 	std::vector<CString> urls;
-	GetImageUrls(obj, urls);
+	GetImageUrls(obj, urls, param.m_ignorePortrait);
 	for (const auto& i : urls)
 	{
 		BOOL res;
