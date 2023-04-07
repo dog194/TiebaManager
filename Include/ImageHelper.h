@@ -30,3 +30,4 @@ HELPER_API BOOL ReadImage(const CString& path, cv::Mat& img);
 HELPER_API BOOL ReadImage(const BYTE* buffer, ULONG size, CImage& img);
 HELPER_API BOOL ReadImage(const BYTE* buffer, ULONG size, cv::Mat& img);
 HELPER_API CString GetImageName(const CString& imgUrl);
+HELPER_API CString GetLocalImgHead(const CString& path);

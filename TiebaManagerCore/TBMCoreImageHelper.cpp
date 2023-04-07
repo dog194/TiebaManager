@@ -55,6 +55,19 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 		urls.push_back(object.authorPortraitUrl);
 }
 
+TBM_CORE_API CString GetImgHead(CString imgUrl)
+{
+	CString imgName = GetImageName(imgUrl);
+	cv::Mat mat;
+	
+	if (PathFileExists(CImageCache::CACHE_PATH + imgName))
+	{
+		// 从图片缓存读取文件头
+		return GetLocalImgHead(CImageCache::CACHE_PATH + imgName);
+	}
+	// 下载图片文件头
+	return HTTPGetFileHead(imgUrl);
+}
 
 // CImageCache
 

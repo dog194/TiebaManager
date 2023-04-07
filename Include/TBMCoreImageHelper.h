@@ -33,6 +33,7 @@ using std::max;
 
 
 TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls);
+TBM_CORE_API CString GetImgHead(CString imgUrl);
 
 
 class TBM_CORE_API CImageCache final : public Singleton<CImageCache>

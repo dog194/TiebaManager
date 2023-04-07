@@ -21,7 +21,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <ImageHelper.h>
 #include <opencv2\imgcodecs.hpp>
 
-
 static BOOL CImageToMat(const CImage& image, cv::Mat& img)
 {
 	img.create(image.GetHeight(), image.GetWidth(), CV_8UC3);
@@ -128,4 +127,27 @@ HELPER_API CString GetImageName(const CString& imgUrl)
 	if (imgName.Right(4).CompareNoCase(_T(".jpg")) != 0)
 		imgName += _T(".jpg");
 	return imgName;
+}
+
+HELPER_API CString GetLocalImgHead(const CString& path)
+{
+	//读取文件头3个字节
+	HANDLE hFile = CreateFile(path, FILE_GENERIC_READ,			//  打开文件，获得文件读句柄
+		FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, //  共享方式打开，避免其他地方需要读写此文件
+		NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (INVALID_HANDLE_VALUE == hFile)							//  文件打开失败，返回空
+		return _T("");
+	const int RANGE = 3;
+	BYTE data[RANGE] = { 0 };
+	DWORD readSize;
+	bool ok = false;
+	if (ReadFile(hFile, data, RANGE, &readSize, NULL) && readSize == RANGE)
+	{
+		CString tmp;
+		tmp.Format(L"%c%c%c", data[0], data[1], data[2]);
+		CloseHandle(hFile);
+		return tmp;
+	}
+	CloseHandle(hFile);//  关闭文件句柄，避免句柄泄露
+	return _T("");
 }

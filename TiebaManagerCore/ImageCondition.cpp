@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <ImageHelper.h>
 #include <opencv2\imgproc.hpp>
 #include <TBMCoreImageHelper.h>
+#include <TBMAPI.h>
 
 
 // 图片条件
@@ -331,7 +332,7 @@ CString CImgContentCondition::GetDescription(const CConditionParam& _param)
 	const auto& param = (CImgContentParam&)_param;
 
 	static LPCTSTR rangeDesc[] = {
-	_T("图片类型 "),
+	_T("图片文件头 "),
 	_T("二维码识别结果 "),
 	};
 
@@ -409,8 +410,7 @@ BOOL CImgContentCondition::MatchLzl(const CConditionParam& _param, const LzlInfo
 
 BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& obj)
 {
-	return FALSE;
-
+	ILog& log = GetLog();
 	auto& imageCache = CImageCache::GetInstance();
 	std::vector<CString> urls;
 	GetImageUrls(obj, urls);
@@ -419,13 +419,20 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 		BOOL res;
 		CString content;
 		cv::Mat img;
-		if (!imageCache.GetImage(i, img))
-			continue;
+		//if (!imageCache.GetImage(i, img))
+			//continue;
 		// 图片，或图片头获取
 		switch (param.m_contentType)
 		{
 		case CImgContentParam::IMG_TYPE:
-
+			content = GetImgHead(i);
+			// Debug 信息
+			// log.Log(i);
+			// log.Log(content);
+			if (content == _T("") || content.GetLength() > 3) {
+				// TODO ERROR 警告
+				continue;
+			}
 			break;
 		case CImgContentParam::QR_CODE:
 			content = GetImgContent(param, img);
