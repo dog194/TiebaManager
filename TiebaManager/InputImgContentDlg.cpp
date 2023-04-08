@@ -24,6 +24,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "TiebaManager.h"
 #include "InputImgContentDlg.h"
 #include <StringHelper.h>
+#include <TBMCoreImageHelper.h>
+#include <ImageHelper.h>
 
 
 // CInputImgContentDlg 对话框
@@ -51,11 +53,14 @@ void CInputImgContentDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT3, m_testEdit);
 	DDX_Control(pDX, IDC_CHECK4, m_ignoreCaseCheck);
 	DDX_Control(pDX, IDC_CHECK_IG_PORTI, m_igPortiCheck);
+	DDX_Control(pDX, IDC_EDIT_IMG_URL, m_imgTestEdit);
 }
 
 
 BEGIN_MESSAGE_MAP(CInputImgContentDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON7, &CInputImgContentDlg::OnBnClickedButton7)
+	ON_BN_CLICKED(IDC_BTN_IMG_BRO, &CInputImgContentDlg::OnBnClickedImgBro)
+	ON_BN_CLICKED(IDC_BTN_IMG_TEST, &CInputImgContentDlg::OnBnClickedImgTest)
 END_MESSAGE_MAP()
 
 
@@ -106,4 +111,80 @@ void CInputImgContentDlg::OnBnClickedButton7()
 		res = StringMatchs(test, content, m_regexCheck.GetCheck(), m_ignoreCaseCheck.GetCheck());
 
 	AfxMessageBox(res ? _T("匹配成功") : _T("匹配失败"));
+}
+
+// 测试图片浏览按钮
+void CInputImgContentDlg::OnBnClickedImgBro()
+{
+	CFileDialog dlg(TRUE, _T("jpg"), NULL, 0,
+		_T("图片文件 (*.jpg;*.png;*.bmp;*.gif)|*.jpg;*.png;*.bmp;*.gif|所有文件 (*.*)|*.*||"), this);
+	if (dlg.DoModal() == IDOK)
+		m_imgTestEdit.SetWindowText(dlg.GetPathName());
+}
+
+// 测试图片
+void CInputImgContentDlg::OnBnClickedImgTest()
+{
+	CString path, ret, tmp;
+	m_imgTestEdit.GetWindowText(path);
+	if (path == _T("") || path.GetLength() < 5) {
+		CString tmp;
+		tmp.Format(_T("%d"), m_rangeCombo.GetCurSel());
+		AfxMessageBox(path.Left(4).MakeLower());
+		return;
+	}
+	// 图片url
+	if (path.Left(4).MakeLower() == _T("http")) {
+		// http 开头
+		switch (m_rangeCombo.GetCurSel()) {
+		case CImgContentParam::IMG_TYPE:
+			ret = GetImgHead(path, false);
+			if (ret != _T("")) {
+				m_testEdit.SetWindowText(_T("图片文件头：") + ret);
+			}
+			else {
+				m_testEdit.SetWindowText(_T("图片文件头：获取失败，地址错误或未知原因"));
+			}
+			break;
+		case CImgContentParam::QR_CODE:
+			if (QRCodeScan(path, ret, false)) {
+				m_testEdit.SetWindowText(_T("二维码识别结果：") + ret);
+			}
+			else {
+				m_testEdit.SetWindowText(_T("二维码识别失败：图片地址错误或未知原因"));
+			}
+			break;
+		default:
+			AfxMessageBox(_T("规则参数异常"));
+		}
+		return;
+	}
+	// 本地文件
+	if (PathFileExists(path)) {
+		switch (m_rangeCombo.GetCurSel()) {
+		case CImgContentParam::IMG_TYPE:
+			ret = GetLocalImgHead(path);
+			if (ret != _T("")) {
+				m_testEdit.SetWindowText(_T("图片文件头：") + ret);
+			}
+			else {
+				m_testEdit.SetWindowText(_T("图片文件头：文件打开失败或未知原因"));
+			}
+			break;
+		case CImgContentParam::QR_CODE:
+			if (QRCodeScanLocal(path, ret)) {
+				m_testEdit.SetWindowText(_T("二维码识别结果：") + ret);
+			}
+			else {
+				m_testEdit.SetWindowText(_T("二维码识别失败：文件打开失败或未知原因"));
+			}
+			break;
+		default:
+			AfxMessageBox(_T("规则参数异常"));
+		}
+		return;
+	}
+	else {
+		m_testEdit.SetWindowText(_T("失败：文件不存在"));
+	}
 }

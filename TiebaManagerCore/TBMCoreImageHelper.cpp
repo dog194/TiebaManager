@@ -102,9 +102,11 @@ TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content, const BOOL addCac
 		content = _T("");
 		return false;
 	}
-	if (QRCodeScan(img, content) && addCache) {
-		// 添加缓存
-		g_pUserCache->m_imgQRCodeCache.push_back(CImgSingleInfoCache(imgName, content));
+	if (QRCodeScan(img, content)) {
+		if (addCache) {
+			// 添加缓存
+			g_pUserCache->m_imgQRCodeCache.push_back(CImgSingleInfoCache(imgName, content));
+		}
 		return true;
 	}
 	return false;
@@ -123,8 +125,8 @@ TBM_CORE_API BOOL QRCodeScan(const cv::Mat& img, CString& content)
 	if (res.size() > 0) {
 		int i = 1;
 		CString tmp;
-		for (const auto& v : res) {
-			tmp.Format(_T("[%d]%s"), i++, GBK2W(v.c_str()));
+		for (const auto& v : res) { // UTF82W  GBK2W
+			tmp.Format(_T("[%d]%s"), i++, UTF82W(v.c_str()));
 			content += tmp;
 		}
 		return true;
@@ -133,6 +135,20 @@ TBM_CORE_API BOOL QRCodeScan(const cv::Mat& img, CString& content)
 		// 无识别结果
 		return true;
 	}
+}
+
+// 图片二维码识别 本地文件
+TBM_CORE_API BOOL QRCodeScanLocal(const CString path, CString& content)
+{
+	content = _T("");
+	if (!PathFileExists(path)) {
+		return false;
+	}
+	cv::Mat img;
+	if (!ReadImage(path, img)) {
+		return false;
+	}
+	return QRCodeScan(img, content);
 }
 
 // CImageCache

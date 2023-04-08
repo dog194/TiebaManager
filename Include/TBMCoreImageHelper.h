@@ -37,6 +37,7 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 TBM_CORE_API CString GetImgHead(CString imgUrl, const BOOL addCache = true);
 TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content, const BOOL addCache = true);
 TBM_CORE_API BOOL QRCodeScan(const cv::Mat& img, CString& content);
+TBM_CORE_API BOOL QRCodeScanLocal(const CString path, CString& content);
 
 class TBM_CORE_API CImageCache final : public Singleton<CImageCache>
 {

@@ -45,7 +45,8 @@ public:
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 	afx_msg void OnBnClickedButton7();
-
+	afx_msg void OnBnClickedImgBro();
+	afx_msg void OnBnClickedImgTest();
 
 public:
 	CComboBox m_rangeCombo;
@@ -56,6 +57,8 @@ public:
 	CButton m_igPortiCheck;
 	CEdit m_contentEdit;
 	CEdit m_testEdit;
+
+	CEdit m_imgTestEdit;
 
 protected:
 	CImgContentParam* m_param;
