@@ -539,7 +539,8 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 	case CTiebaOperate::SET_TIEBA_NOT_FOUND:
 		if (hasCache) {
 			if (!g_pTbmCoreConfig->m_autoScan) {
-				AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
+				m_log.Log(_T("<font color=red>贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!</font>"));
+				//AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,\n惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
 			}
 			useCache = TRUE;
 			break;
