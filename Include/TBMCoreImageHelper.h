@@ -25,6 +25,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "Singleton.h"
 #pragma warning(disable:4819) // OpenCV头文件包含Unicode字符
 #include <opencv2\core\mat.hpp>
+#include <opencv2\wechat_qrcode.hpp>
 using std::min; // 用于GDI+的头文件
 using std::max;
 #include <atlimage.h>
@@ -34,7 +35,8 @@ using std::max;
 
 TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti = false);
 TBM_CORE_API CString GetImgHead(CString imgUrl);
-
+TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content);
+TBM_CORE_API BOOL QRCodeScan(const cv::Mat& img, CString& content);
 
 class TBM_CORE_API CImageCache final : public Singleton<CImageCache>
 {
@@ -45,7 +47,8 @@ private:
 
 public:
 	static CString CACHE_PATH;
-
+	BOOL m_modelInit;
+	std::unique_ptr<cv::wechat_qrcode::WeChatQRCode> qrDetector;
 
 	BOOL GetImage(CString imgUrl, cv::Mat& mat);
 	BOOL GetImage(CString imgUrl, CImage& img);

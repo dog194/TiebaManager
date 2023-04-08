@@ -417,16 +417,12 @@ BOOL CImgContentCondition::MatchLzl(const CConditionParam& _param, const LzlInfo
 BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& obj)
 {
 	ILog& log = GetLog();
-	auto& imageCache = CImageCache::GetInstance();
 	std::vector<CString> urls;
+	CString content, tmp;
 	GetImageUrls(obj, urls, param.m_ignorePortrait);
 	for (const auto& i : urls)
 	{
 		BOOL res;
-		CString content;
-		cv::Mat img;
-		//if (!imageCache.GetImage(i, img))
-			//continue;
 		// 图片，或图片头获取
 		switch (param.m_contentType)
 		{
@@ -436,12 +432,22 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 			// log.Log(i);
 			// log.Log(content);
 			if (content == _T("") || content.GetLength() > 3) {
-				// TODO ERROR 警告
+				// ERROR 提示
+				tmp.Format(_T("<font color=red> 图片文件头获取失败，稍后重试 </font>%s 文件头：\"%s\""), (LPCTSTR)HTMLEscape(i), (LPCTSTR)HTMLEscape(content));
+				log.Log(tmp);
 				continue;
 			}
 			break;
 		case CImgContentParam::QR_CODE:
-			content = GetImgContent(param, img);
+			if (!GetImgContent(param, i, content)) {
+				// 获取失败
+				tmp.Format(_T("<font color=red> 图片处理失败，稍后重试 </font>%s, %d"), (LPCTSTR)HTMLEscape(i), param.m_contentType);
+				log.Log(tmp);
+				continue;
+			}
+			// Debug 信息
+			//tmp.Format(_T("Img:%s, %d"), (LPCTSTR)HTMLEscape(i), param.m_contentType);
+			//log.Log(tmp);
 			break;
 		default:
 			res = FALSE;
@@ -468,14 +474,14 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 	return FALSE;
 }
 
-CString CImgContentCondition::GetImgContent(const CImgContentParam& param, const cv::Mat& img)
+BOOL CImgContentCondition::GetImgContent(const CImgContentParam& param, CString imgUrl, CString& content)
 {
 	switch (param.m_contentType)
 	{
 	case CImgContentParam::QR_CODE:
-		return _T("");
+		return QRCodeScan(imgUrl, content);
 	default: 
-		return _T("");
+		return false;
 	}
 }
 

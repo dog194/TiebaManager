@@ -255,7 +255,7 @@ public:
 	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length) override;
 	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length) override;
 
-	CString GetImgContent(const CImgContentParam& param, const cv::Mat& img);
+	BOOL GetImgContent(const CImgContentParam& param, CString imgUrl, CString& content);
 
 private:
 	BOOL Match(const CImgContentParam& param, const TBObject& obj);

@@ -56,6 +56,7 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 		urls.push_back(object.authorPortraitUrl);
 }
 
+// 获取图片文件，文件头
 TBM_CORE_API CString GetImgHead(CString imgUrl)
 {
 	CString imgName = GetImageName(imgUrl);
@@ -64,7 +65,7 @@ TBM_CORE_API CString GetImgHead(CString imgUrl)
 	for (auto& i : g_pUserCache->m_imgHeadCache) {
 		if (i.m_imgName == imgName) {
 			// 有记录，直接返回结果
-			return i.m_head;
+			return i.m_info;
 		}
 	}
 	if (PathFileExists(CImageCache::CACHE_PATH + imgName))
@@ -78,9 +79,60 @@ TBM_CORE_API CString GetImgHead(CString imgUrl)
 	}
 	// 校验一下结果，没问题添加到缓存
 	if (headInfo != _T("") && headInfo.GetLength() < 4) {
-		g_pUserCache->m_imgHeadCache.push_back(CImgHeadCache(imgName, headInfo));
+		g_pUserCache->m_imgHeadCache.push_back(CImgSingleInfoCache(imgName, headInfo));
 	}
 	return headInfo;
+}
+
+// 图片二维码识别
+TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content) {
+	CString imgName = GetImageName(imgUrl);
+	// 从缓存中查找记录
+	for (auto& i : g_pUserCache->m_imgQRCodeCache) {
+		if (i.m_imgName == imgName) {
+			// 有记录，直接返回结果
+			content = i.m_info;
+			return true;
+		}
+	}
+	auto& imageCache = CImageCache::GetInstance();
+	cv::Mat img;
+	// 无缓存获取图片
+	if (!imageCache.GetImage(imgUrl, img)) {
+		content = _T("");
+		return false;
+	}
+	if (QRCodeScan(img, content)) {
+		// 添加缓存
+		g_pUserCache->m_imgQRCodeCache.push_back(CImgSingleInfoCache(imgName, content));
+		return true;
+	}
+	return false;
+}
+
+// 图片二维码识别
+TBM_CORE_API BOOL QRCodeScan(const cv::Mat& img, CString& content)
+{
+	auto& imageCache = CImageCache::GetInstance();
+	content = _T("");
+	if (!imageCache.m_modelInit) {
+		// detector 实例化失败
+		return false;
+	}
+	auto res = imageCache.qrDetector->detectAndDecode(img);
+	if (res.size() > 0) {
+		int i = 1;
+		CString tmp;
+		for (const auto& v : res) {
+			tmp.Format(_T("[%d]%s"), i++, GBK2W(v.c_str()));
+			content += tmp;
+		}
+		return true;
+	}
+	else {
+		// 无识别结果
+		return true;
+	}
 }
 
 // CImageCache
@@ -91,6 +143,19 @@ CString CImageCache::CACHE_PATH = _T("ImageCache\\");
 CImageCache::CImageCache()
 {
 	m_cleanThread = std::make_unique<std::thread>(&CImageCache::CleanThread, this);
+	try {
+		qrDetector = std::make_unique<cv::wechat_qrcode::WeChatQRCode>(
+			"Model\\detect.prototxt",
+			"Model\\detect.caffemodel",
+			"Model\\sr.prototxt",
+			"Model\\sr.caffemodel"
+			);
+		m_modelInit = true;
+	}
+	catch (std::exception e) {
+		AfxMessageBox(_T("二维码模型初始化失败，相关功能无法使用，请检查Model文件是否存在"));
+		m_modelInit = false;
+	}
 }
 
 CImageCache::~CImageCache()

@@ -73,7 +73,7 @@ BOOL CInputImgContentDlg::OnInitDialog()
 	m_igPortiCheck.SetCheck(m_param->m_ignorePortrait);
 	m_contentEdit.SetWindowText(m_param->m_keyword.text);
 
-	m_testEdit.SetWindowText(_T("欲测试文本"));
+	m_testEdit.SetWindowText(_T("图片文件头可用于判断图片类型，如GIF： GIF, PNG：‰PN， JPG：ÿØÿ 二维码识别：无法识别返回空，至少一个结果[1]httpxxxx, 多个结果[1]xxx[2]xxx...匹配任意识别结果可以使用\"[1]\""));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE

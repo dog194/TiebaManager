@@ -223,9 +223,11 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	// 每24小时清除已封名单
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
 	g_userCache.m_imgHeadCache.clear(); // 每24小时清空一次图片头缓存信息
+	g_userCache.m_imgQRCodeCache.clear(); // 每24小时清空一次图片头缓存信息
 	SetTimer(0, 24 * 60 * 60 * 1000, [](HWND, UINT, UINT_PTR, DWORD) {
 		g_userCache.m_bannedUser->clear();
 		g_userCache.m_imgHeadCache.clear();
+		g_userCache.m_imgQRCodeCache.clear();
 		// 如果设置了自动更新，每天检查一次
 		if (g_globalConfig.m_autoUpdate) {
 			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();

@@ -129,6 +129,7 @@ HELPER_API CString GetImageName(const CString& imgUrl)
 	return imgName;
 }
 
+// 获取本地图片文件，文件头
 HELPER_API CString GetLocalImgHead(const CString& path)
 {
 	//读取文件头3个字节

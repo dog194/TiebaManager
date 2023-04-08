@@ -85,14 +85,14 @@ public:
 	}
 };
 
-class TBM_CORE_API CImgHeadCache {
+class TBM_CORE_API CImgSingleInfoCache {
 public:
 	CString m_imgName;
-	CString m_head;
+	CString m_info;
 
-	CImgHeadCache(CString pImgName, CString pHead) {
+	CImgSingleInfoCache(CString pImgName, CString pInfo) {
 		m_imgName = pImgName;
-		m_head = pHead;
+		m_info = pInfo;
 	}
 };
 
@@ -113,7 +113,8 @@ public:
 	COption<std::set<CString> > m_defriendedUser;		// 已拉黑的用户，要写入文件
 
 	std::vector<CTempIgnoreRule> m_tempIgnoreRule;		// 一次性临时确认列表忽略规则，不写入文件
-	std::vector<CImgHeadCache> m_imgHeadCache;			// 一次性临时确认列表忽略规则，不写入文件
+	std::vector<CImgSingleInfoCache> m_imgHeadCache;	// 图片文件头缓存，不写入文件
+	std::vector<CImgSingleInfoCache> m_imgQRCodeCache;	// 二维码识别缓存，不写入文件
 
 	CUserCache();
 
