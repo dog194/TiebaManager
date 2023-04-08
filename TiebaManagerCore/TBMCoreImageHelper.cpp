@@ -56,8 +56,8 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 		urls.push_back(object.authorPortraitUrl);
 }
 
-// 获取图片文件，文件头
-TBM_CORE_API CString GetImgHead(CString imgUrl)
+// 获取图片文件，文件头  addCache 为 true 正常加入内存缓存， false 不加入，默认为true
+TBM_CORE_API CString GetImgHead(CString imgUrl, const BOOL addCache)
 {
 	CString imgName = GetImageName(imgUrl);
 	CString headInfo;
@@ -78,14 +78,14 @@ TBM_CORE_API CString GetImgHead(CString imgUrl)
 		headInfo = HTTPGetFileHead(imgUrl);
 	}
 	// 校验一下结果，没问题添加到缓存
-	if (headInfo != _T("") && headInfo.GetLength() < 4) {
+	if (headInfo != _T("") && headInfo.GetLength() < 4 && addCache) {
 		g_pUserCache->m_imgHeadCache.push_back(CImgSingleInfoCache(imgName, headInfo));
 	}
 	return headInfo;
 }
 
-// 图片二维码识别
-TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content) {
+// 图片二维码识别  addCache 为 true 正常加入内存缓存， false 不加入，默认为true
+TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content, const BOOL addCache) {
 	CString imgName = GetImageName(imgUrl);
 	// 从缓存中查找记录
 	for (auto& i : g_pUserCache->m_imgQRCodeCache) {
@@ -102,7 +102,7 @@ TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content) {
 		content = _T("");
 		return false;
 	}
-	if (QRCodeScan(img, content)) {
+	if (QRCodeScan(img, content) && addCache) {
 		// 添加缓存
 		g_pUserCache->m_imgQRCodeCache.push_back(CImgSingleInfoCache(imgName, content));
 		return true;

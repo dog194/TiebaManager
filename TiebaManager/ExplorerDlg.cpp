@@ -32,6 +32,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <update.h>
 
 #include <Mmsystem.h>
+#include <TBMCoreImageHelper.h>
+#include "StringHelper.h"
 
 
 // CExplorerDlg 对话框
@@ -64,10 +66,13 @@ void CExplorerDlg::DoDataExchange(CDataExchange* pDX)
 	CModelessDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_TAB1, m_tab);
 	DDX_Control(pDX, IDC_EDIT1, m_edit);
+	DDX_Control(pDX, IDC_EDIT2, m_editInfo);
 	DDX_Control(pDX, IDC_BUTTON1, m_deleteButton);
 	DDX_Control(pDX, IDC_BUTTON2, m_banButton);
 	DDX_Control(pDX, IDC_BUTTON3, m_explorerButton);
 	DDX_Control(pDX, IDC_BUTTON_BL, m_addBlButton);
+	DDX_Control(pDX, IDC_BTN_IMG_HEAD, m_imgHeadButton);
+	DDX_Control(pDX, IDC_BTN_IMG_QR, m_imgQRButton);
 }
 
 
@@ -78,6 +83,8 @@ BEGIN_MESSAGE_MAP(CExplorerDlg, CModelessDlg)
 	ON_BN_CLICKED(IDC_BUTTON2, &CExplorerDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, &CExplorerDlg::OnBnClickedButton3)
 	ON_BN_CLICKED(IDC_BUTTON_BL, &CExplorerDlg::OnBnClickedButtonAddBl)
+	ON_BN_CLICKED(IDC_BTN_IMG_HEAD, &CExplorerDlg::OnBnClickedImgHead)
+	ON_BN_CLICKED(IDC_BTN_IMG_QR, &CExplorerDlg::OnBnClickedImgQR)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -137,6 +144,10 @@ BOOL CExplorerDlg::OnInitDialog()
 	m_resize.AddControl(&m_deleteButton, RT_KEEP_DIST_TO_RIGHT, &m_edit);
 	m_resize.AddControl(&m_banButton, RT_KEEP_DIST_TO_RIGHT, &m_edit);
 	m_resize.AddControl(&m_explorerButton, RT_KEEP_DIST_TO_RIGHT, &m_edit);
+	m_resize.AddControl(&m_addBlButton, RT_KEEP_DIST_TO_RIGHT, &m_edit);
+	m_resize.AddControl(&m_imgHeadButton, RT_KEEP_DIST_TO_TOP, this, RT_KEEP_DIST_TO_BOTTOM, this);
+	m_resize.AddControl(&m_imgQRButton, RT_KEEP_DIST_TO_TOP, this, RT_KEEP_DIST_TO_BOTTOM, this);
+	m_resize.AddControl(&m_editInfo, RT_KEEP_DIST_TO_TOP, this, RT_KEEP_DIST_TO_BOTTOM, this);
 	for (i = 0; i < _countof(m_pages); i++)
 		m_pagesResize.AddControl(m_pages[i], RT_NULL, NULL, RT_NULL, NULL, RT_KEEP_DIST_TO_RIGHT, &m_tab, RT_KEEP_DIST_TO_BOTTOM, &m_tab);
 
@@ -304,6 +315,79 @@ void CExplorerDlg::OnBnClickedButtonAddBl()
 		SetPreFillInfo(nick_name, GetPortraitFromString(portrait));
 	dlg->SetActiveWindow();
 	dlg->m_settingDlg->SetActiveWindow();
+}
+
+// 图片文件头
+void CExplorerDlg::OnBnClickedImgHead()
+{
+	int tabIndex = m_tab.GetCurSel();
+	POSITION pos = m_pages[tabIndex]->m_list.GetFirstSelectedItemPosition();
+	if (pos == NULL)
+		return;
+	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
+	std::vector<CString> urls;
+	if (tabIndex == 0) // 主题
+	{
+		GetImageUrls(m_exploreThreadPage->m_threads[index], urls);
+	}
+	else if (tabIndex == 1) // 帖子
+	{
+		GetImageUrls(m_explorePostPage->m_posts[index], urls);
+	}
+	else // 楼中楼 没有图片
+	{
+		m_editInfo.SetWindowText(_T("图片文件头：\r\n楼中楼哪有图片？头像就不管了！"));
+		return;
+	}
+	// urls 处理
+	CString ret = _T("图片文件头：");
+	for (const auto& i : urls) {
+		if (i.Find(AUTHOR_PORTRAIT_LEFT) == -1) {
+			ret += _T("\r\n图片：") + GetImgHead(i, false);
+		}
+		else {
+			ret += _T("\r\n头像：") + GetImgHead(i, false);
+		}
+	}
+	m_editInfo.SetWindowText(ret);
+}
+
+// 二维码识别
+void CExplorerDlg::OnBnClickedImgQR()
+{
+	int tabIndex = m_tab.GetCurSel();
+	POSITION pos = m_pages[tabIndex]->m_list.GetFirstSelectedItemPosition();
+	if (pos == NULL)
+		return;
+	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
+	std::vector<CString> urls;
+	if (tabIndex == 0) // 主题
+	{
+		GetImageUrls(m_exploreThreadPage->m_threads[index], urls);
+	}
+	else if (tabIndex == 1) // 帖子
+	{
+		GetImageUrls(m_explorePostPage->m_posts[index], urls);
+	}
+	else // 楼中楼 没有图片
+	{
+		m_editInfo.SetWindowText(_T("图片文件头：\r\n楼中楼哪有图片？头像就不管了！"));
+		return;
+	}
+	// urls 处理
+	CString ret = _T("二维码识别:");
+	CString tmp;
+	for (const auto& i : urls) {
+		QRCodeScan(i, tmp, false);
+		if (i.Find(AUTHOR_PORTRAIT_LEFT) == -1) {
+			ret += _T("\r\n图片：") + tmp;
+		}
+		else {
+			ret += _T("\r\n头像：") + tmp;
+		}
+	}
+	m_editInfo.SetWindowText(ret);
+
 }
 
 // 打开浏览图片对话框

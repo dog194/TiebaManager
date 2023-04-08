@@ -21,11 +21,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TiebaOperate.h>
 #include <TiebaClawer.h>
 #include <NetworkHelper.h>
+#include <StringHelper.h>
 #include <TiebaClientHelper.h>
-
-const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
-const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
-
 
 CTiebaOperate::CTiebaOperate(CString& cookie, const int& banDuration, const CString& banReason) :
 	m_cookie(cookie), 
