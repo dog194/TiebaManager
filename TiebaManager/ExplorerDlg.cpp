@@ -322,8 +322,10 @@ void CExplorerDlg::OnBnClickedImgHead()
 {
 	int tabIndex = m_tab.GetCurSel();
 	POSITION pos = m_pages[tabIndex]->m_list.GetFirstSelectedItemPosition();
-	if (pos == NULL)
+	if (pos == NULL) {
+		m_editInfo.SetWindowText(_T("图片文件头：\r\n未选中"));
 		return;
+	}
 	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
 	std::vector<CString> urls;
 	if (tabIndex == 0) // 主题
@@ -357,8 +359,10 @@ void CExplorerDlg::OnBnClickedImgQR()
 {
 	int tabIndex = m_tab.GetCurSel();
 	POSITION pos = m_pages[tabIndex]->m_list.GetFirstSelectedItemPosition();
-	if (pos == NULL)
+	if (pos == NULL) {
+		m_editInfo.SetWindowText(_T("二维码识别：\r\n未选中"));
 		return;
+	}
 	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
 	std::vector<CString> urls;
 	if (tabIndex == 0) // 主题
@@ -371,7 +375,7 @@ void CExplorerDlg::OnBnClickedImgQR()
 	}
 	else // 楼中楼 没有图片
 	{
-		m_editInfo.SetWindowText(_T("图片文件头：\r\n楼中楼哪有图片？头像就不管了！"));
+		m_editInfo.SetWindowText(_T("二维码识别：\r\n楼中楼哪有图片？头像就不管了！"));
 		return;
 	}
 	// urls 处理
