@@ -418,7 +418,8 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 {
 	ILog& log = GetLog();
 	std::vector<CString> urls;
-	CString content, tmp;
+	CString content, tmp, recResult;
+	recResult = _T("");
 	CString* attachedInfo = (CString*)&obj.attachedInfo;
 	GetImageUrls(obj, urls, param.m_ignorePortrait);
 	for (const auto& i : urls)
@@ -438,7 +439,7 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 				log.Log(tmp);
 				continue;
 			}
-			*attachedInfo += _T("\r\n图片文件头：") + content;
+			recResult += _T("\r\n图片文件头：") + content;
 			break;
 		case CImgContentParam::QR_CODE:
 			if (!GetImgContent(param, i, content)) {
@@ -447,7 +448,7 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 				log.Log(tmp);
 				continue;
 			}
-			*attachedInfo += _T("\r\n二维码识别：") + content;
+			recResult += _T("\r\n二维码识别：") + content;
 			// Debug 信息
 			//tmp.Format(_T("Img:%s, %d"), (LPCTSTR)HTMLEscape(i), param.m_contentType);
 			//log.Log(tmp);
@@ -471,8 +472,11 @@ BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& 
 		// 取FALSE
 		if (param.m_not)
 			res = !res;
-		if (res)
+		if (res) {
+			// 只有在true的時候附加，避免信息被反复添加。
+			*attachedInfo += recResult;
 			return TRUE;
+		}
 	}
 	return FALSE;
 }
