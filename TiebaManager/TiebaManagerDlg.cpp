@@ -207,6 +207,28 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		m_settingDlg->ShowAbout();
 	}
 
+	// 模型文件自检处理，兼容更新问题
+	if (!PathFileExists(_T("Model"))) {
+		// 没有文件夹，创建文件夹
+		CreateDir(_T("Model"));
+	}
+	const CString MODEL_LIST[4] = {
+	_T("detect.caffemodel"),
+	_T("detect.prototxt"),
+	_T("sr.caffemodel"),
+	_T("sr.prototxt"),
+	};
+	for (const auto& fileInfo : MODEL_LIST)
+	{
+		if (!PathFileExists(_T("Model\\") + fileInfo)) {
+			// 模型不存在
+			if (PathFileExists(_T("Update\\Model\\") + fileInfo)) {
+				// 移动文件
+				MoveFile(_T("Update\\Model\\") + fileInfo, _T("Model\\") + fileInfo);
+			}
+		}
+	}
+
 	// 如果设置了自动更新，启动检查一次
 	if (g_globalConfig.m_autoUpdate) {
 		std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();

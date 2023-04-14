@@ -123,6 +123,8 @@ static BOOL ReplaceFiles(const std::vector<CUpdateInfo::FileInfo>& files, const 
 ;	// 原理：可移动正在运行的程序、DLL文件（但是不能删除），貌似可以用ReplaceFile这个API，但是没试过
 	for (const auto& fileInfo : files)
 	{
+		CreateDir(updateDir + fileInfo.dir);
+		CreateDir(relativeDir + fileInfo.dir);
 		if ((PathFileExists(updateDir + fileInfo.dir + fileInfo.name + _T(".bak"))
 			&& !DeleteFile(updateDir + fileInfo.dir + fileInfo.name + _T(".bak")))
 			|| (PathFileExists(relativeDir + fileInfo.dir + fileInfo.name)

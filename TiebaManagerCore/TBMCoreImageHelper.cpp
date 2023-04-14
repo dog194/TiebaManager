@@ -169,7 +169,7 @@ CImageCache::CImageCache()
 		m_modelInit = true;
 	}
 	catch (std::exception e) {
-		AfxMessageBox(_T("二维码模型初始化失败，相关功能无法使用，请检查Model文件是否存在"));
+		AfxMessageBox(_T("二维码模型初始化失败，相关规则无法使用，应该是模型文件不在，到群问吧"));
 		m_modelInit = false;
 	}
 }
