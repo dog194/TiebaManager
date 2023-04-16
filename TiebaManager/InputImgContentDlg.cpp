@@ -78,7 +78,7 @@ BOOL CInputImgContentDlg::OnInitDialog()
 	m_igPortiCheck.SetCheck(m_param->m_ignorePortrait);
 	m_contentEdit.SetWindowText(m_param->m_keyword.text);
 
-	m_testEdit.SetWindowText(_T("图片文件头可用于判断图片类型，如GIF： GIF, PNG：‰PN， JPG：ÿØÿ 二维码识别：无法识别返回空，至少一个结果[1]httpxxxx, 多个结果[1]xxx[2]xxx...匹配任意识别结果可以使用\"[1]\""));
+	m_testEdit.SetWindowText(_T("【图片文件头】判断图片的文件头类型。例如GIF图片是\"GIF\"，这里举例几个常见的文件类型（GIF=GIF、PNG=PN、JPG=ÿØÿ），删除一切GIF图片直接填写GIF。\r\n【二维码识别】当图片存在二维码时，至少返回一个结果，例：[1]httpxxxx。当出现多个结果时返回：[1]xxx[2]xxx...，删除一切二维码直接填写[1]。"));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
@@ -130,7 +130,7 @@ void CInputImgContentDlg::OnBnClickedImgTest()
 	if (path == _T("") || path.GetLength() < 5) {
 		CString tmp;
 		tmp.Format(_T("%d"), m_rangeCombo.GetCurSel());
-		AfxMessageBox(path.Left(4).MakeLower());
+		AfxMessageBox(_T("请输入正确网址或本地路径"));
 		return;
 	}
 	// 图片url

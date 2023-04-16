@@ -192,11 +192,9 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 默认启用黑名单
 	g_pTbmCoreConfig->m_blackListEnable.m_value = TRUE;
-
-	if (g_pTbmCoreConfig->m_nickNameInterface.m_value == TRUE) {
-		// 主动切换 m_nickNameInterface
-		g_pTbmCoreConfig->m_clawerInterface.m_value = FALSE;
-	}
+	// 默认使用新客户端接口 主动切换 m_nickNameInterface
+	g_pTbmCoreConfig->m_nickNameInterface.m_value = TRUE;
+	g_pTbmCoreConfig->m_clawerInterface.m_value = FALSE;
 
 	// 初次运行先看关于
 	if (g_globalConfig.m_firstRun)

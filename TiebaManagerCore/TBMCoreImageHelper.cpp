@@ -25,6 +25,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <MiscHelper.h>
 #include <TBMCoreGlobal.h>
 
+#include <opencv2/imgproc.hpp>
+#include <opencv2/imgcodecs.hpp>
 
 TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti)
 {
@@ -39,9 +41,9 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 		// 从主题预览取图片地址
 		TapiThreadInfo& thread = (TapiThreadInfo&)object;
 
-		for (std::regex_iterator<LPCTSTR> it((LPCTSTR)thread.preview, (LPCTSTR)thread.preview + thread.preview.GetLength(), THREAD_IMG_REG),
+		for (std::regex_iterator<LPCTSTR> it((LPCTSTR)thread.preview, (LPCTSTR)thread.preview + thread.preview.GetLength(), POST_IMG_REG),
 			end; it != end; ++it)
-			urls.push_back((*it)[1].str().c_str());
+			urls.push_back((*it)[2].str().c_str());
 	}
 	else
 	{
