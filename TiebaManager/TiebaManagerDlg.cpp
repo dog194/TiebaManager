@@ -192,11 +192,9 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 默认启用黑名单
 	g_pTbmCoreConfig->m_blackListEnable.m_value = TRUE;
-
-	if (g_pTbmCoreConfig->m_nickNameInterface.m_value == TRUE) {
-		// 主动切换 m_nickNameInterface
-		g_pTbmCoreConfig->m_clawerInterface.m_value = FALSE;
-	}
+	// 默认使用新客户端接口 主动切换 m_nickNameInterface
+	g_pTbmCoreConfig->m_nickNameInterface.m_value = TRUE;
+	g_pTbmCoreConfig->m_clawerInterface.m_value = FALSE;
 
 	// 初次运行先看关于
 	if (g_globalConfig.m_firstRun)
@@ -205,6 +203,28 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		g_globalConfig.Save(GLOBAL_CONFIG_PATH);
 		OnBnClickedButton5();
 		m_settingDlg->ShowAbout();
+	}
+
+	// 模型文件自检处理，兼容更新问题
+	if (!PathFileExists(_T("Model"))) {
+		// 没有文件夹，创建文件夹
+		CreateDir(_T("Model"));
+	}
+	const CString MODEL_LIST[4] = {
+	_T("detect.caffemodel"),
+	_T("detect.prototxt"),
+	_T("sr.caffemodel"),
+	_T("sr.prototxt"),
+	};
+	for (const auto& fileInfo : MODEL_LIST)
+	{
+		if (!PathFileExists(_T("Model\\") + fileInfo)) {
+			// 模型不存在
+			if (PathFileExists(_T("Update\\Model\\") + fileInfo)) {
+				// 移动文件
+				MoveFile(_T("Update\\Model\\") + fileInfo, _T("Model\\") + fileInfo);
+			}
+		}
 	}
 
 	// 如果设置了自动更新，启动检查一次
@@ -222,8 +242,12 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 每24小时清除已封名单
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
+	g_userCache.m_imgHeadCache.clear(); // 每24小时清空一次图片头缓存信息
+	g_userCache.m_imgQRCodeCache.clear(); // 每24小时清空一次图片头缓存信息
 	SetTimer(0, 24 * 60 * 60 * 1000, [](HWND, UINT, UINT_PTR, DWORD) {
 		g_userCache.m_bannedUser->clear();
+		g_userCache.m_imgHeadCache.clear();
+		g_userCache.m_imgQRCodeCache.clear();
 		// 如果设置了自动更新，每天检查一次
 		if (g_globalConfig.m_autoUpdate) {
 			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
@@ -535,7 +559,8 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 	case CTiebaOperate::SET_TIEBA_NOT_FOUND:
 		if (hasCache) {
 			if (!g_pTbmCoreConfig->m_autoScan) {
-				AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
+				m_log.Log(_T("<font color=red>贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!</font>"));
+				//AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,\n惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
 			}
 			useCache = TRUE;
 			break;

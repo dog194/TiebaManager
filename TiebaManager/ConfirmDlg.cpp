@@ -177,7 +177,10 @@ BOOL CConfirmDlg::OnInitDialog()
 		else {
 			content += _T("\r\n\r\n主题帖ID：") + m_operation->object->tid;
 		}
-		
+		// 看是否有附带信息
+		if (m_operation->object->attachedInfo != _T("")) {
+			content += _T("\r\n") + m_operation->object->attachedInfo;
+		}
 
 		m_contentEdit.SetWindowText(content);
 		m_contentEdit.SetSel(m_operation->pos, m_operation->pos + m_operation->length);

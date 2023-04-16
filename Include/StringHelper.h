@@ -34,6 +34,9 @@ public:
 	void Set(const CString& _text, BOOL _isRegex = FALSE, BOOL _ignoreCase = FALSE);
 };
 
+const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
+const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
+
 const int m_tips_num = 8;
 const CString m_tips[m_tips_num] = {
 	_T("更新群，交流群，736700862(没被封的话)"),
@@ -126,6 +129,8 @@ HELPER_API CString GetNameUsingPortrait(const CString& pPortrait);
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
 // time_t to string x年x月x日
 HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src = NULL);
+// 获取时间戳毫秒
+HELPER_API LONGLONG GetTimestampMS();
 // Int to CString
 HELPER_API CString Int2CString(const int num);
 // Int64 to CString

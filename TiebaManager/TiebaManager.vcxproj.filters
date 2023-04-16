@@ -225,6 +225,12 @@
     <ClInclude Include="ToolsPage.h">
       <Filter>头文件\GUI\Setting</Filter>
     </ClInclude>
+    <ClInclude Include="AcedPage.h">
+      <Filter>头文件\GUI\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="InputImgContentDlg.h">
+      <Filter>头文件\GUI\Setting\Condition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TiebaManager.cpp">
@@ -352,6 +358,12 @@
     </ClCompile>
     <ClCompile Include="ToolsPage.cpp">
       <Filter>源文件\GUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="AcedPage.cpp">
+      <Filter>源文件\GUI\Setting</Filter>
+    </ClCompile>
+    <ClCompile Include="InputImgContentDlg.cpp">
+      <Filter>源文件\GUI\Setting\Condition</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

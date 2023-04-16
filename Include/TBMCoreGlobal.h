@@ -62,6 +62,8 @@ public:
 	COption<BOOL>		m_blackListBan;			// 黑名单封禁
 	COption<BOOL>		m_blackListRecheck;		// 确认窗口重新检测是否在黑名单
 
+	COption<BOOL>		m_acedEnhancedLzl;		// 进阶-增强型楼中楼
+
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则
 	COption<std::set<CString> >              m_trustedThreads;    // 信任主题
@@ -83,6 +85,17 @@ public:
 	}
 };
 
+class TBM_CORE_API CImgSingleInfoCache {
+public:
+	CString m_imgName;
+	CString m_info;
+
+	CImgSingleInfoCache(CString pImgName, CString pInfo) {
+		m_imgName = pImgName;
+		m_info = pInfo;
+	}
+};
+
 class TBM_CORE_API CUserCache : public CConfigBase
 {
 public:
@@ -100,6 +113,8 @@ public:
 	COption<std::set<CString> > m_defriendedUser;		// 已拉黑的用户，要写入文件
 
 	std::vector<CTempIgnoreRule> m_tempIgnoreRule;		// 一次性临时确认列表忽略规则，不写入文件
+	std::vector<CImgSingleInfoCache> m_imgHeadCache;	// 图片文件头缓存，不写入文件
+	std::vector<CImgSingleInfoCache> m_imgQRCodeCache;	// 二维码识别缓存，不写入文件
 
 	CUserCache();
 

@@ -57,6 +57,8 @@ public:
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnBnClickedButtonAddBl();
+	afx_msg void OnBnClickedImgHead();
+	afx_msg void OnBnClickedImgQR();
 
 	void ViewImages(std::unique_ptr<std::vector<CString> > img);
 
@@ -67,10 +69,14 @@ public:
 	std::unique_ptr<CExplorePostPage> m_explorePostPage;
 	std::unique_ptr<CExploreLzlPage> m_exploreLzlPage;
 	CEdit m_edit;
+	CEdit m_editInfo;
 	CButton m_deleteButton;
 	CButton m_banButton;
 	CButton m_explorerButton;
 	CButton m_addBlButton;
+
+	CButton m_imgHeadButton;
+	CButton m_imgQRButton;
 
 	CImageViewDlg* m_imageViewDlg;
 

@@ -27,8 +27,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 // 当前版本，每次更新后修改，也可以不是日期
-UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("221218(2.6)");
-UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 221218; //使用整数形式，更方便版本判断
+UPDATE_API const CString UPDATE_CURRENT_VERSION = _T("230416(2.7)");
+UPDATE_API const int UPDATE_CURRENT_VERSION_NUM = 230416; //使用整数形式，更方便版本判断
 
 static const CString MANUALLY_UPDATE_URL = _T("http://tieba.bakasnow.com/TiebaManager/?download&client=%d");
 UPDATE_API const CString UPDATE_INFO_URL = _T("http://tieba.bakasnow.com/TiebaManager/?update&client=%d");
@@ -123,6 +123,8 @@ static BOOL ReplaceFiles(const std::vector<CUpdateInfo::FileInfo>& files, const 
 ;	// 原理：可移动正在运行的程序、DLL文件（但是不能删除），貌似可以用ReplaceFile这个API，但是没试过
 	for (const auto& fileInfo : files)
 	{
+		CreateDir(updateDir + fileInfo.dir);
+		CreateDir(relativeDir + fileInfo.dir);
 		if ((PathFileExists(updateDir + fileInfo.dir + fileInfo.name + _T(".bak"))
 			&& !DeleteFile(updateDir + fileInfo.dir + fileInfo.name + _T(".bak")))
 			|| (PathFileExists(relativeDir + fileInfo.dir + fileInfo.name)

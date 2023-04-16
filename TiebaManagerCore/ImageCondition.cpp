@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <ImageHelper.h>
 #include <opencv2\imgproc.hpp>
 #include <TBMCoreImageHelper.h>
+#include <TBMAPI.h>
 
 
 // 图片条件
@@ -322,3 +323,172 @@ double CImageCondition::CompareImage(const CImageParam& param, const cv::Mat& im
 	default: return -3.0;
 	}
 }
+
+
+// 图片内容条件
+
+CString CImgContentCondition::GetDescription(const CConditionParam& _param)
+{
+	const auto& param = (CImgContentParam&)_param;
+
+	static LPCTSTR rangeDesc[] = {
+	_T("图片文件头 "),
+	_T("二维码识别结果 "),
+	};
+
+	CString res = rangeDesc[param.m_contentType];
+	if (param.m_not)
+		res += _T("不");
+	res += param.m_include ? _T("含有") : _T("匹配");
+	res += param.m_keyword.isRegex ? _T("正则表达式\"") : _T("\"");
+	res += param.m_keyword.text;
+	res += _T("\"");
+	if (param.m_keyword.ignoreCase)
+		res += _T("，忽略大小写");
+	return res;
+}
+
+CConditionParam* CImgContentCondition::ReadParam(const tinyxml2::XMLElement* optionNode)
+{
+	auto* param = new CImgContentParam();
+
+	COption<int> type("Type", CImgContentParam::IMG_TYPE, InRange<int, CImgContentParam::IMG_TYPE, CImgContentParam::QR_CODE>);
+	COption<BOOL> not("Not", FALSE);
+	COption<BOOL> include("Include", TRUE);
+	COption<BOOL> igPorti("IgPorti", TRUE);
+	COption<RegexText> keyword("Keyword");
+	type.Read(*optionNode);
+	not.Read(*optionNode);
+	include.Read(*optionNode);
+	igPorti.Read(*optionNode);
+	keyword.Read(*optionNode);
+
+	param->m_contentType = CImgContentParam::ContentType(*type);
+	param->m_not = not;
+	param->m_include = include;
+	param->m_ignorePortrait = igPorti;
+	param->m_keyword = keyword;
+
+	return param;
+}
+
+void CImgContentCondition::WriteParam(const CConditionParam& _param, tinyxml2::XMLElement* optionNode)
+{
+	const auto& param = (CImgContentParam&)_param;
+
+	COption<int> range("Type");
+	*range = param.m_contentType;
+	range.Write(*optionNode);
+	COption<BOOL> not("Not");
+	*not = param.m_not;
+	not.Write(*optionNode);
+	COption<BOOL> include("Include");
+	*include = param.m_include;
+	include.Write(*optionNode);
+	COption<BOOL> igPorti("IgPorti");
+	*igPorti = param.m_ignorePortrait;
+	igPorti.Write(*optionNode);
+	COption<RegexText> keyword("Keyword");
+	*keyword = param.m_keyword;
+	keyword.Write(*optionNode);
+}
+
+CConditionParam* CImgContentCondition::CloneParam(const CConditionParam& _param)
+{
+	const auto& param = (CImgContentParam&)_param;
+	return new CImgContentParam(param);
+}
+
+BOOL CImgContentCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
+{
+	return CImgContentCondition::Match((CImgContentParam&)_param, thread);
+}
+
+BOOL CImgContentCondition::MatchPost(const CConditionParam& _param, const PostInfo& post, int& pos, int& length)
+{
+	return CImgContentCondition::Match((CImgContentParam&)_param, post);
+}
+
+BOOL CImgContentCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& lzl, int& pos, int& length)
+{
+	return CImgContentCondition::Match((CImgContentParam&)_param, lzl);
+}
+
+BOOL CImgContentCondition::Match(const CImgContentParam& param, const TBObject& obj)
+{
+	ILog& log = GetLog();
+	std::vector<CString> urls;
+	CString content, tmp, recResult;
+	recResult = _T("");
+	CString* attachedInfo = (CString*)&obj.attachedInfo;
+	GetImageUrls(obj, urls, param.m_ignorePortrait);
+	for (const auto& i : urls)
+	{
+		BOOL res;
+		// 图片，或图片头获取
+		switch (param.m_contentType)
+		{
+		case CImgContentParam::IMG_TYPE:
+			content = GetImgHead(i);
+			// Debug 信息
+			// log.Log(i);
+			// log.Log(content);
+			if (content == _T("") || content.GetLength() > 3) {
+				// ERROR 提示
+				tmp.Format(_T("<font color=red> 图片文件头获取失败，稍后重试 </font>%s 文件头：\"%s\""), (LPCTSTR)HTMLEscape(i), (LPCTSTR)HTMLEscape(content));
+				log.Log(tmp);
+				continue;
+			}
+			recResult += _T("\r\n图片文件头：") + content;
+			break;
+		case CImgContentParam::QR_CODE:
+			if (!GetImgContent(param, i, content)) {
+				// 获取失败
+				tmp.Format(_T("<font color=red> 图片处理失败，稍后重试 </font>%s, %d"), (LPCTSTR)HTMLEscape(i), param.m_contentType);
+				log.Log(tmp);
+				continue;
+			}
+			recResult += _T("\r\n二维码识别：") + content;
+			// Debug 信息
+			//tmp.Format(_T("Img:%s, %d"), (LPCTSTR)HTMLEscape(i), param.m_contentType);
+			//log.Log(tmp);
+			break;
+		default:
+			res = FALSE;
+			break;
+		}
+
+		// 判断匹配
+		int _pos, _length;
+		if (param.m_include)
+		{
+			res = StringIncludes(content, param.m_keyword, &_pos, &_length);
+		}
+		else
+		{
+			res = StringMatchs(content, param.m_keyword);
+			_length = content.GetLength();
+		}
+		// 取FALSE
+		if (param.m_not)
+			res = !res;
+		if (res) {
+			// 只有在true的時候附加，避免信息被反复添加。
+			*attachedInfo += recResult;
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+BOOL CImgContentCondition::GetImgContent(const CImgContentParam& param, CString imgUrl, CString& content)
+{
+	switch (param.m_contentType)
+	{
+	case CImgContentParam::QR_CODE:
+		return QRCodeScan(imgUrl, content);
+	default: 
+		return false;
+	}
+}
+

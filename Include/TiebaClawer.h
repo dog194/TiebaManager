@@ -50,6 +50,7 @@ public:
 	CString authorID;	          // 作者ID
 	CString authorPortraitUrl;	  // 作者头像URL。对于Web接口主题为空
 	time_t timestamp;             // 创建时间，Unix时间戳(UTC)。对于Web接口主题为0
+	CString attachedInfo = _T("");// 通用额外变量，用于存放一些额外信息传递给确认窗口
 
 	
 	TBObject(TBObjectType type) : m_type(type) { }

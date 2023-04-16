@@ -218,6 +218,48 @@ private:
 	BOOL Match(const CImageParam& param, const TBObject& obj);
 };
 
+// 图片内容条件
+
+class TBM_CORE_API CImgContentParam final : public CConditionParam
+{
+public:
+	enum ContentType
+	{
+		IMG_TYPE,			// 图片类型
+		QR_CODE,			// 二维码
+	};
+
+	CImgContentParam() : CConditionParam(_T("图片内容条件")) { }
+
+	ContentType m_contentType = IMG_TYPE;    // 内容类型
+	BOOL m_not = FALSE;                      // 结果取FALSE
+	BOOL m_include = TRUE;                   // TRUE为包含，FALSE为匹配
+	BOOL m_ignorePortrait = TRUE;			 // 忽略头像，TRUE 为忽略，FALSE为包括
+	RegexText m_keyword;                     // 关键词
+};
+
+class TBM_CORE_API CImgContentCondition final : public CCondition, public Singleton<CImgContentCondition>
+{
+	DECL_SINGLETON(CImgContentCondition);
+private:
+	CImgContentCondition() : CCondition(_T("图片内容条件")) { };
+
+public:
+	virtual CString GetDescription(const CConditionParam& param) override;
+
+	virtual CConditionParam* ReadParam(const tinyxml2::XMLElement* optionNode) override;
+	virtual void WriteParam(const CConditionParam& param, tinyxml2::XMLElement* optionNode) override;
+	virtual CConditionParam* CloneParam(const CConditionParam& param) override;
+
+	virtual BOOL MatchThread(const CConditionParam& param, const TapiThreadInfo& thread, int& pos, int& length) override;
+	virtual BOOL MatchPost(const CConditionParam& param, const PostInfo& post, int& pos, int& length) override;
+	virtual BOOL MatchLzl(const CConditionParam& param, const LzlInfo& lzl, int& pos, int& length) override;
+
+	BOOL GetImgContent(const CImgContentParam& param, CString imgUrl, CString& content);
+
+private:
+	BOOL Match(const CImgContentParam& param, const TBObject& obj);
+};
 
 // 楼层条件
 

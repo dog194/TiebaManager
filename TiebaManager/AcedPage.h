@@ -1,5 +1,5 @@
 ﻿/*
-Copyright (C) 2011-2017  xfgryujk
+Copyright (C) 2023  Dog194
 https://tieba.baidu.com/f?kw=%D2%BB%B8%F6%BC%AB%C6%E4%D2%FE%C3%D8%D6%BB%D3%D0xfgryujk%D6%AA%B5%C0%B5%C4%B5%D8%B7%BD
 
 This program is free software; you can redistribute it and/or modify
@@ -18,16 +18,32 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #pragma once
-#include "HelperCommon.h"
-#pragma warning(disable:4819) // OpenCV头文件包含Unicode字符
-#include <opencv2\core\mat.hpp>
-using std::min; // 用于GDI+的头文件
-using std::max;
-#include <atlimage.h>
+#include "afxwin.h"
+#include <NormalDlg.h>
+#include "resource.h"
 
 
-HELPER_API BOOL ReadImage(const CString& path, cv::Mat& img);
-HELPER_API BOOL ReadImage(const BYTE* buffer, ULONG size, CImage& img);
-HELPER_API BOOL ReadImage(const BYTE* buffer, ULONG size, cv::Mat& img);
-HELPER_API CString GetImageName(const CString& imgUrl);
-HELPER_API CString GetLocalImgHead(const CString& path);
+// CAcedPage 对话框
+
+class CAcedPage : public CNormalDlg
+{
+	DECLARE_DYNAMIC(CAcedPage)
+
+public:
+	CAcedPage(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~CAcedPage();
+
+	// 对话框数据
+	enum { IDD = IDD_ACED_PAGE };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+
+	DECLARE_MESSAGE_MAP()
+public:
+	virtual BOOL OnInitDialog();
+	afx_msg void InitFilesList();
+
+public:
+	CButton m_acedEnhancedLzlCheck;
+};

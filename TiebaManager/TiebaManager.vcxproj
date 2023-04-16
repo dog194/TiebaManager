@@ -126,7 +126,9 @@
     <ClInclude Include="..\Include\TBMEvents.h" />
     <ClInclude Include="..\Include\TiebaManagerCommon.h" />
     <ClInclude Include="AboutPage.h" />
+    <ClInclude Include="AcedPage.h" />
     <ClInclude Include="BlackListRulesPage.h" />
+    <ClInclude Include="InputImgContentDlg.h" />
     <ClInclude Include="ConditionGUI.h" />
     <ClInclude Include="ConfigHelper.h" />
     <ClInclude Include="IllegalRulesPage.h" />
@@ -170,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AboutPage.cpp" />
+    <ClCompile Include="AcedPage.cpp" />
     <ClCompile Include="BlackListRulesPage.cpp" />
     <ClCompile Include="ConditionGUI.cpp" />
     <ClCompile Include="ConfigHelper.cpp" />
@@ -177,6 +180,7 @@
     <ClCompile Include="InputFloorDlg.cpp" />
     <ClCompile Include="InputIllegalRuleDlg.cpp" />
     <ClCompile Include="InputImageDlg.cpp" />
+    <ClCompile Include="InputImgContentDlg.cpp" />
     <ClCompile Include="InputKeywordDlg.cpp" />
     <ClCompile Include="InputLevelDlg.cpp" />
     <ClCompile Include="InputRuleDlg.cpp" />

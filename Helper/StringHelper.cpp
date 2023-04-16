@@ -26,9 +26,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 using namespace tinyxml2;
 using namespace rapidjson;
 
-const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
-const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
-
 void RegexText::Set(const CString& _text, BOOL _isRegex, BOOL _ignoreCase)
 {
 	isRegex = _isRegex;
@@ -524,6 +521,16 @@ HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src)
 	}
 	tmp.Format(_T("%02d-%02d-%02d"), time_.tm_year + 1900, time_.tm_mon + 1, time_.tm_mday);
 	return tmp;
+}
+
+// 获取时间戳毫秒
+HELPER_API LONGLONG GetTimestampMS()
+{
+	// TODO 修复，目前只是秒数 * 1000
+	time_t t;
+	time(&t);
+	time_t tMS = t * 1000;
+	return tMS;
 }
 
 // Int to CString

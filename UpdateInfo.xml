@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>221218(2.6)</Version>
-    <VersionNum>221218</VersionNum>
+    <Version>230416(2.7)</Version>
+    <VersionNum>230416</VersionNum>
     <UpdateLog>
+    更新日志230416(2.7)：
+    【重要更新】
+    1.新增图片内容规则-图片文件头，可判断图片是否为GIF
+    2.新增图片内容规则-二维码识别
+    图片内容规则结果内存缓存24小时。
+    默认忽略扫描头像-可在规则中取消忽略
+    扫描图片会增加扫描时间，尽管加了缓存，每次刚开启的时候和清空缓存的时候也会明显增加扫描时间。
+    【附带】
+    1.帖子浏览器-新增快捷获取图片文件头，二维码识别模块
+    【调整】
+    1.使用本地贴吧信息缓存，不再进行窗口弹出，改为log提示
+    2.强制使用新版客户端接口，网页端接口禁用
+    </UpdateLog>
+    <HistoryLog>
+    ========历史更新日志========
     更新日志221218(2.6)：
     【重要更新】
     1.史诗级更新！新增主题多页扫描，例：填写“1-9”代表扫描第1页到第9页的主题帖
@@ -17,9 +32,6 @@
     1.日志界面，现在可以点击规则名快捷打开违规规则
     2.日志界面，新增过点提示，新的一天日期
     3.清除全部规则时会向您确认“是否删除全部规则”
-    </UpdateLog>
-    <HistoryLog>
-    ========历史更新日志========
     更新日志220911(2.55)：
     1.修复不扫描帖子最后一页的bug
     更新日志220826(2.54)：
@@ -84,5 +96,9 @@
         <item><value><Dir/><Name>Update.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>libprotobuf.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>libprotobuf-lite.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir>Model\</Dir><Name>detect.caffemodel</Name><URL/><MD5/></value></item>
+        <item><value><Dir>Model\</Dir><Name>detect.prototxt</Name><URL/><MD5/></value></item>
+        <item><value><Dir>Model\</Dir><Name>sr.caffemodel</Name><URL/><MD5/></value></item>
+        <item><value><Dir>Model\</Dir><Name>sr.prototxt</Name><URL/><MD5/></value></item>
     </Files>
 </UpdateInfo>
