@@ -201,6 +201,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	{
 		*g_globalConfig.m_firstRun = FALSE;
 		g_globalConfig.Save(GLOBAL_CONFIG_PATH);
+		AfxMessageBox(_T("本软件免费！开源！如果你花钱买或下载的，恭喜你被骗了！"), MB_ICONINFORMATION);
 		OnBnClickedButton5();
 		m_settingDlg->ShowAbout();
 	}
