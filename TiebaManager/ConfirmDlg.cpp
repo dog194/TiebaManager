@@ -163,7 +163,8 @@ BOOL CConfirmDlg::OnInitDialog()
 		case TBObject::LZL:
 		{
 			const LzlInfo& lzl = (LzlInfo&)*m_operation->object;
-			content += _T("\r\n回复楼层：") + lzl.floor;
+			content += _T("\r\n等级：") + lzl.authorLevel
+					 + _T("\r\n回复楼层：") + lzl.floor;
 			break;
 		}
 		}

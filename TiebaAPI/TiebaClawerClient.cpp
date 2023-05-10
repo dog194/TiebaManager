@@ -558,6 +558,7 @@ const static void decodeLzl(SubPostList& pbSubPost, LzlInfo& lzl, const CString 
 	lzl.author = PostuserList[userIndex[uid]].name;
 	lzl.authorShowName = PostuserList[userIndex[uid]].ShowName;
 	lzl.authorPortraitUrl = PostuserList[userIndex[uid]].PortraitUrl;
+	lzl.authorLevel = Int2CString(PostuserList[userIndex[uid]].level);
 	lzl.timestamp = time;
 	lzl.cid = pid;
 	lzl.floor = floor;

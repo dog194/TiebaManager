@@ -139,6 +139,7 @@ class TIEBA_API_API LzlInfo : public TBObject
 public:
 	CString cid;			// 楼中楼ID
 	CString floor;			// 楼层
+	CString authorLevel;	// 作者等级
 	CString content;		// 内容
 
 

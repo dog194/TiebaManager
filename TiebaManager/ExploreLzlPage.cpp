@@ -89,6 +89,7 @@ void CExploreLzlPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 		CExplorerDlg* explorerDlg = (CExplorerDlg*)GetParent()->GetParent();
 		explorerDlg->m_edit.SetWindowText(m_lzls[pNMLV->iItem].content 
 			+ _T("\r\n\r\n作者显示名：") + m_lzls[pNMLV->iItem].authorShowName
+			+ _T("\r\n等级：") + m_lzls[pNMLV->iItem].authorLevel
 			+ _T("\r\n楼层：") + m_lzls[pNMLV->iItem].floor
 			+ _T("\r\n\r\n作者名：") + m_lzls[pNMLV->iItem].author
 			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_lzls[pNMLV->iItem].authorPortraitUrl)

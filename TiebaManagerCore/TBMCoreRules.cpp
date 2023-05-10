@@ -277,12 +277,14 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = lzl.GetContent();     break;
 	case CKeywordParam::UID:
 		startPos = lzl.GetContent().GetLength() + 7 + 
+			lzl.authorLevel.GetLength() + 5 +
 			lzl.floor.GetLength() + 10 + 
 			lzl.authorShowName.GetLength() + 8;
 		content = lzl.author;
 		break;
 	case CKeywordParam::PORTRAIT:
 		startPos = lzl.GetContent().GetLength() + 7 + 
+			lzl.authorLevel.GetLength() + 5 +
 			lzl.floor.GetLength() + 10 + 
 			lzl.authorShowName.GetLength() + 8 + 
 			lzl.author.GetLength() + 17;
@@ -290,6 +292,7 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 		break;
 	case CKeywordParam::TID:
 		startPos = lzl.GetContent().GetLength() + 7 +
+			lzl.authorLevel.GetLength() + 5 +
 			lzl.floor.GetLength() + 10 +
 			lzl.authorShowName.GetLength() + 8 +
 			lzl.author.GetLength() + 17 +
@@ -376,7 +379,18 @@ BOOL CLevelCondition::MatchPost(const CConditionParam& _param, const PostInfo& p
 
 BOOL CLevelCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& lzl, int& pos, int& length)
 {
-	return FALSE;
+	const auto& param = (CLevelParam&)_param;
+
+	if (lzl.authorLevel == _T(""))
+		return FALSE;
+
+	int level = _ttoi(lzl.authorLevel);
+	switch (param.m_operator)
+	{
+	default: return FALSE;
+	case CLevelParam::LESS:       return level <= param.m_level;
+	case CLevelParam::GREATER:    return level >= param.m_level;
+	}
 }
 
 
