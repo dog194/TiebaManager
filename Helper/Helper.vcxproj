@@ -50,6 +50,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
+    <IncludePath>$(SolutionDir)Include;$(SolutionDir)3rdParty\opencv\include;$(SolutionDir)3rdParty\rapidjson;$(SolutionDir)3rdParty\libcurl\include;$(SolutionDir)3rdParty\tinyxml2\include;$(SolutionDir)3rdParty\protobuf;$(SolutionDir)3rdParty\sqlite\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)$(Configuration);$(SolutionDir)3rdParty\opencv\lib;$(SolutionDir)3rdParty\libcurl\lib;$(SolutionDir)3rdParty\protobuf\lib;$(SolutionDir)3rdParty\sqlite\lib;$(SolutionDir)3rdParty\tinyxml2\lib\$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
