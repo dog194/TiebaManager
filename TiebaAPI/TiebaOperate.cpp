@@ -327,6 +327,8 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 		return _T("需要验证码(操作太快？)");
 	if (errorCode == _T("220034"))
 		return _T("您的操作太频繁了");
+	if (errorCode == _T("230308"))
+		return _T("没有权限（扫到跨吧广告或登录信息失效）");
 	if (errorCode == _T("224009"))
 		return _T("帖子已被锁定");
 	if (errorCode == _T("230871"))

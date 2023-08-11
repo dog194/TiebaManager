@@ -36,6 +36,7 @@ public:
 
 const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
 const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
+const TCHAR AUTHOR_PORTRAIT_URL_PREFIX[] = _T("http://tb.himg.baidu.com/sys/portrait/item/");
 
 const int m_tips_num = 8;
 const CString m_tips[m_tips_num] = {
@@ -118,6 +119,8 @@ HELPER_API CString DncodeURI_GBK(const CString& src);
 HELPER_API CString HTMLEscape(const CString& src);
 // HTML反转义
 HELPER_API CString HTMLUnescape(const CString& src);
+// totalComment API 清理多余 HTML
+HELPER_API CString HTMLDelete4totalComment(const CString& src);
 // JS反转义，调用者应自行转义src里的双引号
 HELPER_API CString JSUnescape(const CString& src);
 

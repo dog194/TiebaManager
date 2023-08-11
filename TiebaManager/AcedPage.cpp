@@ -46,18 +46,36 @@ void CAcedPage::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(CAcedPage, CNormalDlg)
+	ON_BN_CLICKED(IDC_ENHANCED_LZL, &CAcedPage::OnBnClickedCheckLzl)
 
 END_MESSAGE_MAP()
 #pragma endregion
 
 // CAcedPage 消息处理程序
-void CAcedPage::InitFilesList()
+
+// 进阶楼中楼
+void CAcedPage::OnBnClickedCheckLzl()
 {
-	CString tmp;
+	if (m_acedEnhancedLzlCheck.GetCheck()) {
+		CString tmp = L"1 开启后增加额外请求获取帖子前10不被折叠的楼中楼\n\r"
+			L"2 流量增加，扫描时间增加，所以扫描间隔建议60s以上\n\r"
+			L"3 获取的额外楼中楼用户等级可能无法获取，因此启用该功能后相关规则需要修改\n\r"
+			L"4 相关规则建议全部重新检查，尤其是含有次数等的正则规则\n\r"
+			L"是否开启？";
+		int result = AfxMessageBox(tmp, MB_ICONINFORMATION | MB_YESNO);
+		if (result != IDYES) {
+			m_acedEnhancedLzlCheck.SetCheck(false);
+		}
+	}
 }
 
-BOOL CAcedPage::OnInitDialog()
+void CAcedPage::ShowPlan(const CPlan& plan)
 {
-	CString tmp;
-	return FALSE;
+	// UpdateData(TRUE);
+	m_acedEnhancedLzlCheck.SetCheck(plan.m_acedEnhancedLzl);	// Aced 楼中楼
+}
+
+void CAcedPage::ApplyPlanInDlg(CPlan& plan)
+{
+	*plan.m_acedEnhancedLzl = m_acedEnhancedLzlCheck.GetCheck();// Aced 楼中楼
 }

@@ -29,9 +29,9 @@ BOOL TiebaClawerProxy::GetThreads(const CString& forumName, const CString& ignor
 }
 
 TiebaClawer::GetPostsResult TiebaClawerProxy::GetPosts(const CString& fid, const CString& tid, const CString& page,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const bool useAceLzl)
 {
-	return GetImplement().GetPosts(fid, tid, page, posts, lzls, addition);
+	return GetImplement().GetPosts(fid, tid, page, posts, lzls, addition, useAceLzl);
 }
 
 TiebaClawer::GetPostsResult TiebaClawerProxy::GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,

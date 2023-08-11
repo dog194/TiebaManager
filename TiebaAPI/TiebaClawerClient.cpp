@@ -21,6 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "iostream"
 #include "fstream"
 #include <TiebaClawerClient.h>
+#include <TBMCoreGlobal.h>
 
 #include <StringHelper.h>
 #include <NetworkHelper.h>
@@ -41,6 +42,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 using namespace rapidjson;
 
 #include <map>
+
 
 // 使用客户端接口采集贴吧
 BOOL TiebaClawerClient::GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads)
@@ -75,7 +77,7 @@ BOOL TiebaClawerClient::GetThreads(const CString& forumName, const CString& igno
 		thread.author = rawThread[L"author"][L"name"].GetString();
 		thread.authorShowName = rawThread[L"author"][L"name_show"].GetString();
 		thread.authorID = rawThread[L"author"][L"id"].GetString();
-		thread.authorPortraitUrl = CString(_T("http://tb.himg.baidu.com/sys/portrait/item/")) + rawThread[L"author"][L"portrait"].GetString();
+		thread.authorPortraitUrl = CString(AUTHOR_PORTRAIT_URL_PREFIX) + rawThread[L"author"][L"portrait"].GetString();
 		if (rawThread.HasMember(L"create_time")) // 直播贴没有create_time
 			thread.timestamp = _ttoi64(rawThread[L"create_time"].GetString());
 		else
@@ -124,7 +126,7 @@ BOOL TiebaClawerClient::GetThreads(const CString& forumName, const CString& igno
 }
 
 TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, const CString& tid, const CString& page,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const bool useAceLzl)
 {
 	CString data;
 	data.Format(_T("_client_type=2&_client_version=7.0.0&back=0&floor_rn=3&from=tieba&kz=%s&mark=0&net_type=1&pn=%s&rn=30&st_type=tb_bookmarklist&with_floor=1"), 
@@ -166,7 +168,7 @@ static void GetLzls(const CString& tid, const GenericDocument<UTF16<> >& documen
 			const auto& user = userList[userIndex[lzl.authorID]];
 			lzl.author = user[L"name"].GetString();
 			lzl.authorShowName = user[L"name_show"].GetString();
-			lzl.authorPortraitUrl = CString(_T("http://tb.himg.baidu.com/sys/portrait/item/")) + user[L"portrait"].GetString();
+			lzl.authorPortraitUrl = CString(AUTHOR_PORTRAIT_URL_PREFIX) + user[L"portrait"].GetString();
 			lzl.timestamp = _ttoi64(subPost[L"time"].GetString());
 			lzl.cid = subPost[L"id"].GetString();
 			lzl.floor = post[L"floor"].GetString();
@@ -248,7 +250,7 @@ TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, cons
 			post.authorLevel = user[L"level_id"].GetString();
 		else
 			post.authorLevel = _T("1");
-		post.authorPortraitUrl = CString(_T("http://tb.himg.baidu.com/sys/portrait/item/")) + user[L"portrait"].GetString();
+		post.authorPortraitUrl = CString(AUTHOR_PORTRAIT_URL_PREFIX) + user[L"portrait"].GetString();
 		post.timestamp = _ttoi64(rawPost[L"time"].GetString());
 
 		post.content = _T("");
@@ -333,7 +335,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	CString name = strUTF82W(rawUser.name());
 	CString nameShow = strUTF82W(rawUser.name_show());
 	CString portrait = strUTF82W(rawUser.portrait());
-	CString portraitUrl = _T("http://tb.himg.baidu.com/sys/portrait/item/") + portrait;
+	CString portraitUrl = AUTHOR_PORTRAIT_URL_PREFIX + portrait;
 	int level = rawUser.level_id();
 	int is_bawu = rawUser.is_bawu();
 	CString bawuType = strUTF82W(rawUser.bawu_type());
@@ -678,7 +680,6 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		CString preview = decodeContent(pbContentList, tid);
 		//int tab_id = rawThread->tab_id();
 		
-		
 		//CString TMPP;
 		//TMPP.Format(_T("标题：%s"), title);
 		//WriteStringCon(TMPP, _T("row.txt"));
@@ -709,12 +710,14 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 			thread.authorShowName = userList[userIndex[author_id]].ShowName;
 			thread.authorID = userList[userIndex[author_id]].id;
 			thread.authorPortraitUrl = userList[userIndex[author_id]].PortraitUrl;
+			thread.tidAuthorPortraitUrl = userList[userIndex[author_id]].PortraitUrl;
 		}
 		else {
 			thread.author = _T("[数据错误]");
 			thread.authorShowName = _T("[数据错误]");
 			thread.authorID = _T("");
-			thread.authorPortraitUrl = _T("[数据错误]");;
+			thread.authorPortraitUrl = _T("[数据错误]");
+			thread.tidAuthorPortraitUrl = _T("");
 		}
 		thread.preview = preview;
 		//thread.preview += _T("\r\n");
@@ -751,7 +754,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 }
 
 TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& fid, const CString& tid, const CString& page,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const bool useAceLzl)
 {
 	// 请求构造
 	PbPageReqIdl pbReq;
@@ -778,9 +781,15 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	data = pbData.c_str();
 
 	CStringA srcA = TiebaClientHTTPProtoPost(_T("http://c.tieba.baidu.com/c/f/pb/page?cmd=302001"), data);
-	CString src = _T("");
 	if (srcA == NET_TIMEOUT_TEXT)
 		return GET_POSTS_TIMEOUT;
+	CString src = _T("");
+	
+	if (g_pTbmCoreConfig->m_acedEnhancedLzl) {
+		src = HTTPGet(_T("https://tieba.baidu.com/p/totalComment?tid=") + tid + _T("&pn=") + page);
+		if (src == NET_TIMEOUT_TEXT)
+			return GET_POSTS_TIMEOUT;
+	}
 
 	return GetPosts(fid, tid, page, src, posts, lzls, addition, srcA);
 }
@@ -825,9 +834,106 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	decodeUserList(pbPostUserList, PostuserList);
 	// 映射用户ID和索引
 	std::map<CString, int> userIndex;
-	int uSize = PostuserList.size();
-	for (int i = 0; i < uSize; ++i)
-		userIndex[PostuserList[i].id] = i;
+
+	// 解析 Json 前10楼 楼中楼
+	bool aced_lzl_info = true;
+	bool use_addl_lzl_info = false ? src == _T("") : true;
+	std::vector<LzlInfo> jsonLzl;
+	jsonLzl.clear();
+	if (use_addl_lzl_info) {
+		GenericDocument<UTF16<> > document;
+		document.Parse(src);
+		if (document.HasParseError() || !document.IsObject() || document[L"errno"].GetInt() != 0) {
+			aced_lzl_info = false;
+		}
+		else if (document[L"errno"].IsInt() && document[L"errno"].GetInt() != 0) {
+			aced_lzl_info = false;
+		}
+		else if (!document[L"errno"].IsInt()) {
+			aced_lzl_info = false;
+		}
+		else {
+			// "data":{"comment_list":[],"user_list":[]}}
+			if (document[L"data"][L"comment_list"].IsArray()) {
+				// "comment_list":[] 楼中楼为空
+				aced_lzl_info = false;
+			}
+			else if (document[L"data"][L"comment_list"].IsObject()) {
+				// "comment_list":{"148225253760":
+				const auto& lzl_comment_list = document[L"data"][L"comment_list"];
+				const auto& lzl_user_list = document[L"data"][L"user_list"];
+				// lzl 用户 列表转换
+				int lzl_ul_size = lzl_user_list.Size();
+				int i = 0;
+				for (auto& v : lzl_user_list.GetObject()) {
+					CString v_id = v.name.GetString();
+					// 判断是否已经有用户信息。
+					bool is_add = true;
+					for (auto& t : PostuserList) {
+						if (t.id.CompareNoCase(v_id) == 0) {
+							// 已经有
+							is_add = false;
+							break;
+						}
+					}
+					if (is_add) {
+						TBUserObj tmp_user = TBUserObj();
+						tmp_user.id = v.name.GetString();
+						tmp_user.name = v.value[L"user_name"].GetString();
+						tmp_user.ShowName = v.value[L"show_nickname"].GetString();
+						tmp_user.Portrait = v.value[L"portrait"].GetString();
+						tmp_user.PortraitUrl = AUTHOR_PORTRAIT_URL_PREFIX + tmp_user.Portrait;
+						tmp_user.level = 0;
+						tmp_user.is_bawu = 0;
+						tmp_user.bawu_type = L"";
+						tmp_user.post_num = 0;
+						tmp_user.tb_age = L"";
+						tmp_user.is_default_avatar = 0;
+						tmp_user.tieba_uid = L"";
+						tmp_user.reply_type = 0;
+						PostuserList.push_back(tmp_user);
+					}					
+				}
+				// 更新 userIndex =================================
+				int uSize = PostuserList.size();
+				for (int i = 0; i < uSize; ++i)
+					userIndex[PostuserList[i].id] = i;
+				// ================================================
+				// lzl_comment_list 用户 列表转换
+				for (auto& v : lzl_comment_list.GetObject()) {
+					// 第一层解析 
+					CString v_key = v.name.GetString();
+					for (auto& vv : v.value[L"comment_info"].GetArray()) {
+						// 第二层遍历
+						CString tmp_uid = Int64oCString(vv[L"user_id"].GetInt64());
+						LzlInfo tmp_lzl = LzlInfo();
+						// 赋值
+						tmp_lzl.rawData = _T("");
+						tmp_lzl.tid = tid;
+						tmp_lzl.authorID = PostuserList[userIndex[tmp_uid]].id;
+						tmp_lzl.author = PostuserList[userIndex[tmp_uid]].name;
+						tmp_lzl.authorShowName = PostuserList[userIndex[tmp_uid]].ShowName;
+						tmp_lzl.authorPortraitUrl = PostuserList[userIndex[tmp_uid]].PortraitUrl;
+						if (PostuserList[userIndex[tmp_uid]].level == 0)
+							tmp_lzl.authorLevel = _T("");
+						else 
+							tmp_lzl.authorLevel = Int2CString(PostuserList[userIndex[tmp_uid]].level);
+						tmp_lzl.timestamp = vv[L"now_time"].GetInt64();
+						tmp_lzl.cid = Int64oCString(vv[L"comment_id"].GetInt64());
+						// floor 后续更新
+						tmp_lzl.floor = v_key;
+						tmp_lzl.content = _T("[aceLzl]") + HTMLDelete4totalComment(HTMLUnescape(vv[L"content"].GetString()));
+						jsonLzl.push_back(tmp_lzl);
+					}
+				}
+			}
+		}
+	}
+	else {
+		int uSize = PostuserList.size();
+		for (int i = 0; i < uSize; ++i)
+			userIndex[PostuserList[i].id] = i;
+	}	
 
 	int size = pbPostList->size();
 	posts.resize(size);
@@ -940,12 +1046,31 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		pbSubPostList = post_SubPost->mutable_sub_post_list();
 		if (pbSubPostList->size() > 0) {
 			tLzl += pbSubPostList->size();
-			lzls.resize(tLzl);
 			for (auto& rawLzl = pbSubPostList->begin(); rawLzl != pbSubPostList->end(); ++rawLzl)
 			{	
-				auto& lzl = lzls[iLzl];
+				LzlInfo lzl = LzlInfo();
 				decodeLzl(*rawLzl, lzl, floor, PostuserList, userIndex, tid);
-				++iLzl;
+				lzls.push_back(lzl);
+			}
+		}
+		// 附加获取完整前10楼 楼中楼？
+		if (aced_lzl_info && use_addl_lzl_info && jsonLzl.size() && sub_post_number > 0) {
+			for (auto& t : jsonLzl) {
+				if (t.floor.Compare(post.pid) == 0) {
+					t.floor = floor;
+					// 判断是附加，还是插入
+					bool is_push_back = true;
+					for (auto& i : lzls) {
+						if (t.cid.Compare(i.cid) == 0) {
+							// 找到对应楼中楼，进行合并
+							i.content += _T("\r\n\r\n") + t.content;
+							is_push_back = false;
+							break;
+						}
+					}
+					if (is_push_back)
+						lzls.push_back(t);
+				}
 			}
 		}
 		++iPost;

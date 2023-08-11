@@ -128,7 +128,7 @@ BOOL TiebaClawerWeb::GetThreads(const CString& forumName, const CString& ignoreT
 }
 
 TiebaClawer::GetPostsResult TiebaClawerWeb::GetPosts(const CString& fid, const CString& tid, const CString& page,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const bool useAceLzl)
 {
 	CString src = HTTPGet(_T("https://tieba.baidu.com/p/") + tid + _T("?pn=") + page + _T("&fid=") + fid);
 	if (src == NET_TIMEOUT_TEXT)
@@ -306,7 +306,7 @@ void TiebaClawerWeb::GetLzls(const CString& fid, const CString& tid, const CStri
 			lzl.authorID = comment[L"user_id"].GetString();
 			const auto& user = userList[(LPCWSTR)lzl.authorID];
 			lzl.authorShowName = user[L"nickname"].GetString();
-			lzl.authorPortraitUrl = CString(_T("http://tb.himg.baidu.com/sys/portrait/item/")) + user[L"portrait"].GetString();
+			lzl.authorPortraitUrl = CString(AUTHOR_PORTRAIT_URL_PREFIX) + user[L"portrait"].GetString();
 			lzl.timestamp = comment[L"now_time"].GetInt64();
 			lzl.cid = comment[L"comment_id"].GetString();
 			lzl.floor = floor;

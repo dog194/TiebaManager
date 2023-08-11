@@ -208,7 +208,8 @@ void CExplorerDlg::OnBnClickedButton2()
 		//数据获取
 		std::vector<PostInfo> posts;
 		std::vector<LzlInfo> lzls;
-		TiebaClawerProxy::GetInstance().GetPosts(g_tiebaOperate.GetForumID(), m_exploreThreadPage->m_threads[index].tid, _T("1"), posts, lzls);
+		TiebaClawerProxy::GetInstance().GetPosts(g_tiebaOperate.GetForumID(), m_exploreThreadPage->m_threads[index].tid, _T("1"), posts, lzls,
+			NULL, g_plan.m_acedEnhancedLzl);
 		if (posts.size() > 0)
 			pid = posts[0].pid;
 

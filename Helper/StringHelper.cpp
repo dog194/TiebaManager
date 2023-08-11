@@ -216,7 +216,6 @@ HELPER_API BOOL StringMatchs(const CString& str, const RegexText& content)
 		return content.ignoreCase ? str.CompareNoCase(content.text) == 0 : str == content.text;
 }
 
-
 // 取字符串之间的字符串
 HELPER_API CString GetStringBetween(const CString& src, const CString& left, const CString& right, int startPos)
 {
@@ -418,6 +417,37 @@ HELPER_API CString HTMLUnescape(const CString& src)
 	result.Replace(_T("&lt;"), _T("<"));
 	result.Replace(_T("&gt;"), _T(">"));
 	result.Replace(_T("&amp;"), _T("&"));
+	return result;
+}
+
+// totalComment API 清理多余 HTML
+HELPER_API CString HTMLDelete4totalComment(const CString& src)
+{
+	CString result = src;
+	// <a> 常规 a 标签
+	result.Replace(_T(" rel=\"noopener noreferrer nofollow\"  class=\"j - no - opener - url\" "), _T(""));
+	// 回复 xx 标签
+	int left = result.Find(_T("回复 <a"));
+	if (left == 0) {
+		CString tmp = GetStringBetween2(result, _T("回复 <a"), _T(">"));
+		result.Replace(tmp, _T("回复 "));
+		result.Replace(_T("</a> :"), _T(" :"));
+	}
+	// @ 标签
+	left = result.Find(_T("<a href=\"\"  onclick"));
+	while (left != -1)
+	{
+		CString tmp = GetStringBetween2(result, _T("<a href=\"\"  onclick"), _T("hideattip(this)\" "));
+		result.Replace(tmp, _T("<a href=\"\" "));
+		result.Replace(_T("target=\"_blank\" class=\"at\""), _T("class=\"at\""));
+		left = result.Find(_T("<a href=\"\"  onclick"));
+	}
+	// 贴吧帖子内部跳转 标签
+	left = result.Find(_T("<a href="));
+	if (left != -1) {
+		CString tmp = GetStringBetween2(result, _T("<a href="), _T(">"));
+		result.Replace(tmp, _T("<a>"));
+	}
 	return result;
 }
 

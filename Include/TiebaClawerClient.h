@@ -30,7 +30,7 @@ class TIEBA_API_API TiebaClawerClient final : public TiebaClawer, public Singlet
 public:
 	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads) override;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, std::vector<PostInfo>& posts,
-		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) override;
+		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const bool useAceLzl = false) override;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
 		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const CStringA& srcA = "") override;
 };
@@ -42,7 +42,7 @@ class TIEBA_API_API TiebaClawerClientNickName final : public TiebaClawer, public
 public:
 	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads) override;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, std::vector<PostInfo>& posts,
-		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) override;
+		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const bool useAceLzl = false) override;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
 		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const CStringA& srcA = "") override;
 };

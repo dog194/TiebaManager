@@ -18,6 +18,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include "stdafx.h"
+#include "sqlite3.h"
 #include "TiebaManagerDlg.h"
 #include <TBMEvents.h>
 #include <TBMAPI.h>
@@ -277,6 +278,11 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 			OnBnClickedButton1();
 		}
 	}
+
+	// 数据库初始化？
+	sqlite3* db;
+	int rc;
+	rc = sqlite3_open("tb.db", &db);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
