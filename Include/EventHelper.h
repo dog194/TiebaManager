@@ -91,12 +91,12 @@ public:
 			{
 				_RPTF0(_CRT_WARN, "回调事件时出现bad_function_call\n");
 			}
-
+			/*
 			if (m_listeners._Isnil(it._Mynode()))
 			{
 				_RPTF0(_CRT_WARN, "迭代调用事件时当前结点被删除\n"); // 出现这个说明有BUG...
 				break;
-			}
+			}*/
 		}
 	}
 };
