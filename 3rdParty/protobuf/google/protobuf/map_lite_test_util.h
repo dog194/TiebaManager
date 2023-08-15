@@ -31,7 +31,7 @@
 #ifndef GOOGLE_PROTOBUF_MAP_LITE_TEST_UTIL_H__
 #define GOOGLE_PROTOBUF_MAP_LITE_TEST_UTIL_H__
 
-#include <google/protobuf/map_lite_unittest.pb.h>
+#include "google/protobuf/map_lite_unittest.pb.h"
 
 namespace google {
 namespace protobuf {
@@ -75,6 +75,6 @@ class MapLiteTestUtil {
 };
 
 }  // namespace protobuf
-
 }  // namespace google
+
 #endif  // GOOGLE_PROTOBUF_MAP_LITE_TEST_UTIL_H__

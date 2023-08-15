@@ -28,12 +28,12 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <google/protobuf/stubs/logging.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/arena_test_util.h>
+#include "google/protobuf/arena_test_util.h"
+
+#include "absl/log/absl_check.h"
 
 
-#define EXPECT_EQ GOOGLE_CHECK_EQ
+#define EXPECT_EQ ABSL_CHECK_EQ
 
 namespace google {
 namespace protobuf {

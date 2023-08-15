@@ -34,13 +34,16 @@
 //
 // A proto file we will use for unit testing.
 
-syntax = "proto2";
+edition = "2023";
+
+// Treat all enums as closed by default (proto2 behavior).
+option features.enum_type = CLOSED;
 
 // Some generic_services option(s) added automatically.
 // See:  http://go/proto2-generic-services-default
-option cc_generic_services = true;   // auto-added
-option java_generic_services = true; // auto-added
-option py_generic_services = true;   // auto-added
+option cc_generic_services = true;    // auto-added
+option java_generic_services = true;  // auto-added
+option py_generic_services = true;    // auto-added
 option cc_enable_arenas = true;
 
 // We don't put this in a package within proto2 because we need to make sure

@@ -33,6 +33,7 @@
 // Tests that a "lite" message can import a regular message.
 
 syntax = "proto2";
+
 package protobuf_unittest;
 
 import "google/protobuf/unittest.proto";
@@ -41,4 +42,7 @@ option optimize_for = LITE_RUNTIME;
 
 message TestLiteImportsNonlite {
   optional TestAllTypes message = 1;
+
+  // Verifies that transitive required fields generates valid code.
+  optional TestRequired message_with_required = 2;
 }

@@ -35,43 +35,42 @@
 
 #include <string>
 
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/status.h>
+#include "google/protobuf/type.pb.h"
+#include "absl/status/status.h"
+#include "google/protobuf/port.h"
 
+
+// Must be included last.
+#include "google/protobuf/port_def.inc"
 
 namespace google {
-namespace protobuf {
-class Type;
-class Enum;
-}  // namespace protobuf
-
-
 namespace protobuf {
 class DescriptorPool;
 namespace util {
 
-// Abstract interface for a type resovler.
+// Abstract interface for a type resolver.
 //
 // Implementations of this interface must be thread-safe.
-class LIBPROTOBUF_EXPORT TypeResolver {
+class PROTOBUF_EXPORT TypeResolver {
  public:
   TypeResolver() {}
+  TypeResolver(const TypeResolver&) = delete;
+  TypeResolver& operator=(const TypeResolver&) = delete;
   virtual ~TypeResolver() {}
 
   // Resolves a type url for a message type.
-  virtual util::Status ResolveMessageType(
-      const string& type_url, google::protobuf::Type* message_type) = 0;
+  virtual absl::Status ResolveMessageType(
+      const std::string& type_url, google::protobuf::Type* message_type) = 0;
 
   // Resolves a type url for an enum type.
-  virtual util::Status ResolveEnumType(const string& type_url,
-                                         google::protobuf::Enum* enum_type) = 0;
-
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TypeResolver);
+  virtual absl::Status ResolveEnumType(const std::string& type_url,
+                                       google::protobuf::Enum* enum_type) = 0;
 };
 
 }  // namespace util
 }  // namespace protobuf
-
 }  // namespace google
+
+#include "google/protobuf/port_undef.inc"
+
 #endif  // GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_H__

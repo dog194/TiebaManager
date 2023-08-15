@@ -31,10 +31,8 @@
 #ifndef GOOGLE_PROTOBUF_COMPILER_CSHARP_REPEATED_PRIMITIVE_FIELD_H__
 #define GOOGLE_PROTOBUF_COMPILER_CSHARP_REPEATED_PRIMITIVE_FIELD_H__
 
-#include <string>
-
-#include <google/protobuf/compiler/code_generator.h>
-#include <google/protobuf/compiler/csharp/csharp_field_base.h>
+#include "google/protobuf/compiler/code_generator.h"
+#include "google/protobuf/compiler/csharp/csharp_field_base.h"
 
 namespace google {
 namespace protobuf {
@@ -43,23 +41,27 @@ namespace csharp {
 
 class RepeatedPrimitiveFieldGenerator : public FieldGeneratorBase {
  public:
-  RepeatedPrimitiveFieldGenerator(const FieldDescriptor* descriptor, int fieldOrdinal, const Options *options);
+  RepeatedPrimitiveFieldGenerator(const FieldDescriptor* descriptor,
+                                  int presenceIndex, const Options* options);
   ~RepeatedPrimitiveFieldGenerator();
 
-  virtual void GenerateCloningCode(io::Printer* printer);
-  virtual void GenerateFreezingCode(io::Printer* printer);
-  virtual void GenerateMembers(io::Printer* printer);
-  virtual void GenerateMergingCode(io::Printer* printer);
-  virtual void GenerateParsingCode(io::Printer* printer);
-  virtual void GenerateSerializationCode(io::Printer* printer);
-  virtual void GenerateSerializedSizeCode(io::Printer* printer);
+  RepeatedPrimitiveFieldGenerator(const RepeatedPrimitiveFieldGenerator&) = delete;
+  RepeatedPrimitiveFieldGenerator& operator=(const RepeatedPrimitiveFieldGenerator&) = delete;
 
-  virtual void WriteHash(io::Printer* printer);
-  virtual void WriteEquals(io::Printer* printer);
-  virtual void WriteToString(io::Printer* printer);
+  virtual void GenerateCloningCode(io::Printer* printer) override;
+  virtual void GenerateFreezingCode(io::Printer* printer) override;
+  virtual void GenerateMembers(io::Printer* printer) override;
+  virtual void GenerateMergingCode(io::Printer* printer) override;
+  virtual void GenerateParsingCode(io::Printer* printer) override;
+  virtual void GenerateParsingCode(io::Printer* printer, bool use_parse_context) override;
+  virtual void GenerateSerializationCode(io::Printer* printer) override;
+  virtual void GenerateSerializationCode(io::Printer* printer, bool use_write_context) override;
+  virtual void GenerateSerializedSizeCode(io::Printer* printer) override;
+  virtual void GenerateExtensionCode(io::Printer* printer) override;
 
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(RepeatedPrimitiveFieldGenerator);
+  virtual void WriteHash(io::Printer* printer) override;
+  virtual void WriteEquals(io::Printer* printer) override;
+  virtual void WriteToString(io::Printer* printer) override;
 };
 
 }  // namespace csharp

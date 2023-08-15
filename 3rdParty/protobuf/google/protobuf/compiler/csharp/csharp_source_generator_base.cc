@@ -28,28 +28,26 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "google/protobuf/compiler/csharp/csharp_source_generator_base.h"
+
 #include <sstream>
 
-#include <google/protobuf/compiler/code_generator.h>
-#include <google/protobuf/compiler/plugin.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/descriptor.pb.h>
-#include <google/protobuf/io/printer.h>
-#include <google/protobuf/io/zero_copy_stream.h>
-
-#include <google/protobuf/compiler/csharp/csharp_source_generator_base.h>
-#include <google/protobuf/compiler/csharp/csharp_helpers.h>
-#include <google/protobuf/compiler/csharp/csharp_names.h>
-#include <google/protobuf/compiler/csharp/csharp_options.h>
+#include "google/protobuf/compiler/code_generator.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/compiler/csharp/csharp_helpers.h"
+#include "google/protobuf/compiler/csharp/names.h"
+#include "google/protobuf/compiler/csharp/csharp_options.h"
+#include "google/protobuf/descriptor.pb.h"
+#include "google/protobuf/io/printer.h"
+#include "google/protobuf/io/zero_copy_stream.h"
 
 namespace google {
 namespace protobuf {
 namespace compiler {
 namespace csharp {
 
-SourceGeneratorBase::SourceGeneratorBase(const FileDescriptor* descriptor,
-                                         const Options *options)
-    : descriptor_(descriptor), options_(options) {
+SourceGeneratorBase::SourceGeneratorBase(
+    const Options *options) : options_(options) {
 }
 
 SourceGeneratorBase::~SourceGeneratorBase() {
@@ -57,10 +55,14 @@ SourceGeneratorBase::~SourceGeneratorBase() {
 
 void SourceGeneratorBase::WriteGeneratedCodeAttributes(io::Printer* printer) {
   printer->Print("[global::System.Diagnostics.DebuggerNonUserCodeAttribute]\n");
+  // The second argument of the [GeneratedCode] attribute could be set to current protoc
+  // version, but that would cause excessive code churn in the pre-generated
+  // code in the repository every time the protobuf version number is updated.
+  printer->Print("[global::System.CodeDom.Compiler.GeneratedCode(\"protoc\", null)]\n");
 }
 
 std::string SourceGeneratorBase::class_access_level() {
-  return (IsDescriptorProto(descriptor_) || this->options()->internal_access) ? "internal" : "public";
+  return this->options()->internal_access ? "internal" : "public";
 }
 
 const Options* SourceGeneratorBase::options() {
