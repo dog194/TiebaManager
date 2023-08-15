@@ -23,9 +23,10 @@ TiebaManager
 ---------
 
 * [OpenCV](http://opencv.org/) 4.5.3
-* [TinyXML2](http://www.grinninglizard.com/tinyxml2/index.html)
+* [TinyXML2](https://github.com/leethomason/tinyxml2) 9.0.0
 * [libcurl](https://curl.haxx.se/libcurl/) 7.78.0
-* [protobuf](https://github.com/protocolbuffers/protobuf/releases) 3.5.1
+* [protobuf](https://github.com/protocolbuffers/protobuf/releases) 24.0
+* [abseil-cpp](https://github.com/abseil/abseil-cpp) Protobuf 引用
 * [SQLite3](https://www.sqlite.org/download.html) 3.41.2
 * [7z](https://www.7-zip.org/) 19.00 (7za.exe)
 * [rapidjson](http://rapidjson.org/)
@@ -33,6 +34,6 @@ TiebaManager
 搭建开发环境
 ---------
 
-1. 使用VS2013或以上版本
+1. 使用VS2022或以上版本
 2. 下载本项目源码
 3. 运行`SetupEnvironment.bat`
