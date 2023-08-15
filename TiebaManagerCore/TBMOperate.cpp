@@ -323,46 +323,33 @@ void CTBMOperate::OperateThread()
 			if (pass)
 			{
 				BOOL result = FALSE;
-				CString pid, portrait, nick_name;
+				CString portrait, nick_name;
 				// 不管是不是客户端接口封，都获取 PID
 
 				switch (op.object->m_type)
 				{
 				case TBObject::THREAD:
-				{
-					std::vector<PostInfo> posts;
-					std::vector<LzlInfo> lzls;
-					TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), op.object->tid, _T("1"), posts, lzls);
-					if (posts.size() > 0){
-						pid = posts[0].pid;
-						portrait = posts[0].authorPortraitUrl;
-						nick_name = posts[0].authorShowName;
-					}		
+					portrait = op.object.get()->authorPortraitUrl;
+					nick_name = op.object.get()->authorShowName;
 					break;
-				}
 				case TBObject::POST:
-					pid = ((PostInfo*)op.object.get())->pid;
 					portrait = ((PostInfo*)op.object.get())->authorPortraitUrl;
 					nick_name = ((PostInfo*)op.object.get())->authorShowName;
 					break;
 				case TBObject::LZL:
-					pid = ((LzlInfo*)op.object.get())->cid;
 					portrait = ((LzlInfo*)op.object.get())->authorPortraitUrl;
 					nick_name = ((LzlInfo*)op.object.get())->authorShowName;
 					break;
 				}
 
-				if (pid == _T(""))
-					g_pLog->Log(_T("<font color=red>封禁 </font>") + op.object->authorShowName + _T("<font color=red> 失败！(获取帖子ID失败)</font>"));
-
-				CString code = (g_pTbmCoreConfig->m_banClientInterface || pid == _T("")) ?
-					g_pTiebaOperate->BanIDClient(op.object->author, pid, portrait, nick_name) : g_pTiebaOperate->BanID(op.object->author, pid, portrait, nick_name);
+				CString code = (g_pTbmCoreConfig->m_banClientInterface) ?
+					g_pTiebaOperate->BanIDClient(op.object->author, portrait, nick_name) : g_pTiebaOperate->BanID(op.object->author, portrait, nick_name);
 				if (code != _T("0"))
 				{
 					CString content; //需同步更新 url 传递
 					content.Format(_T("<font color=red>封禁 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
 						_T("\"bd:%s,%s,%s,%s,Dog194\">重试</a>"), (LPCTSTR)op.object->authorShowName, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
-						(LPCTSTR)op.object->author, (LPCTSTR)pid, (LPCTSTR)portrait, (LPCTSTR)nick_name);
+						(LPCTSTR)op.object->author, (LPCTSTR)_T(""), (LPCTSTR)portrait, (LPCTSTR)nick_name);
 					g_pLog->Log(content);
 				}
 				else

@@ -137,11 +137,11 @@ static inline CString GetOperationErrorCode(const CString& src)
 }
 
 // 封ID，返回错误代码 针对无用户名ID
-CString CTiebaOperate::BanID(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name)
+CString CTiebaOperate::BanID(const CString& userName, const CString& portrait, const CString& nick_name)
 {
 	//兼容原版 有用户名直接封
 	if (userName != _T("")) {
-		return BanID(userName, pid);
+		return BanID(userName);
 	}
 	//不存在userName
 	//portrait[]=xxxxxxxxxxxxxxxxxxxxxxx
@@ -150,7 +150,7 @@ CString CTiebaOperate::BanID(const CString& userName, const CString& pid, const 
 	//xxxxxxxxxxxxxxx
 	if (portrait == _T("")) {
 		//本身就空。
-		return BanID(userName, pid);
+		return BanID(userName);
 	}
 	CString data, tmp;
 	tmp = GetStringBetween(portrait, AUTHOR_PORTRAIT_LEFT, AUTHOR_PORTRAIT_RIGHT);
@@ -167,21 +167,10 @@ CString CTiebaOperate::BanID(const CString& userName, const CString& pid, const 
 			m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("%20"), (LPCTSTR)EncodeURI(tmp));
 	}*/
 	//else {
-		data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&pid%%5B%%5D=%s&reason=%s&portrait%%5B%%5D=%s&nick_name%%5B%%5D=%s"),
-			m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName), (LPCTSTR)pid,
+		data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&reason=%s&portrait%%5B%%5D=%s&nick_name%%5B%%5D=%s"),
+			m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName),
 			m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("1"), (LPCTSTR)EncodeURI(tmp), (LPCTSTR)EncodeURI(nick_name));
 	//}
-	CString src = this->HTTPPost(_T("https://tieba.baidu.com/pmc/blockid"), data);
-	return GetOperationErrorCode(src);
-}
-
-// 封ID，返回错误代码
-CString CTiebaOperate::BanID(const CString& userName, const CString& pid)
-{
-	CString data;
-	data.Format(_T("day=%d&fid=%s&tbs=%s&ie=gbk&user_name%%5B%%5D=%s&pid%%5B%%5D=%s&reason=%s"),
-		m_banDuration, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, (LPCTSTR)EncodeURI(userName), (LPCTSTR)pid,
-		m_banReason != _T("") ? (LPCTSTR)m_banReason : _T("1"));
 	CString src = this->HTTPPost(_T("https://tieba.baidu.com/pmc/blockid"), data);
 	return GetOperationErrorCode(src);
 }
@@ -198,7 +187,7 @@ CString CTiebaOperate::BanID(const CString& userName)
 }
 
 // 封ID，返回错误代码，客户端接口
-CString CTiebaOperate::BanIDClient(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name)
+CString CTiebaOperate::BanIDClient(const CString& userName, const CString& portrait, const CString& nick_name)
 {
 	CString data, tmp;
 	tmp = GetPortraitFromString(portrait);

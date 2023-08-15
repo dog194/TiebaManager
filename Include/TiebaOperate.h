@@ -62,13 +62,11 @@ public:
 	CString HTTPPost(const CString& URL, const CString& data);
 
 	// 封ID，返回错误代码 针对无用户名ID
-	CString BanID(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name);
-	// 封ID，返回错误代码
-	CString BanID(const CString& userName, const CString& pid);
+	CString BanID(const CString& userName, const CString& portrait, const CString& nick_name);
 	// 封ID，返回错误代码，不用PID（用户必须为本吧会员）
 	CString BanID(const CString& userName);
 	// 封ID，返回错误代码，客户端接口
-	CString BanIDClient(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name);
+	CString BanIDClient(const CString& userName, const CString& portrait, const CString& nick_name);
 	// 封ID，返回错误代码，客户端接口，不用PID，小吧可封10天
 	CString BanIDClient(const CString& userName);
 	// 拉黑，返回错误代码

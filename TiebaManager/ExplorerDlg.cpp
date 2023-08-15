@@ -198,43 +198,32 @@ void CExplorerDlg::OnBnClickedButton2()
 	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
 
 
-	CString author, pid, portrait, nick_name;
+	CString author, portrait, nick_name;
 	if (tabIndex == 0) // 主题
 	{
 		author = m_exploreThreadPage->m_threads[index].author;
 		portrait = m_exploreThreadPage->m_threads[index].authorPortraitUrl;
 		nick_name = m_exploreThreadPage->m_threads[index].authorShowName;
-
-		//数据获取
-		std::vector<PostInfo> posts;
-		std::vector<LzlInfo> lzls;
-		TiebaClawerProxy::GetInstance().GetPosts(g_tiebaOperate.GetForumID(), m_exploreThreadPage->m_threads[index].tid, _T("1"), posts, lzls);
-		if (posts.size() > 0)
-			pid = posts[0].pid;
-
 	}
 	else if (tabIndex == 1) // 帖子
 	{
 		author = m_explorePostPage->m_posts[index].author;
 		portrait = m_explorePostPage->m_posts[index].authorPortraitUrl;
 		nick_name = m_explorePostPage->m_posts[index].authorShowName;
-		pid = m_explorePostPage->m_posts[index].pid;
 	}
 	else // 楼中楼
 	{
 		author = m_exploreLzlPage->m_lzls[index].author;
 		portrait = m_exploreLzlPage->m_lzls[index].authorPortraitUrl;
 		nick_name = m_exploreLzlPage->m_lzls[index].authorShowName;
-		pid = m_exploreLzlPage->m_lzls[index].cid;
 	}
-
 
 	/*if (pid == _T(""))
 	{
 		AfxMessageBox(_T("封禁失败(获取帖子ID失败)"), MB_ICONERROR);
 		return;
 	}*/
-	CString code = (g_plan.m_banClientInterface) ? GetTiebaOperate().BanIDClient(author, pid, portrait, nick_name) : GetTiebaOperate().BanID(author, pid, portrait, nick_name);
+	CString code = (g_plan.m_banClientInterface) ? GetTiebaOperate().BanIDClient(author, portrait, nick_name) : GetTiebaOperate().BanID(author, portrait, nick_name);
 	if (code != _T("0"))
 		AfxMessageBox(_T("封禁失败，错误代码" + code + _T("(") + GetTiebaErrorText(code) + _T(")")), MB_ICONERROR);
 	else {
@@ -277,35 +266,24 @@ void CExplorerDlg::OnBnClickedButtonAddBl()
 		return;
 	int index = m_pages[tabIndex]->m_list.GetNextSelectedItem(pos);
 
-
-	CString author, pid, portrait, nick_name;
+	CString author, portrait, nick_name;
 	if (tabIndex == 0) // 主题
 	{
 		author = m_exploreThreadPage->m_threads[index].author;
 		portrait = m_exploreThreadPage->m_threads[index].authorPortraitUrl;
 		nick_name = m_exploreThreadPage->m_threads[index].authorShowName;
-
-		//数据获取
-		std::vector<PostInfo> posts;
-		std::vector<LzlInfo> lzls;
-		TiebaClawerProxy::GetInstance().GetPosts(g_tiebaOperate.GetForumID(), m_exploreThreadPage->m_threads[index].tid, _T("1"), posts, lzls);
-		if (posts.size() > 0)
-			pid = posts[0].pid;
-
 	}
 	else if (tabIndex == 1) // 帖子
 	{
 		author = m_explorePostPage->m_posts[index].author;
 		portrait = m_explorePostPage->m_posts[index].authorPortraitUrl;
 		nick_name = m_explorePostPage->m_posts[index].authorShowName;
-		pid = m_explorePostPage->m_posts[index].pid;
 	}
 	else // 楼中楼
 	{
 		author = m_exploreLzlPage->m_lzls[index].author;
 		portrait = m_exploreLzlPage->m_lzls[index].authorPortraitUrl;
 		nick_name = m_exploreLzlPage->m_lzls[index].authorShowName;
-		pid = m_exploreLzlPage->m_lzls[index].cid;
 	}
 
 	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
