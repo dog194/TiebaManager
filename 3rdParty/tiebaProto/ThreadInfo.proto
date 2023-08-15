@@ -2,13 +2,17 @@ syntax = "proto3";
 
 import "PbContent.proto";
 import "Agree.proto";
+import "PollInfo.proto";
 
 message ThreadInfo {
     int64 id = 1;
+    int64 tid = 2;
     string title = 3;
     int32 reply_num = 4;
     int32 view_num = 5;
+    string last_time = 6;
     int32 last_time_int = 7;
+    int32 thread_types = 8;
     int32 is_top = 9;
     int32 is_good = 10;
     int32 is_vote = 11;
@@ -16,12 +20,31 @@ message ThreadInfo {
     int64 first_post_id = 40;
     int32 is_global_top = 42;
     int32 create_time = 45;
+    int64 post_id = 52;
+    int32 time = 53;
     int64 author_id = 56;
     uint32 is_ad = 59;
+    string pids = 61;
+    PollInfo poll_info = 74;
     int32 is_godthread_recommend = 85;
     Agree agree = 126;
     int32 is_god = 131;
+    message OriginThreadInfo {
+		string title = 1;
+		string fname = 4;
+		string tid = 5;
+		int64 fid = 7;
+		int32 thread_type = 8;
+		int32 is_deleted = 9;
+		repeated PbContent content = 14;
+		int32 reply_num = 16;
+		Agree agree = 19;
+		PollInfo poll_info = 21;
+		int64 pid = 25;
+	}
+    OriginThreadInfo origin_thread_info = 141;
     repeated PbContent first_post_content = 142; 
+    int32 is_share_thread = 143;
     int32 tab_id = 175;
     int32 is_deleted = 181;
     int32 is_frs_mask = 198;

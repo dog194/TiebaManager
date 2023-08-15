@@ -4,417 +4,329 @@
 #include "FrsTabInfo.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class FrsTabInfoDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<FrsTabInfo>
-      _instance;
-} _FrsTabInfo_default_instance_;
-namespace protobuf_FrsTabInfo_2eproto {
-void InitDefaultsFrsTabInfoImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::_FrsTabInfo_default_instance_;
-    new (ptr) ::FrsTabInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::FrsTabInfo::InitAsDefaultInstance();
-}
-
-void InitDefaultsFrsTabInfo() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFrsTabInfoImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[1];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsTabInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsTabInfo, tab_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsTabInfo, tab_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsTabInfo, is_general_tab_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::FrsTabInfo)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_FrsTabInfo_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "FrsTabInfo.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\020FrsTabInfo.proto\"F\n\nFrsTabInfo\022\016\n\006tab_"
-      "id\030\001 \001(\005\022\020\n\010tab_name\030\003 \001(\t\022\026\n\016is_general"
-      "_tab\030\007 \001(\005b\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR FrsTabInfo::FrsTabInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.tab_name_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.tab_id_)*/ 0,
+      /*decltype(_impl_.is_general_tab_)*/ 0,
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct FrsTabInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR FrsTabInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~FrsTabInfoDefaultTypeInternal() {}
+  union {
+    FrsTabInfo _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 98);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "FrsTabInfo.proto", &protobuf_RegisterTypes);
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_FrsTabInfo_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FrsTabInfoDefaultTypeInternal _FrsTabInfo_default_instance_;
+static ::_pb::Metadata file_level_metadata_FrsTabInfo_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_FrsTabInfo_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_FrsTabInfo_2eproto = nullptr;
+const ::uint32_t TableStruct_FrsTabInfo_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::FrsTabInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::FrsTabInfo, _impl_.tab_id_),
+    PROTOBUF_FIELD_OFFSET(::FrsTabInfo, _impl_.tab_name_),
+    PROTOBUF_FIELD_OFFSET(::FrsTabInfo, _impl_.is_general_tab_),
+};
 
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, -1, -1, sizeof(::FrsTabInfo)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_FrsTabInfo_default_instance_._instance,
+};
+const char descriptor_table_protodef_FrsTabInfo_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\020FrsTabInfo.proto\"F\n\nFrsTabInfo\022\016\n\006tab_"
+    "id\030\001 \001(\005\022\020\n\010tab_name\030\003 \001(\t\022\026\n\016is_general"
+    "_tab\030\007 \001(\005b\006proto3"
+};
+static ::absl::once_flag descriptor_table_FrsTabInfo_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_FrsTabInfo_2eproto = {
+    false,
+    false,
+    98,
+    descriptor_table_protodef_FrsTabInfo_2eproto,
+    "FrsTabInfo.proto",
+    &descriptor_table_FrsTabInfo_2eproto_once,
+    nullptr,
+    0,
+    1,
+    schemas,
+    file_default_instances,
+    TableStruct_FrsTabInfo_2eproto::offsets,
+    file_level_metadata_FrsTabInfo_2eproto,
+    file_level_enum_descriptors_FrsTabInfo_2eproto,
+    file_level_service_descriptors_FrsTabInfo_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_FrsTabInfo_2eproto_getter() {
+  return &descriptor_table_FrsTabInfo_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_FrsTabInfo_2eproto(&descriptor_table_FrsTabInfo_2eproto);
 // ===================================================================
 
-void FrsTabInfo::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FrsTabInfo::kTabIdFieldNumber;
-const int FrsTabInfo::kTabNameFieldNumber;
-const int FrsTabInfo::kIsGeneralTabFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class FrsTabInfo::_Internal {
+ public:
+};
 
-FrsTabInfo::FrsTabInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_FrsTabInfo_2eproto::InitDefaultsFrsTabInfo();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:FrsTabInfo)
+FrsTabInfo::FrsTabInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:FrsTabInfo)
 }
-FrsTabInfo::FrsTabInfo(const FrsTabInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  tab_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.tab_name().size() > 0) {
-    tab_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tab_name_);
+FrsTabInfo::FrsTabInfo(const FrsTabInfo& from) : ::google::protobuf::Message() {
+  FrsTabInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_name_){},
+      decltype(_impl_.tab_id_){},
+      decltype(_impl_.is_general_tab_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.tab_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.tab_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_tab_name().empty()) {
+    _this->_impl_.tab_name_.Set(from._internal_tab_name(), _this->GetArenaForAllocation());
   }
-  ::memcpy(&tab_id_, &from.tab_id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&is_general_tab_) -
-    reinterpret_cast<char*>(&tab_id_)) + sizeof(is_general_tab_));
+  ::memcpy(&_impl_.tab_id_, &from._impl_.tab_id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.is_general_tab_) -
+    reinterpret_cast<char*>(&_impl_.tab_id_)) + sizeof(_impl_.is_general_tab_));
+
   // @@protoc_insertion_point(copy_constructor:FrsTabInfo)
 }
-
-void FrsTabInfo::SharedCtor() {
-  tab_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&tab_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&is_general_tab_) -
-      reinterpret_cast<char*>(&tab_id_)) + sizeof(is_general_tab_));
-  _cached_size_ = 0;
+inline void FrsTabInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_name_){},
+      decltype(_impl_.tab_id_){0},
+      decltype(_impl_.is_general_tab_){0},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.tab_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.tab_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 FrsTabInfo::~FrsTabInfo() {
   // @@protoc_insertion_point(destructor:FrsTabInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void FrsTabInfo::SharedDtor() {
-  tab_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void FrsTabInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.tab_name_.Destroy();
 }
-
 void FrsTabInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* FrsTabInfo::descriptor() {
-  ::protobuf_FrsTabInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsTabInfo_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const FrsTabInfo& FrsTabInfo::default_instance() {
-  ::protobuf_FrsTabInfo_2eproto::InitDefaultsFrsTabInfo();
-  return *internal_default_instance();
-}
-
-FrsTabInfo* FrsTabInfo::New(::google::protobuf::Arena* arena) const {
-  FrsTabInfo* n = new FrsTabInfo;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void FrsTabInfo::Clear() {
+PROTOBUF_NOINLINE void FrsTabInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:FrsTabInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  tab_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&tab_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&is_general_tab_) -
-      reinterpret_cast<char*>(&tab_id_)) + sizeof(is_general_tab_));
-  _internal_metadata_.Clear();
+  _impl_.tab_name_.ClearToEmpty();
+  ::memset(&_impl_.tab_id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.is_general_tab_) -
+      reinterpret_cast<char*>(&_impl_.tab_id_)) + sizeof(_impl_.is_general_tab_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool FrsTabInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:FrsTabInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 tab_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &tab_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string tab_name = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_tab_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->tab_name().data(), static_cast<int>(this->tab_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "FrsTabInfo.tab_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_general_tab = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_general_tab_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:FrsTabInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:FrsTabInfo)
-  return false;
-#undef DO_
+const char* FrsTabInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void FrsTabInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:FrsTabInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // int32 tab_id = 1;
-  if (this->tab_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->tab_id(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 27, 2> FrsTabInfo::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    7, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967226,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_FrsTabInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 tab_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(FrsTabInfo, _impl_.tab_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(FrsTabInfo, _impl_.tab_id_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // string tab_name = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(FrsTabInfo, _impl_.tab_name_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 tab_id = 1;
+    {PROTOBUF_FIELD_OFFSET(FrsTabInfo, _impl_.tab_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string tab_name = 3;
+    {PROTOBUF_FIELD_OFFSET(FrsTabInfo, _impl_.tab_name_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 is_general_tab = 7;
+    {PROTOBUF_FIELD_OFFSET(FrsTabInfo, _impl_.is_general_tab_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+    "\12\0\10\0\0\0\0\0"
+    "FrsTabInfo"
+    "tab_name"
+  }},
+};
 
-  // string tab_name = 3;
-  if (this->tab_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->tab_name().data(), static_cast<int>(this->tab_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "FrsTabInfo.tab_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->tab_name(), output);
-  }
-
-  // int32 is_general_tab = 7;
-  if (this->is_general_tab() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->is_general_tab(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:FrsTabInfo)
-}
-
-::google::protobuf::uint8* FrsTabInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* FrsTabInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:FrsTabInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int32 tab_id = 1;
-  if (this->tab_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->tab_id(), target);
+  if (this->_internal_tab_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_tab_id(), target);
   }
 
   // string tab_name = 3;
-  if (this->tab_name().size() > 0) {
+  if (!this->_internal_tab_name().empty()) {
+    const std::string& _s = this->_internal_tab_name();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->tab_name().data(), static_cast<int>(this->tab_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "FrsTabInfo.tab_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->tab_name(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "FrsTabInfo.tab_name");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
   // int32 is_general_tab = 7;
-  if (this->is_general_tab() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->is_general_tab(), target);
+  if (this->_internal_is_general_tab() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<7>(
+            stream, this->_internal_is_general_tab(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:FrsTabInfo)
   return target;
 }
 
-size_t FrsTabInfo::ByteSizeLong() const {
+::size_t FrsTabInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:FrsTabInfo)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // string tab_name = 3;
-  if (this->tab_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->tab_name());
+  if (!this->_internal_tab_name().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_tab_name());
   }
 
   // int32 tab_id = 1;
-  if (this->tab_id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->tab_id());
+  if (this->_internal_tab_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_tab_id());
   }
 
   // int32 is_general_tab = 7;
-  if (this->is_general_tab() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_general_tab());
+  if (this->_internal_is_general_tab() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_is_general_tab());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void FrsTabInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:FrsTabInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  const FrsTabInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const FrsTabInfo>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FrsTabInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:FrsTabInfo)
-    MergeFrom(*source);
-  }
-}
+const ::google::protobuf::Message::ClassData FrsTabInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    FrsTabInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*FrsTabInfo::GetClassData() const { return &_class_data_; }
 
-void FrsTabInfo::MergeFrom(const FrsTabInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:FrsTabInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+
+void FrsTabInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<FrsTabInfo*>(&to_msg);
+  auto& from = static_cast<const FrsTabInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:FrsTabInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.tab_name().size() > 0) {
-
-    tab_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tab_name_);
+  if (!from._internal_tab_name().empty()) {
+    _this->_internal_set_tab_name(from._internal_tab_name());
   }
-  if (from.tab_id() != 0) {
-    set_tab_id(from.tab_id());
+  if (from._internal_tab_id() != 0) {
+    _this->_internal_set_tab_id(from._internal_tab_id());
   }
-  if (from.is_general_tab() != 0) {
-    set_is_general_tab(from.is_general_tab());
+  if (from._internal_is_general_tab() != 0) {
+    _this->_internal_set_is_general_tab(from._internal_is_general_tab());
   }
-}
-
-void FrsTabInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:FrsTabInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void FrsTabInfo::CopyFrom(const FrsTabInfo& from) {
@@ -424,29 +336,34 @@ void FrsTabInfo::CopyFrom(const FrsTabInfo& from) {
   MergeFrom(from);
 }
 
-bool FrsTabInfo::IsInitialized() const {
+PROTOBUF_NOINLINE bool FrsTabInfo::IsInitialized() const {
   return true;
 }
 
-void FrsTabInfo::Swap(FrsTabInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void FrsTabInfo::InternalSwap(FrsTabInfo* other) {
   using std::swap;
-  tab_name_.Swap(&other->tab_name_);
-  swap(tab_id_, other->tab_id_);
-  swap(is_general_tab_, other->is_general_tab_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.tab_name_, lhs_arena,
+                                       &other->_impl_.tab_name_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(FrsTabInfo, _impl_.is_general_tab_)
+      + sizeof(FrsTabInfo::_impl_.is_general_tab_)
+      - PROTOBUF_FIELD_OFFSET(FrsTabInfo, _impl_.tab_id_)>(
+          reinterpret_cast<char*>(&_impl_.tab_id_),
+          reinterpret_cast<char*>(&other->_impl_.tab_id_));
 }
 
 ::google::protobuf::Metadata FrsTabInfo::GetMetadata() const {
-  protobuf_FrsTabInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsTabInfo_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_FrsTabInfo_2eproto_getter, &descriptor_table_FrsTabInfo_2eproto_once,
+      file_level_metadata_FrsTabInfo_2eproto[0]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

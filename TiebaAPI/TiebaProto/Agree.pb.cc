@@ -4,359 +4,273 @@
 #include "Agree.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class AgreeDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Agree>
-      _instance;
-} _Agree_default_instance_;
-namespace protobuf_Agree_2eproto {
-void InitDefaultsAgreeImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::_Agree_default_instance_;
-    new (ptr) ::Agree();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Agree::InitAsDefaultInstance();
-}
-
-void InitDefaultsAgree() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsAgreeImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[1];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Agree, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Agree, agree_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Agree, disagree_num_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::Agree)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_Agree_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "Agree.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\013Agree.proto\"0\n\005Agree\022\021\n\tagree_num\030\001 \001("
-      "\003\022\024\n\014disagree_num\030\004 \001(\003b\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR Agree::Agree(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.agree_num_)*/ ::int64_t{0},
+      /*decltype(_impl_.disagree_num_)*/ ::int64_t{0},
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct AgreeDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR AgreeDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~AgreeDefaultTypeInternal() {}
+  union {
+    Agree _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 71);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "Agree.proto", &protobuf_RegisterTypes);
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_Agree_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 AgreeDefaultTypeInternal _Agree_default_instance_;
+static ::_pb::Metadata file_level_metadata_Agree_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_Agree_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_Agree_2eproto = nullptr;
+const ::uint32_t TableStruct_Agree_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::Agree, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::Agree, _impl_.agree_num_),
+    PROTOBUF_FIELD_OFFSET(::Agree, _impl_.disagree_num_),
+};
 
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, -1, -1, sizeof(::Agree)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_Agree_default_instance_._instance,
+};
+const char descriptor_table_protodef_Agree_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\013Agree.proto\"0\n\005Agree\022\021\n\tagree_num\030\001 \001("
+    "\003\022\024\n\014disagree_num\030\004 \001(\003b\006proto3"
+};
+static ::absl::once_flag descriptor_table_Agree_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_Agree_2eproto = {
+    false,
+    false,
+    71,
+    descriptor_table_protodef_Agree_2eproto,
+    "Agree.proto",
+    &descriptor_table_Agree_2eproto_once,
+    nullptr,
+    0,
+    1,
+    schemas,
+    file_default_instances,
+    TableStruct_Agree_2eproto::offsets,
+    file_level_metadata_Agree_2eproto,
+    file_level_enum_descriptors_Agree_2eproto,
+    file_level_service_descriptors_Agree_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_Agree_2eproto_getter() {
+  return &descriptor_table_Agree_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_Agree_2eproto(&descriptor_table_Agree_2eproto);
 // ===================================================================
 
-void Agree::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Agree::kAgreeNumFieldNumber;
-const int Agree::kDisagreeNumFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class Agree::_Internal {
+ public:
+};
 
-Agree::Agree()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Agree_2eproto::InitDefaultsAgree();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:Agree)
+Agree::Agree(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Agree)
 }
 Agree::Agree(const Agree& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&agree_num_, &from.agree_num_,
-    static_cast<size_t>(reinterpret_cast<char*>(&disagree_num_) -
-    reinterpret_cast<char*>(&agree_num_)) + sizeof(disagree_num_));
+    : ::google::protobuf::Message(), _impl_(from._impl_) {
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:Agree)
 }
-
-void Agree::SharedCtor() {
-  ::memset(&agree_num_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&disagree_num_) -
-      reinterpret_cast<char*>(&agree_num_)) + sizeof(disagree_num_));
-  _cached_size_ = 0;
+inline void Agree::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.agree_num_){::int64_t{0}},
+      decltype(_impl_.disagree_num_){::int64_t{0}},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
 }
-
 Agree::~Agree() {
   // @@protoc_insertion_point(destructor:Agree)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Agree::SharedDtor() {
+inline void Agree::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
 }
-
 void Agree::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Agree::descriptor() {
-  ::protobuf_Agree_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Agree_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const Agree& Agree::default_instance() {
-  ::protobuf_Agree_2eproto::InitDefaultsAgree();
-  return *internal_default_instance();
-}
-
-Agree* Agree::New(::google::protobuf::Arena* arena) const {
-  Agree* n = new Agree;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void Agree::Clear() {
+PROTOBUF_NOINLINE void Agree::Clear() {
 // @@protoc_insertion_point(message_clear_start:Agree)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&agree_num_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&disagree_num_) -
-      reinterpret_cast<char*>(&agree_num_)) + sizeof(disagree_num_));
-  _internal_metadata_.Clear();
+  ::memset(&_impl_.agree_num_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.disagree_num_) -
+      reinterpret_cast<char*>(&_impl_.agree_num_)) + sizeof(_impl_.disagree_num_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool Agree::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Agree)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 agree_num = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &agree_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 disagree_num = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &disagree_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:Agree)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:Agree)
-  return false;
-#undef DO_
+const char* Agree::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void Agree::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Agree)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // int64 agree_num = 1;
-  if (this->agree_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->agree_num(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> Agree::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    4, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967286,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_Agree_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // int64 disagree_num = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(Agree, _impl_.disagree_num_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(Agree, _impl_.disagree_num_)}},
+    // int64 agree_num = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(Agree, _impl_.agree_num_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Agree, _impl_.agree_num_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int64 agree_num = 1;
+    {PROTOBUF_FIELD_OFFSET(Agree, _impl_.agree_num_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // int64 disagree_num = 4;
+    {PROTOBUF_FIELD_OFFSET(Agree, _impl_.disagree_num_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
 
-  // int64 disagree_num = 4;
-  if (this->disagree_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->disagree_num(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:Agree)
-}
-
-::google::protobuf::uint8* Agree::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* Agree::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:Agree)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int64 agree_num = 1;
-  if (this->agree_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->agree_num(), target);
+  if (this->_internal_agree_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<1>(
+            stream, this->_internal_agree_num(), target);
   }
 
   // int64 disagree_num = 4;
-  if (this->disagree_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->disagree_num(), target);
+  if (this->_internal_disagree_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<4>(
+            stream, this->_internal_disagree_num(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:Agree)
   return target;
 }
 
-size_t Agree::ByteSizeLong() const {
+::size_t Agree::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:Agree)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // int64 agree_num = 1;
-  if (this->agree_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->agree_num());
+  if (this->_internal_agree_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_agree_num());
   }
 
   // int64 disagree_num = 4;
-  if (this->disagree_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->disagree_num());
+  if (this->_internal_disagree_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_disagree_num());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Agree::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Agree)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Agree* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Agree>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Agree)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Agree)
-    MergeFrom(*source);
-  }
-}
+const ::google::protobuf::Message::ClassData Agree::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    Agree::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*Agree::GetClassData() const { return &_class_data_; }
 
-void Agree::MergeFrom(const Agree& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Agree)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+
+void Agree::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Agree*>(&to_msg);
+  auto& from = static_cast<const Agree&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Agree)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.agree_num() != 0) {
-    set_agree_num(from.agree_num());
+  if (from._internal_agree_num() != 0) {
+    _this->_internal_set_agree_num(from._internal_agree_num());
   }
-  if (from.disagree_num() != 0) {
-    set_disagree_num(from.disagree_num());
+  if (from._internal_disagree_num() != 0) {
+    _this->_internal_set_disagree_num(from._internal_disagree_num());
   }
-}
-
-void Agree::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Agree)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Agree::CopyFrom(const Agree& from) {
@@ -366,28 +280,30 @@ void Agree::CopyFrom(const Agree& from) {
   MergeFrom(from);
 }
 
-bool Agree::IsInitialized() const {
+PROTOBUF_NOINLINE bool Agree::IsInitialized() const {
   return true;
 }
 
-void Agree::Swap(Agree* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Agree::InternalSwap(Agree* other) {
   using std::swap;
-  swap(agree_num_, other->agree_num_);
-  swap(disagree_num_, other->disagree_num_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Agree, _impl_.disagree_num_)
+      + sizeof(Agree::_impl_.disagree_num_)
+      - PROTOBUF_FIELD_OFFSET(Agree, _impl_.agree_num_)>(
+          reinterpret_cast<char*>(&_impl_.agree_num_),
+          reinterpret_cast<char*>(&other->_impl_.agree_num_));
 }
 
 ::google::protobuf::Metadata Agree::GetMetadata() const {
-  protobuf_Agree_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Agree_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Agree_2eproto_getter, &descriptor_table_Agree_2eproto_once,
+      file_level_metadata_Agree_2eproto[0]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

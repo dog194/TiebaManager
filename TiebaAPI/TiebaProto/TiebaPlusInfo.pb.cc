@@ -4,799 +4,1216 @@
 #include "TiebaPlusInfo.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class TiebaPlusInfoDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<TiebaPlusInfo>
-      _instance;
-} _TiebaPlusInfo_default_instance_;
-namespace protobuf_TiebaPlusInfo_2eproto {
-void InitDefaultsTiebaPlusInfoImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::_TiebaPlusInfo_default_instance_;
-    new (ptr) ::TiebaPlusInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::TiebaPlusInfo::InitAsDefaultInstance();
-}
-
-void InitDefaultsTiebaPlusInfo() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsTiebaPlusInfoImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[1];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, title_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, desc_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, jump_url_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, app_icon_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, target_type_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, h5_jump_type_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, h5_jump_number_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, h5_jump_param_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, jump_type_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::TiebaPlusInfo, button_desc_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::TiebaPlusInfo)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_TiebaPlusInfo_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "TiebaPlusInfo.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\023TiebaPlusInfo.proto\"\322\001\n\rTiebaPlusInfo\022"
-      "\r\n\005title\030\001 \001(\t\022\014\n\004desc\030\002 \001(\t\022\020\n\010jump_url"
-      "\030\003 \001(\t\022\020\n\010app_icon\030\006 \001(\t\022\023\n\013target_type\030"
-      "\014 \001(\005\022\024\n\014h5_jump_type\030\r \001(\005\022\026\n\016h5_jump_n"
-      "umber\030\016 \001(\t\022\025\n\rh5_jump_param\030\017 \001(\t\022\021\n\tju"
-      "mp_type\030\020 \001(\005\022\023\n\013button_desc\030\027 \001(\tb\006prot"
-      "o3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR TiebaPlusInfo::TiebaPlusInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.title_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.desc_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.jump_url_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.download_url_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.app_id_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.app_icon_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.app_package_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.app_version_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.app_privacy_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.app_power_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.app_company_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.h5_jump_number_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.h5_jump_param_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.item_id_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.forum_name_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.wx_thumbnail_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.button_desc_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.plugin_user_)*/ nullptr,
+      /*decltype(_impl_.target_type_)*/ 0,
+      /*decltype(_impl_.h5_jump_type_)*/ 0,
+      /*decltype(_impl_.jump_type_)*/ 0,
+      /*decltype(_impl_.is_appoint_)*/ 0,
+      /*decltype(_impl_.jump_setting_)*/ 0,
+    } {}
+struct TiebaPlusInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR TiebaPlusInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~TiebaPlusInfoDefaultTypeInternal() {}
+  union {
+    TiebaPlusInfo _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 242);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "TiebaPlusInfo.proto", &protobuf_RegisterTypes);
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_TiebaPlusInfo_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TiebaPlusInfoDefaultTypeInternal _TiebaPlusInfo_default_instance_;
+static ::_pb::Metadata file_level_metadata_TiebaPlusInfo_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_TiebaPlusInfo_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_TiebaPlusInfo_2eproto = nullptr;
+const ::uint32_t TableStruct_TiebaPlusInfo_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.title_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.desc_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.jump_url_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.download_url_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.app_id_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.app_icon_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.app_package_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.app_version_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.app_privacy_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.app_power_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.app_company_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.target_type_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.h5_jump_type_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.h5_jump_number_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.h5_jump_param_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.jump_type_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.item_id_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.is_appoint_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.plugin_user_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.forum_name_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.jump_setting_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.wx_thumbnail_),
+    PROTOBUF_FIELD_OFFSET(::TiebaPlusInfo, _impl_.button_desc_),
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    0,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+};
 
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, 31, -1, sizeof(::TiebaPlusInfo)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_TiebaPlusInfo_default_instance_._instance,
+};
+const char descriptor_table_protodef_TiebaPlusInfo_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\023TiebaPlusInfo.proto\032\020PluginUser.proto\""
+    "\346\003\n\rTiebaPlusInfo\022\r\n\005title\030\001 \001(\t\022\014\n\004desc"
+    "\030\002 \001(\t\022\020\n\010jump_url\030\003 \001(\t\022\024\n\014download_url"
+    "\030\004 \001(\t\022\016\n\006app_id\030\005 \001(\t\022\020\n\010app_icon\030\006 \001(\t"
+    "\022\023\n\013app_package\030\007 \001(\t\022\023\n\013app_version\030\010 \001"
+    "(\t\022\023\n\013app_privacy\030\t \001(\t\022\021\n\tapp_power\030\n \001"
+    "(\t\022\023\n\013app_company\030\013 \001(\t\022\023\n\013target_type\030\014"
+    " \001(\005\022\024\n\014h5_jump_type\030\r \001(\005\022\026\n\016h5_jump_nu"
+    "mber\030\016 \001(\t\022\025\n\rh5_jump_param\030\017 \001(\t\022\021\n\tjum"
+    "p_type\030\020 \001(\005\022\017\n\007item_id\030\021 \001(\t\022\022\n\nis_appo"
+    "int\030\022 \001(\005\022 \n\013plugin_user\030\023 \001(\0132\013.PluginU"
+    "ser\022\022\n\nforum_name\030\024 \001(\t\022\024\n\014jump_setting\030"
+    "\025 \001(\005\022\024\n\014wx_thumbnail\030\026 \001(\t\022\023\n\013button_de"
+    "sc\030\027 \001(\tb\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_TiebaPlusInfo_2eproto_deps[1] =
+    {
+        &::descriptor_table_PluginUser_2eproto,
+};
+static ::absl::once_flag descriptor_table_TiebaPlusInfo_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_TiebaPlusInfo_2eproto = {
+    false,
+    false,
+    536,
+    descriptor_table_protodef_TiebaPlusInfo_2eproto,
+    "TiebaPlusInfo.proto",
+    &descriptor_table_TiebaPlusInfo_2eproto_once,
+    descriptor_table_TiebaPlusInfo_2eproto_deps,
+    1,
+    1,
+    schemas,
+    file_default_instances,
+    TableStruct_TiebaPlusInfo_2eproto::offsets,
+    file_level_metadata_TiebaPlusInfo_2eproto,
+    file_level_enum_descriptors_TiebaPlusInfo_2eproto,
+    file_level_service_descriptors_TiebaPlusInfo_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_TiebaPlusInfo_2eproto_getter() {
+  return &descriptor_table_TiebaPlusInfo_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_TiebaPlusInfo_2eproto(&descriptor_table_TiebaPlusInfo_2eproto);
 // ===================================================================
 
-void TiebaPlusInfo::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int TiebaPlusInfo::kTitleFieldNumber;
-const int TiebaPlusInfo::kDescFieldNumber;
-const int TiebaPlusInfo::kJumpUrlFieldNumber;
-const int TiebaPlusInfo::kAppIconFieldNumber;
-const int TiebaPlusInfo::kTargetTypeFieldNumber;
-const int TiebaPlusInfo::kH5JumpTypeFieldNumber;
-const int TiebaPlusInfo::kH5JumpNumberFieldNumber;
-const int TiebaPlusInfo::kH5JumpParamFieldNumber;
-const int TiebaPlusInfo::kJumpTypeFieldNumber;
-const int TiebaPlusInfo::kButtonDescFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class TiebaPlusInfo::_Internal {
+ public:
+  using HasBits = decltype(std::declval<TiebaPlusInfo>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_._has_bits_);
+  static const ::PluginUser& plugin_user(const TiebaPlusInfo* msg);
+  static void set_has_plugin_user(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+};
 
-TiebaPlusInfo::TiebaPlusInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_TiebaPlusInfo_2eproto::InitDefaultsTiebaPlusInfo();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:TiebaPlusInfo)
+const ::PluginUser& TiebaPlusInfo::_Internal::plugin_user(const TiebaPlusInfo* msg) {
+  return *msg->_impl_.plugin_user_;
 }
-TiebaPlusInfo::TiebaPlusInfo(const TiebaPlusInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.title().size() > 0) {
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+void TiebaPlusInfo::clear_plugin_user() {
+  if (_impl_.plugin_user_ != nullptr) _impl_.plugin_user_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+TiebaPlusInfo::TiebaPlusInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:TiebaPlusInfo)
+}
+TiebaPlusInfo::TiebaPlusInfo(const TiebaPlusInfo& from) : ::google::protobuf::Message() {
+  TiebaPlusInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.title_){},
+      decltype(_impl_.desc_){},
+      decltype(_impl_.jump_url_){},
+      decltype(_impl_.download_url_){},
+      decltype(_impl_.app_id_){},
+      decltype(_impl_.app_icon_){},
+      decltype(_impl_.app_package_){},
+      decltype(_impl_.app_version_){},
+      decltype(_impl_.app_privacy_){},
+      decltype(_impl_.app_power_){},
+      decltype(_impl_.app_company_){},
+      decltype(_impl_.h5_jump_number_){},
+      decltype(_impl_.h5_jump_param_){},
+      decltype(_impl_.item_id_){},
+      decltype(_impl_.forum_name_){},
+      decltype(_impl_.wx_thumbnail_){},
+      decltype(_impl_.button_desc_){},
+      decltype(_impl_.plugin_user_){nullptr},
+      decltype(_impl_.target_type_){},
+      decltype(_impl_.h5_jump_type_){},
+      decltype(_impl_.jump_type_){},
+      decltype(_impl_.is_appoint_){},
+      decltype(_impl_.jump_setting_){},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_title().empty()) {
+    _this->_impl_.title_.Set(from._internal_title(), _this->GetArenaForAllocation());
   }
-  desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.desc().size() > 0) {
-    desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
+  _impl_.desc_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.desc_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_desc().empty()) {
+    _this->_impl_.desc_.Set(from._internal_desc(), _this->GetArenaForAllocation());
   }
-  jump_url_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.jump_url().size() > 0) {
-    jump_url_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.jump_url_);
+  _impl_.jump_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.jump_url_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_jump_url().empty()) {
+    _this->_impl_.jump_url_.Set(from._internal_jump_url(), _this->GetArenaForAllocation());
   }
-  app_icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.app_icon().size() > 0) {
-    app_icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.app_icon_);
+  _impl_.download_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.download_url_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_download_url().empty()) {
+    _this->_impl_.download_url_.Set(from._internal_download_url(), _this->GetArenaForAllocation());
   }
-  h5_jump_number_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.h5_jump_number().size() > 0) {
-    h5_jump_number_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.h5_jump_number_);
+  _impl_.app_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_id_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_app_id().empty()) {
+    _this->_impl_.app_id_.Set(from._internal_app_id(), _this->GetArenaForAllocation());
   }
-  h5_jump_param_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.h5_jump_param().size() > 0) {
-    h5_jump_param_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.h5_jump_param_);
+  _impl_.app_icon_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_icon_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_app_icon().empty()) {
+    _this->_impl_.app_icon_.Set(from._internal_app_icon(), _this->GetArenaForAllocation());
   }
-  button_desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.button_desc().size() > 0) {
-    button_desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.button_desc_);
+  _impl_.app_package_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_package_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_app_package().empty()) {
+    _this->_impl_.app_package_.Set(from._internal_app_package(), _this->GetArenaForAllocation());
   }
-  ::memcpy(&jump_type_, &from.jump_type_,
-    static_cast<size_t>(reinterpret_cast<char*>(&h5_jump_type_) -
-    reinterpret_cast<char*>(&jump_type_)) + sizeof(h5_jump_type_));
+  _impl_.app_version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_version_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_app_version().empty()) {
+    _this->_impl_.app_version_.Set(from._internal_app_version(), _this->GetArenaForAllocation());
+  }
+  _impl_.app_privacy_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_privacy_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_app_privacy().empty()) {
+    _this->_impl_.app_privacy_.Set(from._internal_app_privacy(), _this->GetArenaForAllocation());
+  }
+  _impl_.app_power_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_power_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_app_power().empty()) {
+    _this->_impl_.app_power_.Set(from._internal_app_power(), _this->GetArenaForAllocation());
+  }
+  _impl_.app_company_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_company_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_app_company().empty()) {
+    _this->_impl_.app_company_.Set(from._internal_app_company(), _this->GetArenaForAllocation());
+  }
+  _impl_.h5_jump_number_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.h5_jump_number_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_h5_jump_number().empty()) {
+    _this->_impl_.h5_jump_number_.Set(from._internal_h5_jump_number(), _this->GetArenaForAllocation());
+  }
+  _impl_.h5_jump_param_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.h5_jump_param_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_h5_jump_param().empty()) {
+    _this->_impl_.h5_jump_param_.Set(from._internal_h5_jump_param(), _this->GetArenaForAllocation());
+  }
+  _impl_.item_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.item_id_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_item_id().empty()) {
+    _this->_impl_.item_id_.Set(from._internal_item_id(), _this->GetArenaForAllocation());
+  }
+  _impl_.forum_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.forum_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_forum_name().empty()) {
+    _this->_impl_.forum_name_.Set(from._internal_forum_name(), _this->GetArenaForAllocation());
+  }
+  _impl_.wx_thumbnail_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.wx_thumbnail_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_wx_thumbnail().empty()) {
+    _this->_impl_.wx_thumbnail_.Set(from._internal_wx_thumbnail(), _this->GetArenaForAllocation());
+  }
+  _impl_.button_desc_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.button_desc_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_button_desc().empty()) {
+    _this->_impl_.button_desc_.Set(from._internal_button_desc(), _this->GetArenaForAllocation());
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.plugin_user_ = new ::PluginUser(*from._impl_.plugin_user_);
+  }
+  ::memcpy(&_impl_.target_type_, &from._impl_.target_type_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.jump_setting_) -
+    reinterpret_cast<char*>(&_impl_.target_type_)) + sizeof(_impl_.jump_setting_));
+
   // @@protoc_insertion_point(copy_constructor:TiebaPlusInfo)
 }
-
-void TiebaPlusInfo::SharedCtor() {
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  jump_url_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  app_icon_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  h5_jump_number_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  h5_jump_param_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  button_desc_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&jump_type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&h5_jump_type_) -
-      reinterpret_cast<char*>(&jump_type_)) + sizeof(h5_jump_type_));
-  _cached_size_ = 0;
+inline void TiebaPlusInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.title_){},
+      decltype(_impl_.desc_){},
+      decltype(_impl_.jump_url_){},
+      decltype(_impl_.download_url_){},
+      decltype(_impl_.app_id_){},
+      decltype(_impl_.app_icon_){},
+      decltype(_impl_.app_package_){},
+      decltype(_impl_.app_version_){},
+      decltype(_impl_.app_privacy_){},
+      decltype(_impl_.app_power_){},
+      decltype(_impl_.app_company_){},
+      decltype(_impl_.h5_jump_number_){},
+      decltype(_impl_.h5_jump_param_){},
+      decltype(_impl_.item_id_){},
+      decltype(_impl_.forum_name_){},
+      decltype(_impl_.wx_thumbnail_){},
+      decltype(_impl_.button_desc_){},
+      decltype(_impl_.plugin_user_){nullptr},
+      decltype(_impl_.target_type_){0},
+      decltype(_impl_.h5_jump_type_){0},
+      decltype(_impl_.jump_type_){0},
+      decltype(_impl_.is_appoint_){0},
+      decltype(_impl_.jump_setting_){0},
+  };
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.desc_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.desc_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.jump_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.jump_url_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.download_url_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.download_url_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.app_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_id_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.app_icon_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_icon_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.app_package_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_package_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.app_version_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_version_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.app_privacy_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_privacy_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.app_power_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_power_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.app_company_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.app_company_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.h5_jump_number_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.h5_jump_number_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.h5_jump_param_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.h5_jump_param_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.item_id_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.item_id_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.forum_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.forum_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.wx_thumbnail_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.wx_thumbnail_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.button_desc_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.button_desc_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 TiebaPlusInfo::~TiebaPlusInfo() {
   // @@protoc_insertion_point(destructor:TiebaPlusInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void TiebaPlusInfo::SharedDtor() {
-  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  desc_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  jump_url_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  app_icon_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  h5_jump_number_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  h5_jump_param_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  button_desc_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void TiebaPlusInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.title_.Destroy();
+  _impl_.desc_.Destroy();
+  _impl_.jump_url_.Destroy();
+  _impl_.download_url_.Destroy();
+  _impl_.app_id_.Destroy();
+  _impl_.app_icon_.Destroy();
+  _impl_.app_package_.Destroy();
+  _impl_.app_version_.Destroy();
+  _impl_.app_privacy_.Destroy();
+  _impl_.app_power_.Destroy();
+  _impl_.app_company_.Destroy();
+  _impl_.h5_jump_number_.Destroy();
+  _impl_.h5_jump_param_.Destroy();
+  _impl_.item_id_.Destroy();
+  _impl_.forum_name_.Destroy();
+  _impl_.wx_thumbnail_.Destroy();
+  _impl_.button_desc_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.plugin_user_;
 }
-
 void TiebaPlusInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* TiebaPlusInfo::descriptor() {
-  ::protobuf_TiebaPlusInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_TiebaPlusInfo_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const TiebaPlusInfo& TiebaPlusInfo::default_instance() {
-  ::protobuf_TiebaPlusInfo_2eproto::InitDefaultsTiebaPlusInfo();
-  return *internal_default_instance();
-}
-
-TiebaPlusInfo* TiebaPlusInfo::New(::google::protobuf::Arena* arena) const {
-  TiebaPlusInfo* n = new TiebaPlusInfo;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void TiebaPlusInfo::Clear() {
+PROTOBUF_NOINLINE void TiebaPlusInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:TiebaPlusInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  jump_url_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  app_icon_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  h5_jump_number_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  h5_jump_param_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  button_desc_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&jump_type_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&h5_jump_type_) -
-      reinterpret_cast<char*>(&jump_type_)) + sizeof(h5_jump_type_));
-  _internal_metadata_.Clear();
+  _impl_.title_.ClearToEmpty();
+  _impl_.desc_.ClearToEmpty();
+  _impl_.jump_url_.ClearToEmpty();
+  _impl_.download_url_.ClearToEmpty();
+  _impl_.app_id_.ClearToEmpty();
+  _impl_.app_icon_.ClearToEmpty();
+  _impl_.app_package_.ClearToEmpty();
+  _impl_.app_version_.ClearToEmpty();
+  _impl_.app_privacy_.ClearToEmpty();
+  _impl_.app_power_.ClearToEmpty();
+  _impl_.app_company_.ClearToEmpty();
+  _impl_.h5_jump_number_.ClearToEmpty();
+  _impl_.h5_jump_param_.ClearToEmpty();
+  _impl_.item_id_.ClearToEmpty();
+  _impl_.forum_name_.ClearToEmpty();
+  _impl_.wx_thumbnail_.ClearToEmpty();
+  _impl_.button_desc_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.plugin_user_ != nullptr);
+    _impl_.plugin_user_->Clear();
+  }
+  ::memset(&_impl_.target_type_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.jump_setting_) -
+      reinterpret_cast<char*>(&_impl_.target_type_)) + sizeof(_impl_.jump_setting_));
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool TiebaPlusInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:TiebaPlusInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string title = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_title()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->title().data(), static_cast<int>(this->title().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "TiebaPlusInfo.title"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string desc = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_desc()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->desc().data(), static_cast<int>(this->desc().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "TiebaPlusInfo.desc"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string jump_url = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_jump_url()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->jump_url().data(), static_cast<int>(this->jump_url().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "TiebaPlusInfo.jump_url"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string app_icon = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_app_icon()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->app_icon().data(), static_cast<int>(this->app_icon().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "TiebaPlusInfo.app_icon"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 target_type = 12;
-      case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(96u /* 96 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &target_type_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 h5_jump_type = 13;
-      case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &h5_jump_type_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string h5_jump_number = 14;
-      case 14: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(114u /* 114 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_h5_jump_number()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->h5_jump_number().data(), static_cast<int>(this->h5_jump_number().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "TiebaPlusInfo.h5_jump_number"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string h5_jump_param = 15;
-      case 15: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(122u /* 122 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_h5_jump_param()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->h5_jump_param().data(), static_cast<int>(this->h5_jump_param().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "TiebaPlusInfo.h5_jump_param"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 jump_type = 16;
-      case 16: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(128u /* 128 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &jump_type_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string button_desc = 23;
-      case 23: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(186u /* 186 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_button_desc()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->button_desc().data(), static_cast<int>(this->button_desc().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "TiebaPlusInfo.button_desc"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:TiebaPlusInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:TiebaPlusInfo)
-  return false;
-#undef DO_
+const char* TiebaPlusInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void TiebaPlusInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:TiebaPlusInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // string title = 1;
-  if (this->title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.title");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->title(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<5, 23, 1, 201, 2> TiebaPlusInfo::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_._has_bits_),
+    0, // no _extensions_
+    23, 248,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4286578688,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    23,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_TiebaPlusInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // string title = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.title_)}},
+    // string desc = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.desc_)}},
+    // string jump_url = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.jump_url_)}},
+    // string download_url = 4;
+    {::_pbi::TcParser::FastUS1,
+     {34, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.download_url_)}},
+    // string app_id = 5;
+    {::_pbi::TcParser::FastUS1,
+     {42, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_id_)}},
+    // string app_icon = 6;
+    {::_pbi::TcParser::FastUS1,
+     {50, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_icon_)}},
+    // string app_package = 7;
+    {::_pbi::TcParser::FastUS1,
+     {58, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_package_)}},
+    // string app_version = 8;
+    {::_pbi::TcParser::FastUS1,
+     {66, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_version_)}},
+    // string app_privacy = 9;
+    {::_pbi::TcParser::FastUS1,
+     {74, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_privacy_)}},
+    // string app_power = 10;
+    {::_pbi::TcParser::FastUS1,
+     {82, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_power_)}},
+    // string app_company = 11;
+    {::_pbi::TcParser::FastUS1,
+     {90, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_company_)}},
+    // int32 target_type = 12;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(TiebaPlusInfo, _impl_.target_type_), 63>(),
+     {96, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.target_type_)}},
+    // int32 h5_jump_type = 13;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(TiebaPlusInfo, _impl_.h5_jump_type_), 63>(),
+     {104, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.h5_jump_type_)}},
+    // string h5_jump_number = 14;
+    {::_pbi::TcParser::FastUS1,
+     {114, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.h5_jump_number_)}},
+    // string h5_jump_param = 15;
+    {::_pbi::TcParser::FastUS1,
+     {122, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.h5_jump_param_)}},
+    // int32 jump_type = 16;
+    {::_pbi::TcParser::FastV32S2,
+     {384, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.jump_type_)}},
+    // string item_id = 17;
+    {::_pbi::TcParser::FastUS2,
+     {394, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.item_id_)}},
+    // int32 is_appoint = 18;
+    {::_pbi::TcParser::FastV32S2,
+     {400, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.is_appoint_)}},
+    // .PluginUser plugin_user = 19;
+    {::_pbi::TcParser::FastMtS2,
+     {410, 0, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.plugin_user_)}},
+    // string forum_name = 20;
+    {::_pbi::TcParser::FastUS2,
+     {418, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.forum_name_)}},
+    // int32 jump_setting = 21;
+    {::_pbi::TcParser::FastV32S2,
+     {424, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.jump_setting_)}},
+    // string wx_thumbnail = 22;
+    {::_pbi::TcParser::FastUS2,
+     {434, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.wx_thumbnail_)}},
+    // string button_desc = 23;
+    {::_pbi::TcParser::FastUS2,
+     {442, 63, 0, PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.button_desc_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string title = 1;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.title_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string desc = 2;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.desc_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string jump_url = 3;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.jump_url_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string download_url = 4;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.download_url_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string app_id = 5;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string app_icon = 6;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_icon_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string app_package = 7;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_package_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string app_version = 8;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_version_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string app_privacy = 9;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_privacy_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string app_power = 10;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_power_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string app_company = 11;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.app_company_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 target_type = 12;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.target_type_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 h5_jump_type = 13;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.h5_jump_type_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string h5_jump_number = 14;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.h5_jump_number_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string h5_jump_param = 15;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.h5_jump_param_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 jump_type = 16;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.jump_type_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string item_id = 17;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.item_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 is_appoint = 18;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.is_appoint_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .PluginUser plugin_user = 19;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.plugin_user_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // string forum_name = 20;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.forum_name_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 jump_setting = 21;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.jump_setting_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string wx_thumbnail = 22;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.wx_thumbnail_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string button_desc = 23;
+    {PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.button_desc_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::PluginUser>()},
+  }}, {{
+    "\15\5\4\10\14\6\10\13\13\13\11\13\0\0\16\15\0\7\0\0\12\0\14\13"
+    "TiebaPlusInfo"
+    "title"
+    "desc"
+    "jump_url"
+    "download_url"
+    "app_id"
+    "app_icon"
+    "app_package"
+    "app_version"
+    "app_privacy"
+    "app_power"
+    "app_company"
+    "h5_jump_number"
+    "h5_jump_param"
+    "item_id"
+    "forum_name"
+    "wx_thumbnail"
+    "button_desc"
+  }},
+};
 
-  // string desc = 2;
-  if (this->desc().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->desc().data(), static_cast<int>(this->desc().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.desc");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->desc(), output);
-  }
-
-  // string jump_url = 3;
-  if (this->jump_url().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->jump_url().data(), static_cast<int>(this->jump_url().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.jump_url");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->jump_url(), output);
-  }
-
-  // string app_icon = 6;
-  if (this->app_icon().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->app_icon().data(), static_cast<int>(this->app_icon().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.app_icon");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      6, this->app_icon(), output);
-  }
-
-  // int32 target_type = 12;
-  if (this->target_type() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->target_type(), output);
-  }
-
-  // int32 h5_jump_type = 13;
-  if (this->h5_jump_type() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->h5_jump_type(), output);
-  }
-
-  // string h5_jump_number = 14;
-  if (this->h5_jump_number().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->h5_jump_number().data(), static_cast<int>(this->h5_jump_number().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.h5_jump_number");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      14, this->h5_jump_number(), output);
-  }
-
-  // string h5_jump_param = 15;
-  if (this->h5_jump_param().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->h5_jump_param().data(), static_cast<int>(this->h5_jump_param().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.h5_jump_param");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      15, this->h5_jump_param(), output);
-  }
-
-  // int32 jump_type = 16;
-  if (this->jump_type() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(16, this->jump_type(), output);
-  }
-
-  // string button_desc = 23;
-  if (this->button_desc().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->button_desc().data(), static_cast<int>(this->button_desc().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.button_desc");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      23, this->button_desc(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:TiebaPlusInfo)
-}
-
-::google::protobuf::uint8* TiebaPlusInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* TiebaPlusInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:TiebaPlusInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // string title = 1;
-  if (this->title().size() > 0) {
+  if (!this->_internal_title().empty()) {
+    const std::string& _s = this->_internal_title();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.title");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->title(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.title");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
   // string desc = 2;
-  if (this->desc().size() > 0) {
+  if (!this->_internal_desc().empty()) {
+    const std::string& _s = this->_internal_desc();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->desc().data(), static_cast<int>(this->desc().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.desc");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->desc(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.desc");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // string jump_url = 3;
-  if (this->jump_url().size() > 0) {
+  if (!this->_internal_jump_url().empty()) {
+    const std::string& _s = this->_internal_jump_url();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->jump_url().data(), static_cast<int>(this->jump_url().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.jump_url");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->jump_url(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.jump_url");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
+  }
+
+  // string download_url = 4;
+  if (!this->_internal_download_url().empty()) {
+    const std::string& _s = this->_internal_download_url();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.download_url");
+    target = stream->WriteStringMaybeAliased(4, _s, target);
+  }
+
+  // string app_id = 5;
+  if (!this->_internal_app_id().empty()) {
+    const std::string& _s = this->_internal_app_id();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.app_id");
+    target = stream->WriteStringMaybeAliased(5, _s, target);
   }
 
   // string app_icon = 6;
-  if (this->app_icon().size() > 0) {
+  if (!this->_internal_app_icon().empty()) {
+    const std::string& _s = this->_internal_app_icon();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->app_icon().data(), static_cast<int>(this->app_icon().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.app_icon");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        6, this->app_icon(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.app_icon");
+    target = stream->WriteStringMaybeAliased(6, _s, target);
+  }
+
+  // string app_package = 7;
+  if (!this->_internal_app_package().empty()) {
+    const std::string& _s = this->_internal_app_package();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.app_package");
+    target = stream->WriteStringMaybeAliased(7, _s, target);
+  }
+
+  // string app_version = 8;
+  if (!this->_internal_app_version().empty()) {
+    const std::string& _s = this->_internal_app_version();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.app_version");
+    target = stream->WriteStringMaybeAliased(8, _s, target);
+  }
+
+  // string app_privacy = 9;
+  if (!this->_internal_app_privacy().empty()) {
+    const std::string& _s = this->_internal_app_privacy();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.app_privacy");
+    target = stream->WriteStringMaybeAliased(9, _s, target);
+  }
+
+  // string app_power = 10;
+  if (!this->_internal_app_power().empty()) {
+    const std::string& _s = this->_internal_app_power();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.app_power");
+    target = stream->WriteStringMaybeAliased(10, _s, target);
+  }
+
+  // string app_company = 11;
+  if (!this->_internal_app_company().empty()) {
+    const std::string& _s = this->_internal_app_company();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.app_company");
+    target = stream->WriteStringMaybeAliased(11, _s, target);
   }
 
   // int32 target_type = 12;
-  if (this->target_type() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->target_type(), target);
+  if (this->_internal_target_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<12>(
+            stream, this->_internal_target_type(), target);
   }
 
   // int32 h5_jump_type = 13;
-  if (this->h5_jump_type() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->h5_jump_type(), target);
+  if (this->_internal_h5_jump_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<13>(
+            stream, this->_internal_h5_jump_type(), target);
   }
 
   // string h5_jump_number = 14;
-  if (this->h5_jump_number().size() > 0) {
+  if (!this->_internal_h5_jump_number().empty()) {
+    const std::string& _s = this->_internal_h5_jump_number();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->h5_jump_number().data(), static_cast<int>(this->h5_jump_number().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.h5_jump_number");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        14, this->h5_jump_number(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.h5_jump_number");
+    target = stream->WriteStringMaybeAliased(14, _s, target);
   }
 
   // string h5_jump_param = 15;
-  if (this->h5_jump_param().size() > 0) {
+  if (!this->_internal_h5_jump_param().empty()) {
+    const std::string& _s = this->_internal_h5_jump_param();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->h5_jump_param().data(), static_cast<int>(this->h5_jump_param().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.h5_jump_param");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        15, this->h5_jump_param(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.h5_jump_param");
+    target = stream->WriteStringMaybeAliased(15, _s, target);
   }
 
   // int32 jump_type = 16;
-  if (this->jump_type() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(16, this->jump_type(), target);
+  if (this->_internal_jump_type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        16, this->_internal_jump_type(), target);
+  }
+
+  // string item_id = 17;
+  if (!this->_internal_item_id().empty()) {
+    const std::string& _s = this->_internal_item_id();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.item_id");
+    target = stream->WriteStringMaybeAliased(17, _s, target);
+  }
+
+  // int32 is_appoint = 18;
+  if (this->_internal_is_appoint() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        18, this->_internal_is_appoint(), target);
+  }
+
+  cached_has_bits = _impl_._has_bits_[0];
+  // .PluginUser plugin_user = 19;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(19, _Internal::plugin_user(this),
+        _Internal::plugin_user(this).GetCachedSize(), target, stream);
+  }
+
+  // string forum_name = 20;
+  if (!this->_internal_forum_name().empty()) {
+    const std::string& _s = this->_internal_forum_name();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.forum_name");
+    target = stream->WriteStringMaybeAliased(20, _s, target);
+  }
+
+  // int32 jump_setting = 21;
+  if (this->_internal_jump_setting() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        21, this->_internal_jump_setting(), target);
+  }
+
+  // string wx_thumbnail = 22;
+  if (!this->_internal_wx_thumbnail().empty()) {
+    const std::string& _s = this->_internal_wx_thumbnail();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.wx_thumbnail");
+    target = stream->WriteStringMaybeAliased(22, _s, target);
   }
 
   // string button_desc = 23;
-  if (this->button_desc().size() > 0) {
+  if (!this->_internal_button_desc().empty()) {
+    const std::string& _s = this->_internal_button_desc();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->button_desc().data(), static_cast<int>(this->button_desc().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "TiebaPlusInfo.button_desc");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        23, this->button_desc(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "TiebaPlusInfo.button_desc");
+    target = stream->WriteStringMaybeAliased(23, _s, target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:TiebaPlusInfo)
   return target;
 }
 
-size_t TiebaPlusInfo::ByteSizeLong() const {
+::size_t TiebaPlusInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:TiebaPlusInfo)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // string title = 1;
-  if (this->title().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->title());
+  if (!this->_internal_title().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_title());
   }
 
   // string desc = 2;
-  if (this->desc().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->desc());
+  if (!this->_internal_desc().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_desc());
   }
 
   // string jump_url = 3;
-  if (this->jump_url().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->jump_url());
+  if (!this->_internal_jump_url().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_jump_url());
+  }
+
+  // string download_url = 4;
+  if (!this->_internal_download_url().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_download_url());
+  }
+
+  // string app_id = 5;
+  if (!this->_internal_app_id().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_app_id());
   }
 
   // string app_icon = 6;
-  if (this->app_icon().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->app_icon());
+  if (!this->_internal_app_icon().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_app_icon());
+  }
+
+  // string app_package = 7;
+  if (!this->_internal_app_package().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_app_package());
+  }
+
+  // string app_version = 8;
+  if (!this->_internal_app_version().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_app_version());
+  }
+
+  // string app_privacy = 9;
+  if (!this->_internal_app_privacy().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_app_privacy());
+  }
+
+  // string app_power = 10;
+  if (!this->_internal_app_power().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_app_power());
+  }
+
+  // string app_company = 11;
+  if (!this->_internal_app_company().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_app_company());
   }
 
   // string h5_jump_number = 14;
-  if (this->h5_jump_number().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->h5_jump_number());
+  if (!this->_internal_h5_jump_number().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_h5_jump_number());
   }
 
   // string h5_jump_param = 15;
-  if (this->h5_jump_param().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->h5_jump_param());
+  if (!this->_internal_h5_jump_param().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_h5_jump_param());
+  }
+
+  // string item_id = 17;
+  if (!this->_internal_item_id().empty()) {
+    total_size += 2 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_item_id());
+  }
+
+  // string forum_name = 20;
+  if (!this->_internal_forum_name().empty()) {
+    total_size += 2 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_forum_name());
+  }
+
+  // string wx_thumbnail = 22;
+  if (!this->_internal_wx_thumbnail().empty()) {
+    total_size += 2 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_wx_thumbnail());
   }
 
   // string button_desc = 23;
-  if (this->button_desc().size() > 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->button_desc());
+  if (!this->_internal_button_desc().empty()) {
+    total_size += 2 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_button_desc());
   }
 
-  // int32 jump_type = 16;
-  if (this->jump_type() != 0) {
+  // .PluginUser plugin_user = 19;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->jump_type());
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *_impl_.plugin_user_);
   }
 
   // int32 target_type = 12;
-  if (this->target_type() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->target_type());
+  if (this->_internal_target_type() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_target_type());
   }
 
   // int32 h5_jump_type = 13;
-  if (this->h5_jump_type() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->h5_jump_type());
+  if (this->_internal_h5_jump_type() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_h5_jump_type());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void TiebaPlusInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:TiebaPlusInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  const TiebaPlusInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const TiebaPlusInfo>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:TiebaPlusInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:TiebaPlusInfo)
-    MergeFrom(*source);
+  // int32 jump_type = 16;
+  if (this->_internal_jump_type() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_jump_type());
   }
+
+  // int32 is_appoint = 18;
+  if (this->_internal_is_appoint() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_is_appoint());
+  }
+
+  // int32 jump_setting = 21;
+  if (this->_internal_jump_setting() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_jump_setting());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void TiebaPlusInfo::MergeFrom(const TiebaPlusInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:TiebaPlusInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+const ::google::protobuf::Message::ClassData TiebaPlusInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    TiebaPlusInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*TiebaPlusInfo::GetClassData() const { return &_class_data_; }
+
+
+void TiebaPlusInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<TiebaPlusInfo*>(&to_msg);
+  auto& from = static_cast<const TiebaPlusInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:TiebaPlusInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.title().size() > 0) {
-
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+  if (!from._internal_title().empty()) {
+    _this->_internal_set_title(from._internal_title());
   }
-  if (from.desc().size() > 0) {
-
-    desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.desc_);
+  if (!from._internal_desc().empty()) {
+    _this->_internal_set_desc(from._internal_desc());
   }
-  if (from.jump_url().size() > 0) {
-
-    jump_url_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.jump_url_);
+  if (!from._internal_jump_url().empty()) {
+    _this->_internal_set_jump_url(from._internal_jump_url());
   }
-  if (from.app_icon().size() > 0) {
-
-    app_icon_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.app_icon_);
+  if (!from._internal_download_url().empty()) {
+    _this->_internal_set_download_url(from._internal_download_url());
   }
-  if (from.h5_jump_number().size() > 0) {
-
-    h5_jump_number_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.h5_jump_number_);
+  if (!from._internal_app_id().empty()) {
+    _this->_internal_set_app_id(from._internal_app_id());
   }
-  if (from.h5_jump_param().size() > 0) {
-
-    h5_jump_param_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.h5_jump_param_);
+  if (!from._internal_app_icon().empty()) {
+    _this->_internal_set_app_icon(from._internal_app_icon());
   }
-  if (from.button_desc().size() > 0) {
-
-    button_desc_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.button_desc_);
+  if (!from._internal_app_package().empty()) {
+    _this->_internal_set_app_package(from._internal_app_package());
   }
-  if (from.jump_type() != 0) {
-    set_jump_type(from.jump_type());
+  if (!from._internal_app_version().empty()) {
+    _this->_internal_set_app_version(from._internal_app_version());
   }
-  if (from.target_type() != 0) {
-    set_target_type(from.target_type());
+  if (!from._internal_app_privacy().empty()) {
+    _this->_internal_set_app_privacy(from._internal_app_privacy());
   }
-  if (from.h5_jump_type() != 0) {
-    set_h5_jump_type(from.h5_jump_type());
+  if (!from._internal_app_power().empty()) {
+    _this->_internal_set_app_power(from._internal_app_power());
   }
-}
-
-void TiebaPlusInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:TiebaPlusInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  if (!from._internal_app_company().empty()) {
+    _this->_internal_set_app_company(from._internal_app_company());
+  }
+  if (!from._internal_h5_jump_number().empty()) {
+    _this->_internal_set_h5_jump_number(from._internal_h5_jump_number());
+  }
+  if (!from._internal_h5_jump_param().empty()) {
+    _this->_internal_set_h5_jump_param(from._internal_h5_jump_param());
+  }
+  if (!from._internal_item_id().empty()) {
+    _this->_internal_set_item_id(from._internal_item_id());
+  }
+  if (!from._internal_forum_name().empty()) {
+    _this->_internal_set_forum_name(from._internal_forum_name());
+  }
+  if (!from._internal_wx_thumbnail().empty()) {
+    _this->_internal_set_wx_thumbnail(from._internal_wx_thumbnail());
+  }
+  if (!from._internal_button_desc().empty()) {
+    _this->_internal_set_button_desc(from._internal_button_desc());
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_internal_mutable_plugin_user()->::PluginUser::MergeFrom(
+        from._internal_plugin_user());
+  }
+  if (from._internal_target_type() != 0) {
+    _this->_internal_set_target_type(from._internal_target_type());
+  }
+  if (from._internal_h5_jump_type() != 0) {
+    _this->_internal_set_h5_jump_type(from._internal_h5_jump_type());
+  }
+  if (from._internal_jump_type() != 0) {
+    _this->_internal_set_jump_type(from._internal_jump_type());
+  }
+  if (from._internal_is_appoint() != 0) {
+    _this->_internal_set_is_appoint(from._internal_is_appoint());
+  }
+  if (from._internal_jump_setting() != 0) {
+    _this->_internal_set_jump_setting(from._internal_jump_setting());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void TiebaPlusInfo::CopyFrom(const TiebaPlusInfo& from) {
@@ -806,36 +1223,67 @@ void TiebaPlusInfo::CopyFrom(const TiebaPlusInfo& from) {
   MergeFrom(from);
 }
 
-bool TiebaPlusInfo::IsInitialized() const {
+PROTOBUF_NOINLINE bool TiebaPlusInfo::IsInitialized() const {
   return true;
 }
 
-void TiebaPlusInfo::Swap(TiebaPlusInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void TiebaPlusInfo::InternalSwap(TiebaPlusInfo* other) {
   using std::swap;
-  title_.Swap(&other->title_);
-  desc_.Swap(&other->desc_);
-  jump_url_.Swap(&other->jump_url_);
-  app_icon_.Swap(&other->app_icon_);
-  h5_jump_number_.Swap(&other->h5_jump_number_);
-  h5_jump_param_.Swap(&other->h5_jump_param_);
-  button_desc_.Swap(&other->button_desc_);
-  swap(jump_type_, other->jump_type_);
-  swap(target_type_, other->target_type_);
-  swap(h5_jump_type_, other->h5_jump_type_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.title_, lhs_arena,
+                                       &other->_impl_.title_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.desc_, lhs_arena,
+                                       &other->_impl_.desc_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.jump_url_, lhs_arena,
+                                       &other->_impl_.jump_url_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.download_url_, lhs_arena,
+                                       &other->_impl_.download_url_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.app_id_, lhs_arena,
+                                       &other->_impl_.app_id_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.app_icon_, lhs_arena,
+                                       &other->_impl_.app_icon_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.app_package_, lhs_arena,
+                                       &other->_impl_.app_package_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.app_version_, lhs_arena,
+                                       &other->_impl_.app_version_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.app_privacy_, lhs_arena,
+                                       &other->_impl_.app_privacy_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.app_power_, lhs_arena,
+                                       &other->_impl_.app_power_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.app_company_, lhs_arena,
+                                       &other->_impl_.app_company_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.h5_jump_number_, lhs_arena,
+                                       &other->_impl_.h5_jump_number_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.h5_jump_param_, lhs_arena,
+                                       &other->_impl_.h5_jump_param_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.item_id_, lhs_arena,
+                                       &other->_impl_.item_id_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.forum_name_, lhs_arena,
+                                       &other->_impl_.forum_name_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.wx_thumbnail_, lhs_arena,
+                                       &other->_impl_.wx_thumbnail_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.button_desc_, lhs_arena,
+                                       &other->_impl_.button_desc_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.jump_setting_)
+      + sizeof(TiebaPlusInfo::_impl_.jump_setting_)
+      - PROTOBUF_FIELD_OFFSET(TiebaPlusInfo, _impl_.plugin_user_)>(
+          reinterpret_cast<char*>(&_impl_.plugin_user_),
+          reinterpret_cast<char*>(&other->_impl_.plugin_user_));
 }
 
 ::google::protobuf::Metadata TiebaPlusInfo::GetMetadata() const {
-  protobuf_TiebaPlusInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_TiebaPlusInfo_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_TiebaPlusInfo_2eproto_getter, &descriptor_table_TiebaPlusInfo_2eproto_once,
+      file_level_metadata_TiebaPlusInfo_2eproto[0]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

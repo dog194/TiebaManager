@@ -4,1532 +4,803 @@
 #include "ThreadInfo.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class PollInfo_PollOptionDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<PollInfo_PollOption>
-      _instance;
-} _PollInfo_PollOption_default_instance_;
-class PollInfoDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<PollInfo>
-      _instance;
-} _PollInfo_default_instance_;
-class ThreadInfo_OriginThreadInfoDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ThreadInfo_OriginThreadInfo>
-      _instance;
-} _ThreadInfo_OriginThreadInfo_default_instance_;
-class ThreadInfoDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ThreadInfo>
-      _instance;
-} _ThreadInfo_default_instance_;
-namespace protobuf_ThreadInfo_2eproto {
-void InitDefaultsPollInfo_PollOptionImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::_PollInfo_PollOption_default_instance_;
-    new (ptr) ::PollInfo_PollOption();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::PollInfo_PollOption::InitAsDefaultInstance();
-}
-
-void InitDefaultsPollInfo_PollOption() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPollInfo_PollOptionImpl);
-}
-
-void InitDefaultsPollInfoImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo_PollOption();
-  {
-    void* ptr = &::_PollInfo_default_instance_;
-    new (ptr) ::PollInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::PollInfo::InitAsDefaultInstance();
-}
-
-void InitDefaultsPollInfo() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPollInfoImpl);
-}
-
-void InitDefaultsThreadInfo_OriginThreadInfoImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_PbContent_2eproto::InitDefaultsPbContent();
-  protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo();
-  {
-    void* ptr = &::_ThreadInfo_OriginThreadInfo_default_instance_;
-    new (ptr) ::ThreadInfo_OriginThreadInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::ThreadInfo_OriginThreadInfo::InitAsDefaultInstance();
-}
-
-void InitDefaultsThreadInfo_OriginThreadInfo() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsThreadInfo_OriginThreadInfoImpl);
-}
-
-void InitDefaultsThreadInfoImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo();
-  protobuf_Agree_2eproto::InitDefaultsAgree();
-  protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfo_OriginThreadInfo();
-  protobuf_PbContent_2eproto::InitDefaultsPbContent();
-  {
-    void* ptr = &::_ThreadInfo_default_instance_;
-    new (ptr) ::ThreadInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::ThreadInfo::InitAsDefaultInstance();
-}
-
-void InitDefaultsThreadInfo() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsThreadInfoImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[4];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo_PollOption, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo_PollOption, num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo_PollOption, text_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo_PollOption, image_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo, is_multi_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo, total_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo, options_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo, total_poll_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::PollInfo, title_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, title_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, tid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, fid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, is_deleted_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, content_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, poll_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, pid_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, title_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, reply_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, view_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, last_time_int_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_top_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_good_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_voice_thread_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, fid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, first_post_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_global_top_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, create_time_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, author_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_ad_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, poll_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_godthread_recommend_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, agree_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_god_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, origin_thread_info_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, first_post_content_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_share_thread_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, tab_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_deleted_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::ThreadInfo, is_frs_mask_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::PollInfo_PollOption)},
-  { 8, -1, sizeof(::PollInfo)},
-  { 18, -1, sizeof(::ThreadInfo_OriginThreadInfo)},
-  { 30, -1, sizeof(::ThreadInfo)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_PollInfo_PollOption_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_PollInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_ThreadInfo_OriginThreadInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_ThreadInfo_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "ThreadInfo.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\020ThreadInfo.proto\032\017PbContent.proto\032\013Agr"
-      "ee.proto\"\261\001\n\010PollInfo\022\020\n\010is_multi\030\002 \001(\005\022"
-      "\021\n\ttotal_num\030\003 \001(\003\022%\n\007options\030\t \003(\0132\024.Po"
-      "llInfo.PollOption\022\022\n\ntotal_poll\030\013 \001(\003\022\r\n"
-      "\005title\030\014 \001(\t\0326\n\nPollOption\022\013\n\003num\030\002 \001(\003\022"
-      "\014\n\004text\030\003 \001(\t\022\r\n\005image\030\004 \001(\t\"\311\005\n\nThreadI"
-      "nfo\022\n\n\002id\030\001 \001(\003\022\r\n\005title\030\003 \001(\t\022\021\n\treply_"
-      "num\030\004 \001(\005\022\020\n\010view_num\030\005 \001(\005\022\025\n\rlast_time"
-      "_int\030\007 \001(\005\022\016\n\006is_top\030\t \001(\005\022\017\n\007is_good\030\n "
-      "\001(\005\022\027\n\017is_voice_thread\030\017 \001(\005\022\013\n\003fid\030\033 \001("
-      "\003\022\025\n\rfirst_post_id\030( \001(\003\022\025\n\ris_global_to"
-      "p\030* \001(\005\022\023\n\013create_time\030- \001(\005\022\021\n\tauthor_i"
-      "d\0308 \001(\003\022\r\n\005is_ad\030; \001(\r\022\034\n\tpoll_info\030J \001("
-      "\0132\t.PollInfo\022\036\n\026is_godthread_recommend\030U"
-      " \001(\005\022\025\n\005agree\030~ \001(\0132\006.Agree\022\017\n\006is_god\030\203\001"
-      " \001(\005\0229\n\022origin_thread_info\030\215\001 \001(\0132\034.Thre"
-      "adInfo.OriginThreadInfo\022\'\n\022first_post_co"
-      "ntent\030\216\001 \003(\0132\n.PbContent\022\030\n\017is_share_thr"
-      "ead\030\217\001 \001(\005\022\017\n\006tab_id\030\257\001 \001(\005\022\023\n\nis_delete"
-      "d\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\032\227\001\n\020Origi"
-      "nThreadInfo\022\r\n\005title\030\001 \001(\t\022\013\n\003tid\030\005 \001(\t\022"
-      "\013\n\003fid\030\007 \001(\003\022\022\n\nis_deleted\030\t \001(\005\022\033\n\007cont"
-      "ent\030\016 \003(\0132\n.PbContent\022\034\n\tpoll_info\030\025 \001(\013"
-      "2\t.PollInfo\022\013\n\003pid\030\031 \001(\003b\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR ThreadInfo_OriginThreadInfo::ThreadInfo_OriginThreadInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.content_)*/ {},
+      /*decltype(_impl_.title_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.fname_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.tid_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.agree_)*/ nullptr,
+      /*decltype(_impl_.poll_info_)*/ nullptr,
+      /*decltype(_impl_.fid_)*/ ::int64_t{0},
+      /*decltype(_impl_.thread_type_)*/ 0,
+      /*decltype(_impl_.is_deleted_)*/ 0,
+      /*decltype(_impl_.pid_)*/ ::int64_t{0},
+      /*decltype(_impl_.reply_num_)*/ 0,
+    } {}
+struct ThreadInfo_OriginThreadInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ThreadInfo_OriginThreadInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ThreadInfo_OriginThreadInfoDefaultTypeInternal() {}
+  union {
+    ThreadInfo_OriginThreadInfo _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 952);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "ThreadInfo.proto", &protobuf_RegisterTypes);
-  ::protobuf_PbContent_2eproto::AddDescriptors();
-  ::protobuf_Agree_2eproto::AddDescriptors();
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_ThreadInfo_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ThreadInfo_OriginThreadInfoDefaultTypeInternal _ThreadInfo_OriginThreadInfo_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR ThreadInfo::ThreadInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.first_post_content_)*/ {},
+      /*decltype(_impl_.title_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.last_time_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.pids_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.poll_info_)*/ nullptr,
+      /*decltype(_impl_.agree_)*/ nullptr,
+      /*decltype(_impl_.origin_thread_info_)*/ nullptr,
+      /*decltype(_impl_.id_)*/ ::int64_t{0},
+      /*decltype(_impl_.tid_)*/ ::int64_t{0},
+      /*decltype(_impl_.reply_num_)*/ 0,
+      /*decltype(_impl_.view_num_)*/ 0,
+      /*decltype(_impl_.last_time_int_)*/ 0,
+      /*decltype(_impl_.thread_types_)*/ 0,
+      /*decltype(_impl_.is_top_)*/ 0,
+      /*decltype(_impl_.is_good_)*/ 0,
+      /*decltype(_impl_.is_vote_)*/ 0,
+      /*decltype(_impl_.is_global_top_)*/ 0,
+      /*decltype(_impl_.fid_)*/ ::int64_t{0},
+      /*decltype(_impl_.first_post_id_)*/ ::int64_t{0},
+      /*decltype(_impl_.create_time_)*/ 0,
+      /*decltype(_impl_.time_)*/ 0,
+      /*decltype(_impl_.post_id_)*/ ::int64_t{0},
+      /*decltype(_impl_.author_id_)*/ ::int64_t{0},
+      /*decltype(_impl_.is_ad_)*/ 0u,
+      /*decltype(_impl_.is_godthread_recommend_)*/ 0,
+      /*decltype(_impl_.is_god_)*/ 0,
+      /*decltype(_impl_.is_share_thread_)*/ 0,
+      /*decltype(_impl_.tab_id_)*/ 0,
+      /*decltype(_impl_.is_deleted_)*/ 0,
+      /*decltype(_impl_.is_frs_mask_)*/ 0,
+    } {}
+struct ThreadInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ThreadInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ThreadInfoDefaultTypeInternal() {}
+  union {
+    ThreadInfo _instance;
+  };
+};
 
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ThreadInfoDefaultTypeInternal _ThreadInfo_default_instance_;
+static ::_pb::Metadata file_level_metadata_ThreadInfo_2eproto[2];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_ThreadInfo_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_ThreadInfo_2eproto = nullptr;
+const ::uint32_t TableStruct_ThreadInfo_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.title_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.fname_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.tid_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.fid_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.thread_type_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.is_deleted_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.content_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.reply_num_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.agree_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.poll_info_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_OriginThreadInfo, _impl_.pid_),
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    0,
+    1,
+    ~0u,
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.id_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.tid_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.title_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.reply_num_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.view_num_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.last_time_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.last_time_int_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.thread_types_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_top_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_good_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_vote_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.fid_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.first_post_id_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_global_top_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.create_time_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.post_id_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.time_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.author_id_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_ad_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.pids_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.poll_info_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_godthread_recommend_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.agree_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_god_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.origin_thread_info_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.first_post_content_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_share_thread_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.tab_id_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_deleted_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_frs_mask_),
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    0,
+    ~0u,
+    1,
+    ~0u,
+    2,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+};
+
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, 19, -1, sizeof(::ThreadInfo_OriginThreadInfo)},
+        {30, 68, -1, sizeof(::ThreadInfo)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_ThreadInfo_OriginThreadInfo_default_instance_._instance,
+    &::_ThreadInfo_default_instance_._instance,
+};
+const char descriptor_table_protodef_ThreadInfo_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\020ThreadInfo.proto\032\017PbContent.proto\032\013Agr"
+    "ee.proto\032\016PollInfo.proto\"\362\006\n\nThreadInfo\022"
+    "\n\n\002id\030\001 \001(\003\022\013\n\003tid\030\002 \001(\003\022\r\n\005title\030\003 \001(\t\022"
+    "\021\n\treply_num\030\004 \001(\005\022\020\n\010view_num\030\005 \001(\005\022\021\n\t"
+    "last_time\030\006 \001(\t\022\025\n\rlast_time_int\030\007 \001(\005\022\024"
+    "\n\014thread_types\030\010 \001(\005\022\016\n\006is_top\030\t \001(\005\022\017\n\007"
+    "is_good\030\n \001(\005\022\017\n\007is_vote\030\013 \001(\005\022\013\n\003fid\030\033 "
+    "\001(\003\022\025\n\rfirst_post_id\030( \001(\003\022\025\n\ris_global_"
+    "top\030* \001(\005\022\023\n\013create_time\030- \001(\005\022\017\n\007post_i"
+    "d\0304 \001(\003\022\014\n\004time\0305 \001(\005\022\021\n\tauthor_id\0308 \001(\003"
+    "\022\r\n\005is_ad\030; \001(\r\022\014\n\004pids\030= \001(\t\022\034\n\tpoll_in"
+    "fo\030J \001(\0132\t.PollInfo\022\036\n\026is_godthread_reco"
+    "mmend\030U \001(\005\022\025\n\005agree\030~ \001(\0132\006.Agree\022\017\n\006is"
+    "_god\030\203\001 \001(\005\0229\n\022origin_thread_info\030\215\001 \001(\013"
+    "2\034.ThreadInfo.OriginThreadInfo\022\'\n\022first_"
+    "post_content\030\216\001 \003(\0132\n.PbContent\022\030\n\017is_sh"
+    "are_thread\030\217\001 \001(\005\022\017\n\006tab_id\030\257\001 \001(\005\022\023\n\nis"
+    "_deleted\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\032\345\001"
+    "\n\020OriginThreadInfo\022\r\n\005title\030\001 \001(\t\022\r\n\005fna"
+    "me\030\004 \001(\t\022\013\n\003tid\030\005 \001(\t\022\013\n\003fid\030\007 \001(\003\022\023\n\013th"
+    "read_type\030\010 \001(\005\022\022\n\nis_deleted\030\t \001(\005\022\033\n\007c"
+    "ontent\030\016 \003(\0132\n.PbContent\022\021\n\treply_num\030\020 "
+    "\001(\005\022\025\n\005agree\030\023 \001(\0132\006.Agree\022\034\n\tpoll_info\030"
+    "\025 \001(\0132\t.PollInfo\022\013\n\003pid\030\031 \001(\003b\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_ThreadInfo_2eproto_deps[3] =
+    {
+        &::descriptor_table_Agree_2eproto,
+        &::descriptor_table_PbContent_2eproto,
+        &::descriptor_table_PollInfo_2eproto,
+};
+static ::absl::once_flag descriptor_table_ThreadInfo_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_ThreadInfo_2eproto = {
+    false,
+    false,
+    957,
+    descriptor_table_protodef_ThreadInfo_2eproto,
+    "ThreadInfo.proto",
+    &descriptor_table_ThreadInfo_2eproto_once,
+    descriptor_table_ThreadInfo_2eproto_deps,
+    3,
+    2,
+    schemas,
+    file_default_instances,
+    TableStruct_ThreadInfo_2eproto::offsets,
+    file_level_metadata_ThreadInfo_2eproto,
+    file_level_enum_descriptors_ThreadInfo_2eproto,
+    file_level_service_descriptors_ThreadInfo_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_ThreadInfo_2eproto_getter() {
+  return &descriptor_table_ThreadInfo_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_ThreadInfo_2eproto(&descriptor_table_ThreadInfo_2eproto);
 // ===================================================================
 
-void PollInfo_PollOption::InitAsDefaultInstance() {
+class ThreadInfo_OriginThreadInfo::_Internal {
+ public:
+  using HasBits = decltype(std::declval<ThreadInfo_OriginThreadInfo>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_._has_bits_);
+  static const ::Agree& agree(const ThreadInfo_OriginThreadInfo* msg);
+  static void set_has_agree(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::PollInfo& poll_info(const ThreadInfo_OriginThreadInfo* msg);
+  static void set_has_poll_info(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+};
+
+const ::Agree& ThreadInfo_OriginThreadInfo::_Internal::agree(const ThreadInfo_OriginThreadInfo* msg) {
+  return *msg->_impl_.agree_;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int PollInfo_PollOption::kNumFieldNumber;
-const int PollInfo_PollOption::kTextFieldNumber;
-const int PollInfo_PollOption::kImageFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-PollInfo_PollOption::PollInfo_PollOption()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo_PollOption();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:PollInfo.PollOption)
-}
-PollInfo_PollOption::PollInfo_PollOption(const PollInfo_PollOption& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  text_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.text().size() > 0) {
-    text_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.text_);
-  }
-  image_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.image().size() > 0) {
-    image_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.image_);
-  }
-  num_ = from.num_;
-  // @@protoc_insertion_point(copy_constructor:PollInfo.PollOption)
-}
-
-void PollInfo_PollOption::SharedCtor() {
-  text_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  image_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  num_ = GOOGLE_LONGLONG(0);
-  _cached_size_ = 0;
-}
-
-PollInfo_PollOption::~PollInfo_PollOption() {
-  // @@protoc_insertion_point(destructor:PollInfo.PollOption)
-  SharedDtor();
-}
-
-void PollInfo_PollOption::SharedDtor() {
-  text_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  image_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void PollInfo_PollOption::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* PollInfo_PollOption::descriptor() {
-  ::protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const PollInfo_PollOption& PollInfo_PollOption::default_instance() {
-  ::protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo_PollOption();
-  return *internal_default_instance();
-}
-
-PollInfo_PollOption* PollInfo_PollOption::New(::google::protobuf::Arena* arena) const {
-  PollInfo_PollOption* n = new PollInfo_PollOption;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void PollInfo_PollOption::Clear() {
-// @@protoc_insertion_point(message_clear_start:PollInfo.PollOption)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  text_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  image_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  num_ = GOOGLE_LONGLONG(0);
-  _internal_metadata_.Clear();
-}
-
-bool PollInfo_PollOption::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:PollInfo.PollOption)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 num = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string text = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_text()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->text().data(), static_cast<int>(this->text().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "PollInfo.PollOption.text"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string image = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_image()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->image().data(), static_cast<int>(this->image().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "PollInfo.PollOption.image"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:PollInfo.PollOption)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:PollInfo.PollOption)
-  return false;
-#undef DO_
-}
-
-void PollInfo_PollOption::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:PollInfo.PollOption)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int64 num = 2;
-  if (this->num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->num(), output);
-  }
-
-  // string text = 3;
-  if (this->text().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->text().data(), static_cast<int>(this->text().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "PollInfo.PollOption.text");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->text(), output);
-  }
-
-  // string image = 4;
-  if (this->image().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->image().data(), static_cast<int>(this->image().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "PollInfo.PollOption.image");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->image(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:PollInfo.PollOption)
-}
-
-::google::protobuf::uint8* PollInfo_PollOption::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:PollInfo.PollOption)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int64 num = 2;
-  if (this->num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->num(), target);
-  }
-
-  // string text = 3;
-  if (this->text().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->text().data(), static_cast<int>(this->text().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "PollInfo.PollOption.text");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->text(), target);
-  }
-
-  // string image = 4;
-  if (this->image().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->image().data(), static_cast<int>(this->image().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "PollInfo.PollOption.image");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->image(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:PollInfo.PollOption)
-  return target;
-}
-
-size_t PollInfo_PollOption::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:PollInfo.PollOption)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // string text = 3;
-  if (this->text().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->text());
-  }
-
-  // string image = 4;
-  if (this->image().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->image());
-  }
-
-  // int64 num = 2;
-  if (this->num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->num());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void PollInfo_PollOption::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:PollInfo.PollOption)
-  GOOGLE_DCHECK_NE(&from, this);
-  const PollInfo_PollOption* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const PollInfo_PollOption>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:PollInfo.PollOption)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:PollInfo.PollOption)
-    MergeFrom(*source);
-  }
-}
-
-void PollInfo_PollOption::MergeFrom(const PollInfo_PollOption& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:PollInfo.PollOption)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (from.text().size() > 0) {
-
-    text_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.text_);
-  }
-  if (from.image().size() > 0) {
-
-    image_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.image_);
-  }
-  if (from.num() != 0) {
-    set_num(from.num());
-  }
-}
-
-void PollInfo_PollOption::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:PollInfo.PollOption)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void PollInfo_PollOption::CopyFrom(const PollInfo_PollOption& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:PollInfo.PollOption)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool PollInfo_PollOption::IsInitialized() const {
-  return true;
-}
-
-void PollInfo_PollOption::Swap(PollInfo_PollOption* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void PollInfo_PollOption::InternalSwap(PollInfo_PollOption* other) {
-  using std::swap;
-  text_.Swap(&other->text_);
-  image_.Swap(&other->image_);
-  swap(num_, other->num_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata PollInfo_PollOption::GetMetadata() const {
-  protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void PollInfo::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int PollInfo::kIsMultiFieldNumber;
-const int PollInfo::kTotalNumFieldNumber;
-const int PollInfo::kOptionsFieldNumber;
-const int PollInfo::kTotalPollFieldNumber;
-const int PollInfo::kTitleFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-PollInfo::PollInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:PollInfo)
-}
-PollInfo::PollInfo(const PollInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      options_(from.options_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.title().size() > 0) {
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
-  }
-  ::memcpy(&total_num_, &from.total_num_,
-    static_cast<size_t>(reinterpret_cast<char*>(&total_poll_) -
-    reinterpret_cast<char*>(&total_num_)) + sizeof(total_poll_));
-  // @@protoc_insertion_point(copy_constructor:PollInfo)
-}
-
-void PollInfo::SharedCtor() {
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&total_num_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&total_poll_) -
-      reinterpret_cast<char*>(&total_num_)) + sizeof(total_poll_));
-  _cached_size_ = 0;
-}
-
-PollInfo::~PollInfo() {
-  // @@protoc_insertion_point(destructor:PollInfo)
-  SharedDtor();
-}
-
-void PollInfo::SharedDtor() {
-  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void PollInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* PollInfo::descriptor() {
-  ::protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
-}
-
-const PollInfo& PollInfo::default_instance() {
-  ::protobuf_ThreadInfo_2eproto::InitDefaultsPollInfo();
-  return *internal_default_instance();
-}
-
-PollInfo* PollInfo::New(::google::protobuf::Arena* arena) const {
-  PollInfo* n = new PollInfo;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void PollInfo::Clear() {
-// @@protoc_insertion_point(message_clear_start:PollInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  options_.Clear();
-  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&total_num_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&total_poll_) -
-      reinterpret_cast<char*>(&total_num_)) + sizeof(total_poll_));
-  _internal_metadata_.Clear();
-}
-
-bool PollInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:PollInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 is_multi = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_multi_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 total_num = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &total_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .PollInfo.PollOption options = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_options()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 total_poll = 11;
-      case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(88u /* 88 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &total_poll_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string title = 12;
-      case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(98u /* 98 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_title()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->title().data(), static_cast<int>(this->title().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "PollInfo.title"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:PollInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:PollInfo)
-  return false;
-#undef DO_
-}
-
-void PollInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:PollInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 is_multi = 2;
-  if (this->is_multi() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->is_multi(), output);
-  }
-
-  // int64 total_num = 3;
-  if (this->total_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(3, this->total_num(), output);
-  }
-
-  // repeated .PollInfo.PollOption options = 9;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->options_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, this->options(static_cast<int>(i)), output);
-  }
-
-  // int64 total_poll = 11;
-  if (this->total_poll() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(11, this->total_poll(), output);
-  }
-
-  // string title = 12;
-  if (this->title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "PollInfo.title");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      12, this->title(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:PollInfo)
-}
-
-::google::protobuf::uint8* PollInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:PollInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int32 is_multi = 2;
-  if (this->is_multi() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->is_multi(), target);
-  }
-
-  // int64 total_num = 3;
-  if (this->total_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(3, this->total_num(), target);
-  }
-
-  // repeated .PollInfo.PollOption options = 9;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->options_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        9, this->options(static_cast<int>(i)), deterministic, target);
-  }
-
-  // int64 total_poll = 11;
-  if (this->total_poll() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(11, this->total_poll(), target);
-  }
-
-  // string title = 12;
-  if (this->title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "PollInfo.title");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        12, this->title(), target);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:PollInfo)
-  return target;
-}
-
-size_t PollInfo::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:PollInfo)
-  size_t total_size = 0;
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // repeated .PollInfo.PollOption options = 9;
-  {
-    unsigned int count = static_cast<unsigned int>(this->options_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->options(static_cast<int>(i)));
-    }
-  }
-
-  // string title = 12;
-  if (this->title().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->title());
-  }
-
-  // int64 total_num = 3;
-  if (this->total_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->total_num());
-  }
-
-  // int32 is_multi = 2;
-  if (this->is_multi() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_multi());
-  }
-
-  // int64 total_poll = 11;
-  if (this->total_poll() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->total_poll());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void PollInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:PollInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  const PollInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const PollInfo>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:PollInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:PollInfo)
-    MergeFrom(*source);
-  }
-}
-
-void PollInfo::MergeFrom(const PollInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:PollInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  options_.MergeFrom(from.options_);
-  if (from.title().size() > 0) {
-
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
-  }
-  if (from.total_num() != 0) {
-    set_total_num(from.total_num());
-  }
-  if (from.is_multi() != 0) {
-    set_is_multi(from.is_multi());
-  }
-  if (from.total_poll() != 0) {
-    set_total_poll(from.total_poll());
-  }
-}
-
-void PollInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:PollInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void PollInfo::CopyFrom(const PollInfo& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:PollInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool PollInfo::IsInitialized() const {
-  return true;
-}
-
-void PollInfo::Swap(PollInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void PollInfo::InternalSwap(PollInfo* other) {
-  using std::swap;
-  options_.InternalSwap(&other->options_);
-  title_.Swap(&other->title_);
-  swap(total_num_, other->total_num_);
-  swap(is_multi_, other->is_multi_);
-  swap(total_poll_, other->total_poll_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata PollInfo::GetMetadata() const {
-  protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages];
-}
-
-
-// ===================================================================
-
-void ThreadInfo_OriginThreadInfo::InitAsDefaultInstance() {
-  ::_ThreadInfo_OriginThreadInfo_default_instance_._instance.get_mutable()->poll_info_ = const_cast< ::PollInfo*>(
-      ::PollInfo::internal_default_instance());
+const ::PollInfo& ThreadInfo_OriginThreadInfo::_Internal::poll_info(const ThreadInfo_OriginThreadInfo* msg) {
+  return *msg->_impl_.poll_info_;
 }
 void ThreadInfo_OriginThreadInfo::clear_content() {
-  content_.Clear();
+  _internal_mutable_content()->Clear();
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ThreadInfo_OriginThreadInfo::kTitleFieldNumber;
-const int ThreadInfo_OriginThreadInfo::kTidFieldNumber;
-const int ThreadInfo_OriginThreadInfo::kFidFieldNumber;
-const int ThreadInfo_OriginThreadInfo::kIsDeletedFieldNumber;
-const int ThreadInfo_OriginThreadInfo::kContentFieldNumber;
-const int ThreadInfo_OriginThreadInfo::kPollInfoFieldNumber;
-const int ThreadInfo_OriginThreadInfo::kPidFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+void ThreadInfo_OriginThreadInfo::clear_agree() {
+  if (_impl_.agree_ != nullptr) _impl_.agree_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+void ThreadInfo_OriginThreadInfo::clear_poll_info() {
+  if (_impl_.poll_info_ != nullptr) _impl_.poll_info_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+ThreadInfo_OriginThreadInfo::ThreadInfo_OriginThreadInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ThreadInfo.OriginThreadInfo)
+}
+ThreadInfo_OriginThreadInfo::ThreadInfo_OriginThreadInfo(const ThreadInfo_OriginThreadInfo& from) : ::google::protobuf::Message() {
+  ThreadInfo_OriginThreadInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.content_){from._impl_.content_},
+      decltype(_impl_.title_){},
+      decltype(_impl_.fname_){},
+      decltype(_impl_.tid_){},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.poll_info_){nullptr},
+      decltype(_impl_.fid_){},
+      decltype(_impl_.thread_type_){},
+      decltype(_impl_.is_deleted_){},
+      decltype(_impl_.pid_){},
+      decltype(_impl_.reply_num_){},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_title().empty()) {
+    _this->_impl_.title_.Set(from._internal_title(), _this->GetArenaForAllocation());
+  }
+  _impl_.fname_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.fname_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_fname().empty()) {
+    _this->_impl_.fname_.Set(from._internal_fname(), _this->GetArenaForAllocation());
+  }
+  _impl_.tid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.tid_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_tid().empty()) {
+    _this->_impl_.tid_.Set(from._internal_tid(), _this->GetArenaForAllocation());
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.poll_info_ = new ::PollInfo(*from._impl_.poll_info_);
+  }
+  ::memcpy(&_impl_.fid_, &from._impl_.fid_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.reply_num_) -
+    reinterpret_cast<char*>(&_impl_.fid_)) + sizeof(_impl_.reply_num_));
 
-ThreadInfo_OriginThreadInfo::ThreadInfo_OriginThreadInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfo_OriginThreadInfo();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:ThreadInfo.OriginThreadInfo)
-}
-ThreadInfo_OriginThreadInfo::ThreadInfo_OriginThreadInfo(const ThreadInfo_OriginThreadInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      content_(from.content_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.title().size() > 0) {
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
-  }
-  tid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.tid().size() > 0) {
-    tid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tid_);
-  }
-  if (from.has_poll_info()) {
-    poll_info_ = new ::PollInfo(*from.poll_info_);
-  } else {
-    poll_info_ = NULL;
-  }
-  ::memcpy(&fid_, &from.fid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&pid_) -
-    reinterpret_cast<char*>(&fid_)) + sizeof(pid_));
   // @@protoc_insertion_point(copy_constructor:ThreadInfo.OriginThreadInfo)
 }
-
-void ThreadInfo_OriginThreadInfo::SharedCtor() {
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  tid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&poll_info_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&pid_) -
-      reinterpret_cast<char*>(&poll_info_)) + sizeof(pid_));
-  _cached_size_ = 0;
+inline void ThreadInfo_OriginThreadInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.content_){arena},
+      decltype(_impl_.title_){},
+      decltype(_impl_.fname_){},
+      decltype(_impl_.tid_){},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.poll_info_){nullptr},
+      decltype(_impl_.fid_){::int64_t{0}},
+      decltype(_impl_.thread_type_){0},
+      decltype(_impl_.is_deleted_){0},
+      decltype(_impl_.pid_){::int64_t{0}},
+      decltype(_impl_.reply_num_){0},
+  };
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.fname_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.fname_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.tid_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.tid_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 ThreadInfo_OriginThreadInfo::~ThreadInfo_OriginThreadInfo() {
   // @@protoc_insertion_point(destructor:ThreadInfo.OriginThreadInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void ThreadInfo_OriginThreadInfo::SharedDtor() {
-  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  tid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete poll_info_;
+inline void ThreadInfo_OriginThreadInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.content_.~RepeatedPtrField();
+  _impl_.title_.Destroy();
+  _impl_.fname_.Destroy();
+  _impl_.tid_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.agree_;
+  if (this != internal_default_instance()) delete _impl_.poll_info_;
 }
-
 void ThreadInfo_OriginThreadInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ThreadInfo_OriginThreadInfo::descriptor() {
-  ::protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const ThreadInfo_OriginThreadInfo& ThreadInfo_OriginThreadInfo::default_instance() {
-  ::protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfo_OriginThreadInfo();
-  return *internal_default_instance();
-}
-
-ThreadInfo_OriginThreadInfo* ThreadInfo_OriginThreadInfo::New(::google::protobuf::Arena* arena) const {
-  ThreadInfo_OriginThreadInfo* n = new ThreadInfo_OriginThreadInfo;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void ThreadInfo_OriginThreadInfo::Clear() {
+PROTOBUF_NOINLINE void ThreadInfo_OriginThreadInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:ThreadInfo.OriginThreadInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  content_.Clear();
-  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  tid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && poll_info_ != NULL) {
-    delete poll_info_;
-  }
-  poll_info_ = NULL;
-  ::memset(&fid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&pid_) -
-      reinterpret_cast<char*>(&fid_)) + sizeof(pid_));
-  _internal_metadata_.Clear();
-}
-
-bool ThreadInfo_OriginThreadInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ThreadInfo.OriginThreadInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string title = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_title()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->title().data(), static_cast<int>(this->title().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "ThreadInfo.OriginThreadInfo.title"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string tid = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_tid()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->tid().data(), static_cast<int>(this->tid().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "ThreadInfo.OriginThreadInfo.tid"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 fid = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &fid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_deleted = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_deleted_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .PbContent content = 14;
-      case 14: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(114u /* 114 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_content()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .PollInfo poll_info = 21;
-      case 21: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_poll_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 pid = 25;
-      case 25: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(200u /* 200 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &pid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  _internal_mutable_content()->Clear();
+  _impl_.title_.ClearToEmpty();
+  _impl_.fname_.ClearToEmpty();
+  _impl_.tid_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.agree_ != nullptr);
+      _impl_.agree_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.poll_info_ != nullptr);
+      _impl_.poll_info_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:ThreadInfo.OriginThreadInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:ThreadInfo.OriginThreadInfo)
-  return false;
-#undef DO_
+  ::memset(&_impl_.fid_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.reply_num_) -
+      reinterpret_cast<char*>(&_impl_.fid_)) + sizeof(_impl_.reply_num_));
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void ThreadInfo_OriginThreadInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ThreadInfo.OriginThreadInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string title = 1;
-  if (this->title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "ThreadInfo.OriginThreadInfo.title");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->title(), output);
-  }
-
-  // string tid = 5;
-  if (this->tid().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->tid().data(), static_cast<int>(this->tid().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "ThreadInfo.OriginThreadInfo.tid");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->tid(), output);
-  }
-
-  // int64 fid = 7;
-  if (this->fid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(7, this->fid(), output);
-  }
-
-  // int32 is_deleted = 9;
-  if (this->is_deleted() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->is_deleted(), output);
-  }
-
-  // repeated .PbContent content = 14;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, this->content(static_cast<int>(i)), output);
-  }
-
-  // .PollInfo poll_info = 21;
-  if (this->has_poll_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, *this->poll_info_, output);
-  }
-
-  // int64 pid = 25;
-  if (this->pid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(25, this->pid(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:ThreadInfo.OriginThreadInfo)
+const char* ThreadInfo_OriginThreadInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* ThreadInfo_OriginThreadInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<4, 11, 3, 57, 2> ThreadInfo_OriginThreadInfo::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_._has_bits_),
+    0, // no _extensions_
+    25, 120,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4276837926,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    11,  // num_field_entries
+    3,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_ThreadInfo_OriginThreadInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // int32 reply_num = 16;
+    {::_pbi::TcParser::FastV32S2,
+     {384, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.reply_num_)}},
+    // string title = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.title_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // .Agree agree = 19;
+    {::_pbi::TcParser::FastMtS2,
+     {410, 0, 1, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.agree_)}},
+    // string fname = 4;
+    {::_pbi::TcParser::FastUS1,
+     {34, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.fname_)}},
+    // string tid = 5;
+    {::_pbi::TcParser::FastUS1,
+     {42, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.tid_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // int64 fid = 7;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(ThreadInfo_OriginThreadInfo, _impl_.fid_), 63>(),
+     {56, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.fid_)}},
+    // int32 thread_type = 8;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo_OriginThreadInfo, _impl_.thread_type_), 63>(),
+     {64, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.thread_type_)}},
+    // int32 is_deleted = 9;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo_OriginThreadInfo, _impl_.is_deleted_), 63>(),
+     {72, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.is_deleted_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // repeated .PbContent content = 14;
+    {::_pbi::TcParser::FastMtR1,
+     {114, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.content_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string title = 1;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.title_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string fname = 4;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.fname_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string tid = 5;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.tid_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int64 fid = 7;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.fid_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // int32 thread_type = 8;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.thread_type_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 is_deleted = 9;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.is_deleted_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // repeated .PbContent content = 14;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.content_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int32 reply_num = 16;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.reply_num_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .Agree agree = 19;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.agree_), _Internal::kHasBitsOffset + 0, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .PollInfo poll_info = 21;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.poll_info_), _Internal::kHasBitsOffset + 1, 2,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int64 pid = 25;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.pid_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::PbContent>()},
+    {::_pbi::TcParser::GetTable<::Agree>()},
+    {::_pbi::TcParser::GetTable<::PollInfo>()},
+  }}, {{
+    "\33\5\5\3\0\0\0\0\0\0\0\0\0\0\0\0"
+    "ThreadInfo.OriginThreadInfo"
+    "title"
+    "fname"
+    "tid"
+  }},
+};
+
+::uint8_t* ThreadInfo_OriginThreadInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:ThreadInfo.OriginThreadInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // string title = 1;
-  if (this->title().size() > 0) {
+  if (!this->_internal_title().empty()) {
+    const std::string& _s = this->_internal_title();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "ThreadInfo.OriginThreadInfo.title");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->title(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ThreadInfo.OriginThreadInfo.title");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
+  }
+
+  // string fname = 4;
+  if (!this->_internal_fname().empty()) {
+    const std::string& _s = this->_internal_fname();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ThreadInfo.OriginThreadInfo.fname");
+    target = stream->WriteStringMaybeAliased(4, _s, target);
   }
 
   // string tid = 5;
-  if (this->tid().size() > 0) {
+  if (!this->_internal_tid().empty()) {
+    const std::string& _s = this->_internal_tid();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->tid().data(), static_cast<int>(this->tid().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "ThreadInfo.OriginThreadInfo.tid");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        5, this->tid(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ThreadInfo.OriginThreadInfo.tid");
+    target = stream->WriteStringMaybeAliased(5, _s, target);
   }
 
   // int64 fid = 7;
-  if (this->fid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(7, this->fid(), target);
+  if (this->_internal_fid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<7>(
+            stream, this->_internal_fid(), target);
+  }
+
+  // int32 thread_type = 8;
+  if (this->_internal_thread_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<8>(
+            stream, this->_internal_thread_type(), target);
   }
 
   // int32 is_deleted = 9;
-  if (this->is_deleted() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->is_deleted(), target);
+  if (this->_internal_is_deleted() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<9>(
+            stream, this->_internal_is_deleted(), target);
   }
 
   // repeated .PbContent content = 14;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_content_size()); i < n; i++) {
+    const auto& repfield = this->_internal_content().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        14, this->content(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(14, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  // int32 reply_num = 16;
+  if (this->_internal_reply_num() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        16, this->_internal_reply_num(), target);
+  }
+
+  cached_has_bits = _impl_._has_bits_[0];
+  // .Agree agree = 19;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(19, _Internal::agree(this),
+        _Internal::agree(this).GetCachedSize(), target, stream);
   }
 
   // .PollInfo poll_info = 21;
-  if (this->has_poll_info()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        21, *this->poll_info_, deterministic, target);
+      InternalWriteMessage(21, _Internal::poll_info(this),
+        _Internal::poll_info(this).GetCachedSize(), target, stream);
   }
 
   // int64 pid = 25;
-  if (this->pid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(25, this->pid(), target);
+  if (this->_internal_pid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        25, this->_internal_pid(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:ThreadInfo.OriginThreadInfo)
   return target;
 }
 
-size_t ThreadInfo_OriginThreadInfo::ByteSizeLong() const {
+::size_t ThreadInfo_OriginThreadInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:ThreadInfo.OriginThreadInfo)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .PbContent content = 14;
-  {
-    unsigned int count = static_cast<unsigned int>(this->content_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->content(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_content_size();
+  for (const auto& msg : this->_internal_content()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+  }
+  // string title = 1;
+  if (!this->_internal_title().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_title());
   }
 
-  // string title = 1;
-  if (this->title().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->title());
+  // string fname = 4;
+  if (!this->_internal_fname().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_fname());
   }
 
   // string tid = 5;
-  if (this->tid().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->tid());
+  if (!this->_internal_tid().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_tid());
   }
 
-  // .PollInfo poll_info = 21;
-  if (this->has_poll_info()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->poll_info_);
-  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // .Agree agree = 19;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.agree_);
+    }
 
+    // .PollInfo poll_info = 21;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.poll_info_);
+    }
+
+  }
   // int64 fid = 7;
-  if (this->fid() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->fid());
+  if (this->_internal_fid() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_fid());
+  }
+
+  // int32 thread_type = 8;
+  if (this->_internal_thread_type() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_thread_type());
   }
 
   // int32 is_deleted = 9;
-  if (this->is_deleted() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_deleted());
+  if (this->_internal_is_deleted() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_is_deleted());
   }
 
   // int64 pid = 25;
-  if (this->pid() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->pid());
+  if (this->_internal_pid() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int64Size(
+                                    this->_internal_pid());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ThreadInfo_OriginThreadInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:ThreadInfo.OriginThreadInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ThreadInfo_OriginThreadInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ThreadInfo_OriginThreadInfo>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ThreadInfo.OriginThreadInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:ThreadInfo.OriginThreadInfo)
-    MergeFrom(*source);
+  // int32 reply_num = 16;
+  if (this->_internal_reply_num() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_reply_num());
   }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void ThreadInfo_OriginThreadInfo::MergeFrom(const ThreadInfo_OriginThreadInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:ThreadInfo.OriginThreadInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+const ::google::protobuf::Message::ClassData ThreadInfo_OriginThreadInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    ThreadInfo_OriginThreadInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*ThreadInfo_OriginThreadInfo::GetClassData() const { return &_class_data_; }
+
+
+void ThreadInfo_OriginThreadInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<ThreadInfo_OriginThreadInfo*>(&to_msg);
+  auto& from = static_cast<const ThreadInfo_OriginThreadInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ThreadInfo.OriginThreadInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  content_.MergeFrom(from.content_);
-  if (from.title().size() > 0) {
-
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+  _this->_internal_mutable_content()->MergeFrom(from._internal_content());
+  if (!from._internal_title().empty()) {
+    _this->_internal_set_title(from._internal_title());
   }
-  if (from.tid().size() > 0) {
-
-    tid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tid_);
+  if (!from._internal_fname().empty()) {
+    _this->_internal_set_fname(from._internal_fname());
   }
-  if (from.has_poll_info()) {
-    mutable_poll_info()->::PollInfo::MergeFrom(from.poll_info());
+  if (!from._internal_tid().empty()) {
+    _this->_internal_set_tid(from._internal_tid());
   }
-  if (from.fid() != 0) {
-    set_fid(from.fid());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_agree()->::Agree::MergeFrom(
+          from._internal_agree());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_poll_info()->::PollInfo::MergeFrom(
+          from._internal_poll_info());
+    }
   }
-  if (from.is_deleted() != 0) {
-    set_is_deleted(from.is_deleted());
+  if (from._internal_fid() != 0) {
+    _this->_internal_set_fid(from._internal_fid());
   }
-  if (from.pid() != 0) {
-    set_pid(from.pid());
+  if (from._internal_thread_type() != 0) {
+    _this->_internal_set_thread_type(from._internal_thread_type());
   }
-}
-
-void ThreadInfo_OriginThreadInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:ThreadInfo.OriginThreadInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  if (from._internal_is_deleted() != 0) {
+    _this->_internal_set_is_deleted(from._internal_is_deleted());
+  }
+  if (from._internal_pid() != 0) {
+    _this->_internal_set_pid(from._internal_pid());
+  }
+  if (from._internal_reply_num() != 0) {
+    _this->_internal_set_reply_num(from._internal_reply_num());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void ThreadInfo_OriginThreadInfo::CopyFrom(const ThreadInfo_OriginThreadInfo& from) {
@@ -1539,1127 +810,1001 @@ void ThreadInfo_OriginThreadInfo::CopyFrom(const ThreadInfo_OriginThreadInfo& fr
   MergeFrom(from);
 }
 
-bool ThreadInfo_OriginThreadInfo::IsInitialized() const {
+PROTOBUF_NOINLINE bool ThreadInfo_OriginThreadInfo::IsInitialized() const {
   return true;
 }
 
-void ThreadInfo_OriginThreadInfo::Swap(ThreadInfo_OriginThreadInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ThreadInfo_OriginThreadInfo::InternalSwap(ThreadInfo_OriginThreadInfo* other) {
   using std::swap;
-  content_.InternalSwap(&other->content_);
-  title_.Swap(&other->title_);
-  tid_.Swap(&other->tid_);
-  swap(poll_info_, other->poll_info_);
-  swap(fid_, other->fid_);
-  swap(is_deleted_, other->is_deleted_);
-  swap(pid_, other->pid_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.content_.InternalSwap(&other->_impl_.content_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.title_, lhs_arena,
+                                       &other->_impl_.title_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.fname_, lhs_arena,
+                                       &other->_impl_.fname_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.tid_, lhs_arena,
+                                       &other->_impl_.tid_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.reply_num_)
+      + sizeof(ThreadInfo_OriginThreadInfo::_impl_.reply_num_)
+      - PROTOBUF_FIELD_OFFSET(ThreadInfo_OriginThreadInfo, _impl_.agree_)>(
+          reinterpret_cast<char*>(&_impl_.agree_),
+          reinterpret_cast<char*>(&other->_impl_.agree_));
 }
 
 ::google::protobuf::Metadata ThreadInfo_OriginThreadInfo::GetMetadata() const {
-  protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_ThreadInfo_2eproto_getter, &descriptor_table_ThreadInfo_2eproto_once,
+      file_level_metadata_ThreadInfo_2eproto[0]);
 }
-
-
 // ===================================================================
 
-void ThreadInfo::InitAsDefaultInstance() {
-  ::_ThreadInfo_default_instance_._instance.get_mutable()->poll_info_ = const_cast< ::PollInfo*>(
-      ::PollInfo::internal_default_instance());
-  ::_ThreadInfo_default_instance_._instance.get_mutable()->agree_ = const_cast< ::Agree*>(
-      ::Agree::internal_default_instance());
-  ::_ThreadInfo_default_instance_._instance.get_mutable()->origin_thread_info_ = const_cast< ::ThreadInfo_OriginThreadInfo*>(
-      ::ThreadInfo_OriginThreadInfo::internal_default_instance());
+class ThreadInfo::_Internal {
+ public:
+  using HasBits = decltype(std::declval<ThreadInfo>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_._has_bits_);
+  static const ::PollInfo& poll_info(const ThreadInfo* msg);
+  static void set_has_poll_info(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::Agree& agree(const ThreadInfo* msg);
+  static void set_has_agree(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static const ::ThreadInfo_OriginThreadInfo& origin_thread_info(const ThreadInfo* msg);
+  static void set_has_origin_thread_info(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+};
+
+const ::PollInfo& ThreadInfo::_Internal::poll_info(const ThreadInfo* msg) {
+  return *msg->_impl_.poll_info_;
+}
+const ::Agree& ThreadInfo::_Internal::agree(const ThreadInfo* msg) {
+  return *msg->_impl_.agree_;
+}
+const ::ThreadInfo_OriginThreadInfo& ThreadInfo::_Internal::origin_thread_info(const ThreadInfo* msg) {
+  return *msg->_impl_.origin_thread_info_;
+}
+void ThreadInfo::clear_poll_info() {
+  if (_impl_.poll_info_ != nullptr) _impl_.poll_info_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 void ThreadInfo::clear_agree() {
-  if (GetArenaNoVirtual() == NULL && agree_ != NULL) {
-    delete agree_;
-  }
-  agree_ = NULL;
+  if (_impl_.agree_ != nullptr) _impl_.agree_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 void ThreadInfo::clear_first_post_content() {
-  first_post_content_.Clear();
+  _internal_mutable_first_post_content()->Clear();
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ThreadInfo::kIdFieldNumber;
-const int ThreadInfo::kTitleFieldNumber;
-const int ThreadInfo::kReplyNumFieldNumber;
-const int ThreadInfo::kViewNumFieldNumber;
-const int ThreadInfo::kLastTimeIntFieldNumber;
-const int ThreadInfo::kIsTopFieldNumber;
-const int ThreadInfo::kIsGoodFieldNumber;
-const int ThreadInfo::kIsVoiceThreadFieldNumber;
-const int ThreadInfo::kFidFieldNumber;
-const int ThreadInfo::kFirstPostIdFieldNumber;
-const int ThreadInfo::kIsGlobalTopFieldNumber;
-const int ThreadInfo::kCreateTimeFieldNumber;
-const int ThreadInfo::kAuthorIdFieldNumber;
-const int ThreadInfo::kIsAdFieldNumber;
-const int ThreadInfo::kPollInfoFieldNumber;
-const int ThreadInfo::kIsGodthreadRecommendFieldNumber;
-const int ThreadInfo::kAgreeFieldNumber;
-const int ThreadInfo::kIsGodFieldNumber;
-const int ThreadInfo::kOriginThreadInfoFieldNumber;
-const int ThreadInfo::kFirstPostContentFieldNumber;
-const int ThreadInfo::kIsShareThreadFieldNumber;
-const int ThreadInfo::kTabIdFieldNumber;
-const int ThreadInfo::kIsDeletedFieldNumber;
-const int ThreadInfo::kIsFrsMaskFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+ThreadInfo::ThreadInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ThreadInfo)
+}
+ThreadInfo::ThreadInfo(const ThreadInfo& from) : ::google::protobuf::Message() {
+  ThreadInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.first_post_content_){from._impl_.first_post_content_},
+      decltype(_impl_.title_){},
+      decltype(_impl_.last_time_){},
+      decltype(_impl_.pids_){},
+      decltype(_impl_.poll_info_){nullptr},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.origin_thread_info_){nullptr},
+      decltype(_impl_.id_){},
+      decltype(_impl_.tid_){},
+      decltype(_impl_.reply_num_){},
+      decltype(_impl_.view_num_){},
+      decltype(_impl_.last_time_int_){},
+      decltype(_impl_.thread_types_){},
+      decltype(_impl_.is_top_){},
+      decltype(_impl_.is_good_){},
+      decltype(_impl_.is_vote_){},
+      decltype(_impl_.is_global_top_){},
+      decltype(_impl_.fid_){},
+      decltype(_impl_.first_post_id_){},
+      decltype(_impl_.create_time_){},
+      decltype(_impl_.time_){},
+      decltype(_impl_.post_id_){},
+      decltype(_impl_.author_id_){},
+      decltype(_impl_.is_ad_){},
+      decltype(_impl_.is_godthread_recommend_){},
+      decltype(_impl_.is_god_){},
+      decltype(_impl_.is_share_thread_){},
+      decltype(_impl_.tab_id_){},
+      decltype(_impl_.is_deleted_){},
+      decltype(_impl_.is_frs_mask_){},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_title().empty()) {
+    _this->_impl_.title_.Set(from._internal_title(), _this->GetArenaForAllocation());
+  }
+  _impl_.last_time_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.last_time_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_last_time().empty()) {
+    _this->_impl_.last_time_.Set(from._internal_last_time(), _this->GetArenaForAllocation());
+  }
+  _impl_.pids_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.pids_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_pids().empty()) {
+    _this->_impl_.pids_.Set(from._internal_pids(), _this->GetArenaForAllocation());
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.poll_info_ = new ::PollInfo(*from._impl_.poll_info_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000004u) != 0) {
+    _this->_impl_.origin_thread_info_ = new ::ThreadInfo_OriginThreadInfo(*from._impl_.origin_thread_info_);
+  }
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.is_frs_mask_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.is_frs_mask_));
 
-ThreadInfo::ThreadInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfo();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:ThreadInfo)
-}
-ThreadInfo::ThreadInfo(const ThreadInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      first_post_content_(from.first_post_content_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.title().size() > 0) {
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
-  }
-  if (from.has_poll_info()) {
-    poll_info_ = new ::PollInfo(*from.poll_info_);
-  } else {
-    poll_info_ = NULL;
-  }
-  if (from.has_agree()) {
-    agree_ = new ::Agree(*from.agree_);
-  } else {
-    agree_ = NULL;
-  }
-  if (from.has_origin_thread_info()) {
-    origin_thread_info_ = new ::ThreadInfo_OriginThreadInfo(*from.origin_thread_info_);
-  } else {
-    origin_thread_info_ = NULL;
-  }
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&is_deleted_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(is_deleted_));
   // @@protoc_insertion_point(copy_constructor:ThreadInfo)
 }
-
-void ThreadInfo::SharedCtor() {
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&poll_info_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&is_deleted_) -
-      reinterpret_cast<char*>(&poll_info_)) + sizeof(is_deleted_));
-  _cached_size_ = 0;
+inline void ThreadInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.first_post_content_){arena},
+      decltype(_impl_.title_){},
+      decltype(_impl_.last_time_){},
+      decltype(_impl_.pids_){},
+      decltype(_impl_.poll_info_){nullptr},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.origin_thread_info_){nullptr},
+      decltype(_impl_.id_){::int64_t{0}},
+      decltype(_impl_.tid_){::int64_t{0}},
+      decltype(_impl_.reply_num_){0},
+      decltype(_impl_.view_num_){0},
+      decltype(_impl_.last_time_int_){0},
+      decltype(_impl_.thread_types_){0},
+      decltype(_impl_.is_top_){0},
+      decltype(_impl_.is_good_){0},
+      decltype(_impl_.is_vote_){0},
+      decltype(_impl_.is_global_top_){0},
+      decltype(_impl_.fid_){::int64_t{0}},
+      decltype(_impl_.first_post_id_){::int64_t{0}},
+      decltype(_impl_.create_time_){0},
+      decltype(_impl_.time_){0},
+      decltype(_impl_.post_id_){::int64_t{0}},
+      decltype(_impl_.author_id_){::int64_t{0}},
+      decltype(_impl_.is_ad_){0u},
+      decltype(_impl_.is_godthread_recommend_){0},
+      decltype(_impl_.is_god_){0},
+      decltype(_impl_.is_share_thread_){0},
+      decltype(_impl_.tab_id_){0},
+      decltype(_impl_.is_deleted_){0},
+      decltype(_impl_.is_frs_mask_){0},
+  };
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.last_time_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.last_time_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.pids_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.pids_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 ThreadInfo::~ThreadInfo() {
   // @@protoc_insertion_point(destructor:ThreadInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void ThreadInfo::SharedDtor() {
-  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete poll_info_;
-  if (this != internal_default_instance()) delete agree_;
-  if (this != internal_default_instance()) delete origin_thread_info_;
+inline void ThreadInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.first_post_content_.~RepeatedPtrField();
+  _impl_.title_.Destroy();
+  _impl_.last_time_.Destroy();
+  _impl_.pids_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.poll_info_;
+  if (this != internal_default_instance()) delete _impl_.agree_;
+  if (this != internal_default_instance()) delete _impl_.origin_thread_info_;
 }
-
 void ThreadInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ThreadInfo::descriptor() {
-  ::protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const ThreadInfo& ThreadInfo::default_instance() {
-  ::protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfo();
-  return *internal_default_instance();
-}
-
-ThreadInfo* ThreadInfo::New(::google::protobuf::Arena* arena) const {
-  ThreadInfo* n = new ThreadInfo;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void ThreadInfo::Clear() {
+PROTOBUF_NOINLINE void ThreadInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:ThreadInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  first_post_content_.Clear();
-  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && poll_info_ != NULL) {
-    delete poll_info_;
-  }
-  poll_info_ = NULL;
-  if (GetArenaNoVirtual() == NULL && agree_ != NULL) {
-    delete agree_;
-  }
-  agree_ = NULL;
-  if (GetArenaNoVirtual() == NULL && origin_thread_info_ != NULL) {
-    delete origin_thread_info_;
-  }
-  origin_thread_info_ = NULL;
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&is_deleted_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(is_deleted_));
-  _internal_metadata_.Clear();
-}
-
-bool ThreadInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:ThreadInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string title = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_title()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->title().data(), static_cast<int>(this->title().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "ThreadInfo.title"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 reply_num = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &reply_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 view_num = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &view_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 last_time_int = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &last_time_int_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_top = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_top_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_good = 10;
-      case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(80u /* 80 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_good_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_voice_thread = 15;
-      case 15: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(120u /* 120 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_voice_thread_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 fid = 27;
-      case 27: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(216u /* 216 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &fid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 first_post_id = 40;
-      case 40: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(64u /* 320 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &first_post_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_global_top = 42;
-      case 42: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(80u /* 336 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_global_top_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 create_time = 45;
-      case 45: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(104u /* 360 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &create_time_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 author_id = 56;
-      case 56: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(192u /* 448 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &author_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // uint32 is_ad = 59;
-      case 59: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(216u /* 472 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &is_ad_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .PollInfo poll_info = 74;
-      case 74: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(82u /* 594 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_poll_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_godthread_recommend = 85;
-      case 85: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(168u /* 680 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_godthread_recommend_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .Agree agree = 126;
-      case 126: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(242u /* 1010 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_agree()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_god = 131;
-      case 131: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 1048 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_god_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
-      case 141: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(106u /* 1130 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_origin_thread_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .PbContent first_post_content = 142;
-      case 142: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(114u /* 1138 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_first_post_content()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_share_thread = 143;
-      case 143: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(120u /* 1144 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_share_thread_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 tab_id = 175;
-      case 175: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(120u /* 1400 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &tab_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_deleted = 181;
-      case 181: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(168u /* 1448 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_deleted_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 is_frs_mask = 198;
-      case 198: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u /* 1584 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &is_frs_mask_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  _internal_mutable_first_post_content()->Clear();
+  _impl_.title_.ClearToEmpty();
+  _impl_.last_time_.ClearToEmpty();
+  _impl_.pids_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.poll_info_ != nullptr);
+      _impl_.poll_info_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.agree_ != nullptr);
+      _impl_.agree_->Clear();
+    }
+    if (cached_has_bits & 0x00000004u) {
+      ABSL_DCHECK(_impl_.origin_thread_info_ != nullptr);
+      _impl_.origin_thread_info_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:ThreadInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:ThreadInfo)
-  return false;
-#undef DO_
+  ::memset(&_impl_.id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.is_frs_mask_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.is_frs_mask_));
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void ThreadInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:ThreadInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int64 id = 1;
-  if (this->id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
-  }
-
-  // string title = 3;
-  if (this->title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "ThreadInfo.title");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->title(), output);
-  }
-
-  // int32 reply_num = 4;
-  if (this->reply_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->reply_num(), output);
-  }
-
-  // int32 view_num = 5;
-  if (this->view_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->view_num(), output);
-  }
-
-  // int32 last_time_int = 7;
-  if (this->last_time_int() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->last_time_int(), output);
-  }
-
-  // int32 is_top = 9;
-  if (this->is_top() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->is_top(), output);
-  }
-
-  // int32 is_good = 10;
-  if (this->is_good() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->is_good(), output);
-  }
-
-  // int32 is_voice_thread = 15;
-  if (this->is_voice_thread() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(15, this->is_voice_thread(), output);
-  }
-
-  // int64 fid = 27;
-  if (this->fid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(27, this->fid(), output);
-  }
-
-  // int64 first_post_id = 40;
-  if (this->first_post_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(40, this->first_post_id(), output);
-  }
-
-  // int32 is_global_top = 42;
-  if (this->is_global_top() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(42, this->is_global_top(), output);
-  }
-
-  // int32 create_time = 45;
-  if (this->create_time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(45, this->create_time(), output);
-  }
-
-  // int64 author_id = 56;
-  if (this->author_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(56, this->author_id(), output);
-  }
-
-  // uint32 is_ad = 59;
-  if (this->is_ad() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(59, this->is_ad(), output);
-  }
-
-  // .PollInfo poll_info = 74;
-  if (this->has_poll_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      74, *this->poll_info_, output);
-  }
-
-  // int32 is_godthread_recommend = 85;
-  if (this->is_godthread_recommend() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(85, this->is_godthread_recommend(), output);
-  }
-
-  // .Agree agree = 126;
-  if (this->has_agree()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      126, *this->agree_, output);
-  }
-
-  // int32 is_god = 131;
-  if (this->is_god() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(131, this->is_god(), output);
-  }
-
-  // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
-  if (this->has_origin_thread_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      141, *this->origin_thread_info_, output);
-  }
-
-  // repeated .PbContent first_post_content = 142;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->first_post_content_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      142, this->first_post_content(static_cast<int>(i)), output);
-  }
-
-  // int32 is_share_thread = 143;
-  if (this->is_share_thread() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(143, this->is_share_thread(), output);
-  }
-
-  // int32 tab_id = 175;
-  if (this->tab_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(175, this->tab_id(), output);
-  }
-
-  // int32 is_deleted = 181;
-  if (this->is_deleted() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(181, this->is_deleted(), output);
-  }
-
-  // int32 is_frs_mask = 198;
-  if (this->is_frs_mask() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(198, this->is_frs_mask(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:ThreadInfo)
+const char* ThreadInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* ThreadInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_._has_bits_),
+    0, // no _extensions_
+    198, 248,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4227856384,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    30,  // num_field_entries
+    4,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_ThreadInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(ThreadInfo, _impl_.id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.id_)}},
+    // int64 tid = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(ThreadInfo, _impl_.tid_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.tid_)}},
+    // string title = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.title_)}},
+    // int32 reply_num = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo, _impl_.reply_num_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.reply_num_)}},
+    // int32 view_num = 5;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo, _impl_.view_num_), 63>(),
+     {40, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.view_num_)}},
+    // string last_time = 6;
+    {::_pbi::TcParser::FastUS1,
+     {50, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.last_time_)}},
+    // int32 last_time_int = 7;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo, _impl_.last_time_int_), 63>(),
+     {56, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.last_time_int_)}},
+    // int32 thread_types = 8;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo, _impl_.thread_types_), 63>(),
+     {64, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.thread_types_)}},
+    // int32 is_top = 9;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo, _impl_.is_top_), 63>(),
+     {72, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_top_)}},
+    // int32 is_good = 10;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo, _impl_.is_good_), 63>(),
+     {80, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_good_)}},
+    // int32 is_vote = 11;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ThreadInfo, _impl_.is_vote_), 63>(),
+     {88, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_vote_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 is_god = 131;
+    {::_pbi::TcParser::FastV32S2,
+     {2200, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_god_)}},
+    // int64 post_id = 52;
+    {::_pbi::TcParser::FastV64S2,
+     {928, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.post_id_)}},
+    // int32 time = 53;
+    {::_pbi::TcParser::FastV32S2,
+     {936, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.time_)}},
+    // int32 is_frs_mask = 198;
+    {::_pbi::TcParser::FastV32S2,
+     {3248, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_frs_mask_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // int64 first_post_id = 40;
+    {::_pbi::TcParser::FastV64S2,
+     {704, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.first_post_id_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 is_global_top = 42;
+    {::_pbi::TcParser::FastV32S2,
+     {720, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_global_top_)}},
+    // int64 fid = 27;
+    {::_pbi::TcParser::FastV64S2,
+     {472, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.fid_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 create_time = 45;
+    {::_pbi::TcParser::FastV32S2,
+     {744, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.create_time_)}},
+    // .Agree agree = 126;
+    {::_pbi::TcParser::FastMtS2,
+     {2034, 1, 1, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.agree_)}},
+    // int32 is_share_thread = 143;
+    {::_pbi::TcParser::FastV32S2,
+     {2296, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_share_thread_)}},
+  }}, {{
+    40, 0, 10,
+    53210, 12, 65494, 17, 57339, 20, 65535, 22, 65535, 22, 63423, 22,
+    65311, 24, 65535, 27, 57215, 27, 49151, 29,
+    65535, 65535
+  }}, {{
+    // int64 id = 1;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // int64 tid = 2;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.tid_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // string title = 3;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.title_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 reply_num = 4;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.reply_num_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 view_num = 5;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.view_num_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string last_time = 6;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.last_time_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 last_time_int = 7;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.last_time_int_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 thread_types = 8;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.thread_types_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 is_top = 9;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_top_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 is_good = 10;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_good_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 is_vote = 11;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_vote_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int64 fid = 27;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.fid_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // int64 first_post_id = 40;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.first_post_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // int32 is_global_top = 42;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_global_top_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 create_time = 45;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.create_time_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int64 post_id = 52;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.post_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // int32 time = 53;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.time_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int64 author_id = 56;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.author_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // uint32 is_ad = 59;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_ad_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // string pids = 61;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.pids_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .PollInfo poll_info = 74;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.poll_info_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int32 is_godthread_recommend = 85;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_godthread_recommend_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .Agree agree = 126;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.agree_), _Internal::kHasBitsOffset + 1, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int32 is_god = 131;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_god_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.origin_thread_info_), _Internal::kHasBitsOffset + 2, 2,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .PbContent first_post_content = 142;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.first_post_content_), -1, 3,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int32 is_share_thread = 143;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_share_thread_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 tab_id = 175;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.tab_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 is_deleted = 181;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_deleted_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 is_frs_mask = 198;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_frs_mask_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::PollInfo>()},
+    {::_pbi::TcParser::GetTable<::Agree>()},
+    {::_pbi::TcParser::GetTable<::ThreadInfo_OriginThreadInfo>()},
+    {::_pbi::TcParser::GetTable<::PbContent>()},
+  }}, {{
+    "\12\0\0\5\0\0\11\0\0\0\0\0\0\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"
+    "ThreadInfo"
+    "title"
+    "last_time"
+    "pids"
+  }},
+};
+
+::uint8_t* ThreadInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:ThreadInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  if (this->_internal_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<1>(
+            stream, this->_internal_id(), target);
+  }
+
+  // int64 tid = 2;
+  if (this->_internal_tid() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<2>(
+            stream, this->_internal_tid(), target);
   }
 
   // string title = 3;
-  if (this->title().size() > 0) {
+  if (!this->_internal_title().empty()) {
+    const std::string& _s = this->_internal_title();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "ThreadInfo.title");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->title(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ThreadInfo.title");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
   // int32 reply_num = 4;
-  if (this->reply_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->reply_num(), target);
+  if (this->_internal_reply_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<4>(
+            stream, this->_internal_reply_num(), target);
   }
 
   // int32 view_num = 5;
-  if (this->view_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->view_num(), target);
+  if (this->_internal_view_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<5>(
+            stream, this->_internal_view_num(), target);
+  }
+
+  // string last_time = 6;
+  if (!this->_internal_last_time().empty()) {
+    const std::string& _s = this->_internal_last_time();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ThreadInfo.last_time");
+    target = stream->WriteStringMaybeAliased(6, _s, target);
   }
 
   // int32 last_time_int = 7;
-  if (this->last_time_int() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->last_time_int(), target);
+  if (this->_internal_last_time_int() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<7>(
+            stream, this->_internal_last_time_int(), target);
+  }
+
+  // int32 thread_types = 8;
+  if (this->_internal_thread_types() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<8>(
+            stream, this->_internal_thread_types(), target);
   }
 
   // int32 is_top = 9;
-  if (this->is_top() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->is_top(), target);
+  if (this->_internal_is_top() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<9>(
+            stream, this->_internal_is_top(), target);
   }
 
   // int32 is_good = 10;
-  if (this->is_good() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->is_good(), target);
+  if (this->_internal_is_good() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<10>(
+            stream, this->_internal_is_good(), target);
   }
 
-  // int32 is_voice_thread = 15;
-  if (this->is_voice_thread() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(15, this->is_voice_thread(), target);
+  // int32 is_vote = 11;
+  if (this->_internal_is_vote() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<11>(
+            stream, this->_internal_is_vote(), target);
   }
 
   // int64 fid = 27;
-  if (this->fid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(27, this->fid(), target);
+  if (this->_internal_fid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        27, this->_internal_fid(), target);
   }
 
   // int64 first_post_id = 40;
-  if (this->first_post_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(40, this->first_post_id(), target);
+  if (this->_internal_first_post_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        40, this->_internal_first_post_id(), target);
   }
 
   // int32 is_global_top = 42;
-  if (this->is_global_top() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(42, this->is_global_top(), target);
+  if (this->_internal_is_global_top() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        42, this->_internal_is_global_top(), target);
   }
 
   // int32 create_time = 45;
-  if (this->create_time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(45, this->create_time(), target);
+  if (this->_internal_create_time() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        45, this->_internal_create_time(), target);
+  }
+
+  // int64 post_id = 52;
+  if (this->_internal_post_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        52, this->_internal_post_id(), target);
+  }
+
+  // int32 time = 53;
+  if (this->_internal_time() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        53, this->_internal_time(), target);
   }
 
   // int64 author_id = 56;
-  if (this->author_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(56, this->author_id(), target);
+  if (this->_internal_author_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        56, this->_internal_author_id(), target);
   }
 
   // uint32 is_ad = 59;
-  if (this->is_ad() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(59, this->is_ad(), target);
+  if (this->_internal_is_ad() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        59, this->_internal_is_ad(), target);
   }
 
+  // string pids = 61;
+  if (!this->_internal_pids().empty()) {
+    const std::string& _s = this->_internal_pids();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ThreadInfo.pids");
+    target = stream->WriteStringMaybeAliased(61, _s, target);
+  }
+
+  cached_has_bits = _impl_._has_bits_[0];
   // .PollInfo poll_info = 74;
-  if (this->has_poll_info()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        74, *this->poll_info_, deterministic, target);
+      InternalWriteMessage(74, _Internal::poll_info(this),
+        _Internal::poll_info(this).GetCachedSize(), target, stream);
   }
 
   // int32 is_godthread_recommend = 85;
-  if (this->is_godthread_recommend() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(85, this->is_godthread_recommend(), target);
+  if (this->_internal_is_godthread_recommend() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        85, this->_internal_is_godthread_recommend(), target);
   }
 
   // .Agree agree = 126;
-  if (this->has_agree()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        126, *this->agree_, deterministic, target);
+      InternalWriteMessage(126, _Internal::agree(this),
+        _Internal::agree(this).GetCachedSize(), target, stream);
   }
 
   // int32 is_god = 131;
-  if (this->is_god() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(131, this->is_god(), target);
+  if (this->_internal_is_god() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        131, this->_internal_is_god(), target);
   }
 
   // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
-  if (this->has_origin_thread_info()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        141, *this->origin_thread_info_, deterministic, target);
+      InternalWriteMessage(141, _Internal::origin_thread_info(this),
+        _Internal::origin_thread_info(this).GetCachedSize(), target, stream);
   }
 
   // repeated .PbContent first_post_content = 142;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->first_post_content_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_first_post_content_size()); i < n; i++) {
+    const auto& repfield = this->_internal_first_post_content().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        142, this->first_post_content(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(142, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // int32 is_share_thread = 143;
-  if (this->is_share_thread() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(143, this->is_share_thread(), target);
+  if (this->_internal_is_share_thread() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        143, this->_internal_is_share_thread(), target);
   }
 
   // int32 tab_id = 175;
-  if (this->tab_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(175, this->tab_id(), target);
+  if (this->_internal_tab_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        175, this->_internal_tab_id(), target);
   }
 
   // int32 is_deleted = 181;
-  if (this->is_deleted() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(181, this->is_deleted(), target);
+  if (this->_internal_is_deleted() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        181, this->_internal_is_deleted(), target);
   }
 
   // int32 is_frs_mask = 198;
-  if (this->is_frs_mask() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(198, this->is_frs_mask(), target);
+  if (this->_internal_is_frs_mask() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        198, this->_internal_is_frs_mask(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:ThreadInfo)
   return target;
 }
 
-size_t ThreadInfo::ByteSizeLong() const {
+::size_t ThreadInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:ThreadInfo)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .PbContent first_post_content = 142;
-  {
-    unsigned int count = static_cast<unsigned int>(this->first_post_content_size());
-    total_size += 2UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->first_post_content(static_cast<int>(i)));
-    }
+  total_size += 2UL * this->_internal_first_post_content_size();
+  for (const auto& msg : this->_internal_first_post_content()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // string title = 3;
-  if (this->title().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->title());
+  if (!this->_internal_title().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_title());
   }
 
-  // .PollInfo poll_info = 74;
-  if (this->has_poll_info()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->poll_info_);
+  // string last_time = 6;
+  if (!this->_internal_last_time().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_last_time());
   }
 
-  // .Agree agree = 126;
-  if (this->has_agree()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->agree_);
+  // string pids = 61;
+  if (!this->_internal_pids().empty()) {
+    total_size += 2 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_pids());
   }
 
-  // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
-  if (this->has_origin_thread_info()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->origin_thread_info_);
-  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    // .PollInfo poll_info = 74;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.poll_info_);
+    }
 
+    // .Agree agree = 126;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.agree_);
+    }
+
+    // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.origin_thread_info_);
+    }
+
+  }
   // int64 id = 1;
-  if (this->id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->id());
+  if (this->_internal_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_id());
+  }
+
+  // int64 tid = 2;
+  if (this->_internal_tid() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_tid());
   }
 
   // int32 reply_num = 4;
-  if (this->reply_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->reply_num());
+  if (this->_internal_reply_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_reply_num());
   }
 
   // int32 view_num = 5;
-  if (this->view_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->view_num());
+  if (this->_internal_view_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_view_num());
   }
 
   // int32 last_time_int = 7;
-  if (this->last_time_int() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->last_time_int());
+  if (this->_internal_last_time_int() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_last_time_int());
+  }
+
+  // int32 thread_types = 8;
+  if (this->_internal_thread_types() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_thread_types());
   }
 
   // int32 is_top = 9;
-  if (this->is_top() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_top());
+  if (this->_internal_is_top() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_is_top());
   }
 
   // int32 is_good = 10;
-  if (this->is_good() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_good());
+  if (this->_internal_is_good() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_is_good());
   }
 
-  // int32 is_voice_thread = 15;
-  if (this->is_voice_thread() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_voice_thread());
-  }
-
-  // int32 is_frs_mask = 198;
-  if (this->is_frs_mask() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_frs_mask());
-  }
-
-  // int64 fid = 27;
-  if (this->fid() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->fid());
-  }
-
-  // int64 first_post_id = 40;
-  if (this->first_post_id() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->first_post_id());
+  // int32 is_vote = 11;
+  if (this->_internal_is_vote() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_is_vote());
   }
 
   // int32 is_global_top = 42;
-  if (this->is_global_top() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_global_top());
+  if (this->_internal_is_global_top() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_is_global_top());
+  }
+
+  // int64 fid = 27;
+  if (this->_internal_fid() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int64Size(
+                                    this->_internal_fid());
+  }
+
+  // int64 first_post_id = 40;
+  if (this->_internal_first_post_id() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int64Size(
+                                    this->_internal_first_post_id());
   }
 
   // int32 create_time = 45;
-  if (this->create_time() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->create_time());
+  if (this->_internal_create_time() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_create_time());
+  }
+
+  // int32 time = 53;
+  if (this->_internal_time() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_time());
+  }
+
+  // int64 post_id = 52;
+  if (this->_internal_post_id() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int64Size(
+                                    this->_internal_post_id());
   }
 
   // int64 author_id = 56;
-  if (this->author_id() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->author_id());
+  if (this->_internal_author_id() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int64Size(
+                                    this->_internal_author_id());
   }
 
   // uint32 is_ad = 59;
-  if (this->is_ad() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->is_ad());
+  if (this->_internal_is_ad() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::UInt32Size(
+                                    this->_internal_is_ad());
   }
 
   // int32 is_godthread_recommend = 85;
-  if (this->is_godthread_recommend() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_godthread_recommend());
+  if (this->_internal_is_godthread_recommend() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_is_godthread_recommend());
   }
 
   // int32 is_god = 131;
-  if (this->is_god() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_god());
+  if (this->_internal_is_god() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_is_god());
   }
 
   // int32 is_share_thread = 143;
-  if (this->is_share_thread() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_share_thread());
+  if (this->_internal_is_share_thread() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_is_share_thread());
   }
 
   // int32 tab_id = 175;
-  if (this->tab_id() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->tab_id());
+  if (this->_internal_tab_id() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_tab_id());
   }
 
   // int32 is_deleted = 181;
-  if (this->is_deleted() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->is_deleted());
+  if (this->_internal_is_deleted() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_is_deleted());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ThreadInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:ThreadInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ThreadInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const ThreadInfo>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:ThreadInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:ThreadInfo)
-    MergeFrom(*source);
+  // int32 is_frs_mask = 198;
+  if (this->_internal_is_frs_mask() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_is_frs_mask());
   }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void ThreadInfo::MergeFrom(const ThreadInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:ThreadInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+const ::google::protobuf::Message::ClassData ThreadInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    ThreadInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*ThreadInfo::GetClassData() const { return &_class_data_; }
+
+
+void ThreadInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<ThreadInfo*>(&to_msg);
+  auto& from = static_cast<const ThreadInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ThreadInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  first_post_content_.MergeFrom(from.first_post_content_);
-  if (from.title().size() > 0) {
-
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+  _this->_internal_mutable_first_post_content()->MergeFrom(from._internal_first_post_content());
+  if (!from._internal_title().empty()) {
+    _this->_internal_set_title(from._internal_title());
   }
-  if (from.has_poll_info()) {
-    mutable_poll_info()->::PollInfo::MergeFrom(from.poll_info());
+  if (!from._internal_last_time().empty()) {
+    _this->_internal_set_last_time(from._internal_last_time());
   }
-  if (from.has_agree()) {
-    mutable_agree()->::Agree::MergeFrom(from.agree());
+  if (!from._internal_pids().empty()) {
+    _this->_internal_set_pids(from._internal_pids());
   }
-  if (from.has_origin_thread_info()) {
-    mutable_origin_thread_info()->::ThreadInfo_OriginThreadInfo::MergeFrom(from.origin_thread_info());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_poll_info()->::PollInfo::MergeFrom(
+          from._internal_poll_info());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_agree()->::Agree::MergeFrom(
+          from._internal_agree());
+    }
+    if (cached_has_bits & 0x00000004u) {
+      _this->_internal_mutable_origin_thread_info()->::ThreadInfo_OriginThreadInfo::MergeFrom(
+          from._internal_origin_thread_info());
+    }
   }
-  if (from.id() != 0) {
-    set_id(from.id());
+  if (from._internal_id() != 0) {
+    _this->_internal_set_id(from._internal_id());
   }
-  if (from.reply_num() != 0) {
-    set_reply_num(from.reply_num());
+  if (from._internal_tid() != 0) {
+    _this->_internal_set_tid(from._internal_tid());
   }
-  if (from.view_num() != 0) {
-    set_view_num(from.view_num());
+  if (from._internal_reply_num() != 0) {
+    _this->_internal_set_reply_num(from._internal_reply_num());
   }
-  if (from.last_time_int() != 0) {
-    set_last_time_int(from.last_time_int());
+  if (from._internal_view_num() != 0) {
+    _this->_internal_set_view_num(from._internal_view_num());
   }
-  if (from.is_top() != 0) {
-    set_is_top(from.is_top());
+  if (from._internal_last_time_int() != 0) {
+    _this->_internal_set_last_time_int(from._internal_last_time_int());
   }
-  if (from.is_good() != 0) {
-    set_is_good(from.is_good());
+  if (from._internal_thread_types() != 0) {
+    _this->_internal_set_thread_types(from._internal_thread_types());
   }
-  if (from.is_voice_thread() != 0) {
-    set_is_voice_thread(from.is_voice_thread());
+  if (from._internal_is_top() != 0) {
+    _this->_internal_set_is_top(from._internal_is_top());
   }
-  if (from.is_frs_mask() != 0) {
-    set_is_frs_mask(from.is_frs_mask());
+  if (from._internal_is_good() != 0) {
+    _this->_internal_set_is_good(from._internal_is_good());
   }
-  if (from.fid() != 0) {
-    set_fid(from.fid());
+  if (from._internal_is_vote() != 0) {
+    _this->_internal_set_is_vote(from._internal_is_vote());
   }
-  if (from.first_post_id() != 0) {
-    set_first_post_id(from.first_post_id());
+  if (from._internal_is_global_top() != 0) {
+    _this->_internal_set_is_global_top(from._internal_is_global_top());
   }
-  if (from.is_global_top() != 0) {
-    set_is_global_top(from.is_global_top());
+  if (from._internal_fid() != 0) {
+    _this->_internal_set_fid(from._internal_fid());
   }
-  if (from.create_time() != 0) {
-    set_create_time(from.create_time());
+  if (from._internal_first_post_id() != 0) {
+    _this->_internal_set_first_post_id(from._internal_first_post_id());
   }
-  if (from.author_id() != 0) {
-    set_author_id(from.author_id());
+  if (from._internal_create_time() != 0) {
+    _this->_internal_set_create_time(from._internal_create_time());
   }
-  if (from.is_ad() != 0) {
-    set_is_ad(from.is_ad());
+  if (from._internal_time() != 0) {
+    _this->_internal_set_time(from._internal_time());
   }
-  if (from.is_godthread_recommend() != 0) {
-    set_is_godthread_recommend(from.is_godthread_recommend());
+  if (from._internal_post_id() != 0) {
+    _this->_internal_set_post_id(from._internal_post_id());
   }
-  if (from.is_god() != 0) {
-    set_is_god(from.is_god());
+  if (from._internal_author_id() != 0) {
+    _this->_internal_set_author_id(from._internal_author_id());
   }
-  if (from.is_share_thread() != 0) {
-    set_is_share_thread(from.is_share_thread());
+  if (from._internal_is_ad() != 0) {
+    _this->_internal_set_is_ad(from._internal_is_ad());
   }
-  if (from.tab_id() != 0) {
-    set_tab_id(from.tab_id());
+  if (from._internal_is_godthread_recommend() != 0) {
+    _this->_internal_set_is_godthread_recommend(from._internal_is_godthread_recommend());
   }
-  if (from.is_deleted() != 0) {
-    set_is_deleted(from.is_deleted());
+  if (from._internal_is_god() != 0) {
+    _this->_internal_set_is_god(from._internal_is_god());
   }
-}
-
-void ThreadInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:ThreadInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  if (from._internal_is_share_thread() != 0) {
+    _this->_internal_set_is_share_thread(from._internal_is_share_thread());
+  }
+  if (from._internal_tab_id() != 0) {
+    _this->_internal_set_tab_id(from._internal_tab_id());
+  }
+  if (from._internal_is_deleted() != 0) {
+    _this->_internal_set_is_deleted(from._internal_is_deleted());
+  }
+  if (from._internal_is_frs_mask() != 0) {
+    _this->_internal_set_is_frs_mask(from._internal_is_frs_mask());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void ThreadInfo::CopyFrom(const ThreadInfo& from) {
@@ -2669,50 +1814,40 @@ void ThreadInfo::CopyFrom(const ThreadInfo& from) {
   MergeFrom(from);
 }
 
-bool ThreadInfo::IsInitialized() const {
+PROTOBUF_NOINLINE bool ThreadInfo::IsInitialized() const {
   return true;
 }
 
-void ThreadInfo::Swap(ThreadInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ThreadInfo::InternalSwap(ThreadInfo* other) {
   using std::swap;
-  first_post_content_.InternalSwap(&other->first_post_content_);
-  title_.Swap(&other->title_);
-  swap(poll_info_, other->poll_info_);
-  swap(agree_, other->agree_);
-  swap(origin_thread_info_, other->origin_thread_info_);
-  swap(id_, other->id_);
-  swap(reply_num_, other->reply_num_);
-  swap(view_num_, other->view_num_);
-  swap(last_time_int_, other->last_time_int_);
-  swap(is_top_, other->is_top_);
-  swap(is_good_, other->is_good_);
-  swap(is_voice_thread_, other->is_voice_thread_);
-  swap(is_frs_mask_, other->is_frs_mask_);
-  swap(fid_, other->fid_);
-  swap(first_post_id_, other->first_post_id_);
-  swap(is_global_top_, other->is_global_top_);
-  swap(create_time_, other->create_time_);
-  swap(author_id_, other->author_id_);
-  swap(is_ad_, other->is_ad_);
-  swap(is_godthread_recommend_, other->is_godthread_recommend_);
-  swap(is_god_, other->is_god_);
-  swap(is_share_thread_, other->is_share_thread_);
-  swap(tab_id_, other->tab_id_);
-  swap(is_deleted_, other->is_deleted_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.first_post_content_.InternalSwap(&other->_impl_.first_post_content_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.title_, lhs_arena,
+                                       &other->_impl_.title_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.last_time_, lhs_arena,
+                                       &other->_impl_.last_time_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.pids_, lhs_arena,
+                                       &other->_impl_.pids_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_frs_mask_)
+      + sizeof(ThreadInfo::_impl_.is_frs_mask_)
+      - PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.poll_info_)>(
+          reinterpret_cast<char*>(&_impl_.poll_info_),
+          reinterpret_cast<char*>(&other->_impl_.poll_info_));
 }
 
 ::google::protobuf::Metadata ThreadInfo::GetMetadata() const {
-  protobuf_ThreadInfo_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_ThreadInfo_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_ThreadInfo_2eproto_getter, &descriptor_table_ThreadInfo_2eproto_once,
+      file_level_metadata_ThreadInfo_2eproto[1]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

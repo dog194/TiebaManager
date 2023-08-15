@@ -4,504 +4,440 @@
 #include "Post.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class Post_SubPostDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Post_SubPost>
-      _instance;
-} _Post_SubPost_default_instance_;
-class Post_SignatureData_SignatureContentDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Post_SignatureData_SignatureContent>
-      _instance;
-} _Post_SignatureData_SignatureContent_default_instance_;
-class Post_SignatureDataDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Post_SignatureData>
-      _instance;
-} _Post_SignatureData_default_instance_;
-class PostDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Post>
-      _instance;
-} _Post_default_instance_;
-namespace protobuf_Post_2eproto {
-void InitDefaultsPost_SubPostImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_SubPostList_2eproto::InitDefaultsSubPostList();
-  {
-    void* ptr = &::_Post_SubPost_default_instance_;
-    new (ptr) ::Post_SubPost();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Post_SubPost::InitAsDefaultInstance();
-}
-
-void InitDefaultsPost_SubPost() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPost_SubPostImpl);
-}
-
-void InitDefaultsPost_SignatureData_SignatureContentImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::_Post_SignatureData_SignatureContent_default_instance_;
-    new (ptr) ::Post_SignatureData_SignatureContent();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Post_SignatureData_SignatureContent::InitAsDefaultInstance();
-}
-
-void InitDefaultsPost_SignatureData_SignatureContent() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPost_SignatureData_SignatureContentImpl);
-}
-
-void InitDefaultsPost_SignatureDataImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Post_2eproto::InitDefaultsPost_SignatureData_SignatureContent();
-  {
-    void* ptr = &::_Post_SignatureData_default_instance_;
-    new (ptr) ::Post_SignatureData();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Post_SignatureData::InitAsDefaultInstance();
-}
-
-void InitDefaultsPost_SignatureData() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPost_SignatureDataImpl);
-}
-
-void InitDefaultsPostImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_PbContent_2eproto::InitDefaultsPbContent();
-  protobuf_Post_2eproto::InitDefaultsPost_SubPost();
-  protobuf_Post_2eproto::InitDefaultsPost_SignatureData();
-  protobuf_Agree_2eproto::InitDefaultsAgree();
-  protobuf_SimpleForum_2eproto::InitDefaultsSimpleForum();
-  {
-    void* ptr = &::_Post_default_instance_;
-    new (ptr) ::Post();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::Post::InitAsDefaultInstance();
-}
-
-void InitDefaultsPost() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsPostImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[4];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SubPost, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SubPost, pid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SubPost, sub_post_list_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData_SignatureContent, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData_SignatureContent, type_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData_SignatureContent, text_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData, signature_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData, fontkeyname_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData, fontcolor_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post_SignatureData, content_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, title_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, floor_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, time_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, content_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, sub_post_number_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, author_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, sub_post_list_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, signature_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, agree_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, from_forum_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::Post, tid_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::Post_SubPost)},
-  { 7, -1, sizeof(::Post_SignatureData_SignatureContent)},
-  { 14, -1, sizeof(::Post_SignatureData)},
-  { 23, -1, sizeof(::Post)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_Post_SubPost_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_Post_SignatureData_SignatureContent_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_Post_SignatureData_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_Post_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "Post.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\nPost.proto\032\017PbContent.proto\032\021SubPostLi"
-      "st.proto\032\013Agree.proto\032\021SimpleForum.proto"
-      "\"\217\004\n\004Post\022\n\n\002id\030\001 \001(\003\022\r\n\005title\030\002 \001(\t\022\r\n\005"
-      "floor\030\003 \001(\r\022\014\n\004time\030\004 \001(\r\022\033\n\007content\030\005 \003"
-      "(\0132\n.PbContent\022\027\n\017sub_post_number\030\r \001(\r\022"
-      "\021\n\tauthor_id\030\023 \001(\003\022$\n\rsub_post_list\030\017 \001("
-      "\0132\r.Post.SubPost\022&\n\tsignature\030\025 \001(\0132\023.Po"
-      "st.SignatureData\022\025\n\005agree\030% \001(\0132\006.Agree\022"
-      " \n\nfrom_forum\030& \001(\0132\014.SimpleForum\022\013\n\003tid"
-      "\030. \001(\003\032;\n\007SubPost\022\013\n\003pid\030\001 \001(\004\022#\n\rsub_po"
-      "st_list\030\002 \003(\0132\014.SubPostList\032\264\001\n\rSignatur"
-      "eData\022\024\n\014signature_id\030\001 \001(\005\022\023\n\013fontKeyNa"
-      "me\030\002 \001(\t\022\021\n\tfontColor\030\003 \001(\t\0225\n\007content\030\004"
-      " \003(\0132$.Post.SignatureData.SignatureConte"
-      "nt\032.\n\020SignatureContent\022\014\n\004type\030\001 \001(\005\022\014\n\004"
-      "text\030\002 \001(\tb\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR Post_SubPost::Post_SubPost(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.sub_post_list_)*/ {},
+      /*decltype(_impl_.pid_)*/ ::uint64_t{0u},
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct Post_SubPostDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Post_SubPostDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Post_SubPostDefaultTypeInternal() {}
+  union {
+    Post_SubPost _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 618);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "Post.proto", &protobuf_RegisterTypes);
-  ::protobuf_PbContent_2eproto::AddDescriptors();
-  ::protobuf_SubPostList_2eproto::AddDescriptors();
-  ::protobuf_Agree_2eproto::AddDescriptors();
-  ::protobuf_SimpleForum_2eproto::AddDescriptors();
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_Post_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Post_SubPostDefaultTypeInternal _Post_SubPost_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR Post_SignatureData_SignatureContent::Post_SignatureData_SignatureContent(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.text_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.type_)*/ 0,
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct Post_SignatureData_SignatureContentDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Post_SignatureData_SignatureContentDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Post_SignatureData_SignatureContentDefaultTypeInternal() {}
+  union {
+    Post_SignatureData_SignatureContent _instance;
+  };
+};
 
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Post_SignatureData_SignatureContentDefaultTypeInternal _Post_SignatureData_SignatureContent_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR Post_SignatureData::Post_SignatureData(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.content_)*/ {},
+      /*decltype(_impl_.fontkeyname_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.fontcolor_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.signature_id_)*/ 0,
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct Post_SignatureDataDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Post_SignatureDataDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Post_SignatureDataDefaultTypeInternal() {}
+  union {
+    Post_SignatureData _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Post_SignatureDataDefaultTypeInternal _Post_SignatureData_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR Post::Post(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.content_)*/ {},
+      /*decltype(_impl_.title_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.sub_post_list_)*/ nullptr,
+      /*decltype(_impl_.signature_)*/ nullptr,
+      /*decltype(_impl_.agree_)*/ nullptr,
+      /*decltype(_impl_.from_forum_)*/ nullptr,
+      /*decltype(_impl_.id_)*/ ::int64_t{0},
+      /*decltype(_impl_.floor_)*/ 0u,
+      /*decltype(_impl_.time_)*/ 0u,
+      /*decltype(_impl_.author_id_)*/ ::int64_t{0},
+      /*decltype(_impl_.tid_)*/ ::int64_t{0},
+      /*decltype(_impl_.sub_post_number_)*/ 0u,
+    } {}
+struct PostDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR PostDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~PostDefaultTypeInternal() {}
+  union {
+    Post _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PostDefaultTypeInternal _Post_default_instance_;
+static ::_pb::Metadata file_level_metadata_Post_2eproto[4];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_Post_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_Post_2eproto = nullptr;
+const ::uint32_t TableStruct_Post_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::Post_SubPost, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::Post_SubPost, _impl_.pid_),
+    PROTOBUF_FIELD_OFFSET(::Post_SubPost, _impl_.sub_post_list_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData_SignatureContent, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData_SignatureContent, _impl_.type_),
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData_SignatureContent, _impl_.text_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _impl_.signature_id_),
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _impl_.fontkeyname_),
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _impl_.fontcolor_),
+    PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _impl_.content_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::Post, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.id_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.title_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.floor_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.time_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.content_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.sub_post_number_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.author_id_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.sub_post_list_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.signature_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.agree_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.from_forum_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.tid_),
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    0,
+    1,
+    2,
+    3,
+    ~0u,
+};
+
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, -1, -1, sizeof(::Post_SubPost)},
+        {10, -1, -1, sizeof(::Post_SignatureData_SignatureContent)},
+        {20, -1, -1, sizeof(::Post_SignatureData)},
+        {32, 52, -1, sizeof(::Post)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_Post_SubPost_default_instance_._instance,
+    &::_Post_SignatureData_SignatureContent_default_instance_._instance,
+    &::_Post_SignatureData_default_instance_._instance,
+    &::_Post_default_instance_._instance,
+};
+const char descriptor_table_protodef_Post_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\nPost.proto\032\017PbContent.proto\032\021SubPostLi"
+    "st.proto\032\013Agree.proto\032\021SimpleForum.proto"
+    "\"\217\004\n\004Post\022\n\n\002id\030\001 \001(\003\022\r\n\005title\030\002 \001(\t\022\r\n\005"
+    "floor\030\003 \001(\r\022\014\n\004time\030\004 \001(\r\022\033\n\007content\030\005 \003"
+    "(\0132\n.PbContent\022\027\n\017sub_post_number\030\r \001(\r\022"
+    "\021\n\tauthor_id\030\023 \001(\003\022$\n\rsub_post_list\030\017 \001("
+    "\0132\r.Post.SubPost\022&\n\tsignature\030\025 \001(\0132\023.Po"
+    "st.SignatureData\022\025\n\005agree\030% \001(\0132\006.Agree\022"
+    " \n\nfrom_forum\030& \001(\0132\014.SimpleForum\022\013\n\003tid"
+    "\030. \001(\003\032;\n\007SubPost\022\013\n\003pid\030\001 \001(\004\022#\n\rsub_po"
+    "st_list\030\002 \003(\0132\014.SubPostList\032\264\001\n\rSignatur"
+    "eData\022\024\n\014signature_id\030\001 \001(\005\022\023\n\013fontKeyNa"
+    "me\030\002 \001(\t\022\021\n\tfontColor\030\003 \001(\t\0225\n\007content\030\004"
+    " \003(\0132$.Post.SignatureData.SignatureConte"
+    "nt\032.\n\020SignatureContent\022\014\n\004type\030\001 \001(\005\022\014\n\004"
+    "text\030\002 \001(\tb\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_Post_2eproto_deps[4] =
+    {
+        &::descriptor_table_Agree_2eproto,
+        &::descriptor_table_PbContent_2eproto,
+        &::descriptor_table_SimpleForum_2eproto,
+        &::descriptor_table_SubPostList_2eproto,
+};
+static ::absl::once_flag descriptor_table_Post_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_Post_2eproto = {
+    false,
+    false,
+    618,
+    descriptor_table_protodef_Post_2eproto,
+    "Post.proto",
+    &descriptor_table_Post_2eproto_once,
+    descriptor_table_Post_2eproto_deps,
+    4,
+    4,
+    schemas,
+    file_default_instances,
+    TableStruct_Post_2eproto::offsets,
+    file_level_metadata_Post_2eproto,
+    file_level_enum_descriptors_Post_2eproto,
+    file_level_service_descriptors_Post_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_Post_2eproto_getter() {
+  return &descriptor_table_Post_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_Post_2eproto(&descriptor_table_Post_2eproto);
 // ===================================================================
 
-void Post_SubPost::InitAsDefaultInstance() {
-}
-void Post_SubPost::clear_sub_post_list() {
-  sub_post_list_.Clear();
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Post_SubPost::kPidFieldNumber;
-const int Post_SubPost::kSubPostListFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class Post_SubPost::_Internal {
+ public:
+};
 
-Post_SubPost::Post_SubPost()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Post_2eproto::InitDefaultsPost_SubPost();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:Post.SubPost)
+void Post_SubPost::clear_sub_post_list() {
+  _internal_mutable_sub_post_list()->Clear();
 }
-Post_SubPost::Post_SubPost(const Post_SubPost& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      sub_post_list_(from.sub_post_list_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  pid_ = from.pid_;
+Post_SubPost::Post_SubPost(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Post.SubPost)
+}
+Post_SubPost::Post_SubPost(const Post_SubPost& from) : ::google::protobuf::Message() {
+  Post_SubPost* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.sub_post_list_){from._impl_.sub_post_list_},
+      decltype(_impl_.pid_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _this->_impl_.pid_ = from._impl_.pid_;
+
   // @@protoc_insertion_point(copy_constructor:Post.SubPost)
 }
-
-void Post_SubPost::SharedCtor() {
-  pid_ = GOOGLE_ULONGLONG(0);
-  _cached_size_ = 0;
+inline void Post_SubPost::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.sub_post_list_){arena},
+      decltype(_impl_.pid_){::uint64_t{0u}},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
 }
-
 Post_SubPost::~Post_SubPost() {
   // @@protoc_insertion_point(destructor:Post.SubPost)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Post_SubPost::SharedDtor() {
+inline void Post_SubPost::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.sub_post_list_.~RepeatedPtrField();
 }
-
 void Post_SubPost::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Post_SubPost::descriptor() {
-  ::protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const Post_SubPost& Post_SubPost::default_instance() {
-  ::protobuf_Post_2eproto::InitDefaultsPost_SubPost();
-  return *internal_default_instance();
-}
-
-Post_SubPost* Post_SubPost::New(::google::protobuf::Arena* arena) const {
-  Post_SubPost* n = new Post_SubPost;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void Post_SubPost::Clear() {
+PROTOBUF_NOINLINE void Post_SubPost::Clear() {
 // @@protoc_insertion_point(message_clear_start:Post.SubPost)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  sub_post_list_.Clear();
-  pid_ = GOOGLE_ULONGLONG(0);
-  _internal_metadata_.Clear();
+  _internal_mutable_sub_post_list()->Clear();
+  _impl_.pid_ = ::uint64_t{0u};
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool Post_SubPost::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Post.SubPost)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // uint64 pid = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &pid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .SubPostList sub_post_list = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_sub_post_list()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:Post.SubPost)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:Post.SubPost)
-  return false;
-#undef DO_
+const char* Post_SubPost::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void Post_SubPost::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Post.SubPost)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // uint64 pid = 1;
-  if (this->pid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->pid(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 1, 0, 2> Post_SubPost::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_Post_SubPost_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // repeated .SubPostList sub_post_list = 2;
+    {::_pbi::TcParser::FastMtR1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SubPost, _impl_.sub_post_list_)}},
+    // uint64 pid = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(Post_SubPost, _impl_.pid_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SubPost, _impl_.pid_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // uint64 pid = 1;
+    {PROTOBUF_FIELD_OFFSET(Post_SubPost, _impl_.pid_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt64)},
+    // repeated .SubPostList sub_post_list = 2;
+    {PROTOBUF_FIELD_OFFSET(Post_SubPost, _impl_.sub_post_list_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::SubPostList>()},
+  }}, {{
+  }},
+};
 
-  // repeated .SubPostList sub_post_list = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->sub_post_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->sub_post_list(static_cast<int>(i)), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:Post.SubPost)
-}
-
-::google::protobuf::uint8* Post_SubPost::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* Post_SubPost::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:Post.SubPost)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // uint64 pid = 1;
-  if (this->pid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->pid(), target);
+  if (this->_internal_pid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
+        1, this->_internal_pid(), target);
   }
 
   // repeated .SubPostList sub_post_list = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->sub_post_list_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_sub_post_list_size()); i < n; i++) {
+    const auto& repfield = this->_internal_sub_post_list().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, this->sub_post_list(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:Post.SubPost)
   return target;
 }
 
-size_t Post_SubPost::ByteSizeLong() const {
+::size_t Post_SubPost::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:Post.SubPost)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // repeated .SubPostList sub_post_list = 2;
-  {
-    unsigned int count = static_cast<unsigned int>(this->sub_post_list_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->sub_post_list(static_cast<int>(i)));
-    }
-  }
-
-  // uint64 pid = 1;
-  if (this->pid() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt64Size(
-        this->pid());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void Post_SubPost::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Post.SubPost)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Post_SubPost* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Post_SubPost>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Post.SubPost)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Post.SubPost)
-    MergeFrom(*source);
-  }
-}
-
-void Post_SubPost::MergeFrom(const Post_SubPost& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Post.SubPost)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  sub_post_list_.MergeFrom(from.sub_post_list_);
-  if (from.pid() != 0) {
-    set_pid(from.pid());
+  // repeated .SubPostList sub_post_list = 2;
+  total_size += 1UL * this->_internal_sub_post_list_size();
+  for (const auto& msg : this->_internal_sub_post_list()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
+  // uint64 pid = 1;
+  if (this->_internal_pid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
+        this->_internal_pid());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Post_SubPost::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Post.SubPost)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData Post_SubPost::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    Post_SubPost::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*Post_SubPost::GetClassData() const { return &_class_data_; }
+
+
+void Post_SubPost::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Post_SubPost*>(&to_msg);
+  auto& from = static_cast<const Post_SubPost&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Post.SubPost)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_sub_post_list()->MergeFrom(from._internal_sub_post_list());
+  if (from._internal_pid() != 0) {
+    _this->_internal_set_pid(from._internal_pid());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Post_SubPost::CopyFrom(const Post_SubPost& from) {
@@ -511,292 +447,212 @@ void Post_SubPost::CopyFrom(const Post_SubPost& from) {
   MergeFrom(from);
 }
 
-bool Post_SubPost::IsInitialized() const {
+PROTOBUF_NOINLINE bool Post_SubPost::IsInitialized() const {
   return true;
 }
 
-void Post_SubPost::Swap(Post_SubPost* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Post_SubPost::InternalSwap(Post_SubPost* other) {
   using std::swap;
-  sub_post_list_.InternalSwap(&other->sub_post_list_);
-  swap(pid_, other->pid_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.sub_post_list_.InternalSwap(&other->_impl_.sub_post_list_);
+        swap(_impl_.pid_, other->_impl_.pid_);
 }
 
 ::google::protobuf::Metadata Post_SubPost::GetMetadata() const {
-  protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Post_2eproto_getter, &descriptor_table_Post_2eproto_once,
+      file_level_metadata_Post_2eproto[0]);
 }
-
-
 // ===================================================================
 
-void Post_SignatureData_SignatureContent::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Post_SignatureData_SignatureContent::kTypeFieldNumber;
-const int Post_SignatureData_SignatureContent::kTextFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class Post_SignatureData_SignatureContent::_Internal {
+ public:
+};
 
-Post_SignatureData_SignatureContent::Post_SignatureData_SignatureContent()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Post_2eproto::InitDefaultsPost_SignatureData_SignatureContent();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:Post.SignatureData.SignatureContent)
+Post_SignatureData_SignatureContent::Post_SignatureData_SignatureContent(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Post.SignatureData.SignatureContent)
 }
-Post_SignatureData_SignatureContent::Post_SignatureData_SignatureContent(const Post_SignatureData_SignatureContent& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  text_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.text().size() > 0) {
-    text_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.text_);
+Post_SignatureData_SignatureContent::Post_SignatureData_SignatureContent(const Post_SignatureData_SignatureContent& from) : ::google::protobuf::Message() {
+  Post_SignatureData_SignatureContent* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.text_){},
+      decltype(_impl_.type_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.text_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.text_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_text().empty()) {
+    _this->_impl_.text_.Set(from._internal_text(), _this->GetArenaForAllocation());
   }
-  type_ = from.type_;
+  _this->_impl_.type_ = from._impl_.type_;
+
   // @@protoc_insertion_point(copy_constructor:Post.SignatureData.SignatureContent)
 }
-
-void Post_SignatureData_SignatureContent::SharedCtor() {
-  text_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  type_ = 0;
-  _cached_size_ = 0;
+inline void Post_SignatureData_SignatureContent::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.text_){},
+      decltype(_impl_.type_){0},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.text_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.text_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 Post_SignatureData_SignatureContent::~Post_SignatureData_SignatureContent() {
   // @@protoc_insertion_point(destructor:Post.SignatureData.SignatureContent)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Post_SignatureData_SignatureContent::SharedDtor() {
-  text_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void Post_SignatureData_SignatureContent::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.text_.Destroy();
 }
-
 void Post_SignatureData_SignatureContent::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Post_SignatureData_SignatureContent::descriptor() {
-  ::protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const Post_SignatureData_SignatureContent& Post_SignatureData_SignatureContent::default_instance() {
-  ::protobuf_Post_2eproto::InitDefaultsPost_SignatureData_SignatureContent();
-  return *internal_default_instance();
-}
-
-Post_SignatureData_SignatureContent* Post_SignatureData_SignatureContent::New(::google::protobuf::Arena* arena) const {
-  Post_SignatureData_SignatureContent* n = new Post_SignatureData_SignatureContent;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void Post_SignatureData_SignatureContent::Clear() {
+PROTOBUF_NOINLINE void Post_SignatureData_SignatureContent::Clear() {
 // @@protoc_insertion_point(message_clear_start:Post.SignatureData.SignatureContent)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  text_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  type_ = 0;
-  _internal_metadata_.Clear();
+  _impl_.text_.ClearToEmpty();
+  _impl_.type_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool Post_SignatureData_SignatureContent::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Post.SignatureData.SignatureContent)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 type = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &type_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string text = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_text()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->text().data(), static_cast<int>(this->text().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Post.SignatureData.SignatureContent.text"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:Post.SignatureData.SignatureContent)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:Post.SignatureData.SignatureContent)
-  return false;
-#undef DO_
+const char* Post_SignatureData_SignatureContent::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void Post_SignatureData_SignatureContent::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Post.SignatureData.SignatureContent)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // int32 type = 1;
-  if (this->type() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->type(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 48, 2> Post_SignatureData_SignatureContent::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_Post_SignatureData_SignatureContent_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string text = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SignatureData_SignatureContent, _impl_.text_)}},
+    // int32 type = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Post_SignatureData_SignatureContent, _impl_.type_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SignatureData_SignatureContent, _impl_.type_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 type = 1;
+    {PROTOBUF_FIELD_OFFSET(Post_SignatureData_SignatureContent, _impl_.type_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string text = 2;
+    {PROTOBUF_FIELD_OFFSET(Post_SignatureData_SignatureContent, _impl_.text_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\43\0\4\0\0\0\0\0"
+    "Post.SignatureData.SignatureContent"
+    "text"
+  }},
+};
 
-  // string text = 2;
-  if (this->text().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->text().data(), static_cast<int>(this->text().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.SignatureData.SignatureContent.text");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->text(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:Post.SignatureData.SignatureContent)
-}
-
-::google::protobuf::uint8* Post_SignatureData_SignatureContent::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* Post_SignatureData_SignatureContent::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:Post.SignatureData.SignatureContent)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int32 type = 1;
-  if (this->type() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->type(), target);
+  if (this->_internal_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_type(), target);
   }
 
   // string text = 2;
-  if (this->text().size() > 0) {
+  if (!this->_internal_text().empty()) {
+    const std::string& _s = this->_internal_text();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->text().data(), static_cast<int>(this->text().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.SignatureData.SignatureContent.text");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->text(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Post.SignatureData.SignatureContent.text");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:Post.SignatureData.SignatureContent)
   return target;
 }
 
-size_t Post_SignatureData_SignatureContent::ByteSizeLong() const {
+::size_t Post_SignatureData_SignatureContent::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:Post.SignatureData.SignatureContent)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // string text = 2;
-  if (this->text().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->text());
+  if (!this->_internal_text().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_text());
   }
 
   // int32 type = 1;
-  if (this->type() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->type());
+  if (this->_internal_type() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_type());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Post_SignatureData_SignatureContent::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Post.SignatureData.SignatureContent)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Post_SignatureData_SignatureContent* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Post_SignatureData_SignatureContent>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Post.SignatureData.SignatureContent)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Post.SignatureData.SignatureContent)
-    MergeFrom(*source);
-  }
-}
+const ::google::protobuf::Message::ClassData Post_SignatureData_SignatureContent::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    Post_SignatureData_SignatureContent::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*Post_SignatureData_SignatureContent::GetClassData() const { return &_class_data_; }
 
-void Post_SignatureData_SignatureContent::MergeFrom(const Post_SignatureData_SignatureContent& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Post.SignatureData.SignatureContent)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+
+void Post_SignatureData_SignatureContent::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Post_SignatureData_SignatureContent*>(&to_msg);
+  auto& from = static_cast<const Post_SignatureData_SignatureContent&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Post.SignatureData.SignatureContent)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.text().size() > 0) {
-
-    text_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.text_);
+  if (!from._internal_text().empty()) {
+    _this->_internal_set_text(from._internal_text());
   }
-  if (from.type() != 0) {
-    set_type(from.type());
+  if (from._internal_type() != 0) {
+    _this->_internal_set_type(from._internal_type());
   }
-}
-
-void Post_SignatureData_SignatureContent::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Post.SignatureData.SignatureContent)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Post_SignatureData_SignatureContent::CopyFrom(const Post_SignatureData_SignatureContent& from) {
@@ -806,389 +662,279 @@ void Post_SignatureData_SignatureContent::CopyFrom(const Post_SignatureData_Sign
   MergeFrom(from);
 }
 
-bool Post_SignatureData_SignatureContent::IsInitialized() const {
+PROTOBUF_NOINLINE bool Post_SignatureData_SignatureContent::IsInitialized() const {
   return true;
 }
 
-void Post_SignatureData_SignatureContent::Swap(Post_SignatureData_SignatureContent* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Post_SignatureData_SignatureContent::InternalSwap(Post_SignatureData_SignatureContent* other) {
   using std::swap;
-  text_.Swap(&other->text_);
-  swap(type_, other->type_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.text_, lhs_arena,
+                                       &other->_impl_.text_, rhs_arena);
+        swap(_impl_.type_, other->_impl_.type_);
 }
 
 ::google::protobuf::Metadata Post_SignatureData_SignatureContent::GetMetadata() const {
-  protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Post_2eproto_getter, &descriptor_table_Post_2eproto_once,
+      file_level_metadata_Post_2eproto[1]);
 }
-
-
 // ===================================================================
 
-void Post_SignatureData::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Post_SignatureData::kSignatureIdFieldNumber;
-const int Post_SignatureData::kFontKeyNameFieldNumber;
-const int Post_SignatureData::kFontColorFieldNumber;
-const int Post_SignatureData::kContentFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class Post_SignatureData::_Internal {
+ public:
+};
 
-Post_SignatureData::Post_SignatureData()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Post_2eproto::InitDefaultsPost_SignatureData();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:Post.SignatureData)
+Post_SignatureData::Post_SignatureData(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Post.SignatureData)
 }
-Post_SignatureData::Post_SignatureData(const Post_SignatureData& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      content_(from.content_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  fontkeyname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.fontkeyname().size() > 0) {
-    fontkeyname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.fontkeyname_);
+Post_SignatureData::Post_SignatureData(const Post_SignatureData& from) : ::google::protobuf::Message() {
+  Post_SignatureData* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.content_){from._impl_.content_},
+      decltype(_impl_.fontkeyname_){},
+      decltype(_impl_.fontcolor_){},
+      decltype(_impl_.signature_id_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.fontkeyname_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.fontkeyname_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_fontkeyname().empty()) {
+    _this->_impl_.fontkeyname_.Set(from._internal_fontkeyname(), _this->GetArenaForAllocation());
   }
-  fontcolor_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.fontcolor().size() > 0) {
-    fontcolor_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.fontcolor_);
+  _impl_.fontcolor_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.fontcolor_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_fontcolor().empty()) {
+    _this->_impl_.fontcolor_.Set(from._internal_fontcolor(), _this->GetArenaForAllocation());
   }
-  signature_id_ = from.signature_id_;
+  _this->_impl_.signature_id_ = from._impl_.signature_id_;
+
   // @@protoc_insertion_point(copy_constructor:Post.SignatureData)
 }
-
-void Post_SignatureData::SharedCtor() {
-  fontkeyname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  fontcolor_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  signature_id_ = 0;
-  _cached_size_ = 0;
+inline void Post_SignatureData::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.content_){arena},
+      decltype(_impl_.fontkeyname_){},
+      decltype(_impl_.fontcolor_){},
+      decltype(_impl_.signature_id_){0},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.fontkeyname_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.fontkeyname_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.fontcolor_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.fontcolor_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 Post_SignatureData::~Post_SignatureData() {
   // @@protoc_insertion_point(destructor:Post.SignatureData)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Post_SignatureData::SharedDtor() {
-  fontkeyname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  fontcolor_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void Post_SignatureData::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.content_.~RepeatedPtrField();
+  _impl_.fontkeyname_.Destroy();
+  _impl_.fontcolor_.Destroy();
 }
-
 void Post_SignatureData::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Post_SignatureData::descriptor() {
-  ::protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const Post_SignatureData& Post_SignatureData::default_instance() {
-  ::protobuf_Post_2eproto::InitDefaultsPost_SignatureData();
-  return *internal_default_instance();
-}
-
-Post_SignatureData* Post_SignatureData::New(::google::protobuf::Arena* arena) const {
-  Post_SignatureData* n = new Post_SignatureData;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void Post_SignatureData::Clear() {
+PROTOBUF_NOINLINE void Post_SignatureData::Clear() {
 // @@protoc_insertion_point(message_clear_start:Post.SignatureData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  content_.Clear();
-  fontkeyname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  fontcolor_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  signature_id_ = 0;
-  _internal_metadata_.Clear();
+  _internal_mutable_content()->Clear();
+  _impl_.fontkeyname_.ClearToEmpty();
+  _impl_.fontcolor_.ClearToEmpty();
+  _impl_.signature_id_ = 0;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool Post_SignatureData::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Post.SignatureData)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int32 signature_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &signature_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string fontKeyName = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_fontkeyname()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->fontkeyname().data(), static_cast<int>(this->fontkeyname().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Post.SignatureData.fontKeyName"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string fontColor = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_fontcolor()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->fontcolor().data(), static_cast<int>(this->fontcolor().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Post.SignatureData.fontColor"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .Post.SignatureData.SignatureContent content = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_content()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:Post.SignatureData)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:Post.SignatureData)
-  return false;
-#undef DO_
+const char* Post_SignatureData::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void Post_SignatureData::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Post.SignatureData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // int32 signature_id = 1;
-  if (this->signature_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->signature_id(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 1, 47, 2> Post_SignatureData::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_Post_SignatureData_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // repeated .Post.SignatureData.SignatureContent content = 4;
+    {::_pbi::TcParser::FastMtR1,
+     {34, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.content_)}},
+    // int32 signature_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Post_SignatureData, _impl_.signature_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.signature_id_)}},
+    // string fontKeyName = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.fontkeyname_)}},
+    // string fontColor = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.fontcolor_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 signature_id = 1;
+    {PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.signature_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // string fontKeyName = 2;
+    {PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.fontkeyname_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string fontColor = 3;
+    {PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.fontcolor_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // repeated .Post.SignatureData.SignatureContent content = 4;
+    {PROTOBUF_FIELD_OFFSET(Post_SignatureData, _impl_.content_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::Post_SignatureData_SignatureContent>()},
+  }}, {{
+    "\22\0\13\11\0\0\0\0"
+    "Post.SignatureData"
+    "fontKeyName"
+    "fontColor"
+  }},
+};
 
-  // string fontKeyName = 2;
-  if (this->fontkeyname().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->fontkeyname().data(), static_cast<int>(this->fontkeyname().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.SignatureData.fontKeyName");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->fontkeyname(), output);
-  }
-
-  // string fontColor = 3;
-  if (this->fontcolor().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->fontcolor().data(), static_cast<int>(this->fontcolor().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.SignatureData.fontColor");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->fontcolor(), output);
-  }
-
-  // repeated .Post.SignatureData.SignatureContent content = 4;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, this->content(static_cast<int>(i)), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:Post.SignatureData)
-}
-
-::google::protobuf::uint8* Post_SignatureData::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* Post_SignatureData::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:Post.SignatureData)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int32 signature_id = 1;
-  if (this->signature_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->signature_id(), target);
+  if (this->_internal_signature_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_signature_id(), target);
   }
 
   // string fontKeyName = 2;
-  if (this->fontkeyname().size() > 0) {
+  if (!this->_internal_fontkeyname().empty()) {
+    const std::string& _s = this->_internal_fontkeyname();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->fontkeyname().data(), static_cast<int>(this->fontkeyname().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.SignatureData.fontKeyName");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->fontkeyname(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Post.SignatureData.fontKeyName");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // string fontColor = 3;
-  if (this->fontcolor().size() > 0) {
+  if (!this->_internal_fontcolor().empty()) {
+    const std::string& _s = this->_internal_fontcolor();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->fontcolor().data(), static_cast<int>(this->fontcolor().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.SignatureData.fontColor");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->fontcolor(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Post.SignatureData.fontColor");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
   // repeated .Post.SignatureData.SignatureContent content = 4;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_content_size()); i < n; i++) {
+    const auto& repfield = this->_internal_content().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, this->content(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:Post.SignatureData)
   return target;
 }
 
-size_t Post_SignatureData::ByteSizeLong() const {
+::size_t Post_SignatureData::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:Post.SignatureData)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .Post.SignatureData.SignatureContent content = 4;
-  {
-    unsigned int count = static_cast<unsigned int>(this->content_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->content(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_content_size();
+  for (const auto& msg : this->_internal_content()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // string fontKeyName = 2;
-  if (this->fontkeyname().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->fontkeyname());
+  if (!this->_internal_fontkeyname().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_fontkeyname());
   }
 
   // string fontColor = 3;
-  if (this->fontcolor().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->fontcolor());
+  if (!this->_internal_fontcolor().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_fontcolor());
   }
 
   // int32 signature_id = 1;
-  if (this->signature_id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->signature_id());
+  if (this->_internal_signature_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_signature_id());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Post_SignatureData::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Post.SignatureData)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Post_SignatureData* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Post_SignatureData>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Post.SignatureData)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Post.SignatureData)
-    MergeFrom(*source);
-  }
-}
+const ::google::protobuf::Message::ClassData Post_SignatureData::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    Post_SignatureData::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*Post_SignatureData::GetClassData() const { return &_class_data_; }
 
-void Post_SignatureData::MergeFrom(const Post_SignatureData& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Post.SignatureData)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+
+void Post_SignatureData::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Post_SignatureData*>(&to_msg);
+  auto& from = static_cast<const Post_SignatureData&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Post.SignatureData)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  content_.MergeFrom(from.content_);
-  if (from.fontkeyname().size() > 0) {
-
-    fontkeyname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.fontkeyname_);
+  _this->_internal_mutable_content()->MergeFrom(from._internal_content());
+  if (!from._internal_fontkeyname().empty()) {
+    _this->_internal_set_fontkeyname(from._internal_fontkeyname());
   }
-  if (from.fontcolor().size() > 0) {
-
-    fontcolor_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.fontcolor_);
+  if (!from._internal_fontcolor().empty()) {
+    _this->_internal_set_fontcolor(from._internal_fontcolor());
   }
-  if (from.signature_id() != 0) {
-    set_signature_id(from.signature_id());
+  if (from._internal_signature_id() != 0) {
+    _this->_internal_set_signature_id(from._internal_signature_id());
   }
-}
-
-void Post_SignatureData::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Post.SignatureData)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Post_SignatureData::CopyFrom(const Post_SignatureData& from) {
@@ -1198,723 +944,562 @@ void Post_SignatureData::CopyFrom(const Post_SignatureData& from) {
   MergeFrom(from);
 }
 
-bool Post_SignatureData::IsInitialized() const {
+PROTOBUF_NOINLINE bool Post_SignatureData::IsInitialized() const {
   return true;
 }
 
-void Post_SignatureData::Swap(Post_SignatureData* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Post_SignatureData::InternalSwap(Post_SignatureData* other) {
   using std::swap;
-  content_.InternalSwap(&other->content_);
-  fontkeyname_.Swap(&other->fontkeyname_);
-  fontcolor_.Swap(&other->fontcolor_);
-  swap(signature_id_, other->signature_id_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.content_.InternalSwap(&other->_impl_.content_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.fontkeyname_, lhs_arena,
+                                       &other->_impl_.fontkeyname_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.fontcolor_, lhs_arena,
+                                       &other->_impl_.fontcolor_, rhs_arena);
+        swap(_impl_.signature_id_, other->_impl_.signature_id_);
 }
 
 ::google::protobuf::Metadata Post_SignatureData::GetMetadata() const {
-  protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Post_2eproto_getter, &descriptor_table_Post_2eproto_once,
+      file_level_metadata_Post_2eproto[2]);
 }
-
-
 // ===================================================================
 
-void Post::InitAsDefaultInstance() {
-  ::_Post_default_instance_._instance.get_mutable()->sub_post_list_ = const_cast< ::Post_SubPost*>(
-      ::Post_SubPost::internal_default_instance());
-  ::_Post_default_instance_._instance.get_mutable()->signature_ = const_cast< ::Post_SignatureData*>(
-      ::Post_SignatureData::internal_default_instance());
-  ::_Post_default_instance_._instance.get_mutable()->agree_ = const_cast< ::Agree*>(
-      ::Agree::internal_default_instance());
-  ::_Post_default_instance_._instance.get_mutable()->from_forum_ = const_cast< ::SimpleForum*>(
-      ::SimpleForum::internal_default_instance());
+class Post::_Internal {
+ public:
+  using HasBits = decltype(std::declval<Post>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(Post, _impl_._has_bits_);
+  static const ::Post_SubPost& sub_post_list(const Post* msg);
+  static void set_has_sub_post_list(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::Post_SignatureData& signature(const Post* msg);
+  static void set_has_signature(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static const ::Agree& agree(const Post* msg);
+  static void set_has_agree(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static const ::SimpleForum& from_forum(const Post* msg);
+  static void set_has_from_forum(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
+  }
+};
+
+const ::Post_SubPost& Post::_Internal::sub_post_list(const Post* msg) {
+  return *msg->_impl_.sub_post_list_;
+}
+const ::Post_SignatureData& Post::_Internal::signature(const Post* msg) {
+  return *msg->_impl_.signature_;
+}
+const ::Agree& Post::_Internal::agree(const Post* msg) {
+  return *msg->_impl_.agree_;
+}
+const ::SimpleForum& Post::_Internal::from_forum(const Post* msg) {
+  return *msg->_impl_.from_forum_;
 }
 void Post::clear_content() {
-  content_.Clear();
+  _internal_mutable_content()->Clear();
 }
 void Post::clear_agree() {
-  if (GetArenaNoVirtual() == NULL && agree_ != NULL) {
-    delete agree_;
-  }
-  agree_ = NULL;
+  if (_impl_.agree_ != nullptr) _impl_.agree_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 void Post::clear_from_forum() {
-  if (GetArenaNoVirtual() == NULL && from_forum_ != NULL) {
-    delete from_forum_;
-  }
-  from_forum_ = NULL;
+  if (_impl_.from_forum_ != nullptr) _impl_.from_forum_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Post::kIdFieldNumber;
-const int Post::kTitleFieldNumber;
-const int Post::kFloorFieldNumber;
-const int Post::kTimeFieldNumber;
-const int Post::kContentFieldNumber;
-const int Post::kSubPostNumberFieldNumber;
-const int Post::kAuthorIdFieldNumber;
-const int Post::kSubPostListFieldNumber;
-const int Post::kSignatureFieldNumber;
-const int Post::kAgreeFieldNumber;
-const int Post::kFromForumFieldNumber;
-const int Post::kTidFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+Post::Post(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Post)
+}
+Post::Post(const Post& from) : ::google::protobuf::Message() {
+  Post* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.content_){from._impl_.content_},
+      decltype(_impl_.title_){},
+      decltype(_impl_.sub_post_list_){nullptr},
+      decltype(_impl_.signature_){nullptr},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.from_forum_){nullptr},
+      decltype(_impl_.id_){},
+      decltype(_impl_.floor_){},
+      decltype(_impl_.time_){},
+      decltype(_impl_.author_id_){},
+      decltype(_impl_.tid_){},
+      decltype(_impl_.sub_post_number_){},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_title().empty()) {
+    _this->_impl_.title_.Set(from._internal_title(), _this->GetArenaForAllocation());
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.sub_post_list_ = new ::Post_SubPost(*from._impl_.sub_post_list_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.signature_ = new ::Post_SignatureData(*from._impl_.signature_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000004u) != 0) {
+    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000008u) != 0) {
+    _this->_impl_.from_forum_ = new ::SimpleForum(*from._impl_.from_forum_);
+  }
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.sub_post_number_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.sub_post_number_));
 
-Post::Post()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_Post_2eproto::InitDefaultsPost();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:Post)
-}
-Post::Post(const Post& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      content_(from.content_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.title().size() > 0) {
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
-  }
-  if (from.has_sub_post_list()) {
-    sub_post_list_ = new ::Post_SubPost(*from.sub_post_list_);
-  } else {
-    sub_post_list_ = NULL;
-  }
-  if (from.has_signature()) {
-    signature_ = new ::Post_SignatureData(*from.signature_);
-  } else {
-    signature_ = NULL;
-  }
-  if (from.has_agree()) {
-    agree_ = new ::Agree(*from.agree_);
-  } else {
-    agree_ = NULL;
-  }
-  if (from.has_from_forum()) {
-    from_forum_ = new ::SimpleForum(*from.from_forum_);
-  } else {
-    from_forum_ = NULL;
-  }
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&tid_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(tid_));
   // @@protoc_insertion_point(copy_constructor:Post)
 }
-
-void Post::SharedCtor() {
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&sub_post_list_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&tid_) -
-      reinterpret_cast<char*>(&sub_post_list_)) + sizeof(tid_));
-  _cached_size_ = 0;
+inline void Post::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.content_){arena},
+      decltype(_impl_.title_){},
+      decltype(_impl_.sub_post_list_){nullptr},
+      decltype(_impl_.signature_){nullptr},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.from_forum_){nullptr},
+      decltype(_impl_.id_){::int64_t{0}},
+      decltype(_impl_.floor_){0u},
+      decltype(_impl_.time_){0u},
+      decltype(_impl_.author_id_){::int64_t{0}},
+      decltype(_impl_.tid_){::int64_t{0}},
+      decltype(_impl_.sub_post_number_){0u},
+  };
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 Post::~Post() {
   // @@protoc_insertion_point(destructor:Post)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Post::SharedDtor() {
-  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete sub_post_list_;
-  if (this != internal_default_instance()) delete signature_;
-  if (this != internal_default_instance()) delete agree_;
-  if (this != internal_default_instance()) delete from_forum_;
+inline void Post::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.content_.~RepeatedPtrField();
+  _impl_.title_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.sub_post_list_;
+  if (this != internal_default_instance()) delete _impl_.signature_;
+  if (this != internal_default_instance()) delete _impl_.agree_;
+  if (this != internal_default_instance()) delete _impl_.from_forum_;
 }
-
 void Post::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Post::descriptor() {
-  ::protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const Post& Post::default_instance() {
-  ::protobuf_Post_2eproto::InitDefaultsPost();
-  return *internal_default_instance();
-}
-
-Post* Post::New(::google::protobuf::Arena* arena) const {
-  Post* n = new Post;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void Post::Clear() {
+PROTOBUF_NOINLINE void Post::Clear() {
 // @@protoc_insertion_point(message_clear_start:Post)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  content_.Clear();
-  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && sub_post_list_ != NULL) {
-    delete sub_post_list_;
-  }
-  sub_post_list_ = NULL;
-  if (GetArenaNoVirtual() == NULL && signature_ != NULL) {
-    delete signature_;
-  }
-  signature_ = NULL;
-  if (GetArenaNoVirtual() == NULL && agree_ != NULL) {
-    delete agree_;
-  }
-  agree_ = NULL;
-  if (GetArenaNoVirtual() == NULL && from_forum_ != NULL) {
-    delete from_forum_;
-  }
-  from_forum_ = NULL;
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&tid_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(tid_));
-  _internal_metadata_.Clear();
-}
-
-bool Post::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:Post)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string title = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_title()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->title().data(), static_cast<int>(this->title().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "Post.title"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // uint32 floor = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &floor_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // uint32 time = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &time_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .PbContent content = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_content()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // uint32 sub_post_number = 13;
-      case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &sub_post_number_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .Post.SubPost sub_post_list = 15;
-      case 15: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(122u /* 122 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_sub_post_list()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 author_id = 19;
-      case 19: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(152u /* 152 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &author_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .Post.SignatureData signature = 21;
-      case 21: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_signature()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .Agree agree = 37;
-      case 37: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 298 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_agree()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .SimpleForum from_forum = 38;
-      case 38: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u /* 306 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_from_forum()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 tid = 46;
-      case 46: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(112u /* 368 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &tid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  _internal_mutable_content()->Clear();
+  _impl_.title_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000000fu) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.sub_post_list_ != nullptr);
+      _impl_.sub_post_list_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.signature_ != nullptr);
+      _impl_.signature_->Clear();
+    }
+    if (cached_has_bits & 0x00000004u) {
+      ABSL_DCHECK(_impl_.agree_ != nullptr);
+      _impl_.agree_->Clear();
+    }
+    if (cached_has_bits & 0x00000008u) {
+      ABSL_DCHECK(_impl_.from_forum_ != nullptr);
+      _impl_.from_forum_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:Post)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:Post)
-  return false;
-#undef DO_
+  ::memset(&_impl_.id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.sub_post_number_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.sub_post_number_));
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void Post::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:Post)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int64 id = 1;
-  if (this->id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
-  }
-
-  // string title = 2;
-  if (this->title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.title");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->title(), output);
-  }
-
-  // uint32 floor = 3;
-  if (this->floor() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->floor(), output);
-  }
-
-  // uint32 time = 4;
-  if (this->time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->time(), output);
-  }
-
-  // repeated .PbContent content = 5;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, this->content(static_cast<int>(i)), output);
-  }
-
-  // uint32 sub_post_number = 13;
-  if (this->sub_post_number() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(13, this->sub_post_number(), output);
-  }
-
-  // .Post.SubPost sub_post_list = 15;
-  if (this->has_sub_post_list()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, *this->sub_post_list_, output);
-  }
-
-  // int64 author_id = 19;
-  if (this->author_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(19, this->author_id(), output);
-  }
-
-  // .Post.SignatureData signature = 21;
-  if (this->has_signature()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, *this->signature_, output);
-  }
-
-  // .Agree agree = 37;
-  if (this->has_agree()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      37, *this->agree_, output);
-  }
-
-  // .SimpleForum from_forum = 38;
-  if (this->has_from_forum()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      38, *this->from_forum_, output);
-  }
-
-  // int64 tid = 46;
-  if (this->tid() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(46, this->tid(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:Post)
+const char* Post::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* Post::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(Post, _impl_._has_bits_),
+    0, // no _extensions_
+    46, 120,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4293636064,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    12,  // num_field_entries
+    5,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_Post_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(Post, _impl_.id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.id_)}},
+    // string title = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.title_)}},
+    // uint32 floor = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Post, _impl_.floor_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.floor_)}},
+    // uint32 time = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Post, _impl_.time_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.time_)}},
+    // repeated .PbContent content = 5;
+    {::_pbi::TcParser::FastMtR1,
+     {42, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.content_)}},
+    // .SimpleForum from_forum = 38;
+    {::_pbi::TcParser::FastMtS2,
+     {690, 3, 4, PROTOBUF_FIELD_OFFSET(Post, _impl_.from_forum_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // uint32 sub_post_number = 13;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Post, _impl_.sub_post_number_), 63>(),
+     {104, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_number_)}},
+    // int64 tid = 46;
+    {::_pbi::TcParser::FastV64S2,
+     {752, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.tid_)}},
+    // .Post.SubPost sub_post_list = 15;
+    {::_pbi::TcParser::FastMtS1,
+     {122, 0, 1, PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_list_)}},
+  }}, {{
+    37, 0, 1,
+    65020, 9,
+    65535, 65535
+  }}, {{
+    // int64 id = 1;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // string title = 2;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.title_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // uint32 floor = 3;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.floor_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // uint32 time = 4;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.time_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // repeated .PbContent content = 5;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.content_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint32 sub_post_number = 13;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_number_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // .Post.SubPost sub_post_list = 15;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_list_), _Internal::kHasBitsOffset + 0, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int64 author_id = 19;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.author_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // .Post.SignatureData signature = 21;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.signature_), _Internal::kHasBitsOffset + 1, 2,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .Agree agree = 37;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.agree_), _Internal::kHasBitsOffset + 2, 3,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .SimpleForum from_forum = 38;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.from_forum_), _Internal::kHasBitsOffset + 3, 4,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int64 tid = 46;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.tid_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::PbContent>()},
+    {::_pbi::TcParser::GetTable<::Post_SubPost>()},
+    {::_pbi::TcParser::GetTable<::Post_SignatureData>()},
+    {::_pbi::TcParser::GetTable<::Agree>()},
+    {::_pbi::TcParser::GetTable<::SimpleForum>()},
+  }}, {{
+    "\4\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0"
+    "Post"
+    "title"
+  }},
+};
+
+::uint8_t* Post::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:Post)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  if (this->_internal_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<1>(
+            stream, this->_internal_id(), target);
   }
 
   // string title = 2;
-  if (this->title().size() > 0) {
+  if (!this->_internal_title().empty()) {
+    const std::string& _s = this->_internal_title();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "Post.title");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->title(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Post.title");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // uint32 floor = 3;
-  if (this->floor() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->floor(), target);
+  if (this->_internal_floor() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        3, this->_internal_floor(), target);
   }
 
   // uint32 time = 4;
-  if (this->time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->time(), target);
+  if (this->_internal_time() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        4, this->_internal_time(), target);
   }
 
   // repeated .PbContent content = 5;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_content_size()); i < n; i++) {
+    const auto& repfield = this->_internal_content().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        5, this->content(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(5, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // uint32 sub_post_number = 13;
-  if (this->sub_post_number() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(13, this->sub_post_number(), target);
+  if (this->_internal_sub_post_number() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        13, this->_internal_sub_post_number(), target);
   }
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .Post.SubPost sub_post_list = 15;
-  if (this->has_sub_post_list()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        15, *this->sub_post_list_, deterministic, target);
+      InternalWriteMessage(15, _Internal::sub_post_list(this),
+        _Internal::sub_post_list(this).GetCachedSize(), target, stream);
   }
 
   // int64 author_id = 19;
-  if (this->author_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(19, this->author_id(), target);
+  if (this->_internal_author_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        19, this->_internal_author_id(), target);
   }
 
   // .Post.SignatureData signature = 21;
-  if (this->has_signature()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        21, *this->signature_, deterministic, target);
+      InternalWriteMessage(21, _Internal::signature(this),
+        _Internal::signature(this).GetCachedSize(), target, stream);
   }
 
   // .Agree agree = 37;
-  if (this->has_agree()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        37, *this->agree_, deterministic, target);
+      InternalWriteMessage(37, _Internal::agree(this),
+        _Internal::agree(this).GetCachedSize(), target, stream);
   }
 
   // .SimpleForum from_forum = 38;
-  if (this->has_from_forum()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        38, *this->from_forum_, deterministic, target);
+      InternalWriteMessage(38, _Internal::from_forum(this),
+        _Internal::from_forum(this).GetCachedSize(), target, stream);
   }
 
   // int64 tid = 46;
-  if (this->tid() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(46, this->tid(), target);
+  if (this->_internal_tid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        46, this->_internal_tid(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:Post)
   return target;
 }
 
-size_t Post::ByteSizeLong() const {
+::size_t Post::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:Post)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .PbContent content = 5;
-  {
-    unsigned int count = static_cast<unsigned int>(this->content_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->content(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_content_size();
+  for (const auto& msg : this->_internal_content()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // string title = 2;
-  if (this->title().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->title());
+  if (!this->_internal_title().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_title());
   }
 
-  // .Post.SubPost sub_post_list = 15;
-  if (this->has_sub_post_list()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->sub_post_list_);
-  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000000fu) {
+    // .Post.SubPost sub_post_list = 15;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.sub_post_list_);
+    }
 
-  // .Post.SignatureData signature = 21;
-  if (this->has_signature()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->signature_);
-  }
+    // .Post.SignatureData signature = 21;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.signature_);
+    }
 
-  // .Agree agree = 37;
-  if (this->has_agree()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->agree_);
-  }
+    // .Agree agree = 37;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.agree_);
+    }
 
-  // .SimpleForum from_forum = 38;
-  if (this->has_from_forum()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->from_forum_);
-  }
+    // .SimpleForum from_forum = 38;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.from_forum_);
+    }
 
+  }
   // int64 id = 1;
-  if (this->id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->id());
+  if (this->_internal_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_id());
   }
 
   // uint32 floor = 3;
-  if (this->floor() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->floor());
+  if (this->_internal_floor() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_floor());
   }
 
   // uint32 time = 4;
-  if (this->time() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->time());
-  }
-
-  // uint32 sub_post_number = 13;
-  if (this->sub_post_number() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->sub_post_number());
+  if (this->_internal_time() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_time());
   }
 
   // int64 author_id = 19;
-  if (this->author_id() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->author_id());
+  if (this->_internal_author_id() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int64Size(
+                                    this->_internal_author_id());
   }
 
   // int64 tid = 46;
-  if (this->tid() != 0) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->tid());
+  if (this->_internal_tid() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int64Size(
+                                    this->_internal_tid());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void Post::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:Post)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Post* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const Post>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:Post)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:Post)
-    MergeFrom(*source);
+  // uint32 sub_post_number = 13;
+  if (this->_internal_sub_post_number() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_sub_post_number());
   }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Post::MergeFrom(const Post& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:Post)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+const ::google::protobuf::Message::ClassData Post::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    Post::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*Post::GetClassData() const { return &_class_data_; }
+
+
+void Post::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Post*>(&to_msg);
+  auto& from = static_cast<const Post&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Post)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  content_.MergeFrom(from.content_);
-  if (from.title().size() > 0) {
-
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+  _this->_internal_mutable_content()->MergeFrom(from._internal_content());
+  if (!from._internal_title().empty()) {
+    _this->_internal_set_title(from._internal_title());
   }
-  if (from.has_sub_post_list()) {
-    mutable_sub_post_list()->::Post_SubPost::MergeFrom(from.sub_post_list());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000000fu) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_sub_post_list()->::Post_SubPost::MergeFrom(
+          from._internal_sub_post_list());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_signature()->::Post_SignatureData::MergeFrom(
+          from._internal_signature());
+    }
+    if (cached_has_bits & 0x00000004u) {
+      _this->_internal_mutable_agree()->::Agree::MergeFrom(
+          from._internal_agree());
+    }
+    if (cached_has_bits & 0x00000008u) {
+      _this->_internal_mutable_from_forum()->::SimpleForum::MergeFrom(
+          from._internal_from_forum());
+    }
   }
-  if (from.has_signature()) {
-    mutable_signature()->::Post_SignatureData::MergeFrom(from.signature());
+  if (from._internal_id() != 0) {
+    _this->_internal_set_id(from._internal_id());
   }
-  if (from.has_agree()) {
-    mutable_agree()->::Agree::MergeFrom(from.agree());
+  if (from._internal_floor() != 0) {
+    _this->_internal_set_floor(from._internal_floor());
   }
-  if (from.has_from_forum()) {
-    mutable_from_forum()->::SimpleForum::MergeFrom(from.from_forum());
+  if (from._internal_time() != 0) {
+    _this->_internal_set_time(from._internal_time());
   }
-  if (from.id() != 0) {
-    set_id(from.id());
+  if (from._internal_author_id() != 0) {
+    _this->_internal_set_author_id(from._internal_author_id());
   }
-  if (from.floor() != 0) {
-    set_floor(from.floor());
+  if (from._internal_tid() != 0) {
+    _this->_internal_set_tid(from._internal_tid());
   }
-  if (from.time() != 0) {
-    set_time(from.time());
+  if (from._internal_sub_post_number() != 0) {
+    _this->_internal_set_sub_post_number(from._internal_sub_post_number());
   }
-  if (from.sub_post_number() != 0) {
-    set_sub_post_number(from.sub_post_number());
-  }
-  if (from.author_id() != 0) {
-    set_author_id(from.author_id());
-  }
-  if (from.tid() != 0) {
-    set_tid(from.tid());
-  }
-}
-
-void Post::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:Post)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Post::CopyFrom(const Post& from) {
@@ -1924,38 +1509,36 @@ void Post::CopyFrom(const Post& from) {
   MergeFrom(from);
 }
 
-bool Post::IsInitialized() const {
+PROTOBUF_NOINLINE bool Post::IsInitialized() const {
   return true;
 }
 
-void Post::Swap(Post* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Post::InternalSwap(Post* other) {
   using std::swap;
-  content_.InternalSwap(&other->content_);
-  title_.Swap(&other->title_);
-  swap(sub_post_list_, other->sub_post_list_);
-  swap(signature_, other->signature_);
-  swap(agree_, other->agree_);
-  swap(from_forum_, other->from_forum_);
-  swap(id_, other->id_);
-  swap(floor_, other->floor_);
-  swap(time_, other->time_);
-  swap(sub_post_number_, other->sub_post_number_);
-  swap(author_id_, other->author_id_);
-  swap(tid_, other->tid_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.content_.InternalSwap(&other->_impl_.content_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.title_, lhs_arena,
+                                       &other->_impl_.title_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_number_)
+      + sizeof(Post::_impl_.sub_post_number_)
+      - PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_list_)>(
+          reinterpret_cast<char*>(&_impl_.sub_post_list_),
+          reinterpret_cast<char*>(&other->_impl_.sub_post_list_));
 }
 
 ::google::protobuf::Metadata Post::GetMetadata() const {
-  protobuf_Post_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_Post_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Post_2eproto_getter, &descriptor_table_Post_2eproto_once,
+      file_level_metadata_Post_2eproto[3]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

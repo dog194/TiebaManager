@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "TiebaPlusInfo.proto";
+
 message PbContent {
     uint32 type = 1;
     string text = 2;
@@ -12,6 +14,9 @@ message PbContent {
     string big_cdn_src = 9;
     string imgtype = 10;
     string voice_md5 = 12;
+    uint32 during_time = 13;
+    uint32 is_sub = 14;
+    int64 uid = 15;
     uint32 width = 18;
     uint32 height = 19;
     string packet_name = 20;
@@ -19,4 +24,5 @@ message PbContent {
     uint32 e_type = 24;
     string origin_src = 25;
     uint32 origin_size = 27;
+    TiebaPlusInfo tiebaplus_info = 40;
 }

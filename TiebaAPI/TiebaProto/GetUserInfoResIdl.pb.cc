@@ -4,377 +4,323 @@
 #include "GetUserInfoResIdl.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class GetUserInfoResIdl_DataResDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<GetUserInfoResIdl_DataRes>
-      _instance;
-} _GetUserInfoResIdl_DataRes_default_instance_;
-class GetUserInfoResIdlDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<GetUserInfoResIdl>
-      _instance;
-} _GetUserInfoResIdl_default_instance_;
-namespace protobuf_GetUserInfoResIdl_2eproto {
-void InitDefaultsGetUserInfoResIdl_DataResImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_User_2eproto::InitDefaultsUser();
-  {
-    void* ptr = &::_GetUserInfoResIdl_DataRes_default_instance_;
-    new (ptr) ::GetUserInfoResIdl_DataRes();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::GetUserInfoResIdl_DataRes::InitAsDefaultInstance();
-}
-
-void InitDefaultsGetUserInfoResIdl_DataRes() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsGetUserInfoResIdl_DataResImpl);
-}
-
-void InitDefaultsGetUserInfoResIdlImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Error_2eproto::InitDefaultsError();
-  protobuf_GetUserInfoResIdl_2eproto::InitDefaultsGetUserInfoResIdl_DataRes();
-  {
-    void* ptr = &::_GetUserInfoResIdl_default_instance_;
-    new (ptr) ::GetUserInfoResIdl();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::GetUserInfoResIdl::InitAsDefaultInstance();
-}
-
-void InitDefaultsGetUserInfoResIdl() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsGetUserInfoResIdlImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[2];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetUserInfoResIdl_DataRes, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetUserInfoResIdl_DataRes, user_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetUserInfoResIdl, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetUserInfoResIdl, error_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::GetUserInfoResIdl, data_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::GetUserInfoResIdl_DataRes)},
-  { 6, -1, sizeof(::GetUserInfoResIdl)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_GetUserInfoResIdl_DataRes_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_GetUserInfoResIdl_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "GetUserInfoResIdl.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 2);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\027GetUserInfoResIdl.proto\032\nUser.proto\032\013E"
-      "rror.proto\"t\n\021GetUserInfoResIdl\022\025\n\005error"
-      "\030\001 \001(\0132\006.Error\022(\n\004data\030\002 \001(\0132\032.GetUserIn"
-      "foResIdl.DataRes\032\036\n\007DataRes\022\023\n\004user\030\001 \001("
-      "\0132\005.Userb\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR GetUserInfoResIdl_DataRes::GetUserInfoResIdl_DataRes(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.user_)*/ nullptr,
+    } {}
+struct GetUserInfoResIdl_DataResDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR GetUserInfoResIdl_DataResDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~GetUserInfoResIdl_DataResDefaultTypeInternal() {}
+  union {
+    GetUserInfoResIdl_DataRes _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 176);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "GetUserInfoResIdl.proto", &protobuf_RegisterTypes);
-  ::protobuf_User_2eproto::AddDescriptors();
-  ::protobuf_Error_2eproto::AddDescriptors();
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_GetUserInfoResIdl_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetUserInfoResIdl_DataResDefaultTypeInternal _GetUserInfoResIdl_DataRes_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR GetUserInfoResIdl::GetUserInfoResIdl(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.error_)*/ nullptr,
+      /*decltype(_impl_.data_)*/ nullptr,
+    } {}
+struct GetUserInfoResIdlDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR GetUserInfoResIdlDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~GetUserInfoResIdlDefaultTypeInternal() {}
+  union {
+    GetUserInfoResIdl _instance;
+  };
+};
 
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetUserInfoResIdlDefaultTypeInternal _GetUserInfoResIdl_default_instance_;
+static ::_pb::Metadata file_level_metadata_GetUserInfoResIdl_2eproto[2];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_GetUserInfoResIdl_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_GetUserInfoResIdl_2eproto = nullptr;
+const ::uint32_t TableStruct_GetUserInfoResIdl_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    PROTOBUF_FIELD_OFFSET(::GetUserInfoResIdl_DataRes, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::GetUserInfoResIdl_DataRes, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::GetUserInfoResIdl_DataRes, _impl_.user_),
+    0,
+    PROTOBUF_FIELD_OFFSET(::GetUserInfoResIdl, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::GetUserInfoResIdl, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::GetUserInfoResIdl, _impl_.error_),
+    PROTOBUF_FIELD_OFFSET(::GetUserInfoResIdl, _impl_.data_),
+    0,
+    1,
+};
+
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, 9, -1, sizeof(::GetUserInfoResIdl_DataRes)},
+        {10, 20, -1, sizeof(::GetUserInfoResIdl)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_GetUserInfoResIdl_DataRes_default_instance_._instance,
+    &::_GetUserInfoResIdl_default_instance_._instance,
+};
+const char descriptor_table_protodef_GetUserInfoResIdl_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\027GetUserInfoResIdl.proto\032\nUser.proto\032\013E"
+    "rror.proto\"t\n\021GetUserInfoResIdl\022\025\n\005error"
+    "\030\001 \001(\0132\006.Error\022(\n\004data\030\002 \001(\0132\032.GetUserIn"
+    "foResIdl.DataRes\032\036\n\007DataRes\022\023\n\004user\030\001 \001("
+    "\0132\005.Userb\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_GetUserInfoResIdl_2eproto_deps[2] =
+    {
+        &::descriptor_table_Error_2eproto,
+        &::descriptor_table_User_2eproto,
+};
+static ::absl::once_flag descriptor_table_GetUserInfoResIdl_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_GetUserInfoResIdl_2eproto = {
+    false,
+    false,
+    176,
+    descriptor_table_protodef_GetUserInfoResIdl_2eproto,
+    "GetUserInfoResIdl.proto",
+    &descriptor_table_GetUserInfoResIdl_2eproto_once,
+    descriptor_table_GetUserInfoResIdl_2eproto_deps,
+    2,
+    2,
+    schemas,
+    file_default_instances,
+    TableStruct_GetUserInfoResIdl_2eproto::offsets,
+    file_level_metadata_GetUserInfoResIdl_2eproto,
+    file_level_enum_descriptors_GetUserInfoResIdl_2eproto,
+    file_level_service_descriptors_GetUserInfoResIdl_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_GetUserInfoResIdl_2eproto_getter() {
+  return &descriptor_table_GetUserInfoResIdl_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_GetUserInfoResIdl_2eproto(&descriptor_table_GetUserInfoResIdl_2eproto);
 // ===================================================================
 
-void GetUserInfoResIdl_DataRes::InitAsDefaultInstance() {
-  ::_GetUserInfoResIdl_DataRes_default_instance_._instance.get_mutable()->user_ = const_cast< ::User*>(
-      ::User::internal_default_instance());
+class GetUserInfoResIdl_DataRes::_Internal {
+ public:
+  using HasBits = decltype(std::declval<GetUserInfoResIdl_DataRes>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl_DataRes, _impl_._has_bits_);
+  static const ::User& user(const GetUserInfoResIdl_DataRes* msg);
+  static void set_has_user(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+};
+
+const ::User& GetUserInfoResIdl_DataRes::_Internal::user(const GetUserInfoResIdl_DataRes* msg) {
+  return *msg->_impl_.user_;
 }
 void GetUserInfoResIdl_DataRes::clear_user() {
-  if (GetArenaNoVirtual() == NULL && user_ != NULL) {
-    delete user_;
-  }
-  user_ = NULL;
+  if (_impl_.user_ != nullptr) _impl_.user_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int GetUserInfoResIdl_DataRes::kUserFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+GetUserInfoResIdl_DataRes::GetUserInfoResIdl_DataRes(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:GetUserInfoResIdl.DataRes)
+}
+GetUserInfoResIdl_DataRes::GetUserInfoResIdl_DataRes(const GetUserInfoResIdl_DataRes& from) : ::google::protobuf::Message() {
+  GetUserInfoResIdl_DataRes* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.user_){nullptr},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.user_ = new ::User(*from._impl_.user_);
+  }
 
-GetUserInfoResIdl_DataRes::GetUserInfoResIdl_DataRes()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_GetUserInfoResIdl_2eproto::InitDefaultsGetUserInfoResIdl_DataRes();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:GetUserInfoResIdl.DataRes)
-}
-GetUserInfoResIdl_DataRes::GetUserInfoResIdl_DataRes(const GetUserInfoResIdl_DataRes& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_user()) {
-    user_ = new ::User(*from.user_);
-  } else {
-    user_ = NULL;
-  }
   // @@protoc_insertion_point(copy_constructor:GetUserInfoResIdl.DataRes)
 }
-
-void GetUserInfoResIdl_DataRes::SharedCtor() {
-  user_ = NULL;
-  _cached_size_ = 0;
+inline void GetUserInfoResIdl_DataRes::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.user_){nullptr},
+  };
 }
-
 GetUserInfoResIdl_DataRes::~GetUserInfoResIdl_DataRes() {
   // @@protoc_insertion_point(destructor:GetUserInfoResIdl.DataRes)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void GetUserInfoResIdl_DataRes::SharedDtor() {
-  if (this != internal_default_instance()) delete user_;
+inline void GetUserInfoResIdl_DataRes::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.user_;
 }
-
 void GetUserInfoResIdl_DataRes::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* GetUserInfoResIdl_DataRes::descriptor() {
-  ::protobuf_GetUserInfoResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GetUserInfoResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const GetUserInfoResIdl_DataRes& GetUserInfoResIdl_DataRes::default_instance() {
-  ::protobuf_GetUserInfoResIdl_2eproto::InitDefaultsGetUserInfoResIdl_DataRes();
-  return *internal_default_instance();
-}
-
-GetUserInfoResIdl_DataRes* GetUserInfoResIdl_DataRes::New(::google::protobuf::Arena* arena) const {
-  GetUserInfoResIdl_DataRes* n = new GetUserInfoResIdl_DataRes;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void GetUserInfoResIdl_DataRes::Clear() {
+PROTOBUF_NOINLINE void GetUserInfoResIdl_DataRes::Clear() {
 // @@protoc_insertion_point(message_clear_start:GetUserInfoResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && user_ != NULL) {
-    delete user_;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.user_ != nullptr);
+    _impl_.user_->Clear();
   }
-  user_ = NULL;
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool GetUserInfoResIdl_DataRes::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:GetUserInfoResIdl.DataRes)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .User user = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_user()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:GetUserInfoResIdl.DataRes)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:GetUserInfoResIdl.DataRes)
-  return false;
-#undef DO_
+const char* GetUserInfoResIdl_DataRes::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void GetUserInfoResIdl_DataRes::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:GetUserInfoResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // .User user = 1;
-  if (this->has_user()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->user_, output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> GetUserInfoResIdl_DataRes::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl_DataRes, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_GetUserInfoResIdl_DataRes_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // .User user = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl_DataRes, _impl_.user_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .User user = 1;
+    {PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl_DataRes, _impl_.user_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::User>()},
+  }}, {{
+  }},
+};
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:GetUserInfoResIdl.DataRes)
-}
-
-::google::protobuf::uint8* GetUserInfoResIdl_DataRes::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* GetUserInfoResIdl_DataRes::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:GetUserInfoResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .User user = 1;
-  if (this->has_user()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, *this->user_, deterministic, target);
+      InternalWriteMessage(1, _Internal::user(this),
+        _Internal::user(this).GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:GetUserInfoResIdl.DataRes)
   return target;
 }
 
-size_t GetUserInfoResIdl_DataRes::ByteSizeLong() const {
+::size_t GetUserInfoResIdl_DataRes::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:GetUserInfoResIdl.DataRes)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // .User user = 1;
-  if (this->has_user()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->user_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void GetUserInfoResIdl_DataRes::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:GetUserInfoResIdl.DataRes)
-  GOOGLE_DCHECK_NE(&from, this);
-  const GetUserInfoResIdl_DataRes* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const GetUserInfoResIdl_DataRes>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:GetUserInfoResIdl.DataRes)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:GetUserInfoResIdl.DataRes)
-    MergeFrom(*source);
-  }
-}
-
-void GetUserInfoResIdl_DataRes::MergeFrom(const GetUserInfoResIdl_DataRes& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:GetUserInfoResIdl.DataRes)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (from.has_user()) {
-    mutable_user()->::User::MergeFrom(from.user());
+  // .User user = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *_impl_.user_);
   }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void GetUserInfoResIdl_DataRes::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:GetUserInfoResIdl.DataRes)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData GetUserInfoResIdl_DataRes::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    GetUserInfoResIdl_DataRes::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*GetUserInfoResIdl_DataRes::GetClassData() const { return &_class_data_; }
+
+
+void GetUserInfoResIdl_DataRes::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<GetUserInfoResIdl_DataRes*>(&to_msg);
+  auto& from = static_cast<const GetUserInfoResIdl_DataRes&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:GetUserInfoResIdl.DataRes)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_internal_mutable_user()->::User::MergeFrom(
+        from._internal_user());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void GetUserInfoResIdl_DataRes::CopyFrom(const GetUserInfoResIdl_DataRes& from) {
@@ -384,302 +330,248 @@ void GetUserInfoResIdl_DataRes::CopyFrom(const GetUserInfoResIdl_DataRes& from) 
   MergeFrom(from);
 }
 
-bool GetUserInfoResIdl_DataRes::IsInitialized() const {
+PROTOBUF_NOINLINE bool GetUserInfoResIdl_DataRes::IsInitialized() const {
   return true;
 }
 
-void GetUserInfoResIdl_DataRes::Swap(GetUserInfoResIdl_DataRes* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void GetUserInfoResIdl_DataRes::InternalSwap(GetUserInfoResIdl_DataRes* other) {
   using std::swap;
-  swap(user_, other->user_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.user_, other->_impl_.user_);
 }
 
 ::google::protobuf::Metadata GetUserInfoResIdl_DataRes::GetMetadata() const {
-  protobuf_GetUserInfoResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GetUserInfoResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_GetUserInfoResIdl_2eproto_getter, &descriptor_table_GetUserInfoResIdl_2eproto_once,
+      file_level_metadata_GetUserInfoResIdl_2eproto[0]);
 }
-
-
 // ===================================================================
 
-void GetUserInfoResIdl::InitAsDefaultInstance() {
-  ::_GetUserInfoResIdl_default_instance_._instance.get_mutable()->error_ = const_cast< ::Error*>(
-      ::Error::internal_default_instance());
-  ::_GetUserInfoResIdl_default_instance_._instance.get_mutable()->data_ = const_cast< ::GetUserInfoResIdl_DataRes*>(
-      ::GetUserInfoResIdl_DataRes::internal_default_instance());
+class GetUserInfoResIdl::_Internal {
+ public:
+  using HasBits = decltype(std::declval<GetUserInfoResIdl>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_._has_bits_);
+  static const ::Error& error(const GetUserInfoResIdl* msg);
+  static void set_has_error(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::GetUserInfoResIdl_DataRes& data(const GetUserInfoResIdl* msg);
+  static void set_has_data(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+};
+
+const ::Error& GetUserInfoResIdl::_Internal::error(const GetUserInfoResIdl* msg) {
+  return *msg->_impl_.error_;
+}
+const ::GetUserInfoResIdl_DataRes& GetUserInfoResIdl::_Internal::data(const GetUserInfoResIdl* msg) {
+  return *msg->_impl_.data_;
 }
 void GetUserInfoResIdl::clear_error() {
-  if (GetArenaNoVirtual() == NULL && error_ != NULL) {
-    delete error_;
-  }
-  error_ = NULL;
+  if (_impl_.error_ != nullptr) _impl_.error_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int GetUserInfoResIdl::kErrorFieldNumber;
-const int GetUserInfoResIdl::kDataFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+GetUserInfoResIdl::GetUserInfoResIdl(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:GetUserInfoResIdl)
+}
+GetUserInfoResIdl::GetUserInfoResIdl(const GetUserInfoResIdl& from) : ::google::protobuf::Message() {
+  GetUserInfoResIdl* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.error_){nullptr},
+      decltype(_impl_.data_){nullptr},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.error_ = new ::Error(*from._impl_.error_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.data_ = new ::GetUserInfoResIdl_DataRes(*from._impl_.data_);
+  }
 
-GetUserInfoResIdl::GetUserInfoResIdl()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_GetUserInfoResIdl_2eproto::InitDefaultsGetUserInfoResIdl();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:GetUserInfoResIdl)
-}
-GetUserInfoResIdl::GetUserInfoResIdl(const GetUserInfoResIdl& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_error()) {
-    error_ = new ::Error(*from.error_);
-  } else {
-    error_ = NULL;
-  }
-  if (from.has_data()) {
-    data_ = new ::GetUserInfoResIdl_DataRes(*from.data_);
-  } else {
-    data_ = NULL;
-  }
   // @@protoc_insertion_point(copy_constructor:GetUserInfoResIdl)
 }
-
-void GetUserInfoResIdl::SharedCtor() {
-  ::memset(&error_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&data_) -
-      reinterpret_cast<char*>(&error_)) + sizeof(data_));
-  _cached_size_ = 0;
+inline void GetUserInfoResIdl::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.error_){nullptr},
+      decltype(_impl_.data_){nullptr},
+  };
 }
-
 GetUserInfoResIdl::~GetUserInfoResIdl() {
   // @@protoc_insertion_point(destructor:GetUserInfoResIdl)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void GetUserInfoResIdl::SharedDtor() {
-  if (this != internal_default_instance()) delete error_;
-  if (this != internal_default_instance()) delete data_;
+inline void GetUserInfoResIdl::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.error_;
+  if (this != internal_default_instance()) delete _impl_.data_;
 }
-
 void GetUserInfoResIdl::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* GetUserInfoResIdl::descriptor() {
-  ::protobuf_GetUserInfoResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GetUserInfoResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const GetUserInfoResIdl& GetUserInfoResIdl::default_instance() {
-  ::protobuf_GetUserInfoResIdl_2eproto::InitDefaultsGetUserInfoResIdl();
-  return *internal_default_instance();
-}
-
-GetUserInfoResIdl* GetUserInfoResIdl::New(::google::protobuf::Arena* arena) const {
-  GetUserInfoResIdl* n = new GetUserInfoResIdl;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void GetUserInfoResIdl::Clear() {
+PROTOBUF_NOINLINE void GetUserInfoResIdl::Clear() {
 // @@protoc_insertion_point(message_clear_start:GetUserInfoResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && error_ != NULL) {
-    delete error_;
-  }
-  error_ = NULL;
-  if (GetArenaNoVirtual() == NULL && data_ != NULL) {
-    delete data_;
-  }
-  data_ = NULL;
-  _internal_metadata_.Clear();
-}
-
-bool GetUserInfoResIdl::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:GetUserInfoResIdl)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .Error error = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_error()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .GetUserInfoResIdl.DataRes data = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_data()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.error_ != nullptr);
+      _impl_.error_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.data_ != nullptr);
+      _impl_.data_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:GetUserInfoResIdl)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:GetUserInfoResIdl)
-  return false;
-#undef DO_
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void GetUserInfoResIdl::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:GetUserInfoResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .Error error = 1;
-  if (this->has_error()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->error_, output);
-  }
-
-  // .GetUserInfoResIdl.DataRes data = 2;
-  if (this->has_data()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->data_, output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:GetUserInfoResIdl)
+const char* GetUserInfoResIdl::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* GetUserInfoResIdl::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 2, 0, 2> GetUserInfoResIdl::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    2,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_GetUserInfoResIdl_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // .GetUserInfoResIdl.DataRes data = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 1, 1, PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_.data_)}},
+    // .Error error = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_.error_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .Error error = 1;
+    {PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_.error_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .GetUserInfoResIdl.DataRes data = 2;
+    {PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_.data_), _Internal::kHasBitsOffset + 1, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::Error>()},
+    {::_pbi::TcParser::GetTable<::GetUserInfoResIdl_DataRes>()},
+  }}, {{
+  }},
+};
+
+::uint8_t* GetUserInfoResIdl::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:GetUserInfoResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .Error error = 1;
-  if (this->has_error()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, *this->error_, deterministic, target);
+      InternalWriteMessage(1, _Internal::error(this),
+        _Internal::error(this).GetCachedSize(), target, stream);
   }
 
   // .GetUserInfoResIdl.DataRes data = 2;
-  if (this->has_data()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, *this->data_, deterministic, target);
+      InternalWriteMessage(2, _Internal::data(this),
+        _Internal::data(this).GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:GetUserInfoResIdl)
   return target;
 }
 
-size_t GetUserInfoResIdl::ByteSizeLong() const {
+::size_t GetUserInfoResIdl::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:GetUserInfoResIdl)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // .Error error = 1;
-  if (this->has_error()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->error_);
-  }
-
-  // .GetUserInfoResIdl.DataRes data = 2;
-  if (this->has_data()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->data_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void GetUserInfoResIdl::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:GetUserInfoResIdl)
-  GOOGLE_DCHECK_NE(&from, this);
-  const GetUserInfoResIdl* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const GetUserInfoResIdl>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:GetUserInfoResIdl)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:GetUserInfoResIdl)
-    MergeFrom(*source);
-  }
-}
-
-void GetUserInfoResIdl::MergeFrom(const GetUserInfoResIdl& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:GetUserInfoResIdl)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (from.has_error()) {
-    mutable_error()->::Error::MergeFrom(from.error());
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // .Error error = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.error_);
+    }
+
+    // .GetUserInfoResIdl.DataRes data = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.data_);
+    }
+
   }
-  if (from.has_data()) {
-    mutable_data()->::GetUserInfoResIdl_DataRes::MergeFrom(from.data());
-  }
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void GetUserInfoResIdl::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:GetUserInfoResIdl)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData GetUserInfoResIdl::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    GetUserInfoResIdl::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*GetUserInfoResIdl::GetClassData() const { return &_class_data_; }
+
+
+void GetUserInfoResIdl::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<GetUserInfoResIdl*>(&to_msg);
+  auto& from = static_cast<const GetUserInfoResIdl&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:GetUserInfoResIdl)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_error()->::Error::MergeFrom(
+          from._internal_error());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_data()->::GetUserInfoResIdl_DataRes::MergeFrom(
+          from._internal_data());
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void GetUserInfoResIdl::CopyFrom(const GetUserInfoResIdl& from) {
@@ -689,28 +581,31 @@ void GetUserInfoResIdl::CopyFrom(const GetUserInfoResIdl& from) {
   MergeFrom(from);
 }
 
-bool GetUserInfoResIdl::IsInitialized() const {
+PROTOBUF_NOINLINE bool GetUserInfoResIdl::IsInitialized() const {
   return true;
 }
 
-void GetUserInfoResIdl::Swap(GetUserInfoResIdl* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void GetUserInfoResIdl::InternalSwap(GetUserInfoResIdl* other) {
   using std::swap;
-  swap(error_, other->error_);
-  swap(data_, other->data_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_.data_)
+      + sizeof(GetUserInfoResIdl::_impl_.data_)
+      - PROTOBUF_FIELD_OFFSET(GetUserInfoResIdl, _impl_.error_)>(
+          reinterpret_cast<char*>(&_impl_.error_),
+          reinterpret_cast<char*>(&other->_impl_.error_));
 }
 
 ::google::protobuf::Metadata GetUserInfoResIdl::GetMetadata() const {
-  protobuf_GetUserInfoResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_GetUserInfoResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_GetUserInfoResIdl_2eproto_getter, &descriptor_table_GetUserInfoResIdl_2eproto_once,
+      file_level_metadata_GetUserInfoResIdl_2eproto[1]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

@@ -4,619 +4,495 @@
 #include "FrsPageResIdl.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class FrsPageResIdl_DataRes_ForumInfoDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<FrsPageResIdl_DataRes_ForumInfo>
-      _instance;
-} _FrsPageResIdl_DataRes_ForumInfo_default_instance_;
-class FrsPageResIdl_DataRes_NavTabInfoDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<FrsPageResIdl_DataRes_NavTabInfo>
-      _instance;
-} _FrsPageResIdl_DataRes_NavTabInfo_default_instance_;
-class FrsPageResIdl_DataResDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<FrsPageResIdl_DataRes>
-      _instance;
-} _FrsPageResIdl_DataRes_default_instance_;
-class FrsPageResIdlDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<FrsPageResIdl>
-      _instance;
-} _FrsPageResIdl_default_instance_;
-namespace protobuf_FrsPageResIdl_2eproto {
-void InitDefaultsFrsPageResIdl_DataRes_ForumInfoImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  {
-    void* ptr = &::_FrsPageResIdl_DataRes_ForumInfo_default_instance_;
-    new (ptr) ::FrsPageResIdl_DataRes_ForumInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::FrsPageResIdl_DataRes_ForumInfo::InitAsDefaultInstance();
-}
-
-void InitDefaultsFrsPageResIdl_DataRes_ForumInfo() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFrsPageResIdl_DataRes_ForumInfoImpl);
-}
-
-void InitDefaultsFrsPageResIdl_DataRes_NavTabInfoImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_FrsTabInfo_2eproto::InitDefaultsFrsTabInfo();
-  {
-    void* ptr = &::_FrsPageResIdl_DataRes_NavTabInfo_default_instance_;
-    new (ptr) ::FrsPageResIdl_DataRes_NavTabInfo();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::FrsPageResIdl_DataRes_NavTabInfo::InitAsDefaultInstance();
-}
-
-void InitDefaultsFrsPageResIdl_DataRes_NavTabInfo() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFrsPageResIdl_DataRes_NavTabInfoImpl);
-}
-
-void InitDefaultsFrsPageResIdl_DataResImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes_ForumInfo();
-  protobuf_Page_2eproto::InitDefaultsPage();
-  protobuf_ThreadInfo_2eproto::InitDefaultsThreadInfo();
-  protobuf_User_2eproto::InitDefaultsUser();
-  protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes_NavTabInfo();
-  {
-    void* ptr = &::_FrsPageResIdl_DataRes_default_instance_;
-    new (ptr) ::FrsPageResIdl_DataRes();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::FrsPageResIdl_DataRes::InitAsDefaultInstance();
-}
-
-void InitDefaultsFrsPageResIdl_DataRes() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFrsPageResIdl_DataResImpl);
-}
-
-void InitDefaultsFrsPageResIdlImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Error_2eproto::InitDefaultsError();
-  protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes();
-  {
-    void* ptr = &::_FrsPageResIdl_default_instance_;
-    new (ptr) ::FrsPageResIdl();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::FrsPageResIdl::InitAsDefaultInstance();
-}
-
-void InitDefaultsFrsPageResIdl() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsFrsPageResIdlImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[4];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, member_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, thread_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, post_num_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_NavTabInfo, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes_NavTabInfo, tab_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes, forum_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes, page_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes, thread_list_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes, user_list_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl_DataRes, nav_tab_info_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl, error_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::FrsPageResIdl, data_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::FrsPageResIdl_DataRes_ForumInfo)},
-  { 10, -1, sizeof(::FrsPageResIdl_DataRes_NavTabInfo)},
-  { 16, -1, sizeof(::FrsPageResIdl_DataRes)},
-  { 26, -1, sizeof(::FrsPageResIdl)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_FrsPageResIdl_DataRes_ForumInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_FrsPageResIdl_DataRes_NavTabInfo_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_FrsPageResIdl_DataRes_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_FrsPageResIdl_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "FrsPageResIdl.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\023FrsPageResIdl.proto\032\nPage.proto\032\020Threa"
-      "dInfo.proto\032\nUser.proto\032\020FrsTabInfo.prot"
-      "o\032\013Error.proto\"\234\003\n\rFrsPageResIdl\022\025\n\005erro"
-      "r\030\001 \001(\0132\006.Error\022$\n\004data\030\002 \001(\0132\026.FrsPageR"
-      "esIdl.DataRes\032\315\002\n\007DataRes\022/\n\005forum\030\002 \001(\013"
-      "2 .FrsPageResIdl.DataRes.ForumInfo\022\023\n\004pa"
-      "ge\030\004 \001(\0132\005.Page\022 \n\013thread_list\030\007 \003(\0132\013.T"
-      "hreadInfo\022\030\n\tuser_list\030\021 \003(\0132\005.User\0227\n\014n"
-      "av_tab_info\030% \001(\0132!.FrsPageResIdl.DataRe"
-      "s.NavTabInfo\032_\n\tForumInfo\022\n\n\002id\030\001 \001(\003\022\014\n"
-      "\004name\030\002 \001(\t\022\022\n\nmember_num\030\t \001(\005\022\022\n\nthrea"
-      "d_num\030\n \001(\005\022\020\n\010post_num\030\014 \001(\005\032&\n\nNavTabI"
-      "nfo\022\030\n\003tab\030\001 \003(\0132\013.FrsTabInfob\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR FrsPageResIdl_DataRes_ForumInfo::FrsPageResIdl_DataRes_ForumInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.name_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.id_)*/ ::int64_t{0},
+      /*decltype(_impl_.member_num_)*/ 0,
+      /*decltype(_impl_.thread_num_)*/ 0,
+      /*decltype(_impl_.post_num_)*/ 0,
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct FrsPageResIdl_DataRes_ForumInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR FrsPageResIdl_DataRes_ForumInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~FrsPageResIdl_DataRes_ForumInfoDefaultTypeInternal() {}
+  union {
+    FrsPageResIdl_DataRes_ForumInfo _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 517);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "FrsPageResIdl.proto", &protobuf_RegisterTypes);
-  ::protobuf_Page_2eproto::AddDescriptors();
-  ::protobuf_ThreadInfo_2eproto::AddDescriptors();
-  ::protobuf_User_2eproto::AddDescriptors();
-  ::protobuf_FrsTabInfo_2eproto::AddDescriptors();
-  ::protobuf_Error_2eproto::AddDescriptors();
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_FrsPageResIdl_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FrsPageResIdl_DataRes_ForumInfoDefaultTypeInternal _FrsPageResIdl_DataRes_ForumInfo_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR FrsPageResIdl_DataRes_NavTabInfo::FrsPageResIdl_DataRes_NavTabInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.tab_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct FrsPageResIdl_DataRes_NavTabInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR FrsPageResIdl_DataRes_NavTabInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~FrsPageResIdl_DataRes_NavTabInfoDefaultTypeInternal() {}
+  union {
+    FrsPageResIdl_DataRes_NavTabInfo _instance;
+  };
+};
 
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FrsPageResIdl_DataRes_NavTabInfoDefaultTypeInternal _FrsPageResIdl_DataRes_NavTabInfo_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR FrsPageResIdl_DataRes::FrsPageResIdl_DataRes(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.thread_list_)*/ {},
+      /*decltype(_impl_.user_list_)*/ {},
+      /*decltype(_impl_.forum_)*/ nullptr,
+      /*decltype(_impl_.page_)*/ nullptr,
+      /*decltype(_impl_.nav_tab_info_)*/ nullptr,
+    } {}
+struct FrsPageResIdl_DataResDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR FrsPageResIdl_DataResDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~FrsPageResIdl_DataResDefaultTypeInternal() {}
+  union {
+    FrsPageResIdl_DataRes _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FrsPageResIdl_DataResDefaultTypeInternal _FrsPageResIdl_DataRes_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR FrsPageResIdl::FrsPageResIdl(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.error_)*/ nullptr,
+      /*decltype(_impl_.data_)*/ nullptr,
+    } {}
+struct FrsPageResIdlDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR FrsPageResIdlDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~FrsPageResIdlDefaultTypeInternal() {}
+  union {
+    FrsPageResIdl _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FrsPageResIdlDefaultTypeInternal _FrsPageResIdl_default_instance_;
+static ::_pb::Metadata file_level_metadata_FrsPageResIdl_2eproto[4];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_FrsPageResIdl_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_FrsPageResIdl_2eproto = nullptr;
+const ::uint32_t TableStruct_FrsPageResIdl_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, _impl_.id_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, _impl_.name_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, _impl_.member_num_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, _impl_.thread_num_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_ForumInfo, _impl_.post_num_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_NavTabInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes_NavTabInfo, _impl_.tab_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes, _impl_.forum_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes, _impl_.page_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes, _impl_.thread_list_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes, _impl_.user_list_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl_DataRes, _impl_.nav_tab_info_),
+    0,
+    1,
+    ~0u,
+    ~0u,
+    2,
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl, _impl_.error_),
+    PROTOBUF_FIELD_OFFSET(::FrsPageResIdl, _impl_.data_),
+    0,
+    1,
+};
+
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, -1, -1, sizeof(::FrsPageResIdl_DataRes_ForumInfo)},
+        {13, -1, -1, sizeof(::FrsPageResIdl_DataRes_NavTabInfo)},
+        {22, 35, -1, sizeof(::FrsPageResIdl_DataRes)},
+        {40, 50, -1, sizeof(::FrsPageResIdl)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_FrsPageResIdl_DataRes_ForumInfo_default_instance_._instance,
+    &::_FrsPageResIdl_DataRes_NavTabInfo_default_instance_._instance,
+    &::_FrsPageResIdl_DataRes_default_instance_._instance,
+    &::_FrsPageResIdl_default_instance_._instance,
+};
+const char descriptor_table_protodef_FrsPageResIdl_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\023FrsPageResIdl.proto\032\nPage.proto\032\020Threa"
+    "dInfo.proto\032\nUser.proto\032\020FrsTabInfo.prot"
+    "o\032\013Error.proto\"\234\003\n\rFrsPageResIdl\022\025\n\005erro"
+    "r\030\001 \001(\0132\006.Error\022$\n\004data\030\002 \001(\0132\026.FrsPageR"
+    "esIdl.DataRes\032\315\002\n\007DataRes\022/\n\005forum\030\002 \001(\013"
+    "2 .FrsPageResIdl.DataRes.ForumInfo\022\023\n\004pa"
+    "ge\030\004 \001(\0132\005.Page\022 \n\013thread_list\030\007 \003(\0132\013.T"
+    "hreadInfo\022\030\n\tuser_list\030\021 \003(\0132\005.User\0227\n\014n"
+    "av_tab_info\030% \001(\0132!.FrsPageResIdl.DataRe"
+    "s.NavTabInfo\032_\n\tForumInfo\022\n\n\002id\030\001 \001(\003\022\014\n"
+    "\004name\030\002 \001(\t\022\022\n\nmember_num\030\t \001(\005\022\022\n\nthrea"
+    "d_num\030\n \001(\005\022\020\n\010post_num\030\014 \001(\005\032&\n\nNavTabI"
+    "nfo\022\030\n\003tab\030\001 \003(\0132\013.FrsTabInfob\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_FrsPageResIdl_2eproto_deps[5] =
+    {
+        &::descriptor_table_Error_2eproto,
+        &::descriptor_table_FrsTabInfo_2eproto,
+        &::descriptor_table_Page_2eproto,
+        &::descriptor_table_ThreadInfo_2eproto,
+        &::descriptor_table_User_2eproto,
+};
+static ::absl::once_flag descriptor_table_FrsPageResIdl_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_FrsPageResIdl_2eproto = {
+    false,
+    false,
+    517,
+    descriptor_table_protodef_FrsPageResIdl_2eproto,
+    "FrsPageResIdl.proto",
+    &descriptor_table_FrsPageResIdl_2eproto_once,
+    descriptor_table_FrsPageResIdl_2eproto_deps,
+    5,
+    4,
+    schemas,
+    file_default_instances,
+    TableStruct_FrsPageResIdl_2eproto::offsets,
+    file_level_metadata_FrsPageResIdl_2eproto,
+    file_level_enum_descriptors_FrsPageResIdl_2eproto,
+    file_level_service_descriptors_FrsPageResIdl_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_FrsPageResIdl_2eproto_getter() {
+  return &descriptor_table_FrsPageResIdl_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_FrsPageResIdl_2eproto(&descriptor_table_FrsPageResIdl_2eproto);
 // ===================================================================
 
-void FrsPageResIdl_DataRes_ForumInfo::InitAsDefaultInstance() {
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FrsPageResIdl_DataRes_ForumInfo::kIdFieldNumber;
-const int FrsPageResIdl_DataRes_ForumInfo::kNameFieldNumber;
-const int FrsPageResIdl_DataRes_ForumInfo::kMemberNumFieldNumber;
-const int FrsPageResIdl_DataRes_ForumInfo::kThreadNumFieldNumber;
-const int FrsPageResIdl_DataRes_ForumInfo::kPostNumFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class FrsPageResIdl_DataRes_ForumInfo::_Internal {
+ public:
+};
 
-FrsPageResIdl_DataRes_ForumInfo::FrsPageResIdl_DataRes_ForumInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes_ForumInfo();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:FrsPageResIdl.DataRes.ForumInfo)
+FrsPageResIdl_DataRes_ForumInfo::FrsPageResIdl_DataRes_ForumInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:FrsPageResIdl.DataRes.ForumInfo)
 }
-FrsPageResIdl_DataRes_ForumInfo::FrsPageResIdl_DataRes_ForumInfo(const FrsPageResIdl_DataRes_ForumInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.name().size() > 0) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+FrsPageResIdl_DataRes_ForumInfo::FrsPageResIdl_DataRes_ForumInfo(const FrsPageResIdl_DataRes_ForumInfo& from) : ::google::protobuf::Message() {
+  FrsPageResIdl_DataRes_ForumInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.name_){},
+      decltype(_impl_.id_){},
+      decltype(_impl_.member_num_){},
+      decltype(_impl_.thread_num_){},
+      decltype(_impl_.post_num_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_name().empty()) {
+    _this->_impl_.name_.Set(from._internal_name(), _this->GetArenaForAllocation());
   }
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&thread_num_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(thread_num_));
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.post_num_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.post_num_));
+
   // @@protoc_insertion_point(copy_constructor:FrsPageResIdl.DataRes.ForumInfo)
 }
-
-void FrsPageResIdl_DataRes_ForumInfo::SharedCtor() {
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&thread_num_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(thread_num_));
-  _cached_size_ = 0;
+inline void FrsPageResIdl_DataRes_ForumInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.name_){},
+      decltype(_impl_.id_){::int64_t{0}},
+      decltype(_impl_.member_num_){0},
+      decltype(_impl_.thread_num_){0},
+      decltype(_impl_.post_num_){0},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 FrsPageResIdl_DataRes_ForumInfo::~FrsPageResIdl_DataRes_ForumInfo() {
   // @@protoc_insertion_point(destructor:FrsPageResIdl.DataRes.ForumInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void FrsPageResIdl_DataRes_ForumInfo::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void FrsPageResIdl_DataRes_ForumInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.name_.Destroy();
 }
-
 void FrsPageResIdl_DataRes_ForumInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* FrsPageResIdl_DataRes_ForumInfo::descriptor() {
-  ::protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const FrsPageResIdl_DataRes_ForumInfo& FrsPageResIdl_DataRes_ForumInfo::default_instance() {
-  ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes_ForumInfo();
-  return *internal_default_instance();
-}
-
-FrsPageResIdl_DataRes_ForumInfo* FrsPageResIdl_DataRes_ForumInfo::New(::google::protobuf::Arena* arena) const {
-  FrsPageResIdl_DataRes_ForumInfo* n = new FrsPageResIdl_DataRes_ForumInfo;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void FrsPageResIdl_DataRes_ForumInfo::Clear() {
+PROTOBUF_NOINLINE void FrsPageResIdl_DataRes_ForumInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:FrsPageResIdl.DataRes.ForumInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&thread_num_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(thread_num_));
-  _internal_metadata_.Clear();
+  _impl_.name_.ClearToEmpty();
+  ::memset(&_impl_.id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.post_num_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.post_num_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool FrsPageResIdl_DataRes_ForumInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:FrsPageResIdl.DataRes.ForumInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->name().data(), static_cast<int>(this->name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "FrsPageResIdl.DataRes.ForumInfo.name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 member_num = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(72u /* 72 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &member_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 thread_num = 10;
-      case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(80u /* 80 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &thread_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 post_num = 12;
-      case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(96u /* 96 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &post_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:FrsPageResIdl.DataRes.ForumInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:FrsPageResIdl.DataRes.ForumInfo)
-  return false;
-#undef DO_
+const char* FrsPageResIdl_DataRes_ForumInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void FrsPageResIdl_DataRes_ForumInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:FrsPageResIdl.DataRes.ForumInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // int64 id = 1;
-  if (this->id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 5, 0, 44, 2> FrsPageResIdl_DataRes_ForumInfo::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    12, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294964476,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    5,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_FrsPageResIdl_DataRes_ForumInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // int32 post_num = 12;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(FrsPageResIdl_DataRes_ForumInfo, _impl_.post_num_), 63>(),
+     {96, 63, 0, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.post_num_)}},
+    // int64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(FrsPageResIdl_DataRes_ForumInfo, _impl_.id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.id_)}},
+    // string name = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.name_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int64 id = 1;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // string name = 2;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.name_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 member_num = 9;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.member_num_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 thread_num = 10;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.thread_num_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 post_num = 12;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.post_num_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+  }},
+  // no aux_entries
+  {{
+    "\37\0\4\0\0\0\0\0"
+    "FrsPageResIdl.DataRes.ForumInfo"
+    "name"
+  }},
+};
 
-  // string name = 2;
-  if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "FrsPageResIdl.DataRes.ForumInfo.name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->name(), output);
-  }
-
-  // int32 member_num = 9;
-  if (this->member_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(9, this->member_num(), output);
-  }
-
-  // int32 thread_num = 10;
-  if (this->thread_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->thread_num(), output);
-  }
-
-  // int32 post_num = 12;
-  if (this->post_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->post_num(), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:FrsPageResIdl.DataRes.ForumInfo)
-}
-
-::google::protobuf::uint8* FrsPageResIdl_DataRes_ForumInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* FrsPageResIdl_DataRes_ForumInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:FrsPageResIdl.DataRes.ForumInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  if (this->_internal_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<1>(
+            stream, this->_internal_id(), target);
   }
 
   // string name = 2;
-  if (this->name().size() > 0) {
+  if (!this->_internal_name().empty()) {
+    const std::string& _s = this->_internal_name();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "FrsPageResIdl.DataRes.ForumInfo.name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->name(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "FrsPageResIdl.DataRes.ForumInfo.name");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // int32 member_num = 9;
-  if (this->member_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(9, this->member_num(), target);
+  if (this->_internal_member_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<9>(
+            stream, this->_internal_member_num(), target);
   }
 
   // int32 thread_num = 10;
-  if (this->thread_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->thread_num(), target);
+  if (this->_internal_thread_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<10>(
+            stream, this->_internal_thread_num(), target);
   }
 
   // int32 post_num = 12;
-  if (this->post_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->post_num(), target);
+  if (this->_internal_post_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<12>(
+            stream, this->_internal_post_num(), target);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:FrsPageResIdl.DataRes.ForumInfo)
   return target;
 }
 
-size_t FrsPageResIdl_DataRes_ForumInfo::ByteSizeLong() const {
+::size_t FrsPageResIdl_DataRes_ForumInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:FrsPageResIdl.DataRes.ForumInfo)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // string name = 2;
-  if (this->name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->name());
+  if (!this->_internal_name().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_name());
   }
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->id());
-  }
-
-  // int32 post_num = 12;
-  if (this->post_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->post_num());
+  if (this->_internal_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_id());
   }
 
   // int32 member_num = 9;
-  if (this->member_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->member_num());
+  if (this->_internal_member_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_member_num());
   }
 
   // int32 thread_num = 10;
-  if (this->thread_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->thread_num());
+  if (this->_internal_thread_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_thread_num());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void FrsPageResIdl_DataRes_ForumInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:FrsPageResIdl.DataRes.ForumInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  const FrsPageResIdl_DataRes_ForumInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const FrsPageResIdl_DataRes_ForumInfo>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FrsPageResIdl.DataRes.ForumInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:FrsPageResIdl.DataRes.ForumInfo)
-    MergeFrom(*source);
+  // int32 post_num = 12;
+  if (this->_internal_post_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_post_num());
   }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void FrsPageResIdl_DataRes_ForumInfo::MergeFrom(const FrsPageResIdl_DataRes_ForumInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl.DataRes.ForumInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+const ::google::protobuf::Message::ClassData FrsPageResIdl_DataRes_ForumInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    FrsPageResIdl_DataRes_ForumInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*FrsPageResIdl_DataRes_ForumInfo::GetClassData() const { return &_class_data_; }
+
+
+void FrsPageResIdl_DataRes_ForumInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<FrsPageResIdl_DataRes_ForumInfo*>(&to_msg);
+  auto& from = static_cast<const FrsPageResIdl_DataRes_ForumInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl.DataRes.ForumInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  if (!from._internal_name().empty()) {
+    _this->_internal_set_name(from._internal_name());
   }
-  if (from.id() != 0) {
-    set_id(from.id());
+  if (from._internal_id() != 0) {
+    _this->_internal_set_id(from._internal_id());
   }
-  if (from.post_num() != 0) {
-    set_post_num(from.post_num());
+  if (from._internal_member_num() != 0) {
+    _this->_internal_set_member_num(from._internal_member_num());
   }
-  if (from.member_num() != 0) {
-    set_member_num(from.member_num());
+  if (from._internal_thread_num() != 0) {
+    _this->_internal_set_thread_num(from._internal_thread_num());
   }
-  if (from.thread_num() != 0) {
-    set_thread_num(from.thread_num());
+  if (from._internal_post_num() != 0) {
+    _this->_internal_set_post_num(from._internal_post_num());
   }
-}
-
-void FrsPageResIdl_DataRes_ForumInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:FrsPageResIdl.DataRes.ForumInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void FrsPageResIdl_DataRes_ForumInfo::CopyFrom(const FrsPageResIdl_DataRes_ForumInfo& from) {
@@ -626,245 +502,181 @@ void FrsPageResIdl_DataRes_ForumInfo::CopyFrom(const FrsPageResIdl_DataRes_Forum
   MergeFrom(from);
 }
 
-bool FrsPageResIdl_DataRes_ForumInfo::IsInitialized() const {
+PROTOBUF_NOINLINE bool FrsPageResIdl_DataRes_ForumInfo::IsInitialized() const {
   return true;
 }
 
-void FrsPageResIdl_DataRes_ForumInfo::Swap(FrsPageResIdl_DataRes_ForumInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void FrsPageResIdl_DataRes_ForumInfo::InternalSwap(FrsPageResIdl_DataRes_ForumInfo* other) {
   using std::swap;
-  name_.Swap(&other->name_);
-  swap(id_, other->id_);
-  swap(post_num_, other->post_num_);
-  swap(member_num_, other->member_num_);
-  swap(thread_num_, other->thread_num_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, lhs_arena,
+                                       &other->_impl_.name_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.post_num_)
+      + sizeof(FrsPageResIdl_DataRes_ForumInfo::_impl_.post_num_)
+      - PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_ForumInfo, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
 }
 
 ::google::protobuf::Metadata FrsPageResIdl_DataRes_ForumInfo::GetMetadata() const {
-  protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_FrsPageResIdl_2eproto_getter, &descriptor_table_FrsPageResIdl_2eproto_once,
+      file_level_metadata_FrsPageResIdl_2eproto[0]);
 }
-
-
 // ===================================================================
 
-void FrsPageResIdl_DataRes_NavTabInfo::InitAsDefaultInstance() {
-}
-void FrsPageResIdl_DataRes_NavTabInfo::clear_tab() {
-  tab_.Clear();
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FrsPageResIdl_DataRes_NavTabInfo::kTabFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class FrsPageResIdl_DataRes_NavTabInfo::_Internal {
+ public:
+};
 
-FrsPageResIdl_DataRes_NavTabInfo::FrsPageResIdl_DataRes_NavTabInfo()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes_NavTabInfo();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:FrsPageResIdl.DataRes.NavTabInfo)
+void FrsPageResIdl_DataRes_NavTabInfo::clear_tab() {
+  _internal_mutable_tab()->Clear();
 }
-FrsPageResIdl_DataRes_NavTabInfo::FrsPageResIdl_DataRes_NavTabInfo(const FrsPageResIdl_DataRes_NavTabInfo& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      tab_(from.tab_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+FrsPageResIdl_DataRes_NavTabInfo::FrsPageResIdl_DataRes_NavTabInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:FrsPageResIdl.DataRes.NavTabInfo)
+}
+FrsPageResIdl_DataRes_NavTabInfo::FrsPageResIdl_DataRes_NavTabInfo(const FrsPageResIdl_DataRes_NavTabInfo& from) : ::google::protobuf::Message() {
+  FrsPageResIdl_DataRes_NavTabInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_){from._impl_.tab_},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+
   // @@protoc_insertion_point(copy_constructor:FrsPageResIdl.DataRes.NavTabInfo)
 }
-
-void FrsPageResIdl_DataRes_NavTabInfo::SharedCtor() {
-  _cached_size_ = 0;
+inline void FrsPageResIdl_DataRes_NavTabInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_){arena},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
 }
-
 FrsPageResIdl_DataRes_NavTabInfo::~FrsPageResIdl_DataRes_NavTabInfo() {
   // @@protoc_insertion_point(destructor:FrsPageResIdl.DataRes.NavTabInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void FrsPageResIdl_DataRes_NavTabInfo::SharedDtor() {
+inline void FrsPageResIdl_DataRes_NavTabInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.tab_.~RepeatedPtrField();
 }
-
 void FrsPageResIdl_DataRes_NavTabInfo::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* FrsPageResIdl_DataRes_NavTabInfo::descriptor() {
-  ::protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const FrsPageResIdl_DataRes_NavTabInfo& FrsPageResIdl_DataRes_NavTabInfo::default_instance() {
-  ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes_NavTabInfo();
-  return *internal_default_instance();
-}
-
-FrsPageResIdl_DataRes_NavTabInfo* FrsPageResIdl_DataRes_NavTabInfo::New(::google::protobuf::Arena* arena) const {
-  FrsPageResIdl_DataRes_NavTabInfo* n = new FrsPageResIdl_DataRes_NavTabInfo;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void FrsPageResIdl_DataRes_NavTabInfo::Clear() {
+PROTOBUF_NOINLINE void FrsPageResIdl_DataRes_NavTabInfo::Clear() {
 // @@protoc_insertion_point(message_clear_start:FrsPageResIdl.DataRes.NavTabInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  tab_.Clear();
-  _internal_metadata_.Clear();
+  _internal_mutable_tab()->Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool FrsPageResIdl_DataRes_NavTabInfo::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:FrsPageResIdl.DataRes.NavTabInfo)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .FrsTabInfo tab = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_tab()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:FrsPageResIdl.DataRes.NavTabInfo)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:FrsPageResIdl.DataRes.NavTabInfo)
-  return false;
-#undef DO_
+const char* FrsPageResIdl_DataRes_NavTabInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void FrsPageResIdl_DataRes_NavTabInfo::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:FrsPageResIdl.DataRes.NavTabInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // repeated .FrsTabInfo tab = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tab_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->tab(static_cast<int>(i)), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> FrsPageResIdl_DataRes_NavTabInfo::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_FrsPageResIdl_DataRes_NavTabInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // repeated .FrsTabInfo tab = 1;
+    {::_pbi::TcParser::FastMtR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_NavTabInfo, _impl_.tab_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // repeated .FrsTabInfo tab = 1;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes_NavTabInfo, _impl_.tab_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::FrsTabInfo>()},
+  }}, {{
+  }},
+};
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:FrsPageResIdl.DataRes.NavTabInfo)
-}
-
-::google::protobuf::uint8* FrsPageResIdl_DataRes_NavTabInfo::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* FrsPageResIdl_DataRes_NavTabInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:FrsPageResIdl.DataRes.NavTabInfo)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // repeated .FrsTabInfo tab = 1;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tab_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_tab_size()); i < n; i++) {
+    const auto& repfield = this->_internal_tab().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, this->tab(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:FrsPageResIdl.DataRes.NavTabInfo)
   return target;
 }
 
-size_t FrsPageResIdl_DataRes_NavTabInfo::ByteSizeLong() const {
+::size_t FrsPageResIdl_DataRes_NavTabInfo::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:FrsPageResIdl.DataRes.NavTabInfo)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // repeated .FrsTabInfo tab = 1;
-  {
-    unsigned int count = static_cast<unsigned int>(this->tab_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->tab(static_cast<int>(i)));
-    }
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void FrsPageResIdl_DataRes_NavTabInfo::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:FrsPageResIdl.DataRes.NavTabInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  const FrsPageResIdl_DataRes_NavTabInfo* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const FrsPageResIdl_DataRes_NavTabInfo>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FrsPageResIdl.DataRes.NavTabInfo)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:FrsPageResIdl.DataRes.NavTabInfo)
-    MergeFrom(*source);
-  }
-}
-
-void FrsPageResIdl_DataRes_NavTabInfo::MergeFrom(const FrsPageResIdl_DataRes_NavTabInfo& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl.DataRes.NavTabInfo)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  tab_.MergeFrom(from.tab_);
+  // repeated .FrsTabInfo tab = 1;
+  total_size += 1UL * this->_internal_tab_size();
+  for (const auto& msg : this->_internal_tab()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+  }
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void FrsPageResIdl_DataRes_NavTabInfo::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:FrsPageResIdl.DataRes.NavTabInfo)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData FrsPageResIdl_DataRes_NavTabInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    FrsPageResIdl_DataRes_NavTabInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*FrsPageResIdl_DataRes_NavTabInfo::GetClassData() const { return &_class_data_; }
+
+
+void FrsPageResIdl_DataRes_NavTabInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<FrsPageResIdl_DataRes_NavTabInfo*>(&to_msg);
+  auto& from = static_cast<const FrsPageResIdl_DataRes_NavTabInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl.DataRes.NavTabInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_tab()->MergeFrom(from._internal_tab());
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void FrsPageResIdl_DataRes_NavTabInfo::CopyFrom(const FrsPageResIdl_DataRes_NavTabInfo& from) {
@@ -874,438 +686,352 @@ void FrsPageResIdl_DataRes_NavTabInfo::CopyFrom(const FrsPageResIdl_DataRes_NavT
   MergeFrom(from);
 }
 
-bool FrsPageResIdl_DataRes_NavTabInfo::IsInitialized() const {
+PROTOBUF_NOINLINE bool FrsPageResIdl_DataRes_NavTabInfo::IsInitialized() const {
   return true;
 }
 
-void FrsPageResIdl_DataRes_NavTabInfo::Swap(FrsPageResIdl_DataRes_NavTabInfo* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void FrsPageResIdl_DataRes_NavTabInfo::InternalSwap(FrsPageResIdl_DataRes_NavTabInfo* other) {
   using std::swap;
-  tab_.InternalSwap(&other->tab_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.tab_.InternalSwap(&other->_impl_.tab_);
 }
 
 ::google::protobuf::Metadata FrsPageResIdl_DataRes_NavTabInfo::GetMetadata() const {
-  protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_FrsPageResIdl_2eproto_getter, &descriptor_table_FrsPageResIdl_2eproto_once,
+      file_level_metadata_FrsPageResIdl_2eproto[1]);
 }
-
-
 // ===================================================================
 
-void FrsPageResIdl_DataRes::InitAsDefaultInstance() {
-  ::_FrsPageResIdl_DataRes_default_instance_._instance.get_mutable()->forum_ = const_cast< ::FrsPageResIdl_DataRes_ForumInfo*>(
-      ::FrsPageResIdl_DataRes_ForumInfo::internal_default_instance());
-  ::_FrsPageResIdl_DataRes_default_instance_._instance.get_mutable()->page_ = const_cast< ::Page*>(
-      ::Page::internal_default_instance());
-  ::_FrsPageResIdl_DataRes_default_instance_._instance.get_mutable()->nav_tab_info_ = const_cast< ::FrsPageResIdl_DataRes_NavTabInfo*>(
-      ::FrsPageResIdl_DataRes_NavTabInfo::internal_default_instance());
+class FrsPageResIdl_DataRes::_Internal {
+ public:
+  using HasBits = decltype(std::declval<FrsPageResIdl_DataRes>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_._has_bits_);
+  static const ::FrsPageResIdl_DataRes_ForumInfo& forum(const FrsPageResIdl_DataRes* msg);
+  static void set_has_forum(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::Page& page(const FrsPageResIdl_DataRes* msg);
+  static void set_has_page(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static const ::FrsPageResIdl_DataRes_NavTabInfo& nav_tab_info(const FrsPageResIdl_DataRes* msg);
+  static void set_has_nav_tab_info(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+};
+
+const ::FrsPageResIdl_DataRes_ForumInfo& FrsPageResIdl_DataRes::_Internal::forum(const FrsPageResIdl_DataRes* msg) {
+  return *msg->_impl_.forum_;
+}
+const ::Page& FrsPageResIdl_DataRes::_Internal::page(const FrsPageResIdl_DataRes* msg) {
+  return *msg->_impl_.page_;
+}
+const ::FrsPageResIdl_DataRes_NavTabInfo& FrsPageResIdl_DataRes::_Internal::nav_tab_info(const FrsPageResIdl_DataRes* msg) {
+  return *msg->_impl_.nav_tab_info_;
 }
 void FrsPageResIdl_DataRes::clear_page() {
-  if (GetArenaNoVirtual() == NULL && page_ != NULL) {
-    delete page_;
-  }
-  page_ = NULL;
+  if (_impl_.page_ != nullptr) _impl_.page_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 void FrsPageResIdl_DataRes::clear_thread_list() {
-  thread_list_.Clear();
+  _internal_mutable_thread_list()->Clear();
 }
 void FrsPageResIdl_DataRes::clear_user_list() {
-  user_list_.Clear();
+  _internal_mutable_user_list()->Clear();
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FrsPageResIdl_DataRes::kForumFieldNumber;
-const int FrsPageResIdl_DataRes::kPageFieldNumber;
-const int FrsPageResIdl_DataRes::kThreadListFieldNumber;
-const int FrsPageResIdl_DataRes::kUserListFieldNumber;
-const int FrsPageResIdl_DataRes::kNavTabInfoFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+FrsPageResIdl_DataRes::FrsPageResIdl_DataRes(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:FrsPageResIdl.DataRes)
+}
+FrsPageResIdl_DataRes::FrsPageResIdl_DataRes(const FrsPageResIdl_DataRes& from) : ::google::protobuf::Message() {
+  FrsPageResIdl_DataRes* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.thread_list_){from._impl_.thread_list_},
+      decltype(_impl_.user_list_){from._impl_.user_list_},
+      decltype(_impl_.forum_){nullptr},
+      decltype(_impl_.page_){nullptr},
+      decltype(_impl_.nav_tab_info_){nullptr},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.forum_ = new ::FrsPageResIdl_DataRes_ForumInfo(*from._impl_.forum_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.page_ = new ::Page(*from._impl_.page_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000004u) != 0) {
+    _this->_impl_.nav_tab_info_ = new ::FrsPageResIdl_DataRes_NavTabInfo(*from._impl_.nav_tab_info_);
+  }
 
-FrsPageResIdl_DataRes::FrsPageResIdl_DataRes()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:FrsPageResIdl.DataRes)
-}
-FrsPageResIdl_DataRes::FrsPageResIdl_DataRes(const FrsPageResIdl_DataRes& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      thread_list_(from.thread_list_),
-      user_list_(from.user_list_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_forum()) {
-    forum_ = new ::FrsPageResIdl_DataRes_ForumInfo(*from.forum_);
-  } else {
-    forum_ = NULL;
-  }
-  if (from.has_page()) {
-    page_ = new ::Page(*from.page_);
-  } else {
-    page_ = NULL;
-  }
-  if (from.has_nav_tab_info()) {
-    nav_tab_info_ = new ::FrsPageResIdl_DataRes_NavTabInfo(*from.nav_tab_info_);
-  } else {
-    nav_tab_info_ = NULL;
-  }
   // @@protoc_insertion_point(copy_constructor:FrsPageResIdl.DataRes)
 }
-
-void FrsPageResIdl_DataRes::SharedCtor() {
-  ::memset(&forum_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&nav_tab_info_) -
-      reinterpret_cast<char*>(&forum_)) + sizeof(nav_tab_info_));
-  _cached_size_ = 0;
+inline void FrsPageResIdl_DataRes::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.thread_list_){arena},
+      decltype(_impl_.user_list_){arena},
+      decltype(_impl_.forum_){nullptr},
+      decltype(_impl_.page_){nullptr},
+      decltype(_impl_.nav_tab_info_){nullptr},
+  };
 }
-
 FrsPageResIdl_DataRes::~FrsPageResIdl_DataRes() {
   // @@protoc_insertion_point(destructor:FrsPageResIdl.DataRes)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void FrsPageResIdl_DataRes::SharedDtor() {
-  if (this != internal_default_instance()) delete forum_;
-  if (this != internal_default_instance()) delete page_;
-  if (this != internal_default_instance()) delete nav_tab_info_;
+inline void FrsPageResIdl_DataRes::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.thread_list_.~RepeatedPtrField();
+  _impl_.user_list_.~RepeatedPtrField();
+  if (this != internal_default_instance()) delete _impl_.forum_;
+  if (this != internal_default_instance()) delete _impl_.page_;
+  if (this != internal_default_instance()) delete _impl_.nav_tab_info_;
 }
-
 void FrsPageResIdl_DataRes::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* FrsPageResIdl_DataRes::descriptor() {
-  ::protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const FrsPageResIdl_DataRes& FrsPageResIdl_DataRes::default_instance() {
-  ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl_DataRes();
-  return *internal_default_instance();
-}
-
-FrsPageResIdl_DataRes* FrsPageResIdl_DataRes::New(::google::protobuf::Arena* arena) const {
-  FrsPageResIdl_DataRes* n = new FrsPageResIdl_DataRes;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void FrsPageResIdl_DataRes::Clear() {
+PROTOBUF_NOINLINE void FrsPageResIdl_DataRes::Clear() {
 // @@protoc_insertion_point(message_clear_start:FrsPageResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  thread_list_.Clear();
-  user_list_.Clear();
-  if (GetArenaNoVirtual() == NULL && forum_ != NULL) {
-    delete forum_;
-  }
-  forum_ = NULL;
-  if (GetArenaNoVirtual() == NULL && page_ != NULL) {
-    delete page_;
-  }
-  page_ = NULL;
-  if (GetArenaNoVirtual() == NULL && nav_tab_info_ != NULL) {
-    delete nav_tab_info_;
-  }
-  nav_tab_info_ = NULL;
-  _internal_metadata_.Clear();
-}
-
-bool FrsPageResIdl_DataRes::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:FrsPageResIdl.DataRes)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .FrsPageResIdl.DataRes.ForumInfo forum = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_forum()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .Page page = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_page()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .ThreadInfo thread_list = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_thread_list()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .User user_list = 17;
-      case 17: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(138u /* 138 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_user_list()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .FrsPageResIdl.DataRes.NavTabInfo nav_tab_info = 37;
-      case 37: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 298 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_nav_tab_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  _internal_mutable_thread_list()->Clear();
+  _internal_mutable_user_list()->Clear();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.forum_ != nullptr);
+      _impl_.forum_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.page_ != nullptr);
+      _impl_.page_->Clear();
+    }
+    if (cached_has_bits & 0x00000004u) {
+      ABSL_DCHECK(_impl_.nav_tab_info_ != nullptr);
+      _impl_.nav_tab_info_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:FrsPageResIdl.DataRes)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:FrsPageResIdl.DataRes)
-  return false;
-#undef DO_
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void FrsPageResIdl_DataRes::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:FrsPageResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .FrsPageResIdl.DataRes.ForumInfo forum = 2;
-  if (this->has_forum()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->forum_, output);
-  }
-
-  // .Page page = 4;
-  if (this->has_page()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->page_, output);
-  }
-
-  // repeated .ThreadInfo thread_list = 7;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->thread_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, this->thread_list(static_cast<int>(i)), output);
-  }
-
-  // repeated .User user_list = 17;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->user_list_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      17, this->user_list(static_cast<int>(i)), output);
-  }
-
-  // .FrsPageResIdl.DataRes.NavTabInfo nav_tab_info = 37;
-  if (this->has_nav_tab_info()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      37, *this->nav_tab_info_, output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:FrsPageResIdl.DataRes)
+const char* FrsPageResIdl_DataRes::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* FrsPageResIdl_DataRes::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<3, 5, 5, 0, 7> FrsPageResIdl_DataRes::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_._has_bits_),
+    0, // no _extensions_
+    37, 56,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294901685,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    5,  // num_field_entries
+    5,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_FrsPageResIdl_DataRes_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // repeated .User user_list = 17;
+    {::_pbi::TcParser::FastMtR2,
+     {394, 63, 3, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.user_list_)}},
+    // .FrsPageResIdl.DataRes.ForumInfo forum = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.forum_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // .Page page = 4;
+    {::_pbi::TcParser::FastMtS1,
+     {34, 1, 1, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.page_)}},
+    // .FrsPageResIdl.DataRes.NavTabInfo nav_tab_info = 37;
+    {::_pbi::TcParser::FastMtS2,
+     {682, 2, 4, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.nav_tab_info_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // repeated .ThreadInfo thread_list = 7;
+    {::_pbi::TcParser::FastMtR1,
+     {58, 63, 2, PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.thread_list_)}},
+  }}, {{
+    37, 0, 1,
+    65534, 4,
+    65535, 65535
+  }}, {{
+    // .FrsPageResIdl.DataRes.ForumInfo forum = 2;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.forum_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .Page page = 4;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.page_), _Internal::kHasBitsOffset + 1, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .ThreadInfo thread_list = 7;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.thread_list_), -1, 2,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .User user_list = 17;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.user_list_), -1, 3,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .FrsPageResIdl.DataRes.NavTabInfo nav_tab_info = 37;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.nav_tab_info_), _Internal::kHasBitsOffset + 2, 4,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::FrsPageResIdl_DataRes_ForumInfo>()},
+    {::_pbi::TcParser::GetTable<::Page>()},
+    {::_pbi::TcParser::GetTable<::ThreadInfo>()},
+    {::_pbi::TcParser::GetTable<::User>()},
+    {::_pbi::TcParser::GetTable<::FrsPageResIdl_DataRes_NavTabInfo>()},
+  }}, {{
+  }},
+};
+
+::uint8_t* FrsPageResIdl_DataRes::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:FrsPageResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .FrsPageResIdl.DataRes.ForumInfo forum = 2;
-  if (this->has_forum()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, *this->forum_, deterministic, target);
+      InternalWriteMessage(2, _Internal::forum(this),
+        _Internal::forum(this).GetCachedSize(), target, stream);
   }
 
   // .Page page = 4;
-  if (this->has_page()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        4, *this->page_, deterministic, target);
+      InternalWriteMessage(4, _Internal::page(this),
+        _Internal::page(this).GetCachedSize(), target, stream);
   }
 
   // repeated .ThreadInfo thread_list = 7;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->thread_list_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_thread_list_size()); i < n; i++) {
+    const auto& repfield = this->_internal_thread_list().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        7, this->thread_list(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(7, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // repeated .User user_list = 17;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->user_list_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_user_list_size()); i < n; i++) {
+    const auto& repfield = this->_internal_user_list().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        17, this->user_list(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(17, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // .FrsPageResIdl.DataRes.NavTabInfo nav_tab_info = 37;
-  if (this->has_nav_tab_info()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        37, *this->nav_tab_info_, deterministic, target);
+      InternalWriteMessage(37, _Internal::nav_tab_info(this),
+        _Internal::nav_tab_info(this).GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:FrsPageResIdl.DataRes)
   return target;
 }
 
-size_t FrsPageResIdl_DataRes::ByteSizeLong() const {
+::size_t FrsPageResIdl_DataRes::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:FrsPageResIdl.DataRes)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // repeated .ThreadInfo thread_list = 7;
-  {
-    unsigned int count = static_cast<unsigned int>(this->thread_list_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->thread_list(static_cast<int>(i)));
-    }
-  }
-
-  // repeated .User user_list = 17;
-  {
-    unsigned int count = static_cast<unsigned int>(this->user_list_size());
-    total_size += 2UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->user_list(static_cast<int>(i)));
-    }
-  }
-
-  // .FrsPageResIdl.DataRes.ForumInfo forum = 2;
-  if (this->has_forum()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->forum_);
-  }
-
-  // .Page page = 4;
-  if (this->has_page()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->page_);
-  }
-
-  // .FrsPageResIdl.DataRes.NavTabInfo nav_tab_info = 37;
-  if (this->has_nav_tab_info()) {
-    total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->nav_tab_info_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void FrsPageResIdl_DataRes::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:FrsPageResIdl.DataRes)
-  GOOGLE_DCHECK_NE(&from, this);
-  const FrsPageResIdl_DataRes* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const FrsPageResIdl_DataRes>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FrsPageResIdl.DataRes)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:FrsPageResIdl.DataRes)
-    MergeFrom(*source);
-  }
-}
-
-void FrsPageResIdl_DataRes::MergeFrom(const FrsPageResIdl_DataRes& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl.DataRes)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  thread_list_.MergeFrom(from.thread_list_);
-  user_list_.MergeFrom(from.user_list_);
-  if (from.has_forum()) {
-    mutable_forum()->::FrsPageResIdl_DataRes_ForumInfo::MergeFrom(from.forum());
+  // repeated .ThreadInfo thread_list = 7;
+  total_size += 1UL * this->_internal_thread_list_size();
+  for (const auto& msg : this->_internal_thread_list()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-  if (from.has_page()) {
-    mutable_page()->::Page::MergeFrom(from.page());
+  // repeated .User user_list = 17;
+  total_size += 2UL * this->_internal_user_list_size();
+  for (const auto& msg : this->_internal_user_list()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-  if (from.has_nav_tab_info()) {
-    mutable_nav_tab_info()->::FrsPageResIdl_DataRes_NavTabInfo::MergeFrom(from.nav_tab_info());
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    // .FrsPageResIdl.DataRes.ForumInfo forum = 2;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.forum_);
+    }
+
+    // .Page page = 4;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.page_);
+    }
+
+    // .FrsPageResIdl.DataRes.NavTabInfo nav_tab_info = 37;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.nav_tab_info_);
+    }
+
   }
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void FrsPageResIdl_DataRes::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:FrsPageResIdl.DataRes)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData FrsPageResIdl_DataRes::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    FrsPageResIdl_DataRes::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*FrsPageResIdl_DataRes::GetClassData() const { return &_class_data_; }
+
+
+void FrsPageResIdl_DataRes::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<FrsPageResIdl_DataRes*>(&to_msg);
+  auto& from = static_cast<const FrsPageResIdl_DataRes&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl.DataRes)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_thread_list()->MergeFrom(from._internal_thread_list());
+  _this->_internal_mutable_user_list()->MergeFrom(from._internal_user_list());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_forum()->::FrsPageResIdl_DataRes_ForumInfo::MergeFrom(
+          from._internal_forum());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_page()->::Page::MergeFrom(
+          from._internal_page());
+    }
+    if (cached_has_bits & 0x00000004u) {
+      _this->_internal_mutable_nav_tab_info()->::FrsPageResIdl_DataRes_NavTabInfo::MergeFrom(
+          from._internal_nav_tab_info());
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void FrsPageResIdl_DataRes::CopyFrom(const FrsPageResIdl_DataRes& from) {
@@ -1315,306 +1041,255 @@ void FrsPageResIdl_DataRes::CopyFrom(const FrsPageResIdl_DataRes& from) {
   MergeFrom(from);
 }
 
-bool FrsPageResIdl_DataRes::IsInitialized() const {
+PROTOBUF_NOINLINE bool FrsPageResIdl_DataRes::IsInitialized() const {
   return true;
 }
 
-void FrsPageResIdl_DataRes::Swap(FrsPageResIdl_DataRes* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void FrsPageResIdl_DataRes::InternalSwap(FrsPageResIdl_DataRes* other) {
   using std::swap;
-  thread_list_.InternalSwap(&other->thread_list_);
-  user_list_.InternalSwap(&other->user_list_);
-  swap(forum_, other->forum_);
-  swap(page_, other->page_);
-  swap(nav_tab_info_, other->nav_tab_info_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.thread_list_.InternalSwap(&other->_impl_.thread_list_);
+  _impl_.user_list_.InternalSwap(&other->_impl_.user_list_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.nav_tab_info_)
+      + sizeof(FrsPageResIdl_DataRes::_impl_.nav_tab_info_)
+      - PROTOBUF_FIELD_OFFSET(FrsPageResIdl_DataRes, _impl_.forum_)>(
+          reinterpret_cast<char*>(&_impl_.forum_),
+          reinterpret_cast<char*>(&other->_impl_.forum_));
 }
 
 ::google::protobuf::Metadata FrsPageResIdl_DataRes::GetMetadata() const {
-  protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_FrsPageResIdl_2eproto_getter, &descriptor_table_FrsPageResIdl_2eproto_once,
+      file_level_metadata_FrsPageResIdl_2eproto[2]);
 }
-
-
 // ===================================================================
 
-void FrsPageResIdl::InitAsDefaultInstance() {
-  ::_FrsPageResIdl_default_instance_._instance.get_mutable()->error_ = const_cast< ::Error*>(
-      ::Error::internal_default_instance());
-  ::_FrsPageResIdl_default_instance_._instance.get_mutable()->data_ = const_cast< ::FrsPageResIdl_DataRes*>(
-      ::FrsPageResIdl_DataRes::internal_default_instance());
+class FrsPageResIdl::_Internal {
+ public:
+  using HasBits = decltype(std::declval<FrsPageResIdl>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_._has_bits_);
+  static const ::Error& error(const FrsPageResIdl* msg);
+  static void set_has_error(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::FrsPageResIdl_DataRes& data(const FrsPageResIdl* msg);
+  static void set_has_data(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+};
+
+const ::Error& FrsPageResIdl::_Internal::error(const FrsPageResIdl* msg) {
+  return *msg->_impl_.error_;
+}
+const ::FrsPageResIdl_DataRes& FrsPageResIdl::_Internal::data(const FrsPageResIdl* msg) {
+  return *msg->_impl_.data_;
 }
 void FrsPageResIdl::clear_error() {
-  if (GetArenaNoVirtual() == NULL && error_ != NULL) {
-    delete error_;
-  }
-  error_ = NULL;
+  if (_impl_.error_ != nullptr) _impl_.error_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FrsPageResIdl::kErrorFieldNumber;
-const int FrsPageResIdl::kDataFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+FrsPageResIdl::FrsPageResIdl(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:FrsPageResIdl)
+}
+FrsPageResIdl::FrsPageResIdl(const FrsPageResIdl& from) : ::google::protobuf::Message() {
+  FrsPageResIdl* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.error_){nullptr},
+      decltype(_impl_.data_){nullptr},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.error_ = new ::Error(*from._impl_.error_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.data_ = new ::FrsPageResIdl_DataRes(*from._impl_.data_);
+  }
 
-FrsPageResIdl::FrsPageResIdl()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:FrsPageResIdl)
-}
-FrsPageResIdl::FrsPageResIdl(const FrsPageResIdl& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_error()) {
-    error_ = new ::Error(*from.error_);
-  } else {
-    error_ = NULL;
-  }
-  if (from.has_data()) {
-    data_ = new ::FrsPageResIdl_DataRes(*from.data_);
-  } else {
-    data_ = NULL;
-  }
   // @@protoc_insertion_point(copy_constructor:FrsPageResIdl)
 }
-
-void FrsPageResIdl::SharedCtor() {
-  ::memset(&error_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&data_) -
-      reinterpret_cast<char*>(&error_)) + sizeof(data_));
-  _cached_size_ = 0;
+inline void FrsPageResIdl::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.error_){nullptr},
+      decltype(_impl_.data_){nullptr},
+  };
 }
-
 FrsPageResIdl::~FrsPageResIdl() {
   // @@protoc_insertion_point(destructor:FrsPageResIdl)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void FrsPageResIdl::SharedDtor() {
-  if (this != internal_default_instance()) delete error_;
-  if (this != internal_default_instance()) delete data_;
+inline void FrsPageResIdl::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.error_;
+  if (this != internal_default_instance()) delete _impl_.data_;
 }
-
 void FrsPageResIdl::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* FrsPageResIdl::descriptor() {
-  ::protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const FrsPageResIdl& FrsPageResIdl::default_instance() {
-  ::protobuf_FrsPageResIdl_2eproto::InitDefaultsFrsPageResIdl();
-  return *internal_default_instance();
-}
-
-FrsPageResIdl* FrsPageResIdl::New(::google::protobuf::Arena* arena) const {
-  FrsPageResIdl* n = new FrsPageResIdl;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void FrsPageResIdl::Clear() {
+PROTOBUF_NOINLINE void FrsPageResIdl::Clear() {
 // @@protoc_insertion_point(message_clear_start:FrsPageResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && error_ != NULL) {
-    delete error_;
-  }
-  error_ = NULL;
-  if (GetArenaNoVirtual() == NULL && data_ != NULL) {
-    delete data_;
-  }
-  data_ = NULL;
-  _internal_metadata_.Clear();
-}
-
-bool FrsPageResIdl::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:FrsPageResIdl)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .Error error = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_error()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .FrsPageResIdl.DataRes data = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_data()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.error_ != nullptr);
+      _impl_.error_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.data_ != nullptr);
+      _impl_.data_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:FrsPageResIdl)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:FrsPageResIdl)
-  return false;
-#undef DO_
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void FrsPageResIdl::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:FrsPageResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .Error error = 1;
-  if (this->has_error()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->error_, output);
-  }
-
-  // .FrsPageResIdl.DataRes data = 2;
-  if (this->has_data()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->data_, output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:FrsPageResIdl)
+const char* FrsPageResIdl::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* FrsPageResIdl::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 2, 0, 2> FrsPageResIdl::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    2,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_FrsPageResIdl_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // .FrsPageResIdl.DataRes data = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 1, 1, PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_.data_)}},
+    // .Error error = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_.error_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .Error error = 1;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_.error_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .FrsPageResIdl.DataRes data = 2;
+    {PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_.data_), _Internal::kHasBitsOffset + 1, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::Error>()},
+    {::_pbi::TcParser::GetTable<::FrsPageResIdl_DataRes>()},
+  }}, {{
+  }},
+};
+
+::uint8_t* FrsPageResIdl::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:FrsPageResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .Error error = 1;
-  if (this->has_error()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, *this->error_, deterministic, target);
+      InternalWriteMessage(1, _Internal::error(this),
+        _Internal::error(this).GetCachedSize(), target, stream);
   }
 
   // .FrsPageResIdl.DataRes data = 2;
-  if (this->has_data()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, *this->data_, deterministic, target);
+      InternalWriteMessage(2, _Internal::data(this),
+        _Internal::data(this).GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:FrsPageResIdl)
   return target;
 }
 
-size_t FrsPageResIdl::ByteSizeLong() const {
+::size_t FrsPageResIdl::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:FrsPageResIdl)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // .Error error = 1;
-  if (this->has_error()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->error_);
-  }
-
-  // .FrsPageResIdl.DataRes data = 2;
-  if (this->has_data()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->data_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void FrsPageResIdl::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:FrsPageResIdl)
-  GOOGLE_DCHECK_NE(&from, this);
-  const FrsPageResIdl* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const FrsPageResIdl>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:FrsPageResIdl)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:FrsPageResIdl)
-    MergeFrom(*source);
-  }
-}
-
-void FrsPageResIdl::MergeFrom(const FrsPageResIdl& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (from.has_error()) {
-    mutable_error()->::Error::MergeFrom(from.error());
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // .Error error = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.error_);
+    }
+
+    // .FrsPageResIdl.DataRes data = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.data_);
+    }
+
   }
-  if (from.has_data()) {
-    mutable_data()->::FrsPageResIdl_DataRes::MergeFrom(from.data());
-  }
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void FrsPageResIdl::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:FrsPageResIdl)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData FrsPageResIdl::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    FrsPageResIdl::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*FrsPageResIdl::GetClassData() const { return &_class_data_; }
+
+
+void FrsPageResIdl::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<FrsPageResIdl*>(&to_msg);
+  auto& from = static_cast<const FrsPageResIdl&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:FrsPageResIdl)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_error()->::Error::MergeFrom(
+          from._internal_error());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_data()->::FrsPageResIdl_DataRes::MergeFrom(
+          from._internal_data());
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void FrsPageResIdl::CopyFrom(const FrsPageResIdl& from) {
@@ -1624,28 +1299,31 @@ void FrsPageResIdl::CopyFrom(const FrsPageResIdl& from) {
   MergeFrom(from);
 }
 
-bool FrsPageResIdl::IsInitialized() const {
+PROTOBUF_NOINLINE bool FrsPageResIdl::IsInitialized() const {
   return true;
 }
 
-void FrsPageResIdl::Swap(FrsPageResIdl* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void FrsPageResIdl::InternalSwap(FrsPageResIdl* other) {
   using std::swap;
-  swap(error_, other->error_);
-  swap(data_, other->data_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_.data_)
+      + sizeof(FrsPageResIdl::_impl_.data_)
+      - PROTOBUF_FIELD_OFFSET(FrsPageResIdl, _impl_.error_)>(
+          reinterpret_cast<char*>(&_impl_.error_),
+          reinterpret_cast<char*>(&other->_impl_.error_));
 }
 
 ::google::protobuf::Metadata FrsPageResIdl::GetMetadata() const {
-  protobuf_FrsPageResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_FrsPageResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_FrsPageResIdl_2eproto_getter, &descriptor_table_FrsPageResIdl_2eproto_once,
+      file_level_metadata_FrsPageResIdl_2eproto[3]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

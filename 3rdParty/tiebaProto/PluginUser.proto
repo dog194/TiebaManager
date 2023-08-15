@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message PluginUser {
+    int64 user_id = 1;
+    string user_name_show = 2;
+    int32 user_type = 3;
+    string user_photo = 4;
+    int32 is_download_card_whiteuser = 5;
+}

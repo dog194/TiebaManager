@@ -4,653 +4,577 @@
 #include "SubPostList.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class SubPostListDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<SubPostList>
-      _instance;
-} _SubPostList_default_instance_;
-namespace protobuf_SubPostList_2eproto {
-void InitDefaultsSubPostListImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_PbContent_2eproto::InitDefaultsPbContent();
-  protobuf_User_2eproto::InitDefaultsUser();
-  protobuf_Agree_2eproto::InitDefaultsAgree();
-  {
-    void* ptr = &::_SubPostList_default_instance_;
-    new (ptr) ::SubPostList();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::SubPostList::InitAsDefaultInstance();
-}
-
-void InitDefaultsSubPostList() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSubPostListImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[1];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, content_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, time_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, author_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, title_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, floor_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, author_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SubPostList, agree_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::SubPostList)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_SubPostList_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "SubPostList.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\021SubPostList.proto\032\017PbContent.proto\032\nUs"
-      "er.proto\032\013Agree.proto\"\243\001\n\013SubPostList\022\n\n"
-      "\002id\030\001 \001(\003\022\033\n\007content\030\002 \003(\0132\n.PbContent\022\014"
-      "\n\004time\030\003 \001(\r\022\021\n\tauthor_id\030\004 \001(\003\022\r\n\005title"
-      "\030\005 \001(\t\022\r\n\005floor\030\006 \001(\r\022\025\n\006author\030\007 \001(\0132\005."
-      "User\022\025\n\005agree\030\t \001(\0132\006.Agreeb\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR SubPostList::SubPostList(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.content_)*/ {},
+      /*decltype(_impl_.title_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.author_)*/ nullptr,
+      /*decltype(_impl_.agree_)*/ nullptr,
+      /*decltype(_impl_.id_)*/ ::int64_t{0},
+      /*decltype(_impl_.author_id_)*/ ::int64_t{0},
+      /*decltype(_impl_.time_)*/ 0u,
+      /*decltype(_impl_.floor_)*/ 0u,
+      /*decltype(_impl_.is_giftpost_)*/ 0,
+    } {}
+struct SubPostListDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SubPostListDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SubPostListDefaultTypeInternal() {}
+  union {
+    SubPostList _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 235);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "SubPostList.proto", &protobuf_RegisterTypes);
-  ::protobuf_PbContent_2eproto::AddDescriptors();
-  ::protobuf_User_2eproto::AddDescriptors();
-  ::protobuf_Agree_2eproto::AddDescriptors();
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_SubPostList_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SubPostListDefaultTypeInternal _SubPostList_default_instance_;
+static ::_pb::Metadata file_level_metadata_SubPostList_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_SubPostList_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_SubPostList_2eproto = nullptr;
+const ::uint32_t TableStruct_SubPostList_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.id_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.content_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.time_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.author_id_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.title_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.floor_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.author_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.is_giftpost_),
+    PROTOBUF_FIELD_OFFSET(::SubPostList, _impl_.agree_),
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    0,
+    ~0u,
+    1,
+};
 
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, 17, -1, sizeof(::SubPostList)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_SubPostList_default_instance_._instance,
+};
+const char descriptor_table_protodef_SubPostList_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\021SubPostList.proto\032\017PbContent.proto\032\nUs"
+    "er.proto\032\013Agree.proto\"\270\001\n\013SubPostList\022\n\n"
+    "\002id\030\001 \001(\003\022\033\n\007content\030\002 \003(\0132\n.PbContent\022\014"
+    "\n\004time\030\003 \001(\r\022\021\n\tauthor_id\030\004 \001(\003\022\r\n\005title"
+    "\030\005 \001(\t\022\r\n\005floor\030\006 \001(\r\022\025\n\006author\030\007 \001(\0132\005."
+    "User\022\023\n\013is_giftpost\030\010 \001(\005\022\025\n\005agree\030\t \001(\013"
+    "2\006.Agreeb\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_SubPostList_2eproto_deps[3] =
+    {
+        &::descriptor_table_Agree_2eproto,
+        &::descriptor_table_PbContent_2eproto,
+        &::descriptor_table_User_2eproto,
+};
+static ::absl::once_flag descriptor_table_SubPostList_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_SubPostList_2eproto = {
+    false,
+    false,
+    256,
+    descriptor_table_protodef_SubPostList_2eproto,
+    "SubPostList.proto",
+    &descriptor_table_SubPostList_2eproto_once,
+    descriptor_table_SubPostList_2eproto_deps,
+    3,
+    1,
+    schemas,
+    file_default_instances,
+    TableStruct_SubPostList_2eproto::offsets,
+    file_level_metadata_SubPostList_2eproto,
+    file_level_enum_descriptors_SubPostList_2eproto,
+    file_level_service_descriptors_SubPostList_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_SubPostList_2eproto_getter() {
+  return &descriptor_table_SubPostList_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_SubPostList_2eproto(&descriptor_table_SubPostList_2eproto);
 // ===================================================================
 
-void SubPostList::InitAsDefaultInstance() {
-  ::_SubPostList_default_instance_._instance.get_mutable()->author_ = const_cast< ::User*>(
-      ::User::internal_default_instance());
-  ::_SubPostList_default_instance_._instance.get_mutable()->agree_ = const_cast< ::Agree*>(
-      ::Agree::internal_default_instance());
+class SubPostList::_Internal {
+ public:
+  using HasBits = decltype(std::declval<SubPostList>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(SubPostList, _impl_._has_bits_);
+  static const ::User& author(const SubPostList* msg);
+  static void set_has_author(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::Agree& agree(const SubPostList* msg);
+  static void set_has_agree(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+};
+
+const ::User& SubPostList::_Internal::author(const SubPostList* msg) {
+  return *msg->_impl_.author_;
+}
+const ::Agree& SubPostList::_Internal::agree(const SubPostList* msg) {
+  return *msg->_impl_.agree_;
 }
 void SubPostList::clear_content() {
-  content_.Clear();
+  _internal_mutable_content()->Clear();
 }
 void SubPostList::clear_author() {
-  if (GetArenaNoVirtual() == NULL && author_ != NULL) {
-    delete author_;
-  }
-  author_ = NULL;
+  if (_impl_.author_ != nullptr) _impl_.author_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 void SubPostList::clear_agree() {
-  if (GetArenaNoVirtual() == NULL && agree_ != NULL) {
-    delete agree_;
-  }
-  agree_ = NULL;
+  if (_impl_.agree_ != nullptr) _impl_.agree_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SubPostList::kIdFieldNumber;
-const int SubPostList::kContentFieldNumber;
-const int SubPostList::kTimeFieldNumber;
-const int SubPostList::kAuthorIdFieldNumber;
-const int SubPostList::kTitleFieldNumber;
-const int SubPostList::kFloorFieldNumber;
-const int SubPostList::kAuthorFieldNumber;
-const int SubPostList::kAgreeFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+SubPostList::SubPostList(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:SubPostList)
+}
+SubPostList::SubPostList(const SubPostList& from) : ::google::protobuf::Message() {
+  SubPostList* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.content_){from._impl_.content_},
+      decltype(_impl_.title_){},
+      decltype(_impl_.author_){nullptr},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.id_){},
+      decltype(_impl_.author_id_){},
+      decltype(_impl_.time_){},
+      decltype(_impl_.floor_){},
+      decltype(_impl_.is_giftpost_){},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_title().empty()) {
+    _this->_impl_.title_.Set(from._internal_title(), _this->GetArenaForAllocation());
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.author_ = new ::User(*from._impl_.author_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+  }
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.is_giftpost_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.is_giftpost_));
 
-SubPostList::SubPostList()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SubPostList_2eproto::InitDefaultsSubPostList();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:SubPostList)
-}
-SubPostList::SubPostList(const SubPostList& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      content_(from.content_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.title().size() > 0) {
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
-  }
-  if (from.has_author()) {
-    author_ = new ::User(*from.author_);
-  } else {
-    author_ = NULL;
-  }
-  if (from.has_agree()) {
-    agree_ = new ::Agree(*from.agree_);
-  } else {
-    agree_ = NULL;
-  }
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&floor_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(floor_));
   // @@protoc_insertion_point(copy_constructor:SubPostList)
 }
-
-void SubPostList::SharedCtor() {
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&author_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&floor_) -
-      reinterpret_cast<char*>(&author_)) + sizeof(floor_));
-  _cached_size_ = 0;
+inline void SubPostList::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.content_){arena},
+      decltype(_impl_.title_){},
+      decltype(_impl_.author_){nullptr},
+      decltype(_impl_.agree_){nullptr},
+      decltype(_impl_.id_){::int64_t{0}},
+      decltype(_impl_.author_id_){::int64_t{0}},
+      decltype(_impl_.time_){0u},
+      decltype(_impl_.floor_){0u},
+      decltype(_impl_.is_giftpost_){0},
+  };
+  _impl_.title_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.title_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 SubPostList::~SubPostList() {
   // @@protoc_insertion_point(destructor:SubPostList)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void SubPostList::SharedDtor() {
-  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete author_;
-  if (this != internal_default_instance()) delete agree_;
+inline void SubPostList::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.content_.~RepeatedPtrField();
+  _impl_.title_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.author_;
+  if (this != internal_default_instance()) delete _impl_.agree_;
 }
-
 void SubPostList::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SubPostList::descriptor() {
-  ::protobuf_SubPostList_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SubPostList_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const SubPostList& SubPostList::default_instance() {
-  ::protobuf_SubPostList_2eproto::InitDefaultsSubPostList();
-  return *internal_default_instance();
-}
-
-SubPostList* SubPostList::New(::google::protobuf::Arena* arena) const {
-  SubPostList* n = new SubPostList;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void SubPostList::Clear() {
+PROTOBUF_NOINLINE void SubPostList::Clear() {
 // @@protoc_insertion_point(message_clear_start:SubPostList)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  content_.Clear();
-  title_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && author_ != NULL) {
-    delete author_;
-  }
-  author_ = NULL;
-  if (GetArenaNoVirtual() == NULL && agree_ != NULL) {
-    delete agree_;
-  }
-  agree_ = NULL;
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&floor_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(floor_));
-  _internal_metadata_.Clear();
-}
-
-bool SubPostList::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SubPostList)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .PbContent content = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_content()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // uint32 time = 3;
-      case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &time_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int64 author_id = 4;
-      case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &author_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string title = 5;
-      case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_title()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->title().data(), static_cast<int>(this->title().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "SubPostList.title"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // uint32 floor = 6;
-      case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &floor_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .User author = 7;
-      case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_author()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .Agree agree = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_agree()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  _internal_mutable_content()->Clear();
+  _impl_.title_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.author_ != nullptr);
+      _impl_.author_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.agree_ != nullptr);
+      _impl_.agree_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:SubPostList)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:SubPostList)
-  return false;
-#undef DO_
+  ::memset(&_impl_.id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.is_giftpost_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.is_giftpost_));
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void SubPostList::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SubPostList)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // int64 id = 1;
-  if (this->id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
-  }
-
-  // repeated .PbContent content = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->content(static_cast<int>(i)), output);
-  }
-
-  // uint32 time = 3;
-  if (this->time() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->time(), output);
-  }
-
-  // int64 author_id = 4;
-  if (this->author_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->author_id(), output);
-  }
-
-  // string title = 5;
-  if (this->title().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "SubPostList.title");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->title(), output);
-  }
-
-  // uint32 floor = 6;
-  if (this->floor() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(6, this->floor(), output);
-  }
-
-  // .User author = 7;
-  if (this->has_author()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->author_, output);
-  }
-
-  // .Agree agree = 9;
-  if (this->has_agree()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, *this->agree_, output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:SubPostList)
+const char* SubPostList::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* SubPostList::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<4, 9, 3, 33, 2> SubPostList::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(SubPostList, _impl_._has_bits_),
+    0, // no _extensions_
+    9, 120,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294966784,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    9,  // num_field_entries
+    3,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_SubPostList_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(SubPostList, _impl_.id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.id_)}},
+    // repeated .PbContent content = 2;
+    {::_pbi::TcParser::FastMtR1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.content_)}},
+    // uint32 time = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SubPostList, _impl_.time_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.time_)}},
+    // int64 author_id = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(SubPostList, _impl_.author_id_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.author_id_)}},
+    // string title = 5;
+    {::_pbi::TcParser::FastUS1,
+     {42, 63, 0, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.title_)}},
+    // uint32 floor = 6;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SubPostList, _impl_.floor_), 63>(),
+     {48, 63, 0, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.floor_)}},
+    // .User author = 7;
+    {::_pbi::TcParser::FastMtS1,
+     {58, 0, 1, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.author_)}},
+    // int32 is_giftpost = 8;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SubPostList, _impl_.is_giftpost_), 63>(),
+     {64, 63, 0, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.is_giftpost_)}},
+    // .Agree agree = 9;
+    {::_pbi::TcParser::FastMtS1,
+     {74, 1, 2, PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.agree_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int64 id = 1;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // repeated .PbContent content = 2;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.content_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // uint32 time = 3;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.time_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // int64 author_id = 4;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.author_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // string title = 5;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.title_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // uint32 floor = 6;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.floor_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+    // .User author = 7;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.author_), _Internal::kHasBitsOffset + 0, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // int32 is_giftpost = 8;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.is_giftpost_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .Agree agree = 9;
+    {PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.agree_), _Internal::kHasBitsOffset + 1, 2,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::PbContent>()},
+    {::_pbi::TcParser::GetTable<::User>()},
+    {::_pbi::TcParser::GetTable<::Agree>()},
+  }}, {{
+    "\13\0\0\0\0\5\0\0\0\0\0\0\0\0\0\0"
+    "SubPostList"
+    "title"
+  }},
+};
+
+::uint8_t* SubPostList::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:SubPostList)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  if (this->_internal_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<1>(
+            stream, this->_internal_id(), target);
   }
 
   // repeated .PbContent content = 2;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->content_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_content_size()); i < n; i++) {
+    const auto& repfield = this->_internal_content().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, this->content(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // uint32 time = 3;
-  if (this->time() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->time(), target);
+  if (this->_internal_time() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        3, this->_internal_time(), target);
   }
 
   // int64 author_id = 4;
-  if (this->author_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->author_id(), target);
+  if (this->_internal_author_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<4>(
+            stream, this->_internal_author_id(), target);
   }
 
   // string title = 5;
-  if (this->title().size() > 0) {
+  if (!this->_internal_title().empty()) {
+    const std::string& _s = this->_internal_title();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "SubPostList.title");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        5, this->title(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "SubPostList.title");
+    target = stream->WriteStringMaybeAliased(5, _s, target);
   }
 
   // uint32 floor = 6;
-  if (this->floor() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(6, this->floor(), target);
+  if (this->_internal_floor() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        6, this->_internal_floor(), target);
   }
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .User author = 7;
-  if (this->has_author()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        7, *this->author_, deterministic, target);
+      InternalWriteMessage(7, _Internal::author(this),
+        _Internal::author(this).GetCachedSize(), target, stream);
+  }
+
+  // int32 is_giftpost = 8;
+  if (this->_internal_is_giftpost() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<8>(
+            stream, this->_internal_is_giftpost(), target);
   }
 
   // .Agree agree = 9;
-  if (this->has_agree()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        9, *this->agree_, deterministic, target);
+      InternalWriteMessage(9, _Internal::agree(this),
+        _Internal::agree(this).GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:SubPostList)
   return target;
 }
 
-size_t SubPostList::ByteSizeLong() const {
+::size_t SubPostList::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:SubPostList)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .PbContent content = 2;
-  {
-    unsigned int count = static_cast<unsigned int>(this->content_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->content(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_content_size();
+  for (const auto& msg : this->_internal_content()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // string title = 5;
-  if (this->title().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->title());
+  if (!this->_internal_title().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_title());
   }
 
-  // .User author = 7;
-  if (this->has_author()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->author_);
-  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // .User author = 7;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.author_);
+    }
 
-  // .Agree agree = 9;
-  if (this->has_agree()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->agree_);
-  }
+    // .Agree agree = 9;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.agree_);
+    }
 
+  }
   // int64 id = 1;
-  if (this->id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->id());
+  if (this->_internal_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_id());
   }
 
   // int64 author_id = 4;
-  if (this->author_id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->author_id());
+  if (this->_internal_author_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_author_id());
   }
 
   // uint32 time = 3;
-  if (this->time() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->time());
+  if (this->_internal_time() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_time());
   }
 
   // uint32 floor = 6;
-  if (this->floor() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->floor());
+  if (this->_internal_floor() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_floor());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void SubPostList::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SubPostList)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SubPostList* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SubPostList>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SubPostList)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SubPostList)
-    MergeFrom(*source);
+  // int32 is_giftpost = 8;
+  if (this->_internal_is_giftpost() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_is_giftpost());
   }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void SubPostList::MergeFrom(const SubPostList& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SubPostList)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+const ::google::protobuf::Message::ClassData SubPostList::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    SubPostList::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*SubPostList::GetClassData() const { return &_class_data_; }
+
+
+void SubPostList::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<SubPostList*>(&to_msg);
+  auto& from = static_cast<const SubPostList&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:SubPostList)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  content_.MergeFrom(from.content_);
-  if (from.title().size() > 0) {
-
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+  _this->_internal_mutable_content()->MergeFrom(from._internal_content());
+  if (!from._internal_title().empty()) {
+    _this->_internal_set_title(from._internal_title());
   }
-  if (from.has_author()) {
-    mutable_author()->::User::MergeFrom(from.author());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_author()->::User::MergeFrom(
+          from._internal_author());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_agree()->::Agree::MergeFrom(
+          from._internal_agree());
+    }
   }
-  if (from.has_agree()) {
-    mutable_agree()->::Agree::MergeFrom(from.agree());
+  if (from._internal_id() != 0) {
+    _this->_internal_set_id(from._internal_id());
   }
-  if (from.id() != 0) {
-    set_id(from.id());
+  if (from._internal_author_id() != 0) {
+    _this->_internal_set_author_id(from._internal_author_id());
   }
-  if (from.author_id() != 0) {
-    set_author_id(from.author_id());
+  if (from._internal_time() != 0) {
+    _this->_internal_set_time(from._internal_time());
   }
-  if (from.time() != 0) {
-    set_time(from.time());
+  if (from._internal_floor() != 0) {
+    _this->_internal_set_floor(from._internal_floor());
   }
-  if (from.floor() != 0) {
-    set_floor(from.floor());
+  if (from._internal_is_giftpost() != 0) {
+    _this->_internal_set_is_giftpost(from._internal_is_giftpost());
   }
-}
-
-void SubPostList::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SubPostList)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void SubPostList::CopyFrom(const SubPostList& from) {
@@ -660,34 +584,36 @@ void SubPostList::CopyFrom(const SubPostList& from) {
   MergeFrom(from);
 }
 
-bool SubPostList::IsInitialized() const {
+PROTOBUF_NOINLINE bool SubPostList::IsInitialized() const {
   return true;
 }
 
-void SubPostList::Swap(SubPostList* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void SubPostList::InternalSwap(SubPostList* other) {
   using std::swap;
-  content_.InternalSwap(&other->content_);
-  title_.Swap(&other->title_);
-  swap(author_, other->author_);
-  swap(agree_, other->agree_);
-  swap(id_, other->id_);
-  swap(author_id_, other->author_id_);
-  swap(time_, other->time_);
-  swap(floor_, other->floor_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.content_.InternalSwap(&other->_impl_.content_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.title_, lhs_arena,
+                                       &other->_impl_.title_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.is_giftpost_)
+      + sizeof(SubPostList::_impl_.is_giftpost_)
+      - PROTOBUF_FIELD_OFFSET(SubPostList, _impl_.author_)>(
+          reinterpret_cast<char*>(&_impl_.author_),
+          reinterpret_cast<char*>(&other->_impl_.author_));
 }
 
 ::google::protobuf::Metadata SubPostList::GetMetadata() const {
-  protobuf_SubPostList_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SubPostList_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_SubPostList_2eproto_getter, &descriptor_table_SubPostList_2eproto_once,
+      file_level_metadata_SubPostList_2eproto[0]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"
