@@ -290,7 +290,7 @@ void CTBMScan::ScanPostThread(int threadID)
 
 			// 扫描帖子页
 			int iPageCount = _ttoi(addition.pageCount);
-			BOOL res = ScanPostPage(thread, 1, hasHistoryReply, 0, addition.src, threadID); // 扫描第一页
+			BOOL res = ScanPostPage(thread, 1, hasHistoryReply, 0, addition.src, threadID, addition.srcA); // 扫描第一页
 			if (iPageCount > 1 && !m_stopScanFlag)
 				res = ScanPostPage(thread, iPageCount, hasHistoryReply, 0, _T(""), threadID); // 从最后一页扫描
 
@@ -317,7 +317,7 @@ ScanPostThreadEnd:
 
 // 扫描帖子页
 BOOL CTBMScan::ScanPostPage(const TapiThreadInfo& thread, int page, BOOL hasHistoryReply,
-	int ScanedCount, const CString& src, int threadID)
+	int ScanedCount, const CString& src, int threadID, const CStringA& srcA)
 {
 	BOOL pass = TRUE;
 	g_scanPostPageEvent(threadID, thread, page, pass);
@@ -331,10 +331,10 @@ BOOL CTBMScan::ScanPostPage(const TapiThreadInfo& thread, int page, BOOL hasHist
 	std::vector<PostInfo> posts;
 	std::vector<LzlInfo> lzls;
 	TiebaClawer::GetPostsResult res;
-	if (src == _T(""))
+	if (srcA == "")
 		res = TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), thread.tid, sPage, posts, lzls);
 	else
-		res = TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), thread.tid, sPage, src, posts, lzls);
+		res = TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), thread.tid, sPage, src, posts, lzls, NULL, srcA);
 	switch (res)
 	{
 	case TiebaClawer::GET_POSTS_TIMEOUT:

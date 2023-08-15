@@ -36,6 +36,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "TiebaProto/PbPageReqIdl.pb.h"
 #include "TiebaProto/PbPageResIdl.pb.h"
 #include "TiebaProto/PbContent.pb.h"
+#include "TiebaProto/PollInfo.pb.h"
 #include "TiebaProto/TiebaPlusInfo.pb.h"
 #include "TiebaProto/User.pb.h"
 
@@ -126,7 +127,7 @@ BOOL TiebaClawerClient::GetThreads(const CString& forumName, const CString& igno
 }
 
 TiebaClawer::GetPostsResult TiebaClawerClient::GetPosts(const CString& fid, const CString& tid, const CString& page,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const bool useAceLzl)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
 {
 	CString data;
 	data.Format(_T("_client_type=2&_client_version=7.0.0&back=0&floor_rn=3&from=tieba&kz=%s&mark=0&net_type=1&pn=%s&rn=30&st_type=tb_bookmarklist&with_floor=1"), 
@@ -754,7 +755,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 }
 
 TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& fid, const CString& tid, const CString& page,
-	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const bool useAceLzl)
+	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition)
 {
 	// 请求构造
 	PbPageReqIdl pbReq;
@@ -1082,6 +1083,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		CString tmp;
 		tmp.Format(_T("%d"), pbPage->total_page());
 		addition->src = src;
+		addition->srcA = srcA;
 		addition->fid = fid;
 		addition->pageCount = tmp;
 	}

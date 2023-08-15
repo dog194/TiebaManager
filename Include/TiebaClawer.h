@@ -156,6 +156,7 @@ class AdditionalThreadInfo
 {
 public:
 	CString src;        // 主题源码
+	CStringA srcA;		// 主题源码A
 	CString fid;        // 贴吧ID
 	CString pageCount;  // 页数
 };
@@ -167,7 +168,7 @@ public:
 	virtual BOOL GetThreads(const CString& forumName, const CString& ignoreThread, std::vector<TapiThreadInfo>& threads) = 0;
 	enum GetPostsResult { GET_POSTS_SUCCESS, GET_POSTS_TIMEOUT, GET_POSTS_DELETED };
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, std::vector<PostInfo>& posts, 
-		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const bool useAceLzl = false) = 0;
+		std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL) = 0;
 	virtual GetPostsResult GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src, 
 		std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition = NULL, const CStringA& srcA = "") = 0;
 };
