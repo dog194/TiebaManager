@@ -124,6 +124,10 @@ void CLoopBanInputDlg::OnEnKillfocusEditPortrait()
 	// 输入验证
 	m_edit_portrait.GetWindowText(tmp);
 	m_edit_uid.GetWindowText(tmpU_ori);
+	if (tmp == _T("")) {
+		// 无数据，不触发验证
+		return;
+	}
 	if (tmp.GetLength() > PORT_LEN_MAX) {
 		m_static_portrait.SetWindowTextW(_T("		 头像ID长度超过，如果复制正确，请到群里反馈"));
 		m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度超过，如果复制正确，请到群里反馈"), TTI_NONE);

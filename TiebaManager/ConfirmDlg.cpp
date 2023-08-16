@@ -270,7 +270,6 @@ void CConfirmDlg::OnBnClickedButtonAddBl()
 {
 	if (m_operation == NULL)
 		return;
-	this->ShowWindow(SW_MINIMIZE);
 	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
 	dlg->OnBnClickedButton5();
 	dlg->m_settingDlg->ShowBlackListRulePage();
@@ -285,7 +284,6 @@ void CConfirmDlg::OpenRulePage()
 {
 	if (m_operation == NULL)
 		return;
-	this->ShowWindow(SW_MINIMIZE);
 	if (m_operation->ruleType == RULE_TYPE_ILLEGA_RULE) {
 		CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
 		dlg->OnBnClickedButton5();
