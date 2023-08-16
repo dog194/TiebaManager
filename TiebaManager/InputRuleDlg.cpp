@@ -211,8 +211,16 @@ void CInputRuleDlg<RuleType>::OnCancel()
 template<class RuleType>
 void CInputRuleDlg<RuleType>::OnOK()
 {
-	if (m_ruleCopy.m_conditionParams.empty())
-		AfxMessageBox(_T("没有添加条件，此规则将无效"), MB_ICONWARNING);
+	if (m_ruleCopy.m_conditionParams.empty()) {
+		AfxMessageBox(_T("请添加至少一条规则"), MB_ICONWARNING);
+		return;
+	}
+	CString tmp;
+	m_ruleNameEdit.GetWindowText(tmp);
+	if (tmp == _T("")) {
+		m_ruleNameEdit.ShowBalloonTip(_T(""), _T("规则名不可为空"), TTI_NONE);
+		return;
+	}
 
 	m_ruleNameEdit.GetWindowText(m_ruleCopy.m_name);
 	m_rule = std::move(m_ruleCopy);
