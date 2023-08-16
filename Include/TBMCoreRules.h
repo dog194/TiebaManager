@@ -136,13 +136,17 @@ public:
 		LESS,             // <=
 		GREATER           // >=
 	};
-
+	enum timeType
+	{
+		TIME,             // 纯时间
+		DATE_TIME         // 日期+时间
+	};
 
 	CTimeParam() : CConditionParam(_T("时间条件")) { }
 
-
 	Operator m_operator = GREATER;  // 操作符
 	time_t m_time = time(NULL);     // Unix时间戳
+	timeType m_timeType = DATE_TIME;// 时间模式，TRUE：完整时间，或，FALSE：仅时间
 };
 
 class TBM_CORE_API CTimeCondition final : public CCondition, public Singleton<CTimeCondition>

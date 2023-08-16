@@ -42,6 +42,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	virtual void OnBnClickedRadio0();
+	virtual void OnBnClickedRadio1();
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 
@@ -49,6 +51,8 @@ public:
 public:
 	CComboBox m_operatorCombo;
 	CDateTimeCtrl m_timeCtrl;
+	CButton m_radio_dateTime;
+	CButton m_radio_timeOnly;
 
 protected:
 	CTimeParam* m_param;

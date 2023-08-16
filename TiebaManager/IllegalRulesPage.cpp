@@ -54,19 +54,19 @@ BOOL CIllegalRulesPage::OnInitDialog()
 BOOL CIllegalRulesPage::SetItem(int index)
 {
 	CInputIllegalRuleDlg dlg(m_rules[index], CInputIllegalRuleDlg::IDD, this);
-	if (m_subWinLock == true)
+	if (m_subWinLock == TRUE)
 		return FALSE;
-	m_subWinLock = true;
+	m_subWinLock = TRUE;
 	if (dlg.DoModal() == IDOK)
 	{
 		m_list.SetItemText(index, 0, m_rules[index].m_name);
 		OnUpdateRule(index);
 
 		((CSettingDlg*)GetParent())->m_clearScanCache = TRUE;
-		m_subWinLock = false;
+		m_subWinLock = FALSE;
 		return TRUE;
 	}
-	m_subWinLock = false;
+	m_subWinLock = FALSE;
 	return FALSE;
 }
 

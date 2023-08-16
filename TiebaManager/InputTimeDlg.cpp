@@ -44,10 +44,14 @@ void CInputTimeDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBO2, m_operatorCombo);
 	DDX_Control(pDX, IDC_DATETIMEPICKER1, m_timeCtrl);
+	DDX_Control(pDX, IDC_RADIO0, m_radio_dateTime);
+	DDX_Control(pDX, IDC_RADIO1, m_radio_timeOnly);
 }
 
 
 BEGIN_MESSAGE_MAP(CInputTimeDlg, CDialog)
+	ON_BN_CLICKED(IDC_RADIO0, &CInputTimeDlg::OnBnClickedRadio0)
+	ON_BN_CLICKED(IDC_RADIO1, &CInputTimeDlg::OnBnClickedRadio1)
 END_MESSAGE_MAP()
 
 
@@ -59,12 +63,31 @@ BOOL CInputTimeDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	m_operatorCombo.SetCurSel(m_param->m_operator);
-	m_timeCtrl.SetFormat(_T("yyyy-MM-dd HH:mm:ss"));
+	if (m_param->m_timeType == CTimeParam::timeType::DATE_TIME) {
+		m_timeCtrl.SetFormat(_T("yyyy-MM-dd HH:mm:ss"));
+		m_radio_dateTime.SetCheck(TRUE);
+	}
+	else {
+		m_timeCtrl.SetFormat(_T("HH:mm:ss"));
+		m_radio_timeOnly.SetCheck(TRUE);
+	}
 	CTime time(m_param->m_time);
 	m_timeCtrl.SetTime(&time);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
+}
+
+// 0 m_radio_dateTime 日期+时间
+void CInputTimeDlg::OnBnClickedRadio0()
+{
+	m_timeCtrl.SetFormat(_T("yyyy-MM-dd HH:mm:ss"));
+}
+
+// 1 m_radio_timeOnly 时间
+void CInputTimeDlg::OnBnClickedRadio1()
+{
+	m_timeCtrl.SetFormat(_T("HH:mm:ss"));
 }
 
 void CInputTimeDlg::OnOK()
@@ -73,6 +96,11 @@ void CInputTimeDlg::OnOK()
 	CTime time;
 	m_timeCtrl.GetTime(time);
 	m_param->m_time = time.GetTime();
+	int radioState = m_radio_dateTime.GetCheck();
+	if (radioState == TRUE)
+		m_param->m_timeType = CTimeParam::timeType::DATE_TIME;
+	else
+		m_param->m_timeType = CTimeParam::timeType::TIME;
 
 	CDialog::OnOK();
 }

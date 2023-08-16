@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #pragma once
 #include "HelperCommon.h"
 #include <regex>
+#include <time.h>
 
 
 class HELPER_API RegexText
@@ -134,6 +135,9 @@ HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
 HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src = NULL);
 // 获取时间戳毫秒
 HELPER_API LONGLONG GetTimestampMS();
+// 比较时间，返回秒数差值，排除日期, 正值，t1 大于 t2, t1 比 t2 晚
+HELPER_API int GetTimeDiffInS(const time_t& time_1, const time_t& time_2);
+
 // Int to CString
 HELPER_API CString Int2CString(const int num);
 // Int64 to CString

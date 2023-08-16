@@ -563,6 +563,19 @@ HELPER_API LONGLONG GetTimestampMS()
 	return tMS;
 }
 
+// 比较时间，返回秒数差值，排除日期, 正值，t2 大于 t1, t2 比 t1 晚
+HELPER_API int GetTimeDiffInS(const time_t& time_1, const time_t& time_2)
+{
+	// 输入值为 timestamp 包括日期
+	std::tm* tm1 = new std::tm{ 0, 0, 0, 1, 0, 100 };
+	std::tm* tm2 = new std::tm{ 0, 0, 0, 1, 0, 100 };
+	localtime_s(tm1, &time_1);
+	localtime_s(tm2, &time_2);
+	int diff = (tm2->tm_hour - tm1->tm_hour) * 3600 + (tm2->tm_min - tm1->tm_min) * 60 + (tm2->tm_sec - tm1->tm_sec);
+	delete tm1, tm2;
+	return diff;
+}
+// ======================================================================================================
 // Int to CString
 HELPER_API CString Int2CString(const int num)
 {
@@ -718,7 +731,7 @@ End:
 	CString str;
 	str.Format(_T("%s"), ptBuf);
 
-	delete ptBuf;
+	delete[] ptBuf;
 	ptBuf = NULL;
 	return str;
 }

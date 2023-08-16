@@ -407,7 +407,10 @@ CString CTimeCondition::GetDescription(const CConditionParam& _param)
 	tm timeInfo;
 	localtime_s(&timeInfo, &param.m_time);
 	CString time;
-	_tcsftime(time.GetBuffer(100), 100, _T("%Y-%m-%d %X"), &timeInfo);
+	if (param.m_timeType == CTimeParam::DATE_TIME)
+		_tcsftime(time.GetBuffer(100), 100, _T("%Y-%m-%d %X"), &timeInfo);
+	else
+		_tcsftime(time.GetBuffer(100), 100, _T("%X"), &timeInfo);
 	time.ReleaseBuffer();
 	return operatorDesc[param.m_operator] + time;
 }
@@ -419,11 +422,14 @@ CConditionParam* CTimeCondition::ReadParam(const tinyxml2::XMLElement* optionNod
 
 	COption<int> op("Operator", CTimeParam::GREATER, InRange<int, CTimeParam::LESS, CTimeParam::GREATER>);
 	COption<time_t> time("Time", 0LL);
+	COption<int> m_dt("DT", CTimeParam::DATE_TIME, InRange<int, CTimeParam::TIME, CTimeParam::DATE_TIME>);
 	op.Read(*optionNode);
 	time.Read(*optionNode);
+	m_dt.Read(*optionNode);
 
 	param->m_operator = CTimeParam::Operator(*op);
 	param->m_time = time;
+	param->m_timeType = CTimeParam::timeType(*m_dt);
 
 	return param;
 }
@@ -438,6 +444,9 @@ void CTimeCondition::WriteParam(const CConditionParam& _param, tinyxml2::XMLElem
 	COption<time_t> time("Time");
 	*time = param.m_time;
 	time.Write(*optionNode);
+	COption<int> m_dt("DT");
+	*m_dt = param.m_timeType;
+	m_dt.Write(*optionNode);
 }
 
 CConditionParam* CTimeCondition::CloneParam(const CConditionParam& _param)
@@ -452,11 +461,26 @@ BOOL CTimeCondition::Match(const CTimeParam& param, const TBObject& obj)
 	if (obj.timestamp == 0)
 		return FALSE;
 
-	switch (param.m_operator)
+	int diff;
+	switch (param.m_timeType)
 	{
 	default: return FALSE;
-	case CTimeParam::LESS:       return obj.timestamp <= param.m_time;
-	case CTimeParam::GREATER:    return obj.timestamp >= param.m_time;
+	case CTimeParam::TIME:
+		// 纯比较时间
+		diff = GetTimeDiffInS(obj.timestamp, param.m_time);
+		switch (param.m_operator)
+		{
+		default: return FALSE;
+		case CTimeParam::LESS:       return diff >= 0;
+		case CTimeParam::GREATER:    return diff <= 0;
+		}
+	case CTimeParam::DATE_TIME:
+		switch (param.m_operator)
+		{
+		default: return FALSE;
+		case CTimeParam::LESS:       return obj.timestamp <= param.m_time;
+		case CTimeParam::GREATER:    return obj.timestamp >= param.m_time;
+		}
 	}
 }
 
