@@ -839,10 +839,14 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 
 	// 解析 Json 前10楼 楼中楼
 	bool aced_lzl_info = true;
-	bool use_addl_lzl_info = false ? src == _T("") : true;
+	bool use_addl_lzl_info;
+	if (src == _T(""))
+		use_addl_lzl_info = false;
+	else
+		use_addl_lzl_info = true;
 	std::vector<LzlInfo> jsonLzl;
 	jsonLzl.clear();
-	if (use_addl_lzl_info) {
+	if (use_addl_lzl_info == true) {
 		GenericDocument<UTF16<> > document;
 		document.Parse(src);
 		if (document.HasParseError() || !document.IsObject() || document[L"errno"].GetInt() != 0) {
@@ -931,11 +935,12 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 			}
 		}
 	}
-	else {
+	if (use_addl_lzl_info == false || aced_lzl_info == false) {
+		// 没开启 楼中楼，或者楼中楼 获取失败
 		int uSize = PostuserList.size();
 		for (int i = 0; i < uSize; ++i)
 			userIndex[PostuserList[i].id] = i;
-	}	
+	}
 
 	int size = pbPostList->size();
 	posts.resize(size);
