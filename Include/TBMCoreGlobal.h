@@ -63,6 +63,7 @@ public:
 	COption<BOOL>		m_blackListRecheck;		// 确认窗口重新检测是否在黑名单
 
 	COption<BOOL>		m_acedEnhancedLzl;		// 进阶-增强型楼中楼
+	COption<BOOL>		m_acedBlackCheckBan;	// 进阶-定期校验黑名单列表
 
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则
@@ -135,6 +136,7 @@ const int RULE_TYPE_DELETE_ONLY = 2;
 const int RULE_TYPE_BAN_DIRECTLY = 3;
 const int RULE_TYPE_IGNORE_TID = 4;
 const int RULE_TYPE_IGNORE_POR = 5;
+const int RULE_TYPE_CHECK_D2F = 16;
 
 
 // 使用本模块前应先设置的全局变量

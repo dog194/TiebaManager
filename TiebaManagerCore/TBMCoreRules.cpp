@@ -590,6 +590,7 @@ CUserInfo::CUserInfo()
 	m_uid = _T("");
 	m_portrait = _T("");
 	m_note = _T("");
+	m_day2Free = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid)
@@ -597,6 +598,7 @@ CUserInfo::CUserInfo(const CString& uid)
 	m_uid = uid;
 	m_portrait = _T("");
 	m_note = _T("");
+	m_day2Free = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid, const CString& portrait)
@@ -604,6 +606,7 @@ CUserInfo::CUserInfo(const CString& uid, const CString& portrait)
 	m_uid = uid;
 	m_portrait = portrait;
 	m_note = _T("");
+	m_day2Free = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid, const CString& portrait, const CString& note)
@@ -611,6 +614,7 @@ CUserInfo::CUserInfo(const CString& uid, const CString& portrait, const CString&
 	m_uid = uid;
 	m_portrait = portrait;
 	m_note = note;
+	m_day2Free = _T("");
 }
 
 BOOL CUserInfo::Match(const CString& uid, const CString& portrait)
@@ -658,15 +662,18 @@ DECLEAR_READ(CUserInfo)
 	COption<CString> portrait("portrait");
 	COption<int> trigCount("trigCount");
 	COption<CString> note("note");
+	COption<CString> day2free("d2f");
 	uid.Read(*optionNode);
 	trigCount.Read(*optionNode);
 	portrait.Read(*optionNode);
 	note.Read(*optionNode);
+	day2free.Read(*optionNode);
 
 	m_value.m_uid = uid;
 	m_value.m_portrait = portrait;
 	m_value.m_trigCount = trigCount;
 	m_value.m_note = note;
+	m_value.m_day2Free = day2free;
 
 	if (!IsValid(m_value))	//虽然不知道做了什么，但是还是写了 = =
 		UseDefault();
@@ -682,17 +689,21 @@ DECLEAR_WRITE(CUserInfo)
 	COption<CString> portrait("portrait");
 	COption<int> trigCount("trigCount");
 	COption<CString> note("note");
+	COption<CString> day2free("d2f");
 	uid.Read(*optionNode);
 	trigCount.Read(*optionNode);
 	portrait.Read(*optionNode);
 	note.Read(*optionNode);
+	day2free.Read(*optionNode);
 
 	*uid = m_value.m_uid;
 	*portrait = m_value.m_portrait;
 	*trigCount = m_value.m_trigCount;
 	*note = m_value.m_note;
+	*day2free = m_value.m_day2Free;
 	uid.Write(*optionNode);
 	portrait.Write(*optionNode);
 	trigCount.Write(*optionNode);
 	note.Write(*optionNode);
+	day2free.Write(*optionNode);
 }

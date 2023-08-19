@@ -82,6 +82,16 @@ public:
 	// 删楼中楼，返回错误代码
 	CString DeleteLZL(const CString& tid, const CString& lzlid);
 };
+const CString D2F_RET_TIME_OUT = _T("[超时]");
+const CString D2F_RET_ERROR = _T("[百度抽风/账号注销/参数错误]");
+const CString D2F_RET_NORMAL = _T("[正常]");
+const CString D2F_RET_BAN = _T("[全吧封禁] 封:");
+const CString D2F_TAG_NEXT = _T("[扫描TAG]");
+const CString D2F_TAG_TIME = _T(" [校验:%s]");
 
+// 头像ID 获取封禁信息
+TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CString& c_name);
+// 头像ID 获取封禁信息 不需要 c_name
+TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret);
 // 取错误文本
 TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode);

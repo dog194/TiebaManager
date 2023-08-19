@@ -315,6 +315,8 @@ public:
 	CString m_portrait;		// portrait
 	int m_trigCount = 0;    // 触发次数
 	CString m_note;			// 备注，没实际用途，单纯用来个人记录
+	CString m_day2Free;		// 客户端接口获取全吧封禁日期
+
 	CUserInfo();
 	CUserInfo(const CString& uid);
 	CUserInfo(const CString& uid, const CString& m_portrait);

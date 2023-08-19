@@ -49,6 +49,7 @@ public:
 	afx_msg void OnEnKillfocusEditPortrait();
 	afx_msg void OnClickNotePre();
 	afx_msg void OnClickNoteNext();
+	afx_msg void OnClickCheckD2f();
 
 public:
 	CEdit m_edit_uid;
@@ -57,6 +58,7 @@ public:
 	CStatic m_static_portrait;
 	CButton m_button_note_pre;
 	CButton m_button_note_next;
+	CButton m_button_check_d2f;
 	CString m_pre_note = _T("");
 	CString m_next_note = _T("");
 

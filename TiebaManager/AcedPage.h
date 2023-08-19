@@ -43,10 +43,18 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedCheckLzl();
+	afx_msg void OnBnClickedCheckBan();
+	afx_msg void OnBnClickedStaticD2f();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 	void ShowPlan(const CPlan& plan);
 	void ApplyPlanInDlg(CPlan& plan);
 
 public:
+	BOOL m_checkBanLock = false;
+	CStatic m_static_check_d2f;
 	CButton m_acedEnhancedLzlCheck;
+	CButton m_acedBlackCheckBanCheck;
+	CButton m_tempCheck;
+	CButton m_btnCheckBanNow;
 };

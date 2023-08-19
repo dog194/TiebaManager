@@ -262,6 +262,10 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 				g_postUpdateInfoEvent(_T(""), dependFiles);
 			}
 		}
+		// 定期校验用户封禁状态
+		if (g_pTbmCoreConfig->m_acedBlackCheckBan.m_value == TRUE) {
+			addUserD2fCheck();
+		}
 	});
 
 	SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION);
@@ -710,4 +714,77 @@ void CTiebaManagerDlg::OnBnClickedButton2()
 void CTiebaManagerDlg::OnBnClickedButton3()
 {
 	CTBMScan::GetInstance().StopScan();
+}
+
+// 其他 /////////////////////////////////////////////////////////////////////////////////
+
+// 添加校验个数
+void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
+{
+	// TODO
+	g_pLog->Log(_T("TODO: 更新日志样式，添加校验") + Int2CString(pTotalCheckNum));
+	int totalUsers = g_pTbmCoreConfig->m_blackListRules.m_value.size();
+	if (0 < totalUsers && totalUsers <= pTotalCheckNum) {
+		auto& operate = CTBMOperate::GetInstance();
+		// 全员添加
+		for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+			operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+		}
+		g_pLog->Log(_T("TODO: 更新日志样式，添加完毕，共添加") + Int2CString(totalUsers));
+	}
+	else {
+		// 搜索是否存在起点
+		auto& operate = CTBMOperate::GetInstance();
+		int userNeede = pTotalCheckNum;
+		int isAdd = 0; // 0 未开始 1 开始添加 2 等待添加TAG 3 完成
+		for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+			if (isAdd == 0 && i.m_day2Free.Find(D2F_TAG_NEXT) != -1) {
+				// 找到了开始 TAG
+				isAdd = 1;
+				// 删除 TAG
+				i.m_day2Free.Replace(D2F_TAG_NEXT, _T(""));
+			}
+			if (isAdd == 1) {
+				// 添加任务
+				operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+				userNeede--;
+			}
+			if (userNeede == 0) {
+				// 终止添加
+				isAdd = 2;
+				userNeede = -1;
+			}
+			else if (userNeede == -1) {
+				// 添加新的TAG
+				i.m_day2Free = D2F_TAG_NEXT + i.m_day2Free;
+				isAdd = 3;
+				break;
+			}
+		}
+		if (isAdd != 3) {
+			if (isAdd == 0) {
+				// 没找到开始TAG 直接开始
+				isAdd = 1;
+			}
+			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+				if (isAdd == 1) {
+					// 添加任务
+					operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+					userNeede--;
+				}
+				if (userNeede == 0) {
+					// 终止添加
+					isAdd = 2;
+					userNeede = -1;
+				}
+				else if (userNeede == -1) {
+					// 添加新的TAG
+					i.m_day2Free = D2F_TAG_NEXT + i.m_day2Free;
+					isAdd = 3;
+					break;
+				}
+			}
+		}
+		g_pLog->Log(_T("TODO: 更新日志样式，添加完毕，共添加") + Int2CString(pTotalCheckNum));
+	}
 }

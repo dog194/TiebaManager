@@ -74,6 +74,20 @@ public:
 		ruleName(ruleName_),
 		ruleType(ruleType_)
 	{ }
+
+	Operation(const CString& ruleName_, const int& ruleType_) :
+		ruleName(ruleName_),
+		ruleType(ruleType_)
+	{ 
+		forceToConfirm = FALSE;
+		pos = 0;
+		length = 0;
+		title = _T("");
+		object = nullptr;
+		confirmQueneLeft = 0;
+		ruleBreakCount = 0;
+		isBlUser = false;
+	}
 };
 
 class TBM_CORE_API CTBMOperate final : public Singleton<CTBMOperate>

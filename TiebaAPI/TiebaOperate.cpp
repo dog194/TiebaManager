@@ -24,6 +24,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <StringHelper.h>
 #include <TiebaClientHelper.h>
 
+#include "TiebaProto/ProfileReqIdl.pb.h"
+#include "TiebaProto/ProfileResIdl.pb.h"
+#include "TiebaProto/User.pb.h"
+
 CTiebaOperate::CTiebaOperate(CString& cookie, const int& banDuration, const CString& banReason) :
 	m_cookie(cookie), 
 	m_banDuration(banDuration), 
@@ -277,6 +281,92 @@ CString CTiebaOperate::DeleteLZL(const CString& tid, const CString& lzlid)
 	//	(LPCTSTR)m_tbs, (LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, tid, lzlid);
 	//CString src = this->HTTPPost(_T("https://tieba.baidu.com/f/commit/post/delete"), data);
 	return GetOperationErrorCode(src);
+}
+
+// 头像ID 获取封禁信息 正常为0 永封为36500 获取失败 -1
+TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CString& u_name)
+{
+	u_ret = _T("");
+	// 请求构造
+	ProfileReqIdl pbReq;
+	ProfileReqIdl_DataReq* pbReqData = new ProfileReqIdl_DataReq();
+	CommonReq* pbCom = new CommonReq();
+	pbCom->set__client_version("12.12.1.0");
+	pbCom->set__client_type(2);
+	pbReqData->set_allocated_common(pbCom);
+	CStringA a_portrait = W2UTF8(u_portrait);
+	pbReqData->set_friend_uid_portrait(a_portrait);
+	pbReqData->set_pn(1);
+	pbReqData->set_need_post_count(0);
+	pbReq.set_allocated_data(pbReqData);
+	std::string pbData;
+	pbReq.SerializeToString(&pbData);
+
+	CStringA data;
+	data = pbData.c_str();
+
+	CStringA src = TiebaClientHTTPProtoPost(_T("http://c.tieba.baidu.com/c/u/user/profile?cmd=303012"), data);
+	std::string src2 = std::string(src, src.GetLength());
+	if (src == NET_TIMEOUT_TEXT) {
+		u_ret = D2F_RET_TIME_OUT;
+		return -1;
+	}
+
+	// 结果解析
+	ProfileResIdl pbRes;
+	ProfileResIdl_DataRes* pbResData;
+	ProfileResIdl_DataRes_Anti* pbResDataAnti;
+	Error* pbError;
+	User* pbUser;
+	pbRes.ParseFromString(src2);
+
+	pbResData = pbRes.mutable_data();
+	pbError = pbRes.mutable_error();
+	pbUser = pbResData->mutable_user();
+	pbResDataAnti = pbResData->mutable_anti_stat();
+	int c_error_nu = pbError->errorno();
+	std::string error_msg = pbError->errmsg();
+	CString c_error_msg = strUTF82W(error_msg);
+	//int block_stat = pbResDataAnti->block_stat();
+	//int hide_stat = pbResDataAnti->hide_stat();
+	int days_tofree = pbResDataAnti->days_tofree();
+	std::string name = pbUser->name();
+	CString c_name = strUTF82W(name);
+	std::string name_show = pbUser->name_show();
+	CString c_name_show = strUTF82W(name_show);
+	std::string portrait = pbUser->portrait();
+	CString c_portrait = strUTF82W(portrait);
+
+
+	int post_num = pbUser->post_num();
+	std::string tb_age = pbUser->tb_age();
+	CString c_tb_age = strUTF82W(tb_age);
+	std::string tieba_uid = pbUser->tieba_uid();
+	CString c_tieba_uid = strUTF82W(tieba_uid);
+
+
+
+	bool is_empty = c_portrait == L"";
+	if (is_empty) {
+		u_ret = D2F_RET_ERROR;
+		return -1;
+	}
+	if (days_tofree == 0)
+		u_ret = D2F_RET_NORMAL;
+	else if (days_tofree > 0)
+		u_ret = D2F_RET_BAN + Int2CString(days_tofree);
+	if (c_name == _T(""))
+		u_name = c_name_show;
+	else
+		u_name = c_name + _T(" - ") + c_name_show;
+	return days_tofree;
+}
+
+// 头像ID 获取封禁信息 正常为0 永封为36500 获取失败 -1
+TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret)
+{
+	CString u_name = _T("");
+	return GetUserAntiDay(u_portrait, u_ret, u_name);
 }
 
 // 取错误文本

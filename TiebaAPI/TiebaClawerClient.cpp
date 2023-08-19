@@ -583,7 +583,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	pbCom->set__client_version("12.12.1.0");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
-	CStringA t_fn = W2UTF8(forumName);;
+	CStringA t_fn = W2UTF8(forumName);
 	//std::string kw = CT2A(forumName);
 	pbReqData->set_kw(t_fn);
 	pbReqData->set_pn(_ttoi(ignoreThread) / 50 + 1);
@@ -750,7 +750,6 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		++iThread;
 	}
 	threads.resize(iThread);
-
 	return TRUE;
 }
 
@@ -782,8 +781,9 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	data = pbData.c_str();
 
 	CStringA srcA = TiebaClientHTTPProtoPost(_T("http://c.tieba.baidu.com/c/f/pb/page?cmd=302001"), data);
-	if (srcA == NET_TIMEOUT_TEXT)
+	if (srcA == NET_TIMEOUT_TEXT) {
 		return GET_POSTS_TIMEOUT;
+	}
 	CString src = _T("");
 	
 	if (g_pTbmCoreConfig->m_acedEnhancedLzl) {
@@ -827,8 +827,9 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	//WriteString(tmp, _T("posts.txt"));
 
 	int error_no = error->errorno();
-	if (pbPostList->size() == 0 || error_no != 0)
+	if (pbPostList->size() == 0 || error_no != 0) {
 		return GET_POSTS_DELETED;
+	}
 	
 	// 用户列表解析
 	std::vector<TBUserObj> PostuserList;

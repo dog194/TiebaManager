@@ -245,6 +245,44 @@ void CTBMOperate::OperateThread()
 		if (!pass)
 			continue;
 
+		// TODO 进一步优化？
+		// 校验 用户 全吧封禁状态 day to free
+		if (op.ruleType == RULE_TYPE_CHECK_D2F) {
+			// 校验结果
+			CString d2f, u_portrait;
+			u_portrait = op.ruleName;
+			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+				if (i.m_portrait == u_portrait) {
+					// TODO 校验上次检测时间
+					CString content, u_name;
+					int d2fCode = GetUserAntiDay(u_portrait, d2f, u_name);
+					if (d2f != D2F_RET_TIME_OUT) {
+						// 并非超时，更新结果到列表
+						content.Format(D2F_TAG_TIME, GetYYMMDD_FromTimeT());
+						d2f += content;
+						i.m_day2Free = d2f;
+						if (d2fCode == 0) {
+							content.Format(_T("<font color=green>校验封禁状态 </font>%s<font color=green> 账号正常！</font>"), (LPCTSTR)u_name);
+						}
+						else if (d2fCode > 0) {
+							content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 全吧封禁：%d</font>"), (LPCTSTR)u_name, d2fCode);
+						}
+						else {
+							content.Format(_T("<font color=purple>校验封禁状态 </font>%s<font color=red> 失败！临时抽风、账号注销或参数错误</font>"), (LPCTSTR)i.m_uid);
+						}
+					}
+					else {
+						// 超时 TODO?
+						content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 失败！请求超时</font>"), (LPCTSTR)i.m_uid);
+					}
+					g_pLog->Log(content);
+					break;
+				}
+			}
+			Sleep((DWORD)(g_pTbmCoreConfig->m_deleteInterval * 1000));
+			continue;
+		}
+
 		BOOL isBan = FALSE;
 		BOOL isDelete = FALSE;
 
@@ -324,7 +362,6 @@ void CTBMOperate::OperateThread()
 			{
 				BOOL result = FALSE;
 				CString portrait, nick_name;
-				// 不管是不是客户端接口封，都获取 PID
 
 				switch (op.object->m_type)
 				{
