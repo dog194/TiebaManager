@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "stdafx.h"
 #include "sqlite3.h"
 #include "TiebaManagerDlg.h"
+#include "TiebaManager.h"
 #include <TBMEvents.h>
 #include <TBMAPI.h>
 #include "TBMGlobal.h"
@@ -39,6 +40,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+
 
 
 // 常量
@@ -743,6 +745,10 @@ void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 				isAdd = 1;
 				// 删除 TAG
 				i.m_day2Free.Replace(D2F_TAG_NEXT, _T(""));
+				CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+				if (dlg->m_settingDlg != NULL) {
+					dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
+				}
 			}
 			if (isAdd == 1) {
 				// 添加任务
@@ -758,12 +764,17 @@ void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 				// 添加新的TAG
 				i.m_day2Free = D2F_TAG_NEXT + i.m_day2Free;
 				isAdd = 3;
+				CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+				if (dlg->m_settingDlg != NULL) {
+					dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
+				}
 				break;
 			}
 		}
 		if (isAdd != 3) {
 			if (isAdd == 0) {
 				// 没找到开始TAG 直接开始
+				// TODO 是不是应该 优先再扫描 有没有空？
 				isAdd = 1;
 			}
 			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {

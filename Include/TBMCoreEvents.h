@@ -41,6 +41,8 @@ extern TBM_CORE_API PostEvent<const Operation&, BOOL>   g_postDefriendEvent;   /
 extern TBM_CORE_API PreEvent<const Operation&, BOOL&>   g_preDeleteEvent;      // 准备删除时触发，参数：操作, 不取消
 extern TBM_CORE_API PostEvent<const Operation&, BOOL>   g_postDeleteEvent;     // 已删除时触发，参数：操作, 封禁成功
 
+extern TBM_CORE_API PostEvent<const CString&, const CString&> g_postD2yEvent;  // 校验封禁状态后根据情况联动更新UI
+
 // 扫描事件
 
 extern TBM_CORE_API PreEvent<const TapiThreadInfo&, BOOL&, CString&, BOOL&, int&, int&, CString&, int&>   g_checkThreadIllegalEvent;        // 判断主题是否违规，参数：主题信息, 是否违规, 日志里输出的信息, 强制确认, 确认时高亮位置, 确认时高亮长度

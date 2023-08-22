@@ -141,6 +141,15 @@ BOOL CBlackListRulesPage::Import(const CString& path)
 	return TRUE;
 }
 
+// 根据 头像ID 更新UI和数据
+void CBlackListRulesPage::setRuleD2Y(const CString& u_portrait, const CString& d2f) {
+	int index = FindIndexFromSecondStr(u_portrait);
+	if (index != -1) {
+		m_list.SetItemText(index, COLUMN_INDEX_BAN_STATUS, d2f);
+		m_rules[index].m_day2Free = d2f;
+	}
+}
+
 void CBlackListRulesPage::ShowList(const std::vector<CUserInfo>& list)
 {
 	m_rules = list;

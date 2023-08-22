@@ -284,6 +284,7 @@ void CTBMOperate::OperateThread()
 						content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 失败！请求超时</font>"), (LPCTSTR)i.m_uid);
 					}
 					g_pLog->Log(content);
+					g_postD2yEvent(u_portrait, d2f);
 					break;
 				}
 			}

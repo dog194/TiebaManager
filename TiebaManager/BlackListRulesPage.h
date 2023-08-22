@@ -47,6 +47,7 @@ public:
 	virtual void OnDelete(int index) override;
 	virtual BOOL Export(const CString& path) override;
 	virtual BOOL Import(const CString& path) override;
+	void setRuleD2Y(const CString& u_portrait, const CString& d2f);
 	void ShowList(const std::vector<CUserInfo>& list);
 	void ApplyList(std::vector<CUserInfo>& list);
 

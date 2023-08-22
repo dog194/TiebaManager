@@ -60,6 +60,7 @@ CTBMListeners::CTBMListeners()
 	g_openLinkInLogEvent.AddListener(OnOpenLinkInLog);
 	g_settingWinCloseEvent.AddListener(OnCloseSettingWin);
 	g_postUpdateInfoEvent.AddListener(OnPostUpdateInfo);
+	g_postD2yEvent.AddListener(OnPostD2yEvent);
 }
 
 
@@ -291,5 +292,12 @@ void CTBMListeners::OnPostUpdateInfo(const CString& hasUpdate, const std::vector
 		else if (dependFiles[i].name == _T("7za.exe")) {
 			dlg->m_7zaV = dependFiles[i].version;
 		}
+	}
+}
+
+void CTBMListeners::OnPostD2yEvent(const CString& u_portrait, const CString& d2f) {
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	if (dlg->m_settingDlg != NULL) {
+		dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(u_portrait, d2f);
 	}
 }
