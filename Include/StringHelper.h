@@ -22,7 +22,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <regex>
 #include <time.h>
 
-
 class HELPER_API RegexText
 {
 public:
@@ -90,6 +89,10 @@ HELPER_API CString GetStringAfter(const CString& src, const CString& left, int s
 HELPER_API BOOL WriteString(const CString& src, const CString& path);
 // 写字符串到文件 续写
 HELPER_API BOOL WriteStringCon(const CString& src, const CString& path);
+// Debug 记录
+HELPER_API void DebugRecord(const CString& title, const int& c_int, const CString& content = L"");
+HELPER_API void DebugRecord(const CString& title, const CString& content = L"");
+
 // 单字符16进制转10进制
 HELPER_API int HexChar2Dec(const CCHAR c);
 // Unicode(UCS-2)转ANSI

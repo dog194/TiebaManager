@@ -65,6 +65,8 @@ public:
 	COption<BOOL>		m_acedEnhancedLzl;		// 进阶-增强型楼中楼
 	COption<BOOL>		m_acedBlackCheckBan;	// 进阶-定期校验黑名单列表
 
+	COption<BOOL>		m_toolsDebug;			// 工具-Debug
+
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则
 	COption<std::set<CString> >              m_trustedThreads;    // 信任主题

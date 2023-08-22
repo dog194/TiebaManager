@@ -46,14 +46,15 @@ CToolsPage::~CToolsPage()
 void CToolsPage::DoDataExchange(CDataExchange* pDX)
 {
 	CNormalDlg::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_STATIC_HELP_V, m_staticHelpV);
-	DDX_Control(pDX, IDC_STATIC_CURL_V, m_staticCurlV);
-	DDX_Control(pDX, IDC_STATIC_CURL_EXE_V, m_staticCurlExeV);
-	DDX_Control(pDX, IDC_STATIC_7Z_V, m_static7zV);
-	DDX_Control(pDX, IDC_STATIC_CURL_V_NEW, m_staticCurlVnew);
+	DDX_Control(pDX, IDC_STATIC_HELP_V,			m_staticHelpV);
+	DDX_Control(pDX, IDC_STATIC_CURL_V,			m_staticCurlV);
+	DDX_Control(pDX, IDC_STATIC_CURL_EXE_V,		m_staticCurlExeV);
+	DDX_Control(pDX, IDC_STATIC_7Z_V,			m_static7zV);
+	DDX_Control(pDX, IDC_STATIC_CURL_V_NEW,		m_staticCurlVnew);
 	DDX_Control(pDX, IDC_STATIC_CURL_EXE_V_NEW, m_staticCurlExeVnew);
-	DDX_Control(pDX, IDC_STATIC_7Z_V_NEW, m_static7zVnew);
+	DDX_Control(pDX, IDC_STATIC_7Z_V_NEW,		m_static7zVnew);
 	DDX_Control(pDX, IDC_BUTTON_LIBCURL_UPDATE, m_btnUpdate);
+	DDX_Control(pDX, IDC_CHECK_DEBUG,			m_checkDebug);
 }
 
 BEGIN_MESSAGE_MAP(CToolsPage, CNormalDlg)
@@ -237,4 +238,14 @@ void CToolsPage::OnBnClickedButtonLibcurlUpdate()
 
 End:
 	CoUninitialize();
+}
+
+void CToolsPage::ShowPlan(const CPlan& plan)
+{
+	m_checkDebug.SetCheck(plan.m_toolsDebug);		// Debug 文件输出
+}
+
+void CToolsPage::ApplyPlanInDlg(CPlan& plan)
+{
+	*plan.m_toolsDebug = m_checkDebug.GetCheck();	// Debug 文件输出
 }

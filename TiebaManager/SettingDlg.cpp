@@ -249,7 +249,8 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 {
 	CString tmp;
 
-	m_acedPage->ShowPlan(plan);		// 进阶page
+	m_acedPage->ShowPlan(plan);			// 进阶page
+	m_toolsPage->ShowPlan(plan);		// 工具page
 
 	tmp.Format(_T("%d"), *plan.m_scanInterval);
 	m_scanPage->m_scanIntervalEdit.SetWindowText(tmp);				    // 扫描间隔
@@ -313,6 +314,7 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	plan.OnChange();
 
 	m_acedPage->ApplyPlanInDlg(plan);		// 进阶page
+	m_toolsPage->ApplyPlanInDlg(plan);		// 工具page
 
 	m_scanPage->m_scanIntervalEdit.GetWindowText(strBuf);
 	*plan.m_scanInterval = _ttoi(strBuf);								// 扫描间隔

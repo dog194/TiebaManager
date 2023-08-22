@@ -19,9 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include <StringHelper.h>
+#include <TBMCoreGlobal.h>
 #include <NetworkHelper.h>
-#include <ConfigFile.h>
-#include <document.h>
+#include <document.h> // rapidjson
 #import <msscript.ocx> no_namespace
 using namespace tinyxml2;
 using namespace rapidjson;
@@ -283,6 +283,28 @@ HELPER_API BOOL WriteStringCon(const CString& src, const CString& path)
 	}
 	file.WriteString(src);
 	return TRUE;
+}
+
+// Debug 记录
+HELPER_API void DebugRecord(const CString& title, const int& c_int, const CString& content)
+{
+	if (g_pTbmCoreConfig->m_toolsDebug == FALSE) {
+		return;
+	}
+	CString src = _T("======== ") + GetYYMMDD_HHMMSS_FromTimeT() + _T(" ========\r\n");
+	src += title + _T(" == ") + Int2CString(c_int) + _T("\r\n") + content;
+	WriteStringCon(src, _T("debugRecord.txt"));
+}
+
+// Debug 记录
+HELPER_API void DebugRecord(const CString& title, const CString& content)
+{
+	if (g_pTbmCoreConfig->m_toolsDebug == FALSE) {
+		return;
+	}
+	CString src = _T("======== ") + GetYYMMDD_HHMMSS_FromTimeT() + _T(" ========\r\n");
+	src += title + _T("\r\n") + content;
+	WriteStringCon(src, _T("debugRecord.txt"));
 }
 
 // 单字符16进制转10进制
