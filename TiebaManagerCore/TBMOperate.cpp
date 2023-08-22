@@ -267,8 +267,16 @@ void CTBMOperate::OperateThread()
 						else if (d2fCode > 0) {
 							content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 全吧封禁：%d</font>"), (LPCTSTR)u_name, d2fCode);
 						}
+						else if (d2fCode == D2F_INT_ERROR)
+						{
+							content.Format(_T("<font color=purple>校验封禁状态 </font>%s<font color=red> 失败！临时抽风、或参数错误</font>"), (LPCTSTR)i.m_uid);
+						}
+						else if (d2fCode == D2F_INT_DELETE) {
+							content.Format(_T("<font color=purple>校验封禁状态 </font>%s<font color=purple> 账号注销，账号回复记录不会消失</font>"), (LPCTSTR)i.m_uid);
+						}
 						else {
-							content.Format(_T("<font color=purple>校验封禁状态 </font>%s<font color=red> 失败！临时抽风、账号注销或参数错误</font>"), (LPCTSTR)i.m_uid);
+							content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 未知结果</font>"), (LPCTSTR)i.m_uid);
+							DebugRecord(_T("校验封禁状态 返回结果异常"), d2fCode, _T("m_uid：") + i.m_uid);
 						}
 					}
 					else {

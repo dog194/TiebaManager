@@ -21,7 +21,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <TiebaOperate.h>
 #include <TiebaClawer.h>
 #include <NetworkHelper.h>
-#include <StringHelper.h>
 #include <TiebaClientHelper.h>
 
 #include "TiebaProto/ProfileReqIdl.pb.h"
@@ -309,7 +308,7 @@ TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CStr
 	std::string src2 = std::string(src, src.GetLength());
 	if (src == NET_TIMEOUT_TEXT) {
 		u_ret = D2F_RET_TIME_OUT;
-		return -1;
+		return D2F_INT_TIME_OUT;
 	}
 
 	// 结果解析
@@ -327,6 +326,8 @@ TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CStr
 	int c_error_nu = pbError->errorno();
 	std::string error_msg = pbError->errmsg();
 	CString c_error_msg = strUTF82W(error_msg);
+	//std::string usermsg = pbError->usermsg();
+	//CString c_usermsg = strUTF82W(usermsg);
 	//int block_stat = pbResDataAnti->block_stat();
 	//int hide_stat = pbResDataAnti->hide_stat();
 	int days_tofree = pbResDataAnti->days_tofree();
@@ -336,20 +337,24 @@ TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CStr
 	CString c_name_show = strUTF82W(name_show);
 	std::string portrait = pbUser->portrait();
 	CString c_portrait = strUTF82W(portrait);
+	INT64 uid = pbUser->id();
 
-
-	int post_num = pbUser->post_num();
-	std::string tb_age = pbUser->tb_age();
-	CString c_tb_age = strUTF82W(tb_age);
-	std::string tieba_uid = pbUser->tieba_uid();
-	CString c_tieba_uid = strUTF82W(tieba_uid);
-
-
+	if (c_error_nu == 300003) {
+		// 300003   D2F_RET_DELETE
+		u_ret = D2F_RET_DELETE;
+		if (c_portrait != L"") {
+			DebugRecord(_T("GetUserAntiDay 300003 错误代码，但头像id不为空"), _T("头像ID：") + c_portrait);
+		}
+		return D2F_INT_DELETE;
+	}
+	else if (c_error_nu != 0) {
+		DebugRecord(_T("GetUserAntiDay 错误代码不为0"), c_error_nu, _T("头像ID：") + c_portrait);
+	}
 
 	bool is_empty = c_portrait == L"";
 	if (is_empty) {
 		u_ret = D2F_RET_ERROR;
-		return -1;
+		return D2F_INT_ERROR;
 	}
 	if (days_tofree == 0)
 		u_ret = D2F_RET_NORMAL;
