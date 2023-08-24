@@ -218,6 +218,9 @@ void CUserInfoInputDlg::OnClickCheckD2f()
 	}
 	if (tmp.GetLength() >= PORT_LEN_MIN && tmp.GetLength() <= PORT_LEN_MAX) {
 		CString banStatus, uName;
+		BOOL isTag = FALSE;
+		if (m_userinfo.m_day2Free.Find(D2F_TAG_NEXT) != -1)
+			isTag = TRUE;
 		GetUserAntiDay(tmp, banStatus, uName);
 		if (uName != _T("")) {
 			if (tmpU == _T(""))
@@ -230,7 +233,10 @@ void CUserInfoInputDlg::OnClickCheckD2f()
 		if (banStatus != D2F_RET_TIME_OUT) {
 			CString content;
 			content.Format(D2F_TAG_TIME, GetYYMMDD_FromTimeT());
-			m_userinfo.m_day2Free = banStatus + content;
+			if (isTag == TRUE)
+				m_userinfo.m_day2Free = D2F_TAG_NEXT + banStatus + content;
+			else
+				m_userinfo.m_day2Free = banStatus + content;
 		}
 	}
 }

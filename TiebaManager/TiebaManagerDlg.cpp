@@ -724,7 +724,7 @@ void CTiebaManagerDlg::OnBnClickedButton3()
 void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 {
 	// TODO
-	g_pLog->Log(_T("TODO: 更新日志样式，添加校验") + Int2CString(pTotalCheckNum));
+	g_pLog->Log(_T("<font color=green>添加个人信息校验") + Int2CString(pTotalCheckNum) + _T("</font>"));
 	int totalUsers = g_pTbmCoreConfig->m_blackListRules.m_value.size();
 	if (0 < totalUsers && totalUsers <= pTotalCheckNum) {
 		auto& operate = CTBMOperate::GetInstance();
@@ -732,43 +732,58 @@ void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 		for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
 			operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
 		}
-		g_pLog->Log(_T("TODO: 更新日志样式，添加完毕，共添加") + Int2CString(totalUsers));
+		g_pLog->Log(_T("<font color=green>添加完毕，共添加") + Int2CString(totalUsers) + _T("</font>"));
 	}
 	else {
-		// 搜索是否存在起点
 		auto& operate = CTBMOperate::GetInstance();
 		int userNeede = pTotalCheckNum;
 		int isAdd = 0; // 0 未开始 1 开始添加 2 等待添加TAG 3 完成
+		// 第一轮，优先 空白 和 抽风记录
 		for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
-			if (isAdd == 0 && i.m_day2Free.Find(D2F_TAG_NEXT) != -1) {
-				// 找到了开始 TAG
-				isAdd = 1;
-				// 删除 TAG
-				i.m_day2Free.Replace(D2F_TAG_NEXT, _T(""));
-				CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
-				if (dlg->m_settingDlg != NULL) {
-					dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
-				}
-			}
-			if (isAdd == 1) {
+			if (i.m_day2Free.Find(D2F_RET_TIME_OUT) != -1 || i.m_day2Free.Find(D2F_RET_ERROR) != -1 || i.m_day2Free == _T("")) {
 				// 添加任务
 				operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
 				userNeede--;
 			}
 			if (userNeede == 0) {
 				// 终止添加
-				isAdd = 2;
-				userNeede = -1;
-			}
-			else if (userNeede == -1) {
-				// 添加新的TAG
-				i.m_day2Free = D2F_TAG_NEXT + i.m_day2Free;
 				isAdd = 3;
-				CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
-				if (dlg->m_settingDlg != NULL) {
-					dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
-				}
+				userNeede = -1;
 				break;
+			}
+		}
+		if (isAdd != 3) { // 搜索是否存在起点
+			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+				if (isAdd == 0 && i.m_day2Free.Find(D2F_TAG_NEXT) != -1) {
+					// 找到了开始 TAG
+					isAdd = 1;
+					// 删除 TAG
+					i.m_day2Free.Replace(D2F_TAG_NEXT, _T(""));
+					CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+					if (dlg->m_settingDlg != NULL) {
+						dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
+					}
+				}
+				if (isAdd == 1) {
+					// 添加任务
+					operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+					userNeede--;
+				}
+				if (userNeede == 0) {
+					// 终止添加
+					isAdd = 2;
+					userNeede = -1;
+				}
+				else if (userNeede == -1) {
+					// 添加新的TAG
+					i.m_day2Free = D2F_TAG_NEXT + i.m_day2Free;
+					isAdd = 3;
+					CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+					if (dlg->m_settingDlg != NULL) {
+						dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
+					}
+					break;
+				}
 			}
 		}
 		if (isAdd != 3) {
@@ -796,6 +811,6 @@ void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 				}
 			}
 		}
-		g_pLog->Log(_T("TODO: 更新日志样式，添加完毕，共添加") + Int2CString(pTotalCheckNum));
+		g_pLog->Log(_T("<font color=green>添加完毕，共添加") + Int2CString(pTotalCheckNum) + _T("</font>"));
 	}
 }
