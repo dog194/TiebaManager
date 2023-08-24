@@ -44,6 +44,7 @@ protected:
 public:
 	afx_msg void OnBnClickedCheckLzl();
 	afx_msg void OnBnClickedCheckBan();
+	afx_msg void OnBnClickedCheckBan2();
 	afx_msg void OnBnClickedStaticD2f();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
@@ -57,4 +58,5 @@ public:
 	CButton m_acedBlackCheckBanCheck;
 	CButton m_tempCheck;
 	CButton m_btnCheckBanNow;
+	CButton m_btnCheckBanNow2;
 };

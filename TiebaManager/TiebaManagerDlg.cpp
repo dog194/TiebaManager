@@ -723,7 +723,6 @@ void CTiebaManagerDlg::OnBnClickedButton3()
 // 添加校验个数
 void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 {
-	// TODO
 	g_pLog->Log(_T("<font color=green>添加个人信息校验") + Int2CString(pTotalCheckNum) + _T("</font>"));
 	int totalUsers = g_pTbmCoreConfig->m_blackListRules.m_value.size();
 	if (0 < totalUsers && totalUsers <= pTotalCheckNum) {
@@ -789,7 +788,6 @@ void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 		if (isAdd != 3) {
 			if (isAdd == 0) {
 				// 没找到开始TAG 直接开始
-				// TODO 是不是应该 优先再扫描 有没有空？
 				isAdd = 1;
 			}
 			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {

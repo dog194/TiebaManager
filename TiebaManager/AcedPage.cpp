@@ -47,12 +47,14 @@ void CAcedPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK_BAN,		m_acedBlackCheckBanCheck);
 	DDX_Control(pDX, IDC_HIDDEN,		m_tempCheck);
 	DDX_Control(pDX, IDC_BTN_CHECK_BAN, m_btnCheckBanNow);
+	DDX_Control(pDX, IDC_BTN_CHECK_BAN_2, m_btnCheckBanNow2);
 }
 
 
 BEGIN_MESSAGE_MAP(CAcedPage, CNormalDlg)
 	ON_BN_CLICKED(IDC_ENHANCED_LZL,		&CAcedPage::OnBnClickedCheckLzl)
 	ON_BN_CLICKED(IDC_BTN_CHECK_BAN,	&CAcedPage::OnBnClickedCheckBan)
+	ON_BN_CLICKED(IDC_BTN_CHECK_BAN_2,	&CAcedPage::OnBnClickedCheckBan2)
 	ON_STN_DBLCLK(IDC_TEXT_CHECK_BAN,	&CAcedPage::OnBnClickedStaticD2f)
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
@@ -79,24 +81,31 @@ void CAcedPage::OnBnClickedCheckLzl()
 // 解锁立即校验按钮
 void CAcedPage::OnBnClickedStaticD2f()
 {
-	CString tmp = L"1 使用立即校验功能前先保存配置，开始后程序会往操作队列中增加查询请求\n\r"
-		L"2 开始后不要点击设置界面的 应用改动，或确定按钮，否则查询结果会被重置并覆盖。\n\r"
-		L"3 点击取消按钮关闭当前按钮可以避免设置覆盖\n\r"
-		L"4 要修改设置请等待查询结束后，重新打开设置界面，这样才能加载最新结果\n\r\n\r"
+	CString tmp = L"1 尽管做了优化\n"
+		L"2 开始后尽量不要修改设置或者黑名单列表内容。\n"
+		L"3 要修改设置请等待查询结束后\n\n"
 		L"是否开启？";
 	int result = AfxMessageBox(tmp, MB_ICONINFORMATION | MB_YESNO);
 	if (result == IDYES) {
 		m_btnCheckBanNow.ShowWindow(SW_SHOW);
+		m_btnCheckBanNow2.ShowWindow(SW_SHOW);
 	}
-
 }
 
 // 立即校验 黑名单 列表
 void CAcedPage::OnBnClickedCheckBan()
 {
 	m_btnCheckBanNow.EnableWindow(FALSE);
-	CTiebaManagerDlg::addUserD2fCheck();
+	CTiebaManagerDlg::addUserD2fCheck(50);
 	SetTimer(0, 2000, NULL);
+}
+
+// 立即校验 黑名单 列表
+void CAcedPage::OnBnClickedCheckBan2()
+{
+	m_btnCheckBanNow2.EnableWindow(FALSE);
+	CTiebaManagerDlg::addUserD2fCheck(100);
+	SetTimer(1, 2000, NULL);
 }
 
 void CAcedPage::ShowPlan(const CPlan& plan)
@@ -122,6 +131,10 @@ void CAcedPage::OnTimer(UINT_PTR nIDEvent)
 	{
 		KillTimer(0);
 		m_btnCheckBanNow.EnableWindow(TRUE);
+	} else if (nIDEvent == 1)
+	{
+		KillTimer(1);
+		m_btnCheckBanNow2.EnableWindow(TRUE);
 	}
 	CDialog::OnTimer(nIDEvent);
 }
