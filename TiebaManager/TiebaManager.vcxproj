@@ -104,6 +104,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>opencv_core453.lib;opencv_wechat_qrcode453.lib;sqlite3.lib;Dbghelp.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <DelayLoadDLLs>TiebaAPI.dll;abseil_dll.dll;libcurl.dll;sqlite3.dll;tinyxml2.dll;opencv_core453.dll;opencv_dnn453.dll;opencv_imgcodecs453.dll;opencv_imgproc453.dll;opencv_wechat_qrcode453.dll;</DelayLoadDLLs>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
