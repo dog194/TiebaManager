@@ -252,6 +252,8 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		g_userCache.m_bannedUser->clear();
 		g_userCache.m_imgHeadCache.clear();
 		g_userCache.m_imgQRCodeCache.clear();
+		// 定期保存缓存数据
+		SaveCurrentUserConfig();
 		// 如果设置了自动更新，每天检查一次
 		if (g_globalConfig.m_autoUpdate) {
 			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();

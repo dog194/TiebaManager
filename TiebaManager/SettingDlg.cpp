@@ -110,7 +110,7 @@ BOOL CSettingDlg::OnInitDialog()
 	m_tree.SetItemData(m_tree.InsertItem(_T("方案")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("账号管理")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("关于&更新")), i++);
-	m_tree.SetItemData(m_tree.InsertItem(_T("没想好叫啥")), i++);
+	m_tree.SetItemData(m_tree.InsertItem(_T("工具")), i++);
 
 	// 初始化各页
 #define CREATE_PAGE(page) page->Create(page->IDD, this)

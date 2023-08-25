@@ -27,6 +27,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "TiebaManager.h"
 #include <Update.h>
 #include <MiscHelper.h>
+#include "ConfigHelper.h"
 
 
 // CToolsPage 对话框
@@ -54,12 +55,15 @@ void CToolsPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_CURL_EXE_V_NEW, m_staticCurlExeVnew);
 	DDX_Control(pDX, IDC_STATIC_7Z_V_NEW,		m_static7zVnew);
 	DDX_Control(pDX, IDC_BUTTON_LIBCURL_UPDATE, m_btnUpdate);
+	DDX_Control(pDX, IDC_BUTTON_SAVE_CACHE,		m_btnSaveCache);
 	DDX_Control(pDX, IDC_CHECK_DEBUG,			m_checkDebug);
 }
 
 BEGIN_MESSAGE_MAP(CToolsPage, CNormalDlg)
 	ON_BN_CLICKED(IDC_BUTTON_OEPN_QQ, &CToolsPage::OnBnClickedButtonOepnQq)
 	ON_BN_CLICKED(IDC_BUTTON_LIBCURL_UPDATE, &CToolsPage::OnBnClickedButtonLibcurlUpdate)
+	ON_BN_CLICKED(IDC_BUTTON_SAVE_CACHE, &CToolsPage::OnBnClickedButtonSaveCache)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -138,7 +142,6 @@ void CToolsPage::OnBnClickedButtonOepnQq()
 {
 	ShellExecute(NULL, _T("open"), QQ_QUN_URL, NULL, NULL, SW_SHOWNORMAL);
 }
-
 
 void CToolsPage::OnBnClickedButtonLibcurlUpdate()
 {
@@ -240,6 +243,13 @@ End:
 	CoUninitialize();
 }
 
+void CToolsPage::OnBnClickedButtonSaveCache()
+{
+	m_btnSaveCache.EnableWindow(FALSE);
+	SaveCurrentUserConfig();
+	SetTimer(0, 2000, NULL);
+}
+
 void CToolsPage::ShowPlan(const CPlan& plan)
 {
 	m_checkDebug.SetCheck(plan.m_toolsDebug);		// Debug 文件输出
@@ -248,4 +258,14 @@ void CToolsPage::ShowPlan(const CPlan& plan)
 void CToolsPage::ApplyPlanInDlg(CPlan& plan)
 {
 	*plan.m_toolsDebug = m_checkDebug.GetCheck();	// Debug 文件输出
+}
+
+void CToolsPage::OnTimer(UINT_PTR nIDEvent)
+{
+	if (nIDEvent == 0)
+	{
+		KillTimer(0);
+		m_btnSaveCache.EnableWindow(TRUE);
+	}
+	CDialog::OnTimer(nIDEvent);
 }
