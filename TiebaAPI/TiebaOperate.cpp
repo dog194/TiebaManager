@@ -134,8 +134,11 @@ static inline CString GetOperationErrorCode(const CString& src)
 	CString code = GetStringBetween(src, _T("no\":"), _T(","));
 	if (code == _T(""))
 		code = GetStringBetween(src, _T("code\":\""), _T("\""));
-	if (code != _T("0"))
+	if (code != _T("0")) {
 		WriteString(src, _T("operation.txt"));
+		if (GetTiebaErrorText(code) == _T("未收录错误"))
+			DebugRecord(_T("未知错误代码"), src);
+	}
 	return code;
 }
 

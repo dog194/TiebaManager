@@ -744,6 +744,7 @@ void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 			if (i.m_day2Free.Find(D2F_RET_TIME_OUT) != -1 || i.m_day2Free.Find(D2F_RET_ERROR) != -1 || i.m_day2Free == _T("")) {
 				// 添加任务
 				operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+				i.m_day2Free = D2F_RET_ADDED;
 				userNeede--;
 			}
 			if (userNeede == 0) {

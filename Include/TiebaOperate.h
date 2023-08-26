@@ -82,6 +82,7 @@ public:
 	// 删楼中楼，返回错误代码
 	CString DeleteLZL(const CString& tid, const CString& lzlid);
 };
+const CString D2F_RET_ADDED = _T("[队列中]");
 const CString D2F_RET_TIME_OUT = _T("[超时]");
 const CString D2F_RET_ERROR = _T("[百度抽风/参数错误]");
 const CString D2F_RET_NORMAL = _T("[正常]");

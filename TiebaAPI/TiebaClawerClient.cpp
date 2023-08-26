@@ -443,6 +443,7 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 		switch (type)
 		{
 		case 0: // 文字
+		case 8: // 不知道是啥 link: bdhd
 		case 9: // 电话号码
 		case 18: // 话题
 		case 27: // 词条
@@ -519,6 +520,8 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 				strUTF82W(rawContent->text()), strUTF82W(pbTbPlusInfo->h5_jump_number()));
 			break;
 		case 36: // TODO
+		case 37:
+			pbTbPlusInfo = rawContent->mutable_tiebaplus_info();
 			content = _T("");
 			break;
 		case 11: // 特殊表情，哈米猫，滑稽，鸡年滑稽等
