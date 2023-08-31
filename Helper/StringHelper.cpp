@@ -575,6 +575,14 @@ HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src)
 	return tmp;
 }
 
+// 获取时间戳
+HELPER_API LONGLONG GetTimestamp()
+{
+	time_t t;
+	time(&t);
+	return t;
+}
+
 // 获取时间戳毫秒
 HELPER_API LONGLONG GetTimestampMS()
 {

@@ -36,6 +36,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "TBMConfigPath.h"
 #include "ConfigHelper.h"
+#include "TBMCoreDbHelper.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -287,10 +288,12 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		}
 	}
 
-	// 数据库初始化？
-	sqlite3* db;
-	int rc;
-	rc = sqlite3_open("tb.db", &db);
+	auto& db = CSqlDb::GetInstance();
+	auto& a123 = db.getImgInfo(_T("1234abcd"));
+	a123.m_QR = _T("啊");
+	a123.is_QR_null = FALSE;
+	db.insert2imgInfo(a123); 
+
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }

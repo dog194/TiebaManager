@@ -69,11 +69,15 @@
     <ClCompile Include="TBMCoreImageHelper.cpp">
       <Filter>源文件\API\Helper</Filter>
     </ClCompile>
+    <ClCompile Include="TBMCoreDbHelper.cpp">
+      <Filter>源文件\API\Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\TiebaManagerCore.rc2">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -110,6 +114,9 @@
       <Filter>头文件\API\Rule</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\TBMCoreImageHelper.h">
+      <Filter>头文件\API\Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\TBMCoreDbHelper.h">
       <Filter>头文件\API\Helper</Filter>
     </ClInclude>
   </ItemGroup>

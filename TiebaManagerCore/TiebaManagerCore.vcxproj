@@ -49,6 +49,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)3rdParty\sqlite\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdParty\sqlite\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -95,7 +97,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opencv_core453.lib;opencv_imgproc453.lib;opencv_wechat_qrcode453.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sqlite3.lib;opencv_core453.lib;opencv_imgproc453.lib;opencv_wechat_qrcode453.lib;Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <DelayLoadDLLs>TiebaAPI.dll;abseil_dll.dll;libcurl.dll;libprotobuf.dll;libprotobuf-lite.dll;sqlite3.dll;tinyxml2.dll;opencv_core453.dll;opencv_dnn453.dll;opencv_imgcodecs453.dll;opencv_imgproc453.dll;opencv_wechat_qrcode453.dll;</DelayLoadDLLs>
     </Link>
     <Midl>
@@ -117,6 +119,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TBMCoreDbHelper.cpp" />
     <ClCompile Include="TBMCoreImageHelper.cpp" />
     <ClCompile Include="ImageCondition.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -133,9 +136,11 @@
     <ClCompile Include="TBMScan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cpp.hint" />
     <None Include="res\TiebaManagerCore.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Include\TBMCoreDbHelper.h" />
     <ClInclude Include="..\Include\TBMCoreImageHelper.h" />
     <ClInclude Include="..\Include\TBMCoreGlobal.h" />
     <ClInclude Include="..\Include\TBMCoreEvents.h" />
