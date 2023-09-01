@@ -297,6 +297,17 @@ HELPER_API void DebugRecord(const CString& title, const int& c_int, const CStrin
 }
 
 // Debug 记录
+HELPER_API void DebugRecord(const CString& title, const double& c_double, const CString& content)
+{
+	if (g_pTbmCoreConfig->m_toolsDebug == FALSE) {
+		return;
+	}
+	CString src = _T("======== ") + GetYYMMDD_HHMMSS_FromTimeT() + _T(" ========\r\n");
+	src += title + _T(" == ") + Double2CString(c_double) + _T("\r\n") + content;
+	WriteStringCon(src, _T("debugRecord.txt"));
+}
+
+// Debug 记录
 HELPER_API void DebugRecord(const CString& title, const CString& content)
 {
 	if (g_pTbmCoreConfig->m_toolsDebug == FALSE) {
@@ -619,6 +630,14 @@ HELPER_API CString Int64oCString(const INT64 num)
 {
 	CString tmp;
 	tmp.Format(_T("%I64d"), num);
+	return tmp;
+}
+
+// Double to CString
+HELPER_API CString Double2CString(const double num)
+{
+	CString tmp;
+	tmp.Format(_T("%f"), num);
 	return tmp;
 }
 

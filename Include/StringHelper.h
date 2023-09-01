@@ -91,6 +91,7 @@ HELPER_API BOOL WriteString(const CString& src, const CString& path);
 HELPER_API BOOL WriteStringCon(const CString& src, const CString& path);
 // Debug 记录
 HELPER_API void DebugRecord(const CString& title, const int& c_int, const CString& content = L"");
+HELPER_API void DebugRecord(const CString& title, const double& c_double, const CString& content = L"");
 HELPER_API void DebugRecord(const CString& title, const CString& content = L"");
 
 // 单字符16进制转10进制
@@ -147,6 +148,8 @@ HELPER_API int GetTimeDiffInS(const time_t& time_1, const time_t& time_2);
 HELPER_API CString Int2CString(const int num);
 // Int64 to CString
 HELPER_API CString Int64oCString(const INT64 num);
+// Double to CString
+HELPER_API CString Double2CString(const double num);
 // 获取随机Tip
 HELPER_API CString GetRandomTip();
 // 获取DLL文件信息

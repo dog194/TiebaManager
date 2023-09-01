@@ -116,8 +116,6 @@ public:
 	COption<std::set<CString> > m_defriendedUser;		// 已拉黑的用户，要写入文件
 
 	std::vector<CTempIgnoreRule> m_tempIgnoreRule;		// 一次性临时确认列表忽略规则，不写入文件
-	std::vector<CImgSingleInfoCache> m_imgHeadCache;	// 图片文件头缓存，不写入文件
-	std::vector<CImgSingleInfoCache> m_imgQRCodeCache;	// 二维码识别缓存，不写入文件
 
 	CUserCache();
 

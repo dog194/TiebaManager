@@ -150,6 +150,11 @@ BOOL CSqlDb::insert2imgInfo(const CDbImgInfo& imgInfo) {
 
 
 CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
+	CDbImgInfo imgInfo = CDbImgInfo(cName);
+	if (m_dbInit == FALSE) {
+		AfxMessageBox(_T("未初始化，却访问 getImgInfo"), MB_ICONINFORMATION | MB_TOPMOST);
+		return imgInfo;
+	}
 	std::string sql = "SELECT " + C_NAME_IG_QR + ", " + C_NAME_IG_HEAD + ", " +
 		C_NAME_IG_OCR + ", " + C_NAME_IG_TIME + " FROM " + TABLE_NAME_IMG_INFO +
 		" WHERE " + C_NAME_IG_ID + "=?";
@@ -163,9 +168,8 @@ CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
 		CString error(errMsg);
 		AfxMessageBox(_T("prepare失败:") + error, MB_ICONINFORMATION | MB_TOPMOST);
 		sqlite3_finalize(stmt);
-		return NULL;
+		return imgInfo;
 	}
-	CDbImgInfo imgInfo = CDbImgInfo(cName);
 	while ((sqlite3_step(stmt)) == SQLITE_ROW) {
 		if (sqlite3_column_type(stmt, 0) != SQLITE_NULL) {
 			imgInfo.is_QR_null = FALSE;
@@ -189,7 +193,7 @@ CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
 		const char* errMsg = sqlite3_errmsg(m_db);
 		CString error(errMsg);
 		AfxMessageBox(_T("查询失败:") + error + Int2CString(rc), MB_ICONINFORMATION | MB_TOPMOST);
-		return NULL;
+		return imgInfo;
 	}
 	return imgInfo;
 }
@@ -219,5 +223,4 @@ CSqlDb::~CSqlDb()
 {
 	sqlite3_close(m_db);
 	m_dbInit = FALSE;
-	AfxMessageBox(_T("CSqlDb 析构了"), MB_ICONINFORMATION | MB_TOPMOST);
 }

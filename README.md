@@ -31,9 +31,14 @@ TiebaManager
 * [7z](https://www.7-zip.org/) 19.00 (7za.exe)
 * [rapidjson](http://rapidjson.org/)
 
+工具
+---------
+* [DB Browser](https://sqlitebrowser.org/dl/) DB Browser for SQLite
+
 搭建开发环境
 ---------
 
 1. 使用VS2022或以上版本
 2. 下载本项目源码
 3. 运行`SetupEnvironment.bat`
+4. 根据编译错误补全缺失的dll，windows SDK，等等等等

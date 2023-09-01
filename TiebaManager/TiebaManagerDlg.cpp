@@ -205,7 +205,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	{
 		*g_globalConfig.m_firstRun = FALSE;
 		g_globalConfig.Save(GLOBAL_CONFIG_PATH);
-		AfxMessageBox(_T("本软件免费！开源！如果你花钱买或下载的，恭喜你被骗了！"), MB_ICONINFORMATION);
+		AfxMessageBox(_T("本软件免费！开源！如果你花钱买或下载的，恭喜你被骗了！"), MB_ICONINFORMATION | MB_TOPMOST);
 		OnBnClickedButton5();
 		m_settingDlg->ShowAbout();
 	}
@@ -247,12 +247,9 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 每24小时清除已封名单
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
-	g_userCache.m_imgHeadCache.clear(); // 每24小时清空一次图片头缓存信息
-	g_userCache.m_imgQRCodeCache.clear(); // 每24小时清空一次图片头缓存信息
 	SetTimer(0, 24 * 60 * 60 * 1000, [](HWND, UINT, UINT_PTR, DWORD) {
 		g_userCache.m_bannedUser->clear();
-		g_userCache.m_imgHeadCache.clear();
-		g_userCache.m_imgQRCodeCache.clear();
+		// TODO 定期清理数据库
 		// 定期保存缓存数据
 		SaveCurrentUserConfig();
 		// 如果设置了自动更新，每天检查一次
@@ -291,7 +288,6 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	auto& db = CSqlDb::GetInstance();
 	auto& a123 = db.getImgInfo(_T("1234abcd"));
 	a123.m_QR = _T("啊");
-	a123.is_QR_null = FALSE;
 	db.insert2imgInfo(a123); 
 
 
