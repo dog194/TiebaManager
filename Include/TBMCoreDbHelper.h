@@ -64,4 +64,6 @@ public:
 	BOOL insert(const std::string& tbName, const std::string& sqlMain);
 	BOOL insert2imgInfo(const CDbImgInfo& imgInfo);
 	CDbImgInfo getImgInfo(const CString& cName);
+	int db_delete(const std::string& tbName, const std::string& sqlConditions);
+	int db_deleteImgInfo(const int& nDays = 30);
 };

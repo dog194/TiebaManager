@@ -69,6 +69,7 @@ TBM_CORE_API CString GetImgHead(CString imgUrl, const BOOL addCache)
 		CSqlDb db = CSqlDb::GetInstance();
 		imgInfo = db.getImgInfo(imgName);
 		if (imgInfo.m_imgHead != _T("")) {
+			db.insert2imgInfo(imgInfo); // 更新访问时间
 			return imgInfo.m_imgHead;
 		}
 	}
@@ -104,6 +105,7 @@ TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content, const BOOL addCac
 		imgInfo = db.getImgInfo(imgName);
 		if (imgInfo.is_QR_null == FALSE) {
 			content = imgInfo.m_QR;
+			db.insert2imgInfo(imgInfo); // 更新访问时间
 			//LARGE_INTEGER end;
 			//QueryPerformanceCounter(&end);
 			//double interval = static_cast<double>(end.QuadPart - start.QuadPart) / frequency.QuadPart;

@@ -73,7 +73,8 @@ public:
 	afx_msg void OnBnClickedButton7();
 	afx_msg void OnClose();
 	afx_msg void OnProWinCheckChange();
-	
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+
 	static afx_msg void addUserD2fCheck(int pTotalCheckNum = 25);
 	DECLARE_EVENTSINK_MAP()
 	void BeforeNavigate2Explorer1(LPDISPATCH pDisp, VARIANT* URL, VARIANT* Flags, VARIANT* TargetFrameName, VARIANT* PostData, VARIANT* Headers, BOOL* Cancel);

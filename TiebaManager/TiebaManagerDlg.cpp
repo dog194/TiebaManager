@@ -106,6 +106,7 @@ BEGIN_MESSAGE_MAP(CTiebaManagerDlg, CNormalDlg)
 	ON_STN_CLICKED(IDC_STATIC7, &CTiebaManagerDlg::OnStnClickedStatic7)
 	ON_BN_CLICKED(IDC_BUTTON7, &CTiebaManagerDlg::OnBnClickedButton7)
 	ON_WM_CLOSE()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 BEGIN_EVENTSINK_MAP(CTiebaManagerDlg, CNormalDlg)
@@ -247,28 +248,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 每24小时清除已封名单
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
-	SetTimer(0, 24 * 60 * 60 * 1000, [](HWND, UINT, UINT_PTR, DWORD) {
-		g_userCache.m_bannedUser->clear();
-		// TODO 定期清理数据库
-		// 定期保存缓存数据
-		SaveCurrentUserConfig();
-		// 如果设置了自动更新，每天检查一次
-		if (g_globalConfig.m_autoUpdate) {
-			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
-			switch (CheckUpdate(True, dependFiles)) {
-			case UPDATE_HAS_UPDATE:
-				g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
-				break;
-			case UPDATE_NO_UPDATE:
-			case UPDATE_FAILED_TO_GET_INFO:
-				g_postUpdateInfoEvent(_T(""), dependFiles);
-			}
-		}
-		// 定期校验用户封禁状态
-		if (g_pTbmCoreConfig->m_acedBlackCheckBan.m_value == TRUE) {
-			addUserD2fCheck();
-		}
-	});
+	SetTimer(0, 24 * 60 * 60 * 1000, NULL);
 
 	SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION);
 
@@ -285,11 +265,8 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 		}
 	}
 
-	auto& db = CSqlDb::GetInstance();
-	auto& a123 = db.getImgInfo(_T("1234abcd"));
-	a123.m_QR = _T("啊");
-	db.insert2imgInfo(a123); 
-
+	//auto& db = CSqlDb::GetInstance();
+	//db.db_deleteImgInfo();
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -813,4 +790,41 @@ void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
 		}
 		g_pLog->Log(_T("<font color=green>添加完毕，共添加") + Int2CString(pTotalCheckNum) + _T("</font>"));
 	}
+}
+
+// 每日 Timer 事件
+void CTiebaManagerDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	if (nIDEvent == 0)
+	{
+		if (m_confirmButton.IsWindowEnabled() == TRUE) {
+			// 未确认，跳过 定时器
+			return;
+		}
+		// 定期清理封禁缓存
+		g_userCache.m_bannedUser->clear();
+		// 定期清理数据库
+		auto& db = CSqlDb::GetInstance();
+		int nDelete = db.db_deleteImgInfo();
+		g_pLog->Log(_T("<font color=green>30 天未查询的数据库数据：已删除 ") + Int2CString(nDelete) + _T(" 条</font>"));
+		// 定期保存缓存数据
+		SaveCurrentUserConfig();
+		// 如果设置了自动更新，每天检查一次
+		if (g_globalConfig.m_autoUpdate) {
+			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
+			switch (CheckUpdate(True, dependFiles)) {
+			case UPDATE_HAS_UPDATE:
+				g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
+				break;
+			case UPDATE_NO_UPDATE:
+			case UPDATE_FAILED_TO_GET_INFO:
+				g_postUpdateInfoEvent(_T(""), dependFiles);
+			}
+		}
+		// 定期校验用户封禁状态
+		if (g_pTbmCoreConfig->m_acedBlackCheckBan.m_value == TRUE) {
+			addUserD2fCheck();
+		}
+	}
+	CDialog::OnTimer(nIDEvent);
 }

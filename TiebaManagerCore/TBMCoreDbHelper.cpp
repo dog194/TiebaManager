@@ -98,6 +98,10 @@ BOOL CSqlDb::initTable() {
 
 // 插入或者更新数据
 BOOL CSqlDb::insert(const std::string& tbName, const std::string& sqlMain) {
+	if (m_dbInit == FALSE) {
+		AfxMessageBox(_T("未初始化，却访问 insert"), MB_ICONINFORMATION | MB_TOPMOST);
+		return FALSE;
+	}
 	// "INSERT OR REPLACE INTO table1 (column1, column2) VALUES (?, ?)"
 	std::string sql = "INSERT OR REPLACE INTO " + tbName + " " + sqlMain;
 	char* errMsg = nullptr;
@@ -198,6 +202,44 @@ CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
 	return imgInfo;
 }
 
+
+int CSqlDb::db_delete(const std::string& tbName, const std::string& sqlConditions) {
+	if (m_dbInit == FALSE) {
+		AfxMessageBox(_T("未初始化，却访问 delete"), MB_ICONINFORMATION | MB_TOPMOST);
+		return FALSE;
+	}
+	// "DELETE FROM table_name WHERE column_name = value";
+	std::string sql = "DELETE FROM " + tbName + " WHERE " + sqlConditions;
+	char* errMsg = nullptr;
+	int rc = sqlite3_exec(m_db, sql.c_str(), NULL, 0, &errMsg);
+	if (rc != SQLITE_OK) {
+		AfxMessageBox(Int2CString(rc), MB_ICONINFORMATION);
+		CString tmp(errMsg);
+		AfxMessageBox(_T("删除数据失败"), MB_ICONINFORMATION);
+		AfxMessageBox(tmp, MB_ICONINFORMATION);
+		tmp = tbName.c_str();
+		AfxMessageBox(tmp, MB_ICONINFORMATION);
+		tmp = sqlConditions.c_str();
+		AfxMessageBox(tmp, MB_ICONINFORMATION);
+		sqlite3_free(errMsg);
+		return -1;
+	}
+	else {
+		int changes = sqlite3_changes(m_db);
+		return changes;
+	}
+}
+
+
+// 按照时间删除，删除超过指定天数之前的数据
+int CSqlDb::db_deleteImgInfo(const int& nDays) {
+	time_t tNow, tLimit;
+	time(&tNow);
+	tLimit = tNow - nDays * 24 * 60 * 60;
+	std::string sqlConditions = C_NAME_IG_TIME + " < ";
+	sqlConditions += CW2A(Int64oCString(tLimit));
+	return db_delete(TABLE_NAME_IMG_INFO, sqlConditions);
+}
 
 CSqlDb::CSqlDb()
 {
