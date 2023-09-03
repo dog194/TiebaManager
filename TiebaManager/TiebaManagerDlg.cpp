@@ -551,13 +551,38 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		if (hasCache) {
 			if (!g_pTbmCoreConfig->m_autoScan) {
 				m_log.Log(_T("<font color=red>贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!</font>"));
-				//AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,\n惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
 			}
 			useCache = TRUE;
 			break;
 		}
 		else {
-			AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR);
+			// API 获取 fid
+			CString aFid = g_tiebaOperate.ApiGetFid(forumName);
+			if (aFid != _T("")) {
+				if (g_globalConfig.m_currentUser == _T("")) {
+					AfxMessageBox(_T("当前账号 为空"), MB_ICONERROR);
+					goto Error;
+				}
+				g_tiebaOperate.SetForumName(forumName);
+				g_tiebaOperate.SetForumID(aFid);
+				g_tiebaOperate.SetUserName_(g_globalConfig.m_currentUser);
+				g_tiebaOperate.SetBDUSS();
+				// API 获取 TBS
+				tbs = g_tiebaOperate.ApiGetTbs(isLogin);
+				if (tbs == _T("")) {
+					AfxMessageBox(_T("获取口令号失败"), MB_ICONERROR);
+					goto Error;
+				}
+				if (isLogin != _T("1")) {
+					AfxMessageBox(_T("未登录状态"), MB_ICONERROR);
+					goto Error;
+				}
+				g_tiebaOperate.SetTBS(tbs);
+				m_log.Log(_T("<font color=red>度娘抽了！需要图像旋转验证！但是2.8版本增加了新的方法替代解决此问题，惊不惊喜?意不意外?</font>"));
+				AfxMessageBox(_T("度娘抽了！需要图像旋转验证！但是2.8版本增加了新的方法替代解决此问题，惊不惊喜?意不意外?"), MB_ICONERROR | MB_TOPMOST);
+				break;
+			}
+			AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR | MB_TOPMOST);
 			goto Error;
 		}
 	case CTiebaOperate::SET_TIEBA_NOT_LOGIN:
@@ -585,9 +610,7 @@ Cache:
 				g_tiebaOperate.SetUserName_(i.m_userName);
 				g_tiebaOperate.SetBDUSS();
 				// 采集tbs
-				src = g_tiebaOperate.HTTPGet(_T("https://tieba.baidu.com/dc/common/tbs"));
-				tbs = GetStringBetween(src, _T("tbs\":\""), _T("\""));
-				isLogin = GetStringBetween(src, _T("is_login\":"), _T("}"));
+				tbs = g_tiebaOperate.ApiGetTbs(isLogin);
 				if (tbs == _T("")) {
 					AfxMessageBox(_T("使用缓存,获取口令号失败"), MB_ICONERROR);
 					goto Error;

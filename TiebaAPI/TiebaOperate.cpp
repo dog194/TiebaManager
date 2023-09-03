@@ -94,7 +94,6 @@ CTiebaOperate::SetTiebaResult CTiebaOperate::SetTieba(const CString& forumName)
 	if (!hasPower)
 		WriteString(src2, _T("admin.txt"));
 		*/
-	BOOL hasPower = TRUE;
 
 	// 取tbs(口令号)
 	m_tbs = GetStringBetween(src, _TBS_LEFT, _TBS_RIGHT);
@@ -109,7 +108,36 @@ CTiebaOperate::SetTiebaResult CTiebaOperate::SetTieba(const CString& forumName)
 	// 确定BDUSS
 	m_bduss = GetStringBetween(m_cookie, _T("BDUSS="), _T(";"));
 	
-	return hasPower ? SET_TIEBA_OK : SET_TIEBA_NO_POWER;
+	return SET_TIEBA_OK;
+}
+
+
+// 使用 api 获取 fid
+CString CTiebaOperate::ApiGetFid(const CString& forumName)
+{
+	if (forumName == _T(""))
+		return _T("");
+	CString src = this->HTTPGet(_T("http://tieba.baidu.com/f/commit/share/fnameShareApi?ie=utf-8&fname=") + EncodeURI(forumName));
+	if (src == NET_TIMEOUT_TEXT)
+		return _T("");
+	// 采集贴吧信息
+	CString tmp = GetStringBetween(src, _T("\"fid\":"), _T(","));
+	if (tmp == _T("0"))
+		return _T("");
+	return tmp;
+}
+
+
+// 使用 api 获取 tbs
+CString CTiebaOperate::ApiGetTbs(CString& isLogin) 
+{
+	CString src = this->HTTPGet(_T("https://tieba.baidu.com/dc/common/tbs"));
+	if (src == NET_TIMEOUT_TEXT) {
+		isLogin = _T("");
+		return _T("");
+	}
+	isLogin = GetStringBetween(src, _T("is_login\":"), _T("}"));
+	return GetStringBetween(src, _T("tbs\":\""), _T("\""));
 }
 
 

@@ -55,6 +55,10 @@ public:
 	enum SetTiebaResult { SET_TIEBA_OK, SET_TIEBA_TIMEOUT, SET_TIEBA_NOT_FOUND, SET_TIEBA_NOT_LOGIN, SET_TIEBA_NO_POWER, SET_TIEBA_NO_TBS };
 	// 设置要操作的贴吧
 	SetTiebaResult SetTieba(const CString& forumName);
+	// 使用 api 获取 fid
+	CString ApiGetFid(const CString& forumName);
+	// 使用 api 获取 tbs
+	CString ApiGetTbs(CString& isLogin);
 
 	// 带Cookie
 	CString HTTPGet(const CString& URL);
