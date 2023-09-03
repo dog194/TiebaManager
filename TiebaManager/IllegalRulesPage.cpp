@@ -41,9 +41,10 @@ BOOL CIllegalRulesPage::OnInitDialog()
 	m_list.DeleteColumn(0);
 	m_list.ModifyStyle(LVS_NOCOLUMNHEADER, 0);
 	int i = 0;
-	m_list.InsertColumn(i++, _T("规则名"), LVCFMT_LEFT, 350);
-	m_list.InsertColumn(i++, _T("强制确认"), LVCFMT_LEFT, 80);
-	m_list.InsertColumn(i++, _T("触发次数"), LVCFMT_LEFT, 80);
+	m_list.InsertColumn(i++, _T("规则名"), LVCFMT_LEFT, 280);
+	m_list.InsertColumn(i++, _T("强制确认"), LVCFMT_LEFT, 60);
+	m_list.InsertColumn(i++, _T("联动删除"), LVCFMT_LEFT, 60);
+	m_list.InsertColumn(i++, _T("触发次数"), LVCFMT_LEFT, 60);
 
 	m_static.SetWindowText(_T("匹配的帖子为违规帖"));
 
@@ -83,7 +84,8 @@ BOOL CIllegalRulesPage::Import(const CString& path)
 void CIllegalRulesPage::OnUpdateRule(int index)
 {
 	m_list.SetItemText(index, 1, m_rules[index].m_forceToConfirm ? _T("√") : _T(""));
+	m_list.SetItemText(index, 2, m_rules[index].m_deleteIfIsLZ ? _T("√") : _T(""));
 	CString tmp;
 	tmp.Format(_T("%d"), m_rules[index].m_trigCount);
-	m_list.SetItemText(index, 2, tmp);
+	m_list.SetItemText(index, 3, tmp);
 }

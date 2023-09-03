@@ -48,6 +48,7 @@ void CAcedPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_HIDDEN,		m_tempCheck);
 	DDX_Control(pDX, IDC_BTN_CHECK_BAN, m_btnCheckBanNow);
 	DDX_Control(pDX, IDC_BTN_CHECK_BAN_2, m_btnCheckBanNow2);
+	DDX_Control(pDX, IDC_INFO_ACE_DEL, m_infoNoAceDelCheck);
 }
 
 
@@ -114,6 +115,8 @@ void CAcedPage::ShowPlan(const CPlan& plan)
 	m_acedEnhancedLzlCheck.SetCheck(plan.m_acedEnhancedLzl);		// Aced 楼中楼
 	m_acedBlackCheckBanCheck.SetCheck(plan.m_acedBlackCheckBan);	// Aced 校验永封
 
+	m_infoNoAceDelCheck.SetCheck(plan.m_infoNoAceDel);				// Info 不警示联动删除
+
 	m_tempCheck.SetCheck(plan.m_hiddenFunction);					// 开发中暂用
 }
 
@@ -121,6 +124,8 @@ void CAcedPage::ApplyPlanInDlg(CPlan& plan)
 {
 	*plan.m_acedEnhancedLzl = m_acedEnhancedLzlCheck.GetCheck();	// Aced 楼中楼
 	*plan.m_acedBlackCheckBan = m_acedBlackCheckBanCheck.GetCheck();// Aced 校验永封
+
+	*plan.m_infoNoAceDel = m_infoNoAceDelCheck.GetCheck();			// Info 不警示联动删除
 
 	*plan.m_hiddenFunction = m_tempCheck.GetCheck();				// 开发中暂用
 }

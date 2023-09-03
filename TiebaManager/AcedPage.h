@@ -56,6 +56,7 @@ public:
 	CStatic m_static_check_d2f;
 	CButton m_acedEnhancedLzlCheck;
 	CButton m_acedBlackCheckBanCheck;
+	CButton m_infoNoAceDelCheck;
 	CButton m_tempCheck;
 	CButton m_btnCheckBanNow;
 	CButton m_btnCheckBanNow2;

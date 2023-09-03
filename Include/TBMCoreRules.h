@@ -32,9 +32,9 @@ class TBM_CORE_API CIllegalRule final : public CRule
 {
 public:
 	BOOL m_forceToConfirm = FALSE;	          // 强制确认
+	BOOL m_deleteIfIsLZ = FALSE;	          // 联动删除
 	int m_trigCount = 0;    			      // 触发次数
 };
-
 
 // 条件
 

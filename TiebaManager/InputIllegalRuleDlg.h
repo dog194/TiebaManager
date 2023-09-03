@@ -41,6 +41,8 @@ public:
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
 
+	afx_msg void OnBnClickedCheckNoAceDel();
+
 	virtual BOOL SetItem(int index) override;
 	virtual void ShowList(const CIllegalRule& list) override;
 	virtual void ShowList(CIllegalRule&& list) override;
@@ -48,4 +50,5 @@ public:
 
 public:
 	CButton m_forceToComfirmCheck;
+	CButton m_deleteIfIsLZCheck;
 };

@@ -35,14 +35,17 @@ DECLEAR_READ(CIllegalRule)
 
 	COption<CRule> rule(m_name);
 	COption<BOOL> forceToConfirm("ForceToConfirm", FALSE);
+	COption<BOOL> deleteIfIsLZ("AceDel", FALSE);
 	COption<int> trigCount("TrigCount", 0);
 	rule.Read(root);
 	forceToConfirm.Read(*optionNode);
+	deleteIfIsLZ.Read(*optionNode);
 	trigCount.Read(*optionNode);
 
 	m_value.m_name = std::move(rule->m_name);
 	m_value.m_conditionParams = std::move(rule->m_conditionParams);
 	m_value.m_forceToConfirm = forceToConfirm;
+	m_value.m_deleteIfIsLZ = deleteIfIsLZ;
 	m_value.m_trigCount = trigCount;
 
 	if (!IsValid(m_value))
@@ -60,6 +63,9 @@ DECLEAR_WRITE(CIllegalRule)
 	COption<BOOL> forceToConfirm("ForceToConfirm");
 	*forceToConfirm = m_value.m_forceToConfirm;
 	forceToConfirm.Write(*optionNode);
+	COption<BOOL> deleteIfIsLZ("AceDel");
+	*deleteIfIsLZ = m_value.m_deleteIfIsLZ;
+	deleteIfIsLZ.Write(*optionNode);
 	COption<int> trigCount("TrigCount");
 	*trigCount = m_value.m_trigCount;
 	trigCount.Write(*optionNode);
