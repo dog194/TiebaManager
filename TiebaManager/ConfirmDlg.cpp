@@ -64,7 +64,8 @@ void CConfirmDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT1, m_contentEdit);
 	DDX_Control(pDX, IDC_STATIC1, m_static);
 	DDX_Control(pDX, IDC_STATIC_RULE, m_static_rule);
-	DDX_Control(pDX, IDC_STATIC_CON_IS_BL, m_static_is_bl);
+	DDX_Control(pDX, IDC_STATIC_CON_IS_BL, m_static_is_bl); 
+	DDX_Control(pDX, IDC_STATIC_CON_IS_LZ, m_static_is_lz);
 	DDX_Control(pDX, IDC_STATIC_CON_RULE_COUNT, m_static_break_rule_count);
 	DDX_Control(pDX, IDC_STATIC_CON_OPE_COUNT, m_static_con_quene_count);
 	DDX_Control(pDX, IDOK, m_yesButton);
@@ -110,6 +111,8 @@ HBRUSH CConfirmDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	if (pWnd->m_hWnd == m_static_is_bl.m_hWnd)
 		pDC->SetTextColor(RGB(255, 0, 0));
+	if (pWnd->m_hWnd == m_static_is_lz.m_hWnd)
+		pDC->SetTextColor(RGB(85, 139, 246));
 	if (pWnd->m_hWnd == m_static_rule.m_hWnd) {
 		pDC->SetTextColor(RGB(0, 0, 255));
 		HFONT m_font = CreateFont(0, 0, 0, 0, 0, 0, TRUE, 0, 0, 0, 0, 0, 0, 0);
@@ -182,6 +185,10 @@ BOOL CConfirmDlg::OnInitDialog()
 		if (m_operation->object->attachedInfo != _T("")) {
 			content += _T("\r\n") + m_operation->object->attachedInfo;
 		}
+		if (m_operation->object->isTidAuthor == TRUE)
+			m_static_is_lz.ShowWindow(SW_SHOW);
+		else
+			m_static_is_lz.ShowWindow(SW_HIDE);
 
 		m_contentEdit.SetWindowText(content);
 		m_contentEdit.SetSel(m_operation->pos, m_operation->pos + m_operation->length);

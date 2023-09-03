@@ -62,6 +62,7 @@ public:
 	CStatic m_static;
 	CStatic m_static_rule;
 	CStatic m_static_is_bl;
+	CStatic m_static_is_lz;
 	CStatic m_static_break_rule_count;
 	CStatic m_static_con_quene_count;
 	CButton m_explorerButton;

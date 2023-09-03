@@ -74,6 +74,7 @@ PROTOBUF_CONSTEXPR ThreadInfo::ThreadInfo(::_pbi::ConstantInitialized)
           &::_pbi::fixed_address_empty_string,
           ::_pbi::ConstantInitialized{},
       },
+      /*decltype(_impl_.author_)*/ nullptr,
       /*decltype(_impl_.poll_info_)*/ nullptr,
       /*decltype(_impl_.agree_)*/ nullptr,
       /*decltype(_impl_.origin_thread_info_)*/ nullptr,
@@ -167,6 +168,7 @@ const ::uint32_t TableStruct_ThreadInfo_2eproto::offsets[] PROTOBUF_SECTION_VARI
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_top_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_good_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_vote_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.author_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.fid_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.first_post_id_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_global_top_),
@@ -197,20 +199,21 @@ const ::uint32_t TableStruct_ThreadInfo_2eproto::offsets[] PROTOBUF_SECTION_VARI
     ~0u,
     ~0u,
     ~0u,
-    ~0u,
-    ~0u,
-    ~0u,
-    ~0u,
-    ~0u,
-    ~0u,
-    ~0u,
-    ~0u,
-    ~0u,
     0,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
     ~0u,
     1,
     ~0u,
     2,
+    ~0u,
+    3,
     ~0u,
     ~0u,
     ~0u,
@@ -221,7 +224,7 @@ const ::uint32_t TableStruct_ThreadInfo_2eproto::offsets[] PROTOBUF_SECTION_VARI
 static const ::_pbi::MigrationSchema
     schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
         {0, 19, -1, sizeof(::ThreadInfo_OriginThreadInfo)},
-        {30, 68, -1, sizeof(::ThreadInfo)},
+        {30, 69, -1, sizeof(::ThreadInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -229,47 +232,49 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::_ThreadInfo_default_instance_._instance,
 };
 const char descriptor_table_protodef_ThreadInfo_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-    "\n\020ThreadInfo.proto\032\017PbContent.proto\032\013Agr"
-    "ee.proto\032\016PollInfo.proto\"\362\006\n\nThreadInfo\022"
-    "\n\n\002id\030\001 \001(\003\022\013\n\003tid\030\002 \001(\003\022\r\n\005title\030\003 \001(\t\022"
-    "\021\n\treply_num\030\004 \001(\005\022\020\n\010view_num\030\005 \001(\005\022\021\n\t"
-    "last_time\030\006 \001(\t\022\025\n\rlast_time_int\030\007 \001(\005\022\024"
-    "\n\014thread_types\030\010 \001(\005\022\016\n\006is_top\030\t \001(\005\022\017\n\007"
-    "is_good\030\n \001(\005\022\017\n\007is_vote\030\013 \001(\005\022\013\n\003fid\030\033 "
-    "\001(\003\022\025\n\rfirst_post_id\030( \001(\003\022\025\n\ris_global_"
-    "top\030* \001(\005\022\023\n\013create_time\030- \001(\005\022\017\n\007post_i"
-    "d\0304 \001(\003\022\014\n\004time\0305 \001(\005\022\021\n\tauthor_id\0308 \001(\003"
-    "\022\r\n\005is_ad\030; \001(\r\022\014\n\004pids\030= \001(\t\022\034\n\tpoll_in"
-    "fo\030J \001(\0132\t.PollInfo\022\036\n\026is_godthread_reco"
-    "mmend\030U \001(\005\022\025\n\005agree\030~ \001(\0132\006.Agree\022\017\n\006is"
-    "_god\030\203\001 \001(\005\0229\n\022origin_thread_info\030\215\001 \001(\013"
-    "2\034.ThreadInfo.OriginThreadInfo\022\'\n\022first_"
-    "post_content\030\216\001 \003(\0132\n.PbContent\022\030\n\017is_sh"
-    "are_thread\030\217\001 \001(\005\022\017\n\006tab_id\030\257\001 \001(\005\022\023\n\nis"
-    "_deleted\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\032\345\001"
-    "\n\020OriginThreadInfo\022\r\n\005title\030\001 \001(\t\022\r\n\005fna"
-    "me\030\004 \001(\t\022\013\n\003tid\030\005 \001(\t\022\013\n\003fid\030\007 \001(\003\022\023\n\013th"
-    "read_type\030\010 \001(\005\022\022\n\nis_deleted\030\t \001(\005\022\033\n\007c"
-    "ontent\030\016 \003(\0132\n.PbContent\022\021\n\treply_num\030\020 "
-    "\001(\005\022\025\n\005agree\030\023 \001(\0132\006.Agree\022\034\n\tpoll_info\030"
-    "\025 \001(\0132\t.PollInfo\022\013\n\003pid\030\031 \001(\003b\006proto3"
+    "\n\020ThreadInfo.proto\032\nUser.proto\032\017PbConten"
+    "t.proto\032\013Agree.proto\032\016PollInfo.proto\"\211\007\n"
+    "\nThreadInfo\022\n\n\002id\030\001 \001(\003\022\013\n\003tid\030\002 \001(\003\022\r\n\005"
+    "title\030\003 \001(\t\022\021\n\treply_num\030\004 \001(\005\022\020\n\010view_n"
+    "um\030\005 \001(\005\022\021\n\tlast_time\030\006 \001(\t\022\025\n\rlast_time"
+    "_int\030\007 \001(\005\022\024\n\014thread_types\030\010 \001(\005\022\016\n\006is_t"
+    "op\030\t \001(\005\022\017\n\007is_good\030\n \001(\005\022\017\n\007is_vote\030\013 \001"
+    "(\005\022\025\n\006author\030\022 \001(\0132\005.User\022\013\n\003fid\030\033 \001(\003\022\025"
+    "\n\rfirst_post_id\030( \001(\003\022\025\n\ris_global_top\030*"
+    " \001(\005\022\023\n\013create_time\030- \001(\005\022\017\n\007post_id\0304 \001"
+    "(\003\022\014\n\004time\0305 \001(\005\022\021\n\tauthor_id\0308 \001(\003\022\r\n\005i"
+    "s_ad\030; \001(\r\022\014\n\004pids\030= \001(\t\022\034\n\tpoll_info\030J "
+    "\001(\0132\t.PollInfo\022\036\n\026is_godthread_recommend"
+    "\030U \001(\005\022\025\n\005agree\030~ \001(\0132\006.Agree\022\017\n\006is_god\030"
+    "\203\001 \001(\005\0229\n\022origin_thread_info\030\215\001 \001(\0132\034.Th"
+    "readInfo.OriginThreadInfo\022\'\n\022first_post_"
+    "content\030\216\001 \003(\0132\n.PbContent\022\030\n\017is_share_t"
+    "hread\030\217\001 \001(\005\022\017\n\006tab_id\030\257\001 \001(\005\022\023\n\nis_dele"
+    "ted\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\032\345\001\n\020Ori"
+    "ginThreadInfo\022\r\n\005title\030\001 \001(\t\022\r\n\005fname\030\004 "
+    "\001(\t\022\013\n\003tid\030\005 \001(\t\022\013\n\003fid\030\007 \001(\003\022\023\n\013thread_"
+    "type\030\010 \001(\005\022\022\n\nis_deleted\030\t \001(\005\022\033\n\007conten"
+    "t\030\016 \003(\0132\n.PbContent\022\021\n\treply_num\030\020 \001(\005\022\025"
+    "\n\005agree\030\023 \001(\0132\006.Agree\022\034\n\tpoll_info\030\025 \001(\013"
+    "2\t.PollInfo\022\013\n\003pid\030\031 \001(\003b\006proto3"
 };
-static const ::_pbi::DescriptorTable* const descriptor_table_ThreadInfo_2eproto_deps[3] =
+static const ::_pbi::DescriptorTable* const descriptor_table_ThreadInfo_2eproto_deps[4] =
     {
         &::descriptor_table_Agree_2eproto,
         &::descriptor_table_PbContent_2eproto,
         &::descriptor_table_PollInfo_2eproto,
+        &::descriptor_table_User_2eproto,
 };
 static ::absl::once_flag descriptor_table_ThreadInfo_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ThreadInfo_2eproto = {
     false,
     false,
-    957,
+    992,
     descriptor_table_protodef_ThreadInfo_2eproto,
     "ThreadInfo.proto",
     &descriptor_table_ThreadInfo_2eproto_once,
     descriptor_table_ThreadInfo_2eproto_deps,
-    3,
+    4,
     2,
     schemas,
     file_default_instances,
@@ -847,20 +852,27 @@ class ThreadInfo::_Internal {
   using HasBits = decltype(std::declval<ThreadInfo>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
     8 * PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_._has_bits_);
+  static const ::User& author(const ThreadInfo* msg);
+  static void set_has_author(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
   static const ::PollInfo& poll_info(const ThreadInfo* msg);
   static void set_has_poll_info(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
+    (*has_bits)[0] |= 2u;
   }
   static const ::Agree& agree(const ThreadInfo* msg);
   static void set_has_agree(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
+    (*has_bits)[0] |= 4u;
   }
   static const ::ThreadInfo_OriginThreadInfo& origin_thread_info(const ThreadInfo* msg);
   static void set_has_origin_thread_info(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
+    (*has_bits)[0] |= 8u;
   }
 };
 
+const ::User& ThreadInfo::_Internal::author(const ThreadInfo* msg) {
+  return *msg->_impl_.author_;
+}
 const ::PollInfo& ThreadInfo::_Internal::poll_info(const ThreadInfo* msg) {
   return *msg->_impl_.poll_info_;
 }
@@ -870,13 +882,17 @@ const ::Agree& ThreadInfo::_Internal::agree(const ThreadInfo* msg) {
 const ::ThreadInfo_OriginThreadInfo& ThreadInfo::_Internal::origin_thread_info(const ThreadInfo* msg) {
   return *msg->_impl_.origin_thread_info_;
 }
+void ThreadInfo::clear_author() {
+  if (_impl_.author_ != nullptr) _impl_.author_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
 void ThreadInfo::clear_poll_info() {
   if (_impl_.poll_info_ != nullptr) _impl_.poll_info_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 void ThreadInfo::clear_agree() {
   if (_impl_.agree_ != nullptr) _impl_.agree_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 void ThreadInfo::clear_first_post_content() {
   _internal_mutable_first_post_content()->Clear();
@@ -896,6 +912,7 @@ ThreadInfo::ThreadInfo(const ThreadInfo& from) : ::google::protobuf::Message() {
       decltype(_impl_.title_){},
       decltype(_impl_.last_time_){},
       decltype(_impl_.pids_){},
+      decltype(_impl_.author_){nullptr},
       decltype(_impl_.poll_info_){nullptr},
       decltype(_impl_.agree_){nullptr},
       decltype(_impl_.origin_thread_info_){nullptr},
@@ -947,12 +964,15 @@ ThreadInfo::ThreadInfo(const ThreadInfo& from) : ::google::protobuf::Message() {
     _this->_impl_.pids_.Set(from._internal_pids(), _this->GetArenaForAllocation());
   }
   if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
-    _this->_impl_.poll_info_ = new ::PollInfo(*from._impl_.poll_info_);
+    _this->_impl_.author_ = new ::User(*from._impl_.author_);
   }
   if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
-    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+    _this->_impl_.poll_info_ = new ::PollInfo(*from._impl_.poll_info_);
   }
   if ((from._impl_._has_bits_[0] & 0x00000004u) != 0) {
+    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000008u) != 0) {
     _this->_impl_.origin_thread_info_ = new ::ThreadInfo_OriginThreadInfo(*from._impl_.origin_thread_info_);
   }
   ::memcpy(&_impl_.id_, &from._impl_.id_,
@@ -970,6 +990,7 @@ inline void ThreadInfo::SharedCtor(::_pb::Arena* arena) {
       decltype(_impl_.title_){},
       decltype(_impl_.last_time_){},
       decltype(_impl_.pids_){},
+      decltype(_impl_.author_){nullptr},
       decltype(_impl_.poll_info_){nullptr},
       decltype(_impl_.agree_){nullptr},
       decltype(_impl_.origin_thread_info_){nullptr},
@@ -1021,6 +1042,7 @@ inline void ThreadInfo::SharedDtor() {
   _impl_.title_.Destroy();
   _impl_.last_time_.Destroy();
   _impl_.pids_.Destroy();
+  if (this != internal_default_instance()) delete _impl_.author_;
   if (this != internal_default_instance()) delete _impl_.poll_info_;
   if (this != internal_default_instance()) delete _impl_.agree_;
   if (this != internal_default_instance()) delete _impl_.origin_thread_info_;
@@ -1040,16 +1062,20 @@ PROTOBUF_NOINLINE void ThreadInfo::Clear() {
   _impl_.last_time_.ClearToEmpty();
   _impl_.pids_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.author_ != nullptr);
+      _impl_.author_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
       ABSL_DCHECK(_impl_.poll_info_ != nullptr);
       _impl_.poll_info_->Clear();
     }
-    if (cached_has_bits & 0x00000002u) {
+    if (cached_has_bits & 0x00000004u) {
       ABSL_DCHECK(_impl_.agree_ != nullptr);
       _impl_.agree_->Clear();
     }
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000008u) {
       ABSL_DCHECK(_impl_.origin_thread_info_ != nullptr);
       _impl_.origin_thread_info_->Clear();
     }
@@ -1069,16 +1095,16 @@ const char* ThreadInfo::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
+const ::_pbi::TcParseTable<5, 31, 5, 61, 25> ThreadInfo::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_._has_bits_),
     0, // no _extensions_
     198, 248,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4227856384,  // skipmap
+    4227725312,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    30,  // num_field_entries
-    4,  // num_aux_entries
+    31,  // num_field_entries
+    5,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     &_ThreadInfo_default_instance_._instance,
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1123,7 +1149,9 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // .User author = 18;
+    {::_pbi::TcParser::FastMtS2,
+     {402, 0, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.author_)}},
     // int32 is_god = 131;
     {::_pbi::TcParser::FastV32S2,
      {2200, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_god_)}},
@@ -1153,14 +1181,14 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
      {744, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.create_time_)}},
     // .Agree agree = 126;
     {::_pbi::TcParser::FastMtS2,
-     {2034, 1, 1, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.agree_)}},
+     {2034, 2, 2, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.agree_)}},
     // int32 is_share_thread = 143;
     {::_pbi::TcParser::FastV32S2,
      {2296, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_share_thread_)}},
   }}, {{
     40, 0, 10,
-    53210, 12, 65494, 17, 57339, 20, 65535, 22, 65535, 22, 63423, 22,
-    65311, 24, 65535, 27, 57215, 27, 49151, 29,
+    53210, 13, 65494, 18, 57339, 21, 65535, 23, 65535, 23, 63423, 23,
+    65311, 25, 65535, 28, 57215, 28, 49151, 30,
     65535, 65535
   }}, {{
     // int64 id = 1;
@@ -1196,6 +1224,9 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
     // int32 is_vote = 11;
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_vote_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .User author = 18;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.author_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // int64 fid = 27;
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.fid_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
@@ -1224,22 +1255,22 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.pids_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // .PollInfo poll_info = 74;
-    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.poll_info_), _Internal::kHasBitsOffset + 0, 0,
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.poll_info_), _Internal::kHasBitsOffset + 1, 1,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // int32 is_godthread_recommend = 85;
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_godthread_recommend_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // .Agree agree = 126;
-    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.agree_), _Internal::kHasBitsOffset + 1, 1,
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.agree_), _Internal::kHasBitsOffset + 2, 2,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // int32 is_god = 131;
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_god_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
-    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.origin_thread_info_), _Internal::kHasBitsOffset + 2, 2,
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.origin_thread_info_), _Internal::kHasBitsOffset + 3, 3,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // repeated .PbContent first_post_content = 142;
-    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.first_post_content_), -1, 3,
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.first_post_content_), -1, 4,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
     // int32 is_share_thread = 143;
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_share_thread_), -1, 0,
@@ -1254,12 +1285,13 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_frs_mask_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }}, {{
+    {::_pbi::TcParser::GetTable<::User>()},
     {::_pbi::TcParser::GetTable<::PollInfo>()},
     {::_pbi::TcParser::GetTable<::Agree>()},
     {::_pbi::TcParser::GetTable<::ThreadInfo_OriginThreadInfo>()},
     {::_pbi::TcParser::GetTable<::PbContent>()},
   }}, {{
-    "\12\0\0\5\0\0\11\0\0\0\0\0\0\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0"
+    "\12\0\0\5\0\0\11\0\0\0\0\0\0\0\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\0\0\0"
     "ThreadInfo"
     "title"
     "last_time"
@@ -1353,6 +1385,14 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
             stream, this->_internal_is_vote(), target);
   }
 
+  cached_has_bits = _impl_._has_bits_[0];
+  // .User author = 18;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(18, _Internal::author(this),
+        _Internal::author(this).GetCachedSize(), target, stream);
+  }
+
   // int64 fid = 27;
   if (this->_internal_fid() != 0) {
     target = stream->EnsureSpace(target);
@@ -1417,9 +1457,8 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
     target = stream->WriteStringMaybeAliased(61, _s, target);
   }
 
-  cached_has_bits = _impl_._has_bits_[0];
   // .PollInfo poll_info = 74;
-  if (cached_has_bits & 0x00000001u) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessage(74, _Internal::poll_info(this),
         _Internal::poll_info(this).GetCachedSize(), target, stream);
@@ -1433,7 +1472,7 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
   }
 
   // .Agree agree = 126;
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessage(126, _Internal::agree(this),
         _Internal::agree(this).GetCachedSize(), target, stream);
@@ -1447,7 +1486,7 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
   }
 
   // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessage(141, _Internal::origin_thread_info(this),
         _Internal::origin_thread_info(this).GetCachedSize(), target, stream);
@@ -1531,23 +1570,30 @@ const ::_pbi::TcParseTable<5, 30, 4, 61, 25> ThreadInfo::_table_ = {
   }
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
-    // .PollInfo poll_info = 74;
+  if (cached_has_bits & 0x0000000fu) {
+    // .User author = 18;
     if (cached_has_bits & 0x00000001u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.author_);
+    }
+
+    // .PollInfo poll_info = 74;
+    if (cached_has_bits & 0x00000002u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           *_impl_.poll_info_);
     }
 
     // .Agree agree = 126;
-    if (cached_has_bits & 0x00000002u) {
+    if (cached_has_bits & 0x00000004u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           *_impl_.agree_);
     }
 
     // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000008u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           *_impl_.origin_thread_info_);
@@ -1721,16 +1767,20 @@ void ThreadInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::
     _this->_internal_set_pids(from._internal_pids());
   }
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_author()->::User::MergeFrom(
+          from._internal_author());
+    }
+    if (cached_has_bits & 0x00000002u) {
       _this->_internal_mutable_poll_info()->::PollInfo::MergeFrom(
           from._internal_poll_info());
     }
-    if (cached_has_bits & 0x00000002u) {
+    if (cached_has_bits & 0x00000004u) {
       _this->_internal_mutable_agree()->::Agree::MergeFrom(
           from._internal_agree());
     }
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000008u) {
       _this->_internal_mutable_origin_thread_info()->::ThreadInfo_OriginThreadInfo::MergeFrom(
           from._internal_origin_thread_info());
     }
@@ -1834,9 +1884,9 @@ void ThreadInfo::InternalSwap(ThreadInfo* other) {
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_frs_mask_)
       + sizeof(ThreadInfo::_impl_.is_frs_mask_)
-      - PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.poll_info_)>(
-          reinterpret_cast<char*>(&_impl_.poll_info_),
-          reinterpret_cast<char*>(&other->_impl_.poll_info_));
+      - PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.author_)>(
+          reinterpret_cast<char*>(&_impl_.author_),
+          reinterpret_cast<char*>(&other->_impl_.author_));
 }
 
 ::google::protobuf::Metadata ThreadInfo::GetMetadata() const {

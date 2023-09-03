@@ -50,6 +50,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
 	virtual BOOL OnInitDialog();
@@ -70,6 +71,7 @@ public:
 	std::unique_ptr<CExploreLzlPage> m_exploreLzlPage;
 	CEdit m_edit;
 	CEdit m_editInfo;
+	CStatic m_isLZ;
 	CButton m_deleteButton;
 	CButton m_banButton;
 	CButton m_explorerButton;

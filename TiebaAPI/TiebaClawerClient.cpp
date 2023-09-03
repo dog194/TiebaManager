@@ -714,14 +714,14 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 			thread.authorShowName = userList[userIndex[author_id]].ShowName;
 			thread.authorID = userList[userIndex[author_id]].id;
 			thread.authorPortraitUrl = userList[userIndex[author_id]].PortraitUrl;
-			thread.tidAuthorPortraitUrl = userList[userIndex[author_id]].PortraitUrl;
+			thread.isTidAuthor = TRUE;
 		}
 		else {
 			thread.author = _T("[数据错误]");
 			thread.authorShowName = _T("[数据错误]");
 			thread.authorID = _T("");
 			thread.authorPortraitUrl = _T("[数据错误]");
-			thread.tidAuthorPortraitUrl = _T("");
+			thread.isTidAuthor = FALSE;
 		}
 		thread.preview = preview;
 		//thread.preview += _T("\r\n");
@@ -810,13 +810,15 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	ThreadInfo* threadInfo;
 	SimpleForum* simpleForum;
 	Page* pbPage;
+	User* threadUser;
 	::google::protobuf::RepeatedPtrField<Post>* pbPostList;
 	::google::protobuf::RepeatedPtrField<User>* pbPostUserList;
-
+	
 	pbRes.ParseFromString(src2);
 	error = pbRes.mutable_error();
 	pbResData = pbRes.mutable_data();
 	threadInfo = pbResData->mutable_thread();
+	threadUser = threadInfo->mutable_author();
 	simpleForum = pbResData->mutable_forum();
 	pbPage = pbResData->mutable_page();
 	pbPostList = pbResData->mutable_post_list();
@@ -833,7 +835,9 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	if (pbPostList->size() == 0 || error_no != 0) {
 		return GET_POSTS_DELETED;
 	}
-	
+	CString threadUid = Int64oCString(threadUser->id());
+	if (threadUid == _T(""))
+		threadUid = _T("? Error ?");
 	// 用户列表解析
 	std::vector<TBUserObj> PostuserList;
 	decodeUserList(pbPostUserList, PostuserList);
@@ -975,6 +979,8 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		post.timestamp = time;
 		post.rawData = _T("");
 		post.content = content;
+		if (post.authorID == threadUid)
+			post.isTidAuthor = TRUE;
 		
 		// 特殊贴解析
 		if (post.floor == _T("1")) { // 仅需要处理1楼
@@ -1060,6 +1066,8 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 			{	
 				LzlInfo lzl = LzlInfo();
 				decodeLzl(*rawLzl, lzl, floor, PostuserList, userIndex, tid);
+				if (lzl.authorID == threadUid)
+					lzl.isTidAuthor = TRUE;
 				lzls.push_back(lzl);
 			}
 		}
@@ -1078,8 +1086,11 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 							break;
 						}
 					}
-					if (is_push_back)
+					if (is_push_back) {
+						if (t.authorID == threadUid)
+							t.isTidAuthor = TRUE;
 						lzls.push_back(t);
+					}
 				}
 			}
 		}

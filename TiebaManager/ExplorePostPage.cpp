@@ -146,6 +146,10 @@ void CExplorePostPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_posts[pNMLV->iItem].authorPortraitUrl)
 			+ _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_posts[pNMLV->iItem].timestamp)
 			+ _T("\r\n主题帖ID：") + m_posts[pNMLV->iItem].tid);
+		if (m_posts[pNMLV->iItem].isTidAuthor == TRUE)
+			explorerDlg->m_isLZ.ShowWindow(SW_SHOW);
+		else
+			explorerDlg->m_isLZ.ShowWindow(SW_HIDE);
 		auto img = std::make_unique<std::vector<CString> >();
 		GetImageUrls(m_posts[pNMLV->iItem], *img);
 		explorerDlg->ViewImages(std::move(img));

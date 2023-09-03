@@ -32,6 +32,7 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
+#include "User.pb.h"
 #include "PbContent.pb.h"
 #include "Agree.pb.h"
 #include "PollInfo.pb.h"
@@ -522,6 +523,7 @@ class ThreadInfo final :
     kTitleFieldNumber = 3,
     kLastTimeFieldNumber = 6,
     kPidsFieldNumber = 61,
+    kAuthorFieldNumber = 18,
     kPollInfoFieldNumber = 74,
     kAgreeFieldNumber = 126,
     kOriginThreadInfoFieldNumber = 141,
@@ -613,6 +615,21 @@ class ThreadInfo final :
   inline PROTOBUF_ALWAYS_INLINE void _internal_set_pids(
       const std::string& value);
   std::string* _internal_mutable_pids();
+
+  public:
+  // .User author = 18;
+  bool has_author() const;
+  void clear_author() ;
+  const ::User& author() const;
+  PROTOBUF_NODISCARD ::User* release_author();
+  ::User* mutable_author();
+  void set_allocated_author(::User* value);
+  void unsafe_arena_set_allocated_author(::User* value);
+  ::User* unsafe_arena_release_author();
+
+  private:
+  const ::User& _internal_author() const;
+  ::User* _internal_mutable_author();
 
   public:
   // .PollInfo poll_info = 74;
@@ -895,7 +912,7 @@ class ThreadInfo final :
   class _Internal;
 
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<5, 30, 4, 61, 25> _table_;
+  static const ::google::protobuf::internal::TcParseTable<5, 31, 5, 61, 25> _table_;
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
@@ -906,6 +923,7 @@ class ThreadInfo final :
     ::google::protobuf::internal::ArenaStringPtr title_;
     ::google::protobuf::internal::ArenaStringPtr last_time_;
     ::google::protobuf::internal::ArenaStringPtr pids_;
+    ::User* author_;
     ::PollInfo* poll_info_;
     ::Agree* agree_;
     ::ThreadInfo_OriginThreadInfo* origin_thread_info_;
@@ -1748,6 +1766,98 @@ inline void ThreadInfo::_internal_set_is_vote(::int32_t value) {
   _impl_.is_vote_ = value;
 }
 
+// .User author = 18;
+inline bool ThreadInfo::has_author() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.author_ != nullptr);
+  return value;
+}
+inline const ::User& ThreadInfo::_internal_author() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::User* p = _impl_.author_;
+  return p != nullptr ? *p : reinterpret_cast<const ::User&>(::_User_default_instance_);
+}
+inline const ::User& ThreadInfo::author() const {
+  // @@protoc_insertion_point(field_get:ThreadInfo.author)
+  return _internal_author();
+}
+inline void ThreadInfo::unsafe_arena_set_allocated_author(::User* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.author_);
+  }
+  _impl_.author_ = reinterpret_cast<::User*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:ThreadInfo.author)
+}
+inline ::User* ThreadInfo::release_author() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::User* released = _impl_.author_;
+  _impl_.author_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::User* ThreadInfo::unsafe_arena_release_author() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:ThreadInfo.author)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::User* temp = _impl_.author_;
+  _impl_.author_ = nullptr;
+  return temp;
+}
+inline ::User* ThreadInfo::_internal_mutable_author() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  if (_impl_.author_ == nullptr) {
+    auto* p = CreateMaybeMessage<::User>(GetArenaForAllocation());
+    _impl_.author_ = reinterpret_cast<::User*>(p);
+  }
+  return _impl_.author_;
+}
+inline ::User* ThreadInfo::mutable_author() {
+  ::User* _msg = _internal_mutable_author();
+  // @@protoc_insertion_point(field_mutable:ThreadInfo.author)
+  return _msg;
+}
+inline void ThreadInfo::set_allocated_author(::User* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.author_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::google::protobuf::MessageLite*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.author_ = reinterpret_cast<::User*>(value);
+  // @@protoc_insertion_point(field_set_allocated:ThreadInfo.author)
+}
+
 // int64 fid = 27;
 inline void ThreadInfo::clear_fid() {
   _impl_.fid_ = ::int64_t{0};
@@ -1977,7 +2087,7 @@ inline void ThreadInfo::set_allocated_pids(std::string* value) {
 
 // .PollInfo poll_info = 74;
 inline bool ThreadInfo::has_poll_info() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.poll_info_ != nullptr);
   return value;
 }
@@ -1997,16 +2107,16 @@ inline void ThreadInfo::unsafe_arena_set_allocated_poll_info(::PollInfo* value) 
   }
   _impl_.poll_info_ = reinterpret_cast<::PollInfo*>(value);
   if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:ThreadInfo.poll_info)
 }
 inline ::PollInfo* ThreadInfo::release_poll_info() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
 
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::PollInfo* released = _impl_.poll_info_;
   _impl_.poll_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -2026,14 +2136,14 @@ inline ::PollInfo* ThreadInfo::unsafe_arena_release_poll_info() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   // @@protoc_insertion_point(field_release:ThreadInfo.poll_info)
 
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::PollInfo* temp = _impl_.poll_info_;
   _impl_.poll_info_ = nullptr;
   return temp;
 }
 inline ::PollInfo* ThreadInfo::_internal_mutable_poll_info() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.poll_info_ == nullptr) {
     auto* p = CreateMaybeMessage<::PollInfo>(GetArenaForAllocation());
     _impl_.poll_info_ = reinterpret_cast<::PollInfo*>(p);
@@ -2058,9 +2168,9 @@ inline void ThreadInfo::set_allocated_poll_info(::PollInfo* value) {
     if (message_arena != submessage_arena) {
       value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000001u;
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
 
   _impl_.poll_info_ = reinterpret_cast<::PollInfo*>(value);
@@ -2091,7 +2201,7 @@ inline void ThreadInfo::_internal_set_is_godthread_recommend(::int32_t value) {
 
 // .Agree agree = 126;
 inline bool ThreadInfo::has_agree() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.agree_ != nullptr);
   return value;
 }
@@ -2111,16 +2221,16 @@ inline void ThreadInfo::unsafe_arena_set_allocated_agree(::Agree* value) {
   }
   _impl_.agree_ = reinterpret_cast<::Agree*>(value);
   if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002u;
+    _impl_._has_bits_[0] |= 0x00000004u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_._has_bits_[0] &= ~0x00000004u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:ThreadInfo.agree)
 }
 inline ::Agree* ThreadInfo::release_agree() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
 
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
   ::Agree* released = _impl_.agree_;
   _impl_.agree_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -2140,14 +2250,14 @@ inline ::Agree* ThreadInfo::unsafe_arena_release_agree() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   // @@protoc_insertion_point(field_release:ThreadInfo.agree)
 
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
   ::Agree* temp = _impl_.agree_;
   _impl_.agree_ = nullptr;
   return temp;
 }
 inline ::Agree* ThreadInfo::_internal_mutable_agree() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   if (_impl_.agree_ == nullptr) {
     auto* p = CreateMaybeMessage<::Agree>(GetArenaForAllocation());
     _impl_.agree_ = reinterpret_cast<::Agree*>(p);
@@ -2172,9 +2282,9 @@ inline void ThreadInfo::set_allocated_agree(::Agree* value) {
     if (message_arena != submessage_arena) {
       value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000002u;
+    _impl_._has_bits_[0] |= 0x00000004u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_._has_bits_[0] &= ~0x00000004u;
   }
 
   _impl_.agree_ = reinterpret_cast<::Agree*>(value);
@@ -2205,13 +2315,13 @@ inline void ThreadInfo::_internal_set_is_god(::int32_t value) {
 
 // .ThreadInfo.OriginThreadInfo origin_thread_info = 141;
 inline bool ThreadInfo::has_origin_thread_info() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.origin_thread_info_ != nullptr);
   return value;
 }
 inline void ThreadInfo::clear_origin_thread_info() {
   if (_impl_.origin_thread_info_ != nullptr) _impl_.origin_thread_info_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline const ::ThreadInfo_OriginThreadInfo& ThreadInfo::_internal_origin_thread_info() const {
   PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
@@ -2229,16 +2339,16 @@ inline void ThreadInfo::unsafe_arena_set_allocated_origin_thread_info(::ThreadIn
   }
   _impl_.origin_thread_info_ = reinterpret_cast<::ThreadInfo_OriginThreadInfo*>(value);
   if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000004u;
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:ThreadInfo.origin_thread_info)
 }
 inline ::ThreadInfo_OriginThreadInfo* ThreadInfo::release_origin_thread_info() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
 
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
   ::ThreadInfo_OriginThreadInfo* released = _impl_.origin_thread_info_;
   _impl_.origin_thread_info_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -2258,14 +2368,14 @@ inline ::ThreadInfo_OriginThreadInfo* ThreadInfo::unsafe_arena_release_origin_th
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   // @@protoc_insertion_point(field_release:ThreadInfo.origin_thread_info)
 
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
   ::ThreadInfo_OriginThreadInfo* temp = _impl_.origin_thread_info_;
   _impl_.origin_thread_info_ = nullptr;
   return temp;
 }
 inline ::ThreadInfo_OriginThreadInfo* ThreadInfo::_internal_mutable_origin_thread_info() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   if (_impl_.origin_thread_info_ == nullptr) {
     auto* p = CreateMaybeMessage<::ThreadInfo_OriginThreadInfo>(GetArenaForAllocation());
     _impl_.origin_thread_info_ = reinterpret_cast<::ThreadInfo_OriginThreadInfo*>(p);
@@ -2290,9 +2400,9 @@ inline void ThreadInfo::set_allocated_origin_thread_info(::ThreadInfo_OriginThre
     if (message_arena != submessage_arena) {
       value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000004u;
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
 
   _impl_.origin_thread_info_ = reinterpret_cast<::ThreadInfo_OriginThreadInfo*>(value);

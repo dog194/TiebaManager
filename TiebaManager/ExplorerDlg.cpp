@@ -67,6 +67,7 @@ void CExplorerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TAB1, m_tab);
 	DDX_Control(pDX, IDC_EDIT1, m_edit);
 	DDX_Control(pDX, IDC_EDIT2, m_editInfo);
+	DDX_Control(pDX, IDC_STATIC_IS_LZ, m_isLZ);
 	DDX_Control(pDX, IDC_BUTTON1, m_deleteButton);
 	DDX_Control(pDX, IDC_BUTTON2, m_banButton);
 	DDX_Control(pDX, IDC_BUTTON3, m_explorerButton);
@@ -78,6 +79,7 @@ void CExplorerDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CExplorerDlg, CModelessDlg)
 	ON_WM_SIZE()
+	ON_WM_CTLCOLOR()
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CExplorerDlg::OnTcnSelchangeTab1)
 	ON_BN_CLICKED(IDC_BUTTON1, &CExplorerDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, &CExplorerDlg::OnBnClickedButton2)
@@ -98,6 +100,15 @@ void CExplorerDlg::OnSize(UINT nType, int cx, int cy)
 {
 	CModelessDlg::OnSize(nType, cx, cy);
 	m_pagesResize.Resize();
+}
+
+// 控件颜色
+HBRUSH CExplorerDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
+	if (pWnd->m_hWnd == m_isLZ.m_hWnd)
+		pDC->SetTextColor(RGB(85, 139, 246));
+	return hbr;
 }
 
 // 切换标签
