@@ -450,6 +450,8 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 		return _T("发帖太频繁，停下来喝杯茶休息下吧（应该是删帖太频繁触发）");
 	if (errorCode == _T("300000"))
 		return _T("由于系统升级，烦请您更新至最新版客户端处理违规用户，感谢您的理解与支持！(暂时无法用旧版客户端api封禁用户名为空用户)");
+	if (errorCode == _T("300003"))
+		return _T("对不起.您没有操作权限");
 	if (errorCode == _T("1211039"))
 		return _T("删除主题失败/这个帖子已经被删除了哦");
 	if (errorCode == _T("1989005"))
