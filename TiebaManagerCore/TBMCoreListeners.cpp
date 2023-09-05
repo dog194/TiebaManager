@@ -86,7 +86,10 @@ static void CTBMCoreListeners::OnCheckIllegal(const TbObj& obj, BOOL& res, CStri
 			forceToConfirm = i.m_forceToConfirm;
 			msg.Format(_T("<font color=red> 触发违规规则 </font><a href=\"rn:%s\">%s</a>"), (LPCTSTR)HTMLEscape(i.m_name), (LPCTSTR)HTMLEscape(i.m_name));
 			ruleName = i.m_name;
-			ruleType = RULE_TYPE_ILLEGA_RULE;
+			if (i.m_deleteIfIsLZ == TRUE && obj.isTidAuthor == TRUE)
+				ruleType = RULE_TYPE_ILLEGA_RULE_DEL_LZ;
+			else
+				ruleType = RULE_TYPE_ILLEGA_RULE;
 			res = TRUE;
 			return;
 		}

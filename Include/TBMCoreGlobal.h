@@ -133,6 +133,8 @@ public:
 };
 
 const int RULE_TYPE_ILLEGA_RULE = 0;
+const int RULE_TYPE_ILLEGA_RULE_DEL_LZ = 32;
+const int RULE_TYPE_ILLEGA_RULE_CANCEL_DEL_LZ = 33;
 const int RULE_TYPE_BLACK_LIST = 1;
 const int RULE_TYPE_DELETE_ONLY = 2;
 const int RULE_TYPE_BAN_DIRECTLY = 3;

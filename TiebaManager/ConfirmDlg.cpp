@@ -69,6 +69,7 @@ void CConfirmDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_CON_RULE_COUNT, m_static_break_rule_count);
 	DDX_Control(pDX, IDC_STATIC_CON_OPE_COUNT, m_static_con_quene_count);
 	DDX_Control(pDX, IDOK, m_yesButton);
+	DDX_Control(pDX, IDC_BUTTON_NO_DEL_LZ, m_noDelLzButton);
 	DDX_Control(pDX, IDCANCEL, m_noButton);
 	DDX_Control(pDX, IDC_BUTTON1, m_explorerButton);
 	DDX_Control(pDX, IDC_BUTTON_ADD_BL, m_addBlButton);
@@ -90,6 +91,7 @@ BEGIN_MESSAGE_MAP(CConfirmDlg, CDialog)
 	ON_STN_CLICKED(IDC_STATIC_RULE, &CConfirmDlg::OnStnClickStaticRule)
 	ON_BN_CLICKED(IDC_BUTTON_DELETE_ONLY, &CConfirmDlg::OnBnClickedButtonDeleteOnly)
 	ON_BN_CLICKED(IDC_BUTTON_BAN_NOW, &CConfirmDlg::OnBnClickedButtonBanNow)
+	ON_BN_CLICKED(IDC_BUTTON_NO_DEL_LZ, &CConfirmDlg::OnBnClickedButtonNoDelLZ)
 	ON_BN_CLICKED(IDC_BUTTON_IGNORE_TID, &CConfirmDlg::OnBnClickedButtonIgnoreTid)
 	ON_BN_CLICKED(IDC_BUTTON_IGNORE_POR, &CConfirmDlg::OnBnClickedButtonIgnorePor)
 END_MESSAGE_MAP()
@@ -136,6 +138,7 @@ BOOL CConfirmDlg::OnInitDialog()
 	m_resize.AddControl(&m_deleteOnlyButton, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, &m_static);
 	m_resize.AddControl(&m_explorerButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_yesButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
+	m_resize.AddControl(&m_noDelLzButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	m_resize.AddControl(&m_noButton, RT_KEEP_DIST_TO_RIGHT, this, RT_KEEP_DIST_TO_BOTTOM, &m_contentEdit);
 	//m_resize.AddControl(&m_static_rule, RT_NULL, NULL, RT_NULL, NULL);
 	m_resize.AddControl(&m_static_is_bl, RT_KEEP_DIST_TO_RIGHT, this, RT_NULL, NULL);
@@ -218,7 +221,11 @@ BOOL CConfirmDlg::OnInitDialog()
 			m_banDirectButton.ShowWindow(SW_SHOW);
 			m_deleteOnlyButton.ShowWindow(SW_SHOW);
 		}
-
+		// 显式修改 是 按钮显示文本
+		if (m_operation->isDeleteThread == TRUE) {
+			m_yesButton.SetWindowText(_T("联动删除"));
+			m_noDelLzButton.ShowWindow(SW_SHOW);
+		}
 		DWORD curTime = GetTickCount();
 		if (curTime - lastTime > 10 * 1000) // 10秒未确认则禁止确认一段时间防止误操作
 		{
@@ -329,6 +336,15 @@ void CConfirmDlg::OnStnDblclickStaticRule()
 	if (g_plan.m_ruleDoubleClick) {
 		OpenRulePage();
 	}
+}
+
+// 取消执行联动删除
+void CConfirmDlg::OnBnClickedButtonNoDelLZ()
+{
+	if (m_operation == NULL)
+		return;
+	m_ruleType = RULE_TYPE_ILLEGA_RULE_CANCEL_DEL_LZ;
+	CDialog::OnOK();
 }
 
 // 只删不封不计次

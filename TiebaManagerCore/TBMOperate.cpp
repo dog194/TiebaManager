@@ -231,7 +231,12 @@ void CTBMOperate::OperateThread()
 			break;
 		if (res == POP_UNEXPECTED)
 			continue;
-
+		// 取消联动删除
+		if (op.ruleType == RULE_TYPE_ILLEGA_RULE_CANCEL_DEL_LZ) {
+			g_pLog->Log(_T("<font color=Orange>取消联动删除 只删违规回复</font>"));
+			op.ruleType = RULE_TYPE_ILLEGA_RULE;
+			op.isDeleteThread = FALSE;
+		}
 		// 没有操作
 		if (op.ruleType == RULE_TYPE_ILLEGA_RULE)
 			if (!g_pTbmCoreConfig->m_delete && !g_pTbmCoreConfig->m_banID && !g_pTbmCoreConfig->m_defriend)
@@ -475,6 +480,10 @@ void CTBMOperate::OperateThread()
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + op.object->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + post->floor + _T("楼"));
 					}
+					if (op.isDeleteThread == TRUE) {
+						g_pLog->Log(_T("<font color=Orange>违规用户是楼主 执行联动删除</font>"));
+						goto CaseThread;
+					}	
 				}
 				else if (op.object->m_type == TBObject::LZL) // 楼中楼
 				{
@@ -495,6 +504,10 @@ void CTBMOperate::OperateThread()
 							sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + lzl->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + lzl->floor + _T("楼回复"));
+					}
+					if (op.isDeleteThread == TRUE) {
+						g_pLog->Log(_T("<font color=Orange>违规用户是楼主 执行联动删除</font>"));
+						goto CaseThread;
 					}
 				}
 				g_postDeleteEvent(op, result);
