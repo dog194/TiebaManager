@@ -37,6 +37,7 @@ public:
 const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
 const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
 const TCHAR AUTHOR_PORTRAIT_URL_PREFIX[] = _T("http://tb.himg.baidu.com/sys/portrait/item/");
+const TCHAR AUTHOR_PORTRAIT_URL_PREFIX_BIG[] = _T("http://tb.himg.baidu.com/sys/portraith/item/");
 
 const int m_tips_num = 8;
 const CString m_tips[m_tips_num] = {

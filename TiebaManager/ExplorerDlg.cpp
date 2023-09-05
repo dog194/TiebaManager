@@ -356,11 +356,11 @@ void CExplorerDlg::OnBnClickedImgQR()
 	std::vector<CString> urls;
 	if (tabIndex == 0) // 主题
 	{
-		GetImageUrls(m_exploreThreadPage->m_threads[index], urls);
+		GetImageUrls(m_exploreThreadPage->m_threads[index], urls, FALSE, TRUE);
 	}
 	else if (tabIndex == 1) // 帖子
 	{
-		GetImageUrls(m_explorePostPage->m_posts[index], urls);
+		GetImageUrls(m_explorePostPage->m_posts[index], urls, FALSE, TRUE);
 	}
 	else // 楼中楼 没有图片
 	{

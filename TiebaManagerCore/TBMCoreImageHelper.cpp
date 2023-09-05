@@ -28,7 +28,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 
-TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti)
+TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti, BOOL isBigPorti)
 {
 	// 1是图片地址
 	static const std::wregex THREAD_IMG_REG(_T("<img .*?bpic=\"(.*?)\".*?/>"));
@@ -54,8 +54,15 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 			urls.push_back((*it)[2].str().c_str());
 	}
 	// 头像
-	if (object.authorPortraitUrl != _T("") && !igPorti)
-		urls.push_back(object.authorPortraitUrl);
+	if (object.authorPortraitUrl != _T("") && !igPorti) {
+		if (isBigPorti == FALSE)
+			urls.push_back(object.authorPortraitUrl);
+		else {
+			CString bigUrl = object.authorPortraitUrl;
+			bigUrl.Replace(AUTHOR_PORTRAIT_URL_PREFIX, AUTHOR_PORTRAIT_URL_PREFIX_BIG);
+			urls.push_back(bigUrl);
+		}
+	}
 }
 
 // 获取图片文件，文件头  addCache 为 true 正常加入内存缓存， false 不加入，默认为true
