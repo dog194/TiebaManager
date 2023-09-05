@@ -87,7 +87,7 @@ BOOL CSqlDb::initTable() {
 	char* errMsg = nullptr;
 	int rc = sqlite3_exec(m_db, sql.c_str(), nullptr, nullptr, &errMsg);
 	if (rc != SQLITE_OK) {
-		AfxMessageBox(_T("表创建失败"), MB_ICONINFORMATION);
+		AfxMessageBox(_T("表创建失败"), MB_ICONINFORMATION | MB_TOPMOST);
 		sqlite3_free(errMsg);
 		return FALSE;
 	}
@@ -99,7 +99,10 @@ BOOL CSqlDb::initTable() {
 // 插入或者更新数据
 BOOL CSqlDb::insert(const std::string& tbName, const std::string& sqlMain) {
 	if (m_dbInit == FALSE) {
-		AfxMessageBox(_T("未初始化，却访问 insert"), MB_ICONINFORMATION | MB_TOPMOST);
+		CString tmp, tmp2;
+		tmp = tbName.c_str();
+		tmp2 = sqlMain.c_str();
+		DebugRecord(_T("未初始化，却访问 insert"), tmp + _T(" ") + tmp2);
 		return FALSE;
 	}
 	// "INSERT OR REPLACE INTO table1 (column1, column2) VALUES (?, ?)"
@@ -107,21 +110,13 @@ BOOL CSqlDb::insert(const std::string& tbName, const std::string& sqlMain) {
 	char* errMsg = nullptr;
 	int rc = sqlite3_exec(m_db, sql.c_str(), nullptr, nullptr, &errMsg);
 	if (rc != SQLITE_OK) {
-		AfxMessageBox(Int2CString(rc), MB_ICONINFORMATION);
 		CString tmp(errMsg);
-		AfxMessageBox(_T("插入数据失败"), MB_ICONINFORMATION);
-		AfxMessageBox(tmp, MB_ICONINFORMATION);
-		tmp = tbName.c_str();
-		AfxMessageBox(tmp, MB_ICONINFORMATION);
-		tmp = sqlMain.c_str();
-		AfxMessageBox(tmp, MB_ICONINFORMATION);
+		CString tmp2, tmp3;
+		tmp2 = tbName.c_str();
+		tmp3 = sqlMain.c_str();
+		DebugRecord(_T("插入数据失败"), tmp + _T(" ") + tmp2 + _T(" ") + tmp3);
 		sqlite3_free(errMsg);
 		return FALSE;
-	}
-	else {
-		// CString tmp;
-		// tmp = sqlMain.c_str();
-		// AfxMessageBox(tmp, MB_ICONINFORMATION | MB_TOPMOST);
 	}
 	return TRUE;
 }
@@ -156,7 +151,7 @@ BOOL CSqlDb::insert2imgInfo(const CDbImgInfo& imgInfo) {
 CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
 	CDbImgInfo imgInfo = CDbImgInfo(cName);
 	if (m_dbInit == FALSE) {
-		AfxMessageBox(_T("未初始化，却访问 getImgInfo"), MB_ICONINFORMATION | MB_TOPMOST);
+		DebugRecord(_T("未初始化，却访问 getImgInfo"), cName);
 		return imgInfo;
 	}
 	std::string sql = "SELECT " + C_NAME_IG_QR + ", " + C_NAME_IG_HEAD + ", " +
@@ -170,7 +165,7 @@ CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
 	if (rc != SQLITE_OK) {
 		const char* errMsg = sqlite3_errmsg(m_db);
 		CString error(errMsg);
-		AfxMessageBox(_T("prepare失败:") + error, MB_ICONINFORMATION | MB_TOPMOST);
+		DebugRecord(_T("prepare失败:"), error);
 		sqlite3_finalize(stmt);
 		return imgInfo;
 	}
@@ -196,7 +191,7 @@ CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
 	if (rc != SQLITE_OK) {
 		const char* errMsg = sqlite3_errmsg(m_db);
 		CString error(errMsg);
-		AfxMessageBox(_T("查询失败:") + error + Int2CString(rc), MB_ICONINFORMATION | MB_TOPMOST);
+		DebugRecord(_T("查询失败:"), error);
 		return imgInfo;
 	}
 	return imgInfo;
@@ -205,7 +200,7 @@ CDbImgInfo CSqlDb::getImgInfo(const CString& cName) {
 
 int CSqlDb::db_delete(const std::string& tbName, const std::string& sqlConditions) {
 	if (m_dbInit == FALSE) {
-		AfxMessageBox(_T("未初始化，却访问 delete"), MB_ICONINFORMATION | MB_TOPMOST);
+		DebugRecord(_T("未初始化，却访问 delete"), _T(""));
 		return FALSE;
 	}
 	// "DELETE FROM table_name WHERE column_name = value";
@@ -213,14 +208,11 @@ int CSqlDb::db_delete(const std::string& tbName, const std::string& sqlCondition
 	char* errMsg = nullptr;
 	int rc = sqlite3_exec(m_db, sql.c_str(), NULL, 0, &errMsg);
 	if (rc != SQLITE_OK) {
-		AfxMessageBox(Int2CString(rc), MB_ICONINFORMATION);
 		CString tmp(errMsg);
-		AfxMessageBox(_T("删除数据失败"), MB_ICONINFORMATION);
-		AfxMessageBox(tmp, MB_ICONINFORMATION);
-		tmp = tbName.c_str();
-		AfxMessageBox(tmp, MB_ICONINFORMATION);
-		tmp = sqlConditions.c_str();
-		AfxMessageBox(tmp, MB_ICONINFORMATION);
+		CString tmp1, tmp2;
+		tmp1 = tbName.c_str();
+		tmp2 = sqlConditions.c_str();
+		DebugRecord(_T("删除数据失败"), tmp + _T("") + tmp1 + _T("") + tmp2);
 		sqlite3_free(errMsg);
 		return -1;
 	}
