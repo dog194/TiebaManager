@@ -190,6 +190,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	});
 	g_globalConfig.Load(GLOBAL_CONFIG_PATH);
 	SetCurrentUser(g_globalConfig.m_currentUser, FALSE);
+	m_pageEdit.SetWindowText(g_globalConfig.m_scanPage.m_value);
 
 	// 自动更新
 	if (g_globalConfig.m_autoUpdate)
@@ -709,7 +710,8 @@ void CTiebaManagerDlg::OnBnClickedButton2()
 		m_pageEdit.SetWindowText(_T("1"));
 		tmp = _T("1");
 	}
-
+	*g_globalConfig.m_scanPage = tmp;
+	g_globalConfig.Save(GLOBAL_CONFIG_PATH);
 	CTBMScan::GetInstance().StartScan(tmp);
 }
 

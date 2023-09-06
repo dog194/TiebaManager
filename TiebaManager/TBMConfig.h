@@ -44,6 +44,7 @@ public:
 	COption<BOOL> m_firstRun;				// 第一次运行
 	COption<CString> m_currentUser;			// 当前账号
 	COption<BOOL> m_autoUpdate;				// 自动更新
+	COption<CString> m_scanPage;			// 扫描页码
 	COption<std::vector<CforumCache> > m_forumCache;// 贴吧信息缓存
 
 	CGlobalConfig();

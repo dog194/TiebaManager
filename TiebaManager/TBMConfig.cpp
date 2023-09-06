@@ -104,11 +104,13 @@ CGlobalConfig::CGlobalConfig() : CConfigBase("Global"),
 	m_firstRun("FirstRun", TRUE),
 	m_currentUser("UserName", _T("[NULL]"), [](const CString& value){ return value != _T("") && PathFileExists(USERS_DIR_PATH + value + _T("\\ck.xml")); }),
 	m_autoUpdate("AutoUpdate", TRUE),
+	m_scanPage("ScanPage", _T("1")),
 	m_forumCache("ForumCache")
 {
 	m_options.push_back(&m_firstRun);
 	m_options.push_back(&m_currentUser);
 	m_options.push_back(&m_autoUpdate);
+	m_options.push_back(&m_scanPage);
 	m_options.push_back(&m_forumCache);
 }
 
