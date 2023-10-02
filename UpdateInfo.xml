@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>230416(2.7)</Version>
-    <VersionNum>230416</VersionNum>
+    <Version>231001(2.8)</Version>
+    <VersionNum>231001</VersionNum>
     <UpdateLog>
+    更新日志231001(2.8)：
+    【重要更新】
+    1.新增联动删除：当楼主在帖子内发表违规回复时可以删除整个主题帖
+    2.升级时间规则：为了方便宵禁需求，现在可以设置规则生效的时间段
+    3.楼中楼进阶设置：开启进阶参数后，楼中楼回复数从前5个升级为前10个
+    4.楼中楼用户等级：现在可以获取到楼中楼发言用户的等级了（开启强化楼中楼无效）
+    5.升级用户黑名单：开启进阶参数后，支持校验用户黑名单中的名单是否处于全吧封禁状态
+    6.修复了贴吧确认失败的问题
+    【功能更新】
+    1.二维码扫描使用大图头像
+    2.api获取fid，解决确认贴吧失败问题
+    3.缓存每日保存，或按钮手动保存
+    4.引入数据库，缓存30天内二维码，图片文件头识别结果
+    5.规则名不可为空
+    6.编译平台升级，基础库Protobuf，tinyxml2升级，理论上提升程序效率
+    7.基础库校验。校验第三方库版本是否对应
+    8.确认窗口，帖子浏览器，新增 【楼主】 标识
+    9.确认窗口跳转，本身不再最小化
+    </UpdateLog>
+    <HistoryLog>
+    ========历史更新日志========
     更新日志230416(2.7)：
     【重要更新】
     1.新增图片内容规则-图片文件头，可判断图片是否为GIF
@@ -15,9 +36,6 @@
     【调整】
     1.使用本地贴吧信息缓存，不再进行窗口弹出，改为log提示
     2.强制使用新版客户端接口，网页端接口禁用
-    </UpdateLog>
-    <HistoryLog>
-    ========历史更新日志========
     更新日志221218(2.6)：
     【重要更新】
     1.史诗级更新！新增主题多页扫描，例：填写“1-9”代表扫描第1页到第9页的主题帖
@@ -94,11 +112,10 @@
         <item><value><Dir/><Name>TiebaManager.exe</Name><URL/><MD5/></value></item>
         <item><value><Dir>Plugin\</Dir><Name>LoopBan.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>Update.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>abseil_dll.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>libprotobuf.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>libprotobuf-lite.dll</Name><URL/><MD5/></value></item>
-        <item><value><Dir>Model\</Dir><Name>detect.caffemodel</Name><URL/><MD5/></value></item>
-        <item><value><Dir>Model\</Dir><Name>detect.prototxt</Name><URL/><MD5/></value></item>
-        <item><value><Dir>Model\</Dir><Name>sr.caffemodel</Name><URL/><MD5/></value></item>
-        <item><value><Dir>Model\</Dir><Name>sr.prototxt</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>sqlite3.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>tinyxml2.dll</Name><URL/><MD5/></value></item>
     </Files>
 </UpdateInfo>
