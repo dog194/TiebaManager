@@ -49,6 +49,7 @@ public:
 	CString authorShowName;       // 作者显示名
 	CString authorID;	          // 作者ID
 	CString authorPortraitUrl;	  // 作者头像URL。对于Web接口主题为空
+	BOOL isTidAuthor = FALSE;	  // 是否是楼主
 	time_t timestamp;             // 创建时间，Unix时间戳(UTC)。对于Web接口主题为0
 	CString attachedInfo = _T("");// 通用额外变量，用于存放一些额外信息传递给确认窗口
 
@@ -139,6 +140,7 @@ class TIEBA_API_API LzlInfo : public TBObject
 public:
 	CString cid;			// 楼中楼ID
 	CString floor;			// 楼层
+	CString authorLevel;	// 作者等级
 	CString content;		// 内容
 
 
@@ -154,6 +156,7 @@ class AdditionalThreadInfo
 {
 public:
 	CString src;        // 主题源码
+	CStringA srcA;		// 主题源码A
 	CString fid;        // 贴吧ID
 	CString pageCount;  // 页数
 };

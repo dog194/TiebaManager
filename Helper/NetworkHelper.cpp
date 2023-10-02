@@ -20,6 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "stdafx.h"
 #include "iostream"
 #include "fstream"
+#include <functional>
 #include <NetworkHelper.h>
 #include <StringHelper.h>
 #include <MiscHelper.h>

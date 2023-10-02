@@ -54,5 +54,5 @@ protected:
 	void ScanThread(CString sPage);
 	void ScanPostThread(int threadID);
 	BOOL ScanPostPage(const TapiThreadInfo& thread, int page, BOOL hasHistoryReply,
-		int ScanedCount, const CString& src, int threadID);
+		int ScanedCount, const CString& src, int threadID, const CStringA& srcA = "");
 };

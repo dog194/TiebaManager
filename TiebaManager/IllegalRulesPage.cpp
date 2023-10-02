@@ -41,9 +41,10 @@ BOOL CIllegalRulesPage::OnInitDialog()
 	m_list.DeleteColumn(0);
 	m_list.ModifyStyle(LVS_NOCOLUMNHEADER, 0);
 	int i = 0;
-	m_list.InsertColumn(i++, _T("规则名"), LVCFMT_LEFT, 350);
-	m_list.InsertColumn(i++, _T("强制确认"), LVCFMT_LEFT, 80);
-	m_list.InsertColumn(i++, _T("触发次数"), LVCFMT_LEFT, 80);
+	m_list.InsertColumn(i++, _T("规则名"), LVCFMT_LEFT, 280);
+	m_list.InsertColumn(i++, _T("强制确认"), LVCFMT_LEFT, 60);
+	m_list.InsertColumn(i++, _T("联动删除"), LVCFMT_LEFT, 60);
+	m_list.InsertColumn(i++, _T("触发次数"), LVCFMT_LEFT, 60);
 
 	m_static.SetWindowText(_T("匹配的帖子为违规帖"));
 
@@ -54,19 +55,19 @@ BOOL CIllegalRulesPage::OnInitDialog()
 BOOL CIllegalRulesPage::SetItem(int index)
 {
 	CInputIllegalRuleDlg dlg(m_rules[index], CInputIllegalRuleDlg::IDD, this);
-	if (m_subWinLock == true)
+	if (m_subWinLock == TRUE)
 		return FALSE;
-	m_subWinLock = true;
+	m_subWinLock = TRUE;
 	if (dlg.DoModal() == IDOK)
 	{
 		m_list.SetItemText(index, 0, m_rules[index].m_name);
 		OnUpdateRule(index);
 
 		((CSettingDlg*)GetParent())->m_clearScanCache = TRUE;
-		m_subWinLock = false;
+		m_subWinLock = FALSE;
 		return TRUE;
 	}
-	m_subWinLock = false;
+	m_subWinLock = FALSE;
 	return FALSE;
 }
 
@@ -83,7 +84,8 @@ BOOL CIllegalRulesPage::Import(const CString& path)
 void CIllegalRulesPage::OnUpdateRule(int index)
 {
 	m_list.SetItemText(index, 1, m_rules[index].m_forceToConfirm ? _T("√") : _T(""));
+	m_list.SetItemText(index, 2, m_rules[index].m_deleteIfIsLZ ? _T("√") : _T(""));
 	CString tmp;
 	tmp.Format(_T("%d"), m_rules[index].m_trigCount);
-	m_list.SetItemText(index, 2, tmp);
+	m_list.SetItemText(index, 3, tmp);
 }

@@ -21,6 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "afxwin.h"
 #include <NormalDlg.h>
 #include "resource.h"
+#include "TBMConfig.h"
 
 
 // CToolsPage 对话框
@@ -43,6 +44,10 @@ protected:
 public:
 	afx_msg void InitFilesList();
 	afx_msg void UpdateVersionLabel();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+
+	void ShowPlan(const CPlan& plan);
+	void ApplyPlanInDlg(CPlan& plan);
 
 public:
 	CStatic m_staticHelpV;
@@ -56,7 +61,10 @@ public:
 	CString m_latestLibcurlV = _T("");
 	
 	CButton m_btnUpdate;
+	CButton m_btnSaveCache;
+	CButton m_checkDebug;
 
 	afx_msg void OnBnClickedButtonLibcurlUpdate();
 	afx_msg void OnBnClickedButtonOepnQq();
+	afx_msg void OnBnClickedButtonSaveCache();
 };

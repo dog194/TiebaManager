@@ -55,6 +55,10 @@ public:
 	enum SetTiebaResult { SET_TIEBA_OK, SET_TIEBA_TIMEOUT, SET_TIEBA_NOT_FOUND, SET_TIEBA_NOT_LOGIN, SET_TIEBA_NO_POWER, SET_TIEBA_NO_TBS };
 	// 设置要操作的贴吧
 	SetTiebaResult SetTieba(const CString& forumName);
+	// 使用 api 获取 fid
+	CString ApiGetFid(const CString& forumName);
+	// 使用 api 获取 tbs
+	CString ApiGetTbs(CString& isLogin);
 
 	// 带Cookie
 	CString HTTPGet(const CString& URL);
@@ -62,13 +66,11 @@ public:
 	CString HTTPPost(const CString& URL, const CString& data);
 
 	// 封ID，返回错误代码 针对无用户名ID
-	CString BanID(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name);
-	// 封ID，返回错误代码
-	CString BanID(const CString& userName, const CString& pid);
+	CString BanID(const CString& userName, const CString& portrait, const CString& nick_name);
 	// 封ID，返回错误代码，不用PID（用户必须为本吧会员）
 	CString BanID(const CString& userName);
 	// 封ID，返回错误代码，客户端接口
-	CString BanIDClient(const CString& userName, const CString& pid, const CString& portrait, const CString& nick_name);
+	CString BanIDClient(const CString& userName, const CString& portrait, const CString& nick_name);
 	// 封ID，返回错误代码，客户端接口，不用PID，小吧可封10天
 	CString BanIDClient(const CString& userName);
 	// 拉黑，返回错误代码
@@ -84,6 +86,22 @@ public:
 	// 删楼中楼，返回错误代码
 	CString DeleteLZL(const CString& tid, const CString& lzlid);
 };
+const CString D2F_RET_ADDED = _T("[队列中]");
+const CString D2F_RET_TIME_OUT = _T("[超时]");
+const CString D2F_RET_ERROR = _T("[百度抽风/参数错误]");
+const CString D2F_RET_NORMAL = _T("[正常]");
+const CString D2F_RET_BAN = _T("[全吧封禁] 封:");
+const CString D2F_RET_DELETE = _T("[账号注销,回复还在]");
+const CString D2F_TAG_NEXT = _T("[扫描TAG]");
+const CString D2F_TAG_TIME = _T(" [校验:%s]");
 
+const int D2F_INT_TIME_OUT = -1;
+const int D2F_INT_ERROR = -2;
+const int D2F_INT_DELETE = -3;
+
+// 头像ID 获取封禁信息
+TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CString& c_name);
+// 头像ID 获取封禁信息 不需要 c_name
+TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret);
 // 取错误文本
 TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode);

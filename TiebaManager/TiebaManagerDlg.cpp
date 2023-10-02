@@ -18,7 +18,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #include "stdafx.h"
+#include "sqlite3.h"
 #include "TiebaManagerDlg.h"
+#include "TiebaManager.h"
 #include <TBMEvents.h>
 #include <TBMAPI.h>
 #include "TBMGlobal.h"
@@ -34,10 +36,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "TBMConfigPath.h"
 #include "ConfigHelper.h"
+#include "TBMCoreDbHelper.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+
 
 
 // 常量
@@ -102,6 +106,7 @@ BEGIN_MESSAGE_MAP(CTiebaManagerDlg, CNormalDlg)
 	ON_STN_CLICKED(IDC_STATIC7, &CTiebaManagerDlg::OnStnClickedStatic7)
 	ON_BN_CLICKED(IDC_BUTTON7, &CTiebaManagerDlg::OnBnClickedButton7)
 	ON_WM_CLOSE()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 BEGIN_EVENTSINK_MAP(CTiebaManagerDlg, CNormalDlg)
@@ -185,6 +190,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	});
 	g_globalConfig.Load(GLOBAL_CONFIG_PATH);
 	SetCurrentUser(g_globalConfig.m_currentUser, FALSE);
+	m_pageEdit.SetWindowText(g_globalConfig.m_scanPage.m_value);
 
 	// 自动更新
 	if (g_globalConfig.m_autoUpdate)
@@ -201,6 +207,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 	{
 		*g_globalConfig.m_firstRun = FALSE;
 		g_globalConfig.Save(GLOBAL_CONFIG_PATH);
+		AfxMessageBox(_T("本软件免费！开源！如果你花钱买或下载的，恭喜你被骗了！"), MB_ICONINFORMATION | MB_TOPMOST);
 		OnBnClickedButton5();
 		m_settingDlg->ShowAbout();
 	}
@@ -242,25 +249,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 每24小时清除已封名单
 	g_userCache.m_bannedUser->clear(); // 临时解决方案，相当于不保存已封名单
-	g_userCache.m_imgHeadCache.clear(); // 每24小时清空一次图片头缓存信息
-	g_userCache.m_imgQRCodeCache.clear(); // 每24小时清空一次图片头缓存信息
-	SetTimer(0, 24 * 60 * 60 * 1000, [](HWND, UINT, UINT_PTR, DWORD) {
-		g_userCache.m_bannedUser->clear();
-		g_userCache.m_imgHeadCache.clear();
-		g_userCache.m_imgQRCodeCache.clear();
-		// 如果设置了自动更新，每天检查一次
-		if (g_globalConfig.m_autoUpdate) {
-			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
-			switch (CheckUpdate(True, dependFiles)) {
-			case UPDATE_HAS_UPDATE:
-				g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
-				break;
-			case UPDATE_NO_UPDATE:
-			case UPDATE_FAILED_TO_GET_INFO:
-				g_postUpdateInfoEvent(_T(""), dependFiles);
-			}
-		}
-	});
+	SetTimer(0, 24 * 60 * 60 * 1000, NULL);
 
 	SetWindowText(_T("贴吧管理器-") + UPDATE_CURRENT_VERSION);
 
@@ -276,6 +265,9 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 			OnBnClickedButton1();
 		}
 	}
+
+	//auto& db = CSqlDb::GetInstance();
+	//db.db_deleteImgInfo();
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -560,13 +552,38 @@ void CTiebaManagerDlg::OnBnClickedButton1()
 		if (hasCache) {
 			if (!g_pTbmCoreConfig->m_autoScan) {
 				m_log.Log(_T("<font color=red>贴吧不存在！但是本地有缓存记录,惊不惊喜?意不意外?将使用缓存记录!</font>"));
-				//AfxMessageBox(_T("贴吧不存在！但是本地有缓存记录,\n惊不惊喜?意不意外?将使用缓存记录!"), MB_ICONINFORMATION);
 			}
 			useCache = TRUE;
 			break;
 		}
 		else {
-			AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR);
+			// API 获取 fid
+			CString aFid = g_tiebaOperate.ApiGetFid(forumName);
+			if (aFid != _T("")) {
+				if (g_globalConfig.m_currentUser == _T("")) {
+					AfxMessageBox(_T("当前账号 为空"), MB_ICONERROR);
+					goto Error;
+				}
+				g_tiebaOperate.SetForumName(forumName);
+				g_tiebaOperate.SetForumID(aFid);
+				g_tiebaOperate.SetUserName_(g_globalConfig.m_currentUser);
+				g_tiebaOperate.SetBDUSS();
+				// API 获取 TBS
+				tbs = g_tiebaOperate.ApiGetTbs(isLogin);
+				if (tbs == _T("")) {
+					AfxMessageBox(_T("获取口令号失败"), MB_ICONERROR);
+					goto Error;
+				}
+				if (isLogin != _T("1")) {
+					AfxMessageBox(_T("未登录状态"), MB_ICONERROR);
+					goto Error;
+				}
+				g_tiebaOperate.SetTBS(tbs);
+				m_log.Log(_T("<font color=red>度娘抽了！需要图像旋转验证！但是2.8版本增加了新的方法替代解决此问题，惊不惊喜?意不意外?</font>"));
+				AfxMessageBox(_T("度娘抽了！需要图像旋转验证！但是2.8版本增加了新的方法替代解决此问题，惊不惊喜?意不意外?"), MB_ICONERROR | MB_TOPMOST);
+				break;
+			}
+			AfxMessageBox(_T("贴吧不存在！(也可能是度娘抽了...大概率是访问过于频繁导致需要图像旋转验证，请稍后再试。)"), MB_ICONERROR | MB_TOPMOST);
 			goto Error;
 		}
 	case CTiebaOperate::SET_TIEBA_NOT_LOGIN:
@@ -594,9 +611,7 @@ Cache:
 				g_tiebaOperate.SetUserName_(i.m_userName);
 				g_tiebaOperate.SetBDUSS();
 				// 采集tbs
-				src = g_tiebaOperate.HTTPGet(_T("https://tieba.baidu.com/dc/common/tbs"));
-				tbs = GetStringBetween(src, _T("tbs\":\""), _T("\""));
-				isLogin = GetStringBetween(src, _T("is_login\":"), _T("}"));
+				tbs = g_tiebaOperate.ApiGetTbs(isLogin);
 				if (tbs == _T("")) {
 					AfxMessageBox(_T("使用缓存,获取口令号失败"), MB_ICONERROR);
 					goto Error;
@@ -695,7 +710,8 @@ void CTiebaManagerDlg::OnBnClickedButton2()
 		m_pageEdit.SetWindowText(_T("1"));
 		tmp = _T("1");
 	}
-
+	*g_globalConfig.m_scanPage = tmp;
+	g_globalConfig.Save(GLOBAL_CONFIG_PATH);
 	CTBMScan::GetInstance().StartScan(tmp);
 }
 
@@ -703,4 +719,137 @@ void CTiebaManagerDlg::OnBnClickedButton2()
 void CTiebaManagerDlg::OnBnClickedButton3()
 {
 	CTBMScan::GetInstance().StopScan();
+}
+
+// 其他 /////////////////////////////////////////////////////////////////////////////////
+
+// 添加校验个数
+void CTiebaManagerDlg::addUserD2fCheck(int pTotalCheckNum)
+{
+	g_pLog->Log(_T("<font color=green>添加个人信息校验") + Int2CString(pTotalCheckNum) + _T("</font>"));
+	int totalUsers = g_pTbmCoreConfig->m_blackListRules.m_value.size();
+	if (0 < totalUsers && totalUsers <= pTotalCheckNum) {
+		auto& operate = CTBMOperate::GetInstance();
+		// 全员添加
+		for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+			operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+		}
+		g_pLog->Log(_T("<font color=green>添加完毕，共添加") + Int2CString(totalUsers) + _T("</font>"));
+	}
+	else {
+		auto& operate = CTBMOperate::GetInstance();
+		int userNeede = pTotalCheckNum;
+		int isAdd = 0; // 0 未开始 1 开始添加 2 等待添加TAG 3 完成
+		// 第一轮，优先 空白 和 抽风记录
+		for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+			if (i.m_day2Free.Find(D2F_RET_TIME_OUT) != -1 || i.m_day2Free.Find(D2F_RET_ERROR) != -1 || i.m_day2Free == _T("")) {
+				// 添加任务
+				operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+				i.m_day2Free = D2F_RET_ADDED;
+				userNeede--;
+			}
+			if (userNeede == 0) {
+				// 终止添加
+				isAdd = 3;
+				userNeede = -1;
+				break;
+			}
+		}
+		if (isAdd != 3) { // 搜索是否存在起点
+			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+				if (isAdd == 0 && i.m_day2Free.Find(D2F_TAG_NEXT) != -1) {
+					// 找到了开始 TAG
+					isAdd = 1;
+					// 删除 TAG
+					i.m_day2Free.Replace(D2F_TAG_NEXT, _T(""));
+					CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+					if (dlg->m_settingDlg != NULL) {
+						dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
+					}
+				}
+				if (isAdd == 1) {
+					// 添加任务
+					operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+					userNeede--;
+				}
+				if (userNeede == 0) {
+					// 终止添加
+					isAdd = 2;
+					userNeede = -1;
+				}
+				else if (userNeede == -1) {
+					// 添加新的TAG
+					i.m_day2Free = D2F_TAG_NEXT + i.m_day2Free;
+					isAdd = 3;
+					CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+					if (dlg->m_settingDlg != NULL) {
+						dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(i.m_portrait, i.m_day2Free);
+					}
+					break;
+				}
+			}
+		}
+		if (isAdd != 3) {
+			if (isAdd == 0) {
+				// 没找到开始TAG 直接开始
+				isAdd = 1;
+			}
+			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+				if (isAdd == 1) {
+					// 添加任务
+					operate.AddConfirm(Operation(i.m_portrait, RULE_TYPE_CHECK_D2F));
+					userNeede--;
+				}
+				if (userNeede == 0) {
+					// 终止添加
+					isAdd = 2;
+					userNeede = -1;
+				}
+				else if (userNeede == -1) {
+					// 添加新的TAG
+					i.m_day2Free = D2F_TAG_NEXT + i.m_day2Free;
+					isAdd = 3;
+					break;
+				}
+			}
+		}
+		g_pLog->Log(_T("<font color=green>添加完毕，共添加") + Int2CString(pTotalCheckNum) + _T("</font>"));
+	}
+}
+
+// 每日 Timer 事件
+void CTiebaManagerDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	if (nIDEvent == 0)
+	{
+		if (m_confirmButton.IsWindowEnabled() == TRUE) {
+			// 未确认，跳过 定时器
+			return;
+		}
+		// 定期清理封禁缓存
+		g_userCache.m_bannedUser->clear();
+		// 定期清理数据库
+		auto& db = CSqlDb::GetInstance();
+		int nDelete = db.db_deleteImgInfo();
+		g_pLog->Log(_T("<font color=green>30 天未查询的数据库数据：已删除 ") + Int2CString(nDelete) + _T(" 条</font>"));
+		// 定期保存缓存数据
+		SaveCurrentUserConfig();
+		// 如果设置了自动更新，每天检查一次
+		if (g_globalConfig.m_autoUpdate) {
+			std::vector<CUpdateInfo::FileInfo> dependFiles = std::vector<CUpdateInfo::FileInfo>();
+			switch (CheckUpdate(True, dependFiles)) {
+			case UPDATE_HAS_UPDATE:
+				g_postUpdateInfoEvent(STR_HAS_UPDATE, dependFiles);
+				break;
+			case UPDATE_NO_UPDATE:
+			case UPDATE_FAILED_TO_GET_INFO:
+				g_postUpdateInfoEvent(_T(""), dependFiles);
+			}
+		}
+		// 定期校验用户封禁状态
+		if (g_pTbmCoreConfig->m_acedBlackCheckBan.m_value == TRUE) {
+			addUserD2fCheck();
+		}
+	}
+	CDialog::OnTimer(nIDEvent);
 }

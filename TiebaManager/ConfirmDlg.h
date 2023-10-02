@@ -52,6 +52,7 @@ public:
 	afx_msg void OpenRulePage();
 	afx_msg void OnStnClickStaticRule();
 	afx_msg void OnStnDblclickStaticRule();
+	afx_msg void OnBnClickedButtonNoDelLZ();
 	afx_msg void OnBnClickedButtonDeleteOnly();
 	afx_msg void OnBnClickedButtonBanNow();
 	afx_msg void OnBnClickedButtonIgnoreTid();
@@ -62,11 +63,13 @@ public:
 	CStatic m_static;
 	CStatic m_static_rule;
 	CStatic m_static_is_bl;
+	CStatic m_static_is_lz;
 	CStatic m_static_break_rule_count;
 	CStatic m_static_con_quene_count;
 	CButton m_explorerButton;
 	CButton m_yesButton;
 	CButton m_noButton;
+	CButton m_noDelLzButton;
 	CButton m_addBlButton;
 	CButton m_banDirectButton;
 	CButton m_deleteOnlyButton;

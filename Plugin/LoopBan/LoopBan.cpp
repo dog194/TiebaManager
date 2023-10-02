@@ -244,7 +244,7 @@ void CLoopBan::LoopBanThread()
 			{
 				code = tiebaOperate.BanID((*config.m_banlist)[i].m_uid);
 			}else {
-				code = tiebaOperate.BanID(_T(""), _T(""), (*config.m_banlist)[i].m_portrait, (*config.m_banlist)[i].m_uid);
+				code = tiebaOperate.BanID(_T(""), (*config.m_banlist)[i].m_portrait, (*config.m_banlist)[i].m_uid);
 				//if (code != _T("0")) // 尝试获取新的PID并用PID封禁
 				//{
 				//	(*config.m_pidList)[i] = GetPIDFromUser((*config.m_userList)[i]);

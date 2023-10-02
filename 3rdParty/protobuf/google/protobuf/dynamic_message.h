@@ -40,22 +40,28 @@
 
 #include <algorithm>
 #include <memory>
-#ifndef _SHARED_PTR_H
-#include <google/protobuf/stubs/shared_ptr.h>
-#endif
 #include <vector>
 
-#include <google/protobuf/message.h>
-#include <google/protobuf/repeated_field.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/mutex.h>
+#include "absl/container/flat_hash_map.h"
+#include "absl/synchronization/mutex.h"
+#include "google/protobuf/message.h"
+#include "google/protobuf/port.h"
+#include "google/protobuf/reflection.h"
+#include "google/protobuf/repeated_field.h"
+
+#ifdef SWIG
+#error "You cannot SWIG proto headers"
+#endif
+
+// Must be included last.
+#include "google/protobuf/port_def.inc"
 
 namespace google {
 namespace protobuf {
 
 // Defined in other files.
-class Descriptor;        // descriptor.h
-class DescriptorPool;    // descriptor.h
+class Descriptor;      // descriptor.h
+class DescriptorPool;  // descriptor.h
 
 // Constructs implementations of Message which can emulate types which are not
 // known at compile-time.
@@ -74,7 +80,10 @@ class DescriptorPool;    // descriptor.h
 // encapsulates this "cache".  All DynamicMessages of the same type created
 // from the same factory will share the same support data.  Any Descriptors
 // used with a particular factory must outlive the factory.
-class LIBPROTOBUF_EXPORT DynamicMessageFactory : public MessageFactory {
+//
+// The thread safety for this class is subtle, see comments around GetPrototype
+// for details
+class PROTOBUF_EXPORT DynamicMessageFactory : public MessageFactory {
  public:
   // Construct a DynamicMessageFactory that will search for extensions in
   // the DescriptorPool in which the extendee is defined.
@@ -87,9 +96,14 @@ class LIBPROTOBUF_EXPORT DynamicMessageFactory : public MessageFactory {
   //   parser to look for extensions in an alternate pool.  However, note that
   //   this is almost never what you want to do.  Almost all users should use
   //   the zero-arg constructor.
-  DynamicMessageFactory(const DescriptorPool* pool);
+#ifndef PROTOBUF_FUTURE_BREAKING_CHANGES
+  explicit
+#endif
+      DynamicMessageFactory(const DescriptorPool* pool);
+  DynamicMessageFactory(const DynamicMessageFactory&) = delete;
+  DynamicMessageFactory& operator=(const DynamicMessageFactory&) = delete;
 
-  ~DynamicMessageFactory();
+  ~DynamicMessageFactory() override;
 
   // Call this to tell the DynamicMessageFactory that if it is given a
   // Descriptor d for which:
@@ -118,62 +132,42 @@ class LIBPROTOBUF_EXPORT DynamicMessageFactory : public MessageFactory {
   // outlive the DynamicMessageFactory.
   //
   // The method is thread-safe.
-  const Message* GetPrototype(const Descriptor* type);
+  const Message* GetPrototype(const Descriptor* type) override;
 
  private:
   const DescriptorPool* pool_;
   bool delegate_to_generated_factory_;
 
-  // This struct just contains a hash_map.  We can't #include <google/protobuf/stubs/hash.h> from
-  // this header due to hacks needed for hash_map portability in the open source
-  // release.  Namely, stubs/hash.h, which defines hash_map portably, is not a
-  // public header (for good reason), but dynamic_message.h is, and public
-  // headers may only #include other public headers.
-  struct PrototypeMap;
-  google::protobuf::scoped_ptr<PrototypeMap> prototypes_;
-  mutable Mutex prototypes_mutex_;
+  struct TypeInfo;
+  absl::flat_hash_map<const Descriptor*, const TypeInfo*> prototypes_;
+  mutable absl::Mutex prototypes_mutex_;
 
   friend class DynamicMessage;
   const Message* GetPrototypeNoLock(const Descriptor* type);
-
-  // Construct default oneof instance for reflection usage if oneof
-  // is defined.
-  static void ConstructDefaultOneofInstance(const Descriptor* type,
-                                            const uint32 offsets[],
-                                            void* default_oneof_instance);
-  // Delete default oneof instance. Called by ~DynamicMessageFactory.
-  static void DeleteDefaultOneofInstance(const Descriptor* type,
-                                         const uint32 offsets[],
-                                         const void* default_oneof_instance);
-
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DynamicMessageFactory);
 };
 
 // Helper for computing a sorted list of map entries via reflection.
-class LIBPROTOBUF_EXPORT DynamicMapSorter {
+class PROTOBUF_EXPORT DynamicMapSorter {
  public:
-  static std::vector<const Message*> Sort(const Message& message,
-                                          int map_size,
+  static std::vector<const Message*> Sort(const Message& message, int map_size,
                                           const Reflection* reflection,
                                           const FieldDescriptor* field) {
-    std::vector<const Message*> result(static_cast<size_t>(map_size));
-    const RepeatedPtrField<Message>& map_field =
-        reflection->GetRepeatedPtrField<Message>(message, field);
-    size_t i = 0;
-    for (RepeatedPtrField<Message>::const_pointer_iterator it =
-             map_field.pointer_begin(); it != map_field.pointer_end(); ) {
-      result[i++] = *it++;
+    std::vector<const Message*> result;
+    result.reserve(map_size);
+    RepeatedFieldRef<Message> map_field =
+        reflection->GetRepeatedFieldRef<Message>(message, field);
+    for (auto it = map_field.begin(); it != map_field.end(); ++it) {
+      result.push_back(&*it);
     }
-    GOOGLE_DCHECK_EQ(result.size(), i);
     MapEntryMessageComparator comparator(field->message_type());
     std::stable_sort(result.begin(), result.end(), comparator);
     // Complain if the keys aren't in ascending order.
 #ifndef NDEBUG
     for (size_t j = 1; j < static_cast<size_t>(map_size); j++) {
       if (!comparator(result[j - 1], result[j])) {
-        GOOGLE_LOG(ERROR) << (comparator(result[j], result[j - 1]) ?
-                      "internal error in map key sorting" :
-                      "map keys are not unique");
+        ABSL_LOG(ERROR) << (comparator(result[j], result[j - 1])
+                                ? "internal error in map key sorting"
+                                : "map keys are not unique");
       }
     }
 #endif
@@ -181,7 +175,7 @@ class LIBPROTOBUF_EXPORT DynamicMapSorter {
   }
 
  private:
-  class LIBPROTOBUF_EXPORT MapEntryMessageComparator {
+  class PROTOBUF_EXPORT MapEntryMessageComparator {
    public:
     explicit MapEntryMessageComparator(const Descriptor* descriptor)
         : field_(descriptor->field(0)) {}
@@ -195,32 +189,32 @@ class LIBPROTOBUF_EXPORT DynamicMapSorter {
           return first < second;
         }
         case FieldDescriptor::CPPTYPE_INT32: {
-          int32 first = reflection->GetInt32(*a, field_);
-          int32 second = reflection->GetInt32(*b, field_);
+          int32_t first = reflection->GetInt32(*a, field_);
+          int32_t second = reflection->GetInt32(*b, field_);
           return first < second;
         }
         case FieldDescriptor::CPPTYPE_INT64: {
-          int64 first = reflection->GetInt64(*a, field_);
-          int64 second = reflection->GetInt64(*b, field_);
+          int64_t first = reflection->GetInt64(*a, field_);
+          int64_t second = reflection->GetInt64(*b, field_);
           return first < second;
         }
         case FieldDescriptor::CPPTYPE_UINT32: {
-          uint32 first = reflection->GetUInt32(*a, field_);
-          uint32 second = reflection->GetUInt32(*b, field_);
+          uint32_t first = reflection->GetUInt32(*a, field_);
+          uint32_t second = reflection->GetUInt32(*b, field_);
           return first < second;
         }
         case FieldDescriptor::CPPTYPE_UINT64: {
-          uint64 first = reflection->GetUInt64(*a, field_);
-          uint64 second = reflection->GetUInt64(*b, field_);
+          uint64_t first = reflection->GetUInt64(*a, field_);
+          uint64_t second = reflection->GetUInt64(*b, field_);
           return first < second;
         }
         case FieldDescriptor::CPPTYPE_STRING: {
-          string first = reflection->GetString(*a, field_);
-          string second = reflection->GetString(*b, field_);
+          std::string first = reflection->GetString(*a, field_);
+          std::string second = reflection->GetString(*b, field_);
           return first < second;
         }
         default:
-          GOOGLE_LOG(DFATAL) << "Invalid key for map field.";
+          ABSL_DLOG(FATAL) << "Invalid key for map field.";
           return true;
       }
     }
@@ -231,6 +225,8 @@ class LIBPROTOBUF_EXPORT DynamicMapSorter {
 };
 
 }  // namespace protobuf
-
 }  // namespace google
+
+#include "google/protobuf/port_undef.inc"
+
 #endif  // GOOGLE_PROTOBUF_DYNAMIC_MESSAGE_H__

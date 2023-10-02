@@ -38,6 +38,7 @@ public:
 	int ruleType;			// 触发的规则类型
 	int confirmQueneLeft;	// 用于传递剩余确认队列事件数量
 	int ruleBreakCount;		// 传递当前作者缓存违规次数
+	BOOL isDeleteThread;	// 联动删除
 	BOOL isBlUser;			// 传递是否属于黑名单用户
 	std::unique_ptr<TBObject> object; // 操作对象
 
@@ -56,6 +57,7 @@ public:
 		confirmQueneLeft = 0;
 		ruleBreakCount = 0;
 		isBlUser = false;
+		isDeleteThread = other.isDeleteThread;
 		return *this;
 	}
 
@@ -70,9 +72,30 @@ public:
 		length(length_),
 		title(title_),
 		object(std::move(object_)),
+		ruleName(ruleName_)
+	{ 
+		ruleType = ruleType_;
+		isDeleteThread = FALSE;
+		if (ruleType == RULE_TYPE_ILLEGA_RULE_DEL_LZ) {
+			ruleType = RULE_TYPE_ILLEGA_RULE;
+			isDeleteThread = TRUE;
+		}
+	}
+
+	Operation(const CString& ruleName_, const int& ruleType_) :
 		ruleName(ruleName_),
 		ruleType(ruleType_)
-	{ }
+	{ 
+		isDeleteThread = FALSE;
+		forceToConfirm = FALSE;
+		pos = 0;
+		length = 0;
+		title = _T("");
+		object = nullptr;
+		confirmQueneLeft = 0;
+		ruleBreakCount = 0;
+		isBlUser = false;
+	}
 };
 
 class TBM_CORE_API CTBMOperate final : public Singleton<CTBMOperate>

@@ -27,6 +27,7 @@ const UINT COLUMN_INDEX_UID = 0;
 const UINT COLUMN_INDEX_PORTRAIT = 1;
 const UINT COLUMN_INDEX_TRIG_COUNT = 2;
 const UINT COLUMN_INDEX_NOTE = 3;
+const UINT COLUMN_INDEX_BAN_STATUS = 4;
 
 // CBlackListRulesPage 对话框
 
@@ -46,6 +47,7 @@ public:
 	virtual void OnDelete(int index) override;
 	virtual BOOL Export(const CString& path) override;
 	virtual BOOL Import(const CString& path) override;
+	void setRuleD2Y(const CString& u_portrait, const CString& d2f);
 	void ShowList(const std::vector<CUserInfo>& list);
 	void ApplyList(std::vector<CUserInfo>& list);
 

@@ -35,14 +35,17 @@ DECLEAR_READ(CIllegalRule)
 
 	COption<CRule> rule(m_name);
 	COption<BOOL> forceToConfirm("ForceToConfirm", FALSE);
+	COption<BOOL> deleteIfIsLZ("AceDel", FALSE);
 	COption<int> trigCount("TrigCount", 0);
 	rule.Read(root);
 	forceToConfirm.Read(*optionNode);
+	deleteIfIsLZ.Read(*optionNode);
 	trigCount.Read(*optionNode);
 
 	m_value.m_name = std::move(rule->m_name);
 	m_value.m_conditionParams = std::move(rule->m_conditionParams);
 	m_value.m_forceToConfirm = forceToConfirm;
+	m_value.m_deleteIfIsLZ = deleteIfIsLZ;
 	m_value.m_trigCount = trigCount;
 
 	if (!IsValid(m_value))
@@ -60,6 +63,9 @@ DECLEAR_WRITE(CIllegalRule)
 	COption<BOOL> forceToConfirm("ForceToConfirm");
 	*forceToConfirm = m_value.m_forceToConfirm;
 	forceToConfirm.Write(*optionNode);
+	COption<BOOL> deleteIfIsLZ("AceDel");
+	*deleteIfIsLZ = m_value.m_deleteIfIsLZ;
+	deleteIfIsLZ.Write(*optionNode);
 	COption<int> trigCount("TrigCount");
 	*trigCount = m_value.m_trigCount;
 	trigCount.Write(*optionNode);
@@ -277,12 +283,14 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = lzl.GetContent();     break;
 	case CKeywordParam::UID:
 		startPos = lzl.GetContent().GetLength() + 7 + 
+			lzl.authorLevel.GetLength() + 5 +
 			lzl.floor.GetLength() + 10 + 
 			lzl.authorShowName.GetLength() + 8;
 		content = lzl.author;
 		break;
 	case CKeywordParam::PORTRAIT:
 		startPos = lzl.GetContent().GetLength() + 7 + 
+			lzl.authorLevel.GetLength() + 5 +
 			lzl.floor.GetLength() + 10 + 
 			lzl.authorShowName.GetLength() + 8 + 
 			lzl.author.GetLength() + 17;
@@ -290,6 +298,7 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 		break;
 	case CKeywordParam::TID:
 		startPos = lzl.GetContent().GetLength() + 7 +
+			lzl.authorLevel.GetLength() + 5 +
 			lzl.floor.GetLength() + 10 +
 			lzl.authorShowName.GetLength() + 8 +
 			lzl.author.GetLength() + 17 +
@@ -376,7 +385,18 @@ BOOL CLevelCondition::MatchPost(const CConditionParam& _param, const PostInfo& p
 
 BOOL CLevelCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& lzl, int& pos, int& length)
 {
-	return FALSE;
+	const auto& param = (CLevelParam&)_param;
+
+	if (lzl.authorLevel == _T(""))
+		return FALSE;
+
+	int level = _ttoi(lzl.authorLevel);
+	switch (param.m_operator)
+	{
+	default: return FALSE;
+	case CLevelParam::LESS:       return level <= param.m_level;
+	case CLevelParam::GREATER:    return level >= param.m_level;
+	}
 }
 
 
@@ -393,7 +413,10 @@ CString CTimeCondition::GetDescription(const CConditionParam& _param)
 	tm timeInfo;
 	localtime_s(&timeInfo, &param.m_time);
 	CString time;
-	_tcsftime(time.GetBuffer(100), 100, _T("%Y-%m-%d %X"), &timeInfo);
+	if (param.m_timeType == CTimeParam::DATE_TIME)
+		_tcsftime(time.GetBuffer(100), 100, _T("%Y-%m-%d %X"), &timeInfo);
+	else
+		_tcsftime(time.GetBuffer(100), 100, _T("%X"), &timeInfo);
 	time.ReleaseBuffer();
 	return operatorDesc[param.m_operator] + time;
 }
@@ -405,11 +428,14 @@ CConditionParam* CTimeCondition::ReadParam(const tinyxml2::XMLElement* optionNod
 
 	COption<int> op("Operator", CTimeParam::GREATER, InRange<int, CTimeParam::LESS, CTimeParam::GREATER>);
 	COption<time_t> time("Time", 0LL);
+	COption<int> m_dt("DT", CTimeParam::DATE_TIME, InRange<int, CTimeParam::TIME, CTimeParam::DATE_TIME>);
 	op.Read(*optionNode);
 	time.Read(*optionNode);
+	m_dt.Read(*optionNode);
 
 	param->m_operator = CTimeParam::Operator(*op);
 	param->m_time = time;
+	param->m_timeType = CTimeParam::timeType(*m_dt);
 
 	return param;
 }
@@ -424,6 +450,9 @@ void CTimeCondition::WriteParam(const CConditionParam& _param, tinyxml2::XMLElem
 	COption<time_t> time("Time");
 	*time = param.m_time;
 	time.Write(*optionNode);
+	COption<int> m_dt("DT");
+	*m_dt = param.m_timeType;
+	m_dt.Write(*optionNode);
 }
 
 CConditionParam* CTimeCondition::CloneParam(const CConditionParam& _param)
@@ -438,11 +467,26 @@ BOOL CTimeCondition::Match(const CTimeParam& param, const TBObject& obj)
 	if (obj.timestamp == 0)
 		return FALSE;
 
-	switch (param.m_operator)
+	int diff;
+	switch (param.m_timeType)
 	{
 	default: return FALSE;
-	case CTimeParam::LESS:       return obj.timestamp <= param.m_time;
-	case CTimeParam::GREATER:    return obj.timestamp >= param.m_time;
+	case CTimeParam::TIME:
+		// 纯比较时间
+		diff = GetTimeDiffInS(obj.timestamp, param.m_time);
+		switch (param.m_operator)
+		{
+		default: return FALSE;
+		case CTimeParam::LESS:       return diff >= 0;
+		case CTimeParam::GREATER:    return diff <= 0;
+		}
+	case CTimeParam::DATE_TIME:
+		switch (param.m_operator)
+		{
+		default: return FALSE;
+		case CTimeParam::LESS:       return obj.timestamp <= param.m_time;
+		case CTimeParam::GREATER:    return obj.timestamp >= param.m_time;
+		}
 	}
 }
 
@@ -552,6 +596,7 @@ CUserInfo::CUserInfo()
 	m_uid = _T("");
 	m_portrait = _T("");
 	m_note = _T("");
+	m_day2Free = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid)
@@ -559,6 +604,7 @@ CUserInfo::CUserInfo(const CString& uid)
 	m_uid = uid;
 	m_portrait = _T("");
 	m_note = _T("");
+	m_day2Free = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid, const CString& portrait)
@@ -566,6 +612,7 @@ CUserInfo::CUserInfo(const CString& uid, const CString& portrait)
 	m_uid = uid;
 	m_portrait = portrait;
 	m_note = _T("");
+	m_day2Free = _T("");
 }
 
 CUserInfo::CUserInfo(const CString& uid, const CString& portrait, const CString& note)
@@ -573,6 +620,7 @@ CUserInfo::CUserInfo(const CString& uid, const CString& portrait, const CString&
 	m_uid = uid;
 	m_portrait = portrait;
 	m_note = note;
+	m_day2Free = _T("");
 }
 
 BOOL CUserInfo::Match(const CString& uid, const CString& portrait)
@@ -620,15 +668,18 @@ DECLEAR_READ(CUserInfo)
 	COption<CString> portrait("portrait");
 	COption<int> trigCount("trigCount");
 	COption<CString> note("note");
+	COption<CString> day2free("d2f");
 	uid.Read(*optionNode);
 	trigCount.Read(*optionNode);
 	portrait.Read(*optionNode);
 	note.Read(*optionNode);
+	day2free.Read(*optionNode);
 
 	m_value.m_uid = uid;
 	m_value.m_portrait = portrait;
 	m_value.m_trigCount = trigCount;
 	m_value.m_note = note;
+	m_value.m_day2Free = day2free;
 
 	if (!IsValid(m_value))	//虽然不知道做了什么，但是还是写了 = =
 		UseDefault();
@@ -644,17 +695,21 @@ DECLEAR_WRITE(CUserInfo)
 	COption<CString> portrait("portrait");
 	COption<int> trigCount("trigCount");
 	COption<CString> note("note");
+	COption<CString> day2free("d2f");
 	uid.Read(*optionNode);
 	trigCount.Read(*optionNode);
 	portrait.Read(*optionNode);
 	note.Read(*optionNode);
+	day2free.Read(*optionNode);
 
 	*uid = m_value.m_uid;
 	*portrait = m_value.m_portrait;
 	*trigCount = m_value.m_trigCount;
 	*note = m_value.m_note;
+	*day2free = m_value.m_day2Free;
 	uid.Write(*optionNode);
 	portrait.Write(*optionNode);
 	trigCount.Write(*optionNode);
 	note.Write(*optionNode);
+	day2free.Write(*optionNode);
 }

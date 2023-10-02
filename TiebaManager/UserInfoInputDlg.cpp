@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include "UserInfoInputDlg.h"
+#include <TiebaOperate.h>
 //#include "resource.h"
 
 
@@ -52,18 +53,20 @@ CUserInfoInputDlg::~CUserInfoInputDlg()
 void CUserInfoInputDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_EDIT_UID, m_edit_uid);
+	DDX_Control(pDX, IDC_EDIT_UID,		m_edit_uid);
 	DDX_Control(pDX, IDC_EDIT_PORTRAIT, m_edit_portrait);
-	DDX_Control(pDX, IDC_EDIT_NOTE, m_edit_note);
-	DDX_Control(pDX, IDC_BUTTON_PRE, m_button_note_pre);
-	DDX_Control(pDX, IDC_BUTTON_NEXT, m_button_note_next);
-	DDX_Control(pDX, IDC_STATIC3, m_static_portrait);
+	DDX_Control(pDX, IDC_EDIT_NOTE,		m_edit_note);
+	DDX_Control(pDX, IDC_BUTTON_PRE,	m_button_note_pre);
+	DDX_Control(pDX, IDC_BUTTON_NEXT,	m_button_note_next);
+	DDX_Control(pDX, IDC_BUTTON_D2F,	m_button_check_d2f);
+	DDX_Control(pDX, IDC_STATIC3,		m_static_portrait);
 }
 
 BEGIN_MESSAGE_MAP(CUserInfoInputDlg, CDialog)
 	ON_EN_KILLFOCUS(IDC_EDIT_PORTRAIT,	&CUserInfoInputDlg::OnEnKillfocusEditPortrait)
 	ON_BN_CLICKED(	IDC_BUTTON_PRE,		&CUserInfoInputDlg::OnClickNotePre)
 	ON_BN_CLICKED(	IDC_BUTTON_NEXT,	&CUserInfoInputDlg::OnClickNoteNext)
+	ON_BN_CLICKED(	IDC_BUTTON_D2F,		&CUserInfoInputDlg::OnClickCheckD2f)
 END_MESSAGE_MAP()
 
 
@@ -86,8 +89,14 @@ BOOL CUserInfoInputDlg::OnInitDialog()
 		m_edit_portrait.SetWindowText(m_userinfo.m_portrait);
 		m_edit_note.SetWindowText(m_userinfo.m_note);
 	}
-	m_edit_portrait.SetSel(0, -1);
-	m_edit_portrait.SetFocus();
+	if (m_preFillUserInfo == NULL && m_userinfo.m_portrait == _T("")) {
+		m_edit_portrait.SetSel(0, -1);
+		m_edit_portrait.SetFocus();
+	}
+	else {
+		m_edit_note.SetSel(0, -1);
+		m_edit_note.SetFocus();
+	}
 
 	if (m_pre_note == _T("")) {
 		m_button_note_pre.ShowWindow(SW_HIDE);
@@ -138,6 +147,10 @@ void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 	// 输入验证
 	m_edit_portrait.GetWindowText(tmp);
 	m_edit_uid.GetWindowText(tmpU_ori);
+	if (tmp == _T("")) {
+		// 无数据，不触发验证
+		return;
+	}
 	if (tmp.GetLength() > PORT_LEN_MAX) {
 		m_static_portrait.SetWindowTextW(_T("		 头像ID长度超过，如果复制正确，请到群里反馈"));
 		m_edit_note.ShowBalloonTip(_T(""), _T("头像ID长度超过，如果复制正确，请到群里反馈"), TTI_NONE);
@@ -179,6 +192,51 @@ void CUserInfoInputDlg::OnEnKillfocusEditPortrait()
 			m_static_portrait.SetWindowTextW(_T("		头像ID验证成功：") + tmpU);
 			if (tmpU_ori == _T("")) 
 				m_edit_uid.SetWindowTextW(DncodeURI(tmpU));
+		}
+	}
+}
+
+// 客户端接口校验永封状态
+void CUserInfoInputDlg::OnClickCheckD2f() 
+{
+	CString tmp, tmpU;
+	// 输入验证
+	m_edit_portrait.GetWindowText(tmp);
+	m_edit_uid.GetWindowText(tmpU);
+	if (tmp == _T("")) {
+		// 无数据，不触发验证
+		m_static_portrait.SetWindowTextW(_T("头像ID为空"));
+		return;
+	}
+	if (tmp.GetLength() > PORT_LEN_MAX) {
+		m_static_portrait.SetWindowTextW(_T("头像ID长度超过，如果复制正确，请到群里反馈"));
+		return;
+	}
+	if (tmp.GetLength() < PORT_LEN_MIN) {
+		m_static_portrait.SetWindowTextW(_T("头像ID长度不足，如果复制正确，请到群里反馈"));
+		return;
+	}
+	if (tmp.GetLength() >= PORT_LEN_MIN && tmp.GetLength() <= PORT_LEN_MAX) {
+		CString banStatus, uName;
+		BOOL isTag = FALSE;
+		if (m_userinfo.m_day2Free.Find(D2F_TAG_NEXT) != -1)
+			isTag = TRUE;
+		GetUserAntiDay(tmp, banStatus, uName);
+		if (uName != _T("")) {
+			if (tmpU == _T(""))
+				m_edit_uid.SetWindowTextW(uName);
+			m_static_portrait.SetWindowTextW(uName + _T("\n\r ") + banStatus);
+		}
+		else {
+			m_static_portrait.SetWindowTextW(banStatus);
+		}
+		if (banStatus != D2F_RET_TIME_OUT) {
+			CString content;
+			content.Format(D2F_TAG_TIME, GetYYMMDD_FromTimeT());
+			if (isTag == TRUE)
+				m_userinfo.m_day2Free = D2F_TAG_NEXT + banStatus + content;
+			else
+				m_userinfo.m_day2Free = banStatus + content;
 		}
 	}
 }

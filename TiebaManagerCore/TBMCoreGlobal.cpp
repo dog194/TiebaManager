@@ -63,6 +63,11 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_blackListRecheck	("BlackListRecheck",	FALSE),
 
 	m_acedEnhancedLzl	("AcedEnhancedLzl",		FALSE),
+	m_acedBlackCheckBan	("AcedBlackCB",			FALSE),
+
+	m_infoNoAceDel		("iNoAceDel",			FALSE),
+
+	m_toolsDebug		("toolsDebug",			FALSE),
 
 	m_illegalRules      ("IllegalRules"),
 	m_trustedRules      ("TrustedRules"),
@@ -103,6 +108,11 @@ CTBMCoreConfig::CTBMCoreConfig(CStringA name) : CConfigBase(name),
 	m_options.push_back(&m_blackListRecheck);
 
 	m_options.push_back(&m_acedEnhancedLzl);
+	m_options.push_back(&m_acedBlackCheckBan);
+
+	m_options.push_back(&m_infoNoAceDel);
+
+	m_options.push_back(&m_toolsDebug);
 
 	m_options.push_back(&m_illegalRules);
 	m_options.push_back(&m_trustedRules);

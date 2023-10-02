@@ -231,7 +231,12 @@ void CTBMOperate::OperateThread()
 			break;
 		if (res == POP_UNEXPECTED)
 			continue;
-
+		// 取消联动删除
+		if (op.ruleType == RULE_TYPE_ILLEGA_RULE_CANCEL_DEL_LZ) {
+			g_pLog->Log(_T("<font color=Orange>取消联动删除 只删违规回复</font>"));
+			op.ruleType = RULE_TYPE_ILLEGA_RULE;
+			op.isDeleteThread = FALSE;
+		}
 		// 没有操作
 		if (op.ruleType == RULE_TYPE_ILLEGA_RULE)
 			if (!g_pTbmCoreConfig->m_delete && !g_pTbmCoreConfig->m_banID && !g_pTbmCoreConfig->m_defriend)
@@ -244,6 +249,53 @@ void CTBMOperate::OperateThread()
 		g_preOperateEvent(op, pass);
 		if (!pass)
 			continue;
+
+		// TODO 进一步优化？
+		// 校验 用户 全吧封禁状态 day to free
+		if (op.ruleType == RULE_TYPE_CHECK_D2F) {
+			// 校验结果
+			CString d2f, u_portrait;
+			u_portrait = op.ruleName;
+			for (auto& i : *g_pTbmCoreConfig->m_blackListRules) {
+				if (i.m_portrait == u_portrait) {
+					// TODO 校验上次检测时间
+					CString content, u_name;
+					int d2fCode = GetUserAntiDay(u_portrait, d2f, u_name);
+					if (d2f != D2F_RET_TIME_OUT) {
+						// 并非超时，更新结果到列表
+						content.Format(D2F_TAG_TIME, GetYYMMDD_FromTimeT());
+						d2f += content;
+						i.m_day2Free = d2f;
+						if (d2fCode == 0) {
+							content.Format(_T("<font color=green>校验封禁状态 </font>%s<font color=green> 账号正常！</font>"), (LPCTSTR)u_name);
+						}
+						else if (d2fCode > 0) {
+							content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 全吧封禁：%d</font>"), (LPCTSTR)u_name, d2fCode);
+						}
+						else if (d2fCode == D2F_INT_ERROR)
+						{
+							content.Format(_T("<font color=purple>校验封禁状态 </font>%s<font color=red> 失败！临时抽风、或参数错误</font>"), (LPCTSTR)i.m_uid);
+						}
+						else if (d2fCode == D2F_INT_DELETE) {
+							content.Format(_T("<font color=purple>校验封禁状态 </font>%s<font color=purple> 账号注销，账号回复记录不会消失</font>"), (LPCTSTR)i.m_uid);
+						}
+						else {
+							content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 未知结果</font>"), (LPCTSTR)i.m_uid);
+							DebugRecord(_T("校验封禁状态 返回结果异常"), d2fCode, _T("m_uid：") + i.m_uid);
+						}
+					}
+					else {
+						// 超时 TODO?
+						content.Format(_T("<font color=red>校验封禁状态 </font>%s<font color=red> 失败！请求超时</font>"), (LPCTSTR)i.m_uid);
+					}
+					g_pLog->Log(content);
+					g_postD2yEvent(u_portrait, d2f);
+					break;
+				}
+			}
+			Sleep((DWORD)(g_pTbmCoreConfig->m_deleteInterval * 1000));
+			continue;
+		}
 
 		BOOL isBan = FALSE;
 		BOOL isDelete = FALSE;
@@ -323,46 +375,32 @@ void CTBMOperate::OperateThread()
 			if (pass)
 			{
 				BOOL result = FALSE;
-				CString pid, portrait, nick_name;
-				// 不管是不是客户端接口封，都获取 PID
+				CString portrait, nick_name;
 
 				switch (op.object->m_type)
 				{
 				case TBObject::THREAD:
-				{
-					std::vector<PostInfo> posts;
-					std::vector<LzlInfo> lzls;
-					TiebaClawerProxy::GetInstance().GetPosts(g_pTiebaOperate->GetForumID(), op.object->tid, _T("1"), posts, lzls);
-					if (posts.size() > 0){
-						pid = posts[0].pid;
-						portrait = posts[0].authorPortraitUrl;
-						nick_name = posts[0].authorShowName;
-					}		
+					portrait = op.object.get()->authorPortraitUrl;
+					nick_name = op.object.get()->authorShowName;
 					break;
-				}
 				case TBObject::POST:
-					pid = ((PostInfo*)op.object.get())->pid;
 					portrait = ((PostInfo*)op.object.get())->authorPortraitUrl;
 					nick_name = ((PostInfo*)op.object.get())->authorShowName;
 					break;
 				case TBObject::LZL:
-					pid = ((LzlInfo*)op.object.get())->cid;
 					portrait = ((LzlInfo*)op.object.get())->authorPortraitUrl;
 					nick_name = ((LzlInfo*)op.object.get())->authorShowName;
 					break;
 				}
 
-				if (pid == _T(""))
-					g_pLog->Log(_T("<font color=red>封禁 </font>") + op.object->authorShowName + _T("<font color=red> 失败！(获取帖子ID失败)</font>"));
-
-				CString code = (g_pTbmCoreConfig->m_banClientInterface || pid == _T("")) ?
-					g_pTiebaOperate->BanIDClient(op.object->author, pid, portrait, nick_name) : g_pTiebaOperate->BanID(op.object->author, pid, portrait, nick_name);
+				CString code = (g_pTbmCoreConfig->m_banClientInterface) ?
+					g_pTiebaOperate->BanIDClient(op.object->author, portrait, nick_name) : g_pTiebaOperate->BanID(op.object->author, portrait, nick_name);
 				if (code != _T("0"))
 				{
 					CString content; //需同步更新 url 传递
 					content.Format(_T("<font color=red>封禁 </font>%s<font color=red> 失败！错误代码：%s(%s)</font><a href=")
 						_T("\"bd:%s,%s,%s,%s,Dog194\">重试</a>"), (LPCTSTR)op.object->authorShowName, (LPCTSTR)code, (LPCTSTR)GetTiebaErrorText(code),
-						(LPCTSTR)op.object->author, (LPCTSTR)pid, (LPCTSTR)portrait, (LPCTSTR)nick_name);
+						(LPCTSTR)op.object->author, (LPCTSTR)_T(""), (LPCTSTR)portrait, (LPCTSTR)nick_name);
 					g_pLog->Log(content);
 				}
 				else
@@ -442,6 +480,10 @@ void CTBMOperate::OperateThread()
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + op.object->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + post->floor + _T("楼"));
 					}
+					if (op.isDeleteThread == TRUE) {
+						g_pLog->Log(_T("<font color=Orange>违规用户是楼主 执行联动删除</font>"));
+						goto CaseThread;
+					}	
 				}
 				else if (op.object->m_type == TBObject::LZL) // 楼中楼
 				{
@@ -462,6 +504,10 @@ void CTBMOperate::OperateThread()
 							sndPlaySound(_T("删贴.wav"), SND_ASYNC | SND_NODEFAULT);
 						g_pLog->Log(_T("<font color=red>删除 </font><a href=\"https://tieba.baidu.com/p/") + lzl->tid
 							+ _T("\">") + HTMLEscape(op.title) + _T("</a> ") + lzl->floor + _T("楼回复"));
+					}
+					if (op.isDeleteThread == TRUE) {
+						g_pLog->Log(_T("<font color=Orange>违规用户是楼主 执行联动删除</font>"));
+						goto CaseThread;
 					}
 				}
 				g_postDeleteEvent(op, result);

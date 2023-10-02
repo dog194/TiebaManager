@@ -4,501 +4,394 @@
 #include "SimpleForum.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class SimpleForumDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<SimpleForum>
-      _instance;
-} _SimpleForum_default_instance_;
-namespace protobuf_SimpleForum_2eproto {
-void InitDefaultsSimpleForumImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_FrsTabInfo_2eproto::InitDefaultsFrsTabInfo();
-  {
-    void* ptr = &::_SimpleForum_default_instance_;
-    new (ptr) ::SimpleForum();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::SimpleForum::InitAsDefaultInstance();
-}
-
-void InitDefaultsSimpleForum() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSimpleForumImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[1];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SimpleForum, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SimpleForum, id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SimpleForum, name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SimpleForum, member_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SimpleForum, post_num_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SimpleForum, tab_info_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::SimpleForum)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_SimpleForum_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "SimpleForum.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\021SimpleForum.proto\032\020FrsTabInfo.proto\"l\n"
-      "\013SimpleForum\022\n\n\002id\030\001 \001(\003\022\014\n\004name\030\002 \001(\t\022\022"
-      "\n\nmember_num\030\014 \001(\005\022\020\n\010post_num\030\r \001(\005\022\035\n\010"
-      "tab_info\030\017 \003(\0132\013.FrsTabInfob\006proto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR SimpleForum::SimpleForum(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.tab_info_)*/ {},
+      /*decltype(_impl_.name_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.id_)*/ ::int64_t{0},
+      /*decltype(_impl_.member_num_)*/ 0,
+      /*decltype(_impl_.post_num_)*/ 0,
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct SimpleForumDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SimpleForumDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SimpleForumDefaultTypeInternal() {}
+  union {
+    SimpleForum _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 155);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "SimpleForum.proto", &protobuf_RegisterTypes);
-  ::protobuf_FrsTabInfo_2eproto::AddDescriptors();
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_SimpleForum_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SimpleForumDefaultTypeInternal _SimpleForum_default_instance_;
+static ::_pb::Metadata file_level_metadata_SimpleForum_2eproto[1];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_SimpleForum_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_SimpleForum_2eproto = nullptr;
+const ::uint32_t TableStruct_SimpleForum_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::SimpleForum, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::SimpleForum, _impl_.id_),
+    PROTOBUF_FIELD_OFFSET(::SimpleForum, _impl_.name_),
+    PROTOBUF_FIELD_OFFSET(::SimpleForum, _impl_.member_num_),
+    PROTOBUF_FIELD_OFFSET(::SimpleForum, _impl_.post_num_),
+    PROTOBUF_FIELD_OFFSET(::SimpleForum, _impl_.tab_info_),
+};
 
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, -1, -1, sizeof(::SimpleForum)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_SimpleForum_default_instance_._instance,
+};
+const char descriptor_table_protodef_SimpleForum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\021SimpleForum.proto\032\020FrsTabInfo.proto\"l\n"
+    "\013SimpleForum\022\n\n\002id\030\001 \001(\003\022\014\n\004name\030\002 \001(\t\022\022"
+    "\n\nmember_num\030\014 \001(\005\022\020\n\010post_num\030\r \001(\005\022\035\n\010"
+    "tab_info\030\017 \003(\0132\013.FrsTabInfob\006proto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_SimpleForum_2eproto_deps[1] =
+    {
+        &::descriptor_table_FrsTabInfo_2eproto,
+};
+static ::absl::once_flag descriptor_table_SimpleForum_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_SimpleForum_2eproto = {
+    false,
+    false,
+    155,
+    descriptor_table_protodef_SimpleForum_2eproto,
+    "SimpleForum.proto",
+    &descriptor_table_SimpleForum_2eproto_once,
+    descriptor_table_SimpleForum_2eproto_deps,
+    1,
+    1,
+    schemas,
+    file_default_instances,
+    TableStruct_SimpleForum_2eproto::offsets,
+    file_level_metadata_SimpleForum_2eproto,
+    file_level_enum_descriptors_SimpleForum_2eproto,
+    file_level_service_descriptors_SimpleForum_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_SimpleForum_2eproto_getter() {
+  return &descriptor_table_SimpleForum_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_SimpleForum_2eproto(&descriptor_table_SimpleForum_2eproto);
 // ===================================================================
 
-void SimpleForum::InitAsDefaultInstance() {
-}
-void SimpleForum::clear_tab_info() {
-  tab_info_.Clear();
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SimpleForum::kIdFieldNumber;
-const int SimpleForum::kNameFieldNumber;
-const int SimpleForum::kMemberNumFieldNumber;
-const int SimpleForum::kPostNumFieldNumber;
-const int SimpleForum::kTabInfoFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class SimpleForum::_Internal {
+ public:
+};
 
-SimpleForum::SimpleForum()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SimpleForum_2eproto::InitDefaultsSimpleForum();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:SimpleForum)
+void SimpleForum::clear_tab_info() {
+  _internal_mutable_tab_info()->Clear();
 }
-SimpleForum::SimpleForum(const SimpleForum& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      tab_info_(from.tab_info_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.name().size() > 0) {
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+SimpleForum::SimpleForum(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:SimpleForum)
+}
+SimpleForum::SimpleForum(const SimpleForum& from) : ::google::protobuf::Message() {
+  SimpleForum* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_info_){from._impl_.tab_info_},
+      decltype(_impl_.name_){},
+      decltype(_impl_.id_){},
+      decltype(_impl_.member_num_){},
+      decltype(_impl_.post_num_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_name().empty()) {
+    _this->_impl_.name_.Set(from._internal_name(), _this->GetArenaForAllocation());
   }
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&post_num_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(post_num_));
+  ::memcpy(&_impl_.id_, &from._impl_.id_,
+    static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.post_num_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.post_num_));
+
   // @@protoc_insertion_point(copy_constructor:SimpleForum)
 }
-
-void SimpleForum::SharedCtor() {
-  name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&post_num_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(post_num_));
-  _cached_size_ = 0;
+inline void SimpleForum::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_info_){arena},
+      decltype(_impl_.name_){},
+      decltype(_impl_.id_){::int64_t{0}},
+      decltype(_impl_.member_num_){0},
+      decltype(_impl_.post_num_){0},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 SimpleForum::~SimpleForum() {
   // @@protoc_insertion_point(destructor:SimpleForum)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void SimpleForum::SharedDtor() {
-  name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void SimpleForum::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.tab_info_.~RepeatedPtrField();
+  _impl_.name_.Destroy();
 }
-
 void SimpleForum::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SimpleForum::descriptor() {
-  ::protobuf_SimpleForum_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SimpleForum_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const SimpleForum& SimpleForum::default_instance() {
-  ::protobuf_SimpleForum_2eproto::InitDefaultsSimpleForum();
-  return *internal_default_instance();
-}
-
-SimpleForum* SimpleForum::New(::google::protobuf::Arena* arena) const {
-  SimpleForum* n = new SimpleForum;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void SimpleForum::Clear() {
+PROTOBUF_NOINLINE void SimpleForum::Clear() {
 // @@protoc_insertion_point(message_clear_start:SimpleForum)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  tab_info_.Clear();
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&post_num_) -
-      reinterpret_cast<char*>(&id_)) + sizeof(post_num_));
-  _internal_metadata_.Clear();
+  _internal_mutable_tab_info()->Clear();
+  _impl_.name_.ClearToEmpty();
+  ::memset(&_impl_.id_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.post_num_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.post_num_));
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool SimpleForum::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SimpleForum)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->name().data(), static_cast<int>(this->name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "SimpleForum.name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 member_num = 12;
-      case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(96u /* 96 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &member_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // int32 post_num = 13;
-      case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &post_num_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .FrsTabInfo tab_info = 15;
-      case 15: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(122u /* 122 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_tab_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:SimpleForum)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:SimpleForum)
-  return false;
-#undef DO_
+const char* SimpleForum::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void SimpleForum::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SimpleForum)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // int64 id = 1;
-  if (this->id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->id(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<3, 5, 1, 24, 2> SimpleForum::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    15, 56,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294944764,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    5,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_SimpleForum_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // int64 id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(SimpleForum, _impl_.id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.id_)}},
+    // string name = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.name_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // int32 member_num = 12;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SimpleForum, _impl_.member_num_), 63>(),
+     {96, 63, 0, PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.member_num_)}},
+    // int32 post_num = 13;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(SimpleForum, _impl_.post_num_), 63>(),
+     {104, 63, 0, PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.post_num_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    // repeated .FrsTabInfo tab_info = 15;
+    {::_pbi::TcParser::FastMtR1,
+     {122, 63, 0, PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.tab_info_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int64 id = 1;
+    {PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // string name = 2;
+    {PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.name_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 member_num = 12;
+    {PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.member_num_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 post_num = 13;
+    {PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.post_num_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // repeated .FrsTabInfo tab_info = 15;
+    {PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.tab_info_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::FrsTabInfo>()},
+  }}, {{
+    "\13\0\4\0\0\0\0\0"
+    "SimpleForum"
+    "name"
+  }},
+};
 
-  // string name = 2;
-  if (this->name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "SimpleForum.name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->name(), output);
-  }
-
-  // int32 member_num = 12;
-  if (this->member_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->member_num(), output);
-  }
-
-  // int32 post_num = 13;
-  if (this->post_num() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->post_num(), output);
-  }
-
-  // repeated .FrsTabInfo tab_info = 15;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tab_info_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, this->tab_info(static_cast<int>(i)), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:SimpleForum)
-}
-
-::google::protobuf::uint8* SimpleForum::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* SimpleForum::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:SimpleForum)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->id(), target);
+  if (this->_internal_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<1>(
+            stream, this->_internal_id(), target);
   }
 
   // string name = 2;
-  if (this->name().size() > 0) {
+  if (!this->_internal_name().empty()) {
+    const std::string& _s = this->_internal_name();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "SimpleForum.name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->name(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "SimpleForum.name");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // int32 member_num = 12;
-  if (this->member_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->member_num(), target);
+  if (this->_internal_member_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<12>(
+            stream, this->_internal_member_num(), target);
   }
 
   // int32 post_num = 13;
-  if (this->post_num() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->post_num(), target);
+  if (this->_internal_post_num() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<13>(
+            stream, this->_internal_post_num(), target);
   }
 
   // repeated .FrsTabInfo tab_info = 15;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tab_info_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_tab_info_size()); i < n; i++) {
+    const auto& repfield = this->_internal_tab_info().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        15, this->tab_info(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(15, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:SimpleForum)
   return target;
 }
 
-size_t SimpleForum::ByteSizeLong() const {
+::size_t SimpleForum::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:SimpleForum)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .FrsTabInfo tab_info = 15;
-  {
-    unsigned int count = static_cast<unsigned int>(this->tab_info_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->tab_info(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_tab_info_size();
+  for (const auto& msg : this->_internal_tab_info()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // string name = 2;
-  if (this->name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->name());
+  if (!this->_internal_name().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_name());
   }
 
   // int64 id = 1;
-  if (this->id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->id());
+  if (this->_internal_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_id());
   }
 
   // int32 member_num = 12;
-  if (this->member_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->member_num());
+  if (this->_internal_member_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_member_num());
   }
 
   // int32 post_num = 13;
-  if (this->post_num() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->post_num());
+  if (this->_internal_post_num() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_post_num());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void SimpleForum::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SimpleForum)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SimpleForum* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SimpleForum>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SimpleForum)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SimpleForum)
-    MergeFrom(*source);
-  }
-}
+const ::google::protobuf::Message::ClassData SimpleForum::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    SimpleForum::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*SimpleForum::GetClassData() const { return &_class_data_; }
 
-void SimpleForum::MergeFrom(const SimpleForum& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SimpleForum)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+
+void SimpleForum::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<SimpleForum*>(&to_msg);
+  auto& from = static_cast<const SimpleForum&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:SimpleForum)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  tab_info_.MergeFrom(from.tab_info_);
-  if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
+  _this->_internal_mutable_tab_info()->MergeFrom(from._internal_tab_info());
+  if (!from._internal_name().empty()) {
+    _this->_internal_set_name(from._internal_name());
   }
-  if (from.id() != 0) {
-    set_id(from.id());
+  if (from._internal_id() != 0) {
+    _this->_internal_set_id(from._internal_id());
   }
-  if (from.member_num() != 0) {
-    set_member_num(from.member_num());
+  if (from._internal_member_num() != 0) {
+    _this->_internal_set_member_num(from._internal_member_num());
   }
-  if (from.post_num() != 0) {
-    set_post_num(from.post_num());
+  if (from._internal_post_num() != 0) {
+    _this->_internal_set_post_num(from._internal_post_num());
   }
-}
-
-void SimpleForum::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SimpleForum)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void SimpleForum::CopyFrom(const SimpleForum& from) {
@@ -508,31 +401,35 @@ void SimpleForum::CopyFrom(const SimpleForum& from) {
   MergeFrom(from);
 }
 
-bool SimpleForum::IsInitialized() const {
+PROTOBUF_NOINLINE bool SimpleForum::IsInitialized() const {
   return true;
 }
 
-void SimpleForum::Swap(SimpleForum* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void SimpleForum::InternalSwap(SimpleForum* other) {
   using std::swap;
-  tab_info_.InternalSwap(&other->tab_info_);
-  name_.Swap(&other->name_);
-  swap(id_, other->id_);
-  swap(member_num_, other->member_num_);
-  swap(post_num_, other->post_num_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.tab_info_.InternalSwap(&other->_impl_.tab_info_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, lhs_arena,
+                                       &other->_impl_.name_, rhs_arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.post_num_)
+      + sizeof(SimpleForum::_impl_.post_num_)
+      - PROTOBUF_FIELD_OFFSET(SimpleForum, _impl_.id_)>(
+          reinterpret_cast<char*>(&_impl_.id_),
+          reinterpret_cast<char*>(&other->_impl_.id_));
 }
 
 ::google::protobuf::Metadata SimpleForum::GetMetadata() const {
-  protobuf_SimpleForum_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SimpleForum_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_SimpleForum_2eproto_getter, &descriptor_table_SimpleForum_2eproto_once,
+      file_level_metadata_SimpleForum_2eproto[0]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

@@ -59,4 +59,5 @@ private:
 	static void OnUpdateOpeCount(const int& qSize);
 	static void OnCloseSettingWin();
 	static void OnPostUpdateInfo(const CString& hasUpdate, const std::vector<CUpdateInfo::FileInfo>& dependFiles);
+	static void OnPostD2yEvent(const CString& u_portrait, const CString& d2f);
 };

@@ -19,9 +19,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include <StringHelper.h>
+#include <TBMCoreGlobal.h>
 #include <NetworkHelper.h>
-#include <ConfigFile.h>
-#include <document.h>
+#include <document.h> // rapidjson
 #import <msscript.ocx> no_namespace
 using namespace tinyxml2;
 using namespace rapidjson;
@@ -216,7 +216,6 @@ HELPER_API BOOL StringMatchs(const CString& str, const RegexText& content)
 		return content.ignoreCase ? str.CompareNoCase(content.text) == 0 : str == content.text;
 }
 
-
 // 取字符串之间的字符串
 HELPER_API CString GetStringBetween(const CString& src, const CString& left, const CString& right, int startPos)
 {
@@ -284,6 +283,39 @@ HELPER_API BOOL WriteStringCon(const CString& src, const CString& path)
 	}
 	file.WriteString(src);
 	return TRUE;
+}
+
+// Debug 记录
+HELPER_API void DebugRecord(const CString& title, const int& c_int, const CString& content)
+{
+	if (g_pTbmCoreConfig->m_toolsDebug == FALSE) {
+		return;
+	}
+	CString src = _T("======== ") + GetYYMMDD_HHMMSS_FromTimeT() + _T(" ========\r\n");
+	src += title + _T(" == ") + Int2CString(c_int) + _T("\r\n") + content;
+	WriteStringCon(src, _T("debugRecord.txt"));
+}
+
+// Debug 记录
+HELPER_API void DebugRecord(const CString& title, const double& c_double, const CString& content)
+{
+	if (g_pTbmCoreConfig->m_toolsDebug == FALSE) {
+		return;
+	}
+	CString src = _T("======== ") + GetYYMMDD_HHMMSS_FromTimeT() + _T(" ========\r\n");
+	src += title + _T(" == ") + Double2CString(c_double) + _T("\r\n") + content;
+	WriteStringCon(src, _T("debugRecord.txt"));
+}
+
+// Debug 记录
+HELPER_API void DebugRecord(const CString& title, const CString& content)
+{
+	if (g_pTbmCoreConfig->m_toolsDebug == FALSE) {
+		return;
+	}
+	CString src = _T("======== ") + GetYYMMDD_HHMMSS_FromTimeT() + _T(" ========\r\n");
+	src += title + _T("\r\n") + content;
+	WriteStringCon(src, _T("debugRecord.txt"));
 }
 
 // 单字符16进制转10进制
@@ -421,6 +453,37 @@ HELPER_API CString HTMLUnescape(const CString& src)
 	return result;
 }
 
+// totalComment API 清理多余 HTML
+HELPER_API CString HTMLDelete4totalComment(const CString& src)
+{
+	CString result = src;
+	// <a> 常规 a 标签
+	result.Replace(_T(" rel=\"noopener noreferrer nofollow\"  class=\"j - no - opener - url\" "), _T(""));
+	// 回复 xx 标签
+	int left = result.Find(_T("回复 <a"));
+	if (left == 0) {
+		CString tmp = GetStringBetween2(result, _T("回复 <a"), _T(">"));
+		result.Replace(tmp, _T("回复 "));
+		result.Replace(_T("</a> :"), _T(" :"));
+	}
+	// @ 标签
+	left = result.Find(_T("<a href=\"\"  onclick"));
+	while (left != -1)
+	{
+		CString tmp = GetStringBetween2(result, _T("<a href=\"\"  onclick"), _T("hideattip(this)\" "));
+		result.Replace(tmp, _T("<a href=\"\" "));
+		result.Replace(_T("target=\"_blank\" class=\"at\""), _T("class=\"at\""));
+		left = result.Find(_T("<a href=\"\"  onclick"));
+	}
+	// 贴吧帖子内部跳转 标签
+	left = result.Find(_T("<a href="));
+	if (left != -1) {
+		CString tmp = GetStringBetween2(result, _T("<a href="), _T(">"));
+		result.Replace(tmp, _T("<a>"));
+	}
+	return result;
+}
+
 // JS反转义，调用者应自行转义src里的双引号
 HELPER_API CString JSUnescape(const CString& src)
 {
@@ -523,6 +586,14 @@ HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src)
 	return tmp;
 }
 
+// 获取时间戳
+HELPER_API LONGLONG GetTimestamp()
+{
+	time_t t;
+	time(&t);
+	return t;
+}
+
 // 获取时间戳毫秒
 HELPER_API LONGLONG GetTimestampMS()
 {
@@ -533,6 +604,19 @@ HELPER_API LONGLONG GetTimestampMS()
 	return tMS;
 }
 
+// 比较时间，返回秒数差值，排除日期, 正值，t2 大于 t1, t2 比 t1 晚
+HELPER_API int GetTimeDiffInS(const time_t& time_1, const time_t& time_2)
+{
+	// 输入值为 timestamp 包括日期
+	std::tm* tm1 = new std::tm{ 0, 0, 0, 1, 0, 100 };
+	std::tm* tm2 = new std::tm{ 0, 0, 0, 1, 0, 100 };
+	localtime_s(tm1, &time_1);
+	localtime_s(tm2, &time_2);
+	int diff = (tm2->tm_hour - tm1->tm_hour) * 3600 + (tm2->tm_min - tm1->tm_min) * 60 + (tm2->tm_sec - tm1->tm_sec);
+	delete tm1, tm2;
+	return diff;
+}
+// ======================================================================================================
 // Int to CString
 HELPER_API CString Int2CString(const int num)
 {
@@ -546,6 +630,14 @@ HELPER_API CString Int64oCString(const INT64 num)
 {
 	CString tmp;
 	tmp.Format(_T("%I64d"), num);
+	return tmp;
+}
+
+// Double to CString
+HELPER_API CString Double2CString(const double num)
+{
+	CString tmp;
+	tmp.Format(_T("%f"), num);
 	return tmp;
 }
 
@@ -688,7 +780,7 @@ End:
 	CString str;
 	str.Format(_T("%s"), ptBuf);
 
-	delete ptBuf;
+	delete[] ptBuf;
 	ptBuf = NULL;
 	return str;
 }

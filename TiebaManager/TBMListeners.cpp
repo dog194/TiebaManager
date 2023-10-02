@@ -60,6 +60,7 @@ CTBMListeners::CTBMListeners()
 	g_openLinkInLogEvent.AddListener(OnOpenLinkInLog);
 	g_settingWinCloseEvent.AddListener(OnCloseSettingWin);
 	g_postUpdateInfoEvent.AddListener(OnPostUpdateInfo);
+	g_postD2yEvent.AddListener(OnPostD2yEvent);
 }
 
 
@@ -205,11 +206,12 @@ void CTBMListeners::OnOpenLinkInLog(const CString& url, BOOL& pass)
 		if (args.GetSize() == 5 && args[4] == "Dog194") {
 			//单独框列，我也不知道有没有其他地方也用了 bd:
 			code = (g_plan.m_banClientInterface /*|| g_plan.m_banDuration == 1*/ || args[1] == _T("")) ?
-				g_tiebaOperate.BanIDClient(args[0], args[1], args[2], args[3]) : g_tiebaOperate.BanID(args[0], args[1], args[2], args[3]);
+				g_tiebaOperate.BanIDClient(args[0], args[2], args[3]) : g_tiebaOperate.BanID(args[0], args[2], args[3]);
+			// g_tiebaOperate.BanIDClient(args[0], args[1], args[2], args[3]) : g_tiebaOperate.BanID(args[0], args[1], args[2], args[3]);
 		}
 		else {
 			code = (g_plan.m_banClientInterface /*|| g_plan.m_banDuration == 1*/ || args[1] == _T("")) ?
-				g_tiebaOperate.BanIDClient(args[0]) : g_tiebaOperate.BanID(args[0], args[1]);
+				g_tiebaOperate.BanIDClient(args[0]) : g_tiebaOperate.BanID(args[0]);
 		}
 		if (code == _T("0"))
 			dlg->m_log.Log(_T("<font color=green>封禁成功！</font>"));
@@ -290,5 +292,12 @@ void CTBMListeners::OnPostUpdateInfo(const CString& hasUpdate, const std::vector
 		else if (dependFiles[i].name == _T("7za.exe")) {
 			dlg->m_7zaV = dependFiles[i].version;
 		}
+	}
+}
+
+void CTBMListeners::OnPostD2yEvent(const CString& u_portrait, const CString& d2f) {
+	CTiebaManagerDlg* dlg = (CTiebaManagerDlg*)theApp.m_pMainWnd;
+	if (dlg->m_settingDlg != NULL) {
+		dlg->m_settingDlg->m_blackListRulesPage->setRuleD2Y(u_portrait, d2f);
 	}
 }

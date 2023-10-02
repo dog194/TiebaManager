@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "Error.proto";
+import "User.proto";
+import "PostInfoList.proto";
+
+message ProfileResIdl {
+    Error error = 1;
+    message DataRes {
+        User user = 1;
+        message Anti {
+            int32 block_stat = 6;
+            int32 hide_stat = 7;
+            int32 days_tofree = 9;
+        }
+        Anti anti_stat = 2;
+        repeated PostInfoList post_list = 4;
+    }
+    DataRes data = 2;
+}

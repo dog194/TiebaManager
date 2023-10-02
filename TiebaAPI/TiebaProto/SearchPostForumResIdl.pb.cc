@@ -4,501 +4,399 @@
 #include "SearchPostForumResIdl.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
-// This is a temporary google only hack
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-#include "third_party/protobuf/version.h"
-#endif
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-class SearchPostForumResIdl_DataRes_SearchForumDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<SearchPostForumResIdl_DataRes_SearchForum>
-      _instance;
-} _SearchPostForumResIdl_DataRes_SearchForum_default_instance_;
-class SearchPostForumResIdl_DataResDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<SearchPostForumResIdl_DataRes>
-      _instance;
-} _SearchPostForumResIdl_DataRes_default_instance_;
-class SearchPostForumResIdlDefaultTypeInternal {
- public:
-  ::google::protobuf::internal::ExplicitlyConstructed<SearchPostForumResIdl>
-      _instance;
-} _SearchPostForumResIdl_default_instance_;
-namespace protobuf_SearchPostForumResIdl_2eproto {
-void InitDefaultsSearchPostForumResIdl_DataRes_SearchForumImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_FrsTabInfo_2eproto::InitDefaultsFrsTabInfo();
-  {
-    void* ptr = &::_SearchPostForumResIdl_DataRes_SearchForum_default_instance_;
-    new (ptr) ::SearchPostForumResIdl_DataRes_SearchForum();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::SearchPostForumResIdl_DataRes_SearchForum::InitAsDefaultInstance();
-}
-
-void InitDefaultsSearchPostForumResIdl_DataRes_SearchForum() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSearchPostForumResIdl_DataRes_SearchForumImpl);
-}
-
-void InitDefaultsSearchPostForumResIdl_DataResImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl_DataRes_SearchForum();
-  {
-    void* ptr = &::_SearchPostForumResIdl_DataRes_default_instance_;
-    new (ptr) ::SearchPostForumResIdl_DataRes();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::SearchPostForumResIdl_DataRes::InitAsDefaultInstance();
-}
-
-void InitDefaultsSearchPostForumResIdl_DataRes() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSearchPostForumResIdl_DataResImpl);
-}
-
-void InitDefaultsSearchPostForumResIdlImpl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_Error_2eproto::InitDefaultsError();
-  protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl_DataRes();
-  {
-    void* ptr = &::_SearchPostForumResIdl_default_instance_;
-    new (ptr) ::SearchPostForumResIdl();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::SearchPostForumResIdl::InitAsDefaultInstance();
-}
-
-void InitDefaultsSearchPostForumResIdl() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsSearchPostForumResIdlImpl);
-}
-
-::google::protobuf::Metadata file_level_metadata[3];
-
-const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, forum_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, forum_name_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, tab_info_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl_DataRes, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl_DataRes, exact_match_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl, error_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::SearchPostForumResIdl, data_),
-};
-static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::SearchPostForumResIdl_DataRes_SearchForum)},
-  { 8, -1, sizeof(::SearchPostForumResIdl_DataRes)},
-  { 14, -1, sizeof(::SearchPostForumResIdl)},
-};
-
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_SearchPostForumResIdl_DataRes_SearchForum_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_SearchPostForumResIdl_DataRes_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::_SearchPostForumResIdl_default_instance_),
-};
-
-void protobuf_AssignDescriptors() {
-  AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
-  AssignDescriptors(
-      "SearchPostForumResIdl.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, NULL, NULL);
-}
-
-void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 3);
-}
-
-void AddDescriptorsImpl() {
-  InitDefaults();
-  static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\033SearchPostForumResIdl.proto\032\020FrsTabInf"
-      "o.proto\032\013Error.proto\"\375\001\n\025SearchPostForum"
-      "ResIdl\022\025\n\005error\030\001 \001(\0132\006.Error\022,\n\004data\030\002 "
-      "\001(\0132\036.SearchPostForumResIdl.DataRes\032\236\001\n\007"
-      "DataRes\022\?\n\013exact_match\030\001 \001(\0132*.SearchPos"
-      "tForumResIdl.DataRes.SearchForum\032R\n\013Sear"
-      "chForum\022\020\n\010forum_id\030\001 \001(\003\022\022\n\nforum_name\030"
-      "\002 \001(\t\022\035\n\010tab_info\030\t \003(\0132\013.FrsTabInfob\006pr"
-      "oto3"
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
+        template <typename>
+PROTOBUF_CONSTEXPR SearchPostForumResIdl_DataRes_SearchForum::SearchPostForumResIdl_DataRes_SearchForum(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.tab_info_)*/ {},
+      /*decltype(_impl_.forum_name_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_.forum_id_)*/ ::int64_t{0},
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct SearchPostForumResIdl_DataRes_SearchForumDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SearchPostForumResIdl_DataRes_SearchForumDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SearchPostForumResIdl_DataRes_SearchForumDefaultTypeInternal() {}
+  union {
+    SearchPostForumResIdl_DataRes_SearchForum _instance;
   };
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 324);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "SearchPostForumResIdl.proto", &protobuf_RegisterTypes);
-  ::protobuf_FrsTabInfo_2eproto::AddDescriptors();
-  ::protobuf_Error_2eproto::AddDescriptors();
-}
+};
 
-void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
-}
-// Force AddDescriptors() to be called at dynamic initialization time.
-struct StaticDescriptorInitializer {
-  StaticDescriptorInitializer() {
-    AddDescriptors();
-  }
-} static_descriptor_initializer;
-}  // namespace protobuf_SearchPostForumResIdl_2eproto
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SearchPostForumResIdl_DataRes_SearchForumDefaultTypeInternal _SearchPostForumResIdl_DataRes_SearchForum_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR SearchPostForumResIdl_DataRes::SearchPostForumResIdl_DataRes(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.exact_match_)*/ nullptr,
+    } {}
+struct SearchPostForumResIdl_DataResDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SearchPostForumResIdl_DataResDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SearchPostForumResIdl_DataResDefaultTypeInternal() {}
+  union {
+    SearchPostForumResIdl_DataRes _instance;
+  };
+};
 
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SearchPostForumResIdl_DataResDefaultTypeInternal _SearchPostForumResIdl_DataRes_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR SearchPostForumResIdl::SearchPostForumResIdl(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.error_)*/ nullptr,
+      /*decltype(_impl_.data_)*/ nullptr,
+    } {}
+struct SearchPostForumResIdlDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR SearchPostForumResIdlDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~SearchPostForumResIdlDefaultTypeInternal() {}
+  union {
+    SearchPostForumResIdl _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SearchPostForumResIdlDefaultTypeInternal _SearchPostForumResIdl_default_instance_;
+static ::_pb::Metadata file_level_metadata_SearchPostForumResIdl_2eproto[3];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_SearchPostForumResIdl_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_SearchPostForumResIdl_2eproto = nullptr;
+const ::uint32_t TableStruct_SearchPostForumResIdl_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, _impl_.forum_id_),
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, _impl_.forum_name_),
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl_DataRes_SearchForum, _impl_.tab_info_),
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl_DataRes, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl_DataRes, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl_DataRes, _impl_.exact_match_),
+    0,
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl, _impl_.error_),
+    PROTOBUF_FIELD_OFFSET(::SearchPostForumResIdl, _impl_.data_),
+    0,
+    1,
+};
+
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, -1, -1, sizeof(::SearchPostForumResIdl_DataRes_SearchForum)},
+        {11, 20, -1, sizeof(::SearchPostForumResIdl_DataRes)},
+        {21, 31, -1, sizeof(::SearchPostForumResIdl)},
+};
+
+static const ::_pb::Message* const file_default_instances[] = {
+    &::_SearchPostForumResIdl_DataRes_SearchForum_default_instance_._instance,
+    &::_SearchPostForumResIdl_DataRes_default_instance_._instance,
+    &::_SearchPostForumResIdl_default_instance_._instance,
+};
+const char descriptor_table_protodef_SearchPostForumResIdl_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\033SearchPostForumResIdl.proto\032\020FrsTabInf"
+    "o.proto\032\013Error.proto\"\375\001\n\025SearchPostForum"
+    "ResIdl\022\025\n\005error\030\001 \001(\0132\006.Error\022,\n\004data\030\002 "
+    "\001(\0132\036.SearchPostForumResIdl.DataRes\032\236\001\n\007"
+    "DataRes\022\?\n\013exact_match\030\001 \001(\0132*.SearchPos"
+    "tForumResIdl.DataRes.SearchForum\032R\n\013Sear"
+    "chForum\022\020\n\010forum_id\030\001 \001(\003\022\022\n\nforum_name\030"
+    "\002 \001(\t\022\035\n\010tab_info\030\t \003(\0132\013.FrsTabInfob\006pr"
+    "oto3"
+};
+static const ::_pbi::DescriptorTable* const descriptor_table_SearchPostForumResIdl_2eproto_deps[2] =
+    {
+        &::descriptor_table_Error_2eproto,
+        &::descriptor_table_FrsTabInfo_2eproto,
+};
+static ::absl::once_flag descriptor_table_SearchPostForumResIdl_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_SearchPostForumResIdl_2eproto = {
+    false,
+    false,
+    324,
+    descriptor_table_protodef_SearchPostForumResIdl_2eproto,
+    "SearchPostForumResIdl.proto",
+    &descriptor_table_SearchPostForumResIdl_2eproto_once,
+    descriptor_table_SearchPostForumResIdl_2eproto_deps,
+    2,
+    3,
+    schemas,
+    file_default_instances,
+    TableStruct_SearchPostForumResIdl_2eproto::offsets,
+    file_level_metadata_SearchPostForumResIdl_2eproto,
+    file_level_enum_descriptors_SearchPostForumResIdl_2eproto,
+    file_level_service_descriptors_SearchPostForumResIdl_2eproto,
+};
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_SearchPostForumResIdl_2eproto_getter() {
+  return &descriptor_table_SearchPostForumResIdl_2eproto;
+}
+// Force running AddDescriptors() at dynamic initialization time.
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_SearchPostForumResIdl_2eproto(&descriptor_table_SearchPostForumResIdl_2eproto);
 // ===================================================================
 
-void SearchPostForumResIdl_DataRes_SearchForum::InitAsDefaultInstance() {
-}
-void SearchPostForumResIdl_DataRes_SearchForum::clear_tab_info() {
-  tab_info_.Clear();
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SearchPostForumResIdl_DataRes_SearchForum::kForumIdFieldNumber;
-const int SearchPostForumResIdl_DataRes_SearchForum::kForumNameFieldNumber;
-const int SearchPostForumResIdl_DataRes_SearchForum::kTabInfoFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class SearchPostForumResIdl_DataRes_SearchForum::_Internal {
+ public:
+};
 
-SearchPostForumResIdl_DataRes_SearchForum::SearchPostForumResIdl_DataRes_SearchForum()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl_DataRes_SearchForum();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:SearchPostForumResIdl.DataRes.SearchForum)
+void SearchPostForumResIdl_DataRes_SearchForum::clear_tab_info() {
+  _internal_mutable_tab_info()->Clear();
 }
-SearchPostForumResIdl_DataRes_SearchForum::SearchPostForumResIdl_DataRes_SearchForum(const SearchPostForumResIdl_DataRes_SearchForum& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      tab_info_(from.tab_info_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  forum_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.forum_name().size() > 0) {
-    forum_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.forum_name_);
+SearchPostForumResIdl_DataRes_SearchForum::SearchPostForumResIdl_DataRes_SearchForum(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:SearchPostForumResIdl.DataRes.SearchForum)
+}
+SearchPostForumResIdl_DataRes_SearchForum::SearchPostForumResIdl_DataRes_SearchForum(const SearchPostForumResIdl_DataRes_SearchForum& from) : ::google::protobuf::Message() {
+  SearchPostForumResIdl_DataRes_SearchForum* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_info_){from._impl_.tab_info_},
+      decltype(_impl_.forum_name_){},
+      decltype(_impl_.forum_id_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.forum_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.forum_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_forum_name().empty()) {
+    _this->_impl_.forum_name_.Set(from._internal_forum_name(), _this->GetArenaForAllocation());
   }
-  forum_id_ = from.forum_id_;
+  _this->_impl_.forum_id_ = from._impl_.forum_id_;
+
   // @@protoc_insertion_point(copy_constructor:SearchPostForumResIdl.DataRes.SearchForum)
 }
-
-void SearchPostForumResIdl_DataRes_SearchForum::SharedCtor() {
-  forum_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  forum_id_ = GOOGLE_LONGLONG(0);
-  _cached_size_ = 0;
+inline void SearchPostForumResIdl_DataRes_SearchForum::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.tab_info_){arena},
+      decltype(_impl_.forum_name_){},
+      decltype(_impl_.forum_id_){::int64_t{0}},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.forum_name_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.forum_name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
-
 SearchPostForumResIdl_DataRes_SearchForum::~SearchPostForumResIdl_DataRes_SearchForum() {
   // @@protoc_insertion_point(destructor:SearchPostForumResIdl.DataRes.SearchForum)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void SearchPostForumResIdl_DataRes_SearchForum::SharedDtor() {
-  forum_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline void SearchPostForumResIdl_DataRes_SearchForum::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.tab_info_.~RepeatedPtrField();
+  _impl_.forum_name_.Destroy();
 }
-
 void SearchPostForumResIdl_DataRes_SearchForum::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SearchPostForumResIdl_DataRes_SearchForum::descriptor() {
-  ::protobuf_SearchPostForumResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SearchPostForumResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const SearchPostForumResIdl_DataRes_SearchForum& SearchPostForumResIdl_DataRes_SearchForum::default_instance() {
-  ::protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl_DataRes_SearchForum();
-  return *internal_default_instance();
-}
-
-SearchPostForumResIdl_DataRes_SearchForum* SearchPostForumResIdl_DataRes_SearchForum::New(::google::protobuf::Arena* arena) const {
-  SearchPostForumResIdl_DataRes_SearchForum* n = new SearchPostForumResIdl_DataRes_SearchForum;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void SearchPostForumResIdl_DataRes_SearchForum::Clear() {
+PROTOBUF_NOINLINE void SearchPostForumResIdl_DataRes_SearchForum::Clear() {
 // @@protoc_insertion_point(message_clear_start:SearchPostForumResIdl.DataRes.SearchForum)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  tab_info_.Clear();
-  forum_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  forum_id_ = GOOGLE_LONGLONG(0);
-  _internal_metadata_.Clear();
+  _internal_mutable_tab_info()->Clear();
+  _impl_.forum_name_.ClearToEmpty();
+  _impl_.forum_id_ = ::int64_t{0};
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool SearchPostForumResIdl_DataRes_SearchForum::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SearchPostForumResIdl.DataRes.SearchForum)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // int64 forum_id = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
-
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &forum_id_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string forum_name = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_forum_name()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->forum_name().data(), static_cast<int>(this->forum_name().length()),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "SearchPostForumResIdl.DataRes.SearchForum.forum_name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .FrsTabInfo tab_info = 9;
-      case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_tab_info()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:SearchPostForumResIdl.DataRes.SearchForum)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:SearchPostForumResIdl.DataRes.SearchForum)
-  return false;
-#undef DO_
+const char* SearchPostForumResIdl_DataRes_SearchForum::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void SearchPostForumResIdl_DataRes_SearchForum::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SearchPostForumResIdl.DataRes.SearchForum)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // int64 forum_id = 1;
-  if (this->forum_id() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->forum_id(), output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 3, 1, 60, 2> SearchPostForumResIdl_DataRes_SearchForum::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    9, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967036,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_SearchPostForumResIdl_DataRes_SearchForum_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string forum_name = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes_SearchForum, _impl_.forum_name_)}},
+    // int64 forum_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(SearchPostForumResIdl_DataRes_SearchForum, _impl_.forum_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes_SearchForum, _impl_.forum_id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int64 forum_id = 1;
+    {PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes_SearchForum, _impl_.forum_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // string forum_name = 2;
+    {PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes_SearchForum, _impl_.forum_name_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // repeated .FrsTabInfo tab_info = 9;
+    {PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes_SearchForum, _impl_.tab_info_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::FrsTabInfo>()},
+  }}, {{
+    "\51\0\12\0\0\0\0\0"
+    "SearchPostForumResIdl.DataRes.SearchForum"
+    "forum_name"
+  }},
+};
 
-  // string forum_name = 2;
-  if (this->forum_name().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->forum_name().data(), static_cast<int>(this->forum_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "SearchPostForumResIdl.DataRes.SearchForum.forum_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->forum_name(), output);
-  }
-
-  // repeated .FrsTabInfo tab_info = 9;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tab_info_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, this->tab_info(static_cast<int>(i)), output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:SearchPostForumResIdl.DataRes.SearchForum)
-}
-
-::google::protobuf::uint8* SearchPostForumResIdl_DataRes_SearchForum::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* SearchPostForumResIdl_DataRes_SearchForum::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:SearchPostForumResIdl.DataRes.SearchForum)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
   // int64 forum_id = 1;
-  if (this->forum_id() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->forum_id(), target);
+  if (this->_internal_forum_id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<1>(
+            stream, this->_internal_forum_id(), target);
   }
 
   // string forum_name = 2;
-  if (this->forum_name().size() > 0) {
+  if (!this->_internal_forum_name().empty()) {
+    const std::string& _s = this->_internal_forum_name();
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->forum_name().data(), static_cast<int>(this->forum_name().length()),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "SearchPostForumResIdl.DataRes.SearchForum.forum_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->forum_name(), target);
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "SearchPostForumResIdl.DataRes.SearchForum.forum_name");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // repeated .FrsTabInfo tab_info = 9;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->tab_info_size()); i < n; i++) {
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_tab_info_size()); i < n; i++) {
+    const auto& repfield = this->_internal_tab_info().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        9, this->tab_info(static_cast<int>(i)), deterministic, target);
+        InternalWriteMessage(9, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:SearchPostForumResIdl.DataRes.SearchForum)
   return target;
 }
 
-size_t SearchPostForumResIdl_DataRes_SearchForum::ByteSizeLong() const {
+::size_t SearchPostForumResIdl_DataRes_SearchForum::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:SearchPostForumResIdl.DataRes.SearchForum)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   // repeated .FrsTabInfo tab_info = 9;
-  {
-    unsigned int count = static_cast<unsigned int>(this->tab_info_size());
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
-          this->tab_info(static_cast<int>(i)));
-    }
+  total_size += 1UL * this->_internal_tab_info_size();
+  for (const auto& msg : this->_internal_tab_info()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // string forum_name = 2;
-  if (this->forum_name().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->forum_name());
+  if (!this->_internal_forum_name().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_forum_name());
   }
 
   // int64 forum_id = 1;
-  if (this->forum_id() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->forum_id());
+  if (this->_internal_forum_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
+        this->_internal_forum_id());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void SearchPostForumResIdl_DataRes_SearchForum::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SearchPostForumResIdl.DataRes.SearchForum)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SearchPostForumResIdl_DataRes_SearchForum* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SearchPostForumResIdl_DataRes_SearchForum>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SearchPostForumResIdl.DataRes.SearchForum)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SearchPostForumResIdl.DataRes.SearchForum)
-    MergeFrom(*source);
-  }
-}
+const ::google::protobuf::Message::ClassData SearchPostForumResIdl_DataRes_SearchForum::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    SearchPostForumResIdl_DataRes_SearchForum::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*SearchPostForumResIdl_DataRes_SearchForum::GetClassData() const { return &_class_data_; }
 
-void SearchPostForumResIdl_DataRes_SearchForum::MergeFrom(const SearchPostForumResIdl_DataRes_SearchForum& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SearchPostForumResIdl.DataRes.SearchForum)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+
+void SearchPostForumResIdl_DataRes_SearchForum::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<SearchPostForumResIdl_DataRes_SearchForum*>(&to_msg);
+  auto& from = static_cast<const SearchPostForumResIdl_DataRes_SearchForum&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:SearchPostForumResIdl.DataRes.SearchForum)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  tab_info_.MergeFrom(from.tab_info_);
-  if (from.forum_name().size() > 0) {
-
-    forum_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.forum_name_);
+  _this->_internal_mutable_tab_info()->MergeFrom(from._internal_tab_info());
+  if (!from._internal_forum_name().empty()) {
+    _this->_internal_set_forum_name(from._internal_forum_name());
   }
-  if (from.forum_id() != 0) {
-    set_forum_id(from.forum_id());
+  if (from._internal_forum_id() != 0) {
+    _this->_internal_set_forum_id(from._internal_forum_id());
   }
-}
-
-void SearchPostForumResIdl_DataRes_SearchForum::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SearchPostForumResIdl.DataRes.SearchForum)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void SearchPostForumResIdl_DataRes_SearchForum::CopyFrom(const SearchPostForumResIdl_DataRes_SearchForum& from) {
@@ -508,248 +406,199 @@ void SearchPostForumResIdl_DataRes_SearchForum::CopyFrom(const SearchPostForumRe
   MergeFrom(from);
 }
 
-bool SearchPostForumResIdl_DataRes_SearchForum::IsInitialized() const {
+PROTOBUF_NOINLINE bool SearchPostForumResIdl_DataRes_SearchForum::IsInitialized() const {
   return true;
 }
 
-void SearchPostForumResIdl_DataRes_SearchForum::Swap(SearchPostForumResIdl_DataRes_SearchForum* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void SearchPostForumResIdl_DataRes_SearchForum::InternalSwap(SearchPostForumResIdl_DataRes_SearchForum* other) {
   using std::swap;
-  tab_info_.InternalSwap(&other->tab_info_);
-  forum_name_.Swap(&other->forum_name_);
-  swap(forum_id_, other->forum_id_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.tab_info_.InternalSwap(&other->_impl_.tab_info_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.forum_name_, lhs_arena,
+                                       &other->_impl_.forum_name_, rhs_arena);
+        swap(_impl_.forum_id_, other->_impl_.forum_id_);
 }
 
 ::google::protobuf::Metadata SearchPostForumResIdl_DataRes_SearchForum::GetMetadata() const {
-  protobuf_SearchPostForumResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SearchPostForumResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_SearchPostForumResIdl_2eproto_getter, &descriptor_table_SearchPostForumResIdl_2eproto_once,
+      file_level_metadata_SearchPostForumResIdl_2eproto[0]);
 }
-
-
 // ===================================================================
 
-void SearchPostForumResIdl_DataRes::InitAsDefaultInstance() {
-  ::_SearchPostForumResIdl_DataRes_default_instance_._instance.get_mutable()->exact_match_ = const_cast< ::SearchPostForumResIdl_DataRes_SearchForum*>(
-      ::SearchPostForumResIdl_DataRes_SearchForum::internal_default_instance());
-}
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SearchPostForumResIdl_DataRes::kExactMatchFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+class SearchPostForumResIdl_DataRes::_Internal {
+ public:
+  using HasBits = decltype(std::declval<SearchPostForumResIdl_DataRes>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes, _impl_._has_bits_);
+  static const ::SearchPostForumResIdl_DataRes_SearchForum& exact_match(const SearchPostForumResIdl_DataRes* msg);
+  static void set_has_exact_match(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+};
 
-SearchPostForumResIdl_DataRes::SearchPostForumResIdl_DataRes()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl_DataRes();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:SearchPostForumResIdl.DataRes)
+const ::SearchPostForumResIdl_DataRes_SearchForum& SearchPostForumResIdl_DataRes::_Internal::exact_match(const SearchPostForumResIdl_DataRes* msg) {
+  return *msg->_impl_.exact_match_;
 }
-SearchPostForumResIdl_DataRes::SearchPostForumResIdl_DataRes(const SearchPostForumResIdl_DataRes& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_exact_match()) {
-    exact_match_ = new ::SearchPostForumResIdl_DataRes_SearchForum(*from.exact_match_);
-  } else {
-    exact_match_ = NULL;
+SearchPostForumResIdl_DataRes::SearchPostForumResIdl_DataRes(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:SearchPostForumResIdl.DataRes)
+}
+SearchPostForumResIdl_DataRes::SearchPostForumResIdl_DataRes(const SearchPostForumResIdl_DataRes& from) : ::google::protobuf::Message() {
+  SearchPostForumResIdl_DataRes* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.exact_match_){nullptr},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.exact_match_ = new ::SearchPostForumResIdl_DataRes_SearchForum(*from._impl_.exact_match_);
   }
+
   // @@protoc_insertion_point(copy_constructor:SearchPostForumResIdl.DataRes)
 }
-
-void SearchPostForumResIdl_DataRes::SharedCtor() {
-  exact_match_ = NULL;
-  _cached_size_ = 0;
+inline void SearchPostForumResIdl_DataRes::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.exact_match_){nullptr},
+  };
 }
-
 SearchPostForumResIdl_DataRes::~SearchPostForumResIdl_DataRes() {
   // @@protoc_insertion_point(destructor:SearchPostForumResIdl.DataRes)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void SearchPostForumResIdl_DataRes::SharedDtor() {
-  if (this != internal_default_instance()) delete exact_match_;
+inline void SearchPostForumResIdl_DataRes::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.exact_match_;
 }
-
 void SearchPostForumResIdl_DataRes::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SearchPostForumResIdl_DataRes::descriptor() {
-  ::protobuf_SearchPostForumResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SearchPostForumResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const SearchPostForumResIdl_DataRes& SearchPostForumResIdl_DataRes::default_instance() {
-  ::protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl_DataRes();
-  return *internal_default_instance();
-}
-
-SearchPostForumResIdl_DataRes* SearchPostForumResIdl_DataRes::New(::google::protobuf::Arena* arena) const {
-  SearchPostForumResIdl_DataRes* n = new SearchPostForumResIdl_DataRes;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void SearchPostForumResIdl_DataRes::Clear() {
+PROTOBUF_NOINLINE void SearchPostForumResIdl_DataRes::Clear() {
 // @@protoc_insertion_point(message_clear_start:SearchPostForumResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && exact_match_ != NULL) {
-    delete exact_match_;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.exact_match_ != nullptr);
+    _impl_.exact_match_->Clear();
   }
-  exact_match_ = NULL;
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-bool SearchPostForumResIdl_DataRes::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SearchPostForumResIdl.DataRes)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .SearchPostForumResIdl.DataRes.SearchForum exact_match = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_exact_match()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:SearchPostForumResIdl.DataRes)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:SearchPostForumResIdl.DataRes)
-  return false;
-#undef DO_
+const char* SearchPostForumResIdl_DataRes::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-void SearchPostForumResIdl_DataRes::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SearchPostForumResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  // .SearchPostForumResIdl.DataRes.SearchForum exact_match = 1;
-  if (this->has_exact_match()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->exact_match_, output);
-  }
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> SearchPostForumResIdl_DataRes::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes, _impl_._has_bits_),
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_SearchPostForumResIdl_DataRes_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // .SearchPostForumResIdl.DataRes.SearchForum exact_match = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes, _impl_.exact_match_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .SearchPostForumResIdl.DataRes.SearchForum exact_match = 1;
+    {PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl_DataRes, _impl_.exact_match_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::SearchPostForumResIdl_DataRes_SearchForum>()},
+  }}, {{
+  }},
+};
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:SearchPostForumResIdl.DataRes)
-}
-
-::google::protobuf::uint8* SearchPostForumResIdl_DataRes::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+::uint8_t* SearchPostForumResIdl_DataRes::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:SearchPostForumResIdl.DataRes)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .SearchPostForumResIdl.DataRes.SearchForum exact_match = 1;
-  if (this->has_exact_match()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, *this->exact_match_, deterministic, target);
+      InternalWriteMessage(1, _Internal::exact_match(this),
+        _Internal::exact_match(this).GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:SearchPostForumResIdl.DataRes)
   return target;
 }
 
-size_t SearchPostForumResIdl_DataRes::ByteSizeLong() const {
+::size_t SearchPostForumResIdl_DataRes::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:SearchPostForumResIdl.DataRes)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // .SearchPostForumResIdl.DataRes.SearchForum exact_match = 1;
-  if (this->has_exact_match()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->exact_match_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void SearchPostForumResIdl_DataRes::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SearchPostForumResIdl.DataRes)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SearchPostForumResIdl_DataRes* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SearchPostForumResIdl_DataRes>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SearchPostForumResIdl.DataRes)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SearchPostForumResIdl.DataRes)
-    MergeFrom(*source);
-  }
-}
-
-void SearchPostForumResIdl_DataRes::MergeFrom(const SearchPostForumResIdl_DataRes& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SearchPostForumResIdl.DataRes)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (from.has_exact_match()) {
-    mutable_exact_match()->::SearchPostForumResIdl_DataRes_SearchForum::MergeFrom(from.exact_match());
+  // .SearchPostForumResIdl.DataRes.SearchForum exact_match = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *_impl_.exact_match_);
   }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void SearchPostForumResIdl_DataRes::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SearchPostForumResIdl.DataRes)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData SearchPostForumResIdl_DataRes::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    SearchPostForumResIdl_DataRes::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*SearchPostForumResIdl_DataRes::GetClassData() const { return &_class_data_; }
+
+
+void SearchPostForumResIdl_DataRes::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<SearchPostForumResIdl_DataRes*>(&to_msg);
+  auto& from = static_cast<const SearchPostForumResIdl_DataRes&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:SearchPostForumResIdl.DataRes)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_internal_mutable_exact_match()->::SearchPostForumResIdl_DataRes_SearchForum::MergeFrom(
+        from._internal_exact_match());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void SearchPostForumResIdl_DataRes::CopyFrom(const SearchPostForumResIdl_DataRes& from) {
@@ -759,302 +608,248 @@ void SearchPostForumResIdl_DataRes::CopyFrom(const SearchPostForumResIdl_DataRes
   MergeFrom(from);
 }
 
-bool SearchPostForumResIdl_DataRes::IsInitialized() const {
+PROTOBUF_NOINLINE bool SearchPostForumResIdl_DataRes::IsInitialized() const {
   return true;
 }
 
-void SearchPostForumResIdl_DataRes::Swap(SearchPostForumResIdl_DataRes* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void SearchPostForumResIdl_DataRes::InternalSwap(SearchPostForumResIdl_DataRes* other) {
   using std::swap;
-  swap(exact_match_, other->exact_match_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.exact_match_, other->_impl_.exact_match_);
 }
 
 ::google::protobuf::Metadata SearchPostForumResIdl_DataRes::GetMetadata() const {
-  protobuf_SearchPostForumResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SearchPostForumResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_SearchPostForumResIdl_2eproto_getter, &descriptor_table_SearchPostForumResIdl_2eproto_once,
+      file_level_metadata_SearchPostForumResIdl_2eproto[1]);
 }
-
-
 // ===================================================================
 
-void SearchPostForumResIdl::InitAsDefaultInstance() {
-  ::_SearchPostForumResIdl_default_instance_._instance.get_mutable()->error_ = const_cast< ::Error*>(
-      ::Error::internal_default_instance());
-  ::_SearchPostForumResIdl_default_instance_._instance.get_mutable()->data_ = const_cast< ::SearchPostForumResIdl_DataRes*>(
-      ::SearchPostForumResIdl_DataRes::internal_default_instance());
+class SearchPostForumResIdl::_Internal {
+ public:
+  using HasBits = decltype(std::declval<SearchPostForumResIdl>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_._has_bits_);
+  static const ::Error& error(const SearchPostForumResIdl* msg);
+  static void set_has_error(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static const ::SearchPostForumResIdl_DataRes& data(const SearchPostForumResIdl* msg);
+  static void set_has_data(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+};
+
+const ::Error& SearchPostForumResIdl::_Internal::error(const SearchPostForumResIdl* msg) {
+  return *msg->_impl_.error_;
+}
+const ::SearchPostForumResIdl_DataRes& SearchPostForumResIdl::_Internal::data(const SearchPostForumResIdl* msg) {
+  return *msg->_impl_.data_;
 }
 void SearchPostForumResIdl::clear_error() {
-  if (GetArenaNoVirtual() == NULL && error_ != NULL) {
-    delete error_;
-  }
-  error_ = NULL;
+  if (_impl_.error_ != nullptr) _impl_.error_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int SearchPostForumResIdl::kErrorFieldNumber;
-const int SearchPostForumResIdl::kDataFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+SearchPostForumResIdl::SearchPostForumResIdl(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:SearchPostForumResIdl)
+}
+SearchPostForumResIdl::SearchPostForumResIdl(const SearchPostForumResIdl& from) : ::google::protobuf::Message() {
+  SearchPostForumResIdl* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.error_){nullptr},
+      decltype(_impl_.data_){nullptr},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.error_ = new ::Error(*from._impl_.error_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.data_ = new ::SearchPostForumResIdl_DataRes(*from._impl_.data_);
+  }
 
-SearchPostForumResIdl::SearchPostForumResIdl()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:SearchPostForumResIdl)
-}
-SearchPostForumResIdl::SearchPostForumResIdl(const SearchPostForumResIdl& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_error()) {
-    error_ = new ::Error(*from.error_);
-  } else {
-    error_ = NULL;
-  }
-  if (from.has_data()) {
-    data_ = new ::SearchPostForumResIdl_DataRes(*from.data_);
-  } else {
-    data_ = NULL;
-  }
   // @@protoc_insertion_point(copy_constructor:SearchPostForumResIdl)
 }
-
-void SearchPostForumResIdl::SharedCtor() {
-  ::memset(&error_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&data_) -
-      reinterpret_cast<char*>(&error_)) + sizeof(data_));
-  _cached_size_ = 0;
+inline void SearchPostForumResIdl::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.error_){nullptr},
+      decltype(_impl_.data_){nullptr},
+  };
 }
-
 SearchPostForumResIdl::~SearchPostForumResIdl() {
   // @@protoc_insertion_point(destructor:SearchPostForumResIdl)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void SearchPostForumResIdl::SharedDtor() {
-  if (this != internal_default_instance()) delete error_;
-  if (this != internal_default_instance()) delete data_;
+inline void SearchPostForumResIdl::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.error_;
+  if (this != internal_default_instance()) delete _impl_.data_;
 }
-
 void SearchPostForumResIdl::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SearchPostForumResIdl::descriptor() {
-  ::protobuf_SearchPostForumResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SearchPostForumResIdl_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+  _impl_._cached_size_.Set(size);
 }
 
-const SearchPostForumResIdl& SearchPostForumResIdl::default_instance() {
-  ::protobuf_SearchPostForumResIdl_2eproto::InitDefaultsSearchPostForumResIdl();
-  return *internal_default_instance();
-}
-
-SearchPostForumResIdl* SearchPostForumResIdl::New(::google::protobuf::Arena* arena) const {
-  SearchPostForumResIdl* n = new SearchPostForumResIdl;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void SearchPostForumResIdl::Clear() {
+PROTOBUF_NOINLINE void SearchPostForumResIdl::Clear() {
 // @@protoc_insertion_point(message_clear_start:SearchPostForumResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (GetArenaNoVirtual() == NULL && error_ != NULL) {
-    delete error_;
-  }
-  error_ = NULL;
-  if (GetArenaNoVirtual() == NULL && data_ != NULL) {
-    delete data_;
-  }
-  data_ = NULL;
-  _internal_metadata_.Clear();
-}
-
-bool SearchPostForumResIdl::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:SearchPostForumResIdl)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // .Error error = 1;
-      case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_error()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // .SearchPostForumResIdl.DataRes data = 2;
-      case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
-               input, mutable_data()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      ABSL_DCHECK(_impl_.error_ != nullptr);
+      _impl_.error_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      ABSL_DCHECK(_impl_.data_ != nullptr);
+      _impl_.data_->Clear();
     }
   }
-success:
-  // @@protoc_insertion_point(parse_success:SearchPostForumResIdl)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:SearchPostForumResIdl)
-  return false;
-#undef DO_
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-void SearchPostForumResIdl::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:SearchPostForumResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // .Error error = 1;
-  if (this->has_error()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->error_, output);
-  }
-
-  // .SearchPostForumResIdl.DataRes data = 2;
-  if (this->has_data()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->data_, output);
-  }
-
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
-  }
-  // @@protoc_insertion_point(serialize_end:SearchPostForumResIdl)
+const char* SearchPostForumResIdl::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
 }
 
-::google::protobuf::uint8* SearchPostForumResIdl::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic; // Unused
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 2, 0, 2> SearchPostForumResIdl::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    2,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_SearchPostForumResIdl_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // .SearchPostForumResIdl.DataRes data = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 1, 1, PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_.data_)}},
+    // .Error error = 1;
+    {::_pbi::TcParser::FastMtS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_.error_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // .Error error = 1;
+    {PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_.error_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .SearchPostForumResIdl.DataRes data = 2;
+    {PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_.data_), _Internal::kHasBitsOffset + 1, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::Error>()},
+    {::_pbi::TcParser::GetTable<::SearchPostForumResIdl_DataRes>()},
+  }}, {{
+  }},
+};
+
+::uint8_t* SearchPostForumResIdl::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:SearchPostForumResIdl)
-  ::google::protobuf::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .Error error = 1;
-  if (this->has_error()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        1, *this->error_, deterministic, target);
+      InternalWriteMessage(1, _Internal::error(this),
+        _Internal::error(this).GetCachedSize(), target, stream);
   }
 
   // .SearchPostForumResIdl.DataRes data = 2;
-  if (this->has_data()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        2, *this->data_, deterministic, target);
+      InternalWriteMessage(2, _Internal::data(this),
+        _Internal::data(this).GetCachedSize(), target, stream);
   }
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:SearchPostForumResIdl)
   return target;
 }
 
-size_t SearchPostForumResIdl::ByteSizeLong() const {
+::size_t SearchPostForumResIdl::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:SearchPostForumResIdl)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
-  }
-  // .Error error = 1;
-  if (this->has_error()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->error_);
-  }
-
-  // .SearchPostForumResIdl.DataRes data = 2;
-  if (this->has_data()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->data_);
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void SearchPostForumResIdl::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:SearchPostForumResIdl)
-  GOOGLE_DCHECK_NE(&from, this);
-  const SearchPostForumResIdl* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const SearchPostForumResIdl>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:SearchPostForumResIdl)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:SearchPostForumResIdl)
-    MergeFrom(*source);
-  }
-}
-
-void SearchPostForumResIdl::MergeFrom(const SearchPostForumResIdl& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:SearchPostForumResIdl)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (from.has_error()) {
-    mutable_error()->::Error::MergeFrom(from.error());
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // .Error error = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.error_);
+    }
+
+    // .SearchPostForumResIdl.DataRes data = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.data_);
+    }
+
   }
-  if (from.has_data()) {
-    mutable_data()->::SearchPostForumResIdl_DataRes::MergeFrom(from.data());
-  }
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void SearchPostForumResIdl::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:SearchPostForumResIdl)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+const ::google::protobuf::Message::ClassData SearchPostForumResIdl::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    SearchPostForumResIdl::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*SearchPostForumResIdl::GetClassData() const { return &_class_data_; }
+
+
+void SearchPostForumResIdl::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<SearchPostForumResIdl*>(&to_msg);
+  auto& from = static_cast<const SearchPostForumResIdl&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:SearchPostForumResIdl)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_mutable_error()->::Error::MergeFrom(
+          from._internal_error());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_mutable_data()->::SearchPostForumResIdl_DataRes::MergeFrom(
+          from._internal_data());
+    }
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void SearchPostForumResIdl::CopyFrom(const SearchPostForumResIdl& from) {
@@ -1064,28 +859,31 @@ void SearchPostForumResIdl::CopyFrom(const SearchPostForumResIdl& from) {
   MergeFrom(from);
 }
 
-bool SearchPostForumResIdl::IsInitialized() const {
+PROTOBUF_NOINLINE bool SearchPostForumResIdl::IsInitialized() const {
   return true;
 }
 
-void SearchPostForumResIdl::Swap(SearchPostForumResIdl* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void SearchPostForumResIdl::InternalSwap(SearchPostForumResIdl* other) {
   using std::swap;
-  swap(error_, other->error_);
-  swap(data_, other->data_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_.data_)
+      + sizeof(SearchPostForumResIdl::_impl_.data_)
+      - PROTOBUF_FIELD_OFFSET(SearchPostForumResIdl, _impl_.error_)>(
+          reinterpret_cast<char*>(&_impl_.error_),
+          reinterpret_cast<char*>(&other->_impl_.error_));
 }
 
 ::google::protobuf::Metadata SearchPostForumResIdl::GetMetadata() const {
-  protobuf_SearchPostForumResIdl_2eproto::protobuf_AssignDescriptorsOnce();
-  return ::protobuf_SearchPostForumResIdl_2eproto::file_level_metadata[kIndexInFileMessages];
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_SearchPostForumResIdl_2eproto_getter, &descriptor_table_SearchPostForumResIdl_2eproto_once,
+      file_level_metadata_SearchPostForumResIdl_2eproto[2]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
+#include "google/protobuf/port_undef.inc"

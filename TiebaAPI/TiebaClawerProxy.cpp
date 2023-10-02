@@ -37,7 +37,7 @@ TiebaClawer::GetPostsResult TiebaClawerProxy::GetPosts(const CString& fid, const
 TiebaClawer::GetPostsResult TiebaClawerProxy::GetPosts(const CString& fid, const CString& tid, const CString& page, const CString& src,
 	std::vector<PostInfo>& posts, std::vector<LzlInfo>& lzls, AdditionalThreadInfo* addition, const CStringA& srcA)
 {
-	return GetImplement().GetPosts(fid, tid, page, src, posts, lzls, addition);
+	return GetImplement().GetPosts(fid, tid, page, src, posts, lzls, addition, srcA);
 }
 
 

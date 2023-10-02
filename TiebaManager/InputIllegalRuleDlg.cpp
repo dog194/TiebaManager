@@ -22,6 +22,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include "InputIllegalRuleDlg.h"
+#include "TBMGlobal.h"
 
 
 // CInputIllegalRuleDlg 对话框
@@ -40,10 +41,12 @@ void CInputIllegalRuleDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CInputRuleDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_CHECK1, m_forceToComfirmCheck);
+	DDX_Control(pDX, IDC_CHECK_ACE_DEL, m_deleteIfIsLZCheck);
 }
 
 
 BEGIN_MESSAGE_MAP(CInputIllegalRuleDlg, CInputRuleDlg<CIllegalRule>)
+	ON_BN_CLICKED(IDC_CHECK_ACE_DEL, &CInputIllegalRuleDlg::OnBnClickedCheckNoAceDel)
 END_MESSAGE_MAP()
 #pragma endregion
 
@@ -55,6 +58,7 @@ BOOL CInputIllegalRuleDlg::OnInitDialog()
 	CInputRuleDlg::OnInitDialog();
 
 	m_resize.AddControl(&m_forceToComfirmCheck, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, this);
+	m_resize.AddControl(&m_deleteIfIsLZCheck, RT_NULL, NULL, RT_KEEP_DIST_TO_BOTTOM, this);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
@@ -75,6 +79,7 @@ void CInputIllegalRuleDlg::ShowList(const CIllegalRule& list)
 	CInputRuleDlg::ShowList(list);
 
 	m_forceToComfirmCheck.SetCheck(m_ruleCopy.m_forceToConfirm);
+	m_deleteIfIsLZCheck.SetCheck(m_ruleCopy.m_deleteIfIsLZ);
 }
 
 void CInputIllegalRuleDlg::ShowList(CIllegalRule&& list)
@@ -82,13 +87,32 @@ void CInputIllegalRuleDlg::ShowList(CIllegalRule&& list)
 	CInputRuleDlg::ShowList(std::move(list));
 
 	m_forceToComfirmCheck.SetCheck(m_ruleCopy.m_forceToConfirm);
+	m_deleteIfIsLZCheck.SetCheck(m_ruleCopy.m_deleteIfIsLZ);
 }
-
 
 // 确认
 void CInputIllegalRuleDlg::OnOK()
 {
 	m_ruleCopy.m_forceToConfirm = m_forceToComfirmCheck.GetCheck();
+	m_ruleCopy.m_deleteIfIsLZ = m_deleteIfIsLZCheck.GetCheck();
 
 	CInputRuleDlg::OnOK();
+}
+
+
+// 联动删除 开启提示
+void CInputIllegalRuleDlg::OnBnClickedCheckNoAceDel()
+{
+	if (g_plan.m_infoNoAceDel == TRUE)
+		return;
+	if (m_deleteIfIsLZCheck.GetCheck()) {
+		CString tmp = L"勾选后，如果违规的用户是楼主\n\r"
+			L"则同时删除整个主题帖\n\r"
+			L"可以在设置中关闭本提醒\n\r\n\r"
+			L"是否开启？";
+		int result = AfxMessageBox(tmp, MB_ICONINFORMATION | MB_YESNO);
+		if (result != IDYES) {
+			m_deleteIfIsLZCheck.SetCheck(false);
+		}
+	}
 }

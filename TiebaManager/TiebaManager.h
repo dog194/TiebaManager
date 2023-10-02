@@ -28,7 +28,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #endif
 
 #include "resource.h"		// 主符号
-
+#include <string>
 
 // CTiebaManagerApp: 
 // 有关此类的实现，请参阅 TiebaManager.cpp
@@ -48,6 +48,8 @@ public:
 private:
 	static LONG WINAPI ExceptionHandler(_EXCEPTION_POINTERS* ExceptionInfo);
 	void Init();
+	BOOL Check3rdDll();
+	std::string GetFileMd5(const CString& fPath, const CString& fName);
 
 	DECLARE_MESSAGE_MAP()
 };

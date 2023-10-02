@@ -43,9 +43,10 @@ BOOL CBlackListRulesPage::OnInitDialog()
 	m_list.DeleteColumn(0);
 	m_list.ModifyStyle(LVS_NOCOLUMNHEADER, 0);
 	m_list.InsertColumn(COLUMN_INDEX_UID, _T("用户名/昵称"), LVCFMT_LEFT, 150);
-	m_list.InsertColumn(COLUMN_INDEX_PORTRAIT, _T("头像ID(Portrait)"), LVCFMT_LEFT, 260);
-	m_list.InsertColumn(COLUMN_INDEX_TRIG_COUNT, _T("触发次数"), LVCFMT_LEFT, 80);
-	m_list.InsertColumn(COLUMN_INDEX_NOTE, _T("备注"), LVCFMT_LEFT, 500);
+	m_list.InsertColumn(COLUMN_INDEX_PORTRAIT, _T("头像ID(Portrait)"), LVCFMT_LEFT, 120);
+	m_list.InsertColumn(COLUMN_INDEX_TRIG_COUNT, _T("触发次数"), LVCFMT_LEFT, 50);
+	m_list.InsertColumn(COLUMN_INDEX_NOTE, _T("备注"), LVCFMT_LEFT, 200);
+	m_list.InsertColumn(COLUMN_INDEX_BAN_STATUS, _T("全吧封禁状态"), LVCFMT_LEFT, 300);
 	m_static.SetWindowText(_T("黑名单用户，根据设置直接删帖或封禁。优先级低于信任规则，高于违规规则。"));
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -58,9 +59,9 @@ BOOL CBlackListRulesPage::SetItem(int index)
 	CString pre_note = index > 0 ? m_rules[index - 1].m_note : _T("");
 	CString next_note = index < m_list.GetItemCount() - 1 ? m_rules[index + 1].m_note : _T("");
 	CUserInfoInputDlg dlg(m_rules[index], CUserInfoInputDlg::IDD, this, pre_note, next_note, preFillInfo);
-	if (m_subWinLock == true) // 增加个变量锁，防止重复开启
+	if (m_subWinLock == TRUE) // 增加个变量锁，防止重复开启
 		return FALSE;
-	m_subWinLock = true;
+	m_subWinLock = TRUE;
 	if (dlg.DoModal() == IDOK && m_rules[index].m_uid != _T(""))
 	{
 		// 判断是否已经在列表中，避免重复添加
@@ -73,7 +74,7 @@ BOOL CBlackListRulesPage::SetItem(int index)
 					AfxMessageBox(m_rules[index].m_portrait + _T(" 已经在列表中！"), MB_ICONINFORMATION);
 					SetSelectedRow(i);
 					ScrollToIndex(i);
-					m_subWinLock = false;
+					m_subWinLock = FALSE;
 					return FALSE;
 				}
 			}
@@ -82,7 +83,7 @@ BOOL CBlackListRulesPage::SetItem(int index)
 					AfxMessageBox(m_rules[index].m_uid + _T(" 已经在列表中！"), MB_ICONINFORMATION);
 					SetSelectedRow(i);
 					ScrollToIndex(i);
-					m_subWinLock = false;
+					m_subWinLock = FALSE;
 					return FALSE;
 				}
 			}
@@ -92,15 +93,16 @@ BOOL CBlackListRulesPage::SetItem(int index)
 		m_list.SetItemText(index, COLUMN_INDEX_PORTRAIT, m_rules[index].m_portrait);
 		m_list.SetItemText(index, COLUMN_INDEX_TRIG_COUNT, Int2CString(m_rules[index].m_trigCount));
 		m_list.SetItemText(index, COLUMN_INDEX_NOTE, m_rules[index].m_note);
+		m_list.SetItemText(index, COLUMN_INDEX_BAN_STATUS, m_rules[index].m_day2Free);
 
 		// 点击确认按钮后，删除 Prefill 数据。
 		preFillInfo = NULL;
 
 		((CSettingDlg*)GetParent())->m_clearScanCache = TRUE;
-		m_subWinLock = false;
+		m_subWinLock = FALSE;
 		return TRUE;
 	}
-	m_subWinLock = false;
+	m_subWinLock = FALSE;
 	return FALSE;
 }
 
@@ -139,6 +141,15 @@ BOOL CBlackListRulesPage::Import(const CString& path)
 	return TRUE;
 }
 
+// 根据 头像ID 更新UI和数据
+void CBlackListRulesPage::setRuleD2Y(const CString& u_portrait, const CString& d2f) {
+	int index = FindIndexFromSecondStr(u_portrait);
+	if (index != -1) {
+		m_list.SetItemText(index, COLUMN_INDEX_BAN_STATUS, d2f);
+		m_rules[index].m_day2Free = d2f;
+	}
+}
+
 void CBlackListRulesPage::ShowList(const std::vector<CUserInfo>& list)
 {
 	m_rules = list;
@@ -149,6 +160,7 @@ void CBlackListRulesPage::ShowList(const std::vector<CUserInfo>& list)
 		m_list.SetItemText(i, COLUMN_INDEX_PORTRAIT, list[i].m_portrait);
 		m_list.SetItemText(i, COLUMN_INDEX_TRIG_COUNT, Int2CString(list[i].m_trigCount));
 		m_list.SetItemText(i, COLUMN_INDEX_NOTE, list[i].m_note);
+		m_list.SetItemText(i, COLUMN_INDEX_BAN_STATUS, list[i].m_day2Free);
 	}
 }
 

@@ -20,7 +20,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #pragma once
 #include "HelperCommon.h"
 #include <regex>
-
+#include <time.h>
 
 class HELPER_API RegexText
 {
@@ -36,6 +36,8 @@ public:
 
 const TCHAR AUTHOR_PORTRAIT_LEFT[] = _T(R"(/portrait/item/)");
 const TCHAR AUTHOR_PORTRAIT_RIGHT[] = _T("?t=");
+const TCHAR AUTHOR_PORTRAIT_URL_PREFIX[] = _T("http://tb.himg.baidu.com/sys/portrait/item/");
+const TCHAR AUTHOR_PORTRAIT_URL_PREFIX_BIG[] = _T("http://tb.himg.baidu.com/sys/portraith/item/");
 
 const int m_tips_num = 8;
 const CString m_tips[m_tips_num] = {
@@ -88,6 +90,11 @@ HELPER_API CString GetStringAfter(const CString& src, const CString& left, int s
 HELPER_API BOOL WriteString(const CString& src, const CString& path);
 // 写字符串到文件 续写
 HELPER_API BOOL WriteStringCon(const CString& src, const CString& path);
+// Debug 记录
+HELPER_API void DebugRecord(const CString& title, const int& c_int, const CString& content = L"");
+HELPER_API void DebugRecord(const CString& title, const double& c_double, const CString& content = L"");
+HELPER_API void DebugRecord(const CString& title, const CString& content = L"");
+
 // 单字符16进制转10进制
 HELPER_API int HexChar2Dec(const CCHAR c);
 // Unicode(UCS-2)转ANSI
@@ -118,6 +125,8 @@ HELPER_API CString DncodeURI_GBK(const CString& src);
 HELPER_API CString HTMLEscape(const CString& src);
 // HTML反转义
 HELPER_API CString HTMLUnescape(const CString& src);
+// totalComment API 清理多余 HTML
+HELPER_API CString HTMLDelete4totalComment(const CString& src);
 // JS反转义，调用者应自行转义src里的双引号
 HELPER_API CString JSUnescape(const CString& src);
 
@@ -129,12 +138,19 @@ HELPER_API CString GetNameUsingPortrait(const CString& pPortrait);
 HELPER_API CString GetYYMMDD_HHMMSS_FromTimeT(const time_t &src = NULL);
 // time_t to string x年x月x日
 HELPER_API CString GetYYMMDD_FromTimeT(const time_t &src = NULL);
+// 获取时间戳
+HELPER_API LONGLONG GetTimestamp();
 // 获取时间戳毫秒
 HELPER_API LONGLONG GetTimestampMS();
+// 比较时间，返回秒数差值，排除日期, 正值，t1 大于 t2, t1 比 t2 晚
+HELPER_API int GetTimeDiffInS(const time_t& time_1, const time_t& time_2);
+
 // Int to CString
 HELPER_API CString Int2CString(const int num);
 // Int64 to CString
 HELPER_API CString Int64oCString(const INT64 num);
+// Double to CString
+HELPER_API CString Double2CString(const double num);
 // 获取随机Tip
 HELPER_API CString GetRandomTip();
 // 获取DLL文件信息

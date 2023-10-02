@@ -38,6 +38,8 @@ TBM_CORE_API DEF_VARIABLE(g_postDefriendEvent);
 TBM_CORE_API DEF_VARIABLE(g_preDeleteEvent);
 TBM_CORE_API DEF_VARIABLE(g_postDeleteEvent);
 
+TBM_CORE_API DEF_VARIABLE(g_postD2yEvent);
+
 TBM_CORE_API DEF_VARIABLE(g_checkThreadIllegalEvent);
 TBM_CORE_API DEF_VARIABLE(g_checkPostIllegalEvent);
 TBM_CORE_API DEF_VARIABLE(g_checkLzlIllegalEvent);
@@ -69,6 +71,8 @@ TBM_CORE_API std::vector<EventBase*> g_tbmCoreEvents{
 	&g_postDefriendEvent,
 	&g_preDeleteEvent,
 	&g_postDeleteEvent,
+
+	&g_postD2yEvent,
 
 	&g_checkThreadIllegalEvent,
 	&g_checkPostIllegalEvent,

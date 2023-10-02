@@ -32,9 +32,9 @@ class TBM_CORE_API CIllegalRule final : public CRule
 {
 public:
 	BOOL m_forceToConfirm = FALSE;	          // 强制确认
+	BOOL m_deleteIfIsLZ = FALSE;	          // 联动删除
 	int m_trigCount = 0;    			      // 触发次数
 };
-
 
 // 条件
 
@@ -136,13 +136,17 @@ public:
 		LESS,             // <=
 		GREATER           // >=
 	};
-
+	enum timeType
+	{
+		TIME,             // 纯时间
+		DATE_TIME         // 日期+时间
+	};
 
 	CTimeParam() : CConditionParam(_T("时间条件")) { }
 
-
 	Operator m_operator = GREATER;  // 操作符
 	time_t m_time = time(NULL);     // Unix时间戳
+	timeType m_timeType = DATE_TIME;// 时间模式，TRUE：完整时间，或，FALSE：仅时间
 };
 
 class TBM_CORE_API CTimeCondition final : public CCondition, public Singleton<CTimeCondition>
@@ -311,6 +315,8 @@ public:
 	CString m_portrait;		// portrait
 	int m_trigCount = 0;    // 触发次数
 	CString m_note;			// 备注，没实际用途，单纯用来个人记录
+	CString m_day2Free;		// 客户端接口获取全吧封禁日期
+
 	CUserInfo();
 	CUserInfo(const CString& uid);
 	CUserInfo(const CString& uid, const CString& m_portrait);

@@ -19,6 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include <ImageHelper.h>
+#include <StringHelper.h>
 #include <opencv2\imgcodecs.hpp>
 
 static BOOL CImageToMat(const CImage& image, cv::Mat& img)
@@ -119,6 +120,9 @@ HELPER_API BOOL ReadImage(const BYTE* buffer, ULONG size, cv::Mat& img)
 // 从图片地址取图片名
 HELPER_API CString GetImageName(const CString& imgUrl)
 {
+	CString nPrefix = _T("");
+	if (imgUrl.Find(AUTHOR_PORTRAIT_URL_PREFIX_BIG) != -1)
+		nPrefix = _T("H.");
 	LPTSTR pos = StrRChr(imgUrl, NULL, _T('/'));
 	CString imgName = (pos == NULL ? imgUrl : pos + 1);
 	int right = imgName.Find(_T("?"));
@@ -126,7 +130,7 @@ HELPER_API CString GetImageName(const CString& imgUrl)
 		imgName = imgName.Left(right);
 	if (imgName.Right(4).CompareNoCase(_T(".jpg")) != 0)
 		imgName += _T(".jpg");
-	return imgName;
+	return nPrefix + imgName;
 }
 
 // 获取本地图片文件，文件头

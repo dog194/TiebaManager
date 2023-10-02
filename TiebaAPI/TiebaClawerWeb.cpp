@@ -306,7 +306,7 @@ void TiebaClawerWeb::GetLzls(const CString& fid, const CString& tid, const CStri
 			lzl.authorID = comment[L"user_id"].GetString();
 			const auto& user = userList[(LPCWSTR)lzl.authorID];
 			lzl.authorShowName = user[L"nickname"].GetString();
-			lzl.authorPortraitUrl = CString(_T("http://tb.himg.baidu.com/sys/portrait/item/")) + user[L"portrait"].GetString();
+			lzl.authorPortraitUrl = CString(AUTHOR_PORTRAIT_URL_PREFIX) + user[L"portrait"].GetString();
 			lzl.timestamp = comment[L"now_time"].GetInt64();
 			lzl.cid = comment[L"comment_id"].GetString();
 			lzl.floor = floor;

@@ -110,7 +110,7 @@ BOOL CSettingDlg::OnInitDialog()
 	m_tree.SetItemData(m_tree.InsertItem(_T("方案")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("账号管理")), i++);
 	m_tree.SetItemData(m_tree.InsertItem(_T("关于&更新")), i++);
-	m_tree.SetItemData(m_tree.InsertItem(_T("没想好叫啥")), i++);
+	m_tree.SetItemData(m_tree.InsertItem(_T("工具")), i++);
 
 	// 初始化各页
 #define CREATE_PAGE(page) page->Create(page->IDD, this)
@@ -249,6 +249,9 @@ void CSettingDlg::ShowPlan(const CPlan& plan)
 {
 	CString tmp;
 
+	m_acedPage->ShowPlan(plan);			// 进阶page
+	m_toolsPage->ShowPlan(plan);		// 工具page
+
 	tmp.Format(_T("%d"), *plan.m_scanInterval);
 	m_scanPage->m_scanIntervalEdit.SetWindowText(tmp);				    // 扫描间隔
 	m_scanPage->m_onlyScanTitleCheck.SetCheck(plan.m_onlyScanTitle);	// 只扫描标题
@@ -309,6 +312,9 @@ void CSettingDlg::ApplyPlanInDlg(CPlan& plan)
 	CString strBuf;
 	int intBuf;
 	plan.OnChange();
+
+	m_acedPage->ApplyPlanInDlg(plan);		// 进阶page
+	m_toolsPage->ApplyPlanInDlg(plan);		// 工具page
 
 	m_scanPage->m_scanIntervalEdit.GetWindowText(strBuf);
 	*plan.m_scanInterval = _ttoi(strBuf);								// 扫描间隔

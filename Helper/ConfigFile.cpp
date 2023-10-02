@@ -216,7 +216,7 @@ BOOL CConfigBase::Load(const CString& path)
 	}
 
 	tinyxml2::XMLDocument doc;
-	if (doc.LoadFile(f) != XML_NO_ERROR)
+	if (doc.LoadFile(f) != XML_SUCCESS)
 	{
 		fclose(f);
 		UseDefault();
@@ -230,7 +230,7 @@ BOOL CConfigBase::Load(const CString& path)
 BOOL CConfigBase::LoadFromString(LPCSTR str, size_t length)
 {
 	tinyxml2::XMLDocument doc;
-	if (doc.Parse(str, length) != XML_NO_ERROR)
+	if (doc.Parse(str, length) != XML_SUCCESS)
 	{
 		UseDefault();
 		return FALSE;
@@ -253,7 +253,7 @@ BOOL CConfigBase::Save(const CString& path) const
 	for (const COptionBase* i : m_options)
 		i->Write(*root);
 
-	BOOL res = doc.SaveFile(f) == XML_NO_ERROR;
+	BOOL res = doc.SaveFile(f) == XML_SUCCESS;
 	fclose(f);
 	return res;
 }

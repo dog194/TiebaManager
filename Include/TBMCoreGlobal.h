@@ -63,6 +63,11 @@ public:
 	COption<BOOL>		m_blackListRecheck;		// 确认窗口重新检测是否在黑名单
 
 	COption<BOOL>		m_acedEnhancedLzl;		// 进阶-增强型楼中楼
+	COption<BOOL>		m_acedBlackCheckBan;	// 进阶-定期校验黑名单列表
+
+	COption<BOOL>		m_infoNoAceDel;			// 信息-不在警示联动删除
+
+	COption<BOOL>		m_toolsDebug;			// 工具-Debug
 
 	COption<std::vector<CIllegalRule> >      m_illegalRules;      // 违规规则
 	COption<std::vector<CRule> >             m_trustedRules;      // 信任规则
@@ -113,8 +118,6 @@ public:
 	COption<std::set<CString> > m_defriendedUser;		// 已拉黑的用户，要写入文件
 
 	std::vector<CTempIgnoreRule> m_tempIgnoreRule;		// 一次性临时确认列表忽略规则，不写入文件
-	std::vector<CImgSingleInfoCache> m_imgHeadCache;	// 图片文件头缓存，不写入文件
-	std::vector<CImgSingleInfoCache> m_imgQRCodeCache;	// 二维码识别缓存，不写入文件
 
 	CUserCache();
 
@@ -130,11 +133,14 @@ public:
 };
 
 const int RULE_TYPE_ILLEGA_RULE = 0;
+const int RULE_TYPE_ILLEGA_RULE_DEL_LZ = 32;
+const int RULE_TYPE_ILLEGA_RULE_CANCEL_DEL_LZ = 33;
 const int RULE_TYPE_BLACK_LIST = 1;
 const int RULE_TYPE_DELETE_ONLY = 2;
 const int RULE_TYPE_BAN_DIRECTLY = 3;
 const int RULE_TYPE_IGNORE_TID = 4;
 const int RULE_TYPE_IGNORE_POR = 5;
+const int RULE_TYPE_CHECK_D2F = 16;
 
 
 // 使用本模块前应先设置的全局变量

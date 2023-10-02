@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 #include "stdafx.h"
 #include <TBMCoreImageHelper.h>
-
+#include <TBMCoreDbHelper.h>
 #include <ImageHelper.h>
 #include <NetworkHelper.h>
 #include <MiscHelper.h>
@@ -28,7 +28,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 
-TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti)
+TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& urls, BOOL igPorti, BOOL isBigPorti)
 {
 	// 1是图片地址
 	static const std::wregex THREAD_IMG_REG(_T("<img .*?bpic=\"(.*?)\".*?/>"));
@@ -54,8 +54,15 @@ TBM_CORE_API void GetImageUrls(const TBObject& object, std::vector<CString>& url
 			urls.push_back((*it)[2].str().c_str());
 	}
 	// 头像
-	if (object.authorPortraitUrl != _T("") && !igPorti)
-		urls.push_back(object.authorPortraitUrl);
+	if (object.authorPortraitUrl != _T("") && !igPorti) {
+		if (isBigPorti == FALSE)
+			urls.push_back(object.authorPortraitUrl);
+		else {
+			CString bigUrl = object.authorPortraitUrl;
+			bigUrl.Replace(AUTHOR_PORTRAIT_URL_PREFIX, AUTHOR_PORTRAIT_URL_PREFIX_BIG);
+			urls.push_back(bigUrl);
+		}
+	}
 }
 
 // 获取图片文件，文件头  addCache 为 true 正常加入内存缓存， false 不加入，默认为true
@@ -63,11 +70,14 @@ TBM_CORE_API CString GetImgHead(CString imgUrl, const BOOL addCache)
 {
 	CString imgName = GetImageName(imgUrl);
 	CString headInfo;
-	// 从缓存中查找记录
-	for (auto& i : g_pUserCache->m_imgHeadCache) {
-		if (i.m_imgName == imgName) {
-			// 有记录，直接返回结果
-			return i.m_info;
+	CDbImgInfo imgInfo = NULL;
+	// 从数据库中查找记录
+	if (addCache == TRUE) {
+		CSqlDb db = CSqlDb::GetInstance();
+		imgInfo = db.getImgInfo(imgName);
+		if (imgInfo.m_imgHead != _T("")) {
+			db.insert2imgInfo(imgInfo); // 更新访问时间
+			return imgInfo.m_imgHead;
 		}
 	}
 	if (PathFileExists(CImageCache::CACHE_PATH + imgName))
@@ -81,19 +91,32 @@ TBM_CORE_API CString GetImgHead(CString imgUrl, const BOOL addCache)
 	}
 	// 校验一下结果，没问题添加到缓存
 	if (headInfo != _T("") && headInfo.GetLength() < 4 && addCache) {
-		g_pUserCache->m_imgHeadCache.push_back(CImgSingleInfoCache(imgName, headInfo));
+		CSqlDb db = CSqlDb::GetInstance();
+		imgInfo.m_imgHead = headInfo;
+		db.insert2imgInfo(imgInfo);
 	}
 	return headInfo;
 }
 
-// 图片二维码识别  addCache 为 true 正常加入内存缓存， false 不加入，默认为true
+// 图片二维码识别  addCache 为 true 正常加入缓存， false 不加入，默认为true
 TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content, const BOOL addCache) {
+	//LARGE_INTEGER frequency;
+	//LARGE_INTEGER start;
+	//QueryPerformanceFrequency(&frequency);
+	//QueryPerformanceCounter(&start);
 	CString imgName = GetImageName(imgUrl);
-	// 从缓存中查找记录
-	for (auto& i : g_pUserCache->m_imgQRCodeCache) {
-		if (i.m_imgName == imgName) {
-			// 有记录，直接返回结果
-			content = i.m_info;
+	CDbImgInfo imgInfo = NULL;
+	// 从数据库中查找记录
+	if (addCache == TRUE) {
+		CSqlDb db = CSqlDb::GetInstance();
+		imgInfo = db.getImgInfo(imgName);
+		if (imgInfo.is_QR_null == FALSE) {
+			content = imgInfo.m_QR;
+			db.insert2imgInfo(imgInfo); // 更新访问时间
+			//LARGE_INTEGER end;
+			//QueryPerformanceCounter(&end);
+			//double interval = static_cast<double>(end.QuadPart - start.QuadPart) / frequency.QuadPart;
+			//DebugRecord(_T("缓存读取二维码数据"), interval, imgName);
 			return true;
 		}
 	}
@@ -105,10 +128,17 @@ TBM_CORE_API BOOL QRCodeScan(CString imgUrl, CString& content, const BOOL addCac
 		return false;
 	}
 	if (QRCodeScan(img, content)) {
-		if (addCache) {
+		if (addCache == TRUE) {
 			// 添加缓存
-			g_pUserCache->m_imgQRCodeCache.push_back(CImgSingleInfoCache(imgName, content));
+			CSqlDb db = CSqlDb::GetInstance();
+			imgInfo.m_QR = content;
+			imgInfo.is_QR_null = FALSE;
+			db.insert2imgInfo(imgInfo);
 		}
+		//LARGE_INTEGER end;
+		//QueryPerformanceCounter(&end);
+		//double interval = static_cast<double>(end.QuadPart - start.QuadPart) / frequency.QuadPart;
+		//DebugRecord(_T("缓存读取二维码数据+识别"), interval, imgName);
 		return true;
 	}
 	return false;
