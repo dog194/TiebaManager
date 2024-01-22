@@ -32,4 +32,8 @@ message Post {
     Agree agree = 37;
     SimpleForum from_forum = 38;
     int64 tid = 46;
+    message CustomState {
+        string content = 2;
+    }
+    CustomState custom_state = 61;
 }

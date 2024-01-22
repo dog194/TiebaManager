@@ -68,6 +68,12 @@ extern User_PrivSetsDefaultTypeInternal _User_PrivSets_default_instance_;
 class User_UserVipInfo;
 struct User_UserVipInfoDefaultTypeInternal;
 extern User_UserVipInfoDefaultTypeInternal _User_UserVipInfo_default_instance_;
+class User_VirtualImageInfo;
+struct User_VirtualImageInfoDefaultTypeInternal;
+extern User_VirtualImageInfoDefaultTypeInternal _User_VirtualImageInfo_default_instance_;
+class User_VirtualImageInfo_StateInfo;
+struct User_VirtualImageInfo_StateInfoDefaultTypeInternal;
+extern User_VirtualImageInfo_StateInfoDefaultTypeInternal _User_VirtualImageInfo_StateInfo_default_instance_;
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
@@ -975,6 +981,348 @@ class User_NewGodInfo final :
   friend struct ::TableStruct_User_2eproto;
 };// -------------------------------------------------------------------
 
+class User_VirtualImageInfo_StateInfo final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:User.VirtualImageInfo.StateInfo) */ {
+ public:
+  inline User_VirtualImageInfo_StateInfo() : User_VirtualImageInfo_StateInfo(nullptr) {}
+  ~User_VirtualImageInfo_StateInfo() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR User_VirtualImageInfo_StateInfo(::google::protobuf::internal::ConstantInitialized);
+
+  User_VirtualImageInfo_StateInfo(const User_VirtualImageInfo_StateInfo& from);
+  User_VirtualImageInfo_StateInfo(User_VirtualImageInfo_StateInfo&& from) noexcept
+    : User_VirtualImageInfo_StateInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline User_VirtualImageInfo_StateInfo& operator=(const User_VirtualImageInfo_StateInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline User_VirtualImageInfo_StateInfo& operator=(User_VirtualImageInfo_StateInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const User_VirtualImageInfo_StateInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const User_VirtualImageInfo_StateInfo* internal_default_instance() {
+    return reinterpret_cast<const User_VirtualImageInfo_StateInfo*>(
+               &_User_VirtualImageInfo_StateInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(User_VirtualImageInfo_StateInfo& a, User_VirtualImageInfo_StateInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(User_VirtualImageInfo_StateInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(User_VirtualImageInfo_StateInfo* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  User_VirtualImageInfo_StateInfo* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<User_VirtualImageInfo_StateInfo>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const User_VirtualImageInfo_StateInfo& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const User_VirtualImageInfo_StateInfo& from) {
+    User_VirtualImageInfo_StateInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(User_VirtualImageInfo_StateInfo* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "User.VirtualImageInfo.StateInfo";
+  }
+  protected:
+  explicit User_VirtualImageInfo_StateInfo(::google::protobuf::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTextFieldNumber = 2,
+  };
+  // string text = 2;
+  void clear_text() ;
+  const std::string& text() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_text(Arg_&& arg, Args_... args);
+  std::string* mutable_text();
+  PROTOBUF_NODISCARD std::string* release_text();
+  void set_allocated_text(std::string* ptr);
+
+  private:
+  const std::string& _internal_text() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_text(
+      const std::string& value);
+  std::string* _internal_mutable_text();
+
+  public:
+  // @@protoc_insertion_point(class_scope:User.VirtualImageInfo.StateInfo)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1, 0, 44, 2> _table_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::google::protobuf::internal::ArenaStringPtr text_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_User_2eproto;
+};// -------------------------------------------------------------------
+
+class User_VirtualImageInfo final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:User.VirtualImageInfo) */ {
+ public:
+  inline User_VirtualImageInfo() : User_VirtualImageInfo(nullptr) {}
+  ~User_VirtualImageInfo() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR User_VirtualImageInfo(::google::protobuf::internal::ConstantInitialized);
+
+  User_VirtualImageInfo(const User_VirtualImageInfo& from);
+  User_VirtualImageInfo(User_VirtualImageInfo&& from) noexcept
+    : User_VirtualImageInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline User_VirtualImageInfo& operator=(const User_VirtualImageInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline User_VirtualImageInfo& operator=(User_VirtualImageInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const User_VirtualImageInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const User_VirtualImageInfo* internal_default_instance() {
+    return reinterpret_cast<const User_VirtualImageInfo*>(
+               &_User_VirtualImageInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(User_VirtualImageInfo& a, User_VirtualImageInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(User_VirtualImageInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(User_VirtualImageInfo* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  User_VirtualImageInfo* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<User_VirtualImageInfo>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const User_VirtualImageInfo& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const User_VirtualImageInfo& from) {
+    User_VirtualImageInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(User_VirtualImageInfo* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "User.VirtualImageInfo";
+  }
+  protected:
+  explicit User_VirtualImageInfo(::google::protobuf::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  typedef User_VirtualImageInfo_StateInfo StateInfo;
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPersonalStateFieldNumber = 9,
+    kIssetVirtualImageFieldNumber = 1,
+  };
+  // .User.VirtualImageInfo.StateInfo personal_state = 9;
+  bool has_personal_state() const;
+  void clear_personal_state() ;
+  const ::User_VirtualImageInfo_StateInfo& personal_state() const;
+  PROTOBUF_NODISCARD ::User_VirtualImageInfo_StateInfo* release_personal_state();
+  ::User_VirtualImageInfo_StateInfo* mutable_personal_state();
+  void set_allocated_personal_state(::User_VirtualImageInfo_StateInfo* value);
+  void unsafe_arena_set_allocated_personal_state(::User_VirtualImageInfo_StateInfo* value);
+  ::User_VirtualImageInfo_StateInfo* unsafe_arena_release_personal_state();
+
+  private:
+  const ::User_VirtualImageInfo_StateInfo& _internal_personal_state() const;
+  ::User_VirtualImageInfo_StateInfo* _internal_mutable_personal_state();
+
+  public:
+  // int32 isset_virtual_image = 1;
+  void clear_isset_virtual_image() ;
+  ::int32_t isset_virtual_image() const;
+  void set_isset_virtual_image(::int32_t value);
+
+  private:
+  ::int32_t _internal_isset_virtual_image() const;
+  void _internal_set_isset_virtual_image(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:User.VirtualImageInfo)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 2, 1, 0, 2> _table_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    ::User_VirtualImageInfo_StateInfo* personal_state_;
+    ::int32_t isset_virtual_image_;
+    PROTOBUF_TSAN_DECLARE_MEMBER;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_User_2eproto;
+};// -------------------------------------------------------------------
+
 class User final :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:User) */ {
  public:
@@ -1031,7 +1379,7 @@ class User final :
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    6;
 
   friend void swap(User& a, User& b) {
     a.Swap(&b);
@@ -1104,6 +1452,7 @@ class User final :
   typedef User_LikeForumInfo LikeForumInfo;
   typedef User_UserVipInfo UserVipInfo;
   typedef User_NewGodInfo NewGodInfo;
+  typedef User_VirtualImageInfo VirtualImageInfo;
 
   // accessors -------------------------------------------------------
 
@@ -1119,6 +1468,7 @@ class User final :
     kPrivSetsFieldNumber = 45,
     kVipInfoFieldNumber = 61,
     kNewGodDataFieldNumber = 101,
+    kVirtualImageInfoFieldNumber = 136,
     kIdFieldNumber = 2,
     kIsCoreuserFieldNumber = 20,
     kLevelIdFieldNumber = 23,
@@ -1305,6 +1655,21 @@ class User final :
   ::User_NewGodInfo* _internal_mutable_new_god_data();
 
   public:
+  // .User.VirtualImageInfo virtual_image_info = 136;
+  bool has_virtual_image_info() const;
+  void clear_virtual_image_info() ;
+  const ::User_VirtualImageInfo& virtual_image_info() const;
+  PROTOBUF_NODISCARD ::User_VirtualImageInfo* release_virtual_image_info();
+  ::User_VirtualImageInfo* mutable_virtual_image_info();
+  void set_allocated_virtual_image_info(::User_VirtualImageInfo* value);
+  void unsafe_arena_set_allocated_virtual_image_info(::User_VirtualImageInfo* value);
+  ::User_VirtualImageInfo* unsafe_arena_release_virtual_image_info();
+
+  private:
+  const ::User_VirtualImageInfo& _internal_virtual_image_info() const;
+  ::User_VirtualImageInfo* _internal_mutable_virtual_image_info();
+
+  public:
   // int64 id = 2;
   void clear_id() ;
   ::int64_t id() const;
@@ -1410,7 +1775,7 @@ class User final :
   class _Internal;
 
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<5, 21, 4, 79, 17> _table_;
+  static const ::google::protobuf::internal::TcParseTable<5, 22, 5, 79, 19> _table_;
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
@@ -1428,6 +1793,7 @@ class User final :
     ::User_PrivSets* priv_sets_;
     ::User_UserVipInfo* vipinfo_;
     ::User_NewGodInfo* new_god_data_;
+    ::User_VirtualImageInfo* virtual_image_info_;
     ::int64_t id_;
     ::int32_t is_coreuser_;
     ::int32_t level_id_;
@@ -2114,6 +2480,183 @@ inline void User_NewGodInfo::set_allocated_type_name(std::string* value) {
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:User.NewGodInfo.type_name)
+}
+
+// -------------------------------------------------------------------
+
+// User_VirtualImageInfo_StateInfo
+
+// string text = 2;
+inline void User_VirtualImageInfo_StateInfo::clear_text() {
+  _impl_.text_.ClearToEmpty();
+}
+inline const std::string& User_VirtualImageInfo_StateInfo::text() const {
+  // @@protoc_insertion_point(field_get:User.VirtualImageInfo.StateInfo.text)
+  return _internal_text();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void User_VirtualImageInfo_StateInfo::set_text(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.text_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:User.VirtualImageInfo.StateInfo.text)
+}
+inline std::string* User_VirtualImageInfo_StateInfo::mutable_text() {
+  std::string* _s = _internal_mutable_text();
+  // @@protoc_insertion_point(field_mutable:User.VirtualImageInfo.StateInfo.text)
+  return _s;
+}
+inline const std::string& User_VirtualImageInfo_StateInfo::_internal_text() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.text_.Get();
+}
+inline void User_VirtualImageInfo_StateInfo::_internal_set_text(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.text_.Set(value, GetArenaForAllocation());
+}
+inline std::string* User_VirtualImageInfo_StateInfo::_internal_mutable_text() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.text_.Mutable( GetArenaForAllocation());
+}
+inline std::string* User_VirtualImageInfo_StateInfo::release_text() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:User.VirtualImageInfo.StateInfo.text)
+  return _impl_.text_.Release();
+}
+inline void User_VirtualImageInfo_StateInfo::set_allocated_text(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.text_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.text_.IsDefault()) {
+          _impl_.text_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:User.VirtualImageInfo.StateInfo.text)
+}
+
+// -------------------------------------------------------------------
+
+// User_VirtualImageInfo
+
+// int32 isset_virtual_image = 1;
+inline void User_VirtualImageInfo::clear_isset_virtual_image() {
+  _impl_.isset_virtual_image_ = 0;
+}
+inline ::int32_t User_VirtualImageInfo::isset_virtual_image() const {
+  // @@protoc_insertion_point(field_get:User.VirtualImageInfo.isset_virtual_image)
+  return _internal_isset_virtual_image();
+}
+inline void User_VirtualImageInfo::set_isset_virtual_image(::int32_t value) {
+  _internal_set_isset_virtual_image(value);
+  // @@protoc_insertion_point(field_set:User.VirtualImageInfo.isset_virtual_image)
+}
+inline ::int32_t User_VirtualImageInfo::_internal_isset_virtual_image() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.isset_virtual_image_;
+}
+inline void User_VirtualImageInfo::_internal_set_isset_virtual_image(::int32_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.isset_virtual_image_ = value;
+}
+
+// .User.VirtualImageInfo.StateInfo personal_state = 9;
+inline bool User_VirtualImageInfo::has_personal_state() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.personal_state_ != nullptr);
+  return value;
+}
+inline void User_VirtualImageInfo::clear_personal_state() {
+  if (_impl_.personal_state_ != nullptr) _impl_.personal_state_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::User_VirtualImageInfo_StateInfo& User_VirtualImageInfo::_internal_personal_state() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::User_VirtualImageInfo_StateInfo* p = _impl_.personal_state_;
+  return p != nullptr ? *p : reinterpret_cast<const ::User_VirtualImageInfo_StateInfo&>(::_User_VirtualImageInfo_StateInfo_default_instance_);
+}
+inline const ::User_VirtualImageInfo_StateInfo& User_VirtualImageInfo::personal_state() const {
+  // @@protoc_insertion_point(field_get:User.VirtualImageInfo.personal_state)
+  return _internal_personal_state();
+}
+inline void User_VirtualImageInfo::unsafe_arena_set_allocated_personal_state(::User_VirtualImageInfo_StateInfo* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.personal_state_);
+  }
+  _impl_.personal_state_ = reinterpret_cast<::User_VirtualImageInfo_StateInfo*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:User.VirtualImageInfo.personal_state)
+}
+inline ::User_VirtualImageInfo_StateInfo* User_VirtualImageInfo::release_personal_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::User_VirtualImageInfo_StateInfo* released = _impl_.personal_state_;
+  _impl_.personal_state_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::User_VirtualImageInfo_StateInfo* User_VirtualImageInfo::unsafe_arena_release_personal_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:User.VirtualImageInfo.personal_state)
+
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::User_VirtualImageInfo_StateInfo* temp = _impl_.personal_state_;
+  _impl_.personal_state_ = nullptr;
+  return temp;
+}
+inline ::User_VirtualImageInfo_StateInfo* User_VirtualImageInfo::_internal_mutable_personal_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  if (_impl_.personal_state_ == nullptr) {
+    auto* p = CreateMaybeMessage<::User_VirtualImageInfo_StateInfo>(GetArenaForAllocation());
+    _impl_.personal_state_ = reinterpret_cast<::User_VirtualImageInfo_StateInfo*>(p);
+  }
+  return _impl_.personal_state_;
+}
+inline ::User_VirtualImageInfo_StateInfo* User_VirtualImageInfo::mutable_personal_state() {
+  ::User_VirtualImageInfo_StateInfo* _msg = _internal_mutable_personal_state();
+  // @@protoc_insertion_point(field_mutable:User.VirtualImageInfo.personal_state)
+  return _msg;
+}
+inline void User_VirtualImageInfo::set_allocated_personal_state(::User_VirtualImageInfo_StateInfo* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::User_VirtualImageInfo_StateInfo*>(_impl_.personal_state_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::User_VirtualImageInfo_StateInfo*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+
+  _impl_.personal_state_ = reinterpret_cast<::User_VirtualImageInfo_StateInfo*>(value);
+  // @@protoc_insertion_point(field_set_allocated:User.VirtualImageInfo.personal_state)
 }
 
 // -------------------------------------------------------------------
@@ -3029,6 +3572,102 @@ inline void User::set_allocated_tieba_uid(std::string* value) {
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:User.tieba_uid)
+}
+
+// .User.VirtualImageInfo virtual_image_info = 136;
+inline bool User::has_virtual_image_info() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.virtual_image_info_ != nullptr);
+  return value;
+}
+inline void User::clear_virtual_image_info() {
+  if (_impl_.virtual_image_info_ != nullptr) _impl_.virtual_image_info_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000008u;
+}
+inline const ::User_VirtualImageInfo& User::_internal_virtual_image_info() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::User_VirtualImageInfo* p = _impl_.virtual_image_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::User_VirtualImageInfo&>(::_User_VirtualImageInfo_default_instance_);
+}
+inline const ::User_VirtualImageInfo& User::virtual_image_info() const {
+  // @@protoc_insertion_point(field_get:User.virtual_image_info)
+  return _internal_virtual_image_info();
+}
+inline void User::unsafe_arena_set_allocated_virtual_image_info(::User_VirtualImageInfo* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.virtual_image_info_);
+  }
+  _impl_.virtual_image_info_ = reinterpret_cast<::User_VirtualImageInfo*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:User.virtual_image_info)
+}
+inline ::User_VirtualImageInfo* User::release_virtual_image_info() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::User_VirtualImageInfo* released = _impl_.virtual_image_info_;
+  _impl_.virtual_image_info_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::User_VirtualImageInfo* User::unsafe_arena_release_virtual_image_info() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:User.virtual_image_info)
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::User_VirtualImageInfo* temp = _impl_.virtual_image_info_;
+  _impl_.virtual_image_info_ = nullptr;
+  return temp;
+}
+inline ::User_VirtualImageInfo* User::_internal_mutable_virtual_image_info() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000008u;
+  if (_impl_.virtual_image_info_ == nullptr) {
+    auto* p = CreateMaybeMessage<::User_VirtualImageInfo>(GetArenaForAllocation());
+    _impl_.virtual_image_info_ = reinterpret_cast<::User_VirtualImageInfo*>(p);
+  }
+  return _impl_.virtual_image_info_;
+}
+inline ::User_VirtualImageInfo* User::mutable_virtual_image_info() {
+  ::User_VirtualImageInfo* _msg = _internal_mutable_virtual_image_info();
+  // @@protoc_insertion_point(field_mutable:User.virtual_image_info)
+  return _msg;
+}
+inline void User::set_allocated_virtual_image_info(::User_VirtualImageInfo* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::User_VirtualImageInfo*>(_impl_.virtual_image_info_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::User_VirtualImageInfo*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+
+  _impl_.virtual_image_info_ = reinterpret_cast<::User_VirtualImageInfo*>(value);
+  // @@protoc_insertion_point(field_set_allocated:User.virtual_image_info)
 }
 
 #ifdef __GNUC__

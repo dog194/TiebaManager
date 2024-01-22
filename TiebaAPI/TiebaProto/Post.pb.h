@@ -60,6 +60,9 @@ extern const ::google::protobuf::internal::DescriptorTable
 class Post;
 struct PostDefaultTypeInternal;
 extern PostDefaultTypeInternal _Post_default_instance_;
+class Post_CustomState;
+struct Post_CustomStateDefaultTypeInternal;
+extern Post_CustomStateDefaultTypeInternal _Post_CustomState_default_instance_;
 class Post_SignatureData;
 struct Post_SignatureDataDefaultTypeInternal;
 extern Post_SignatureDataDefaultTypeInternal _Post_SignatureData_default_instance_;
@@ -650,6 +653,170 @@ class Post_SignatureData final :
   friend struct ::TableStruct_Post_2eproto;
 };// -------------------------------------------------------------------
 
+class Post_CustomState final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Post.CustomState) */ {
+ public:
+  inline Post_CustomState() : Post_CustomState(nullptr) {}
+  ~Post_CustomState() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR Post_CustomState(::google::protobuf::internal::ConstantInitialized);
+
+  Post_CustomState(const Post_CustomState& from);
+  Post_CustomState(Post_CustomState&& from) noexcept
+    : Post_CustomState() {
+    *this = ::std::move(from);
+  }
+
+  inline Post_CustomState& operator=(const Post_CustomState& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Post_CustomState& operator=(Post_CustomState&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Post_CustomState& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Post_CustomState* internal_default_instance() {
+    return reinterpret_cast<const Post_CustomState*>(
+               &_Post_CustomState_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(Post_CustomState& a, Post_CustomState& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Post_CustomState* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Post_CustomState* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Post_CustomState* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Post_CustomState>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const Post_CustomState& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const Post_CustomState& from) {
+    Post_CustomState::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Post_CustomState* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "Post.CustomState";
+  }
+  protected:
+  explicit Post_CustomState(::google::protobuf::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kContentFieldNumber = 2,
+  };
+  // string content = 2;
+  void clear_content() ;
+  const std::string& content() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_content(Arg_&& arg, Args_... args);
+  std::string* mutable_content();
+  PROTOBUF_NODISCARD std::string* release_content();
+  void set_allocated_content(std::string* ptr);
+
+  private:
+  const std::string& _internal_content() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_content(
+      const std::string& value);
+  std::string* _internal_mutable_content();
+
+  public:
+  // @@protoc_insertion_point(class_scope:Post.CustomState)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1, 0, 32, 2> _table_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::google::protobuf::internal::ArenaStringPtr content_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Post_2eproto;
+};// -------------------------------------------------------------------
+
 class Post final :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Post) */ {
  public:
@@ -706,7 +873,7 @@ class Post final :
                &_Post_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(Post& a, Post& b) {
     a.Swap(&b);
@@ -777,6 +944,7 @@ class Post final :
 
   typedef Post_SubPost SubPost;
   typedef Post_SignatureData SignatureData;
+  typedef Post_CustomState CustomState;
 
   // accessors -------------------------------------------------------
 
@@ -787,6 +955,7 @@ class Post final :
     kSignatureFieldNumber = 21,
     kAgreeFieldNumber = 37,
     kFromForumFieldNumber = 38,
+    kCustomStateFieldNumber = 61,
     kIdFieldNumber = 1,
     kFloorFieldNumber = 3,
     kTimeFieldNumber = 4,
@@ -888,6 +1057,21 @@ class Post final :
   ::SimpleForum* _internal_mutable_from_forum();
 
   public:
+  // .Post.CustomState custom_state = 61;
+  bool has_custom_state() const;
+  void clear_custom_state() ;
+  const ::Post_CustomState& custom_state() const;
+  PROTOBUF_NODISCARD ::Post_CustomState* release_custom_state();
+  ::Post_CustomState* mutable_custom_state();
+  void set_allocated_custom_state(::Post_CustomState* value);
+  void unsafe_arena_set_allocated_custom_state(::Post_CustomState* value);
+  ::Post_CustomState* unsafe_arena_release_custom_state();
+
+  private:
+  const ::Post_CustomState& _internal_custom_state() const;
+  ::Post_CustomState* _internal_mutable_custom_state();
+
+  public:
   // int64 id = 1;
   void clear_id() ;
   ::int64_t id() const;
@@ -953,7 +1137,7 @@ class Post final :
   class _Internal;
 
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<4, 12, 5, 26, 7> _table_;
+  static const ::google::protobuf::internal::TcParseTable<4, 13, 6, 26, 9> _table_;
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
@@ -966,6 +1150,7 @@ class Post final :
     ::Post_SignatureData* signature_;
     ::Agree* agree_;
     ::SimpleForum* from_forum_;
+    ::Post_CustomState* custom_state_;
     ::int64_t id_;
     ::uint32_t floor_;
     ::uint32_t time_;
@@ -1308,6 +1493,61 @@ inline ::google::protobuf::RepeatedPtrField<::Post_SignatureData_SignatureConten
 Post_SignatureData::_internal_mutable_content() {
   PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
   return &_impl_.content_;
+}
+
+// -------------------------------------------------------------------
+
+// Post_CustomState
+
+// string content = 2;
+inline void Post_CustomState::clear_content() {
+  _impl_.content_.ClearToEmpty();
+}
+inline const std::string& Post_CustomState::content() const {
+  // @@protoc_insertion_point(field_get:Post.CustomState.content)
+  return _internal_content();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void Post_CustomState::set_content(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.content_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Post.CustomState.content)
+}
+inline std::string* Post_CustomState::mutable_content() {
+  std::string* _s = _internal_mutable_content();
+  // @@protoc_insertion_point(field_mutable:Post.CustomState.content)
+  return _s;
+}
+inline const std::string& Post_CustomState::_internal_content() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.content_.Get();
+}
+inline void Post_CustomState::_internal_set_content(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.content_.Set(value, GetArenaForAllocation());
+}
+inline std::string* Post_CustomState::_internal_mutable_content() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.content_.Mutable( GetArenaForAllocation());
+}
+inline std::string* Post_CustomState::release_content() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:Post.CustomState.content)
+  return _impl_.content_.Release();
+}
+inline void Post_CustomState::set_allocated_content(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.content_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.content_.IsDefault()) {
+          _impl_.content_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Post.CustomState.content)
 }
 
 // -------------------------------------------------------------------
@@ -1914,6 +2154,102 @@ inline void Post::_internal_set_tid(::int64_t value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   ;
   _impl_.tid_ = value;
+}
+
+// .Post.CustomState custom_state = 61;
+inline bool Post::has_custom_state() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.custom_state_ != nullptr);
+  return value;
+}
+inline void Post::clear_custom_state() {
+  if (_impl_.custom_state_ != nullptr) _impl_.custom_state_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
+inline const ::Post_CustomState& Post::_internal_custom_state() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::Post_CustomState* p = _impl_.custom_state_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Post_CustomState&>(::_Post_CustomState_default_instance_);
+}
+inline const ::Post_CustomState& Post::custom_state() const {
+  // @@protoc_insertion_point(field_get:Post.custom_state)
+  return _internal_custom_state();
+}
+inline void Post::unsafe_arena_set_allocated_custom_state(::Post_CustomState* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.custom_state_);
+  }
+  _impl_.custom_state_ = reinterpret_cast<::Post_CustomState*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Post.custom_state)
+}
+inline ::Post_CustomState* Post::release_custom_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::Post_CustomState* released = _impl_.custom_state_;
+  _impl_.custom_state_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::Post_CustomState* Post::unsafe_arena_release_custom_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:Post.custom_state)
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::Post_CustomState* temp = _impl_.custom_state_;
+  _impl_.custom_state_ = nullptr;
+  return temp;
+}
+inline ::Post_CustomState* Post::_internal_mutable_custom_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000010u;
+  if (_impl_.custom_state_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Post_CustomState>(GetArenaForAllocation());
+    _impl_.custom_state_ = reinterpret_cast<::Post_CustomState*>(p);
+  }
+  return _impl_.custom_state_;
+}
+inline ::Post_CustomState* Post::mutable_custom_state() {
+  ::Post_CustomState* _msg = _internal_mutable_custom_state();
+  // @@protoc_insertion_point(field_mutable:Post.custom_state)
+  return _msg;
+}
+inline void Post::set_allocated_custom_state(::Post_CustomState* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::Post_CustomState*>(_impl_.custom_state_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::Post_CustomState*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+
+  _impl_.custom_state_ = reinterpret_cast<::Post_CustomState*>(value);
+  // @@protoc_insertion_point(field_set_allocated:Post.custom_state)
 }
 
 #ifdef __GNUC__

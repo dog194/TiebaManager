@@ -49,6 +49,7 @@ public:
 	CString authorShowName;       // 作者显示名
 	CString authorID;	          // 作者ID
 	CString authorPortraitUrl;	  // 作者头像URL。对于Web接口主题为空
+	CString customState;		  // 用户自定义信息
 	BOOL isTidAuthor = FALSE;	  // 是否是楼主
 	time_t timestamp;             // 创建时间，Unix时间戳(UTC)。对于Web接口主题为0
 	CString attachedInfo = _T("");// 通用额外变量，用于存放一些额外信息传递给确认窗口
@@ -86,6 +87,7 @@ public:
 	CString tb_age;			// 吧龄
 	int is_default_avatar;	// 是否默认头像
 	CString tieba_uid;		// tieba uid
+	CString virtual_info;		// 虚拟形象信息
 	int reply_type;			// 回复模式
 
 	virtual CString GetContent() const { 
@@ -94,6 +96,8 @@ public:
 		TMP.Format(_T("\n头像ID: %s\n等级：%d\t是否吧务：%d-%s\n"), Portrait, level, is_bawu, bawu_type);
 		ret += TMP;
 		TMP.Format(_T("发帖数: %d\t吧龄：%s\t默认头像：%d\ttieba uid:%s\n"), post_num, tb_age, is_default_avatar, tieba_uid);
+		ret += TMP; 
+		TMP.Format(_T("虚拟形象信息: %s\n"), virtual_info);
 		ret += TMP; return ret; }
 
 	TBUserObj(){ }

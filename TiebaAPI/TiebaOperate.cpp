@@ -321,7 +321,7 @@ TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CStr
 	ProfileReqIdl pbReq;
 	ProfileReqIdl_DataReq* pbReqData = new ProfileReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
-	pbCom->set__client_version("12.12.1.0");
+	pbCom->set__client_version("12.53.1.0");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	CStringA a_portrait = W2UTF8(u_portrait);
@@ -369,6 +369,13 @@ TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CStr
 	std::string portrait = pbUser->portrait();
 	CString c_portrait = strUTF82W(portrait);
 	INT64 uid = pbUser->id();
+
+	// VirtualImageInfo // TODO 留做他用
+	User_VirtualImageInfo pbVirtualImageInfo;
+	pbVirtualImageInfo = pbUser->virtual_image_info();
+	User_VirtualImageInfo_StateInfo pbStateInfo;
+	pbStateInfo = pbVirtualImageInfo.personal_state();
+	CString virtual_info = strUTF82W(pbStateInfo.text());
 
 	if (c_error_nu == 300003) {
 		// 300003   D2F_RET_DELETE

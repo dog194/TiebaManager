@@ -1,0 +1,1 @@
+protoc --proto_path=D:/Download/TiebaManager/3rdParty/tiebaProto/ --cpp_out=D:/Download/TiebaManager/3rdParty/protobuf/bin/ D:/Download/TiebaManager/3rdParty/tiebaProto/ThreadInfo.proto
