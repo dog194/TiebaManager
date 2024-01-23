@@ -723,6 +723,10 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 			thread.authorShowName = userList[userIndex[author_id]].ShowName;
 			thread.authorID = userList[userIndex[author_id]].id;
 			thread.authorPortraitUrl = userList[userIndex[author_id]].PortraitUrl;
+			if (userList[userIndex[author_id]].level == 0)
+				thread.authorLevel = _T("");
+			else
+				thread.authorLevel = Int2CString(userList[userIndex[author_id]].level);
 			thread.isTidAuthor = TRUE;
 		}
 		else {
@@ -730,6 +734,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 			thread.authorShowName = _T("[数据错误]");
 			thread.authorID = _T("");
 			thread.authorPortraitUrl = _T("[数据错误]");
+			thread.authorLevel = _T("");
 			thread.isTidAuthor = FALSE;
 		}
 		thread.preview = preview;

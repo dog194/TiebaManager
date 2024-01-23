@@ -110,6 +110,7 @@ class TIEBA_API_API TapiThreadInfo : public TBObject
 public:
 	CString reply;		    // 回复数
 	CString title;		    // 标题
+	CString authorLevel;	// 作者等级
 	CString preview;	    // 预览
 	CString lastAuthor;     // 最后回复
 

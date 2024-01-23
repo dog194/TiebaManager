@@ -206,23 +206,25 @@ BOOL CKeywordCondition::MatchThread(const CConditionParam& _param, const TapiThr
 	case CKeywordParam::AUTHOR:          startPos = thread.GetContent().GetLength() + 10; content = thread.authorShowName;  break;
 	case CKeywordParam::ALL_CONTENT:     startPos = 0;                                    content = thread.GetContent();    break;
 	case CKeywordParam::UID:             
-		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 8;
+		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 5 + thread.authorLevel.GetLength() + 8;
 		content = thread.author;          
 		break;
 	case CKeywordParam::PORTRAIT:        
-		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 8 + thread.author.GetLength() + 17;
+		startPos = thread.GetContent().GetLength() + 10 + thread.authorShowName.GetLength() + 5 + thread.authorLevel.GetLength() + 8 + thread.author.GetLength() + 17;
 		content = GetPortraitFromString(thread.authorPortraitUrl);    
 		break;
 	case CKeywordParam::CUSTOM_STATE:
 		startPos = thread.GetContent().GetLength() + 10 +
-			thread.authorShowName.GetLength() + 8 +
+			thread.authorShowName.GetLength() + 5 + 
+			thread.authorLevel.GetLength() + 8 +
 			thread.author.GetLength() + 17 +
 			GetPortraitFromString(thread.authorPortraitUrl).GetLength() + 9;
 		content = thread.customState;
 		break;
 	case CKeywordParam::TID:
 		startPos = thread.GetContent().GetLength() + 10 + 
-			thread.authorShowName.GetLength() + 8 + 
+			thread.authorShowName.GetLength() + 5 + 
+			thread.authorLevel.GetLength() + 8 +
 			thread.author.GetLength() + 17 + 
 			GetPortraitFromString(thread.authorPortraitUrl).GetLength() + 9 +
 			thread.customState.GetLength() + 15 +
@@ -385,7 +387,18 @@ CConditionParam* CLevelCondition::CloneParam(const CConditionParam& _param)
 
 BOOL CLevelCondition::MatchThread(const CConditionParam& _param, const TapiThreadInfo& thread, int& pos, int& length)
 {
-	return FALSE;
+	const auto& param = (CLevelParam&)_param;
+
+	if (thread.authorLevel == _T(""))
+		return FALSE;
+
+	int level = _ttoi(thread.authorLevel);
+	switch (param.m_operator)
+	{
+	default: return FALSE;
+	case CLevelParam::LESS:       return level <= param.m_level;
+	case CLevelParam::GREATER:    return level >= param.m_level;
+	}
 }
 
 BOOL CLevelCondition::MatchPost(const CConditionParam& _param, const PostInfo& post, int& pos, int& length)

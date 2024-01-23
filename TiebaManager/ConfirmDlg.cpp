@@ -159,6 +159,12 @@ BOOL CConfirmDlg::OnInitDialog()
 		CString content = m_operation->object->GetContent() + _T("\r\n\r\n作者显示名：") + m_operation->object->authorShowName;
 		switch (m_operation->object->m_type)
 		{
+		case TBObject::THREAD:
+		{
+			const TapiThreadInfo& thread = (TapiThreadInfo&)*m_operation->object;
+			content += _T("\r\n等级：") + thread.authorLevel;
+			break;
+		}
 		case TBObject::POST:
 		{
 			const PostInfo& post = (PostInfo&)*m_operation->object;
