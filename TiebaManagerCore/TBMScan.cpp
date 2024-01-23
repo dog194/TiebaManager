@@ -93,6 +93,10 @@ void CTBMScan::ScanThread(CString sPage)
 		{
 			// 主扫描结构
 			for (int iPage = iPageS; iPage <= iPageE; iPage++) {
+				if (m_stopScanFlag) {
+					// 额外的中断判断。
+					break;
+				}
 				// 记录扫描时间
 				if (m_lastScanTime == _T("")) {
 					m_lastScanTime = GetYYMMDD_FromTimeT();
