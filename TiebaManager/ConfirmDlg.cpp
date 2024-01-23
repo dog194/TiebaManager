@@ -176,6 +176,9 @@ BOOL CConfirmDlg::OnInitDialog()
 		}
 		content += _T("\r\n\r\n作者名：") + m_operation->object->author		//多加个换行，有昵称的时候，显示名是昵称，没昵称的时候，显示名等于用户名
 			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_operation->object->authorPortraitUrl);
+		if (m_operation->object->m_type != TBObject::LZL) { // LZL 暂时不支持
+			content += _T("\r\n虚拟形象心情：") + m_operation->object->customState;
+		}
 		if (m_operation->object->timestamp != 0) {
 			//不是所有数据都带时间
 			content += _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_operation->object->timestamp);
