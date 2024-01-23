@@ -272,6 +272,7 @@ BOOL CKeywordCondition::MatchPost(const CConditionParam& _param, const PostInfo&
 			post.author.GetLength() + 17 +
 			GetPortraitFromString(post.authorPortraitUrl).GetLength() + 9;
 		content = post.customState;
+		break;
 	case CKeywordParam::TID:
 		startPos = post.GetContent().GetLength() + 10 +
 			post.authorShowName.GetLength() + 5 +
