@@ -65,6 +65,9 @@ extern User_NewGodInfoDefaultTypeInternal _User_NewGodInfo_default_instance_;
 class User_PrivSets;
 struct User_PrivSetsDefaultTypeInternal;
 extern User_PrivSetsDefaultTypeInternal _User_PrivSets_default_instance_;
+class User_UserGrowth;
+struct User_UserGrowthDefaultTypeInternal;
+extern User_UserGrowthDefaultTypeInternal _User_UserGrowth_default_instance_;
 class User_UserVipInfo;
 struct User_UserVipInfoDefaultTypeInternal;
 extern User_UserVipInfoDefaultTypeInternal _User_UserVipInfo_default_instance_;
@@ -1323,6 +1326,164 @@ class User_VirtualImageInfo final :
   friend struct ::TableStruct_User_2eproto;
 };// -------------------------------------------------------------------
 
+class User_UserGrowth final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:User.UserGrowth) */ {
+ public:
+  inline User_UserGrowth() : User_UserGrowth(nullptr) {}
+  ~User_UserGrowth() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR User_UserGrowth(::google::protobuf::internal::ConstantInitialized);
+
+  User_UserGrowth(const User_UserGrowth& from);
+  User_UserGrowth(User_UserGrowth&& from) noexcept
+    : User_UserGrowth() {
+    *this = ::std::move(from);
+  }
+
+  inline User_UserGrowth& operator=(const User_UserGrowth& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline User_UserGrowth& operator=(User_UserGrowth&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const User_UserGrowth& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const User_UserGrowth* internal_default_instance() {
+    return reinterpret_cast<const User_UserGrowth*>(
+               &_User_UserGrowth_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(User_UserGrowth& a, User_UserGrowth& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(User_UserGrowth* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(User_UserGrowth* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  User_UserGrowth* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<User_UserGrowth>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const User_UserGrowth& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const User_UserGrowth& from) {
+    User_UserGrowth::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(User_UserGrowth* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "User.UserGrowth";
+  }
+  protected:
+  explicit User_UserGrowth(::google::protobuf::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kLevelIdFieldNumber = 1,
+  };
+  // uint32 level_id = 1;
+  void clear_level_id() ;
+  ::uint32_t level_id() const;
+  void set_level_id(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_level_id() const;
+  void _internal_set_level_id(::uint32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:User.UserGrowth)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1, 0, 0, 2> _table_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::uint32_t level_id_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_User_2eproto;
+};// -------------------------------------------------------------------
+
 class User final :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:User) */ {
  public:
@@ -1379,7 +1540,7 @@ class User final :
                &_User_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(User& a, User& b) {
     a.Swap(&b);
@@ -1453,6 +1614,7 @@ class User final :
   typedef User_UserVipInfo UserVipInfo;
   typedef User_NewGodInfo NewGodInfo;
   typedef User_VirtualImageInfo VirtualImageInfo;
+  typedef User_UserGrowth UserGrowth;
 
   // accessors -------------------------------------------------------
 
@@ -1465,14 +1627,19 @@ class User final :
     kBDUSSFieldNumber = 29,
     kTbAgeFieldNumber = 38,
     kTiebaUidFieldNumber = 120,
+    kIpAddressFieldNumber = 127,
     kPrivSetsFieldNumber = 45,
     kVipInfoFieldNumber = 61,
     kNewGodDataFieldNumber = 101,
     kVirtualImageInfoFieldNumber = 136,
+    kUserGrowthFieldNumber = 137,
     kIdFieldNumber = 2,
     kIsCoreuserFieldNumber = 20,
     kLevelIdFieldNumber = 23,
     kIsBawuFieldNumber = 25,
+    kFansNumFieldNumber = 30,
+    kConcernNumFieldNumber = 31,
+    kMyLikeNumFieldNumber = 33,
     kPostNumFieldNumber = 37,
     kGenderFieldNumber = 42,
     kIsFriendFieldNumber = 46,
@@ -1610,6 +1777,22 @@ class User final :
   std::string* _internal_mutable_tieba_uid();
 
   public:
+  // string ip_address = 127;
+  void clear_ip_address() ;
+  const std::string& ip_address() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_ip_address(Arg_&& arg, Args_... args);
+  std::string* mutable_ip_address();
+  PROTOBUF_NODISCARD std::string* release_ip_address();
+  void set_allocated_ip_address(std::string* ptr);
+
+  private:
+  const std::string& _internal_ip_address() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_ip_address(
+      const std::string& value);
+  std::string* _internal_mutable_ip_address();
+
+  public:
   // .User.PrivSets priv_sets = 45;
   bool has_priv_sets() const;
   void clear_priv_sets() ;
@@ -1670,6 +1853,21 @@ class User final :
   ::User_VirtualImageInfo* _internal_mutable_virtual_image_info();
 
   public:
+  // .User.UserGrowth user_growth = 137;
+  bool has_user_growth() const;
+  void clear_user_growth() ;
+  const ::User_UserGrowth& user_growth() const;
+  PROTOBUF_NODISCARD ::User_UserGrowth* release_user_growth();
+  ::User_UserGrowth* mutable_user_growth();
+  void set_allocated_user_growth(::User_UserGrowth* value);
+  void unsafe_arena_set_allocated_user_growth(::User_UserGrowth* value);
+  ::User_UserGrowth* unsafe_arena_release_user_growth();
+
+  private:
+  const ::User_UserGrowth& _internal_user_growth() const;
+  ::User_UserGrowth* _internal_mutable_user_growth();
+
+  public:
   // int64 id = 2;
   void clear_id() ;
   ::int64_t id() const;
@@ -1708,6 +1906,36 @@ class User final :
   private:
   ::int32_t _internal_is_bawu() const;
   void _internal_set_is_bawu(::int32_t value);
+
+  public:
+  // int32 fans_num = 30;
+  void clear_fans_num() ;
+  ::int32_t fans_num() const;
+  void set_fans_num(::int32_t value);
+
+  private:
+  ::int32_t _internal_fans_num() const;
+  void _internal_set_fans_num(::int32_t value);
+
+  public:
+  // int32 concern_num = 31;
+  void clear_concern_num() ;
+  ::int32_t concern_num() const;
+  void set_concern_num(::int32_t value);
+
+  private:
+  ::int32_t _internal_concern_num() const;
+  void _internal_set_concern_num(::int32_t value);
+
+  public:
+  // int32 my_like_num = 33;
+  void clear_my_like_num() ;
+  ::int32_t my_like_num() const;
+  void set_my_like_num(::int32_t value);
+
+  private:
+  ::int32_t _internal_my_like_num() const;
+  void _internal_set_my_like_num(::int32_t value);
 
   public:
   // int32 post_num = 37;
@@ -1775,7 +2003,7 @@ class User final :
   class _Internal;
 
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<5, 22, 5, 79, 19> _table_;
+  static const ::google::protobuf::internal::TcParseTable<5, 27, 6, 97, 19> _table_;
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
@@ -1790,14 +2018,19 @@ class User final :
     ::google::protobuf::internal::ArenaStringPtr bduss_;
     ::google::protobuf::internal::ArenaStringPtr tb_age_;
     ::google::protobuf::internal::ArenaStringPtr tieba_uid_;
+    ::google::protobuf::internal::ArenaStringPtr ip_address_;
     ::User_PrivSets* priv_sets_;
     ::User_UserVipInfo* vipinfo_;
     ::User_NewGodInfo* new_god_data_;
     ::User_VirtualImageInfo* virtual_image_info_;
+    ::User_UserGrowth* user_growth_;
     ::int64_t id_;
     ::int32_t is_coreuser_;
     ::int32_t level_id_;
     ::int32_t is_bawu_;
+    ::int32_t fans_num_;
+    ::int32_t concern_num_;
+    ::int32_t my_like_num_;
     ::int32_t post_num_;
     ::int32_t gender_;
     ::int32_t is_friend_;
@@ -2661,6 +2894,32 @@ inline void User_VirtualImageInfo::set_allocated_personal_state(::User_VirtualIm
 
 // -------------------------------------------------------------------
 
+// User_UserGrowth
+
+// uint32 level_id = 1;
+inline void User_UserGrowth::clear_level_id() {
+  _impl_.level_id_ = 0u;
+}
+inline ::uint32_t User_UserGrowth::level_id() const {
+  // @@protoc_insertion_point(field_get:User.UserGrowth.level_id)
+  return _internal_level_id();
+}
+inline void User_UserGrowth::set_level_id(::uint32_t value) {
+  _internal_set_level_id(value);
+  // @@protoc_insertion_point(field_set:User.UserGrowth.level_id)
+}
+inline ::uint32_t User_UserGrowth::_internal_level_id() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.level_id_;
+}
+inline void User_UserGrowth::_internal_set_level_id(::uint32_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.level_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // User
 
 // int64 id = 2;
@@ -3004,6 +3263,72 @@ inline void User::set_allocated_bduss(std::string* value) {
         }
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:User.BDUSS)
+}
+
+// int32 fans_num = 30;
+inline void User::clear_fans_num() {
+  _impl_.fans_num_ = 0;
+}
+inline ::int32_t User::fans_num() const {
+  // @@protoc_insertion_point(field_get:User.fans_num)
+  return _internal_fans_num();
+}
+inline void User::set_fans_num(::int32_t value) {
+  _internal_set_fans_num(value);
+  // @@protoc_insertion_point(field_set:User.fans_num)
+}
+inline ::int32_t User::_internal_fans_num() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.fans_num_;
+}
+inline void User::_internal_set_fans_num(::int32_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.fans_num_ = value;
+}
+
+// int32 concern_num = 31;
+inline void User::clear_concern_num() {
+  _impl_.concern_num_ = 0;
+}
+inline ::int32_t User::concern_num() const {
+  // @@protoc_insertion_point(field_get:User.concern_num)
+  return _internal_concern_num();
+}
+inline void User::set_concern_num(::int32_t value) {
+  _internal_set_concern_num(value);
+  // @@protoc_insertion_point(field_set:User.concern_num)
+}
+inline ::int32_t User::_internal_concern_num() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.concern_num_;
+}
+inline void User::_internal_set_concern_num(::int32_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.concern_num_ = value;
+}
+
+// int32 my_like_num = 33;
+inline void User::clear_my_like_num() {
+  _impl_.my_like_num_ = 0;
+}
+inline ::int32_t User::my_like_num() const {
+  // @@protoc_insertion_point(field_get:User.my_like_num)
+  return _internal_my_like_num();
+}
+inline void User::set_my_like_num(::int32_t value) {
+  _internal_set_my_like_num(value);
+  // @@protoc_insertion_point(field_set:User.my_like_num)
+}
+inline ::int32_t User::_internal_my_like_num() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.my_like_num_;
+}
+inline void User::_internal_set_my_like_num(::int32_t value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.my_like_num_ = value;
 }
 
 // int32 post_num = 37;
@@ -3574,6 +3899,57 @@ inline void User::set_allocated_tieba_uid(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:User.tieba_uid)
 }
 
+// string ip_address = 127;
+inline void User::clear_ip_address() {
+  _impl_.ip_address_.ClearToEmpty();
+}
+inline const std::string& User::ip_address() const {
+  // @@protoc_insertion_point(field_get:User.ip_address)
+  return _internal_ip_address();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void User::set_ip_address(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.ip_address_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:User.ip_address)
+}
+inline std::string* User::mutable_ip_address() {
+  std::string* _s = _internal_mutable_ip_address();
+  // @@protoc_insertion_point(field_mutable:User.ip_address)
+  return _s;
+}
+inline const std::string& User::_internal_ip_address() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.ip_address_.Get();
+}
+inline void User::_internal_set_ip_address(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.ip_address_.Set(value, GetArenaForAllocation());
+}
+inline std::string* User::_internal_mutable_ip_address() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.ip_address_.Mutable( GetArenaForAllocation());
+}
+inline std::string* User::release_ip_address() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:User.ip_address)
+  return _impl_.ip_address_.Release();
+}
+inline void User::set_allocated_ip_address(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.ip_address_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.ip_address_.IsDefault()) {
+          _impl_.ip_address_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:User.ip_address)
+}
+
 // .User.VirtualImageInfo virtual_image_info = 136;
 inline bool User::has_virtual_image_info() const {
   bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
@@ -3668,6 +4044,102 @@ inline void User::set_allocated_virtual_image_info(::User_VirtualImageInfo* valu
 
   _impl_.virtual_image_info_ = reinterpret_cast<::User_VirtualImageInfo*>(value);
   // @@protoc_insertion_point(field_set_allocated:User.virtual_image_info)
+}
+
+// .User.UserGrowth user_growth = 137;
+inline bool User::has_user_growth() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.user_growth_ != nullptr);
+  return value;
+}
+inline void User::clear_user_growth() {
+  if (_impl_.user_growth_ != nullptr) _impl_.user_growth_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
+inline const ::User_UserGrowth& User::_internal_user_growth() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::User_UserGrowth* p = _impl_.user_growth_;
+  return p != nullptr ? *p : reinterpret_cast<const ::User_UserGrowth&>(::_User_UserGrowth_default_instance_);
+}
+inline const ::User_UserGrowth& User::user_growth() const {
+  // @@protoc_insertion_point(field_get:User.user_growth)
+  return _internal_user_growth();
+}
+inline void User::unsafe_arena_set_allocated_user_growth(::User_UserGrowth* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.user_growth_);
+  }
+  _impl_.user_growth_ = reinterpret_cast<::User_UserGrowth*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:User.user_growth)
+}
+inline ::User_UserGrowth* User::release_user_growth() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::User_UserGrowth* released = _impl_.user_growth_;
+  _impl_.user_growth_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::User_UserGrowth* User::unsafe_arena_release_user_growth() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:User.user_growth)
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::User_UserGrowth* temp = _impl_.user_growth_;
+  _impl_.user_growth_ = nullptr;
+  return temp;
+}
+inline ::User_UserGrowth* User::_internal_mutable_user_growth() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000010u;
+  if (_impl_.user_growth_ == nullptr) {
+    auto* p = CreateMaybeMessage<::User_UserGrowth>(GetArenaForAllocation());
+    _impl_.user_growth_ = reinterpret_cast<::User_UserGrowth*>(p);
+  }
+  return _impl_.user_growth_;
+}
+inline ::User_UserGrowth* User::mutable_user_growth() {
+  ::User_UserGrowth* _msg = _internal_mutable_user_growth();
+  // @@protoc_insertion_point(field_mutable:User.user_growth)
+  return _msg;
+}
+inline void User::set_allocated_user_growth(::User_UserGrowth* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::User_UserGrowth*>(_impl_.user_growth_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::User_UserGrowth*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+
+  _impl_.user_growth_ = reinterpret_cast<::User_UserGrowth*>(value);
+  // @@protoc_insertion_point(field_set_allocated:User.user_growth)
 }
 
 #ifdef __GNUC__

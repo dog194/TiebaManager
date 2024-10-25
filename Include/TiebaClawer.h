@@ -81,6 +81,7 @@ public:
 
 	CString PortraitUrl;	// 作者头像URL。头像ID
 	int level;				// 等级
+	int glevel;				// 成长等级
 	int is_bawu;			// 是否吧务
 	CString bawu_type;		// 吧务类别
 	int post_num;			// 发帖量
@@ -88,7 +89,9 @@ public:
 	int is_default_avatar;	// 是否默认头像
 	CString tieba_uid;		// tieba uid
 	CString virtual_info;	// 虚拟形象信息
+	CString ip_address;		// ip 地址信息
 	int reply_type;			// 回复模式
+
 
 	virtual CString GetContent() const { 
 		CString TMP,ret = _T("");

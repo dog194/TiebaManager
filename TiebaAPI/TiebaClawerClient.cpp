@@ -338,6 +338,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	CString portrait = strUTF82W(rawUser.portrait());
 	CString portraitUrl = AUTHOR_PORTRAIT_URL_PREFIX + portrait;
 	int level = rawUser.level_id();
+	int glevel = rawUser.user_growth().level_id();
 	int is_bawu = rawUser.is_bawu();
 	CString bawuType = strUTF82W(rawUser.bawu_type());
 	int post_num = rawUser.post_num();
@@ -350,6 +351,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	User_VirtualImageInfo_StateInfo pbStateInfo = pbVirtualImageInfo.personal_state();
 	int is_set_virtual = pbVirtualImageInfo.isset_virtual_image();
 	CString virtual_info = strUTF82W(pbStateInfo.text());
+	CString ip_address = strUTF82W(rawUser.ip_address());
 
 	// 赋值
 	user.id = id;
@@ -358,6 +360,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	user.Portrait = portrait;
 	user.PortraitUrl = portraitUrl;
 	user.level = level;
+	user.glevel = glevel;
 	user.is_bawu = is_bawu;
 	user.bawu_type = bawuType;
 	user.post_num = post_num;
@@ -366,6 +369,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	user.tieba_uid = tb_uid;
 	user.reply_type = reply_type;
 	user.virtual_info = virtual_info;
+	user.ip_address = ip_address;
 }
 
 // 解析UserList
