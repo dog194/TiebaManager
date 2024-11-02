@@ -457,6 +457,7 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 		case 9: // 电话号码
 		case 18: // 话题
 		case 27: // 词条
+		case 40: // 梗百科
 			content = strUTF82W(rawContent->text());
 			break;
 		case 1: // 超链接
@@ -600,8 +601,9 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	//std::string kw = CT2A(forumName);
 	pbReqData->set_kw(t_fn);
 	pbReqData->set_pn(_ttoi(ignoreThread) / 50 + 1);
-	pbReqData->set_rn(90);
-	pbReqData->set_rn_need(50);
+	// 暂时改为10.应对贴吧数据修改
+	pbReqData->set_rn(10);
+	pbReqData->set_rn_need(10);
 	pbReqData->set_cid(0);
 	pbReqData->set_is_good(0);
 	pbReqData->set_q_type(2);
@@ -717,7 +719,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		thread.reply = reply_num;
 		thread.customState = customState;
 		if (title == _T("")) {
-			thread.title = decodeContent(pbContentList, tid, _T(""), TRUE).Left(20);
+			thread.title = decodeContent(pbContentList, tid, _T(""), TRUE).Left(30);
 		}
 		else {
 			thread.title = title;
