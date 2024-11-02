@@ -447,6 +447,10 @@ TIEBA_API_API CString GetTiebaErrorText(const CString& errorCode)
 		return _T("这个帖子已经被删除了哦");
 	if (errorCode == _T("4011"))
 		return _T("需要验证码(操作太快？)");
+	if (errorCode == _T("110001"))
+		return _T("未知错误（百度返回就是这个说明）");
+	if (errorCode == _T("1211068"))
+		return _T("正在封禁中/已有封禁正在操作，请稍后再试");
 	if (errorCode == _T("220034"))
 		return _T("您的操作太频繁了");
 	if (errorCode == _T("230308"))
