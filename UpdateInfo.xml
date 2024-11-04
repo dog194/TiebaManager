@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>240131(2.81)</Version>
-    <VersionNum>240131</VersionNum>
+    <Version>241102(2.82)</Version>
+    <VersionNum>241102</VersionNum>
     <UpdateLog>
-    更新日志240131(2.81)：
-    1.新增关键词规则：虚拟形象心情
-    注：仅支持主题帖列表和楼层。不包括楼中楼
-    2.等级规则对主题帖列表生效
+    更新日志241102(2.82)：
+    【重要更新】【强烈建议更新】
+    适配百度改动，每页扫描10帖子。确保不漏扫
+    建议设置改为扫描 1-5 页 (对应50帖子)
+    其他：
+    1.补全解析 梗百科 内容
+    2.补充ErrorCode，自动标题截取调整为30字符（之前20）
     </UpdateLog>
     <HistoryLog>
     ========历史更新日志========
+    更新日志240131(2.81)：
+    1.新增关键词规则：虚拟形象心情【疑似失效】
+    注：仅支持主题帖列表和楼层。不包括楼中楼
+    2.等级规则对主题帖列表生效
     更新日志231001(2.8)：
     【重要更新】
     1.新增联动删除：当楼主在帖子内发表违规回复时可以删除整个主题帖
@@ -121,5 +128,6 @@
         <item><value><Dir/><Name>libprotobuf-lite.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>sqlite3.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>tinyxml2.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>msvcp140.dll</Name><URL/><MD5/></value></item>
     </Files>
 </UpdateInfo>
