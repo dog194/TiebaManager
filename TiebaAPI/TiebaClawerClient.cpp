@@ -447,7 +447,7 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 	for (auto& rawContent = pbContentList->begin(); rawContent != pbContentList->end(); ++rawContent)
 	{
 		UINT type = rawContent->type();
-		CString content, tmp, tmpSize;
+		CString content, tmp, tmp2, tmpSize;
 		std::string tmpStr, tmpSizeStr;
 		TiebaPlusInfo* pbTbPlusInfo;
 		switch (type)
@@ -466,7 +466,8 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 			}
 			else {
 				tmp = strUTF82W(rawContent->link());
-				content.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), tmp, tmp);
+				tmp2 = strUTF82W(rawContent->text());
+				content.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), tmp, tmp2);
 			}
 			break;
 		case 2: // 表情
