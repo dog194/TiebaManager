@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>241102(2.82)</Version>
-    <VersionNum>241102</VersionNum>
+    <Version>241106(2.83)</Version>
+    <VersionNum>241106</VersionNum>
     <UpdateLog>
+    更新日志241106(2.83)：
+    【重要修正】
+    超链接现在正确显示标题
     更新日志241102(2.82)：
     【重要更新】【强烈建议更新】
     适配百度改动，每页扫描10帖子。确保不漏扫
