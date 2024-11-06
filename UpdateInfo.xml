@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UpdateInfo>
-    <Version>231001(2.8)</Version>
-    <VersionNum>231001</VersionNum>
+    <Version>241106(2.83)</Version>
+    <VersionNum>241106</VersionNum>
     <UpdateLog>
+    更新日志241106(2.83)：
+    【重要修正】
+    超链接现在正确显示标题
+    更新日志241102(2.82)：
+    【重要更新】【强烈建议更新】
+    适配百度改动，每页扫描10帖子。确保不漏扫
+    建议设置改为扫描 1-5 页 (对应50帖子)
+    其他：
+    1.补全解析 梗百科 内容
+    2.补充ErrorCode，自动标题截取调整为30字符（之前20）
+    </UpdateLog>
+    <HistoryLog>
+    ========历史更新日志========
+    更新日志240131(2.81)：
+    1.新增关键词规则：虚拟形象心情【疑似失效】
+    注：仅支持主题帖列表和楼层。不包括楼中楼
+    2.等级规则对主题帖列表生效
     更新日志231001(2.8)：
     【重要更新】
     1.新增联动删除：当楼主在帖子内发表违规回复时可以删除整个主题帖
@@ -21,9 +38,6 @@
     7.基础库校验。校验第三方库版本是否对应
     8.确认窗口，帖子浏览器，新增 【楼主】 标识
     9.确认窗口跳转，本身不再最小化
-    </UpdateLog>
-    <HistoryLog>
-    ========历史更新日志========
     更新日志230416(2.7)：
     【重要更新】
     1.新增图片内容规则-图片文件头，可判断图片是否为GIF
@@ -117,5 +131,6 @@
         <item><value><Dir/><Name>libprotobuf-lite.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>sqlite3.dll</Name><URL/><MD5/></value></item>
         <item><value><Dir/><Name>tinyxml2.dll</Name><URL/><MD5/></value></item>
+        <item><value><Dir/><Name>msvcp140.dll</Name><URL/><MD5/></value></item>
     </Files>
 </UpdateInfo>

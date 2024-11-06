@@ -57,6 +57,25 @@ struct ThreadInfo_OriginThreadInfoDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ThreadInfo_OriginThreadInfoDefaultTypeInternal _ThreadInfo_OriginThreadInfo_default_instance_;
         template <typename>
+PROTOBUF_CONSTEXPR ThreadInfo_CustomState::ThreadInfo_CustomState(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.content_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct ThreadInfo_CustomStateDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ThreadInfo_CustomStateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ThreadInfo_CustomStateDefaultTypeInternal() {}
+  union {
+    ThreadInfo_CustomState _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ThreadInfo_CustomStateDefaultTypeInternal _ThreadInfo_CustomState_default_instance_;
+        template <typename>
 PROTOBUF_CONSTEXPR ThreadInfo::ThreadInfo(::_pbi::ConstantInitialized)
     : _impl_{
       /*decltype(_impl_._has_bits_)*/ {},
@@ -78,6 +97,7 @@ PROTOBUF_CONSTEXPR ThreadInfo::ThreadInfo(::_pbi::ConstantInitialized)
       /*decltype(_impl_.poll_info_)*/ nullptr,
       /*decltype(_impl_.agree_)*/ nullptr,
       /*decltype(_impl_.origin_thread_info_)*/ nullptr,
+      /*decltype(_impl_.custom_state_)*/ nullptr,
       /*decltype(_impl_.id_)*/ ::int64_t{0},
       /*decltype(_impl_.tid_)*/ ::int64_t{0},
       /*decltype(_impl_.reply_num_)*/ 0,
@@ -112,7 +132,7 @@ struct ThreadInfoDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ThreadInfoDefaultTypeInternal _ThreadInfo_default_instance_;
-static ::_pb::Metadata file_level_metadata_ThreadInfo_2eproto[2];
+static ::_pb::Metadata file_level_metadata_ThreadInfo_2eproto[3];
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_ThreadInfo_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor**
@@ -149,6 +169,15 @@ const ::uint32_t TableStruct_ThreadInfo_2eproto::offsets[] PROTOBUF_SECTION_VARI
     0,
     1,
     ~0u,
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_CustomState, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo_CustomState, _impl_.content_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_._has_bits_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _internal_metadata_),
     ~0u,  // no _extensions_
@@ -188,6 +217,7 @@ const ::uint32_t TableStruct_ThreadInfo_2eproto::offsets[] PROTOBUF_SECTION_VARI
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.tab_id_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_deleted_),
     PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.is_frs_mask_),
+    PROTOBUF_FIELD_OFFSET(::ThreadInfo, _impl_.custom_state_),
     ~0u,
     ~0u,
     ~0u,
@@ -219,21 +249,24 @@ const ::uint32_t TableStruct_ThreadInfo_2eproto::offsets[] PROTOBUF_SECTION_VARI
     ~0u,
     ~0u,
     ~0u,
+    4,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
         {0, 19, -1, sizeof(::ThreadInfo_OriginThreadInfo)},
-        {30, 69, -1, sizeof(::ThreadInfo)},
+        {30, -1, -1, sizeof(::ThreadInfo_CustomState)},
+        {39, 79, -1, sizeof(::ThreadInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
     &::_ThreadInfo_OriginThreadInfo_default_instance_._instance,
+    &::_ThreadInfo_CustomState_default_instance_._instance,
     &::_ThreadInfo_default_instance_._instance,
 };
 const char descriptor_table_protodef_ThreadInfo_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
     "\n\020ThreadInfo.proto\032\nUser.proto\032\017PbConten"
-    "t.proto\032\013Agree.proto\032\016PollInfo.proto\"\211\007\n"
+    "t.proto\032\013Agree.proto\032\016PollInfo.proto\"\331\007\n"
     "\nThreadInfo\022\n\n\002id\030\001 \001(\003\022\013\n\003tid\030\002 \001(\003\022\r\n\005"
     "title\030\003 \001(\t\022\021\n\treply_num\030\004 \001(\005\022\020\n\010view_n"
     "um\030\005 \001(\005\022\021\n\tlast_time\030\006 \001(\t\022\025\n\rlast_time"
@@ -250,13 +283,15 @@ const char descriptor_table_protodef_ThreadInfo_2eproto[] PROTOBUF_SECTION_VARIA
     "readInfo.OriginThreadInfo\022\'\n\022first_post_"
     "content\030\216\001 \003(\0132\n.PbContent\022\030\n\017is_share_t"
     "hread\030\217\001 \001(\005\022\017\n\006tab_id\030\257\001 \001(\005\022\023\n\nis_dele"
-    "ted\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\032\345\001\n\020Ori"
-    "ginThreadInfo\022\r\n\005title\030\001 \001(\t\022\r\n\005fname\030\004 "
-    "\001(\t\022\013\n\003tid\030\005 \001(\t\022\013\n\003fid\030\007 \001(\003\022\023\n\013thread_"
-    "type\030\010 \001(\005\022\022\n\nis_deleted\030\t \001(\005\022\033\n\007conten"
-    "t\030\016 \003(\0132\n.PbContent\022\021\n\treply_num\030\020 \001(\005\022\025"
-    "\n\005agree\030\023 \001(\0132\006.Agree\022\034\n\tpoll_info\030\025 \001(\013"
-    "2\t.PollInfo\022\013\n\003pid\030\031 \001(\003b\006proto3"
+    "ted\030\265\001 \001(\005\022\024\n\013is_frs_mask\030\306\001 \001(\005\022.\n\014cust"
+    "om_state\030\324\001 \001(\0132\027.ThreadInfo.CustomState"
+    "\032\345\001\n\020OriginThreadInfo\022\r\n\005title\030\001 \001(\t\022\r\n\005"
+    "fname\030\004 \001(\t\022\013\n\003tid\030\005 \001(\t\022\013\n\003fid\030\007 \001(\003\022\023\n"
+    "\013thread_type\030\010 \001(\005\022\022\n\nis_deleted\030\t \001(\005\022\033"
+    "\n\007content\030\016 \003(\0132\n.PbContent\022\021\n\treply_num"
+    "\030\020 \001(\005\022\025\n\005agree\030\023 \001(\0132\006.Agree\022\034\n\tpoll_in"
+    "fo\030\025 \001(\0132\t.PollInfo\022\013\n\003pid\030\031 \001(\003\032\036\n\013Cust"
+    "omState\022\017\n\007content\030\002 \001(\tb\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_ThreadInfo_2eproto_deps[4] =
     {
@@ -269,13 +304,13 @@ static ::absl::once_flag descriptor_table_ThreadInfo_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_ThreadInfo_2eproto = {
     false,
     false,
-    992,
+    1072,
     descriptor_table_protodef_ThreadInfo_2eproto,
     "ThreadInfo.proto",
     &descriptor_table_ThreadInfo_2eproto_once,
     descriptor_table_ThreadInfo_2eproto_deps,
     4,
-    2,
+    3,
     schemas,
     file_default_instances,
     TableStruct_ThreadInfo_2eproto::offsets,
@@ -847,6 +882,197 @@ void ThreadInfo_OriginThreadInfo::InternalSwap(ThreadInfo_OriginThreadInfo* othe
 }
 // ===================================================================
 
+class ThreadInfo_CustomState::_Internal {
+ public:
+};
+
+ThreadInfo_CustomState::ThreadInfo_CustomState(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:ThreadInfo.CustomState)
+}
+ThreadInfo_CustomState::ThreadInfo_CustomState(const ThreadInfo_CustomState& from) : ::google::protobuf::Message() {
+  ThreadInfo_CustomState* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.content_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.content_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.content_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_content().empty()) {
+    _this->_impl_.content_.Set(from._internal_content(), _this->GetArenaForAllocation());
+  }
+
+  // @@protoc_insertion_point(copy_constructor:ThreadInfo.CustomState)
+}
+inline void ThreadInfo_CustomState::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.content_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.content_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.content_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+ThreadInfo_CustomState::~ThreadInfo_CustomState() {
+  // @@protoc_insertion_point(destructor:ThreadInfo.CustomState)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void ThreadInfo_CustomState::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.content_.Destroy();
+}
+void ThreadInfo_CustomState::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+PROTOBUF_NOINLINE void ThreadInfo_CustomState::Clear() {
+// @@protoc_insertion_point(message_clear_start:ThreadInfo.CustomState)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.content_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* ThreadInfo_CustomState::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 38, 2> ThreadInfo_CustomState::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967293,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_ThreadInfo_CustomState_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string content = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo_CustomState, _impl_.content_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string content = 2;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo_CustomState, _impl_.content_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\26\7\0\0\0\0\0\0"
+    "ThreadInfo.CustomState"
+    "content"
+  }},
+};
+
+::uint8_t* ThreadInfo_CustomState::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:ThreadInfo.CustomState)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // string content = 2;
+  if (!this->_internal_content().empty()) {
+    const std::string& _s = this->_internal_content();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "ThreadInfo.CustomState.content");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:ThreadInfo.CustomState)
+  return target;
+}
+
+::size_t ThreadInfo_CustomState::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:ThreadInfo.CustomState)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string content = 2;
+  if (!this->_internal_content().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_content());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData ThreadInfo_CustomState::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    ThreadInfo_CustomState::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*ThreadInfo_CustomState::GetClassData() const { return &_class_data_; }
+
+
+void ThreadInfo_CustomState::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<ThreadInfo_CustomState*>(&to_msg);
+  auto& from = static_cast<const ThreadInfo_CustomState&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:ThreadInfo.CustomState)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_content().empty()) {
+    _this->_internal_set_content(from._internal_content());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ThreadInfo_CustomState::CopyFrom(const ThreadInfo_CustomState& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:ThreadInfo.CustomState)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool ThreadInfo_CustomState::IsInitialized() const {
+  return true;
+}
+
+void ThreadInfo_CustomState::InternalSwap(ThreadInfo_CustomState* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.content_, lhs_arena,
+                                       &other->_impl_.content_, rhs_arena);
+}
+
+::google::protobuf::Metadata ThreadInfo_CustomState::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_ThreadInfo_2eproto_getter, &descriptor_table_ThreadInfo_2eproto_once,
+      file_level_metadata_ThreadInfo_2eproto[1]);
+}
+// ===================================================================
+
 class ThreadInfo::_Internal {
  public:
   using HasBits = decltype(std::declval<ThreadInfo>()._impl_._has_bits_);
@@ -868,6 +1094,10 @@ class ThreadInfo::_Internal {
   static void set_has_origin_thread_info(HasBits* has_bits) {
     (*has_bits)[0] |= 8u;
   }
+  static const ::ThreadInfo_CustomState& custom_state(const ThreadInfo* msg);
+  static void set_has_custom_state(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
+  }
 };
 
 const ::User& ThreadInfo::_Internal::author(const ThreadInfo* msg) {
@@ -881,6 +1111,9 @@ const ::Agree& ThreadInfo::_Internal::agree(const ThreadInfo* msg) {
 }
 const ::ThreadInfo_OriginThreadInfo& ThreadInfo::_Internal::origin_thread_info(const ThreadInfo* msg) {
   return *msg->_impl_.origin_thread_info_;
+}
+const ::ThreadInfo_CustomState& ThreadInfo::_Internal::custom_state(const ThreadInfo* msg) {
+  return *msg->_impl_.custom_state_;
 }
 void ThreadInfo::clear_author() {
   if (_impl_.author_ != nullptr) _impl_.author_->Clear();
@@ -916,6 +1149,7 @@ ThreadInfo::ThreadInfo(const ThreadInfo& from) : ::google::protobuf::Message() {
       decltype(_impl_.poll_info_){nullptr},
       decltype(_impl_.agree_){nullptr},
       decltype(_impl_.origin_thread_info_){nullptr},
+      decltype(_impl_.custom_state_){nullptr},
       decltype(_impl_.id_){},
       decltype(_impl_.tid_){},
       decltype(_impl_.reply_num_){},
@@ -975,6 +1209,9 @@ ThreadInfo::ThreadInfo(const ThreadInfo& from) : ::google::protobuf::Message() {
   if ((from._impl_._has_bits_[0] & 0x00000008u) != 0) {
     _this->_impl_.origin_thread_info_ = new ::ThreadInfo_OriginThreadInfo(*from._impl_.origin_thread_info_);
   }
+  if ((from._impl_._has_bits_[0] & 0x00000010u) != 0) {
+    _this->_impl_.custom_state_ = new ::ThreadInfo_CustomState(*from._impl_.custom_state_);
+  }
   ::memcpy(&_impl_.id_, &from._impl_.id_,
     static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.is_frs_mask_) -
     reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.is_frs_mask_));
@@ -994,6 +1231,7 @@ inline void ThreadInfo::SharedCtor(::_pb::Arena* arena) {
       decltype(_impl_.poll_info_){nullptr},
       decltype(_impl_.agree_){nullptr},
       decltype(_impl_.origin_thread_info_){nullptr},
+      decltype(_impl_.custom_state_){nullptr},
       decltype(_impl_.id_){::int64_t{0}},
       decltype(_impl_.tid_){::int64_t{0}},
       decltype(_impl_.reply_num_){0},
@@ -1046,6 +1284,7 @@ inline void ThreadInfo::SharedDtor() {
   if (this != internal_default_instance()) delete _impl_.poll_info_;
   if (this != internal_default_instance()) delete _impl_.agree_;
   if (this != internal_default_instance()) delete _impl_.origin_thread_info_;
+  if (this != internal_default_instance()) delete _impl_.custom_state_;
 }
 void ThreadInfo::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
@@ -1062,7 +1301,7 @@ PROTOBUF_NOINLINE void ThreadInfo::Clear() {
   _impl_.last_time_.ClearToEmpty();
   _impl_.pids_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(_impl_.author_ != nullptr);
       _impl_.author_->Clear();
@@ -1078,6 +1317,10 @@ PROTOBUF_NOINLINE void ThreadInfo::Clear() {
     if (cached_has_bits & 0x00000008u) {
       ABSL_DCHECK(_impl_.origin_thread_info_ != nullptr);
       _impl_.origin_thread_info_->Clear();
+    }
+    if (cached_has_bits & 0x00000010u) {
+      ABSL_DCHECK(_impl_.custom_state_ != nullptr);
+      _impl_.custom_state_->Clear();
     }
   }
   ::memset(&_impl_.id_, 0, static_cast<::size_t>(
@@ -1095,16 +1338,16 @@ const char* ThreadInfo::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<5, 31, 5, 61, 25> ThreadInfo::_table_ = {
+const ::_pbi::TcParseTable<5, 32, 6, 69, 27> ThreadInfo::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_._has_bits_),
     0, // no _extensions_
-    198, 248,  // max_field_number, fast_idx_mask
+    212, 248,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
     4227725312,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    31,  // num_field_entries
-    5,  // num_aux_entries
+    32,  // num_field_entries
+    6,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     &_ThreadInfo_default_instance_._instance,
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1186,9 +1429,9 @@ const ::_pbi::TcParseTable<5, 31, 5, 61, 25> ThreadInfo::_table_ = {
     {::_pbi::TcParser::FastV32S2,
      {2296, 63, 0, PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_share_thread_)}},
   }}, {{
-    40, 0, 10,
+    40, 0, 11,
     53210, 13, 65494, 18, 57339, 21, 65535, 23, 65535, 23, 63423, 23,
-    65311, 25, 65535, 28, 57215, 28, 49151, 30,
+    65311, 25, 65535, 28, 57215, 28, 49151, 30, 61439, 31,
     65535, 65535
   }}, {{
     // int64 id = 1;
@@ -1284,14 +1527,18 @@ const ::_pbi::TcParseTable<5, 31, 5, 61, 25> ThreadInfo::_table_ = {
     // int32 is_frs_mask = 198;
     {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.is_frs_mask_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .ThreadInfo.CustomState custom_state = 212;
+    {PROTOBUF_FIELD_OFFSET(ThreadInfo, _impl_.custom_state_), _Internal::kHasBitsOffset + 4, 5,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::User>()},
     {::_pbi::TcParser::GetTable<::PollInfo>()},
     {::_pbi::TcParser::GetTable<::Agree>()},
     {::_pbi::TcParser::GetTable<::ThreadInfo_OriginThreadInfo>()},
     {::_pbi::TcParser::GetTable<::PbContent>()},
+    {::_pbi::TcParser::GetTable<::ThreadInfo_CustomState>()},
   }}, {{
-    "\12\0\0\5\0\0\11\0\0\0\0\0\0\0\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\0\0\0"
+    "\12\0\0\5\0\0\11\0\0\0\0\0\0\0\0\0\0\0\0\0\0\4\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
     "ThreadInfo"
     "title"
     "last_time"
@@ -1528,6 +1775,13 @@ const ::_pbi::TcParseTable<5, 31, 5, 61, 25> ThreadInfo::_table_ = {
         198, this->_internal_is_frs_mask(), target);
   }
 
+  // .ThreadInfo.CustomState custom_state = 212;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(212, _Internal::custom_state(this),
+        _Internal::custom_state(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -1570,7 +1824,7 @@ const ::_pbi::TcParseTable<5, 31, 5, 61, 25> ThreadInfo::_table_ = {
   }
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     // .User author = 18;
     if (cached_has_bits & 0x00000001u) {
       total_size += 2 +
@@ -1597,6 +1851,13 @@ const ::_pbi::TcParseTable<5, 31, 5, 61, 25> ThreadInfo::_table_ = {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           *_impl_.origin_thread_info_);
+    }
+
+    // .ThreadInfo.CustomState custom_state = 212;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.custom_state_);
     }
 
   }
@@ -1767,7 +2028,7 @@ void ThreadInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::
     _this->_internal_set_pids(from._internal_pids());
   }
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       _this->_internal_mutable_author()->::User::MergeFrom(
           from._internal_author());
@@ -1783,6 +2044,10 @@ void ThreadInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::
     if (cached_has_bits & 0x00000008u) {
       _this->_internal_mutable_origin_thread_info()->::ThreadInfo_OriginThreadInfo::MergeFrom(
           from._internal_origin_thread_info());
+    }
+    if (cached_has_bits & 0x00000010u) {
+      _this->_internal_mutable_custom_state()->::ThreadInfo_CustomState::MergeFrom(
+          from._internal_custom_state());
     }
   }
   if (from._internal_id() != 0) {
@@ -1892,7 +2157,7 @@ void ThreadInfo::InternalSwap(ThreadInfo* other) {
 ::google::protobuf::Metadata ThreadInfo::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_ThreadInfo_2eproto_getter, &descriptor_table_ThreadInfo_2eproto_once,
-      file_level_metadata_ThreadInfo_2eproto[1]);
+      file_level_metadata_ThreadInfo_2eproto[2]);
 }
 // @@protoc_insertion_point(namespace_scope)
 namespace google {

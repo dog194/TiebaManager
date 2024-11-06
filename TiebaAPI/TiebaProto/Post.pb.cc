@@ -83,6 +83,44 @@ struct Post_SignatureDataDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Post_SignatureDataDefaultTypeInternal _Post_SignatureData_default_instance_;
         template <typename>
+PROTOBUF_CONSTEXPR Post_CustomFigure::Post_CustomFigure(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.background_value_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct Post_CustomFigureDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Post_CustomFigureDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Post_CustomFigureDefaultTypeInternal() {}
+  union {
+    Post_CustomFigure _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Post_CustomFigureDefaultTypeInternal _Post_CustomFigure_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR Post_CustomState::Post_CustomState(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.content_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct Post_CustomStateDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Post_CustomStateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Post_CustomStateDefaultTypeInternal() {}
+  union {
+    Post_CustomState _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Post_CustomStateDefaultTypeInternal _Post_CustomState_default_instance_;
+        template <typename>
 PROTOBUF_CONSTEXPR Post::Post(::_pbi::ConstantInitialized)
     : _impl_{
       /*decltype(_impl_._has_bits_)*/ {},
@@ -94,8 +132,11 @@ PROTOBUF_CONSTEXPR Post::Post(::_pbi::ConstantInitialized)
       },
       /*decltype(_impl_.sub_post_list_)*/ nullptr,
       /*decltype(_impl_.signature_)*/ nullptr,
+      /*decltype(_impl_.author_)*/ nullptr,
       /*decltype(_impl_.agree_)*/ nullptr,
       /*decltype(_impl_.from_forum_)*/ nullptr,
+      /*decltype(_impl_.custom_figure_)*/ nullptr,
+      /*decltype(_impl_.custom_state_)*/ nullptr,
       /*decltype(_impl_.id_)*/ ::int64_t{0},
       /*decltype(_impl_.floor_)*/ 0u,
       /*decltype(_impl_.time_)*/ 0u,
@@ -113,7 +154,7 @@ struct PostDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PostDefaultTypeInternal _Post_default_instance_;
-static ::_pb::Metadata file_level_metadata_Post_2eproto[4];
+static ::_pb::Metadata file_level_metadata_Post_2eproto[6];
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_Post_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor**
@@ -152,6 +193,24 @@ const ::uint32_t TableStruct_Post_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
     PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _impl_.fontkeyname_),
     PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _impl_.fontcolor_),
     PROTOBUF_FIELD_OFFSET(::Post_SignatureData, _impl_.content_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::Post_CustomFigure, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::Post_CustomFigure, _impl_.background_value_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::Post_CustomState, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::Post_CustomState, _impl_.content_),
     PROTOBUF_FIELD_OFFSET(::Post, _impl_._has_bits_),
     PROTOBUF_FIELD_OFFSET(::Post, _internal_metadata_),
     ~0u,  // no _extensions_
@@ -169,9 +228,12 @@ const ::uint32_t TableStruct_Post_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
     PROTOBUF_FIELD_OFFSET(::Post, _impl_.author_id_),
     PROTOBUF_FIELD_OFFSET(::Post, _impl_.sub_post_list_),
     PROTOBUF_FIELD_OFFSET(::Post, _impl_.signature_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.author_),
     PROTOBUF_FIELD_OFFSET(::Post, _impl_.agree_),
     PROTOBUF_FIELD_OFFSET(::Post, _impl_.from_forum_),
     PROTOBUF_FIELD_OFFSET(::Post, _impl_.tid_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.custom_figure_),
+    PROTOBUF_FIELD_OFFSET(::Post, _impl_.custom_state_),
     ~0u,
     ~0u,
     ~0u,
@@ -183,7 +245,10 @@ const ::uint32_t TableStruct_Post_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
     1,
     2,
     3,
+    4,
     ~0u,
+    5,
+    6,
 };
 
 static const ::_pbi::MigrationSchema
@@ -191,51 +256,61 @@ static const ::_pbi::MigrationSchema
         {0, -1, -1, sizeof(::Post_SubPost)},
         {10, -1, -1, sizeof(::Post_SignatureData_SignatureContent)},
         {20, -1, -1, sizeof(::Post_SignatureData)},
-        {32, 52, -1, sizeof(::Post)},
+        {32, -1, -1, sizeof(::Post_CustomFigure)},
+        {41, -1, -1, sizeof(::Post_CustomState)},
+        {50, 73, -1, sizeof(::Post)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
     &::_Post_SubPost_default_instance_._instance,
     &::_Post_SignatureData_SignatureContent_default_instance_._instance,
     &::_Post_SignatureData_default_instance_._instance,
+    &::_Post_CustomFigure_default_instance_._instance,
+    &::_Post_CustomState_default_instance_._instance,
     &::_Post_default_instance_._instance,
 };
 const char descriptor_table_protodef_Post_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
     "\n\nPost.proto\032\017PbContent.proto\032\021SubPostLi"
     "st.proto\032\013Agree.proto\032\021SimpleForum.proto"
-    "\"\217\004\n\004Post\022\n\n\002id\030\001 \001(\003\022\r\n\005title\030\002 \001(\t\022\r\n\005"
-    "floor\030\003 \001(\r\022\014\n\004time\030\004 \001(\r\022\033\n\007content\030\005 \003"
-    "(\0132\n.PbContent\022\027\n\017sub_post_number\030\r \001(\r\022"
-    "\021\n\tauthor_id\030\023 \001(\003\022$\n\rsub_post_list\030\017 \001("
-    "\0132\r.Post.SubPost\022&\n\tsignature\030\025 \001(\0132\023.Po"
-    "st.SignatureData\022\025\n\005agree\030% \001(\0132\006.Agree\022"
-    " \n\nfrom_forum\030& \001(\0132\014.SimpleForum\022\013\n\003tid"
-    "\030. \001(\003\032;\n\007SubPost\022\013\n\003pid\030\001 \001(\004\022#\n\rsub_po"
-    "st_list\030\002 \003(\0132\014.SubPostList\032\264\001\n\rSignatur"
-    "eData\022\024\n\014signature_id\030\001 \001(\005\022\023\n\013fontKeyNa"
-    "me\030\002 \001(\t\022\021\n\tfontColor\030\003 \001(\t\0225\n\007content\030\004"
-    " \003(\0132$.Post.SignatureData.SignatureConte"
-    "nt\032.\n\020SignatureContent\022\014\n\004type\030\001 \001(\005\022\014\n\004"
-    "text\030\002 \001(\tb\006proto3"
+    "\032\nUser.proto\"\304\005\n\004Post\022\n\n\002id\030\001 \001(\003\022\r\n\005tit"
+    "le\030\002 \001(\t\022\r\n\005floor\030\003 \001(\r\022\014\n\004time\030\004 \001(\r\022\033\n"
+    "\007content\030\005 \003(\0132\n.PbContent\022\027\n\017sub_post_n"
+    "umber\030\r \001(\r\022\021\n\tauthor_id\030\023 \001(\003\022$\n\rsub_po"
+    "st_list\030\017 \001(\0132\r.Post.SubPost\022&\n\tsignatur"
+    "e\030\025 \001(\0132\023.Post.SignatureData\022\025\n\006author\030\027"
+    " \001(\0132\005.User\022\025\n\005agree\030% \001(\0132\006.Agree\022 \n\nfr"
+    "om_forum\030& \001(\0132\014.SimpleForum\022\013\n\003tid\030. \001("
+    "\003\022)\n\rcustom_figure\030< \001(\0132\022.Post.CustomFi"
+    "gure\022\'\n\014custom_state\030= \001(\0132\021.Post.Custom"
+    "State\032;\n\007SubPost\022\013\n\003pid\030\001 \001(\004\022#\n\rsub_pos"
+    "t_list\030\002 \003(\0132\014.SubPostList\032\264\001\n\rSignature"
+    "Data\022\024\n\014signature_id\030\001 \001(\005\022\023\n\013fontKeyNam"
+    "e\030\002 \001(\t\022\021\n\tfontColor\030\003 \001(\t\0225\n\007content\030\004 "
+    "\003(\0132$.Post.SignatureData.SignatureConten"
+    "t\032.\n\020SignatureContent\022\014\n\004type\030\001 \001(\005\022\014\n\004t"
+    "ext\030\002 \001(\t\032(\n\014CustomFigure\022\030\n\020background_"
+    "value\030\003 \001(\t\032\036\n\013CustomState\022\017\n\007content\030\002 "
+    "\001(\tb\006proto3"
 };
-static const ::_pbi::DescriptorTable* const descriptor_table_Post_2eproto_deps[4] =
+static const ::_pbi::DescriptorTable* const descriptor_table_Post_2eproto_deps[5] =
     {
         &::descriptor_table_Agree_2eproto,
         &::descriptor_table_PbContent_2eproto,
         &::descriptor_table_SimpleForum_2eproto,
         &::descriptor_table_SubPostList_2eproto,
+        &::descriptor_table_User_2eproto,
 };
 static ::absl::once_flag descriptor_table_Post_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Post_2eproto = {
     false,
     false,
-    618,
+    811,
     descriptor_table_protodef_Post_2eproto,
     "Post.proto",
     &descriptor_table_Post_2eproto_once,
     descriptor_table_Post_2eproto_deps,
-    4,
-    4,
+    5,
+    6,
     schemas,
     file_default_instances,
     TableStruct_Post_2eproto::offsets,
@@ -968,6 +1043,388 @@ void Post_SignatureData::InternalSwap(Post_SignatureData* other) {
 }
 // ===================================================================
 
+class Post_CustomFigure::_Internal {
+ public:
+};
+
+Post_CustomFigure::Post_CustomFigure(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Post.CustomFigure)
+}
+Post_CustomFigure::Post_CustomFigure(const Post_CustomFigure& from) : ::google::protobuf::Message() {
+  Post_CustomFigure* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.background_value_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.background_value_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.background_value_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_background_value().empty()) {
+    _this->_impl_.background_value_.Set(from._internal_background_value(), _this->GetArenaForAllocation());
+  }
+
+  // @@protoc_insertion_point(copy_constructor:Post.CustomFigure)
+}
+inline void Post_CustomFigure::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.background_value_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.background_value_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.background_value_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+Post_CustomFigure::~Post_CustomFigure() {
+  // @@protoc_insertion_point(destructor:Post.CustomFigure)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void Post_CustomFigure::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.background_value_.Destroy();
+}
+void Post_CustomFigure::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+PROTOBUF_NOINLINE void Post_CustomFigure::Clear() {
+// @@protoc_insertion_point(message_clear_start:Post.CustomFigure)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.background_value_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* Post_CustomFigure::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 42, 2> Post_CustomFigure::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967291,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_Post_CustomFigure_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string background_value = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(Post_CustomFigure, _impl_.background_value_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string background_value = 3;
+    {PROTOBUF_FIELD_OFFSET(Post_CustomFigure, _impl_.background_value_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\21\20\0\0\0\0\0\0"
+    "Post.CustomFigure"
+    "background_value"
+  }},
+};
+
+::uint8_t* Post_CustomFigure::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Post.CustomFigure)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // string background_value = 3;
+  if (!this->_internal_background_value().empty()) {
+    const std::string& _s = this->_internal_background_value();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Post.CustomFigure.background_value");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Post.CustomFigure)
+  return target;
+}
+
+::size_t Post_CustomFigure::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Post.CustomFigure)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string background_value = 3;
+  if (!this->_internal_background_value().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_background_value());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData Post_CustomFigure::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    Post_CustomFigure::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*Post_CustomFigure::GetClassData() const { return &_class_data_; }
+
+
+void Post_CustomFigure::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Post_CustomFigure*>(&to_msg);
+  auto& from = static_cast<const Post_CustomFigure&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Post.CustomFigure)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_background_value().empty()) {
+    _this->_internal_set_background_value(from._internal_background_value());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Post_CustomFigure::CopyFrom(const Post_CustomFigure& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Post.CustomFigure)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool Post_CustomFigure::IsInitialized() const {
+  return true;
+}
+
+void Post_CustomFigure::InternalSwap(Post_CustomFigure* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.background_value_, lhs_arena,
+                                       &other->_impl_.background_value_, rhs_arena);
+}
+
+::google::protobuf::Metadata Post_CustomFigure::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Post_2eproto_getter, &descriptor_table_Post_2eproto_once,
+      file_level_metadata_Post_2eproto[3]);
+}
+// ===================================================================
+
+class Post_CustomState::_Internal {
+ public:
+};
+
+Post_CustomState::Post_CustomState(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:Post.CustomState)
+}
+Post_CustomState::Post_CustomState(const Post_CustomState& from) : ::google::protobuf::Message() {
+  Post_CustomState* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.content_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.content_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.content_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_content().empty()) {
+    _this->_impl_.content_.Set(from._internal_content(), _this->GetArenaForAllocation());
+  }
+
+  // @@protoc_insertion_point(copy_constructor:Post.CustomState)
+}
+inline void Post_CustomState::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.content_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.content_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.content_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+Post_CustomState::~Post_CustomState() {
+  // @@protoc_insertion_point(destructor:Post.CustomState)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void Post_CustomState::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.content_.Destroy();
+}
+void Post_CustomState::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+PROTOBUF_NOINLINE void Post_CustomState::Clear() {
+// @@protoc_insertion_point(message_clear_start:Post.CustomState)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.content_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* Post_CustomState::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 32, 2> Post_CustomState::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967293,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_Post_CustomState_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string content = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(Post_CustomState, _impl_.content_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string content = 2;
+    {PROTOBUF_FIELD_OFFSET(Post_CustomState, _impl_.content_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\20\7\0\0\0\0\0\0"
+    "Post.CustomState"
+    "content"
+  }},
+};
+
+::uint8_t* Post_CustomState::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Post.CustomState)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // string content = 2;
+  if (!this->_internal_content().empty()) {
+    const std::string& _s = this->_internal_content();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "Post.CustomState.content");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Post.CustomState)
+  return target;
+}
+
+::size_t Post_CustomState::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Post.CustomState)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string content = 2;
+  if (!this->_internal_content().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_content());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData Post_CustomState::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    Post_CustomState::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*Post_CustomState::GetClassData() const { return &_class_data_; }
+
+
+void Post_CustomState::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Post_CustomState*>(&to_msg);
+  auto& from = static_cast<const Post_CustomState&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Post.CustomState)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_content().empty()) {
+    _this->_internal_set_content(from._internal_content());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void Post_CustomState::CopyFrom(const Post_CustomState& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Post.CustomState)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool Post_CustomState::IsInitialized() const {
+  return true;
+}
+
+void Post_CustomState::InternalSwap(Post_CustomState* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.content_, lhs_arena,
+                                       &other->_impl_.content_, rhs_arena);
+}
+
+::google::protobuf::Metadata Post_CustomState::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Post_2eproto_getter, &descriptor_table_Post_2eproto_once,
+      file_level_metadata_Post_2eproto[4]);
+}
+// ===================================================================
+
 class Post::_Internal {
  public:
   using HasBits = decltype(std::declval<Post>()._impl_._has_bits_);
@@ -981,13 +1438,25 @@ class Post::_Internal {
   static void set_has_signature(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
   }
+  static const ::User& author(const Post* msg);
+  static void set_has_author(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
   static const ::Agree& agree(const Post* msg);
   static void set_has_agree(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
+    (*has_bits)[0] |= 8u;
   }
   static const ::SimpleForum& from_forum(const Post* msg);
   static void set_has_from_forum(HasBits* has_bits) {
-    (*has_bits)[0] |= 8u;
+    (*has_bits)[0] |= 16u;
+  }
+  static const ::Post_CustomFigure& custom_figure(const Post* msg);
+  static void set_has_custom_figure(HasBits* has_bits) {
+    (*has_bits)[0] |= 32u;
+  }
+  static const ::Post_CustomState& custom_state(const Post* msg);
+  static void set_has_custom_state(HasBits* has_bits) {
+    (*has_bits)[0] |= 64u;
   }
 };
 
@@ -997,22 +1466,35 @@ const ::Post_SubPost& Post::_Internal::sub_post_list(const Post* msg) {
 const ::Post_SignatureData& Post::_Internal::signature(const Post* msg) {
   return *msg->_impl_.signature_;
 }
+const ::User& Post::_Internal::author(const Post* msg) {
+  return *msg->_impl_.author_;
+}
 const ::Agree& Post::_Internal::agree(const Post* msg) {
   return *msg->_impl_.agree_;
 }
 const ::SimpleForum& Post::_Internal::from_forum(const Post* msg) {
   return *msg->_impl_.from_forum_;
 }
+const ::Post_CustomFigure& Post::_Internal::custom_figure(const Post* msg) {
+  return *msg->_impl_.custom_figure_;
+}
+const ::Post_CustomState& Post::_Internal::custom_state(const Post* msg) {
+  return *msg->_impl_.custom_state_;
+}
 void Post::clear_content() {
   _internal_mutable_content()->Clear();
 }
+void Post::clear_author() {
+  if (_impl_.author_ != nullptr) _impl_.author_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
 void Post::clear_agree() {
   if (_impl_.agree_ != nullptr) _impl_.agree_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 void Post::clear_from_forum() {
   if (_impl_.from_forum_ != nullptr) _impl_.from_forum_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 Post::Post(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
@@ -1029,8 +1511,11 @@ Post::Post(const Post& from) : ::google::protobuf::Message() {
       decltype(_impl_.title_){},
       decltype(_impl_.sub_post_list_){nullptr},
       decltype(_impl_.signature_){nullptr},
+      decltype(_impl_.author_){nullptr},
       decltype(_impl_.agree_){nullptr},
       decltype(_impl_.from_forum_){nullptr},
+      decltype(_impl_.custom_figure_){nullptr},
+      decltype(_impl_.custom_state_){nullptr},
       decltype(_impl_.id_){},
       decltype(_impl_.floor_){},
       decltype(_impl_.time_){},
@@ -1054,10 +1539,19 @@ Post::Post(const Post& from) : ::google::protobuf::Message() {
     _this->_impl_.signature_ = new ::Post_SignatureData(*from._impl_.signature_);
   }
   if ((from._impl_._has_bits_[0] & 0x00000004u) != 0) {
-    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+    _this->_impl_.author_ = new ::User(*from._impl_.author_);
   }
   if ((from._impl_._has_bits_[0] & 0x00000008u) != 0) {
+    _this->_impl_.agree_ = new ::Agree(*from._impl_.agree_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000010u) != 0) {
     _this->_impl_.from_forum_ = new ::SimpleForum(*from._impl_.from_forum_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000020u) != 0) {
+    _this->_impl_.custom_figure_ = new ::Post_CustomFigure(*from._impl_.custom_figure_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000040u) != 0) {
+    _this->_impl_.custom_state_ = new ::Post_CustomState(*from._impl_.custom_state_);
   }
   ::memcpy(&_impl_.id_, &from._impl_.id_,
     static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.sub_post_number_) -
@@ -1074,8 +1568,11 @@ inline void Post::SharedCtor(::_pb::Arena* arena) {
       decltype(_impl_.title_){},
       decltype(_impl_.sub_post_list_){nullptr},
       decltype(_impl_.signature_){nullptr},
+      decltype(_impl_.author_){nullptr},
       decltype(_impl_.agree_){nullptr},
       decltype(_impl_.from_forum_){nullptr},
+      decltype(_impl_.custom_figure_){nullptr},
+      decltype(_impl_.custom_state_){nullptr},
       decltype(_impl_.id_){::int64_t{0}},
       decltype(_impl_.floor_){0u},
       decltype(_impl_.time_){0u},
@@ -1099,8 +1596,11 @@ inline void Post::SharedDtor() {
   _impl_.title_.Destroy();
   if (this != internal_default_instance()) delete _impl_.sub_post_list_;
   if (this != internal_default_instance()) delete _impl_.signature_;
+  if (this != internal_default_instance()) delete _impl_.author_;
   if (this != internal_default_instance()) delete _impl_.agree_;
   if (this != internal_default_instance()) delete _impl_.from_forum_;
+  if (this != internal_default_instance()) delete _impl_.custom_figure_;
+  if (this != internal_default_instance()) delete _impl_.custom_state_;
 }
 void Post::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
@@ -1115,7 +1615,7 @@ PROTOBUF_NOINLINE void Post::Clear() {
   _internal_mutable_content()->Clear();
   _impl_.title_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000007fu) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(_impl_.sub_post_list_ != nullptr);
       _impl_.sub_post_list_->Clear();
@@ -1125,12 +1625,24 @@ PROTOBUF_NOINLINE void Post::Clear() {
       _impl_.signature_->Clear();
     }
     if (cached_has_bits & 0x00000004u) {
+      ABSL_DCHECK(_impl_.author_ != nullptr);
+      _impl_.author_->Clear();
+    }
+    if (cached_has_bits & 0x00000008u) {
       ABSL_DCHECK(_impl_.agree_ != nullptr);
       _impl_.agree_->Clear();
     }
-    if (cached_has_bits & 0x00000008u) {
+    if (cached_has_bits & 0x00000010u) {
       ABSL_DCHECK(_impl_.from_forum_ != nullptr);
       _impl_.from_forum_->Clear();
+    }
+    if (cached_has_bits & 0x00000020u) {
+      ABSL_DCHECK(_impl_.custom_figure_ != nullptr);
+      _impl_.custom_figure_->Clear();
+    }
+    if (cached_has_bits & 0x00000040u) {
+      ABSL_DCHECK(_impl_.custom_state_ != nullptr);
+      _impl_.custom_state_->Clear();
     }
   }
   ::memset(&_impl_.id_, 0, static_cast<::size_t>(
@@ -1148,16 +1660,16 @@ const char* Post::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
+const ::_pbi::TcParseTable<4, 15, 8, 26, 9> Post::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(Post, _impl_._has_bits_),
     0, // no _extensions_
-    46, 120,  // max_field_number, fast_idx_mask
+    61, 120,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4293636064,  // skipmap
+    4289441760,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    12,  // num_field_entries
-    5,  // num_aux_entries
+    15,  // num_field_entries
+    8,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     &_Post_default_instance_._instance,
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1180,13 +1692,17 @@ const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
      {42, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.content_)}},
     // .SimpleForum from_forum = 38;
     {::_pbi::TcParser::FastMtS2,
-     {690, 3, 4, PROTOBUF_FIELD_OFFSET(Post, _impl_.from_forum_)}},
+     {690, 4, 5, PROTOBUF_FIELD_OFFSET(Post, _impl_.from_forum_)}},
+    // .User author = 23;
+    {::_pbi::TcParser::FastMtS2,
+     {442, 2, 3, PROTOBUF_FIELD_OFFSET(Post, _impl_.author_)}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // .Post.CustomFigure custom_figure = 60;
+    {::_pbi::TcParser::FastMtS2,
+     {994, 5, 6, PROTOBUF_FIELD_OFFSET(Post, _impl_.custom_figure_)}},
     // uint32 sub_post_number = 13;
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Post, _impl_.sub_post_number_), 63>(),
      {104, 63, 0, PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_number_)}},
@@ -1197,8 +1713,8 @@ const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
     {::_pbi::TcParser::FastMtS1,
      {122, 0, 1, PROTOBUF_FIELD_OFFSET(Post, _impl_.sub_post_list_)}},
   }}, {{
-    37, 0, 1,
-    65020, 9,
+    37, 0, 2,
+    65020, 10, 65151, 13,
     65535, 65535
   }}, {{
     // int64 id = 1;
@@ -1228,21 +1744,33 @@ const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
     // .Post.SignatureData signature = 21;
     {PROTOBUF_FIELD_OFFSET(Post, _impl_.signature_), _Internal::kHasBitsOffset + 1, 2,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .User author = 23;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.author_), _Internal::kHasBitsOffset + 2, 3,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // .Agree agree = 37;
-    {PROTOBUF_FIELD_OFFSET(Post, _impl_.agree_), _Internal::kHasBitsOffset + 2, 3,
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.agree_), _Internal::kHasBitsOffset + 3, 4,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // .SimpleForum from_forum = 38;
-    {PROTOBUF_FIELD_OFFSET(Post, _impl_.from_forum_), _Internal::kHasBitsOffset + 3, 4,
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.from_forum_), _Internal::kHasBitsOffset + 4, 5,
     (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     // int64 tid = 46;
     {PROTOBUF_FIELD_OFFSET(Post, _impl_.tid_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // .Post.CustomFigure custom_figure = 60;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.custom_figure_), _Internal::kHasBitsOffset + 5, 6,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .Post.CustomState custom_state = 61;
+    {PROTOBUF_FIELD_OFFSET(Post, _impl_.custom_state_), _Internal::kHasBitsOffset + 6, 7,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::PbContent>()},
     {::_pbi::TcParser::GetTable<::Post_SubPost>()},
     {::_pbi::TcParser::GetTable<::Post_SignatureData>()},
+    {::_pbi::TcParser::GetTable<::User>()},
     {::_pbi::TcParser::GetTable<::Agree>()},
     {::_pbi::TcParser::GetTable<::SimpleForum>()},
+    {::_pbi::TcParser::GetTable<::Post_CustomFigure>()},
+    {::_pbi::TcParser::GetTable<::Post_CustomState>()},
   }}, {{
     "\4\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0"
     "Post"
@@ -1323,15 +1851,22 @@ const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
         _Internal::signature(this).GetCachedSize(), target, stream);
   }
 
-  // .Agree agree = 37;
+  // .User author = 23;
   if (cached_has_bits & 0x00000004u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(23, _Internal::author(this),
+        _Internal::author(this).GetCachedSize(), target, stream);
+  }
+
+  // .Agree agree = 37;
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessage(37, _Internal::agree(this),
         _Internal::agree(this).GetCachedSize(), target, stream);
   }
 
   // .SimpleForum from_forum = 38;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessage(38, _Internal::from_forum(this),
         _Internal::from_forum(this).GetCachedSize(), target, stream);
@@ -1342,6 +1877,20 @@ const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt64ToArray(
         46, this->_internal_tid(), target);
+  }
+
+  // .Post.CustomFigure custom_figure = 60;
+  if (cached_has_bits & 0x00000020u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(60, _Internal::custom_figure(this),
+        _Internal::custom_figure(this).GetCachedSize(), target, stream);
+  }
+
+  // .Post.CustomState custom_state = 61;
+  if (cached_has_bits & 0x00000040u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(61, _Internal::custom_state(this),
+        _Internal::custom_state(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1374,7 +1923,7 @@ const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
   }
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000007fu) {
     // .Post.SubPost sub_post_list = 15;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
@@ -1389,18 +1938,39 @@ const ::_pbi::TcParseTable<4, 12, 5, 26, 7> Post::_table_ = {
           *_impl_.signature_);
     }
 
-    // .Agree agree = 37;
+    // .User author = 23;
     if (cached_has_bits & 0x00000004u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.author_);
+    }
+
+    // .Agree agree = 37;
+    if (cached_has_bits & 0x00000008u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           *_impl_.agree_);
     }
 
     // .SimpleForum from_forum = 38;
-    if (cached_has_bits & 0x00000008u) {
+    if (cached_has_bits & 0x00000010u) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           *_impl_.from_forum_);
+    }
+
+    // .Post.CustomFigure custom_figure = 60;
+    if (cached_has_bits & 0x00000020u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.custom_figure_);
+    }
+
+    // .Post.CustomState custom_state = 61;
+    if (cached_has_bits & 0x00000040u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.custom_state_);
     }
 
   }
@@ -1463,7 +2033,7 @@ void Post::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protob
     _this->_internal_set_title(from._internal_title());
   }
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000000fu) {
+  if (cached_has_bits & 0x0000007fu) {
     if (cached_has_bits & 0x00000001u) {
       _this->_internal_mutable_sub_post_list()->::Post_SubPost::MergeFrom(
           from._internal_sub_post_list());
@@ -1473,12 +2043,24 @@ void Post::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protob
           from._internal_signature());
     }
     if (cached_has_bits & 0x00000004u) {
+      _this->_internal_mutable_author()->::User::MergeFrom(
+          from._internal_author());
+    }
+    if (cached_has_bits & 0x00000008u) {
       _this->_internal_mutable_agree()->::Agree::MergeFrom(
           from._internal_agree());
     }
-    if (cached_has_bits & 0x00000008u) {
+    if (cached_has_bits & 0x00000010u) {
       _this->_internal_mutable_from_forum()->::SimpleForum::MergeFrom(
           from._internal_from_forum());
+    }
+    if (cached_has_bits & 0x00000020u) {
+      _this->_internal_mutable_custom_figure()->::Post_CustomFigure::MergeFrom(
+          from._internal_custom_figure());
+    }
+    if (cached_has_bits & 0x00000040u) {
+      _this->_internal_mutable_custom_state()->::Post_CustomState::MergeFrom(
+          from._internal_custom_state());
     }
   }
   if (from._internal_id() != 0) {
@@ -1533,7 +2115,7 @@ void Post::InternalSwap(Post* other) {
 ::google::protobuf::Metadata Post::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Post_2eproto_getter, &descriptor_table_Post_2eproto_once,
-      file_level_metadata_Post_2eproto[3]);
+      file_level_metadata_Post_2eproto[5]);
 }
 // @@protoc_insertion_point(namespace_scope)
 namespace google {

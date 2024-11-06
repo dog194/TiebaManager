@@ -143,8 +143,10 @@ void CExploreThreadPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 		explorerDlg->m_edit.SetWindowText(m_threads[pNMLV->iItem].title + _T("\r\n")
 			+ m_threads[pNMLV->iItem].preview +
 			+ _T("\r\n\r\n作者显示名：") + m_threads[pNMLV->iItem].authorShowName
+			+ _T("\r\n等级：") + m_threads[pNMLV->iItem].authorLevel
 			+ _T("\r\n\r\n作者名：") + m_threads[pNMLV->iItem].author
 			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_threads[pNMLV->iItem].authorPortraitUrl)
+			+ _T("\r\n虚拟形象心情：") + GetPortraitFromString(m_threads[pNMLV->iItem].customState)
 			+ _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_threads[pNMLV->iItem].timestamp)
 			+ _T("\r\n主题帖ID：") + m_threads[pNMLV->iItem].tid);
 		if (m_threads[pNMLV->iItem].isTidAuthor == TRUE)

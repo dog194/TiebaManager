@@ -36,6 +36,7 @@
 #include "SubPostList.pb.h"
 #include "Agree.pb.h"
 #include "SimpleForum.pb.h"
+#include "User.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -60,6 +61,12 @@ extern const ::google::protobuf::internal::DescriptorTable
 class Post;
 struct PostDefaultTypeInternal;
 extern PostDefaultTypeInternal _Post_default_instance_;
+class Post_CustomFigure;
+struct Post_CustomFigureDefaultTypeInternal;
+extern Post_CustomFigureDefaultTypeInternal _Post_CustomFigure_default_instance_;
+class Post_CustomState;
+struct Post_CustomStateDefaultTypeInternal;
+extern Post_CustomStateDefaultTypeInternal _Post_CustomState_default_instance_;
 class Post_SignatureData;
 struct Post_SignatureDataDefaultTypeInternal;
 extern Post_SignatureDataDefaultTypeInternal _Post_SignatureData_default_instance_;
@@ -650,6 +657,334 @@ class Post_SignatureData final :
   friend struct ::TableStruct_Post_2eproto;
 };// -------------------------------------------------------------------
 
+class Post_CustomFigure final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Post.CustomFigure) */ {
+ public:
+  inline Post_CustomFigure() : Post_CustomFigure(nullptr) {}
+  ~Post_CustomFigure() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR Post_CustomFigure(::google::protobuf::internal::ConstantInitialized);
+
+  Post_CustomFigure(const Post_CustomFigure& from);
+  Post_CustomFigure(Post_CustomFigure&& from) noexcept
+    : Post_CustomFigure() {
+    *this = ::std::move(from);
+  }
+
+  inline Post_CustomFigure& operator=(const Post_CustomFigure& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Post_CustomFigure& operator=(Post_CustomFigure&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Post_CustomFigure& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Post_CustomFigure* internal_default_instance() {
+    return reinterpret_cast<const Post_CustomFigure*>(
+               &_Post_CustomFigure_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(Post_CustomFigure& a, Post_CustomFigure& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Post_CustomFigure* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Post_CustomFigure* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Post_CustomFigure* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Post_CustomFigure>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const Post_CustomFigure& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const Post_CustomFigure& from) {
+    Post_CustomFigure::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Post_CustomFigure* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "Post.CustomFigure";
+  }
+  protected:
+  explicit Post_CustomFigure(::google::protobuf::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kBackgroundValueFieldNumber = 3,
+  };
+  // string background_value = 3;
+  void clear_background_value() ;
+  const std::string& background_value() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_background_value(Arg_&& arg, Args_... args);
+  std::string* mutable_background_value();
+  PROTOBUF_NODISCARD std::string* release_background_value();
+  void set_allocated_background_value(std::string* ptr);
+
+  private:
+  const std::string& _internal_background_value() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_background_value(
+      const std::string& value);
+  std::string* _internal_mutable_background_value();
+
+  public:
+  // @@protoc_insertion_point(class_scope:Post.CustomFigure)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1, 0, 42, 2> _table_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::google::protobuf::internal::ArenaStringPtr background_value_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Post_2eproto;
+};// -------------------------------------------------------------------
+
+class Post_CustomState final :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Post.CustomState) */ {
+ public:
+  inline Post_CustomState() : Post_CustomState(nullptr) {}
+  ~Post_CustomState() override;
+  template<typename = void>
+  explicit PROTOBUF_CONSTEXPR Post_CustomState(::google::protobuf::internal::ConstantInitialized);
+
+  Post_CustomState(const Post_CustomState& from);
+  Post_CustomState(Post_CustomState&& from) noexcept
+    : Post_CustomState() {
+    *this = ::std::move(from);
+  }
+
+  inline Post_CustomState& operator=(const Post_CustomState& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Post_CustomState& operator=(Post_CustomState&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Post_CustomState& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const Post_CustomState* internal_default_instance() {
+    return reinterpret_cast<const Post_CustomState*>(
+               &_Post_CustomState_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    4;
+
+  friend void swap(Post_CustomState& a, Post_CustomState& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(Post_CustomState* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Post_CustomState* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Post_CustomState* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<Post_CustomState>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const Post_CustomState& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom( const Post_CustomState& from) {
+    Post_CustomState::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  ::size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::google::protobuf::internal::ParseContext* ctx) final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target, ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(Post_CustomState* other);
+
+  private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() {
+    return "Post.CustomState";
+  }
+  protected:
+  explicit Post_CustomState(::google::protobuf::Arena* arena);
+  public:
+
+  static const ClassData _class_data_;
+  const ::google::protobuf::Message::ClassData*GetClassData() const final;
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kContentFieldNumber = 2,
+  };
+  // string content = 2;
+  void clear_content() ;
+  const std::string& content() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_content(Arg_&& arg, Args_... args);
+  std::string* mutable_content();
+  PROTOBUF_NODISCARD std::string* release_content();
+  void set_allocated_content(std::string* ptr);
+
+  private:
+  const std::string& _internal_content() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_content(
+      const std::string& value);
+  std::string* _internal_mutable_content();
+
+  public:
+  // @@protoc_insertion_point(class_scope:Post.CustomState)
+ private:
+  class _Internal;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1, 0, 32, 2> _table_;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::google::protobuf::internal::ArenaStringPtr content_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Post_2eproto;
+};// -------------------------------------------------------------------
+
 class Post final :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:Post) */ {
  public:
@@ -706,7 +1041,7 @@ class Post final :
                &_Post_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    5;
 
   friend void swap(Post& a, Post& b) {
     a.Swap(&b);
@@ -777,6 +1112,8 @@ class Post final :
 
   typedef Post_SubPost SubPost;
   typedef Post_SignatureData SignatureData;
+  typedef Post_CustomFigure CustomFigure;
+  typedef Post_CustomState CustomState;
 
   // accessors -------------------------------------------------------
 
@@ -785,8 +1122,11 @@ class Post final :
     kTitleFieldNumber = 2,
     kSubPostListFieldNumber = 15,
     kSignatureFieldNumber = 21,
+    kAuthorFieldNumber = 23,
     kAgreeFieldNumber = 37,
     kFromForumFieldNumber = 38,
+    kCustomFigureFieldNumber = 60,
+    kCustomStateFieldNumber = 61,
     kIdFieldNumber = 1,
     kFloorFieldNumber = 3,
     kTimeFieldNumber = 4,
@@ -858,6 +1198,21 @@ class Post final :
   ::Post_SignatureData* _internal_mutable_signature();
 
   public:
+  // .User author = 23;
+  bool has_author() const;
+  void clear_author() ;
+  const ::User& author() const;
+  PROTOBUF_NODISCARD ::User* release_author();
+  ::User* mutable_author();
+  void set_allocated_author(::User* value);
+  void unsafe_arena_set_allocated_author(::User* value);
+  ::User* unsafe_arena_release_author();
+
+  private:
+  const ::User& _internal_author() const;
+  ::User* _internal_mutable_author();
+
+  public:
   // .Agree agree = 37;
   bool has_agree() const;
   void clear_agree() ;
@@ -886,6 +1241,36 @@ class Post final :
   private:
   const ::SimpleForum& _internal_from_forum() const;
   ::SimpleForum* _internal_mutable_from_forum();
+
+  public:
+  // .Post.CustomFigure custom_figure = 60;
+  bool has_custom_figure() const;
+  void clear_custom_figure() ;
+  const ::Post_CustomFigure& custom_figure() const;
+  PROTOBUF_NODISCARD ::Post_CustomFigure* release_custom_figure();
+  ::Post_CustomFigure* mutable_custom_figure();
+  void set_allocated_custom_figure(::Post_CustomFigure* value);
+  void unsafe_arena_set_allocated_custom_figure(::Post_CustomFigure* value);
+  ::Post_CustomFigure* unsafe_arena_release_custom_figure();
+
+  private:
+  const ::Post_CustomFigure& _internal_custom_figure() const;
+  ::Post_CustomFigure* _internal_mutable_custom_figure();
+
+  public:
+  // .Post.CustomState custom_state = 61;
+  bool has_custom_state() const;
+  void clear_custom_state() ;
+  const ::Post_CustomState& custom_state() const;
+  PROTOBUF_NODISCARD ::Post_CustomState* release_custom_state();
+  ::Post_CustomState* mutable_custom_state();
+  void set_allocated_custom_state(::Post_CustomState* value);
+  void unsafe_arena_set_allocated_custom_state(::Post_CustomState* value);
+  ::Post_CustomState* unsafe_arena_release_custom_state();
+
+  private:
+  const ::Post_CustomState& _internal_custom_state() const;
+  ::Post_CustomState* _internal_mutable_custom_state();
 
   public:
   // int64 id = 1;
@@ -953,7 +1338,7 @@ class Post final :
   class _Internal;
 
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<4, 12, 5, 26, 7> _table_;
+  static const ::google::protobuf::internal::TcParseTable<4, 15, 8, 26, 9> _table_;
   template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
@@ -964,8 +1349,11 @@ class Post final :
     ::google::protobuf::internal::ArenaStringPtr title_;
     ::Post_SubPost* sub_post_list_;
     ::Post_SignatureData* signature_;
+    ::User* author_;
     ::Agree* agree_;
     ::SimpleForum* from_forum_;
+    ::Post_CustomFigure* custom_figure_;
+    ::Post_CustomState* custom_state_;
     ::int64_t id_;
     ::uint32_t floor_;
     ::uint32_t time_;
@@ -1308,6 +1696,116 @@ inline ::google::protobuf::RepeatedPtrField<::Post_SignatureData_SignatureConten
 Post_SignatureData::_internal_mutable_content() {
   PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
   return &_impl_.content_;
+}
+
+// -------------------------------------------------------------------
+
+// Post_CustomFigure
+
+// string background_value = 3;
+inline void Post_CustomFigure::clear_background_value() {
+  _impl_.background_value_.ClearToEmpty();
+}
+inline const std::string& Post_CustomFigure::background_value() const {
+  // @@protoc_insertion_point(field_get:Post.CustomFigure.background_value)
+  return _internal_background_value();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void Post_CustomFigure::set_background_value(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.background_value_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Post.CustomFigure.background_value)
+}
+inline std::string* Post_CustomFigure::mutable_background_value() {
+  std::string* _s = _internal_mutable_background_value();
+  // @@protoc_insertion_point(field_mutable:Post.CustomFigure.background_value)
+  return _s;
+}
+inline const std::string& Post_CustomFigure::_internal_background_value() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.background_value_.Get();
+}
+inline void Post_CustomFigure::_internal_set_background_value(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.background_value_.Set(value, GetArenaForAllocation());
+}
+inline std::string* Post_CustomFigure::_internal_mutable_background_value() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.background_value_.Mutable( GetArenaForAllocation());
+}
+inline std::string* Post_CustomFigure::release_background_value() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:Post.CustomFigure.background_value)
+  return _impl_.background_value_.Release();
+}
+inline void Post_CustomFigure::set_allocated_background_value(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.background_value_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.background_value_.IsDefault()) {
+          _impl_.background_value_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Post.CustomFigure.background_value)
+}
+
+// -------------------------------------------------------------------
+
+// Post_CustomState
+
+// string content = 2;
+inline void Post_CustomState::clear_content() {
+  _impl_.content_.ClearToEmpty();
+}
+inline const std::string& Post_CustomState::content() const {
+  // @@protoc_insertion_point(field_get:Post.CustomState.content)
+  return _internal_content();
+}
+template <typename Arg_, typename... Args_>
+inline PROTOBUF_ALWAYS_INLINE void Post_CustomState::set_content(Arg_&& arg,
+                                                     Args_... args) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.content_.Set(static_cast<Arg_&&>(arg), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Post.CustomState.content)
+}
+inline std::string* Post_CustomState::mutable_content() {
+  std::string* _s = _internal_mutable_content();
+  // @@protoc_insertion_point(field_mutable:Post.CustomState.content)
+  return _s;
+}
+inline const std::string& Post_CustomState::_internal_content() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  return _impl_.content_.Get();
+}
+inline void Post_CustomState::_internal_set_content(const std::string& value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  _impl_.content_.Set(value, GetArenaForAllocation());
+}
+inline std::string* Post_CustomState::_internal_mutable_content() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ;
+  return _impl_.content_.Mutable( GetArenaForAllocation());
+}
+inline std::string* Post_CustomState::release_content() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:Post.CustomState.content)
+  return _impl_.content_.Release();
+}
+inline void Post_CustomState::set_allocated_content(std::string* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_.content_.SetAllocated(value, GetArenaForAllocation());
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        if (_impl_.content_.IsDefault()) {
+          _impl_.content_.Set("", GetArenaForAllocation());
+        }
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Post.CustomState.content)
 }
 
 // -------------------------------------------------------------------
@@ -1710,9 +2208,101 @@ inline void Post::set_allocated_signature(::Post_SignatureData* value) {
   // @@protoc_insertion_point(field_set_allocated:Post.signature)
 }
 
+// .User author = 23;
+inline bool Post::has_author() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.author_ != nullptr);
+  return value;
+}
+inline const ::User& Post::_internal_author() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::User* p = _impl_.author_;
+  return p != nullptr ? *p : reinterpret_cast<const ::User&>(::_User_default_instance_);
+}
+inline const ::User& Post::author() const {
+  // @@protoc_insertion_point(field_get:Post.author)
+  return _internal_author();
+}
+inline void Post::unsafe_arena_set_allocated_author(::User* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.author_);
+  }
+  _impl_.author_ = reinterpret_cast<::User*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Post.author)
+}
+inline ::User* Post::release_author() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::User* released = _impl_.author_;
+  _impl_.author_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::User* Post::unsafe_arena_release_author() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:Post.author)
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::User* temp = _impl_.author_;
+  _impl_.author_ = nullptr;
+  return temp;
+}
+inline ::User* Post::_internal_mutable_author() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000004u;
+  if (_impl_.author_ == nullptr) {
+    auto* p = CreateMaybeMessage<::User>(GetArenaForAllocation());
+    _impl_.author_ = reinterpret_cast<::User*>(p);
+  }
+  return _impl_.author_;
+}
+inline ::User* Post::mutable_author() {
+  ::User* _msg = _internal_mutable_author();
+  // @@protoc_insertion_point(field_mutable:Post.author)
+  return _msg;
+}
+inline void Post::set_allocated_author(::User* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.author_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::google::protobuf::MessageLite*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+
+  _impl_.author_ = reinterpret_cast<::User*>(value);
+  // @@protoc_insertion_point(field_set_allocated:Post.author)
+}
+
 // .Agree agree = 37;
 inline bool Post::has_agree() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.agree_ != nullptr);
   return value;
 }
@@ -1732,16 +2322,16 @@ inline void Post::unsafe_arena_set_allocated_agree(::Agree* value) {
   }
   _impl_.agree_ = reinterpret_cast<::Agree*>(value);
   if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000004u;
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Post.agree)
 }
 inline ::Agree* Post::release_agree() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
 
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
   ::Agree* released = _impl_.agree_;
   _impl_.agree_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -1761,14 +2351,14 @@ inline ::Agree* Post::unsafe_arena_release_agree() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   // @@protoc_insertion_point(field_release:Post.agree)
 
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
   ::Agree* temp = _impl_.agree_;
   _impl_.agree_ = nullptr;
   return temp;
 }
 inline ::Agree* Post::_internal_mutable_agree() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   if (_impl_.agree_ == nullptr) {
     auto* p = CreateMaybeMessage<::Agree>(GetArenaForAllocation());
     _impl_.agree_ = reinterpret_cast<::Agree*>(p);
@@ -1793,9 +2383,9 @@ inline void Post::set_allocated_agree(::Agree* value) {
     if (message_arena != submessage_arena) {
       value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000004u;
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
 
   _impl_.agree_ = reinterpret_cast<::Agree*>(value);
@@ -1804,7 +2394,7 @@ inline void Post::set_allocated_agree(::Agree* value) {
 
 // .SimpleForum from_forum = 38;
 inline bool Post::has_from_forum() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.from_forum_ != nullptr);
   return value;
 }
@@ -1824,16 +2414,16 @@ inline void Post::unsafe_arena_set_allocated_from_forum(::SimpleForum* value) {
   }
   _impl_.from_forum_ = reinterpret_cast<::SimpleForum*>(value);
   if (value != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000008u;
+    _impl_._has_bits_[0] |= 0x00000010u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_._has_bits_[0] &= ~0x00000010u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Post.from_forum)
 }
 inline ::SimpleForum* Post::release_from_forum() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
 
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
   ::SimpleForum* released = _impl_.from_forum_;
   _impl_.from_forum_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -1853,14 +2443,14 @@ inline ::SimpleForum* Post::unsafe_arena_release_from_forum() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   // @@protoc_insertion_point(field_release:Post.from_forum)
 
-  _impl_._has_bits_[0] &= ~0x00000008u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
   ::SimpleForum* temp = _impl_.from_forum_;
   _impl_.from_forum_ = nullptr;
   return temp;
 }
 inline ::SimpleForum* Post::_internal_mutable_from_forum() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_._has_bits_[0] |= 0x00000010u;
   if (_impl_.from_forum_ == nullptr) {
     auto* p = CreateMaybeMessage<::SimpleForum>(GetArenaForAllocation());
     _impl_.from_forum_ = reinterpret_cast<::SimpleForum*>(p);
@@ -1885,9 +2475,9 @@ inline void Post::set_allocated_from_forum(::SimpleForum* value) {
     if (message_arena != submessage_arena) {
       value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000008u;
+    _impl_._has_bits_[0] |= 0x00000010u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_._has_bits_[0] &= ~0x00000010u;
   }
 
   _impl_.from_forum_ = reinterpret_cast<::SimpleForum*>(value);
@@ -1914,6 +2504,198 @@ inline void Post::_internal_set_tid(::int64_t value) {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   ;
   _impl_.tid_ = value;
+}
+
+// .Post.CustomFigure custom_figure = 60;
+inline bool Post::has_custom_figure() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.custom_figure_ != nullptr);
+  return value;
+}
+inline void Post::clear_custom_figure() {
+  if (_impl_.custom_figure_ != nullptr) _impl_.custom_figure_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000020u;
+}
+inline const ::Post_CustomFigure& Post::_internal_custom_figure() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::Post_CustomFigure* p = _impl_.custom_figure_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Post_CustomFigure&>(::_Post_CustomFigure_default_instance_);
+}
+inline const ::Post_CustomFigure& Post::custom_figure() const {
+  // @@protoc_insertion_point(field_get:Post.custom_figure)
+  return _internal_custom_figure();
+}
+inline void Post::unsafe_arena_set_allocated_custom_figure(::Post_CustomFigure* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.custom_figure_);
+  }
+  _impl_.custom_figure_ = reinterpret_cast<::Post_CustomFigure*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000020u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000020u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Post.custom_figure)
+}
+inline ::Post_CustomFigure* Post::release_custom_figure() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000020u;
+  ::Post_CustomFigure* released = _impl_.custom_figure_;
+  _impl_.custom_figure_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::Post_CustomFigure* Post::unsafe_arena_release_custom_figure() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:Post.custom_figure)
+
+  _impl_._has_bits_[0] &= ~0x00000020u;
+  ::Post_CustomFigure* temp = _impl_.custom_figure_;
+  _impl_.custom_figure_ = nullptr;
+  return temp;
+}
+inline ::Post_CustomFigure* Post::_internal_mutable_custom_figure() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000020u;
+  if (_impl_.custom_figure_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Post_CustomFigure>(GetArenaForAllocation());
+    _impl_.custom_figure_ = reinterpret_cast<::Post_CustomFigure*>(p);
+  }
+  return _impl_.custom_figure_;
+}
+inline ::Post_CustomFigure* Post::mutable_custom_figure() {
+  ::Post_CustomFigure* _msg = _internal_mutable_custom_figure();
+  // @@protoc_insertion_point(field_mutable:Post.custom_figure)
+  return _msg;
+}
+inline void Post::set_allocated_custom_figure(::Post_CustomFigure* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::Post_CustomFigure*>(_impl_.custom_figure_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::Post_CustomFigure*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000020u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000020u;
+  }
+
+  _impl_.custom_figure_ = reinterpret_cast<::Post_CustomFigure*>(value);
+  // @@protoc_insertion_point(field_set_allocated:Post.custom_figure)
+}
+
+// .Post.CustomState custom_state = 61;
+inline bool Post::has_custom_state() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.custom_state_ != nullptr);
+  return value;
+}
+inline void Post::clear_custom_state() {
+  if (_impl_.custom_state_ != nullptr) _impl_.custom_state_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000040u;
+}
+inline const ::Post_CustomState& Post::_internal_custom_state() const {
+  PROTOBUF_TSAN_READ(&_impl_._tsan_detect_race);
+  const ::Post_CustomState* p = _impl_.custom_state_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Post_CustomState&>(::_Post_CustomState_default_instance_);
+}
+inline const ::Post_CustomState& Post::custom_state() const {
+  // @@protoc_insertion_point(field_get:Post.custom_state)
+  return _internal_custom_state();
+}
+inline void Post::unsafe_arena_set_allocated_custom_state(::Post_CustomState* value) {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.custom_state_);
+  }
+  _impl_.custom_state_ = reinterpret_cast<::Post_CustomState*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000040u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000040u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Post.custom_state)
+}
+inline ::Post_CustomState* Post::release_custom_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+
+  _impl_._has_bits_[0] &= ~0x00000040u;
+  ::Post_CustomState* released = _impl_.custom_state_;
+  _impl_.custom_state_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+  released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  if (GetArenaForAllocation() == nullptr) {
+    delete old;
+  }
+#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return released;
+}
+inline ::Post_CustomState* Post::unsafe_arena_release_custom_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  // @@protoc_insertion_point(field_release:Post.custom_state)
+
+  _impl_._has_bits_[0] &= ~0x00000040u;
+  ::Post_CustomState* temp = _impl_.custom_state_;
+  _impl_.custom_state_ = nullptr;
+  return temp;
+}
+inline ::Post_CustomState* Post::_internal_mutable_custom_state() {
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  _impl_._has_bits_[0] |= 0x00000040u;
+  if (_impl_.custom_state_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Post_CustomState>(GetArenaForAllocation());
+    _impl_.custom_state_ = reinterpret_cast<::Post_CustomState*>(p);
+  }
+  return _impl_.custom_state_;
+}
+inline ::Post_CustomState* Post::mutable_custom_state() {
+  ::Post_CustomState* _msg = _internal_mutable_custom_state();
+  // @@protoc_insertion_point(field_mutable:Post.custom_state)
+  return _msg;
+}
+inline void Post::set_allocated_custom_state(::Post_CustomState* value) {
+  ::google::protobuf::Arena* message_arena = GetArenaForAllocation();
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::Post_CustomState*>(_impl_.custom_state_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena =
+        ::google::protobuf::Arena::InternalGetOwningArena(reinterpret_cast<::Post_CustomState*>(value));
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000040u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000040u;
+  }
+
+  _impl_.custom_state_ = reinterpret_cast<::Post_CustomState*>(value);
+  // @@protoc_insertion_point(field_set_allocated:Post.custom_state)
 }
 
 #ifdef __GNUC__

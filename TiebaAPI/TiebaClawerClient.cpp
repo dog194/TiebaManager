@@ -338,14 +338,21 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	CString portrait = strUTF82W(rawUser.portrait());
 	CString portraitUrl = AUTHOR_PORTRAIT_URL_PREFIX + portrait;
 	int level = rawUser.level_id();
+	int glevel = rawUser.user_growth().level_id();
 	int is_bawu = rawUser.is_bawu();
 	CString bawuType = strUTF82W(rawUser.bawu_type());
 	int post_num = rawUser.post_num();
 	CString tb_age = strUTF82W(rawUser.tb_age());
 	int is_default_avatar = rawUser.is_default_avatar();
 	CString tb_uid = strUTF82W(rawUser.tieba_uid());
-	
 	int reply_type = rawUser.priv_sets().reply();
+	// 虚拟形象，user_list 不带，需要另外地方获取
+	User_VirtualImageInfo pbVirtualImageInfo = rawUser.virtual_image_info();
+	User_VirtualImageInfo_StateInfo pbStateInfo = pbVirtualImageInfo.personal_state();
+	int is_set_virtual = pbVirtualImageInfo.isset_virtual_image();
+	CString virtual_info = strUTF82W(pbStateInfo.text());
+	CString ip_address = strUTF82W(rawUser.ip_address());
+
 	// 赋值
 	user.id = id;
 	user.name = name;
@@ -353,6 +360,7 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	user.Portrait = portrait;
 	user.PortraitUrl = portraitUrl;
 	user.level = level;
+	user.glevel = glevel;
 	user.is_bawu = is_bawu;
 	user.bawu_type = bawuType;
 	user.post_num = post_num;
@@ -360,6 +368,8 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	user.is_default_avatar = is_default_avatar;
 	user.tieba_uid = tb_uid;
 	user.reply_type = reply_type;
+	user.virtual_info = virtual_info;
+	user.ip_address = ip_address;
 }
 
 // 解析UserList
@@ -437,7 +447,7 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 	for (auto& rawContent = pbContentList->begin(); rawContent != pbContentList->end(); ++rawContent)
 	{
 		UINT type = rawContent->type();
-		CString content, tmp, tmpSize;
+		CString content, tmp, tmp2, tmpSize;
 		std::string tmpStr, tmpSizeStr;
 		TiebaPlusInfo* pbTbPlusInfo;
 		switch (type)
@@ -447,6 +457,7 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 		case 9: // 电话号码
 		case 18: // 话题
 		case 27: // 词条
+		case 40: // 梗百科
 			content = strUTF82W(rawContent->text());
 			break;
 		case 1: // 超链接
@@ -455,7 +466,8 @@ const static CString decodeContent(::google::protobuf::RepeatedPtrField<PbConten
 			}
 			else {
 				tmp = strUTF82W(rawContent->link());
-				content.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), tmp, tmp);
+				tmp2 = strUTF82W(rawContent->text());
+				content.Format(_T(R"(<a href="%s"  target="_blank">%s</a>)"), tmp, tmp2);
 			}
 			break;
 		case 2: // 表情
@@ -583,15 +595,16 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	FrsPageReqIdl pbReq;
 	FrsPageReqIdl_DataReq* pbReqData = new FrsPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
-	pbCom->set__client_version("12.12.1.0");
+	pbCom->set__client_version("12.53.1.0");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	CStringA t_fn = W2UTF8(forumName);
 	//std::string kw = CT2A(forumName);
 	pbReqData->set_kw(t_fn);
 	pbReqData->set_pn(_ttoi(ignoreThread) / 50 + 1);
-	pbReqData->set_rn(90);
-	pbReqData->set_rn_need(50);
+	// 暂时改为10.应对贴吧数据修改
+	pbReqData->set_rn(10);
+	pbReqData->set_rn_need(10);
 	pbReqData->set_cid(0);
 	pbReqData->set_is_good(0);
 	pbReqData->set_q_type(2);
@@ -682,6 +695,8 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		::google::protobuf::RepeatedPtrField<PbContent>* pbContentList;
 		pbContentList = rawThread->mutable_first_post_content();
 		CString preview = decodeContent(pbContentList, tid);
+		ThreadInfo_CustomState pbCustomState = rawThread->custom_state();
+		CString customState = strUTF82W(pbCustomState.content());
 		//int tab_id = rawThread->tab_id();
 		
 		//CString TMPP;
@@ -703,8 +718,9 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 		thread.tid = tid;
 		thread.timestamp = create_time;
 		thread.reply = reply_num;
+		thread.customState = customState;
 		if (title == _T("")) {
-			thread.title = decodeContent(pbContentList, tid, _T(""), TRUE).Left(20);
+			thread.title = decodeContent(pbContentList, tid, _T(""), TRUE).Left(30);
 		}
 		else {
 			thread.title = title;
@@ -714,6 +730,10 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 			thread.authorShowName = userList[userIndex[author_id]].ShowName;
 			thread.authorID = userList[userIndex[author_id]].id;
 			thread.authorPortraitUrl = userList[userIndex[author_id]].PortraitUrl;
+			if (userList[userIndex[author_id]].level == 0)
+				thread.authorLevel = _T("");
+			else
+				thread.authorLevel = Int2CString(userList[userIndex[author_id]].level);
 			thread.isTidAuthor = TRUE;
 		}
 		else {
@@ -721,6 +741,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 			thread.authorShowName = _T("[数据错误]");
 			thread.authorID = _T("");
 			thread.authorPortraitUrl = _T("[数据错误]");
+			thread.authorLevel = _T("");
 			thread.isTidAuthor = FALSE;
 		}
 		thread.preview = preview;
@@ -764,7 +785,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	PbPageReqIdl_DataReq* pbReqData = new PbPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
 
-	pbCom->set__client_version("12.12.1.0");
+	pbCom->set__client_version("12.53.1.0");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	INT64 kz = _ttoi64(tid); 
@@ -962,6 +983,8 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		CString floor = Int2CString(rawPost->floor());
 		UINT32 time = rawPost->time();
 		CString author_id = Int64oCString(rawPost->author_id());
+		Post_CustomState pbCustomState = rawPost->custom_state();
+		CString customState = strUTF82W(pbCustomState.content());
 
 		::google::protobuf::RepeatedPtrField<PbContent>* pbContentList;
 		pbContentList = rawPost->mutable_content();
@@ -979,6 +1002,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		post.timestamp = time;
 		post.rawData = _T("");
 		post.content = content;
+		post.customState = customState;
 		if (post.authorID == threadUid)
 			post.isTidAuthor = TRUE;
 		

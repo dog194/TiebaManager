@@ -117,6 +117,59 @@ struct User_NewGodInfoDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 User_NewGodInfoDefaultTypeInternal _User_NewGodInfo_default_instance_;
         template <typename>
+PROTOBUF_CONSTEXPR User_VirtualImageInfo_StateInfo::User_VirtualImageInfo_StateInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.text_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct User_VirtualImageInfo_StateInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR User_VirtualImageInfo_StateInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~User_VirtualImageInfo_StateInfoDefaultTypeInternal() {}
+  union {
+    User_VirtualImageInfo_StateInfo _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 User_VirtualImageInfo_StateInfoDefaultTypeInternal _User_VirtualImageInfo_StateInfo_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR User_VirtualImageInfo::User_VirtualImageInfo(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_._has_bits_)*/ {},
+      /*decltype(_impl_._cached_size_)*/ {},
+      /*decltype(_impl_.personal_state_)*/ nullptr,
+      /*decltype(_impl_.isset_virtual_image_)*/ 0,
+    } {}
+struct User_VirtualImageInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR User_VirtualImageInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~User_VirtualImageInfoDefaultTypeInternal() {}
+  union {
+    User_VirtualImageInfo _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 User_VirtualImageInfoDefaultTypeInternal _User_VirtualImageInfo_default_instance_;
+        template <typename>
+PROTOBUF_CONSTEXPR User_UserGrowth::User_UserGrowth(::_pbi::ConstantInitialized)
+    : _impl_{
+      /*decltype(_impl_.level_id_)*/ 0u,
+      /*decltype(_impl_._cached_size_)*/ {},
+    } {}
+struct User_UserGrowthDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR User_UserGrowthDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~User_UserGrowthDefaultTypeInternal() {}
+  union {
+    User_UserGrowth _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 User_UserGrowthDefaultTypeInternal _User_UserGrowth_default_instance_;
+        template <typename>
 PROTOBUF_CONSTEXPR User::User(::_pbi::ConstantInitialized)
     : _impl_{
       /*decltype(_impl_._has_bits_)*/ {},
@@ -150,13 +203,22 @@ PROTOBUF_CONSTEXPR User::User(::_pbi::ConstantInitialized)
           &::_pbi::fixed_address_empty_string,
           ::_pbi::ConstantInitialized{},
       },
+      /*decltype(_impl_.ip_address_)*/ {
+          &::_pbi::fixed_address_empty_string,
+          ::_pbi::ConstantInitialized{},
+      },
       /*decltype(_impl_.priv_sets_)*/ nullptr,
       /*decltype(_impl_.vipinfo_)*/ nullptr,
       /*decltype(_impl_.new_god_data_)*/ nullptr,
+      /*decltype(_impl_.virtual_image_info_)*/ nullptr,
+      /*decltype(_impl_.user_growth_)*/ nullptr,
       /*decltype(_impl_.id_)*/ ::int64_t{0},
       /*decltype(_impl_.is_coreuser_)*/ 0,
       /*decltype(_impl_.level_id_)*/ 0,
       /*decltype(_impl_.is_bawu_)*/ 0,
+      /*decltype(_impl_.fans_num_)*/ 0,
+      /*decltype(_impl_.concern_num_)*/ 0,
+      /*decltype(_impl_.my_like_num_)*/ 0,
       /*decltype(_impl_.post_num_)*/ 0,
       /*decltype(_impl_.gender_)*/ 0,
       /*decltype(_impl_.is_friend_)*/ 0,
@@ -174,7 +236,7 @@ struct UserDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 UserDefaultTypeInternal _User_default_instance_;
-static ::_pb::Metadata file_level_metadata_User_2eproto[5];
+static ::_pb::Metadata file_level_metadata_User_2eproto[8];
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_User_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor**
@@ -237,6 +299,36 @@ const ::uint32_t TableStruct_User_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
     PROTOBUF_FIELD_OFFSET(::User_NewGodInfo, _impl_.field_name_),
     PROTOBUF_FIELD_OFFSET(::User_NewGodInfo, _impl_.type_),
     PROTOBUF_FIELD_OFFSET(::User_NewGodInfo, _impl_.type_name_),
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::User_VirtualImageInfo_StateInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::User_VirtualImageInfo_StateInfo, _impl_.text_),
+    PROTOBUF_FIELD_OFFSET(::User_VirtualImageInfo, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::User_VirtualImageInfo, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::User_VirtualImageInfo, _impl_.isset_virtual_image_),
+    PROTOBUF_FIELD_OFFSET(::User_VirtualImageInfo, _impl_.personal_state_),
+    ~0u,
+    0,
+    ~0u,  // no _has_bits_
+    PROTOBUF_FIELD_OFFSET(::User_UserGrowth, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::User_UserGrowth, _impl_.level_id_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_._has_bits_),
     PROTOBUF_FIELD_OFFSET(::User, _internal_metadata_),
     ~0u,  // no _extensions_
@@ -254,6 +346,9 @@ const ::uint32_t TableStruct_User_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
     PROTOBUF_FIELD_OFFSET(::User, _impl_.is_bawu_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_.bawu_type_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_.bduss_),
+    PROTOBUF_FIELD_OFFSET(::User, _impl_.fans_num_),
+    PROTOBUF_FIELD_OFFSET(::User, _impl_.concern_num_),
+    PROTOBUF_FIELD_OFFSET(::User, _impl_.my_like_num_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_.post_num_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_.tb_age_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_.gender_),
@@ -266,6 +361,12 @@ const ::uint32_t TableStruct_User_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
     PROTOBUF_FIELD_OFFSET(::User, _impl_.new_god_data_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_.is_default_avatar_),
     PROTOBUF_FIELD_OFFSET(::User, _impl_.tieba_uid_),
+    PROTOBUF_FIELD_OFFSET(::User, _impl_.ip_address_),
+    PROTOBUF_FIELD_OFFSET(::User, _impl_.virtual_image_info_),
+    PROTOBUF_FIELD_OFFSET(::User, _impl_.user_growth_),
+    ~0u,
+    ~0u,
+    ~0u,
     ~0u,
     ~0u,
     ~0u,
@@ -287,6 +388,9 @@ const ::uint32_t TableStruct_User_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
     2,
     ~0u,
     ~0u,
+    ~0u,
+    3,
+    4,
 };
 
 static const ::_pbi::MigrationSchema
@@ -295,7 +399,10 @@ static const ::_pbi::MigrationSchema
         {17, -1, -1, sizeof(::User_LikeForumInfo)},
         {27, -1, -1, sizeof(::User_UserVipInfo)},
         {43, -1, -1, sizeof(::User_NewGodInfo)},
-        {56, 85, -1, sizeof(::User)},
+        {56, -1, -1, sizeof(::User_VirtualImageInfo_StateInfo)},
+        {65, 75, -1, sizeof(::User_VirtualImageInfo)},
+        {77, -1, -1, sizeof(::User_UserGrowth)},
+        {86, 121, -1, sizeof(::User)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -303,46 +410,57 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::_User_LikeForumInfo_default_instance_._instance,
     &::_User_UserVipInfo_default_instance_._instance,
     &::_User_NewGodInfo_default_instance_._instance,
+    &::_User_VirtualImageInfo_StateInfo_default_instance_._instance,
+    &::_User_VirtualImageInfo_default_instance_._instance,
+    &::_User_UserGrowth_default_instance_._instance,
     &::_User_default_instance_._instance,
 };
 const char descriptor_table_protodef_User_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-    "\n\nUser.proto\"\263\007\n\004User\022\n\n\002id\030\002 \001(\003\022\014\n\004nam"
+    "\n\nUser.proto\"\207\n\n\004User\022\n\n\002id\030\002 \001(\003\022\014\n\004nam"
     "e\030\003 \001(\t\022\021\n\tname_show\030\004 \001(\t\022\020\n\010portrait\030\005"
     " \001(\t\022\023\n\013is_coreuser\030\024 \001(\005\022\020\n\010level_id\030\027 "
     "\001(\005\022\017\n\007is_bawu\030\031 \001(\005\022\021\n\tbawu_type\030\032 \001(\t\022"
-    "\r\n\005BDUSS\030\035 \001(\t\022\020\n\010post_num\030% \001(\005\022\016\n\006tb_a"
-    "ge\030& \001(\t\022\016\n\006gender\030* \001(\005\022!\n\tpriv_sets\030- "
-    "\001(\0132\016.User.PrivSets\022\021\n\tis_friend\030. \001(\005\022&"
-    "\n\tlikeForum\030/ \003(\0132\023.User.LikeForumInfo\022\023"
-    "\n\013is_guanfang\0304 \001(\005\022\"\n\007vipInfo\030= \001(\0132\021.U"
-    "ser.UserVipInfo\022\017\n\007is_fans\030[ \001(\005\022&\n\014new_"
-    "god_data\030e \001(\0132\020.User.NewGodInfo\022\031\n\021is_d"
-    "efault_avatar\030j \001(\005\022\021\n\ttieba_uid\030x \001(\t\032\253"
-    "\001\n\010PrivSets\022\020\n\010location\030\001 \001(\005\022\014\n\004like\030\002 "
-    "\001(\005\022\r\n\005group\030\003 \001(\005\022\014\n\004post\030\004 \001(\005\022\016\n\006frie"
-    "nd\030\005 \001(\005\022\014\n\004live\030\006 \001(\005\022\r\n\005reply\030\007 \001(\005\022\031\n"
-    "\021bazhu_show_inside\030\010 \001(\005\022\032\n\022bazhu_show_o"
-    "utside\030\t \001(\005\0325\n\rLikeForumInfo\022\022\n\nforum_n"
-    "ame\030\001 \001(\t\022\020\n\010forum_id\030\002 \001(\004\032\227\001\n\013UserVipI"
-    "nfo\022\020\n\010v_status\030\001 \001(\r\022\016\n\006s_time\030\002 \001(\r\022\016\n"
-    "\006e_time\030\003 \001(\r\022\021\n\text_score\030\004 \001(\r\022\017\n\007v_le"
-    "vel\030\005 \001(\r\022\017\n\007a_score\030\006 \001(\005\022\017\n\007n_score\030\007 "
-    "\001(\r\022\020\n\010icon_url\030\010 \001(\t\032c\n\nNewGodInfo\022\016\n\006s"
-    "tatus\030\001 \001(\005\022\020\n\010field_id\030\002 \001(\r\022\022\n\nfield_n"
-    "ame\030\003 \001(\t\022\014\n\004type\030\004 \001(\r\022\021\n\ttype_name\030\005 \001"
-    "(\tb\006proto3"
+    "\r\n\005BDUSS\030\035 \001(\t\022\020\n\010fans_num\030\036 \001(\005\022\023\n\013conc"
+    "ern_num\030\037 \001(\005\022\023\n\013my_like_num\030! \001(\005\022\020\n\010po"
+    "st_num\030% \001(\005\022\016\n\006tb_age\030& \001(\t\022\016\n\006gender\030*"
+    " \001(\005\022!\n\tpriv_sets\030- \001(\0132\016.User.PrivSets\022"
+    "\021\n\tis_friend\030. \001(\005\022&\n\tlikeForum\030/ \003(\0132\023."
+    "User.LikeForumInfo\022\023\n\013is_guanfang\0304 \001(\005\022"
+    "\"\n\007vipInfo\030= \001(\0132\021.User.UserVipInfo\022\017\n\007i"
+    "s_fans\030[ \001(\005\022&\n\014new_god_data\030e \001(\0132\020.Use"
+    "r.NewGodInfo\022\031\n\021is_default_avatar\030j \001(\005\022"
+    "\021\n\ttieba_uid\030x \001(\t\022\022\n\nip_address\030\177 \001(\t\0223"
+    "\n\022virtual_image_info\030\210\001 \001(\0132\026.User.Virtu"
+    "alImageInfo\022&\n\013user_growth\030\211\001 \001(\0132\020.User"
+    ".UserGrowth\032\253\001\n\010PrivSets\022\020\n\010location\030\001 \001"
+    "(\005\022\014\n\004like\030\002 \001(\005\022\r\n\005group\030\003 \001(\005\022\014\n\004post\030"
+    "\004 \001(\005\022\016\n\006friend\030\005 \001(\005\022\014\n\004live\030\006 \001(\005\022\r\n\005r"
+    "eply\030\007 \001(\005\022\031\n\021bazhu_show_inside\030\010 \001(\005\022\032\n"
+    "\022bazhu_show_outside\030\t \001(\005\0325\n\rLikeForumIn"
+    "fo\022\022\n\nforum_name\030\001 \001(\t\022\020\n\010forum_id\030\002 \001(\004"
+    "\032\227\001\n\013UserVipInfo\022\020\n\010v_status\030\001 \001(\r\022\016\n\006s_"
+    "time\030\002 \001(\r\022\016\n\006e_time\030\003 \001(\r\022\021\n\text_score\030"
+    "\004 \001(\r\022\017\n\007v_level\030\005 \001(\r\022\017\n\007a_score\030\006 \001(\005\022"
+    "\017\n\007n_score\030\007 \001(\r\022\020\n\010icon_url\030\010 \001(\t\032c\n\nNe"
+    "wGodInfo\022\016\n\006status\030\001 \001(\005\022\020\n\010field_id\030\002 \001"
+    "(\r\022\022\n\nfield_name\030\003 \001(\t\022\014\n\004type\030\004 \001(\r\022\021\n\t"
+    "type_name\030\005 \001(\t\032\204\001\n\020VirtualImageInfo\022\033\n\023"
+    "isset_virtual_image\030\001 \001(\005\0228\n\016personal_st"
+    "ate\030\t \001(\0132 .User.VirtualImageInfo.StateI"
+    "nfo\032\031\n\tStateInfo\022\014\n\004text\030\002 \001(\t\032\036\n\nUserGr"
+    "owth\022\020\n\010level_id\030\001 \001(\rb\006proto3"
 };
 static ::absl::once_flag descriptor_table_User_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_User_2eproto = {
     false,
     false,
-    970,
+    1310,
     descriptor_table_protodef_User_2eproto,
     "User.proto",
     &descriptor_table_User_2eproto_once,
     nullptr,
     0,
-    5,
+    8,
     schemas,
     file_default_instances,
     TableStruct_User_2eproto::offsets,
@@ -1642,6 +1760,589 @@ void User_NewGodInfo::InternalSwap(User_NewGodInfo* other) {
 }
 // ===================================================================
 
+class User_VirtualImageInfo_StateInfo::_Internal {
+ public:
+};
+
+User_VirtualImageInfo_StateInfo::User_VirtualImageInfo_StateInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:User.VirtualImageInfo.StateInfo)
+}
+User_VirtualImageInfo_StateInfo::User_VirtualImageInfo_StateInfo(const User_VirtualImageInfo_StateInfo& from) : ::google::protobuf::Message() {
+  User_VirtualImageInfo_StateInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.text_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  _impl_.text_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.text_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_text().empty()) {
+    _this->_impl_.text_.Set(from._internal_text(), _this->GetArenaForAllocation());
+  }
+
+  // @@protoc_insertion_point(copy_constructor:User.VirtualImageInfo.StateInfo)
+}
+inline void User_VirtualImageInfo_StateInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.text_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+  _impl_.text_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.text_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+}
+User_VirtualImageInfo_StateInfo::~User_VirtualImageInfo_StateInfo() {
+  // @@protoc_insertion_point(destructor:User.VirtualImageInfo.StateInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void User_VirtualImageInfo_StateInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _impl_.text_.Destroy();
+}
+void User_VirtualImageInfo_StateInfo::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+PROTOBUF_NOINLINE void User_VirtualImageInfo_StateInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:User.VirtualImageInfo.StateInfo)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.text_.ClearToEmpty();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* User_VirtualImageInfo_StateInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 44, 2> User_VirtualImageInfo_StateInfo::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    2, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967293,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_User_VirtualImageInfo_StateInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // string text = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo_StateInfo, _impl_.text_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string text = 2;
+    {PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo_StateInfo, _impl_.text_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\37\4\0\0\0\0\0\0"
+    "User.VirtualImageInfo.StateInfo"
+    "text"
+  }},
+};
+
+::uint8_t* User_VirtualImageInfo_StateInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:User.VirtualImageInfo.StateInfo)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // string text = 2;
+  if (!this->_internal_text().empty()) {
+    const std::string& _s = this->_internal_text();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "User.VirtualImageInfo.StateInfo.text");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:User.VirtualImageInfo.StateInfo)
+  return target;
+}
+
+::size_t User_VirtualImageInfo_StateInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:User.VirtualImageInfo.StateInfo)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string text = 2;
+  if (!this->_internal_text().empty()) {
+    total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_text());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData User_VirtualImageInfo_StateInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    User_VirtualImageInfo_StateInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*User_VirtualImageInfo_StateInfo::GetClassData() const { return &_class_data_; }
+
+
+void User_VirtualImageInfo_StateInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<User_VirtualImageInfo_StateInfo*>(&to_msg);
+  auto& from = static_cast<const User_VirtualImageInfo_StateInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:User.VirtualImageInfo.StateInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_text().empty()) {
+    _this->_internal_set_text(from._internal_text());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void User_VirtualImageInfo_StateInfo::CopyFrom(const User_VirtualImageInfo_StateInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:User.VirtualImageInfo.StateInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool User_VirtualImageInfo_StateInfo::IsInitialized() const {
+  return true;
+}
+
+void User_VirtualImageInfo_StateInfo::InternalSwap(User_VirtualImageInfo_StateInfo* other) {
+  using std::swap;
+  auto* lhs_arena = GetArenaForAllocation();
+  auto* rhs_arena = other->GetArenaForAllocation();
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.text_, lhs_arena,
+                                       &other->_impl_.text_, rhs_arena);
+}
+
+::google::protobuf::Metadata User_VirtualImageInfo_StateInfo::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_User_2eproto_getter, &descriptor_table_User_2eproto_once,
+      file_level_metadata_User_2eproto[4]);
+}
+// ===================================================================
+
+class User_VirtualImageInfo::_Internal {
+ public:
+  using HasBits = decltype(std::declval<User_VirtualImageInfo>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo, _impl_._has_bits_);
+  static const ::User_VirtualImageInfo_StateInfo& personal_state(const User_VirtualImageInfo* msg);
+  static void set_has_personal_state(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+};
+
+const ::User_VirtualImageInfo_StateInfo& User_VirtualImageInfo::_Internal::personal_state(const User_VirtualImageInfo* msg) {
+  return *msg->_impl_.personal_state_;
+}
+User_VirtualImageInfo::User_VirtualImageInfo(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:User.VirtualImageInfo)
+}
+User_VirtualImageInfo::User_VirtualImageInfo(const User_VirtualImageInfo& from) : ::google::protobuf::Message() {
+  User_VirtualImageInfo* const _this = this;
+  (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){from._impl_._has_bits_},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.personal_state_){nullptr},
+      decltype(_impl_.isset_virtual_image_){},
+  };
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.personal_state_ = new ::User_VirtualImageInfo_StateInfo(*from._impl_.personal_state_);
+  }
+  _this->_impl_.isset_virtual_image_ = from._impl_.isset_virtual_image_;
+
+  // @@protoc_insertion_point(copy_constructor:User.VirtualImageInfo)
+}
+inline void User_VirtualImageInfo::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_._has_bits_){},
+      /*decltype(_impl_._cached_size_)*/ {},
+      decltype(_impl_.personal_state_){nullptr},
+      decltype(_impl_.isset_virtual_image_){0},
+  };
+}
+User_VirtualImageInfo::~User_VirtualImageInfo() {
+  // @@protoc_insertion_point(destructor:User.VirtualImageInfo)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void User_VirtualImageInfo::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.personal_state_;
+}
+void User_VirtualImageInfo::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+PROTOBUF_NOINLINE void User_VirtualImageInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:User.VirtualImageInfo)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.personal_state_ != nullptr);
+    _impl_.personal_state_->Clear();
+  }
+  _impl_.isset_virtual_image_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* User_VirtualImageInfo::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 2, 1, 0, 2> User_VirtualImageInfo::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo, _impl_._has_bits_),
+    0, // no _extensions_
+    9, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967038,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_User_VirtualImageInfo_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // int32 isset_virtual_image = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(User_VirtualImageInfo, _impl_.isset_virtual_image_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo, _impl_.isset_virtual_image_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // int32 isset_virtual_image = 1;
+    {PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo, _impl_.isset_virtual_image_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .User.VirtualImageInfo.StateInfo personal_state = 9;
+    {PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo, _impl_.personal_state_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::User_VirtualImageInfo_StateInfo>()},
+  }}, {{
+  }},
+};
+
+::uint8_t* User_VirtualImageInfo::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:User.VirtualImageInfo)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // int32 isset_virtual_image = 1;
+  if (this->_internal_isset_virtual_image() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_isset_virtual_image(), target);
+  }
+
+  cached_has_bits = _impl_._has_bits_[0];
+  // .User.VirtualImageInfo.StateInfo personal_state = 9;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(9, _Internal::personal_state(this),
+        _Internal::personal_state(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:User.VirtualImageInfo)
+  return target;
+}
+
+::size_t User_VirtualImageInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:User.VirtualImageInfo)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .User.VirtualImageInfo.StateInfo personal_state = 9;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSize(
+        *_impl_.personal_state_);
+  }
+
+  // int32 isset_virtual_image = 1;
+  if (this->_internal_isset_virtual_image() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_isset_virtual_image());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData User_VirtualImageInfo::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    User_VirtualImageInfo::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*User_VirtualImageInfo::GetClassData() const { return &_class_data_; }
+
+
+void User_VirtualImageInfo::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<User_VirtualImageInfo*>(&to_msg);
+  auto& from = static_cast<const User_VirtualImageInfo&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:User.VirtualImageInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_internal_mutable_personal_state()->::User_VirtualImageInfo_StateInfo::MergeFrom(
+        from._internal_personal_state());
+  }
+  if (from._internal_isset_virtual_image() != 0) {
+    _this->_internal_set_isset_virtual_image(from._internal_isset_virtual_image());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void User_VirtualImageInfo::CopyFrom(const User_VirtualImageInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:User.VirtualImageInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool User_VirtualImageInfo::IsInitialized() const {
+  return true;
+}
+
+void User_VirtualImageInfo::InternalSwap(User_VirtualImageInfo* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo, _impl_.isset_virtual_image_)
+      + sizeof(User_VirtualImageInfo::_impl_.isset_virtual_image_)
+      - PROTOBUF_FIELD_OFFSET(User_VirtualImageInfo, _impl_.personal_state_)>(
+          reinterpret_cast<char*>(&_impl_.personal_state_),
+          reinterpret_cast<char*>(&other->_impl_.personal_state_));
+}
+
+::google::protobuf::Metadata User_VirtualImageInfo::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_User_2eproto_getter, &descriptor_table_User_2eproto_once,
+      file_level_metadata_User_2eproto[5]);
+}
+// ===================================================================
+
+class User_UserGrowth::_Internal {
+ public:
+};
+
+User_UserGrowth::User_UserGrowth(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:User.UserGrowth)
+}
+User_UserGrowth::User_UserGrowth(const User_UserGrowth& from)
+    : ::google::protobuf::Message(), _impl_(from._impl_) {
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:User.UserGrowth)
+}
+inline void User_UserGrowth::SharedCtor(::_pb::Arena* arena) {
+  (void)arena;
+  new (&_impl_) Impl_{
+      decltype(_impl_.level_id_){0u},
+      /*decltype(_impl_._cached_size_)*/ {},
+  };
+}
+User_UserGrowth::~User_UserGrowth() {
+  // @@protoc_insertion_point(destructor:User.UserGrowth)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void User_UserGrowth::SharedDtor() {
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+}
+void User_UserGrowth::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+PROTOBUF_NOINLINE void User_UserGrowth::Clear() {
+// @@protoc_insertion_point(message_clear_start:User.UserGrowth)
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.level_id_ = 0u;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+const char* User_UserGrowth::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
+  return ptr;
+}
+
+
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 0, 0, 2> User_UserGrowth::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_User_UserGrowth_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // uint32 level_id = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(User_UserGrowth, _impl_.level_id_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(User_UserGrowth, _impl_.level_id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // uint32 level_id = 1;
+    {PROTOBUF_FIELD_OFFSET(User_UserGrowth, _impl_.level_id_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUInt32)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+::uint8_t* User_UserGrowth::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:User.UserGrowth)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  // uint32 level_id = 1;
+  if (this->_internal_level_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        1, this->_internal_level_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:User.UserGrowth)
+  return target;
+}
+
+::size_t User_UserGrowth::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:User.UserGrowth)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // uint32 level_id = 1;
+  if (this->_internal_level_id() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_level_id());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::google::protobuf::Message::ClassData User_UserGrowth::_class_data_ = {
+    ::google::protobuf::Message::CopyWithSourceCheck,
+    User_UserGrowth::MergeImpl
+};
+const ::google::protobuf::Message::ClassData*User_UserGrowth::GetClassData() const { return &_class_data_; }
+
+
+void User_UserGrowth::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<User_UserGrowth*>(&to_msg);
+  auto& from = static_cast<const User_UserGrowth&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:User.UserGrowth)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_level_id() != 0) {
+    _this->_internal_set_level_id(from._internal_level_id());
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void User_UserGrowth::CopyFrom(const User_UserGrowth& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:User.UserGrowth)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+PROTOBUF_NOINLINE bool User_UserGrowth::IsInitialized() const {
+  return true;
+}
+
+void User_UserGrowth::InternalSwap(User_UserGrowth* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+        swap(_impl_.level_id_, other->_impl_.level_id_);
+}
+
+::google::protobuf::Metadata User_UserGrowth::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_User_2eproto_getter, &descriptor_table_User_2eproto_once,
+      file_level_metadata_User_2eproto[6]);
+}
+// ===================================================================
+
 class User::_Internal {
  public:
   using HasBits = decltype(std::declval<User>()._impl_._has_bits_);
@@ -1659,6 +2360,14 @@ class User::_Internal {
   static void set_has_new_god_data(HasBits* has_bits) {
     (*has_bits)[0] |= 4u;
   }
+  static const ::User_VirtualImageInfo& virtual_image_info(const User* msg);
+  static void set_has_virtual_image_info(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
+  }
+  static const ::User_UserGrowth& user_growth(const User* msg);
+  static void set_has_user_growth(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
+  }
 };
 
 const ::User_PrivSets& User::_Internal::priv_sets(const User* msg) {
@@ -1669,6 +2378,12 @@ const ::User_UserVipInfo& User::_Internal::vipinfo(const User* msg) {
 }
 const ::User_NewGodInfo& User::_Internal::new_god_data(const User* msg) {
   return *msg->_impl_.new_god_data_;
+}
+const ::User_VirtualImageInfo& User::_Internal::virtual_image_info(const User* msg) {
+  return *msg->_impl_.virtual_image_info_;
+}
+const ::User_UserGrowth& User::_Internal::user_growth(const User* msg) {
+  return *msg->_impl_.user_growth_;
 }
 User::User(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
@@ -1689,13 +2404,19 @@ User::User(const User& from) : ::google::protobuf::Message() {
       decltype(_impl_.bduss_){},
       decltype(_impl_.tb_age_){},
       decltype(_impl_.tieba_uid_){},
+      decltype(_impl_.ip_address_){},
       decltype(_impl_.priv_sets_){nullptr},
       decltype(_impl_.vipinfo_){nullptr},
       decltype(_impl_.new_god_data_){nullptr},
+      decltype(_impl_.virtual_image_info_){nullptr},
+      decltype(_impl_.user_growth_){nullptr},
       decltype(_impl_.id_){},
       decltype(_impl_.is_coreuser_){},
       decltype(_impl_.level_id_){},
       decltype(_impl_.is_bawu_){},
+      decltype(_impl_.fans_num_){},
+      decltype(_impl_.concern_num_){},
+      decltype(_impl_.my_like_num_){},
       decltype(_impl_.post_num_){},
       decltype(_impl_.gender_){},
       decltype(_impl_.is_friend_){},
@@ -1754,6 +2475,13 @@ User::User(const User& from) : ::google::protobuf::Message() {
   if (!from._internal_tieba_uid().empty()) {
     _this->_impl_.tieba_uid_.Set(from._internal_tieba_uid(), _this->GetArenaForAllocation());
   }
+  _impl_.ip_address_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.ip_address_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (!from._internal_ip_address().empty()) {
+    _this->_impl_.ip_address_.Set(from._internal_ip_address(), _this->GetArenaForAllocation());
+  }
   if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
     _this->_impl_.priv_sets_ = new ::User_PrivSets(*from._impl_.priv_sets_);
   }
@@ -1762,6 +2490,12 @@ User::User(const User& from) : ::google::protobuf::Message() {
   }
   if ((from._impl_._has_bits_[0] & 0x00000004u) != 0) {
     _this->_impl_.new_god_data_ = new ::User_NewGodInfo(*from._impl_.new_god_data_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000008u) != 0) {
+    _this->_impl_.virtual_image_info_ = new ::User_VirtualImageInfo(*from._impl_.virtual_image_info_);
+  }
+  if ((from._impl_._has_bits_[0] & 0x00000010u) != 0) {
+    _this->_impl_.user_growth_ = new ::User_UserGrowth(*from._impl_.user_growth_);
   }
   ::memcpy(&_impl_.id_, &from._impl_.id_,
     static_cast<::size_t>(reinterpret_cast<char*>(&_impl_.is_default_avatar_) -
@@ -1782,13 +2516,19 @@ inline void User::SharedCtor(::_pb::Arena* arena) {
       decltype(_impl_.bduss_){},
       decltype(_impl_.tb_age_){},
       decltype(_impl_.tieba_uid_){},
+      decltype(_impl_.ip_address_){},
       decltype(_impl_.priv_sets_){nullptr},
       decltype(_impl_.vipinfo_){nullptr},
       decltype(_impl_.new_god_data_){nullptr},
+      decltype(_impl_.virtual_image_info_){nullptr},
+      decltype(_impl_.user_growth_){nullptr},
       decltype(_impl_.id_){::int64_t{0}},
       decltype(_impl_.is_coreuser_){0},
       decltype(_impl_.level_id_){0},
       decltype(_impl_.is_bawu_){0},
+      decltype(_impl_.fans_num_){0},
+      decltype(_impl_.concern_num_){0},
+      decltype(_impl_.my_like_num_){0},
       decltype(_impl_.post_num_){0},
       decltype(_impl_.gender_){0},
       decltype(_impl_.is_friend_){0},
@@ -1824,6 +2564,10 @@ inline void User::SharedCtor(::_pb::Arena* arena) {
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
         _impl_.tieba_uid_.Set("", GetArenaForAllocation());
   #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.ip_address_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.ip_address_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 User::~User() {
   // @@protoc_insertion_point(destructor:User)
@@ -1840,9 +2584,12 @@ inline void User::SharedDtor() {
   _impl_.bduss_.Destroy();
   _impl_.tb_age_.Destroy();
   _impl_.tieba_uid_.Destroy();
+  _impl_.ip_address_.Destroy();
   if (this != internal_default_instance()) delete _impl_.priv_sets_;
   if (this != internal_default_instance()) delete _impl_.vipinfo_;
   if (this != internal_default_instance()) delete _impl_.new_god_data_;
+  if (this != internal_default_instance()) delete _impl_.virtual_image_info_;
+  if (this != internal_default_instance()) delete _impl_.user_growth_;
 }
 void User::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
@@ -1862,8 +2609,9 @@ PROTOBUF_NOINLINE void User::Clear() {
   _impl_.bduss_.ClearToEmpty();
   _impl_.tb_age_.ClearToEmpty();
   _impl_.tieba_uid_.ClearToEmpty();
+  _impl_.ip_address_.ClearToEmpty();
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       ABSL_DCHECK(_impl_.priv_sets_ != nullptr);
       _impl_.priv_sets_->Clear();
@@ -1875,6 +2623,14 @@ PROTOBUF_NOINLINE void User::Clear() {
     if (cached_has_bits & 0x00000004u) {
       ABSL_DCHECK(_impl_.new_god_data_ != nullptr);
       _impl_.new_god_data_->Clear();
+    }
+    if (cached_has_bits & 0x00000008u) {
+      ABSL_DCHECK(_impl_.virtual_image_info_ != nullptr);
+      _impl_.virtual_image_info_->Clear();
+    }
+    if (cached_has_bits & 0x00000010u) {
+      ABSL_DCHECK(_impl_.user_growth_ != nullptr);
+      _impl_.user_growth_->Clear();
     }
   }
   ::memset(&_impl_.id_, 0, static_cast<::size_t>(
@@ -1892,16 +2648,16 @@ const char* User::_InternalParse(
 
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
+const ::_pbi::TcParseTable<5, 27, 6, 97, 19> User::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(User, _impl_._has_bits_),
     0, // no _extensions_
-    120, 248,  // max_field_number, fast_idx_mask
+    137, 248,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    3971481569,  // skipmap
+    2360868833,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    21,  // num_field_entries
-    4,  // num_aux_entries
+    27,  // num_field_entries
+    6,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     &_User_default_instance_._instance,
     ::_pbi::TcParser::GenericFallback,  // fallback
@@ -1931,7 +2687,9 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
+    // int32 my_like_num = 33;
+    {::_pbi::TcParser::FastV32S2,
+     {648, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.my_like_num_)}},
     {::_pbi::TcParser::MiniParse, {}},
     {::_pbi::TcParser::MiniParse, {}},
     // int32 is_coreuser = 20;
@@ -1962,15 +2720,16 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
     // string BDUSS = 29;
     {::_pbi::TcParser::FastUS2,
      {490, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.bduss_)}},
-    // int32 is_friend = 46;
+    // int32 fans_num = 30;
     {::_pbi::TcParser::FastV32S2,
-     {752, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.is_friend_)}},
-    // repeated .User.LikeForumInfo likeForum = 47;
-    {::_pbi::TcParser::FastMtR2,
-     {762, 63, 1, PROTOBUF_FIELD_OFFSET(User, _impl_.likeforum_)}},
+     {496, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.fans_num_)}},
+    // int32 concern_num = 31;
+    {::_pbi::TcParser::FastV32S2,
+     {504, 63, 0, PROTOBUF_FIELD_OFFSET(User, _impl_.concern_num_)}},
   }}, {{
-    37, 0, 6,
-    30940, 9, 65279, 16, 65535, 17, 65471, 17, 65502, 18, 65527, 20,
+    33, 0, 7,
+    36302, 11, 61431, 18, 65535, 20, 64511, 20, 65007, 21, 49023, 23,
+    65151, 25,
     65535, 65535
   }}, {{
     // int64 id = 2;
@@ -2000,6 +2759,15 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
     // string BDUSS = 29;
     {PROTOBUF_FIELD_OFFSET(User, _impl_.bduss_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 fans_num = 30;
+    {PROTOBUF_FIELD_OFFSET(User, _impl_.fans_num_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 concern_num = 31;
+    {PROTOBUF_FIELD_OFFSET(User, _impl_.concern_num_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 my_like_num = 33;
+    {PROTOBUF_FIELD_OFFSET(User, _impl_.my_like_num_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
     // int32 post_num = 37;
     {PROTOBUF_FIELD_OFFSET(User, _impl_.post_num_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
@@ -2036,13 +2804,24 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
     // string tieba_uid = 120;
     {PROTOBUF_FIELD_OFFSET(User, _impl_.tieba_uid_), -1, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string ip_address = 127;
+    {PROTOBUF_FIELD_OFFSET(User, _impl_.ip_address_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .User.VirtualImageInfo virtual_image_info = 136;
+    {PROTOBUF_FIELD_OFFSET(User, _impl_.virtual_image_info_), _Internal::kHasBitsOffset + 3, 4,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // .User.UserGrowth user_growth = 137;
+    {PROTOBUF_FIELD_OFFSET(User, _impl_.user_growth_), _Internal::kHasBitsOffset + 4, 5,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
   }}, {{
     {::_pbi::TcParser::GetTable<::User_PrivSets>()},
     {::_pbi::TcParser::GetTable<::User_LikeForumInfo>()},
     {::_pbi::TcParser::GetTable<::User_UserVipInfo>()},
     {::_pbi::TcParser::GetTable<::User_NewGodInfo>()},
+    {::_pbi::TcParser::GetTable<::User_VirtualImageInfo>()},
+    {::_pbi::TcParser::GetTable<::User_UserGrowth>()},
   }}, {{
-    "\4\0\4\11\10\0\0\0\11\5\0\6\0\0\0\0\0\0\0\0\0\11\0\0"
+    "\4\0\4\11\10\0\0\0\11\5\0\0\0\0\6\0\0\0\0\0\0\0\0\0\11\12\0\0\0\0\0\0"
     "User"
     "name"
     "name_show"
@@ -2051,6 +2830,7 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
     "BDUSS"
     "tb_age"
     "tieba_uid"
+    "ip_address"
   }},
 };
 
@@ -2127,6 +2907,27 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
         _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "User.BDUSS");
     target = stream->WriteStringMaybeAliased(29, _s, target);
+  }
+
+  // int32 fans_num = 30;
+  if (this->_internal_fans_num() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        30, this->_internal_fans_num(), target);
+  }
+
+  // int32 concern_num = 31;
+  if (this->_internal_concern_num() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        31, this->_internal_concern_num(), target);
+  }
+
+  // int32 my_like_num = 33;
+  if (this->_internal_my_like_num() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        33, this->_internal_my_like_num(), target);
   }
 
   // int32 post_num = 37;
@@ -2217,6 +3018,28 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
     target = stream->WriteStringMaybeAliased(120, _s, target);
   }
 
+  // string ip_address = 127;
+  if (!this->_internal_ip_address().empty()) {
+    const std::string& _s = this->_internal_ip_address();
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+        _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "User.ip_address");
+    target = stream->WriteStringMaybeAliased(127, _s, target);
+  }
+
+  // .User.VirtualImageInfo virtual_image_info = 136;
+  if (cached_has_bits & 0x00000008u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(136, _Internal::virtual_image_info(this),
+        _Internal::virtual_image_info(this).GetCachedSize(), target, stream);
+  }
+
+  // .User.UserGrowth user_growth = 137;
+  if (cached_has_bits & 0x00000010u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessage(137, _Internal::user_growth(this),
+        _Internal::user_growth(this).GetCachedSize(), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -2282,8 +3105,14 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
                                     this->_internal_tieba_uid());
   }
 
+  // string ip_address = 127;
+  if (!this->_internal_ip_address().empty()) {
+    total_size += 2 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                    this->_internal_ip_address());
+  }
+
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000001fu) {
     // .User.PrivSets priv_sets = 45;
     if (cached_has_bits & 0x00000001u) {
       total_size += 2 +
@@ -2303,6 +3132,20 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSize(
           *_impl_.new_god_data_);
+    }
+
+    // .User.VirtualImageInfo virtual_image_info = 136;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.virtual_image_info_);
+    }
+
+    // .User.UserGrowth user_growth = 137;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSize(
+          *_impl_.user_growth_);
     }
 
   }
@@ -2328,6 +3171,24 @@ const ::_pbi::TcParseTable<5, 21, 4, 79, 17> User::_table_ = {
   if (this->_internal_is_bawu() != 0) {
     total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
                                     this->_internal_is_bawu());
+  }
+
+  // int32 fans_num = 30;
+  if (this->_internal_fans_num() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_fans_num());
+  }
+
+  // int32 concern_num = 31;
+  if (this->_internal_concern_num() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_concern_num());
+  }
+
+  // int32 my_like_num = 33;
+  if (this->_internal_my_like_num() != 0) {
+    total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                    this->_internal_my_like_num());
   }
 
   // int32 post_num = 37;
@@ -2406,8 +3267,11 @@ void User::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protob
   if (!from._internal_tieba_uid().empty()) {
     _this->_internal_set_tieba_uid(from._internal_tieba_uid());
   }
+  if (!from._internal_ip_address().empty()) {
+    _this->_internal_set_ip_address(from._internal_ip_address());
+  }
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       _this->_internal_mutable_priv_sets()->::User_PrivSets::MergeFrom(
           from._internal_priv_sets());
@@ -2419,6 +3283,14 @@ void User::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protob
     if (cached_has_bits & 0x00000004u) {
       _this->_internal_mutable_new_god_data()->::User_NewGodInfo::MergeFrom(
           from._internal_new_god_data());
+    }
+    if (cached_has_bits & 0x00000008u) {
+      _this->_internal_mutable_virtual_image_info()->::User_VirtualImageInfo::MergeFrom(
+          from._internal_virtual_image_info());
+    }
+    if (cached_has_bits & 0x00000010u) {
+      _this->_internal_mutable_user_growth()->::User_UserGrowth::MergeFrom(
+          from._internal_user_growth());
     }
   }
   if (from._internal_id() != 0) {
@@ -2432,6 +3304,15 @@ void User::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protob
   }
   if (from._internal_is_bawu() != 0) {
     _this->_internal_set_is_bawu(from._internal_is_bawu());
+  }
+  if (from._internal_fans_num() != 0) {
+    _this->_internal_set_fans_num(from._internal_fans_num());
+  }
+  if (from._internal_concern_num() != 0) {
+    _this->_internal_set_concern_num(from._internal_concern_num());
+  }
+  if (from._internal_my_like_num() != 0) {
+    _this->_internal_set_my_like_num(from._internal_my_like_num());
   }
   if (from._internal_post_num() != 0) {
     _this->_internal_set_post_num(from._internal_post_num());
@@ -2486,6 +3367,8 @@ void User::InternalSwap(User* other) {
                                        &other->_impl_.tb_age_, rhs_arena);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.tieba_uid_, lhs_arena,
                                        &other->_impl_.tieba_uid_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.ip_address_, lhs_arena,
+                                       &other->_impl_.ip_address_, rhs_arena);
   ::google::protobuf::internal::memswap<
       PROTOBUF_FIELD_OFFSET(User, _impl_.is_default_avatar_)
       + sizeof(User::_impl_.is_default_avatar_)
@@ -2497,7 +3380,7 @@ void User::InternalSwap(User* other) {
 ::google::protobuf::Metadata User::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_User_2eproto_getter, &descriptor_table_User_2eproto_once,
-      file_level_metadata_User_2eproto[4]);
+      file_level_metadata_User_2eproto[7]);
 }
 // @@protoc_insertion_point(namespace_scope)
 namespace google {

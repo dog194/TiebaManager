@@ -4,6 +4,7 @@ import "PbContent.proto";
 import "SubPostList.proto";
 import "Agree.proto";
 import "SimpleForum.proto";
+import "User.proto";
 
 message Post {
     int64 id = 1;
@@ -29,7 +30,16 @@ message Post {
         repeated SignatureContent content = 4;
     }
     SignatureData signature = 21;
+    User author = 23;
     Agree agree = 37;
     SimpleForum from_forum = 38;
     int64 tid = 46;
+    message CustomFigure {
+        string background_value = 3;
+    }
+    CustomFigure custom_figure = 60;
+    message CustomState {
+        string content = 2;
+    }
+    CustomState custom_state = 61;
 }
