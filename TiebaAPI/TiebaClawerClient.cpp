@@ -337,6 +337,28 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	CString nameShow = strUTF82W(rawUser.name_show());
 	CString portrait = strUTF82W(rawUser.portrait());
 	CString portraitUrl = AUTHOR_PORTRAIT_URL_PREFIX + portrait;
+
+	//User_Balv balv;
+	//balv = rawUser.balv();
+	//int isBa = balv.is_black();
+	//int isBl = balv.is_block();
+	//int day2free = balv.days_tofree();
+	//if (isBa != 0 || isBl != 0 || day2free != 0) {
+	//	WriteStringCon(nameShow, _T("balv.txt"));
+	//	WriteStringCon(_T(" P:"), _T("balv.txt"));
+	//	WriteStringCon(portrait, _T("balv.txt"));
+	//	CString strTmp;
+	//	WriteStringCon(_T(" black:"), _T("balv.txt"));
+	//	strTmp.Format(_T("%d"), isBa);
+	//	WriteStringCon(strTmp, _T("balv.txt"));
+	//	WriteStringCon(_T(" block:"), _T("balv.txt"));
+	//	strTmp.Format(_T("%d"), isBl);
+	//	WriteStringCon(strTmp, _T("balv.txt"));
+	//	WriteStringCon(_T(" day2free:"), _T("balv.txt"));
+	//	strTmp.Format(_T("%d"), day2free);
+	//	WriteStringCon(strTmp, _T("balv.txt"));
+	//}
+
 	int level = rawUser.level_id();
 	int glevel = rawUser.user_growth().level_id();
 	int is_bawu = rawUser.is_bawu();
@@ -344,13 +366,19 @@ const static void decodeUser(const User& rawUser, TBUserObj& user) {
 	int post_num = rawUser.post_num();
 	CString tb_age = strUTF82W(rawUser.tb_age());
 	int is_default_avatar = rawUser.is_default_avatar();
+	//if (is_default_avatar != 0) {
+	//	WriteStringCon(nameShow, _T("balv.txt"));
+	//	WriteStringCon(_T(" P:"), _T("balv.txt"));
+	//	WriteStringCon(portrait, _T("balv.txt"));
+	//}
 	CString tb_uid = strUTF82W(rawUser.tieba_uid());
 	int reply_type = rawUser.priv_sets().reply();
 	// 虚拟形象，user_list 不带，需要另外地方获取
-	User_VirtualImageInfo pbVirtualImageInfo = rawUser.virtual_image_info();
-	User_VirtualImageInfo_StateInfo pbStateInfo = pbVirtualImageInfo.personal_state();
-	int is_set_virtual = pbVirtualImageInfo.isset_virtual_image();
-	CString virtual_info = strUTF82W(pbStateInfo.text());
+	// User_VirtualImageInfo pbVirtualImageInfo = rawUser.virtual_image_info();
+	// User_VirtualImageInfo_StateInfo pbStateInfo = pbVirtualImageInfo.personal_state();
+	// int is_set_virtual = pbVirtualImageInfo.isset_virtual_image();
+	// CString virtual_info = strUTF82W(pbStateInfo.text());
+	CString virtual_info = _T("");
 	CString ip_address = strUTF82W(rawUser.ip_address());
 
 	// 赋值
@@ -577,6 +605,8 @@ const static void decodeLzl(SubPostList& pbSubPost, LzlInfo& lzl, const CString 
 	lzl.authorShowName = PostuserList[userIndex[uid]].ShowName;
 	lzl.authorPortraitUrl = PostuserList[userIndex[uid]].PortraitUrl;
 	lzl.authorLevel = Int2CString(PostuserList[userIndex[uid]].level);
+	lzl.authorGLevel = Int2CString(PostuserList[userIndex[uid]].glevel);
+	lzl.ip_address = PostuserList[userIndex[uid]].ip_address;
 	lzl.timestamp = time;
 	lzl.cid = pid;
 	lzl.floor = floor;
@@ -595,7 +625,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	FrsPageReqIdl pbReq;
 	FrsPageReqIdl_DataReq* pbReqData = new FrsPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
-	pbCom->set__client_version("12.53.1.0");
+	pbCom->set__client_version("12.82.3.0");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	CStringA t_fn = W2UTF8(forumName);
@@ -734,6 +764,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 				thread.authorLevel = _T("");
 			else
 				thread.authorLevel = Int2CString(userList[userIndex[author_id]].level);
+			thread.authorGLevel = Int2CString(userList[userIndex[author_id]].glevel);
 			thread.isTidAuthor = TRUE;
 		}
 		else {
@@ -785,7 +816,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	PbPageReqIdl_DataReq* pbReqData = new PbPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
 
-	pbCom->set__client_version("12.53.1.0");
+	pbCom->set__client_version("12.82.3.0");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	INT64 kz = _ttoi64(tid); 
@@ -925,6 +956,9 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 						tmp_user.is_default_avatar = 0;
 						tmp_user.tieba_uid = L"";
 						tmp_user.reply_type = 0;
+						tmp_user.virtual_info = L"";
+						tmp_user.ip_address = L"";
+						tmp_user.glevel = 999; // 没有等级
 						PostuserList.push_back(tmp_user);
 					}					
 				}
@@ -948,10 +982,15 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 						tmp_lzl.author = PostuserList[userIndex[tmp_uid]].name;
 						tmp_lzl.authorShowName = PostuserList[userIndex[tmp_uid]].ShowName;
 						tmp_lzl.authorPortraitUrl = PostuserList[userIndex[tmp_uid]].PortraitUrl;
+						tmp_lzl.ip_address = PostuserList[userIndex[tmp_uid]].ip_address;
 						if (PostuserList[userIndex[tmp_uid]].level == 0)
 							tmp_lzl.authorLevel = _T("");
 						else 
 							tmp_lzl.authorLevel = Int2CString(PostuserList[userIndex[tmp_uid]].level);
+						if (PostuserList[userIndex[tmp_uid]].glevel == 999)
+							tmp_lzl.authorGLevel = _T("");
+						else
+							tmp_lzl.authorGLevel = Int2CString(PostuserList[userIndex[tmp_uid]].glevel);
 						tmp_lzl.timestamp = vv[L"now_time"].GetInt64();
 						tmp_lzl.cid = Int64oCString(vv[L"comment_id"].GetInt64());
 						// floor 后续更新
@@ -999,6 +1038,8 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 		post.pid = pid;
 		post.floor = floor;
 		post.authorLevel = Int2CString(PostuserList[userIndex[author_id]].level);
+		post.authorGLevel = Int2CString(PostuserList[userIndex[author_id]].glevel);
+		post.ip_address = PostuserList[userIndex[author_id]].ip_address;
 		post.timestamp = time;
 		post.rawData = _T("");
 		post.content = content;

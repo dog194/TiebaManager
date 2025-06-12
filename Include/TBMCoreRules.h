@@ -54,7 +54,8 @@ public:
 		UID,              // 作者名，可能为空
 		PORTRAIT,         // Portrait，目前版本的用户唯一标识符
 		TID,              // TID, 帖子ID，可以根据帖子制定专门规则
-		CUSTOM_STATE      // 虚拟形象心情 customState
+		CUSTOM_STATE,     // 虚拟形象心情 customState
+		IP_ADDRESS,       // IP地址
 	};
 
 
@@ -99,13 +100,18 @@ public:
 		LESS,             // <=
 		GREATER           // >=
 	};
-
+	enum levelType
+	{
+		LEVEL,			// 贴吧等级
+		G_LEVEL,		// 成长等级
+	};
 
 	CLevelParam() : CConditionParam(_T("等级条件")) { }
 
 
-	Operator m_operator = LESS;  // 操作符
-	int m_level = 1;             // 等级
+	Operator m_operator = LESS;		// 操作符
+	int m_level = 1;				// 等级
+	levelType m_levelType = LEVEL;	// 模式
 };
 
 class TBM_CORE_API CLevelCondition final : public CCondition, public Singleton<CLevelCondition>

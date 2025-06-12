@@ -162,13 +162,15 @@ BOOL CConfirmDlg::OnInitDialog()
 		case TBObject::THREAD:
 		{
 			const TapiThreadInfo& thread = (TapiThreadInfo&)*m_operation->object;
-			content += _T("\r\n等级：") + thread.authorLevel;
+			content += _T("\r\n等级：") + thread.authorLevel
+					+_T("\r\n成长等级：") + thread.authorGLevel;
 			break;
 		}
 		case TBObject::POST:
 		{
 			const PostInfo& post = (PostInfo&)*m_operation->object;
 			content += _T("\r\n等级：") + post.authorLevel
+					 + _T("\r\n成长等级：") + post.authorGLevel
 					 + _T("\r\n楼层：") + post.floor;
 			break;
 		}
@@ -176,6 +178,7 @@ BOOL CConfirmDlg::OnInitDialog()
 		{
 			const LzlInfo& lzl = (LzlInfo&)*m_operation->object;
 			content += _T("\r\n等级：") + lzl.authorLevel
+					 + _T("\r\n成长等级：") + lzl.authorGLevel
 					 + _T("\r\n回复楼层：") + lzl.floor;
 			break;
 		}
@@ -184,6 +187,9 @@ BOOL CConfirmDlg::OnInitDialog()
 			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_operation->object->authorPortraitUrl);
 		if (m_operation->object->m_type != TBObject::LZL) { // LZL 暂时不支持
 			content += _T("\r\n虚拟形象心情：") + m_operation->object->customState;
+		}
+		if (m_operation->object->m_type != TBObject::THREAD) { // 主题帖列表 没有IP
+			content += _T("\r\nIP：") + m_operation->object->ip_address;
 		}
 		if (m_operation->object->timestamp != 0) {
 			//不是所有数据都带时间

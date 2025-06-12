@@ -47,6 +47,8 @@ public:
 public:
 	CComboBox m_operatorCombo;
 	CEdit m_levelEdit;
+	CButton m_radio_level;
+	CButton m_radio_g_level;
 
 protected:
 	CLevelParam* m_param;
