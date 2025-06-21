@@ -41,7 +41,7 @@ const TCHAR AUTHOR_PORTRAIT_URL_PREFIX_BIG[] = _T("http://tb.himg.baidu.com/sys/
 
 const int m_tips_num = 8;
 const CString m_tips[m_tips_num] = {
-	_T("更新群，交流群，278662447(没被封的话)"),
+	_T("发布群，977128054(没被封的话)"),
 	_T("不喜欢复杂的确认界面，可以在设置里面关闭启用Pro窗口"),
 	_T("扫描间隔，删帖封禁间隔都不能设置太短，会出验证码"),
 	_T("确认窗口点击规则名，可以快捷打开对应规则修改"),
