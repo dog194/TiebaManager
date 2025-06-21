@@ -73,6 +73,11 @@ public:
 	CString BanIDClient(const CString& userName, const CString& portrait, const CString& nick_name);
 	// 封ID，返回错误代码，客户端接口，不用PID，小吧可封10天
 	CString BanIDClient(const CString& userName);
+	// 获取申诉列表
+	CString GetAppealList();
+	CString GetAppealList(const int pn);
+	// 批量申诉驳回
+	CString PostAppealReject(const CString rejList);
 	// 拉黑，返回错误代码
 	CString Defriend(const CString& userID);
 	// 删主题，返回错误代码
@@ -98,6 +103,8 @@ const CString D2F_TAG_TIME = _T(" [校验:%s]");
 const int D2F_INT_TIME_OUT = -1;
 const int D2F_INT_ERROR = -2;
 const int D2F_INT_DELETE = -3;
+
+const CString A_REFUSE_REASON = _T("您的申诉暂未通过，请保持更规范文明的发言行为哦~");
 
 // 头像ID 获取封禁信息
 TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CString& c_name);

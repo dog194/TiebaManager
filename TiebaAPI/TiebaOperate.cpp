@@ -249,6 +249,32 @@ CString CTiebaOperate::BanIDClient(const CString& userName)
 	return GetOperationErrorCode(src);
 }
 
+// 获取申诉列表
+CString CTiebaOperate::GetAppealList(const int pn)
+{
+	CString reqUrl;
+	reqUrl.Format(_T("https://tieba.baidu.com/mo/q/getBawuAppealList?fn=%s&fid=%s&tbs=%s&pn=%d&rn=5"), 
+		(LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, pn);
+	CString src = this->HTTPGet(reqUrl);
+	return src;
+}
+
+CString CTiebaOperate::GetAppealList()
+{
+	return GetAppealList(1);
+}
+
+// 批量申诉驳回
+CString CTiebaOperate::PostAppealReject(const CString rejList)
+{
+	CString data;
+	data.Format(_T("fn=%s&fid=%s&refuse_reason=%s&status=2&tbs=%s%s"),
+		(LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, (LPCTSTR)A_REFUSE_REASON,
+		(LPCTSTR)m_tbs, (LPCTSTR)rejList);
+	CString src = TiebaClientHTTPPost(_T("https://tieba.baidu.com/mo/q/multiAppealhandle"), data, &m_cookie);
+	return src;
+}
+
 // 拉黑，返回错误代码
 CString CTiebaOperate::Defriend(const CString& userID)
 {
