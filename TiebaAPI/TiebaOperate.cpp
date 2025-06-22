@@ -249,6 +249,32 @@ CString CTiebaOperate::BanIDClient(const CString& userName)
 	return GetOperationErrorCode(src);
 }
 
+// 获取申诉列表
+CString CTiebaOperate::GetAppealList(const int pn)
+{
+	CString reqUrl;
+	reqUrl.Format(_T("https://tieba.baidu.com/mo/q/getBawuAppealList?fn=%s&fid=%s&tbs=%s&pn=%d&rn=5"), 
+		(LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, (LPCTSTR)m_tbs, pn);
+	CString src = this->HTTPGet(reqUrl);
+	return src;
+}
+
+CString CTiebaOperate::GetAppealList()
+{
+	return GetAppealList(1);
+}
+
+// 批量申诉驳回
+CString CTiebaOperate::PostAppealReject(const CString rejList)
+{
+	CString data;
+	data.Format(_T("fn=%s&fid=%s&refuse_reason=%s&status=2&tbs=%s%s"),
+		(LPCTSTR)m_encodedForumName, (LPCTSTR)m_forumID, (LPCTSTR)A_REFUSE_REASON,
+		(LPCTSTR)m_tbs, (LPCTSTR)rejList);
+	CString src = TiebaClientHTTPPost(_T("https://tieba.baidu.com/mo/q/multiAppealhandle"), data, &m_cookie);
+	return src;
+}
+
 // 拉黑，返回错误代码
 CString CTiebaOperate::Defriend(const CString& userID)
 {
@@ -321,7 +347,7 @@ TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CStr
 	ProfileReqIdl pbReq;
 	ProfileReqIdl_DataReq* pbReqData = new ProfileReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
-	pbCom->set__client_version("12.53.1.0");
+	pbCom->set__client_version("12.82.3.0");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	CStringA a_portrait = W2UTF8(u_portrait);
@@ -371,11 +397,11 @@ TIEBA_API_API int GetUserAntiDay(const CString& u_portrait, CString& u_ret, CStr
 	INT64 uid = pbUser->id();
 
 	// VirtualImageInfo // TODO 留做他用
-	User_VirtualImageInfo pbVirtualImageInfo;
-	pbVirtualImageInfo = pbUser->virtual_image_info();
-	User_VirtualImageInfo_StateInfo pbStateInfo;
-	pbStateInfo = pbVirtualImageInfo.personal_state();
-	CString virtual_info = strUTF82W(pbStateInfo.text());
+	// User_VirtualImageInfo pbVirtualImageInfo;
+	// pbVirtualImageInfo = pbUser->virtual_image_info();
+	// User_VirtualImageInfo_StateInfo pbStateInfo;
+	// pbStateInfo = pbVirtualImageInfo.personal_state();
+	// CString virtual_info = strUTF82W(pbStateInfo.text());
 
 	if (c_error_nu == 300003) {
 		// 300003   D2F_RET_DELETE

@@ -18,38 +18,48 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 */
 
 #pragma once
-#include "resource.h"
-#include <TBMCoreRules.h>
+#include <ConfigFile.h>
+#include "AppealRejectionDlg.h"
+#include <memory>
+#include <thread>
+class Operation;
 
-
-// CInputLevelDlg 对话框
-
-class CInputLevelDlg : public CDialog
+class CAppealRejectionConfig : public CConfigBase
 {
-	DECLARE_DYNAMIC(CInputLevelDlg)
-
 public:
-	CInputLevelDlg(CLevelParam* param, CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~CInputLevelDlg();
+	COption<BOOL> m_enable;					    // 开启
 
-// 对话框数据
-	enum { IDD = IDD_INPUT_LEVEL_DIALOG };
+	CAppealRejectionConfig() : CConfigBase("AppealRejection"),
+		m_enable("Enable", FALSE)
+	{
+		m_options.push_back(&m_enable);
+	}
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+	BOOL Load(const CString& path)
+	{
+		BOOL res = CConfigBase::Load(path);
 
-	DECLARE_MESSAGE_MAP()
+		return res;
+	}
+};
+
+class CAppealRejection
+{
 public:
-	virtual BOOL OnInitDialog();
-	virtual void OnOK();
+	CAppealRejection(HMODULE module);
+	~CAppealRejection();
 
+	void Init();
+	void Uninit();
+	void OnConfig();
 
-public:
-	CComboBox m_operatorCombo;
-	CEdit m_levelEdit;
-	CButton m_radio_level;
-	CButton m_radio_g_level;
+	void OnPostSetTieba(const CString& forumName);
 
-protected:
-	CLevelParam* m_param;
+	void AppealRejectionThread();
+
+	HMODULE m_module;
+
+	CString m_version = _T("");
+	CAppealRejectionConfig m_config;
+	CAppealRejectionDlg* m_appealRejectionDlg = NULL;
 };

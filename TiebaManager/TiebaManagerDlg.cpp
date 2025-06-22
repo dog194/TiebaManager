@@ -183,6 +183,7 @@ BOOL CTiebaManagerDlg::OnInitDialog()
 
 	// 初始化日志
 	m_log.Init();
+	m_log.Log(_T("<font color=green>贴吧管理器交流群：<a href='https://www.bakasnow.com/lianjie/jlq'>278662447</a>，软件</font><font color=red>免费</font><font color=green>下载</font>"));
 
 	// 读取设置
 	g_postSetCurrentUserEvent.AddListener([this](const CString&) {

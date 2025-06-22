@@ -41,7 +41,7 @@ const TCHAR AUTHOR_PORTRAIT_URL_PREFIX_BIG[] = _T("http://tb.himg.baidu.com/sys/
 
 const int m_tips_num = 8;
 const CString m_tips[m_tips_num] = {
-	_T("更新群，交流群，736700862(没被封的话)"),
+	_T("发布群，977128054(没被封的话)"),
 	_T("不喜欢复杂的确认界面，可以在设置里面关闭启用Pro窗口"),
 	_T("扫描间隔，删帖封禁间隔都不能设置太短，会出验证码"),
 	_T("确认窗口点击规则名，可以快捷打开对应规则修改"),
@@ -61,7 +61,7 @@ const CString GET_NAME_ERROR_INPUT_ERROR = _T("[参数错误]");
 const CString GET_NAME_ERROR_FORMAT_ERROR = _T("[格式异常]");
 
 const CString NOT_FOUND = _T("[未找到]");
-const CString QQ_QUN_URL = _T("https://qm.qq.com/cgi-bin/qm/qr?k=ccjdz1q_9-VDat0FeKU9ov9nWrZD3naD");
+const CString QQ_QUN_URL = _T("https://www.bakasnow.com/lianjie/jlq");
 
 // 分割字符串
 HELPER_API void SplitString(CStringArray& dst, const CString& src, const CString& slipt);

@@ -48,8 +48,10 @@ public:
 	CString author;		          // 作者
 	CString authorShowName;       // 作者显示名
 	CString authorID;	          // 作者ID
+	CString authorGLevel;	      // 作者成长等级
 	CString authorPortraitUrl;	  // 作者头像URL。对于Web接口主题为空
 	CString customState;		  // 虚拟形象心情
+	CString ip_address;			  // ip 地址信息
 	BOOL isTidAuthor = FALSE;	  // 是否是楼主
 	time_t timestamp;             // 创建时间，Unix时间戳(UTC)。对于Web接口主题为0
 	CString attachedInfo = _T("");// 通用额外变量，用于存放一些额外信息传递给确认窗口

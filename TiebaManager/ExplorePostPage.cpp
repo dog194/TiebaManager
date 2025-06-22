@@ -141,10 +141,12 @@ void CExplorePostPage::OnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult)
 		explorerDlg->m_edit.SetWindowText(m_posts[pNMLV->iItem].content 
 			+ _T("\r\n\r\n作者显示名：") + m_posts[pNMLV->iItem].authorShowName
 			+ _T("\r\n等级：") + m_posts[pNMLV->iItem].authorLevel
+			+ _T("\r\n成长等级：") + m_posts[pNMLV->iItem].authorGLevel
 			+ _T("\r\n楼层：") + m_posts[pNMLV->iItem].floor
 			+ _T("\r\n\r\n作者名：") + m_posts[pNMLV->iItem].author
 			+ _T("\r\n头像ID(Portrait)：") + GetPortraitFromString(m_posts[pNMLV->iItem].authorPortraitUrl)
 			+ _T("\r\n虚拟形象心情：") + GetPortraitFromString(m_posts[pNMLV->iItem].customState)
+			+ _T("\r\nIP：") + GetPortraitFromString(m_posts[pNMLV->iItem].ip_address)
 			+ _T("\r\n\r\n时        间：") + GetYYMMDD_HHMMSS_FromTimeT(m_posts[pNMLV->iItem].timestamp)
 			+ _T("\r\n主题帖ID：") + m_posts[pNMLV->iItem].tid);
 		if (m_posts[pNMLV->iItem].isTidAuthor == TRUE)

@@ -165,6 +165,20 @@ TBM_CORE_API BOOL QRCodeScan(const cv::Mat& img, CString& content)
 	}
 	else {
 		// 无识别结果
+		// 再度尝试
+		cv::Mat img_gray;
+		cv::cvtColor(img, img_gray, cv::COLOR_BGR2GRAY);
+		cv::threshold(img_gray, img_gray, 245, 255, cv::THRESH_BINARY);
+		res = imageCache.qrDetector->detectAndDecode(img_gray);
+		if (res.size() > 0) {
+			int i = 1;
+			CString tmp;
+			for (const auto& v : res) { // UTF82W  GBK2W
+				tmp.Format(_T("[%d]%s[threshold]"), i++, UTF82W(v.c_str()));
+				content += tmp;
+			}
+			return true;
+		}
 		return true;
 	}
 }

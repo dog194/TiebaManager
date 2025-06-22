@@ -100,7 +100,8 @@ CString CKeywordCondition::GetDescription(const CConditionParam& _param)
 		_T("作者名"),
 		_T("头像ID(Portirt)"),
 		_T("主题帖号(Tid)"),
-		_T("虚拟形象心情")
+		_T("虚拟形象心情"),
+		_T("IP")
 	};
 	
 	CString res = rangeDesc[param.m_range];
@@ -120,7 +121,7 @@ CConditionParam* CKeywordCondition::ReadParam(const tinyxml2::XMLElement* option
 {
 	auto* param = new CKeywordParam();
 
-	COption<int> range("Range", CKeywordParam::ALL_CONTENT, InRange<int, CKeywordParam::TITLE, CKeywordParam::CUSTOM_STATE>);
+	COption<int> range("Range", CKeywordParam::ALL_CONTENT, InRange<int, CKeywordParam::TITLE, CKeywordParam::IP_ADDRESS>);
 	COption<BOOL> not("Not", FALSE);
 	COption<BOOL> include("Include", TRUE);
 	COption<RegexText> keyword("Keyword");
@@ -260,6 +261,7 @@ BOOL CKeywordCondition::MatchPost(const CConditionParam& _param, const PostInfo&
 		startPos = post.GetContent().GetLength() + 10 + 
 			post.authorShowName.GetLength() + 5 +
 			post.authorLevel.GetLength() + 5 +
+			post.authorGLevel.GetLength() + 7 +
 			post.floor.GetLength() + 8 + 
 			post.author.GetLength() + 17;
 		content = GetPortraitFromString(post.authorPortraitUrl);
@@ -268,19 +270,33 @@ BOOL CKeywordCondition::MatchPost(const CConditionParam& _param, const PostInfo&
 		startPos = post.GetContent().GetLength() + 10 +
 			post.authorShowName.GetLength() + 5 +
 			post.authorLevel.GetLength() + 5 +
+			post.authorGLevel.GetLength() + 7 +
 			post.floor.GetLength() + 8 +
 			post.author.GetLength() + 17 +
 			GetPortraitFromString(post.authorPortraitUrl).GetLength() + 9;
 		content = post.customState;
 		break;
+	case CKeywordParam::IP_ADDRESS:
+		startPos = post.GetContent().GetLength() + 10 +
+			post.authorShowName.GetLength() + 5 +
+			post.authorLevel.GetLength() + 5 +
+			post.authorGLevel.GetLength() + 7 +
+			post.floor.GetLength() + 8 +
+			post.author.GetLength() + 17 +
+			GetPortraitFromString(post.authorPortraitUrl).GetLength() + 9 +
+			post.customState.GetLength() + 5;
+		content = post.ip_address;
+		break;
 	case CKeywordParam::TID:
 		startPos = post.GetContent().GetLength() + 10 +
 			post.authorShowName.GetLength() + 5 +
 			post.authorLevel.GetLength() + 5 +
+			post.authorGLevel.GetLength() + 7 +
 			post.floor.GetLength() + 8 +
 			post.author.GetLength() + 17 + 
 			GetPortraitFromString(post.authorPortraitUrl).GetLength() + 9 +
 			post.customState.GetLength() + 15 +
+			post.ip_address.GetLength() + 5 +
 			GetYYMMDD_HHMMSS_FromTimeT(post.timestamp).GetLength() + 8;
 		content = GetPortraitFromString(post.tid);
 		break;
@@ -312,17 +328,30 @@ BOOL CKeywordCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& l
 	case CKeywordParam::PORTRAIT:
 		startPos = lzl.GetContent().GetLength() + 7 + 
 			lzl.authorLevel.GetLength() + 5 +
+			lzl.authorGLevel.GetLength() + 7 +
 			lzl.floor.GetLength() + 10 + 
 			lzl.authorShowName.GetLength() + 8 + 
 			lzl.author.GetLength() + 17;
 		content = GetPortraitFromString(lzl.authorPortraitUrl);
 		break;
-	case CKeywordParam::TID:
+	case CKeywordParam::IP_ADDRESS:
 		startPos = lzl.GetContent().GetLength() + 7 +
 			lzl.authorLevel.GetLength() + 5 +
+			lzl.authorGLevel.GetLength() + 7 +
 			lzl.floor.GetLength() + 10 +
 			lzl.authorShowName.GetLength() + 8 +
 			lzl.author.GetLength() + 17 +
+			GetPortraitFromString(lzl.authorPortraitUrl).GetLength() + 5;
+		content = GetPortraitFromString(lzl.ip_address);
+		break;
+	case CKeywordParam::TID:
+		startPos = lzl.GetContent().GetLength() + 7 +
+			lzl.authorLevel.GetLength() + 5 +
+			lzl.authorGLevel.GetLength() + 7 +
+			lzl.floor.GetLength() + 10 +
+			lzl.authorShowName.GetLength() + 8 +
+			lzl.author.GetLength() + 17 +
+			GetPortraitFromString(lzl.ip_address).GetLength() + 5;
 			GetPortraitFromString(lzl.authorPortraitUrl).GetLength() + 15 +
 			GetYYMMDD_HHMMSS_FromTimeT(lzl.timestamp).GetLength() + 8;
 		content = GetPortraitFromString(lzl.tid);
@@ -347,7 +376,10 @@ CString CLevelCondition::GetDescription(const CConditionParam& _param)
 	};
 
 	CString res;
-	res.Format(_T("%s%d"), operatorDesc[param.m_operator], param.m_level);
+	if (param.m_levelType == CLevelParam::LEVEL)
+		res.Format(_T("%s%d"), operatorDesc[param.m_operator], param.m_level);
+	else
+		res.Format(_T("成长%s%d"), operatorDesc[param.m_operator], param.m_level);
 	return res;
 }
 
@@ -358,11 +390,14 @@ CConditionParam* CLevelCondition::ReadParam(const tinyxml2::XMLElement* optionNo
 
 	COption<int> op("Operator", CLevelParam::LESS, InRange<int, CLevelParam::LESS, CLevelParam::GREATER>);
 	COption<int> level("Level", 1, InRange<int, 1, 18>);
+	COption<int> levelType("lType", CLevelParam::LEVEL, InRange<int, CLevelParam::LEVEL, CLevelParam::G_LEVEL>);
 	op.Read(*optionNode);
 	level.Read(*optionNode);
+	levelType.Read(*optionNode);
 
 	param->m_operator = CLevelParam::Operator(*op);
 	param->m_level = level;
+	param->m_levelType = CLevelParam::levelType(*levelType);
 
 	return param;
 }
@@ -377,6 +412,9 @@ void CLevelCondition::WriteParam(const CConditionParam& _param, tinyxml2::XMLEle
 	COption<int> level("Level");
 	*level = param.m_level;
 	level.Write(*optionNode);
+	COption<int> levelType("lType");
+	*levelType = param.m_levelType;
+	levelType.Write(*optionNode);
 }
 
 CConditionParam* CLevelCondition::CloneParam(const CConditionParam& _param)
@@ -390,10 +428,19 @@ BOOL CLevelCondition::MatchThread(const CConditionParam& _param, const TapiThrea
 {
 	const auto& param = (CLevelParam&)_param;
 
-	if (thread.authorLevel == _T(""))
-		return FALSE;
+	int level;
+	if (param.m_levelType == CLevelParam::G_LEVEL)
+	{
+		if (thread.authorGLevel == _T(""))
+			return FALSE;
+		level = _ttoi(thread.authorGLevel);
+	}
+	else {
+		if (thread.authorLevel == _T(""))
+			return FALSE;
+		level = _ttoi(thread.authorLevel);
+	}
 
-	int level = _ttoi(thread.authorLevel);
 	switch (param.m_operator)
 	{
 	default: return FALSE;
@@ -406,10 +453,19 @@ BOOL CLevelCondition::MatchPost(const CConditionParam& _param, const PostInfo& p
 {
 	const auto& param = (CLevelParam&)_param;
 
-	if (post.authorLevel == _T(""))
-		return FALSE;
+	int level;
+	if (param.m_levelType == CLevelParam::G_LEVEL)
+	{
+		if (post.authorGLevel == _T(""))
+			return FALSE;
+		level = _ttoi(post.authorGLevel);
+	}
+	else {
+		if (post.authorLevel == _T(""))
+			return FALSE;
+		level = _ttoi(post.authorLevel);
+	}
 
-	int level = _ttoi(post.authorLevel);
 	switch (param.m_operator)
 	{
 	default: return FALSE;
@@ -422,10 +478,19 @@ BOOL CLevelCondition::MatchLzl(const CConditionParam& _param, const LzlInfo& lzl
 {
 	const auto& param = (CLevelParam&)_param;
 
-	if (lzl.authorLevel == _T(""))
-		return FALSE;
+	int level;
+	if (param.m_levelType == CLevelParam::G_LEVEL)
+	{
+		if (lzl.authorGLevel == _T(""))
+			return FALSE;
+		level = _ttoi(lzl.authorGLevel);
+	}
+	else {
+		if (lzl.authorLevel == _T(""))
+			return FALSE;
+		level = _ttoi(lzl.authorLevel);
+	}
 
-	int level = _ttoi(lzl.authorLevel);
 	switch (param.m_operator)
 	{
 	default: return FALSE;

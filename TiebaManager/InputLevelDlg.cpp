@@ -44,6 +44,8 @@ void CInputLevelDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMBO2, m_operatorCombo);
 	DDX_Control(pDX, IDC_EDIT1, m_levelEdit);
+	DDX_Control(pDX, IDC_LTYPE_GLEVEL, m_radio_g_level);
+	DDX_Control(pDX, IDC_LTYPE_LEVEL, m_radio_level);
 }
 
 
@@ -61,7 +63,17 @@ BOOL CInputLevelDlg::OnInitDialog()
 	CString tmp;
 	tmp.Format(_T("%d"), m_param->m_level);
 	m_levelEdit.SetWindowText(tmp);
-
+	
+	if (m_param->m_levelType == CLevelParam::LEVEL)
+	{
+		m_radio_level.SetCheck(BST_CHECKED);
+		m_radio_g_level.SetCheck(BST_UNCHECKED);
+	}
+	else
+	{
+		m_radio_level.SetCheck(BST_UNCHECKED);
+		m_radio_g_level.SetCheck(BST_CHECKED);
+	}
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常:  OCX 属性页应返回 FALSE
 }
@@ -75,6 +87,16 @@ void CInputLevelDlg::OnOK()
 	if (m_param->m_level < 1 || m_param->m_level > 18)
 	{
 		AfxMessageBox(_T("等级范围1到18"), MB_ICONERROR);
+		return;
+	}
+	int sel = m_radio_level.GetCheck();
+	if (sel == BST_CHECKED)
+		m_param->m_levelType = CLevelParam::LEVEL;
+	else if (sel == BST_UNCHECKED)
+		m_param->m_levelType = CLevelParam::G_LEVEL;
+	else
+	{
+		AfxMessageBox(_T("请选择等级类型"), MB_ICONERROR);
 		return;
 	}
 
