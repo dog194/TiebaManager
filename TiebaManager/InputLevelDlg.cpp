@@ -84,7 +84,7 @@ void CInputLevelDlg::OnOK()
 	CString tmp;
 	m_levelEdit.GetWindowText(tmp);
 	m_param->m_level = _ttoi(tmp);
-	if (m_param->m_level < 1 || m_param->m_level > 18)
+	if (m_param->m_level < 0 || m_param->m_level > 18)
 	{
 		AfxMessageBox(_T("等级范围1到18"), MB_ICONERROR);
 		return;
