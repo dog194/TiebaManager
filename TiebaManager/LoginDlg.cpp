@@ -26,7 +26,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include <NetworkHelper.h>
 #include <WinInet.h>
 #include <TiebaClawer.h>
+#include <document.h>
 
+using namespace rapidjson;
 
 // CLoginDlg 对话框
 
@@ -177,6 +179,20 @@ HRESULT CLoginDlg::GetSingleCookie(CString& cookie, const CString& name)
 		cookie += _T(";");
 		return S_OK;
 	}
+	else {
+		DWORD size = 0;
+		InternetGetCookieEx(_T("https://baidu.com/"), name, NULL,
+			&size, INTERNET_COOKIE_HTTPONLY, NULL); // size为字节数
+		BOOL result = InternetGetCookieEx(_T("https://baidu.com/"), name, cookie.GetBuffer(size),
+			&size, INTERNET_COOKIE_HTTPONLY, NULL); // BUG：size在XP下单位是字节，在win10是字符数，XP下传字符数会返回缓冲不够
+		HRESULT hr = HRESULT_FROM_WIN32(GetLastError());
+		cookie.ReleaseBuffer();
+		if (result)
+		{
+			cookie += _T(";");
+			return S_OK;
+		}
+	}
 	return hr;
 }
 
@@ -203,12 +219,20 @@ HRESULT CLoginDlg::GetCookie(CString& cookie)
 // 取用户名
 void CLoginDlg::GetLoginUserName()
 {
-	CString src = HTTPGet(_T("https://tieba.baidu.com/f?ie=utf-8&kw=%D2%BB%B8%F6%BC%AB%C6%E4%D2%FE%C3%D8%D6%BB%D3%D0")
-						  _T("xfgryujk%D6%AA%B5%C0%B5%C4%B5%D8%B7%BD"), &m_cookie);
-	CString tmp;
-	std::wcmatch res;
-	if (std::regex_search((LPCTSTR)(tmp = GetStringBetween(src, _T("PageData.user"), _T("}"))), res, USER_NAME_REG))
-		m_userName = JSUnescape(res[1].str().c_str());
-	if (m_userName == _T(""))
+	CString src = HTTPGet(_T("https://tieba.baidu.com/mo/q/newmoindex?need_user=1"), &m_cookie);
+	GenericDocument<UTF16<> > document;
+	document.Parse(src);
+	if (document.HasParseError() || !document.IsObject() || document[L"no"].GetInt() != 0) {
+		m_userName == _T("");
 		WriteString(src, _T("login_forum.txt"));
+		return;
+	}
+	m_userName = document[L"data"][L"name_show"].GetString();
+
+	//CString tmp;
+	//std::wcmatch res;
+	//if (std::regex_search((LPCTSTR)(tmp = GetStringBetween(src, _T("PageData.user"), _T("}"))), res, USER_NAME_REG))
+	//	m_userName = JSUnescape(res[1].str().c_str());
+	//if (m_userName == _T(""))
+	//	WriteString(src, _T("login_forum.txt"));
 }
