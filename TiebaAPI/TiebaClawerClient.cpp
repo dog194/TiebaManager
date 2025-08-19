@@ -22,6 +22,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "fstream"
 #include <TiebaClawerClient.h>
 #include <TBMCoreGlobal.h>
+#include <windows.h>
+#include <string>
+#include <chrono>
 
 #include <StringHelper.h>
 #include <NetworkHelper.h>
@@ -625,7 +628,7 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	FrsPageReqIdl pbReq;
 	FrsPageReqIdl_DataReq* pbReqData = new FrsPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
-	pbCom->set__client_version("12.82.3.0");
+	pbCom->set__client_version("12.64.1.1"); // 12.64.1.1  // 12.82.3.0
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	CStringA t_fn = W2UTF8(forumName);
@@ -636,7 +639,8 @@ BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CStri
 	pbReqData->set_rn(10);
 	pbReqData->set_rn_need(10);
 	pbReqData->set_cid(0);
-	pbReqData->set_is_good(0);
+	// pbReqData->set_is_good(0);
+	pbReqData->set_is_good(tType);
 	pbReqData->set_q_type(2);
 	pbReqData->set_sort_type(5);
 	pbReq.set_allocated_data(pbReqData);
@@ -816,7 +820,7 @@ TiebaClawer::GetPostsResult TiebaClawerClientNickName::GetPosts(const CString& f
 	PbPageReqIdl_DataReq* pbReqData = new PbPageReqIdl_DataReq();
 	CommonReq* pbCom = new CommonReq();
 
-	pbCom->set__client_version("12.82.3.0");
+	pbCom->set__client_version("12.64.1.1");
 	pbCom->set__client_type(2);
 	pbReqData->set_allocated_common(pbCom);
 	INT64 kz = _ttoi64(tid); 
