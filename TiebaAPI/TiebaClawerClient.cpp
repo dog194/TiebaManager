@@ -624,6 +624,31 @@ const CString STR_ONLY_F = _T("\r\n[由于楼主设置了评论权限，你无�
 BOOL TiebaClawerClientNickName::GetThreads(const CString& forumName, const CString& ignoreThread, 
 	std::vector<TapiThreadInfo>& threads)
 {
+	
+	// 同目录是否存在 a.txt 判断
+	int tType = 0;
+	/*
+	WCHAR modulePath[MAX_PATH];
+	// 获取当前模块路径（DLL所在目录）
+	if (GetModuleFileNameW(nullptr, modulePath, MAX_PATH) == 0) {
+		tType = 0;
+	}
+	else {
+		// 提取目录路径
+		std::wstring path(modulePath);
+		size_t pos = path.find_last_of(L"\\/");
+		if (pos == std::wstring::npos) {
+			tType = 0; // 路径解析失败
+		}
+		else {
+			std::wstring filePath = path.substr(0, pos + 1) + L"jingpin.txt";
+			// 实际文件检查（使用最快的方式）
+			DWORD attrib = GetFileAttributesW(filePath.c_str());
+			tType = (attrib != INVALID_FILE_ATTRIBUTES &&
+				!(attrib & FILE_ATTRIBUTE_DIRECTORY)) ? 1 : 0;
+		}
+	}*/
+
 	// 请求构造
 	FrsPageReqIdl pbReq;
 	FrsPageReqIdl_DataReq* pbReqData = new FrsPageReqIdl_DataReq();
