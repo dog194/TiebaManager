@@ -13,6 +13,7 @@ TiebaManager
 链接
 ---------
 
+* [Python WebUI版-贴吧管理器 WebTiebaManager By @single-ptilopsis](https://github.com/TiebaMeow/WebTiebaManager)
 * [Python版-贴吧管理器 aiotieba-reviewer By @Starry-OvO](https://github.com/Starry-OvO/aiotieba-reviewer)
 * [Python版-贴吧管理器 Pypi: aiotieba By @Starry-OvO](https://github.com/Starry-OvO/aiotieba)
 * [作者的个人贴吧](https://tieba.baidu.com/f?kw=%D2%BB%B8%F6%BC%AB%C6%E4%D2%FE%C3%D8%D6%BB%D3%D0xfgryujk%D6%AA%B5%C0%B5%C4%B5%D8%B7%BD)
@@ -43,3 +44,4 @@ TiebaManager
 2. 下载本项目源码
 3. 运行`SetupEnvironment.bat`
 4. 根据编译错误补全缺失的dll，windows SDK，等等等等
+
